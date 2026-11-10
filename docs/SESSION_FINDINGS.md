@@ -333,6 +333,13 @@ across the 91 numbers, keeping lengths** — so the global 2/3/6 excess is alrea
   (X col 1 0.01× / col 49 1.62×; H 0.10× / 2.03×; G 1.89× / 0.52×; null 0.82–1.12×).
 - The letter trail and the master-name overlay form no symbol; names are short row streaks.
 
+### 29. Inverse reading, signatures, elements — `a21 F` + viewer
+- Reversed reading: names vanish (CHASTOR 179/0, GETH 504/0…); forward model 3.5 vs 6.1 bits on
+  reversed text. Only DAXO (= DAX + O) appears reversed. The text has one direction.
+- Dominant letter A in 83/94 sides; U 7, R 3, N 1 (end). Top-3 signatures track the segments.
+- Pyramid from above: triangles top 2.41, bottom 2.44, right 2.05, left 1.77 name-heat; difference
+  = row-edge effect. Elements (quartiles): edges 87% Water; letter maps within ±4 pts of null except X.
+
 ### Provenance warning: the grimoire's "powers"
 The wider project generated a grimoire that assigns each Lord a sefira, planet, talisman,
 how-to-call and danger grade. Its own generator states these layers were *"constructed

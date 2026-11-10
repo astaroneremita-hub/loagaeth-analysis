@@ -85,6 +85,7 @@
     <button data-view="closed">Closed pyr.</button>
     <button data-view="tess">Tesseract</button>
     <button data-view="ico">Icosahedron</button>
+    <button data-view="sigmap">Signatures</button>
   </div>
 
   <section data-show="square diamond">
@@ -116,6 +117,12 @@
     <label class="chk"><input type="checkbox" id="showBase" checked> Show base square</label>
   </section>
 
+  <section data-show="pyramid closed">
+    <label class="chk"><input type="checkbox" id="pOrig" checked> Original faces</label>
+    <label class="chk"><input type="checkbox" id="pInv"> Inverse (faces mirrored, read right-to-left)</label>
+    <label class="chk"><input type="checkbox" id="pRev" checked> Reversed names (magenta)</label>
+  </section>
+
   <section data-show="heat">
     <div class="row"><span>Measure</span><select id="hMode">
       <option value="names">Master-name cells</option><option value="letter">Letter obs/exp</option></select></div>
@@ -123,6 +130,11 @@
     <div class="row" id="hLetterRow"><span>Letter</span><select id="hLetter"></select></div>
     <label class="chk"><input type="checkbox" id="hNull"> Null: letters shuffled in each side</label>
     <small id="hNote"></small>
+  </section>
+
+  <section data-show="heat closed">
+    <div class="row"><span>Colour</span><select id="hColor"><option value="ramp">heat ramp</option><option value="elements">Elements (quartiles)</option></select></div>
+    <div class="row"><span>Camera</span><select id="hCam"><option value="">-</option><option value="top">view from above</option><option value="oblique">oblique</option></select></div>
   </section>
 
   <section data-show="trail">
@@ -141,7 +153,9 @@
   </section>
 
   <section data-show="tess">
-    <div class="row"><span>First side</span><select id="tsStart"></select></div>
+    <div class="row"><span>Group by</span><select id="tsGroup"><option value="consecutive">consecutive</option><option value="sig">dominant-letter signature</option></select></div>
+    <div class="row" id="tsStartRow"><span>First side</span><select id="tsStart"></select></div>
+    <div class="row" id="tsSigRow"><span>Signature</span><select id="tsSig"></select></div>
     <div class="row"><span>4D angle</span><input type="range" id="tsAngle" min="0" max="360" step="1" value="30"></div>
     <label class="chk"><input type="checkbox" id="tsSpin" checked> Spin in 4D</label>
   </section>
@@ -465,6 +479,26 @@ function faceFrame(edge, upper, octa, t) {
   const z = new THREE.Vector3().crossVectors(e, d);
   return { e, d, m, z };
 }
+const REV_COLOR = 0xff4fd8;
+function revMap(e) {                 // reversed master names (diamond sides only) -> rev index
+  const m = new Map();
+  if (!$('pRev').checked || !e || !e.rocc) return m;
+  for (const [k, r0, c0, len] of e.rocc) for (let i = 0; i < len; i++) m.set(r0 * 100 + c0 + i, k);
+  return m;
+}
+function pyramidCopies() {           // original and/or inverse (mirrored) copy, side by side
+  const cps = [];
+  if ($('pOrig').checked) cps.push({ mirror: false });
+  if ($('pInv').checked) cps.push({ mirror: true });
+  if (!cps.length) cps.push({ mirror: false });
+  cps.forEach((cp, i) => { cp.dx = cps.length > 1 ? (i ? 38 : -38) : 0; });
+  return cps;
+}
+function invNote() {
+  const c = pyramidCopies();
+  return (c.length > 1 ? ' Left: original; right: inverse (each face row placed right-to-left, glyphs kept readable).' : c[0].mirror ? ' INVERSE: each face row placed right-to-left (glyphs kept readable).' : '')
+    + ($('pRev').checked ? ` Magenta = reversed master names (${D.rev.stats.reversed[0]} hits on 29-48, all DAXO = reversed OXAD; within-side shuffle mean ${D.rev.stats.reversed[1]}, Markov-1 expected ${D.rev.stats.reversed[2]}).` : '');
+}
 function buildPyramid() {
   const octa = $('octa').checked;
   $('pFace2Row').hidden = !octa;
@@ -476,38 +510,42 @@ function buildPyramid() {
   const faces = [];
   if (octa) sides.forEach((s, i) => { const tr = triangles(s); faces.push({ edge: i, upper: true, s, rows: tr.up, tri: 'upper' }, { edge: i, upper: false, s, rows: tr.lo, tri: 'lower' }); });
   else sides.forEach((s, i) => { const tr = triangles(s); faces.push({ edge: 2 * i, upper: true, s, rows: tr.up, tri: 'upper' }, { edge: 2 * i + 1, upper: true, s, rows: tr.lo, tri: 'lower' }); });
+  const copies = pyramidCopies();
   let n = $('showBase').checked ? totalCells(base) : 0;
   faces.forEach(f => f.rows.forEach(u => n += f.s.rows[u].length));
-  const layer = new CellLayer(n);
-  if ($('showBase').checked) {
-    const hm = nameMap(base);
-    const rot = new THREE.Matrix4().makeRotationX(-Math.PI / 2);
-    base.rows.forEach((row, r) => [...row].forEach((ch, c) => {
-      const k = hm.get(r * 100 + c);
-      M4.copy(rot).setPosition(c - 24, 0, r - 24);
-      layer.add(M4, ch, k !== undefined ? NAME_COLORS[k] : (r + c) % 2 ? C.tileB : C.tileA, k !== undefined ? C.inkDark : C.ink, 1, { r, c, ch, k, side: `base ${base.t}${base.s}` });
-    }));
-  }
+  const layer = new CellLayer(n * copies.length);
   const faceCells = [];
-  faces.forEach(f => {
-    const hm = nameMap(f.s), nr = f.rows.length;
-    f.rows.forEach((u, i) => {
-      const row = f.s.rows[u], len = row.length;
-      const v = SLANT * (1 - (i + 0.5) / nr);
-      const cw = Math.min(1, (2 * HALF * (i + 0.5) / nr) / len);
-      [...row].forEach((ch, j) => {
-        const k = hm.get(u * 100 + j);
-        const tint = f.tri === 'upper' ? C.warm : C.cool;
-        const idx = layer.add(M4.identity(), ch, k !== undefined ? NAME_COLORS[k] : tint, k !== undefined ? C.inkDark : C.ink, 1,
-          { r: u, c: j, ch, k, side: `face ${f.s.t}${f.s.s} ${f.tri} triangle` });
-        faceCells.push({ idx, f, u: (j - (len - 1) / 2) * cw, v, cw });
+  copies.forEach(cp => {
+    if ($('showBase').checked) {
+      const hm = nameMap(base);
+      const rot = new THREE.Matrix4().makeRotationX(-Math.PI / 2);
+      base.rows.forEach((row, r) => [...row].forEach((ch, c) => {
+        const k = hm.get(r * 100 + c);
+        M4.copy(rot).setPosition(c - 24 + cp.dx, 0, r - 24);
+        layer.add(M4, ch, k !== undefined ? NAME_COLORS[k] : (r + c) % 2 ? C.tileB : C.tileA, k !== undefined ? C.inkDark : C.ink, 1, { r, c, ch, k, side: `base ${base.t}${base.s}` });
+      }));
+    }
+    faces.forEach(f => {
+      const hm = nameMap(f.s), rm = revMap(f.s), nr = f.rows.length;
+      f.rows.forEach((u, i) => {
+        const row = f.s.rows[u], len = row.length;
+        const v = SLANT * (1 - (i + 0.5) / nr);
+        const cw = Math.min(1, (2 * HALF * (i + 0.5) / nr) / len);
+        [...row].forEach((ch, j) => {
+          const k = hm.get(u * 100 + j), rv = rm.get(u * 100 + j);
+          const tint = f.tri === 'upper' ? C.warm : C.cool;
+          const bg = rv !== undefined ? REV_COLOR : k !== undefined ? NAME_COLORS[k] : tint;
+          const idx = layer.add(M4.identity(), ch, bg, rv !== undefined || k !== undefined ? C.inkDark : C.ink, 1,
+            { r: u, c: j, ch, k, side: `${cp.mirror ? 'INVERSE ' : ''}face ${f.s.t}${f.s.s} ${f.tri} triangle${rv !== undefined ? ' [reversed ' + D.rev.rev[rv] + ']' : ''}` });
+          faceCells.push({ idx, f, u: (cp.mirror ? -1 : 1) * (j - (len - 1) / 2) * cw, v, cw, dx: cp.dx });
+        });
       });
     });
   });
   layer.done(); root.add(layer.mesh); hoverLayer = layer;
   // wire edges
   const edgeGeo = new THREE.BufferGeometry();
-  edgeGeo.setAttribute('position', new THREE.Float32BufferAttribute(new Float32Array((faces.length * 3 + 4) * 6), 3));
+  edgeGeo.setAttribute('position', new THREE.Float32BufferAttribute(new Float32Array((faces.length * 3 + 4) * 6 * copies.length), 3));
   root.add(new THREE.LineSegments(edgeGeo, new THREE.LineBasicMaterial({ color: 0xc9a85a, transparent: true, opacity: 0.55 })));
   const X = new THREE.Vector3(), Y = new THREE.Vector3(), P = new THREE.Vector3();
   const place = () => {
@@ -517,26 +555,30 @@ function buildPyramid() {
       const fr = frames[faces.indexOf(fc.f)];
       X.copy(fr.e).multiplyScalar(0.95 * fc.cw); Y.copy(fr.d).multiplyScalar(0.95);
       M4.makeBasis(X, Y, fr.z);
-      P.copy(fr.m).addScaledVector(fr.e, fc.u).addScaledVector(fr.d, fc.v).addScaledVector(fr.z, 0.02);
+      P.copy(fr.m).addScaledVector(fr.e, fc.u).addScaledVector(fr.d, fc.v).addScaledVector(fr.z, 0.02); P.x += fc.dx;
       M4.setPosition(P);
       layer.mesh.setMatrixAt(fc.idx, M4);
     });
     layer.mesh.instanceMatrix.needsUpdate = true; layer.mesh.computeBoundingSphere();
     const a = edgeGeo.attributes.position.array; let o = 0;
-    const seg = (p, q) => { a.set([p.x, p.y, p.z, q.x, q.y, q.z], o); o += 6; };
-    frames.forEach(fr => {
-      const A = fr.m.clone().addScaledVector(fr.e, -HALF), B = fr.m.clone().addScaledVector(fr.e, HALF), Ap = fr.m.clone().addScaledVector(fr.d, SLANT);
-      seg(A, B); seg(B, Ap); seg(Ap, A);
+    copies.forEach(cp => {
+      const off = new THREE.Vector3(cp.dx, 0, 0);
+      const seg = (p, q) => { a.set([p.x + off.x, p.y, p.z, q.x + off.x, q.y, q.z], o); o += 6; };
+      frames.forEach(fr => {
+        const A = fr.m.clone().addScaledVector(fr.e, -HALF), B = fr.m.clone().addScaledVector(fr.e, HALF), Ap = fr.m.clone().addScaledVector(fr.d, SLANT);
+        seg(A, B); seg(B, Ap); seg(Ap, A);
+      });
+      const c = [[-HALF, -HALF], [HALF, -HALF], [HALF, HALF], [-HALF, HALF]].map(([x, z]) => new THREE.Vector3(x, 0, z));
+      for (let i = 0; i < 4; i++) seg(c[i], c[(i + 1) % 4]);
     });
-    const c = [[-HALF, -HALF], [HALF, -HALF], [HALF, HALF], [-HALF, HALF]].map(([x, z]) => new THREE.Vector3(x, 0, z));
-    for (let i = 0; i < 4; i++) seg(c[i], c[(i + 1) % 4]);
     edgeGeo.attributes.position.needsUpdate = true; edgeGeo.computeBoundingSphere();
   };
   place(); onSlider = place;
   caption.textContent = octa
     ? `Two pyramids base to base: each diamond side (${fa}a, ${fa}b, ${fb}a, ${fb}b) folds across one edge of base ${base.t}${base.s} - upper triangle above, lower triangle below.`
     : `Hypothesis: base = square table ${base.t}${base.s}; the four lateral faces carry the upper and lower triangles of diamond sides ${fa}a and ${fa}b.`;
-  legend([['Upper triangle (apex = row 1)', C.warm], ['Lower triangle (apex = last row)', C.cool], ['Base square (chessboard)', C.tileB]]);
+  caption.textContent += invNote();
+  legend([['Upper triangle (apex = row 1)', C.warm], ['Lower triangle (apex = last row)', C.cool], ['Base square (chessboard)', C.tileB], ['Reversed name', REV_COLOR]]);
 }
 
 // ---------------------------------------------------------------- BOOK
@@ -612,6 +654,29 @@ const upRot = new THREE.Matrix4().makeRotationX(-Math.PI / 2);
 function groundText(layer, text, x, z, size, col) {
   [...text].forEach((ch, i) => { M4.copy(upRot).scale(new THREE.Vector3(size, size, 1)).setPosition(x + i * size * 0.8, 0.05, z); layer.add(M4, ch, 0, col, 0); });
 }
+const EL_COLORS = [0x2f6fd0, 0x8b5a2b, 0xe8c547, 0xd33b2c], EL_NAMES = ['Water', 'Earth', 'Air', 'Fire']; // coldest -> hottest
+function quart(vals) { const s = Array.from(vals).sort((a, b) => a - b); return [0.25, 0.5, 0.75].map(p => s[Math.min(s.length - 1, Math.floor(p * s.length))]); }
+const elOf = (v, th) => v > th[2] ? 3 : v > th[1] ? 2 : v > th[0] ? 1 : 0;
+const REGIONS = (() => {
+  const reg = { edge: [], interior: [], top: [], right: [], bottom: [], left: [] };
+  for (let r = 0; r < 49; r++) for (let c = 0; c < 49; c++) {
+    const i = r * 49 + c;
+    (c < 2 || c > 46 ? reg.edge : reg.interior).push(i);
+    if (r < Math.min(c, 48 - c)) reg.top.push(i); else if (r > Math.max(c, 48 - c)) reg.bottom.push(i);
+    else if (c < Math.min(r, 48 - r)) reg.left.push(i); else if (c > Math.max(r, 48 - r)) reg.right.push(i);
+  }
+  return reg;
+})();
+function regionText(obs, nul, th) {   // per region: mean heat and element shares (Fire/Air/Earth/Water), observed vs null
+  const f = (x) => x.toFixed(2), pc = (x) => Math.round(x * 100);
+  const line = (vals, idx) => {
+    const m = idx.reduce((s, i) => s + vals[i], 0) / idx.length;
+    if (!th) return f(m);
+    const sh = [0, 0, 0, 0]; idx.forEach(i => sh[elOf(vals[i], th)]++);
+    return `${f(m)} [F${pc(sh[3] / idx.length)} A${pc(sh[2] / idx.length)} E${pc(sh[1] / idx.length)} W${pc(sh[0] / idx.length)}%]`;
+  };
+  return Object.entries(REGIONS).map(([k, idx]) => `${k}: ${line(obs, idx)} | null ${line(nul, idx)}`).join('<br>');
+}
 function edgeStats(a) {      // column means relative to overall mean (row-start / row-end edges)
   const col = (c) => { let s = 0; for (let r = 0; r < 49; r++) s += a[r * 49 + c]; return s / 49; };
   const m = sum(a) / a.length || 1;
@@ -638,10 +703,11 @@ function buildHeat() {
   const geo = new THREE.BoxGeometry(0.86, 1, 0.86); geo.translate(0, 0.5, 0);
   const bars = new THREE.InstancedMesh(geo, new THREE.MeshStandardMaterial({ roughness: 0.5, metalness: 0.1 }), 2401);
   const col = new THREE.Color();
+  const elements = $('hColor').value === 'elements', th = elements ? quart(obs) : null;
   for (let r = 0; r < 49; r++) for (let c = 0; c < 49; c++) {
     const i = r * 49 + c, v = cur[i];
     M4.makeScale(1, Math.max(0.03, v / mx * HMAX), 1).setPosition(c - 24, 0, r - 24);
-    bars.setMatrixAt(i, M4); bars.setColorAt(i, col.setHex(heatHex(v / mx)));
+    bars.setMatrixAt(i, M4); bars.setColorAt(i, col.setHex(elements ? EL_COLORS[elOf(v, th)] : heatHex(v / mx)));
   }
   bars.instanceColor.needsUpdate = true; bars.computeBoundingSphere(); root.add(bars);
   if (mode === 'letter') {
@@ -654,12 +720,15 @@ function buildHeat() {
   lab.done(); root.add(lab.mesh);
   heatPick = { bars, cur, other: nullOn ? obs : nul, nullOn, mode };
   const so = edgeStats(obs), sn = edgeStats(nul), f = (x) => x.toFixed(2);
-  $('hNote').innerHTML = `Observed: max ${f(so.max)}, col 1 mean x${f(so.c1)}, col 49 mean x${f(so.c49)} of overall.<br>Null: max ${f(sn.max)}, col 1 x${f(sn.c1)}, col 49 x${f(sn.c49)}.`;
+  $('hNote').innerHTML = `Observed: max ${f(so.max)}, col 1 mean x${f(so.c1)}, col 49 mean x${f(so.c49)} of overall.<br>Null: max ${f(sn.max)}, col 1 x${f(sn.c1)}, col 49 x${f(sn.c49)}.`
+    + `<br><b>Mean per region</b> (edge = cols 1-2, 48-49; triangles around the diagonals)${th ? ', element shares' : ''}:<br>${regionText(obs, nul, th)}`;
   const what = mode === 'names'
     ? `per cell, number of sides in which that cell is part of ${$('hName').selectedOptions[0].text}`
     : `observed/expected count of letter ${$('hLetter').value} per cell (expected = its total / 2401; plane = ratio 1)`;
-  caption.textContent = `Construction, not a finding. Stack of ${S.sides.length} clean row-written sides (2a-25a): ${what}. ${nullOn ? `NULL: letters shuffled inside each side (seed ${S.seed}).` : 'Observed.'} Bar height and colour share one scale with the ${nullOn ? 'observed' : 'null'} map (max ${f(mx)}).`;
-  legend([['low', heatHex(0.1)], ['mid', heatHex(0.5)], ['high', heatHex(1)]], false);
+  caption.textContent = `Construction, not a finding. Stack of ${S.sides.length} clean row-written sides (2a-25a): ${what}. ${nullOn ? `NULL: letters shuffled inside each side (seed ${S.seed}).` : 'Observed.'} Bar height and colour share one scale with the ${nullOn ? 'observed' : 'null'} map (max ${f(mx)}).`
+    + (th ? ` Elements: bands at the quartiles of the OBSERVED values (${th.map(f).join(', ')}), used for the null too; quartiles give 25% each by construction, except where tied values sit on a threshold.` : '');
+  legend(th ? [3, 2, 1, 0].map(k => [`${EL_NAMES[k]}${k === 3 ? ' (hottest)' : k === 0 ? ' (coldest)' : ''}`, EL_COLORS[k]])
+    : [['low', heatHex(0.1)], ['mid', heatHex(0.5)], ['high', heatHex(1)]], false);
 }
 let heatPick = null;
 
@@ -736,72 +805,86 @@ function dotTexture() {
   const gr = g.createRadialGradient(32, 32, 0, 32, 32, 32); gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(0.35, 'rgba(255,255,255,0.55)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
   g.fillStyle = gr; g.fillRect(0, 0, 64, 64); dotTex = new THREE.CanvasTexture(cv); return dotTex;
 }
-function facePoint(edge, i, nr, j, len, lift) {
+function facePoint(edge, i, nr, j, len, lift, mirror = false) {
   const fr = faceFrame(edge, true, false, 0);
   const v = SLANT * (1 - (i + 0.5) / nr), cw = Math.min(1, (2 * HALF * (i + 0.5) / nr) / len);
-  return fr.m.clone().addScaledVector(fr.e, (j - (len - 1) / 2) * cw).addScaledVector(fr.d, v).addScaledVector(fr.z, lift);
+  return fr.m.clone().addScaledVector(fr.e, (mirror ? -1 : 1) * (j - (len - 1) / 2) * cw).addScaledVector(fr.d, v).addScaledVector(fr.z, lift);
 }
 function buildClosed() {
   addLights();
-  const filt = $('clName').value;
-  if ($('clBase').checked) {
-    const a = dec(S.obs.names[8]), mx = Math.max(...a);
-    const base = new CellLayer(2401);
-    for (let r = 0; r < 49; r++) for (let c = 0; c < 49; c++) {
-      M4.copy(upRot).setPosition(c - 24, 0.01, r - 24);
-      base.add(M4, '', heatHex(a[r * 49 + c] / mx), C.ink, 1, { r, c, ch: `${a[r * 49 + c]} sides`, side: 'base stack' });
-    }
-    base.done(); root.add(base.mesh); hoverLayer = base;
-  }
-  const apex = new THREE.Vector3(0, PH, 0);
-  const cs = [[-HALF, HALF], [HALF, HALF], [HALF, -HALF], [-HALF, -HALF]].map(([x, z]) => new THREE.Vector3(x, 0, z));
-  const fp = []; for (let i = 0; i < 4; i++) fp.push(cs[i], cs[(i + 1) % 4], apex);
-  const fg = new THREE.BufferGeometry().setFromPoints(fp); fg.computeVertexNormals();
-  root.add(new THREE.Mesh(fg, new THREE.MeshStandardMaterial({ color: 0xc9a85a, transparent: true, opacity: 0.1, side: THREE.DoubleSide, depthWrite: false })));
-  const ep = []; for (let i = 0; i < 4; i++) ep.push(cs[i], cs[(i + 1) % 4], cs[i], apex);
-  root.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(ep), new THREE.LineBasicMaterial({ color: 0xc9a85a, transparent: true, opacity: 0.7 })));
-  const pos = [], col = []; let n = 0;
-  for (let t = 29; t <= 48; t++) ['a', 'b'].forEach((s, si) => {
-    const e = T[keyOf(t, s)]; if (!e) return;
-    const tr = triangles(e);
-    const hm = new Map(); e.occ.slice().sort((x, y) => x[3] - y[3]).forEach(([k, r0, c0, len]) => { for (let i = 0; i < len; i++) hm.set(r0 * 100 + c0 + i, k); });
-    [[tr.up, 2 * si], [tr.lo, 2 * si + 1]].forEach(([rows, edge]) => rows.forEach((u, i) => {
-      const row = e.rows[u];
-      for (let j = 0; j < row.length; j++) {
-        const k = hm.get(u * 100 + j); if (k === undefined) continue;
-        if (filt !== 'all' && NAMES[k] !== filt && !(filt === 'GETH' && NAMES[k] === 'ALGETH') && !(filt === 'NOCHA' && NAMES[k] === 'ADNOCHA')) continue;
-        const p = facePoint(edge, i, rows.length, j, row.length, 0.4); pos.push(p.x, p.y, p.z);
-        const c3 = rgb(NAME_COLORS[k]); col.push(c3[0] * 0.7, c3[1] * 0.7, c3[2] * 0.7); n++;
+  const filt = $('clName').value, copies = pyramidCopies();
+  const a = dec(S.obs.names[8]), mx = Math.max(...a);
+  const elements = $('hColor').value === 'elements', th = elements ? quart(a) : null;
+  const pos = [], col = []; let n = 0, nRev = 0;
+  copies.forEach(cp => {
+    if ($('clBase').checked) {
+      const base = new CellLayer(2401);
+      for (let r = 0; r < 49; r++) for (let c = 0; c < 49; c++) {
+        const v = a[r * 49 + c];
+        M4.copy(upRot).setPosition(c - 24 + cp.dx, 0.01, r - 24);
+        base.add(M4, '', elements ? EL_COLORS[elOf(v, th)] : heatHex(v / mx), C.ink, 1,
+          { r, c, ch: `${v} sides${elements ? ' (' + EL_NAMES[elOf(v, th)] + ')' : ''}`, side: 'base stack' });
       }
-    }));
+      base.done(); root.add(base.mesh); hoverLayer = base;
+    }
+    const apex = new THREE.Vector3(cp.dx, PH, 0);
+    const cs = [[-HALF, HALF], [HALF, HALF], [HALF, -HALF], [-HALF, -HALF]].map(([x, z]) => new THREE.Vector3(x + cp.dx, 0, z));
+    const fp = []; for (let i = 0; i < 4; i++) fp.push(cs[i], cs[(i + 1) % 4], apex);
+    const fg = new THREE.BufferGeometry().setFromPoints(fp); fg.computeVertexNormals();
+    root.add(new THREE.Mesh(fg, new THREE.MeshStandardMaterial({ color: 0xc9a85a, transparent: true, opacity: 0.1, side: THREE.DoubleSide, depthWrite: false })));
+    const ep = []; for (let i = 0; i < 4; i++) ep.push(cs[i], cs[(i + 1) % 4], cs[i], apex);
+    root.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(ep), new THREE.LineBasicMaterial({ color: 0xc9a85a, transparent: true, opacity: 0.7 })));
+    for (let t = 29; t <= 48; t++) ['a', 'b'].forEach((s, si) => {
+      const e = T[keyOf(t, s)]; if (!e) return;
+      const tr = triangles(e), rm = revMap(e);
+      const hm = new Map(); e.occ.slice().sort((x, y) => x[3] - y[3]).forEach(([k, r0, c0, len]) => { for (let i = 0; i < len; i++) hm.set(r0 * 100 + c0 + i, k); });
+      [[tr.up, 2 * si], [tr.lo, 2 * si + 1]].forEach(([rows, edge]) => rows.forEach((u, i) => {
+        const row = e.rows[u];
+        for (let j = 0; j < row.length; j++) {
+          const k = hm.get(u * 100 + j), rv = rm.get(u * 100 + j);
+          let hex = null;
+          if (rv !== undefined) { hex = REV_COLOR; nRev++; }
+          else if (k !== undefined && (filt === 'all' || NAMES[k] === filt || (filt === 'GETH' && NAMES[k] === 'ALGETH') || (filt === 'NOCHA' && NAMES[k] === 'ADNOCHA'))) { hex = NAME_COLORS[k]; n++; }
+          if (hex === null) continue;
+          const p = facePoint(edge, i, rows.length, j, row.length, 0.4, cp.mirror); pos.push(p.x + cp.dx, p.y, p.z);
+          const c3 = rgb(hex), g = rv !== undefined ? 1 : 0.7; col.push(c3[0] * g, c3[1] * g, c3[2] * g);
+        }
+      }));
+    });
   });
   const pg = new THREE.BufferGeometry();
   pg.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); pg.setAttribute('color', new THREE.Float32BufferAttribute(col, 3));
   const pm = new THREE.PointsMaterial({ size: +$('clGlow').value, vertexColors: true, map: dotTexture(), transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true });
   root.add(new THREE.Points(pg, pm));
   onSlider = () => { pm.size = +$('clGlow').value; };
-  caption.textContent = `Construction, not a finding. Closed pyramid: ${n} master-name letter cells from all diamond sides 29-48 (side a upper/lower triangle on faces 1-2, side b on faces 3-4, as in Pyramid view) drawn as additive glowing points; overlaps add up. Base: per-cell count of sides with a master-name letter (stack of ${S.sides.length} sides 2a-25a).`;
-  legend([['Base heat: low', heatHex(0.1)], ['Base heat: high', heatHex(1)]]);
+  caption.textContent = `Construction, not a finding. Closed pyramid: ${n / copies.length} master-name letter cells from all diamond sides 29-48 (side a upper/lower triangle on faces 1-2, side b on faces 3-4, as in Pyramid view) drawn as additive glowing points; overlaps add up. Base: per-cell count of sides with a master-name letter (stack of ${S.sides.length} sides 2a-25a)`
+    + (th ? `, coloured as Elements by quartiles of these values (${th.join(', ')}; ties on thresholds make shares unequal).` : '.') + invNote();
+  legend([...(th ? [3, 2, 1, 0].map(k => [`Base: ${EL_NAMES[k]}`, EL_COLORS[k]]) : [['Base heat: low', heatHex(0.1)], ['Base heat: high', heatHex(1)]]), ['Reversed name', REV_COLOR]]);
 }
 
 // ---------------------------------------------------------------- TESSERACT
 function buildTess() {
-  const keys = Object.keys(T).filter(k => T[k].f === 'square-rows').sort((a, b) => parseInt(a) - parseInt(b) || a.localeCompare(b));
-  const start = keys.indexOf($('tsStart').value), sides = Array.from({ length: 24 }, (_, i) => keys[(start + i) % keys.length]);
+  const bySig = $('tsGroup').value === 'sig';
+  $('tsStartRow').hidden = bySig; $('tsSigRow').hidden = !bySig;
+  let pool;
+  if (bySig) pool = sortedKeys().filter(k => D.sig[k] === $('tsSig').value);
+  else { const keys = sortedKeys().filter(k => T[k].f === 'square-rows'); const st = keys.indexOf($('tsStart').value); pool = keys.slice(st).concat(keys.slice(0, st)); }
+  const sides = Array.from({ length: 24 }, (_, i) => pool[i % pool.length]);
   const TS = 392, cv = document.createElement('canvas'); cv.width = TS * 6; cv.height = TS * 4;
   const g = cv.getContext('2d'); g.font = 'bold 7px Georgia, serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
   sides.forEach((k, f) => {
     const e = T[k], hm = nameMap(e), ox = (f % 6) * TS, oy = Math.floor(f / 6) * TS;
     g.fillStyle = '#141a28'; g.fillRect(ox, oy, TS, TS);
-    e.rows.forEach((row, r) => [...row].forEach((ch, c) => {
-      const kk = hm.get(r * 100 + c);
+    const top = Math.floor((49 - e.rows.length) / 2);
+    e.rows.forEach((row, r) => [...row].forEach((ch, c) => {      // diamond rows are centred
+      const kk = hm.get(r * 100 + c), x = ox + (c + (49 - row.length) / 2) * 8, y = oy + (r + top) * 8;
       g.fillStyle = kk !== undefined ? css(NAME_COLORS[kk]) : (r + c) % 2 ? '#262e44' : '#1b2131';
-      g.fillRect(ox + c * 8, oy + r * 8, 7.5, 7.5);
-      g.fillStyle = kk !== undefined ? '#10131a' : '#e9dfc6'; g.fillText(ch, ox + c * 8 + 4, oy + r * 8 + 4.3);
+      g.fillRect(x, y, 7.5, 7.5);
+      g.fillStyle = kk !== undefined ? '#10131a' : '#e9dfc6'; g.fillText(ch, x + 4, y + 4.3);
     }));
     g.strokeStyle = '#c9a85a'; g.lineWidth = 3; g.strokeRect(ox + 1.5, oy + 1.5, TS - 3, TS - 3);
-    g.fillStyle = '#e8b84a'; g.font = 'bold 40px Georgia, serif'; g.fillText(k, ox + TS / 2, oy + TS / 2);
-    g.font = 'bold 7px Georgia, serif';
+    g.fillStyle = '#e8b84a'; g.textAlign = 'left'; g.font = 'bold 13px Georgia, serif'; g.fillText(k, ox + 5, oy + 10);  // small corner tag
+    g.textAlign = 'center'; g.font = 'bold 7px Georgia, serif';
   });
   const tex = new THREE.CanvasTexture(cv); tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
   const SEG = 6, faces = [];
@@ -819,29 +902,37 @@ function buildTess() {
     }
   });
   const geo = new THREE.BufferGeometry();
+  const colArr = new Float32Array(24 * nv * 4).fill(1);
   geo.setAttribute('position', new THREE.BufferAttribute(posArr, 3)); geo.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2)); geo.setIndex(idx);
-  root.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide, transparent: true, opacity: 0.55, depthWrite: false })));
+  geo.setAttribute('color', new THREE.BufferAttribute(colArr, 4));
+  // per-face alpha: only faces of the outer (nearest in w) cube are textured; inner faces nearly invisible
+  root.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ map: tex, vertexColors: true, side: THREE.DoubleSide, transparent: true, depthWrite: false })));
   const verts = []; for (let m = 0; m < 16; m++) verts.push([0, 1, 2, 3].map(b => (m >> b & 1) ? 1 : -1));
   const edges = []; for (let m = 0; m < 16; m++) for (let b = 0; b < 4; b++) if (!(m >> b & 1)) edges.push([m, m | (1 << b)]);
   const eArr = new Float32Array(edges.length * 6), eGeo = new THREE.BufferGeometry(); eGeo.setAttribute('position', new THREE.BufferAttribute(eArr, 3));
   root.add(new THREE.LineSegments(eGeo, new THREE.LineBasicMaterial({ color: 0xe8b84a })));
   const SC = 9, DIST = 3.2;
-  const project = (p, th) => {
+  const rot4 = (p, th) => {
     const c1 = Math.cos(th), s1 = Math.sin(th), c2 = Math.cos(th * 0.62), s2 = Math.sin(th * 0.62);
     let [x, y, z, w] = p;
     [x, w] = [x * c1 - w * s1, x * s1 + w * c1];          // x-w plane
     [z, w] = [z * c2 - w * s2, z * s2 + w * c2];          // z-w plane
-    const k = SC * DIST / (DIST - w); return [x * k, y * k, z * k];
+    return [x, y, z, w];
   };
+  const project = (p, th) => { const [x, y, z, w] = rot4(p, th); const k = SC * DIST / (DIST - w); return [x * k, y * k, z * k]; };
   let spin = 0;
   const update = (th) => {
     faces.forEach((f, fi) => {
+      const pc = [0, 0, 0, 0]; pc[f.o[0]] = f.sa; pc[f.o[1]] = f.sb;
+      const w = rot4(pc, th)[3], t = Math.min(1, Math.max(0, (w - 0.25) / 0.6));
+      const alpha = 0.025 + 0.875 * t * t * (3 - 2 * t);
+      for (let v = 0; v < nv; v++) colArr[(fi * nv + v) * 4 + 3] = alpha;
       for (let i = 0; i <= SEG; i++) for (let j = 0; j <= SEG; j++) {
         const p = [0, 0, 0, 0]; p[f.a] = -1 + 2 * j / SEG; p[f.b] = 1 - 2 * i / SEG; p[f.o[0]] = f.sa; p[f.o[1]] = f.sb;
         posArr.set(project(p, th), (fi * nv + i * (SEG + 1) + j) * 3);
       }
     });
-    geo.attributes.position.needsUpdate = true; geo.computeBoundingSphere();
+    geo.attributes.position.needsUpdate = true; geo.attributes.color.needsUpdate = true; geo.computeBoundingSphere();
     edges.forEach(([m1, m2], i) => { eArr.set(project(verts[m1], th), i * 6); eArr.set(project(verts[m2], th), i * 6 + 3); });
     eGeo.attributes.position.needsUpdate = true; eGeo.computeBoundingSphere();
   };
@@ -851,8 +942,35 @@ function buildTess() {
     const th = THREE.MathUtils.degToRad(+$('tsAngle').value) + spin;
     if (th !== last) { update(th); last = th; }
   });
-  caption.textContent = `Construction, not a finding. Tesseract: a 4D hypercube (8 cubes, 24 square faces) rotated in the x-w and z-w planes and projected to 3D in perspective; its 24 faces carry square sides ${sides[0]}-${sides[23]} (low-resolution textures).`;
+  caption.textContent = `Construction, not a finding. Tesseract: a 4D hypercube (8 cubes, 24 square faces) rotated in the x-w and z-w planes and projected to 3D in perspective. ${bySig ? `Faces filled with signature group ${$('tsSig').value} (${pool.length} sides: ${pool.join(' ')}${pool.length < 24 ? '; cycled to fill 24 faces' : ''}).` : `Faces carry sides ${sides[0]}-${sides[23]} in order.`} Only faces of the outer cube (nearest in w) are textured; the inner cube fades out.`;
   legend([]);
+}
+
+// ---------------------------------------------------------------- SIGNATURE MAP
+const sortedKeys = () => Object.keys(T).sort((a, b) => parseInt(a) - parseInt(b) || a.localeCompare(b));
+const DOM_COLORS = { A: 0xe8b84a, U: 0xa78bfa, R: 0xff7a66, N: 0x3cc7b4 };
+function sigGroups() {
+  const g = {}; sortedKeys().forEach(k => (g[D.sig[k]] ||= []).push(k));
+  return Object.entries(g).sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
+}
+function buildSigmap() {
+  const groups = sigGroups();
+  const layer = new CellLayer(94 + 94 * 3 + groups.length * 3 + 4);
+  const CW = 4.6, TH = 1.7, x0 = -(groups.length - 1) * CW / 2, y0 = 26;
+  groups.forEach(([sig, keys], gi) => {
+    const x = x0 + gi * CW;
+    [...sig].forEach((ch, i) => { M4.makeScale(1.3, 1.3, 1).setPosition(x + (i - 1) * 1.05, y0 + 2.2, 0); layer.add(M4, ch, 0, DOM_COLORS[sig[0]] || C.ink, 0); });
+    keys.forEach((k, ri) => {
+      const y = y0 - ri * TH, e = T[k];
+      M4.makeScale(4.1, 1.5, 1).setPosition(x, y, 0);
+      layer.add(M4, '', DOM_COLORS[sig[0]] || 0x888888, C.ink, e.f === 'diamond' ? 0.75 : 1, { r: 0, c: 0, ch: sig, side: `side ${k} (${e.f})` });
+      [...k].forEach((ch, i) => { M4.makeScale(1.15, 1.15, 1).setPosition(x + (i - (k.length - 1) / 2) * 0.95, y, 0.02); layer.add(M4, ch, 0, C.inkDark, 0); });
+    });
+  });
+  layer.done(); root.add(layer.mesh); hoverLayer = layer;
+  const dom = {}; Object.values(D.sig).forEach(s => dom[s[0]] = (dom[s[0]] || 0) + 1);
+  caption.textContent = `Signature map: the 94 sides (2a-48b) grouped in columns by their top-3 letters (count order, ties alphabetical); tile colour = dominant letter (${Object.entries(dom).map(([l, n]) => `${l} ${n}`).join(', ')}); diamond sides slightly dimmer. Hover a tile for its format.`;
+  legend(Object.entries(DOM_COLORS).map(([l, h]) => [`dominant ${l}`, h]), false);
 }
 
 // ---------------------------------------------------------------- ICOSAHEDRON
@@ -916,6 +1034,7 @@ fill($('tbl'), Array.from({ length: 47 }, (_, i) => [i + 2, `${i + 2} - ${T[keyO
 const baseKeys = Object.keys(T).filter(k => T[k].f === 'square-rows').sort((a, b) => parseInt(a) - parseInt(b) || a.localeCompare(b));
 fill($('pBase'), baseKeys.map(k => [k, k]));
 fill($('tsStart'), baseKeys.map(k => [k, k]));
+fill($('tsSig'), sigGroups().map(([s, ks]) => [s, `${s} (${ks.length}: ${ks.length > 4 ? ks.slice(0, 3).join(' ') + ' ...' : ks.join(' ')})`]));
 const dTables = Array.from({ length: 20 }, (_, i) => [i + 29, String(i + 29)]);
 fill($('pFace'), dTables); fill($('pFace2'), dTables);
 $('pBase').value = '25a'; $('pFace').value = '29'; $('pFace2').value = '30';
@@ -924,21 +1043,25 @@ const CAMS = {
   square: [[0, -8, 88], [0, 0, 0]], diamond: [[0, -6, 104], [0, 0, 0]],
   pyramid: [[62, 58, 92], [0, 8, 0]], book: [[0, -6, 92], [0, 0, 0]],
   heat: [[0, 78, 40], [0, 2, 4]], trail: [[0, 70, 46], [0, 0, 2]], closed: [[58, 46, 84], [0, 10, 0]],
-  tess: [[42, 30, 80], [0, 0, 0]], ico: [[30, 24, 88], [0, 0, 0]],
+  tess: [[42, 30, 80], [0, 0, 0]], sigmap: [[-17, 1, 84], [-17, 1, 0]], ico: [[30, 24, 88], [0, 0, 0]],
 };
 let firstRender = true;
 function render(keepCam = false) {
   clearView();
   document.querySelectorAll('#views button').forEach(b => b.classList.toggle('on', b.dataset.view === state.view));
+  const ALIAS = { tesseract: 'tess', icosahedron: 'ico', signatures: 'sigmap', heatmap: 'heat', closedpyramid: 'closed' };
+  state.view = ALIAS[state.view] || state.view;
+  if (!CAMS[state.view]) state.view = 'square';
   document.querySelectorAll('section[data-show]').forEach(s => s.hidden = !s.dataset.show.split(' ').includes(state.view));
   $('tbl').value = state.table; $('side').value = state.side;
   const e = T[keyOf(state.table, state.side)];
   $('currents').disabled = !(e && e.f === 'square-diagonal');
   $('curNote').textContent = $('currents').disabled ? 'Available for the diagonal squares 25b-28b.' : 'Down-right and up-left flows along r-c diagonals.';
   ({ square: buildSquare, diamond: buildDiamond, pyramid: buildPyramid, book: buildBook, heat: buildHeat, trail: buildTrail,
-    closed: buildClosed, tess: buildTess, ico: buildIco })[state.view]();
+    closed: buildClosed, tess: buildTess, ico: buildIco, sigmap: buildSigmap })[state.view]();
   if (!keepCam) {
-    const c = state.view === 'pyramid' && $('octa').checked ? [[70, 30, 110], [0, 0, 0]] : CAMS[state.view];
+    const two = ['pyramid', 'closed'].includes(state.view) && pyramidCopies().length > 1;
+    const c = two ? [[-14, 85, 150], [-14, 6, 0]] : state.view === 'pyramid' && $('octa').checked ? [[70, 30, 110], [0, 0, 0]] : CAMS[state.view];
     if (firstRender) { camera.position.set(...c[0]); controls.target.set(...c[1]); controls.update(); } else flyTo(...c);
   }
   firstRender = false;
@@ -959,7 +1082,15 @@ $('tbl').onchange = () => {
 };
 $('side').onchange = () => { state.side = $('side').value; render(true); };
 ['currents', 'dlayout', 'hiNames', 'pBase', 'pFace', 'pFace2', 'showBase', 'hMode', 'hName', 'hLetter', 'hNull',
-  'trSrc', 'trOrder', 'trObs', 'trNull', 'clName', 'clBase', 'tsStart', 'icSide'].forEach(id => $(id).onchange = () => render(true));
+  'trSrc', 'trOrder', 'trObs', 'trNull', 'clName', 'clBase', 'tsStart', 'icSide', 'pRev', 'hColor', 'tsGroup', 'tsSig']
+  .forEach(id => $(id).onchange = () => render(true));
+['pOrig', 'pInv'].forEach(id => $(id).onchange = () => render());
+$('hCam').onchange = () => {
+  const v = $('hCam').value; $('hCam').value = '';
+  const wide = state.view === 'closed' && pyramidCopies().length > 1;
+  if (v === 'top') flyTo([0, wide ? 150 : 95, 0.01], [0, 0, 0]);   // row 1 at the top of the screen, col 1 on the left
+  if (v === 'oblique') flyTo(...CAMS[state.view]);
+};
 $('clGlow').oninput = () => { if (onSlider) onSlider(); };
 $('icOcta').onchange = () => { if ($('icOcta').value) { $('icOcta').value = ''; $('octa').checked = true; $('fold').value = 0.15; state.view = 'pyramid'; render(); } };
 $('octa').onchange = () => { $('fold').value = $('octa').checked ? 0.15 : 0; render(); };
@@ -1012,6 +1143,7 @@ function pick() {
   if (!hoverLayer) return;
   const hit = ray.intersectObject(hoverLayer.mesh)[0];
   const inf = hit && hoverLayer.info[hit.instanceId];
+  if (state.view === 'sigmap') { $('hover').textContent = inf ? `${inf.side}: signature ${inf.ch}` : ''; return; }
   $('hover').textContent = inf ? `${inf.side ? inf.side + ' - ' : ''}row ${inf.r + 1}, col ${inf.c + 1}: ${inf.ch}${inf.k !== undefined ? '  [' + NAMES[inf.k] + ']' : ''}` : '';
 }
 
@@ -1044,6 +1176,9 @@ for (const [k, v] of hp) {           // any control by id, e.g. #view=heat&hMode
 }
 state.view = hp.get('view') || 'square';
 render();
+if (hp.get('top')) {                 // #...&top=1 opens with the view from above
+  camera.position.set(0, state.view === 'closed' && pyramidCopies().length > 1 ? 150 : 95, 0.01); controls.target.set(0, 0, 0); controls.update();
+}
 </script>
 </body>
 </html>

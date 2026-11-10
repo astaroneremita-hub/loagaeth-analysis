@@ -533,6 +533,35 @@ the null's. Master names hit any one cell in at most 9 of 36 sides, with no figu
 pyramid they are short horizontal streaks on all four faces, nothing at the apex or along the edges.
 The tesseract and icosahedron are ways to look, not results.
 
+**Second round of views.**
+- **Inverse** (Pyramid / Closed pyramid): every face mirrored, side by side with the original, and
+  reversed master names marked in magenta.
+- **Elements** (Heatmap / Closed pyramid): heat split into quartiles and coloured, hottest to
+  coldest, Fire (red), Air (yellow), Earth (brown), Water (blue) — the practitioner's lens, applied
+  the same way to the null. Plus a **view from above**.
+- **Tesseract by signature**: only the outer cube is textured; faces can be filled with sides that
+  share the same top-three letters instead of consecutive sides.
+- **Signatures**: the 94 sides as tiles in columns by their top-three letters.
+
+| Inverse (ALGETH reads HTEGLA) | Elements, from above | Signature map |
+|---|---|---|
+| ![inverse](figures/viz_pyramid_inverse.jpg) | ![elements](figures/viz_elements_heat_top.jpg) | ![signatures](figures/viz_signature_map.jpg) |
+
+What they show `[a21 F]`:
+- **The text has one direction.** Read backwards, the names vanish: CHASTOR 179 forward / 0
+  reversed, ANZACH 150 / 0, GETH 504 / 0, ADNOCHA 172 / 0 (only DAXO, OXAD reversed, appears — it
+  is the DAX stem + O). A letter model trained forward reads reversed text at 6.1 bits vs 3.5.
+  On the diamonds, reversed hits are DAXO only (19 vs 6.6 expected), forward names 426 vs 80.
+- **Signatures sort the book by itself.** A dominates 83 of 94 sides; U 7 (43b–48b), R 3, N 1, all
+  at the end. Top-three signatures follow the segments: AON opening, ANO heartland, AOX/AOL/AOR
+  diamonds, ARO/RAO late, URN/URO/UON end — the segment difference of `[a16]` made visible.
+- **Seen from above, the pyramid's four triangles are not separate realms.** Mean name heat per
+  triangle: top 2.41, bottom 2.44, right 2.05, left 1.77 (null ≈ 0). Left and right are cooler only
+  because they hold the row-start and row-end columns, where names rarely sit (edges 0.58 vs 2.31
+  inside). With Elements, the edge columns are 87% Water; the interior splits evenly. For letters
+  (where the null is usable) every triangle sits within ±4 points of the null, except X, whose
+  absence from row starts makes the left side "Water".
+
 ### What we tested and threw out (the discipline)
 Mirror/reversal (syllable-pool artifact), decimation-by-2 (names are contiguous), Semitic
 roots (ratio ~1.3, English-like), prefix-as-region (matches a frequency null), the

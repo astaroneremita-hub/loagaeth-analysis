@@ -376,6 +376,40 @@ def E_gematria(counts):
     }
 
 
+def F_reverse(lv):
+    """Read every row backwards: do the names appear, and does a model of the text still read it?"""
+    from a19_machine import CharLM
+
+    def rows(k):
+        return [load.letters(r) for r in lv.get(k, []) if load.letters(r)]
+    tr = [r for t in range(2, 20) for s in "ab" for r in rows(f"{t}{s}")]
+    te = [r for t in range(20, 25) for s in "ab" for r in rows(f"{t}{s}")]
+    fwd = CharLM(4)
+    fwd.fit(tr)
+    back = CharLM(4)
+    back.fit([r[::-1] for r in tr])
+    S = "|".join(r for t in range(2, 49) for s in "ab" for r in rows(f"{t}{s}"))
+    names = ["CHASTOR", "CHUSTOR", "ANZACH", "GETH", "ALGETH", "NOCHA", "ADNOCHA", "ACLAX", "CHADAX", "OXAD"]
+    sig = Counter()
+    per = {}
+    for t in range(2, 49):
+        for s in "ab":
+            x = load.letters("".join(lv.get(f"{t}{s}", [])))
+            if x:
+                c = Counter(x).most_common(3)
+                per[f"{t}{s}"] = "".join(L for L, _ in c)
+                sig[c[0][0]] += 1
+    return {
+        "bits_forward_model_on_forward_text": round(fwd.bits(te), 3),
+        "bits_forward_model_on_reversed_text": round(fwd.bits([r[::-1] for r in te]), 3),
+        "bits_reversed_model_on_reversed_text": round(back.bits([r[::-1] for r in te]), 3),
+        "names_forward_vs_reversed": {n: [S.count(n), S.count(n[::-1])] for n in names},
+        "note": "OXAD reversed is DAXO = the DAX stem + O, not a mirrored name.",
+        "dominant_letter_by_side": dict(sig),
+        "top3_signature_by_side": per,
+    }
+
+
 def run():
     lv = load.leaves()
     entries, refs = parse_index(fetch())
@@ -388,6 +422,7 @@ def run():
         "C_heptarchy": C_heptarchy(counts),
         "D_top_string": D_top_string(stream, lv, refs),
         "E_gematria": E_gematria(counts),
+        "F_reverse_and_signatures": F_reverse(lv),
     }
     b = res["B_segmentation_gold"]
     res["conclusion"] = (

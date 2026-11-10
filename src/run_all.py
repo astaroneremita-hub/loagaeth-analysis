@@ -27,9 +27,16 @@ import a14_anzach
 import a15_book_geometry
 import a16_letters
 import a17_kingdom
+import a18_markup_decoding
+import a19_machine
+import a20_energy_fibonacci_gd
 import make_figures
+import make_viz_data
 
 MODULES = [
+    # a18 runs first: it downloads Peterson's page (if missing) and writes the diagonal-decoded
+    # text of tables 25b-28b, which later modules (territory, geometry) read.
+    ("18_markup_decoding", a18_markup_decoding),
     ("01_basic_stats", a01_basic_stats),
     ("02_network", a02_network),
     ("03_master_name", a03_master_name),
@@ -46,6 +53,8 @@ MODULES = [
     ("15_book_geometry", a15_book_geometry),
     ("16_letters", a16_letters),
     ("17_kingdom", a17_kingdom),
+    ("19_machine", a19_machine),
+    ("20_energy_fibonacci_gd", a20_energy_fibonacci_gd),
 ]
 
 
@@ -62,6 +71,8 @@ def main():
     print("\n[figures]")
     for f in make_figures.run():
         print("  " + f)
+    print("\n[3D viewer data]")
+    make_viz_data.main()
 
 
 if __name__ == "__main__":

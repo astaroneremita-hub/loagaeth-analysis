@@ -128,8 +128,8 @@ def run():
 
     # C borders on the 7x7 plan
     borders = []
-    for name, t in [("CHASTOR appears", 6), ("last heartland table", 25), ("noise tables begin", 26),
-                    ("format turns 45 degrees", 29), ("U-register end begins", 44)]:
+    for name, t in [("CHASTOR appears", 6), ("writing turns from rows to diagonals (side 25b)", 25),
+                    ("diamond format begins", 29), ("U-register end begins", 44)]:
         borders.append({"event": name, "table": t, "week": (t - 1) // 7 + 1, "position_in_week": (t - 1) % 7 + 1})
 
     # D implicit correlation zone
@@ -174,7 +174,10 @@ def run():
                                   "family only lean (bottom / top) without passing it")},
         "B_mirrors": mirrors,
         "C_borders_on_7x7_plan": {"borders": borders,
-                                  "note": "Table 25 is the exact centre of the 7x7 plan (week 4, position 4) and of 1..49. Descriptive, chosen after seeing the data."},
+                                  "note": ("Table 25 is the exact centre of the 7x7 plan (week 4, position 4) and of 1..49; "
+                                           "the writing turns from rows to diagonals between its two sides (25a|25b), "
+                                           "i.e. after side 49 of 98. Tables 26-28 belong to CHASTOR's realm once read "
+                                           "on their diagonals (a18). Descriptive, noticed after seeing the data.")},
         "D_correlation_zone": {"names": NAMES, "familywise_threshold_abs_r": round(thr, 2),
                                "strong_pairs": strong, "houses_within_segments": houses,
                                "house_density_per_1000_letters": seg_density,

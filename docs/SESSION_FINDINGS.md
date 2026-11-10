@@ -182,10 +182,10 @@ across the 91 numbers, keeping lengths** — so the global 2/3/6 excess is alrea
   other letter and that the paper was reoriented. (A naive "every-other-letter along the row"
   version of that idea is refuted: the diamond rows match ordinary adjacent-letter statistics,
   JS 0.09, not skip-one statistics, JS 0.35.)
-- **Tables 26–28 are statistical noise.** Conditional entropy equals a shuffled copy of the same
-  table (e.g. 3.752 vs 3.751), no recurring names (0.001), doubled letters at chance. They are not
-  a permutation of any other table and show no row periodicity. They are the last three full
-  tables before the format change.
+- ~~Tables 26–28 are statistical noise.~~ **SUPERSEDED by section 22.** Read by rows they are
+  indistinguishable from noise (conditional entropy equals a shuffled copy, no recurring names,
+  doubled letters at chance), but that is the wrong reading direction: they are written on the
+  diagonals in two colour currents and decode into ordinary text.
 - **Method correction.** Because the diamond tables hold half the letters per side, raw
   per-table counts (module `a10`, `a11`, `a14`) are not comparable across the two formats. Length-
   normalised, CHASTOR's density is steady from table 6 to 43; the real breaks are at table 6
@@ -257,6 +257,64 @@ across the 91 numbers, keeping lengths** — so the global 2/3/6 excess is alrea
 - Densities per 1000 letters (opening / heartland / diamonds / end): ADNOCHA 0 / 1.75 / 0.22 / 0;
   ALGETH 0.10 / 0.78 / 1.03 / 0; ACLAX 0 / 1.23 / 1.06 / 0. **Two houses alternate table by
   table; the NOCHA house leads the first half, the GETH/ACLAX house holds or grows in the second.**
+
+### 22. Tables 25b–28b decoded: two currents on the diagonals — module `a18`
+- Source: Peterson's page (https://www.esotericarchives.com/dee/sl3189.htm), parsed with its
+  markup. In leaves 25b–28b every letter is followed by one of two signs (`~` / `` ` `` / space).
+  Aligned to the grid (2,401 letters = 2,401 cells in 26a–28b), each sign falls on one chessboard
+  colour: 26a/27a `~` on colour 0 (1,200); 26b `~` colour 0, `/` colour 1; 27b `/` colour 0,
+  `` ` `` colour 1; 28a/28b `/` colour 1, `` ` `` colour 0.
+- Reading each colour along the diagonals (one binary choice per face for the leftward current):
+
+  | face | rows | ↘ current | leftward current |
+  |---|---|---|---|
+  | 26a | 0.001 | 0.220 | 0.259 (↖) |
+  | 26b | 0.001 | 0.367 | 0.246 (↙) |
+  | 27a | 0.000 | 0.150 | 0.227 (↙) |
+  | 27b | 0.001 | 0.381 | 0.284 (↖) |
+  | 28a | 0.001 | 0.403 | 0.126 (↖) |
+  | 28b | 0.000 | 0.403 | 0.175 (↖) |
+
+  (recurring-name share against the inventory of tables 2–24). Overall 0.001 → 0.27; conditional
+  entropy 3.82 → 3.05 bits; doubled letters 9.6% → 1.5%. Control: 35 row-written tables read by the
+  same procedure, maximum 0.005. 25b follows the same rule (colour 0 ↘ 0.307, colour 1 ↖ 0.181).
+- Master names appear once decoded (rows → decoded): CHASTOR 0 → 16, ANZACH 0 → 12, GETH 0 → 85,
+  NOCHA 0 → 51, ADNOCHA 0 → 15, ALGETH 0 → 26, ACLAX 0 → 27. With the decoded text, tables 26–28
+  fall inside CHASTOR's territory (module `a10` now uses it): **the realm is continuous 6–43**.
+- **Midpoint (descriptive):** sides 1a–25a are written in rows, 25b onwards on diagonals; 25a is
+  side 49 of a 98-side book.
+
+### 23. Leaf titles — module `a18`
+- 94 leaf headings extracted (`data/loagaeth_leaf_titles.json`). 5b *Zvchastors plohodmax argednon*
+  contains ZUCHASTOR(S) — the U form of the master name — immediately before CHASTOR's realm begins
+  at table 6; ALGE/ALGETH appear in the headings of 3b, 4a, 7a, 8a.
+- Headings are not summaries of their leaf: 15% of title 4-grams occur in their own leaf vs 16% in
+  other leaves (53 titles).
+
+### 24. Machine or language — module `a19`
+- Soyga Aries table (extracted locally from Kupin 2014, not redistributed): columns periodic, best
+  self-match 0.969 / 0.875 / 0.844 at period 4, 0.458 at period 12. Loagaeth rows 0.197 vs shuffled
+  0.168; decoded diagonals 0.227. **The Soyga table is generated; the Loagaeth is not.**
+- 2-D rule: H(x) 3.951, H(x|above) 3.943, H(x|left) 3.093, H(x|left, above) 3.016.
+- Compression (bits/letter, zlib / bz2 / lzma): real 3.55 / 3.28 / 3.38, Markov-3 surrogate
+  3.52 / 3.16 / 3.34, shuffled 4.58 / 4.32 / 4.10 — no long-range regularity beyond local syllables.
+- Character model (order 4, trained on 2–24): held-out 3.012; decoded 25b–28 3.437; same tables by
+  rows 7.620; diamonds 3.745; end as written 5.051; end with U→A 4.246; shuffled 7.508.
+- Order-5 generator: produces plausible Loagaeth surface text with a similar doubled-letter rate
+  (0.6% vs 0.9%); it over-produces the most frequent names.
+
+### 25. Letter energy by realm — module `a20`
+- Mean letter value per segment in 13 gematria systems + surprisal: end > heartland in 10 of 14 after
+  Bonferroni. Golden Dawn: 38.8 / 45.6 / 60.0 / 83.2 (opening / heartland / diamonds / end).
+- With U turned back into A, only 3 of 14 remain (Golden Dawn difference −0.75, p = 0.65). Surprisal
+  stays higher at the end (+0.17 bit/letter, p < 0.001).
+
+### 26. Fibonacci, gradual division, Golden-Dawn rearrangement — module `a20` (negative)
+- Fibonacci gaps between CHASTORs 1.04% vs 1.47% random (95th 3.1%); Fibonacci start columns 17.7%
+  vs 18.6% expected; borders not Fibonacci, not at the golden section (30.3).
+- 7×7 blocks χ² 1473 vs shuffled 95th 1063 — explained by the row-edge effect; central row names
+  0.264 vs 0.280 elsewhere.
+- Golden-Dawn-style quadrant rearrangement: original best in 35/35 tables (mean best gain −0.014).
 
 ### Provenance warning: the grimoire's "powers"
 The wider project generated a grimoire that assigns each Lord a sefira, planet, talisman,

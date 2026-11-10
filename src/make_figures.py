@@ -225,7 +225,7 @@ def fig_series():
     body.append(text(x0, base + 34, "table (book order)", 11, MUTED))
     body += legend(50, 300, [(TEAL, "GETH"), (P6, "CHASTOR"), (CORAL, "ANZACH")])
     return svg("fig_stems_across_tables", 640, 320, "Three great stems across the tables",
-               "Occurrences per table. All three vanish together in the void tables 26–28.", body)
+               "Occurrences per table, rows as written. The dip at 26–28 is a reading artefact: those tables run on diagonals (a18).", body)
 
 
 # ---------------------------------------------------------------- 7. letter positional grammar
@@ -262,14 +262,14 @@ def fig_letter_grammar():
 def fig_book_formats():
     r = res("15_book_geometry")
     per = r["E_per_table"]
-    noise = {int(t) for t in r["C_tables_26_28"]}
+    noise = {int(t) for t in r.get("C_tables_26_28_read_by_rows", {})}
 
     def cat(t):
         f = per[str(t)]["format"] if str(t) in per else ""
         if t == 1:
             return ("prophecy (word-spaced)", GRAY)
         if t in noise:
-            return ("noise tables", CORAL)
+            return ("square written on diagonals (two currents)", AMBER)
         if f.startswith("full"):
             return ("full grid, written in rows", P6)
         if f == "diamond pair":
@@ -297,7 +297,7 @@ def fig_book_formats():
     body += legend(24, y0 + 196, items[:3])
     body += legend(24, y0 + 216, items[3:])
     return svg("fig_book_formats", x0 * 2 + 48 * cw, 310, "The book has distinct physical formats",
-               "Top: format of each table. Bottom: share of text made of recurring names.", body)
+               "Top: format of each table. Bottom: recurring-name share read by rows (26–28 need their diagonal reading, see a18).", body)
 
 
 # ---------------------------------------------------------------- 9. diamond geometry
@@ -346,7 +346,8 @@ def fig_doubled():
              ("Loagaeth diamond tables", r["diamond_tables_29_48"], TEAL),
              ("Leaf 1 (prophecy)", r["leaf1_words"], GRAY),
              ("The 48 Calls", r["calls_words"] or 0, BLUE),
-             ("Tables 26–28", r["tables_26_28"], CORAL)]
+             ("Tables 26–28 read on diagonals", r.get("tables_26_28_read_on_diagonals") or 0, AMBER),
+             ("Tables 26–28 read by rows (wrong)", r["tables_26_28_read_by_rows"], CORAL)]
     ch = r["chance_from_letter_freq"]
     mx = max(ch, max(v for _, v, _ in items)) * 1.1
     body, x0, wmax = [], 200, 360
@@ -359,7 +360,7 @@ def fig_doubled():
     body.append(f'<line x1="{cx:.0f}" y1="72" x2="{cx:.0f}" y2="252" stroke="{INK}" stroke-dasharray="4 3"/>')
     body.append(text(cx, 268, f"chance {ch*100:.1f}%", 11, INK, "middle"))
     return svg("fig_doubled_letters", 620, 290, "The no-doubled-letter rule",
-               "Share of adjacent identical letters. The Loagaeth avoids them ~11× below chance; tables 26–28 do not.", body)
+               "Share of adjacent identical letters. The Loagaeth avoids them far below chance — when read in its own direction.", body)
 
 
 # ---------------------------------------------------------------- 11. every letter, with gematria value
@@ -463,7 +464,7 @@ def fig_plan_7x7():
         elif t <= 25:
             seg[t] = ("CHASTOR heartland", P6)
         elif t <= 28:
-            seg[t] = ("noise", CORAL)
+            seg[t] = ("squares on diagonals", AMBER)
         elif t <= 43:
             seg[t] = ("diamonds", TEAL)
         elif t <= 48:
@@ -490,10 +491,117 @@ def fig_plan_7x7():
     for i, (nm, c) in enumerate(seen):
         body.append(rect(lx, y0 + i * 24, 12, 12, c, 2))
         body.append(text(lx + 18, y0 + i * 24 + 11, nm, 12, MUTED))
-    body.append(text(lx, y0 + len(seen) * 24 + 16, "gold frame: table 25,", 12, AMBER))
-    body.append(text(lx, y0 + len(seen) * 24 + 32, "centre of the plan", 12, AMBER))
-    return svg("fig_plan_7x7", lx + 180, y0 + 7 * cs + 30, "The 49 tables on the 7×7 plan",
-               "CHASTOR's heartland ends at the exact centre; the 45° format begins with week 5.", body)
+    body.append(text(lx, y0 + len(seen) * 24 + 16, "gold frame: table 25, centre of", 12, AMBER))
+    body.append(text(lx, y0 + len(seen) * 24 + 32, "the plan; writing turns from rows", 12, AMBER))
+    body.append(text(lx, y0 + len(seen) * 24 + 48, "to diagonals between 25a and 25b", 12, AMBER))
+    return svg("fig_plan_7x7", lx + 230, y0 + 7 * cs + 30, "The 49 tables on the 7×7 plan",
+               "49 sides in rows, then 49 sides on diagonals: the turn falls at the exact middle of the book.", body)
+
+
+# ---------------------------------------------------------------- 17. the two currents (tables 25b-28b)
+def fig_two_currents():
+    d = res("18_markup_decoding")
+    faces = d["B_faces"]
+    body = []
+    # schematic: a 9x9 chessboard with the two currents
+    x0, y0, s = 34, 80, 18
+    for r in range(9):
+        for c in range(9):
+            body.append(rect(x0 + c * s, y0 + r * s, s - 1, s - 1, P2 if (r + c) % 2 == 0 else "#9FE1CB", 1))
+    body.append('<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M1 1L8 5L1 9" fill="none" stroke="context-stroke" stroke-width="1.6"/></marker></defs>')
+    for k in (0, 2, 4):
+        body.append(f'<line x1="{x0+k*s+4}" y1="{y0+4}" x2="{x0+(8)*s+10-k*0}" y2="{y0+(8-k)*s+10}" stroke="{P6}" stroke-width="2" marker-end="url(#ah)"/>')
+    for k in (1, 3, 5):
+        body.append(f'<line x1="{x0+8*s+10}" y1="{y0+(8-k+1)*s-4}" x2="{x0+(k-1)*s+6}" y2="{y0+6}" stroke="{TEAL}" stroke-width="2" marker-end="url(#ah)"/>')
+    body.append(text(x0, y0 + 9 * s + 18, "colour 1 flows ↘, colour 2 flows ↖", 11, MUTED))
+    # bars: rows vs decoded per face
+    bx, by = 250, 74
+    body.append(text(bx, by, "recurring-name share", 12, INK, weight=600))
+    keys = list(faces)
+    for i, k in enumerate(keys):
+        y = by + 14 + i * 26
+        f = faces[k]
+        body.append(text(bx, y + 13, k, 12, INK))
+        for j, (lab, v, c) in enumerate([("rows", f["rows_as_written"]["names"], CORAL),
+                                         ("↘", f["stream_down_right"]["names"], P6),
+                                         ("left", f["stream_leftward"]["names"], TEAL)]):
+            body.append(rect(bx + 34 + j * 112, y + 2, max(v / 0.45 * 100, 1), 15, c, 2))
+            body.append(text(bx + 34 + j * 112 + max(v / 0.45 * 100, 1) + 3, y + 13, f"{v:.2f}", 10, INK))
+    ctrl = d["B_control_row_tables_read_diagonally"]["max_names_any_diagonal_reading"]
+    body.append(text(bx, by + 14 + len(keys) * 26 + 14,
+                     f"Control: 35 ordinary row tables read the same way reach at most {ctrl:.3f}.", 11, MUTED))
+    body += legend(bx, by + 14 + len(keys) * 26 + 34, [(CORAL, "read by rows"), (P6, "colour 1 ↘"), (TEAL, "colour 2 leftward")])
+    return svg("fig_two_currents", 640, by + len(keys) * 26 + 70, "Tables 25b–28b: two currents on the diagonals",
+               "Peterson's marks separate the chessboard colours; each colour read on its diagonals is ordinary Loagaeth.", body)
+
+
+# ---------------------------------------------------------------- 18. machine vs language
+def fig_machine():
+    d = res("19_machine")
+    lm = d["D_language_model_bits_per_letter"]
+    items = [("held-out heartland", lm["heldout_rows_2_24_crossval"], P6),
+             ("tables 25b–28 on diagonals", lm["decoded_diagonals_25b_28"], AMBER),
+             ("diamonds 29–43", lm["diamonds_29_43"], TEAL),
+             ("end 44–48 with U→A", lm["end_44_48_with_U_back_to_A"], BLUE),
+             ("end 44–48 as written", lm["end_44_48_as_written"], "#85B7EB"),
+             ("tables 26–28 by rows", lm["same_tables_read_by_rows"], CORAL),
+             ("shuffled letters", lm["shuffled_heartland"], GRAY)]
+    body, x0 = [], 210
+    body.append(text(24, 76, "A character language model trained on tables 2–24: bits per letter (lower = it understands)", 12, INK, weight=600))
+    for i, (lab, v, c) in enumerate(items):
+        y = 86 + i * 26
+        body.append(text(24, y + 14, lab, 12, INK))
+        body.append(rect(x0, y + 2, v / 8 * 330, 17, c, 3))
+        body.append(text(x0 + v / 8 * 330 + 6, y + 15, f"{v:.2f}", 11, INK))
+    sy = 86 + len(items) * 26 + 24
+    body.append(text(24, sy, "Periodicity (best self-match at a fixed period): machine vs language", 12, INK, weight=600))
+    per = d["A_periodicity"]
+    rows_ = []
+    if isinstance(per.get("soyga_aries_columns"), list):
+        for c in per["soyga_aries_columns"][:3]:
+            rows_.append((f"Soyga Aries, column {c['column']} (period {c['period']})", c["best_match"], AMBER))
+    rows_ += [("Loagaeth rows", per["loagaeth_rows_2_24"], P6), ("Loagaeth shuffled", per["loagaeth_rows_shuffled"], GRAY)]
+    for i, (lab, v, c) in enumerate(rows_):
+        y = sy + 10 + i * 24
+        body.append(text(24, y + 14, lab, 12, INK))
+        body.append(rect(x0 + 60, y + 2, v * 300, 16, c, 3))
+        body.append(text(x0 + 66 + v * 300, y + 15, f"{v:.2f}", 11, INK))
+    return svg("fig_machine_vs_language", 660, sy + 10 + len(rows_) * 24 + 24, "Machine or language?",
+               "The Soyga table is generated by a rule (periodic); the Loagaeth reads like a language.", body)
+
+
+# ---------------------------------------------------------------- 19. energy of letters by realm
+def fig_energy():
+    d = res("20_energy_fibonacci_gd")["A_energy_by_segment"]
+    gd = d["golden_dawn_coluna__F08"]["mean_by_segment"]
+    sp = d["surprisal_bits"]["mean_by_segment"]
+    segs = list(gd)
+    lab = {"opening_2_5": "opening", "heartland_6_24": "heartland", "diamonds_29_43": "diamonds", "end_44_48": "end"}
+    mx = max(gd.values())
+    body, x0, base = [], 60, 240
+    body.append(text(x0, 74, "Mean Golden Dawn value per letter", 12, INK, weight=600))
+    for i, s in enumerate(segs):
+        v = gd[s]
+        h = v / mx * 140
+        body.append(rect(x0 + i * 70, base - h, 46, h, P6, 3))
+        body.append(text(x0 + i * 70 + 23, base - h - 6, f"{v:.0f}", 11, INK, "middle"))
+        body.append(text(x0 + i * 70 + 23, base + 16, lab[s], 11, INK, "middle"))
+    x1 = 380
+    mx2 = max(sp.values())
+    mn2 = min(sp.values()) - 0.2
+    body.append(text(x1, 74, "Information per letter (bits)", 12, INK, weight=600))
+    for i, s in enumerate(segs):
+        v = sp[s]
+        h = (v - mn2) / (mx2 - mn2) * 140
+        body.append(rect(x1 + i * 62, base - h, 40, h, TEAL, 3))
+        body.append(text(x1 + i * 62 + 20, base - h - 6, f"{v:.2f}", 11, INK, "middle"))
+        body.append(text(x1 + i * 62 + 20, base + 16, lab[s], 11, INK, "middle"))
+    s20 = res("20_energy_fibonacci_gd")["A_summary"]
+    body.append(text(24, 284, f"End denser than heartland in {len(s20['end_denser_after_bonferroni'])} of {s20['systems']} measures (Bonferroni);"
+                              f" with U turned back into A only {len(s20['still_denser_with_U_as_A'])} remain.", 11, MUTED))
+    body.append(text(24, 300, "The rise is carried mostly by the A→U shift (U = 400, A = 1 in the Golden Dawn table).", 11, MUTED))
+    return svg("fig_energy_by_realm", 660, 318, "Is the end of the book 'denser'?",
+               "Letter value and information per letter, by segment.", body)
 
 
 # ---------------------------------------------------------------- 16. the two houses
@@ -524,7 +632,7 @@ def fig_houses():
 
 FIGURES = [fig_territory, fig_digits, fig_head_regime, fig_nesting, fig_hive, fig_series, fig_letter_grammar,
            fig_book_formats, fig_diamond, fig_doubled, fig_letter_counts, fig_letters_segments, fig_u_register,
-           fig_row_edges, fig_plan_7x7, fig_houses]
+           fig_row_edges, fig_plan_7x7, fig_houses, fig_two_currents, fig_machine, fig_energy]
 
 
 def run():

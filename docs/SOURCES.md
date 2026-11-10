@@ -17,6 +17,17 @@ manuscript; we ship the extracted JSON, not the facsimile images.
   of 2401 letters. `?` = an illegible/null cell.
 - **Caveat:** one transcription only. Hubs and counts should be re-checked against a
   second transcription; transcription error can inflate or hide a recurring name.
+- **Markup and leaf titles:** module `a18` downloads the same page
+  (`https://www.esotericarchives.com/dee/sl3189.htm`, revision of 12/12/2022) into
+  `data/raw/` (git-ignored, not redistributed) and derives from it only: the leaf headings
+  (`data/loagaeth_leaf_titles.json`), which chessboard colour each of Peterson's marks falls on in
+  leaves 25b–28b, and the diagonal reading of those tables
+  (`data/loagaeth_diagonal_decoded.json`).
+- **Comparison only — the Book of Soyga:** *Aldaraia sive Soyga vocor*, edited and translated by
+  Jane L. Kupin (2014, all rights reserved; from BL MS Sloane 8 and Bodleian MS Bodley 908). Module
+  `a19` reads five columns of its *Tabula prima Aries* from a local copy
+  (`data/raw/soyga_aries_columns.json`, git-ignored) to compare periodicity. Nothing from that
+  edition is shipped in this repository.
 
 ## Derived Loagaeth datasets (produced by this project)
 

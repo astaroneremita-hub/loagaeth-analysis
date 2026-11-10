@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Loagaeth 3D Tables</title>
+<style>
+  :root {
+    --bg0: #07080c; --bg1: #121624; --ink: #e9dfc6; --mute: #9aa0b4; --line: #2a3046;
+    --panel: rgba(14, 17, 28, 0.86); --accent: #e8b84a;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; }
+  body {
+    background: radial-gradient(ellipse at 60% 35%, var(--bg1) 0%, var(--bg0) 70%);
+    color: var(--ink); font: 13px/1.45 Georgia, "Times New Roman", serif;
+  }
+  #stage { position: fixed; inset: 0; }
+  #panel {
+    position: fixed; top: 14px; left: 14px; width: 272px; max-height: calc(100% - 28px); overflow-y: auto;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 14px 12px;
+    backdrop-filter: blur(6px); z-index: 2;
+  }
+  #panel h1 { font-size: 17px; font-weight: normal; margin: 0 0 10px; letter-spacing: .04em; }
+  #panel h1 span { color: var(--accent); font-size: 12px; margin-left: 4px; letter-spacing: .2em; }
+  .seg { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-bottom: 12px; }
+  .seg button {
+    background: #1a1f30; color: var(--mute); border: 1px solid var(--line); border-radius: 6px;
+    padding: 6px 0; font: inherit; font-size: 12px; cursor: pointer;
+  }
+  .seg button.on { background: #2b2414; color: var(--accent); border-color: #6b5320; }
+  section { border-top: 1px solid var(--line); padding: 9px 0 4px; }
+  section[hidden], .row[hidden] { display: none; }
+  .row { display: flex; align-items: center; gap: 8px; margin: 5px 0; }
+  .row > span { width: 92px; color: var(--mute); font-size: 12px; flex: none; }
+  select, input[type=range] { flex: 1; min-width: 0; }
+  select {
+    background: #1a1f30; color: var(--ink); border: 1px solid var(--line); border-radius: 5px;
+    padding: 3px 4px; font: inherit; font-size: 12px;
+  }
+  input[type=range] { accent-color: var(--accent); }
+  label.chk { display: flex; gap: 7px; align-items: center; margin: 5px 0; cursor: pointer; }
+  input[type=checkbox] { accent-color: var(--accent); }
+  small { color: var(--mute); display: block; font-size: 11px; }
+  #legend { border-top: 1px solid var(--line); padding-top: 8px; margin-top: 4px; }
+  #legend .it { display: flex; align-items: center; gap: 7px; font-size: 11.5px; margin: 2px 0; color: #cfc8b4; }
+  #legend i { width: 12px; height: 12px; border-radius: 2px; flex: none; display: inline-block; }
+  #legend .h { color: var(--mute); font-size: 11px; margin: 6px 0 2px; letter-spacing: .06em; text-transform: uppercase; }
+  #hover { min-height: 18px; margin-top: 8px; color: var(--accent); font-size: 12px; font-family: Consolas, monospace; }
+  #caption {
+    position: fixed; left: 300px; right: 16px; bottom: 14px; text-align: center; color: #d9d1bb;
+    font-size: 13px; pointer-events: none; text-shadow: 0 1px 3px #000; z-index: 1;
+  }
+  #toggle { display: none; }
+  @media (max-width: 720px) {
+    #panel { left: 8px; right: 8px; top: 8px; width: auto; max-height: 55%; }
+    #panel.closed > *:not(#toggle):not(h1) { display: none; }
+    #toggle {
+      display: block; position: absolute; right: 10px; top: 10px; background: #1a1f30; color: var(--ink);
+      border: 1px solid var(--line); border-radius: 5px; font: inherit; font-size: 12px; padding: 2px 8px;
+    }
+    #caption { left: 16px; font-size: 12px; }
+  }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+} }
+</script>
+<script src="loagaeth_viz_data.js"></script>
+</head>
+<body>
+<div id="stage"></div>
+<div id="panel">
+  <button id="toggle">menu</button>
+  <h1>Liber Loagaeth<span>3D</span></h1>
+  <div class="seg" id="views">
+    <button data-view="square">Square</button>
+    <button data-view="diamond">Diamond</button>
+    <button data-view="pyramid">Pyramid</button>
+    <button data-view="book">Book</button>
+  </div>
+
+  <section data-show="square diamond">
+    <div class="row"><span>Table</span><select id="tbl"></select></div>
+    <div class="row"><span>Side</span><select id="side"><option value="a">a</option><option value="b">b</option></select></div>
+  </section>
+
+  <section data-show="square">
+    <label class="chk"><input type="checkbox" id="currents"> Show the two currents</label>
+    <small id="curNote">Available for the diagonal squares 25b-28b.</small>
+  </section>
+
+  <section data-show="diamond">
+    <div class="row"><span>Layout</span><select id="dlayout">
+      <option value="side">One side: stepped rhombus</option>
+      <option value="combined">Both sides: 49x49 grid</option>
+    </select></div>
+    <div class="row" id="gapRow"><span>Halves gap</span><input type="range" id="gap" min="0" max="8" step="0.1" value="2"></div>
+    <div class="row" id="rotRow"><span>Rotation</span><input type="range" id="rot" min="0" max="45" step="1" value="45"></div>
+    <small id="dNote"></small>
+  </section>
+
+  <section data-show="pyramid">
+    <div class="row"><span>Base square</span><select id="pBase"></select></div>
+    <div class="row"><span>Faces from</span><select id="pFace"></select></div>
+    <label class="chk"><input type="checkbox" id="octa"> Octahedron (two pyramids)</label>
+    <div class="row" id="pFace2Row"><span>Lower faces</span><select id="pFace2"></select></div>
+    <div class="row"><span id="foldLbl">Unfold faces</span><input type="range" id="fold" min="0" max="1" step="0.01" value="0"></div>
+    <label class="chk"><input type="checkbox" id="showBase" checked> Show base square</label>
+  </section>
+
+  <section data-show="square diamond pyramid">
+    <label class="chk"><input type="checkbox" id="hiNames" checked> Highlight master names</label>
+  </section>
+
+  <div id="legend"></div>
+  <div id="hover"></div>
+</div>
+<div id="caption"></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const D = window.LOAGAETH;
+const $ = (id) => document.getElementById(id);
+const caption = $('caption');
+if (!D) { caption.textContent = 'Data file loagaeth_viz_data.js not found - run python src/make_viz_data.py'; throw new Error('no data'); }
+
+// ---------------------------------------------------------------- palette
+const NAME_COLORS = [0xe8b84a, 0xff7a66, 0x3cc7b4, 0xa78bfa, 0xa78bfa, 0x3cc7b4, 0x7bd36b, 0x5b9cff];
+const NAME_LEGEND = [['CHASTOR', 0xe8b84a], ['ANZACH', 0xff7a66], ['GETH / ALGETH', 0x3cc7b4],
+  ['NOCHA / ADNOCHA', 0xa78bfa], ['ACLAX', 0x7bd36b], ['CHUSTOR', 0x5b9cff]];
+const C = {
+  tileA: 0x1b2131, tileB: 0x262e44, ink: 0xe9dfc6, inkDark: 0x10131a,
+  warm: 0x3b2c1c, cool: 0x1b2d3d, join: 0x4d3f1c, curA: 0xf2c66d, curB: 0x6fd3ff,
+  curTileA: 0x33291a, curTileB: 0x182c38,
+};
+const ZONE_COLORS = { prophecy: 0xb48cf0, frontier: 0x7fa7c9, CHASTOR: 0xe8b84a, CHUSTOR: 0x5b9cff, border: 0xc97a5a, void: 0x50566a };
+const FORMAT_COLORS = { 'square-rows': 0xe9dfc6, 'square-diagonal': 0x3cc7b4, diamond: 0xff7a66, prose: 0xb48cf0 };
+const rgb = (h) => [((h >> 16) & 255) / 255, ((h >> 8) & 255) / 255, (h & 255) / 255];
+const css = (h) => '#' + h.toString(16).padStart(6, '0');
+
+// ---------------------------------------------------------------- renderer
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setClearColor(0x000000, 0);
+$('stage').appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, 1, 0.5, 2000);
+camera.position.set(0, 0, 100);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true; controls.dampingFactor = 0.08; controls.screenSpacePanning = true;
+function resize() {
+  const w = window.innerWidth, h = window.innerHeight;
+  renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix();
+}
+window.addEventListener('resize', resize); resize();
+
+// ---------------------------------------------------------------- glyph atlas (one texture)
+const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+const GI = {}; [...CHARS].forEach((ch, i) => GI[ch] = i);
+const atlas = (() => {
+  const cv = document.createElement('canvas'); cv.width = cv.height = 1024;
+  const g = cv.getContext('2d');
+  g.fillStyle = '#fff'; g.textAlign = 'center'; g.textBaseline = 'middle';
+  g.font = '600 88px Georgia, "Times New Roman", serif';
+  [...CHARS].forEach((ch, i) => g.fillText(ch, (i % 8) * 128 + 64, Math.floor(i / 8) * 128 + 70));
+  const t = new THREE.CanvasTexture(cv);
+  t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  t.minFilter = THREE.LinearMipmapLinearFilter; t.generateMipmaps = true;
+  return t;
+})();
+
+const cellMaterial = new THREE.ShaderMaterial({
+  uniforms: { uAtlas: { value: atlas }, uInset: { value: 0.05 }, uGlyph: { value: 0.84 } },
+  side: THREE.DoubleSide,
+  vertexShader: `
+    attribute float aGlyph; attribute vec4 aBg; attribute vec3 aFg;
+    varying vec2 vUv; varying float vGlyph; varying vec4 vBg; varying vec3 vFg;
+    void main() {
+      vUv = uv; vGlyph = aGlyph; vBg = aBg; vFg = aFg;
+      gl_Position = projectionMatrix * modelViewMatrix * instanceMatrix * vec4(position, 1.0);
+    }`,
+  fragmentShader: `
+    uniform sampler2D uAtlas; uniform float uInset; uniform float uGlyph;
+    varying vec2 vUv; varying float vGlyph; varying vec4 vBg; varying vec3 vFg;
+    void main() {
+      vec2 uv = vUv;
+      if (!gl_FrontFacing) uv.x = 1.0 - uv.x;   // keep letters unmirrored from behind
+      float inside = step(uInset, uv.x) * step(uv.x, 1.0 - uInset) * step(uInset, uv.y) * step(uv.y, 1.0 - uInset);
+      float a = 0.0;
+      if (vGlyph >= 0.0) {
+        vec2 g = clamp((uv - 0.5) / uGlyph + 0.5, 0.0, 1.0);
+        float row = floor((vGlyph + 0.5) / 8.0), col = floor(vGlyph - row * 8.0 + 0.5);
+        a = texture2D(uAtlas, vec2((col + g.x) / 8.0, 1.0 - (row + 1.0 - g.y) / 8.0)).a;
+      }
+      float bgA = vBg.a * inside;
+      float alpha = max(bgA, a);
+      if (alpha < 0.35) discard;
+      vec3 base = bgA > 0.0 ? vBg.rgb : vFg;
+      gl_FragColor = vec4(mix(base, vFg, a), 1.0);
+    }`,
+});
+
+// One InstancedMesh carries tiles + glyphs for a whole view.
+class CellLayer {
+  constructor(n) {
+    this.n = n;
+    this.geo = new THREE.PlaneGeometry(1, 1);
+    this.glyph = new Float32Array(n); this.bg = new Float32Array(n * 4); this.fg = new Float32Array(n * 3);
+    this.geo.setAttribute('aGlyph', new THREE.InstancedBufferAttribute(this.glyph, 1));
+    this.geo.setAttribute('aBg', new THREE.InstancedBufferAttribute(this.bg, 4));
+    this.geo.setAttribute('aFg', new THREE.InstancedBufferAttribute(this.fg, 3));
+    this.mesh = new THREE.InstancedMesh(this.geo, cellMaterial, n);
+    this.mesh.frustumCulled = false;
+    this.info = new Array(n);
+    this.i = 0;
+  }
+  add(matrix, ch, bgHex, fgHex, bgAlpha = 1, info = null) {
+    const i = this.i++;
+    this.mesh.setMatrixAt(i, matrix);
+    this.glyph[i] = ch in GI ? GI[ch] : -1;
+    const b = rgb(bgHex), f = rgb(fgHex);
+    this.bg.set([b[0], b[1], b[2], bgAlpha], i * 4); this.fg.set(f, i * 3);
+    this.info[i] = info;
+    return i;
+  }
+  done() { this.mesh.count = this.i; this.mesh.instanceMatrix.needsUpdate = true; this.mesh.computeBoundingSphere(); }
+}
+
+// ---------------------------------------------------------------- data helpers
+const T = D.tables, NAMES = D.names;
+const zoneOf = (n) => D.zones[n] || 'void';
+const keyOf = (t, s) => `${t}${s}`;
+function nameMap(entry) {           // (row*100+col) -> name index; longer names drawn last win
+  const m = new Map();
+  if (!$('hiNames').checked || !entry) return m;
+  const occ = entry.occ.slice().sort((a, b) => a[3] - b[3]);
+  for (const [k, r0, c0, len, dr, dc] of occ) for (let i = 0; i < len; i++) m.set((r0 + dr * i) * 100 + (c0 + dc * i), k);
+  return m;
+}
+const totalCells = (e) => e.rows.reduce((s, r) => s + r.length, 0);
+const occCount = (e) => { const c = {}; e.occ.forEach(o => c[NAMES[o[0]]] = (c[NAMES[o[0]]] || 0) + 1); return c; };
+const occSummary = (e) => { const c = occCount(e); const s = Object.entries(c).map(([k, v]) => `${k} ${v}`).join(', '); return s || 'no master names'; };
+function triangles(entry) {          // upper triangle (apex first) and lower triangle (apex first)
+  const lens = entry.rows.map(r => r.length), mx = Math.max(...lens);
+  const first = lens.indexOf(mx), last = lens.lastIndexOf(mx);
+  const up = [], lo = [];
+  for (let u = 0; u <= first; u++) up.push(u);
+  for (let u = entry.rows.length - 1; u >= last; u--) lo.push(u);
+  return { up, lo, first, last };
+}
+
+// ---------------------------------------------------------------- view plumbing
+let root = new THREE.Group(); scene.add(root);
+let tickers = [], pickables = [], hoverLayer = null, onSlider = null;
+function clearView() {
+  root.traverse(o => {
+    if (o.geometry) o.geometry.dispose();
+    if (o.material && o.material !== cellMaterial) (Array.isArray(o.material) ? o.material : [o.material]).forEach(m => m.dispose());
+  });
+  scene.remove(root); root = new THREE.Group(); scene.add(root);
+  tickers = []; pickables = []; hoverLayer = null; onSlider = null;
+  $('hover').textContent = '';
+}
+let fly = null;
+function flyTo(pos, target) {
+  fly = { t: 0, p0: camera.position.clone(), p1: new THREE.Vector3(...pos), q0: controls.target.clone(), q1: new THREE.Vector3(...target) };
+}
+
+const state = { view: 'square', table: 12, side: 'a' };
+const M4 = new THREE.Matrix4();
+
+// ---------------------------------------------------------------- SQUARE
+function buildSquare() {
+  const key = keyOf(state.table, state.side), e = T[key];
+  const diag = e.f === 'square-diagonal', cur = diag && $('currents').checked;
+  const hm = nameMap(e);
+  const layer = new CellLayer(totalCells(e));
+  e.rows.forEach((row, r) => [...row].forEach((ch, c) => {
+    const k = hm.get(r * 100 + c);
+    const par = (r + c) % 2;
+    let bg = par ? C.tileB : C.tileA;
+    if (cur) bg = par === e.drp ? C.curTileA : C.curTileB;
+    const hi = k !== undefined;
+    M4.makeTranslation(c - 24, 24 - r, hi ? 0.35 : 0);
+    layer.add(M4, ch, hi ? NAME_COLORS[k] : bg, hi ? C.inkDark : C.ink, 1, { r, c, ch, k });
+  }));
+  layer.done(); root.add(layer.mesh); hoverLayer = layer;
+  if (cur) buildCurrents(e);
+  const fmt = diag
+    ? `${e.rows.length}x49 square whose text runs along r-c diagonals: (r+c) ${e.drp ? 'odd' : 'even'} cells read down-right, the other colour up-left`
+    : `49x49 square read in rows (${totalCells(e).toLocaleString('en')} letters)`;
+  caption.textContent = `Table ${key} - ${fmt}. Highlights: ${occSummary(e)}.`;
+  legend(diag ? [['Down-right current', cur ? C.curA : null], ['Up-left current', cur ? C.curB : null]].filter(x => x[1]) : []);
+}
+
+const lineVS = `attribute float aS; varying float vS; void main(){ vS = aS; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`;
+const lineFS = `uniform float uTime; uniform vec3 uColor; varying float vS;
+  void main(){ float q = fract((uTime * 5.0 - vS) / 9.0); float a = 0.12 + 0.88 * pow(1.0 - q, 5.0); gl_FragColor = vec4(uColor * a, 1.0); }`;
+function buildCurrents(e) {
+  const groups = [[], []]; // 0: down-right, 1: up-left
+  for (let d = -48; d <= 48; d++) {
+    const cells = [];
+    for (let r = 0; r < 49; r++) { const c = r - d; if (c >= 0 && c < 49 && r < e.rows.length && c < e.rows[r].length) cells.push([r, c]); }
+    if (cells.length < 2) continue;
+    const dr = Math.abs(d) % 2 === e.drp;
+    if (!dr) cells.reverse();
+    groups[dr ? 0 : 1].push(cells);
+  }
+  const cone = new THREE.ConeGeometry(0.32, 0.9, 10);
+  groups.forEach((list, gi) => {
+    const pos = [], s = [];
+    const col = gi === 0 ? C.curA : C.curB;
+    const heads = new THREE.InstancedMesh(cone, new THREE.MeshBasicMaterial({ color: col }), list.length);
+    const up = new THREE.Vector3(0, 1, 0), q = new THREE.Quaternion();
+    list.forEach((cells, li) => {
+      const [r0, c0] = cells[0], [r1, c1] = cells[cells.length - 1];
+      const L = (cells.length - 1) * Math.SQRT2;
+      pos.push(c0 - 24, 24 - r0, 0.6, c1 - 24, 24 - r1, 0.6); s.push(0, L);
+      const dir = new THREE.Vector3(c1 - c0, -(r1 - r0), 0).normalize();
+      q.setFromUnitVectors(up, dir);
+      M4.compose(new THREE.Vector3(c1 - 24, 24 - r1, 0.6).addScaledVector(dir, 0.5), q, new THREE.Vector3(1, 1, 1));
+      heads.setMatrixAt(li, M4);
+    });
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+    g.setAttribute('aS', new THREE.Float32BufferAttribute(s, 1));
+    const mat = new THREE.ShaderMaterial({ uniforms: { uTime: { value: 0 }, uColor: { value: new THREE.Color(...rgb(col)) } },
+      vertexShader: lineVS, fragmentShader: lineFS, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
+    root.add(new THREE.LineSegments(g, mat)); root.add(heads);
+    tickers.push((t) => mat.uniforms.uTime.value = t);
+  });
+}
+
+// ---------------------------------------------------------------- DIAMOND
+function isPattern(e, odd) {
+  const n = odd ? 49 : 48;
+  if (e.rows.length !== n) return false;
+  return e.rows.every((r, u) => r.length === (odd ? (u <= 24 ? 2 * u + 1 : 97 - 2 * u) : (u <= 23 ? 2 * u + 2 : 96 - 2 * u)));
+}
+function buildDiamond() {
+  const layout = $('dlayout').value;
+  $('gapRow').hidden = layout !== 'side'; $('rotRow').hidden = layout !== 'combined';
+  $('dNote').textContent = '';
+  if (layout === 'combined') { if (buildCombined()) return; $('dNote').textContent = 'Both sides have the same row parity (or an irregular row count): showing one side.'; }
+  $('gapRow').hidden = false; $('rotRow').hidden = true;
+  const key = keyOf(state.table, state.side), e = T[key];
+  const hm = nameMap(e), tri = triangles(e), gap = +$('gap').value;
+  const n = e.rows.length, mid = (tri.first + tri.last) / 2;
+  const layer = new CellLayer(totalCells(e));
+  const outline = [[], []];
+  e.rows.forEach((row, u) => {
+    const half = u < tri.first ? 0 : u > tri.last ? 1 : -1;
+    const y = mid - u + (half === 0 ? gap : half === 1 ? -gap : 0);
+    const len = row.length;
+    [...row].forEach((ch, j) => {
+      const k = hm.get(u * 100 + j);
+      const bg = k !== undefined ? NAME_COLORS[k] : half === 0 ? C.warm : half === 1 ? C.cool : C.join;
+      M4.makeTranslation(j - (len - 1) / 2, y, k !== undefined ? 0.35 : 0);
+      layer.add(M4, ch, bg, k !== undefined ? C.inkDark : C.ink, 1, { r: u, c: j, ch, k, side: key });
+    });
+    if (half !== 1) outline[0].push([len / 2, y]);
+    if (half !== 0) outline[1].push([len / 2, y]);
+  });
+  layer.done(); root.add(layer.mesh); hoverLayer = layer;
+  // stepped silhouettes of the two halves (each a stepped pyramid sharing the widest row)
+  outline.forEach((rows, hi) => {
+    const right = [];
+    rows.forEach(([hw, y]) => { right.push([hw + 0.1, y + 0.6], [hw + 0.1, y - 0.6]); });
+    const left = right.map(([x, y]) => [-x, y]).reverse();
+    const pts = right.concat(left).map(([x, y]) => new THREE.Vector3(x, y, 0.05));
+    const g = new THREE.BufferGeometry().setFromPoints(pts);
+    root.add(new THREE.LineLoop(g, new THREE.LineBasicMaterial({ color: hi ? 0x6fb6ff : 0xf0b061, transparent: true, opacity: 0.8 })));
+  });
+  caption.textContent = `Table ${key} - diamond side, rows ${e.rows[0].length}..${Math.max(...e.rows.map(r => r.length))}..${e.rows[n - 1].length} (${totalCells(e).toLocaleString('en')} letters), centred: the rows above and below the widest row are two stepped pyramids joined at it. Highlights: ${occSummary(e)}.`;
+  legend([['Upper pyramid (rows to widest)', C.warm], ['Widest row (the joint)', C.join], ['Lower pyramid', C.cool]]);
+}
+function buildCombined() {
+  const a = T[keyOf(state.table, 'a')], b = T[keyOf(state.table, 'b')];
+  if (!a || !b) return false;
+  let odd = null, even = null;
+  for (const e of [a, b]) { if (isPattern(e, true)) odd = odd || e; else if (isPattern(e, false)) even = even || e; }
+  if (!odd || !even) return false;
+  const group = new THREE.Group(); root.add(group);
+  const layer = new CellLayer(2401);
+  [[odd, 0], [even, 1]].forEach(([e, p]) => {
+    const hm = nameMap(e);
+    e.rows.forEach((row, u) => {
+      const s = 2 * u + p, r0 = Math.max(0, s - 48);
+      [...row].forEach((ch, j) => {
+        const r = r0 + j, c = s - r, k = hm.get(u * 100 + j);
+        M4.makeTranslation(c - 24, 24 - r, k !== undefined ? 0.35 : 0);
+        layer.add(M4, ch, k !== undefined ? NAME_COLORS[k] : p ? C.cool : C.warm, k !== undefined ? C.inkDark : C.ink, 1,
+          { r, c, ch, k, side: `${e.t}${e.s} row ${u + 1}, pos ${j + 1}` });
+      });
+    });
+  });
+  layer.done(); group.add(layer.mesh); hoverLayer = layer;
+  const setRot = () => { group.rotation.z = -THREE.MathUtils.degToRad(+$('rot').value); };
+  setRot(); onSlider = setRot;
+  caption.textContent = `Table ${state.table} - side ${odd.s} (rows 1,3..49..3,1) on anti-diagonals r+c=2u and side ${even.s} (rows 2..48..2) on r+c=2u+1, cells by increasing r: together one 49x49 square, here turned ${$('rot').value} deg.`;
+  legend([[`Side ${odd.s} (odd rows)`, C.warm], [`Side ${even.s} (even rows)`, C.cool]]);
+  return true;
+}
+
+// ---------------------------------------------------------------- PYRAMID / OCTAHEDRON
+const HALF = 24.5, PH = 31;                        // half base, pyramid height (about Giza proportion)
+const SLANT = Math.hypot(PH, HALF), THETA_F = Math.PI - Math.atan2(PH, HALF);
+const NORMALS = [new THREE.Vector3(0, 0, 1), new THREE.Vector3(1, 0, 0), new THREE.Vector3(0, 0, -1), new THREE.Vector3(-1, 0, 0)];
+const UP = new THREE.Vector3(0, 1, 0);
+function faceFrame(edge, upper, octa, t) {
+  const n = NORMALS[edge];
+  const e = new THREE.Vector3().crossVectors(UP, n); if (!upper) e.negate();
+  const th = octa ? THETA_F : THETA_F * (1 - t);
+  const d = n.clone().multiplyScalar(Math.cos(th)).addScaledVector(UP, (upper ? 1 : -1) * Math.sin(th));
+  const m = n.clone().multiplyScalar(HALF);
+  if (octa) m.addScaledVector(UP, (upper ? 1 : -1) * t * 14);
+  const z = new THREE.Vector3().crossVectors(e, d);
+  return { e, d, m, z };
+}
+function buildPyramid() {
+  const octa = $('octa').checked;
+  $('pFace2Row').hidden = !octa;
+  $('foldLbl').textContent = octa ? 'Separate halves' : 'Unfold faces';
+  const base = T[$('pBase').value];
+  const fa = +$('pFace').value, fb = +$('pFace2').value;
+  const sides = octa ? [T[keyOf(fa, 'a')], T[keyOf(fa, 'b')], T[keyOf(fb, 'a')], T[keyOf(fb, 'b')]] : [T[keyOf(fa, 'a')], T[keyOf(fa, 'b')]];
+  // faces: list of {edge, upper, side, rows(order apex->base)}
+  const faces = [];
+  if (octa) sides.forEach((s, i) => { const tr = triangles(s); faces.push({ edge: i, upper: true, s, rows: tr.up, tri: 'upper' }, { edge: i, upper: false, s, rows: tr.lo, tri: 'lower' }); });
+  else sides.forEach((s, i) => { const tr = triangles(s); faces.push({ edge: 2 * i, upper: true, s, rows: tr.up, tri: 'upper' }, { edge: 2 * i + 1, upper: true, s, rows: tr.lo, tri: 'lower' }); });
+  let n = $('showBase').checked ? totalCells(base) : 0;
+  faces.forEach(f => f.rows.forEach(u => n += f.s.rows[u].length));
+  const layer = new CellLayer(n);
+  if ($('showBase').checked) {
+    const hm = nameMap(base);
+    const rot = new THREE.Matrix4().makeRotationX(-Math.PI / 2);
+    base.rows.forEach((row, r) => [...row].forEach((ch, c) => {
+      const k = hm.get(r * 100 + c);
+      M4.copy(rot).setPosition(c - 24, 0, r - 24);
+      layer.add(M4, ch, k !== undefined ? NAME_COLORS[k] : (r + c) % 2 ? C.tileB : C.tileA, k !== undefined ? C.inkDark : C.ink, 1, { r, c, ch, k, side: `base ${base.t}${base.s}` });
+    }));
+  }
+  const faceCells = [];
+  faces.forEach(f => {
+    const hm = nameMap(f.s), nr = f.rows.length;
+    f.rows.forEach((u, i) => {
+      const row = f.s.rows[u], len = row.length;
+      const v = SLANT * (1 - (i + 0.5) / nr);
+      const cw = Math.min(1, (2 * HALF * (i + 0.5) / nr) / len);
+      [...row].forEach((ch, j) => {
+        const k = hm.get(u * 100 + j);
+        const tint = f.tri === 'upper' ? C.warm : C.cool;
+        const idx = layer.add(M4.identity(), ch, k !== undefined ? NAME_COLORS[k] : tint, k !== undefined ? C.inkDark : C.ink, 1,
+          { r: u, c: j, ch, k, side: `face ${f.s.t}${f.s.s} ${f.tri} triangle` });
+        faceCells.push({ idx, f, u: (j - (len - 1) / 2) * cw, v, cw });
+      });
+    });
+  });
+  layer.done(); root.add(layer.mesh); hoverLayer = layer;
+  // wire edges
+  const edgeGeo = new THREE.BufferGeometry();
+  edgeGeo.setAttribute('position', new THREE.Float32BufferAttribute(new Float32Array((faces.length * 3 + 4) * 6), 3));
+  root.add(new THREE.LineSegments(edgeGeo, new THREE.LineBasicMaterial({ color: 0xc9a85a, transparent: true, opacity: 0.55 })));
+  const X = new THREE.Vector3(), Y = new THREE.Vector3(), P = new THREE.Vector3();
+  const place = () => {
+    const t = +$('fold').value;
+    const frames = faces.map(f => faceFrame(f.edge, f.upper, octa, t));
+    faceCells.forEach(fc => {
+      const fr = frames[faces.indexOf(fc.f)];
+      X.copy(fr.e).multiplyScalar(0.95 * fc.cw); Y.copy(fr.d).multiplyScalar(0.95);
+      M4.makeBasis(X, Y, fr.z);
+      P.copy(fr.m).addScaledVector(fr.e, fc.u).addScaledVector(fr.d, fc.v).addScaledVector(fr.z, 0.02);
+      M4.setPosition(P);
+      layer.mesh.setMatrixAt(fc.idx, M4);
+    });
+    layer.mesh.instanceMatrix.needsUpdate = true; layer.mesh.computeBoundingSphere();
+    const a = edgeGeo.attributes.position.array; let o = 0;
+    const seg = (p, q) => { a.set([p.x, p.y, p.z, q.x, q.y, q.z], o); o += 6; };
+    frames.forEach(fr => {
+      const A = fr.m.clone().addScaledVector(fr.e, -HALF), B = fr.m.clone().addScaledVector(fr.e, HALF), Ap = fr.m.clone().addScaledVector(fr.d, SLANT);
+      seg(A, B); seg(B, Ap); seg(Ap, A);
+    });
+    const c = [[-HALF, -HALF], [HALF, -HALF], [HALF, HALF], [-HALF, HALF]].map(([x, z]) => new THREE.Vector3(x, 0, z));
+    for (let i = 0; i < 4; i++) seg(c[i], c[(i + 1) % 4]);
+    edgeGeo.attributes.position.needsUpdate = true; edgeGeo.computeBoundingSphere();
+  };
+  place(); onSlider = place;
+  caption.textContent = octa
+    ? `Two pyramids base to base: each diamond side (${fa}a, ${fa}b, ${fb}a, ${fb}b) folds across one edge of base ${base.t}${base.s} - upper triangle above, lower triangle below.`
+    : `Hypothesis: base = square table ${base.t}${base.s}; the four lateral faces carry the upper and lower triangles of diamond sides ${fa}a and ${fa}b.`;
+  legend([['Upper triangle (apex = row 1)', C.warm], ['Lower triangle (apex = last row)', C.cool], ['Base square (chessboard)', C.tileB]]);
+}
+
+// ---------------------------------------------------------------- BOOK
+function buildBook() {
+  root.add(new THREE.AmbientLight(0xffffff, 0.55));
+  const dl = new THREE.DirectionalLight(0xffffff, 1.6); dl.position.set(20, 30, 60); root.add(dl);
+  const plateGeo = new THREE.BoxGeometry(6, 6, 0.5), stripGeo = new THREE.BoxGeometry(2.6, 0.6, 0.56);
+  const mats = {}; const mat = (hex, extra = {}) => mats[hex + JSON.stringify(extra)] ||= new THREE.MeshStandardMaterial({ color: hex, roughness: 0.55, metalness: 0.25, ...extra });
+  const labels = new CellLayer(49 * 2 + 14);
+  const pos = (n) => [((n - 1) % 7 - 3) * 9.2, (3 - Math.floor((n - 1) / 7)) * 9.2];
+  for (let n = 1; n <= 49; n++) {
+    const [x, y] = pos(n);
+    const g = new THREE.Group(); g.position.set(x, y, 0); g.userData = { n, phase: n * 0.7 };
+    const missing = n === 49, ea = T[keyOf(n, 'a')], eb = T[keyOf(n, 'b')];
+    const zone = zoneOf(n);
+    const plate = new THREE.Mesh(plateGeo, missing ? mat(0x30343f, { transparent: true, opacity: 0.35, wireframe: true }) : mat(ZONE_COLORS[zone]));
+    if (ea && ea.f === 'diamond') plate.rotation.z = Math.PI / 4;
+    plate.userData = { n }; g.add(plate); pickables.push(plate);
+    if (!missing) {
+      const fA = n === 1 ? 'prose' : ea.f, fB = n === 1 ? 'prose' : eb.f;
+      [[fA, -1.35], [fB, 1.35]].forEach(([f, dx]) => {
+        const s = new THREE.Mesh(stripGeo, mat(FORMAT_COLORS[f], { emissive: FORMAT_COLORS[f], emissiveIntensity: 0.35 }));
+        s.position.set(dx, -3.9, 0); g.add(s);
+      });
+    }
+    root.add(g);
+    const txt = String(n);
+    [...txt].forEach((ch, i) => {
+      M4.makeScale(2.6, 2.6, 1).setPosition(x + (i - (txt.length - 1) / 2) * 1.75, y + 0.3, 0.3);
+      labels.add(M4, ch, 0, missing ? 0x8a90a0 : C.inkDark, 0, null);
+    });
+    tickers.push((t) => { g.position.z = Math.sin(t * 0.9 + g.userData.phase) * 0.35; });
+  }
+  for (let w = 1; w <= 7; w++) {
+    const y = (4 - w) * 9.2;
+    M4.makeScale(2, 2, 1).setPosition(-37.6, y, 0); labels.add(M4, 'W', 0, 0x9aa0b4, 0);
+    M4.makeScale(2, 2, 1).setPosition(-35.9, y, 0); labels.add(M4, String(w), 0, 0x9aa0b4, 0);
+  }
+  labels.done(); root.add(labels.mesh);
+  // labels must bob with plates: give each label pair its own offset via a ticker
+  const base = []; for (let i = 0; i < labels.i; i++) { labels.mesh.getMatrixAt(i, M4); base.push(M4.clone()); }
+  tickers.push((t) => {
+    let i = 0;
+    for (let n = 1; n <= 49; n++) {
+      const dz = Math.sin(t * 0.9 + n * 0.7) * 0.35, len = String(n).length;
+      for (let j = 0; j < len; j++, i++) { M4.copy(base[i]); M4.elements[14] += dz; labels.mesh.setMatrixAt(i, M4); }
+    }
+    labels.mesh.instanceMatrix.needsUpdate = true;
+  });
+  caption.textContent = 'The book as a 7x7 plan: tables 1-49 by week (rows W1-W7). Colour = territory zone (26-28 as CHASTOR); strips = format of sides a | b; diamond tables are turned 45 deg. Click a plate to open it.';
+  legend([
+    ...Object.entries(ZONE_COLORS).map(([z, h]) => [`zone: ${z}`, h]),
+    ['format: rows', FORMAT_COLORS['square-rows']], ['format: diagonal', FORMAT_COLORS['square-diagonal']],
+    ['format: diamond', FORMAT_COLORS.diamond], ['format: prose (leaf 1)', FORMAT_COLORS.prose],
+  ], false);
+}
+
+// ---------------------------------------------------------------- legend / UI
+function legend(extra, names = true) {
+  let h = '';
+  if (names && $('hiNames').checked) h += '<div class="h">Master names</div>' + NAME_LEGEND.map(([n, c]) => `<div class="it"><i style="background:${css(c)}"></i>${n}</div>`).join('');
+  if (extra.length) h += '<div class="h">This view</div>' + extra.map(([n, c]) => `<div class="it"><i style="background:${css(c)}"></i>${n}</div>`).join('');
+  $('legend').innerHTML = h;
+}
+const fill = (sel, items) => { sel.innerHTML = items.map(([v, l]) => `<option value="${v}">${l}</option>`).join(''); };
+fill($('tbl'), Array.from({ length: 47 }, (_, i) => [i + 2, `${i + 2} - ${T[keyOf(i + 2, 'a')].f === 'diamond' ? 'diamond' : 'square'}`]));
+const baseKeys = Object.keys(T).filter(k => T[k].f === 'square-rows').sort((a, b) => parseInt(a) - parseInt(b) || a.localeCompare(b));
+fill($('pBase'), baseKeys.map(k => [k, k]));
+const dTables = Array.from({ length: 20 }, (_, i) => [i + 29, String(i + 29)]);
+fill($('pFace'), dTables); fill($('pFace2'), dTables);
+$('pBase').value = '25a'; $('pFace').value = '29'; $('pFace2').value = '30';
+
+const CAMS = {
+  square: [[0, -8, 88], [0, 0, 0]], diamond: [[0, -6, 104], [0, 0, 0]],
+  pyramid: [[62, 58, 92], [0, 8, 0]], book: [[0, -6, 92], [0, 0, 0]],
+};
+function render(keepCam = false) {
+  clearView();
+  document.querySelectorAll('#views button').forEach(b => b.classList.toggle('on', b.dataset.view === state.view));
+  document.querySelectorAll('section[data-show]').forEach(s => s.hidden = !s.dataset.show.split(' ').includes(state.view));
+  $('tbl').value = state.table; $('side').value = state.side;
+  const e = T[keyOf(state.table, state.side)];
+  $('currents').disabled = !(e && e.f === 'square-diagonal');
+  $('curNote').textContent = $('currents').disabled ? 'Available for the diagonal squares 25b-28b.' : 'Down-right and up-left flows along r-c diagonals.';
+  ({ square: buildSquare, diamond: buildDiamond, pyramid: buildPyramid, book: buildBook })[state.view]();
+  if (!keepCam) { const c = CAMS[state.view]; if (state.view === 'pyramid' && $('octa').checked) flyTo([70, 30, 110], [0, 0, 0]); else flyTo(...c); }
+}
+function setView(v) {
+  state.view = v;
+  if (v === 'square' && T[keyOf(state.table, 'a')].f === 'diamond') { state.table = 12; state.side = 'a'; }
+  if (v === 'diamond' && T[keyOf(state.table, 'a')].f !== 'diamond') { state.table = 33; state.side = 'a'; }
+  render();
+}
+document.querySelectorAll('#views button').forEach(b => b.onclick = () => setView(b.dataset.view));
+$('tbl').onchange = () => {
+  state.table = +$('tbl').value;
+  const isD = T[keyOf(state.table, 'a')].f === 'diamond';
+  if (state.view === 'square' && isD) state.view = 'diamond';
+  else if (state.view === 'diamond' && !isD) state.view = 'square';
+  render(true);
+};
+$('side').onchange = () => { state.side = $('side').value; render(true); };
+['currents', 'dlayout', 'hiNames', 'pBase', 'pFace', 'pFace2', 'showBase'].forEach(id => $(id).onchange = () => render(true));
+$('octa').onchange = () => { $('fold').value = $('octa').checked ? 0.15 : 0; render(); };
+$('gap').oninput = () => render(true);
+['rot', 'fold'].forEach(id => $(id).oninput = () => { if (onSlider) onSlider(); if (id === 'rot' && state.view === 'diamond') caption.textContent = caption.textContent.replace(/turned \d+ deg/, `turned ${$('rot').value} deg`); });
+$('toggle').onclick = () => $('panel').classList.toggle('closed');
+
+// ---------------------------------------------------------------- picking
+const ray = new THREE.Raycaster(), mouse = new THREE.Vector2();
+let down = null, hovered = null, needPick = false;
+renderer.domElement.addEventListener('pointermove', (ev) => { mouse.set(ev.clientX / innerWidth * 2 - 1, -ev.clientY / innerHeight * 2 + 1); needPick = true; });
+renderer.domElement.addEventListener('pointerdown', (ev) => { down = [ev.clientX, ev.clientY]; });
+renderer.domElement.addEventListener('pointerup', (ev) => {
+  if (!down || Math.hypot(ev.clientX - down[0], ev.clientY - down[1]) > 5) return;
+  if (state.view !== 'book') return;
+  ray.setFromCamera(mouse.set(ev.clientX / innerWidth * 2 - 1, -ev.clientY / innerHeight * 2 + 1), camera);
+  const hit = ray.intersectObjects(pickables)[0];
+  if (!hit) return;
+  const n = hit.object.userData.n;
+  if (n === 1) { caption.textContent = 'Leaf 1 is word-spaced prose, not a letter grid.'; return; }
+  if (n === 49) { caption.textContent = 'Table 49 is missing from the manuscript.'; return; }
+  state.table = n; state.side = 'a';
+  state.view = T[keyOf(n, 'a')].f === 'diamond' ? 'diamond' : 'square';
+  render();
+});
+function pick() {
+  needPick = false;
+  ray.setFromCamera(mouse, camera);
+  if (state.view === 'book') {
+    const hit = ray.intersectObjects(pickables)[0];
+    const g = hit ? hit.object.parent : null;
+    if (hovered && hovered !== g) hovered.scale.setScalar(1);
+    hovered = g;
+    if (g) {
+      g.scale.setScalar(1.1);
+      const n = g.userData.n, ea = T[keyOf(n, 'a')], eb = T[keyOf(n, 'b')];
+      $('hover').textContent = n === 49 ? 'Table 49 (missing)' : n === 1 ? 'Table 1 (prose) - ' + zoneOf(1)
+        : `Table ${n} - ${zoneOf(n)}${D.rulers[n] ? ' (' + D.rulers[n] + ')' : ''} - ${ea.f}${eb && eb.f !== ea.f ? ' / ' + eb.f : ''}`;
+      renderer.domElement.style.cursor = 'pointer';
+    } else { $('hover').textContent = ''; renderer.domElement.style.cursor = ''; }
+    return;
+  }
+  if (!hoverLayer) return;
+  const hit = ray.intersectObject(hoverLayer.mesh)[0];
+  const inf = hit && hoverLayer.info[hit.instanceId];
+  $('hover').textContent = inf ? `${inf.side ? inf.side + ' - ' : ''}row ${inf.r + 1}, col ${inf.c + 1}: ${inf.ch}${inf.k !== undefined ? '  [' + NAMES[inf.k] + ']' : ''}` : '';
+}
+
+// ---------------------------------------------------------------- loop
+const clock = new THREE.Clock();
+renderer.setAnimationLoop(() => {
+  const dt = clock.getDelta(), t = clock.elapsedTime;
+  if (fly) {
+    fly.t = Math.min(1, fly.t + dt / 0.9);
+    const k = fly.t * fly.t * (3 - 2 * fly.t);
+    camera.position.lerpVectors(fly.p0, fly.p1, k); controls.target.lerpVectors(fly.q0, fly.q1, k);
+    if (fly.t >= 1) fly = null;
+  }
+  tickers.forEach(f => f(t));
+  controls.update();
+  if (needPick) pick();
+  renderer.render(scene, camera);
+});
+
+// initial view (supports #view=diamond&table=33&side=b for direct links)
+const hp = new URLSearchParams(location.hash.slice(1));
+if (hp.get('table')) state.table = +hp.get('table');
+if (hp.get('side')) state.side = hp.get('side');
+if (hp.get('currents')) $('currents').checked = true;
+if (hp.get('octa')) $('octa').checked = true;
+if (hp.get('layout')) $('dlayout').value = hp.get('layout');
+state.view = hp.get('view') || 'square';
+render();
+</script>
+</body>
+</html>

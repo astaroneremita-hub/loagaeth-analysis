@@ -31,8 +31,30 @@ def ruler(s, k=6, minf=3):
     return max(c, key=c.get) if c else None
 
 
+def decoded_tables(tables):
+    """Tables 25b-28 are written on diagonals (module a18). Read them in that order, so that
+    they are not mistaken for empty tables. Falls back to the row reading if a18 has not run."""
+    path = os.path.join(load.DATA, "loagaeth_diagonal_decoded.json")
+    if not os.path.exists(path):
+        return tables, []
+    faces = json.load(open(path, encoding="utf-8"))["faces"]
+    out = dict(tables)
+    used = []
+    for t in (25, 26, 27, 28):
+        parts = []
+        for s in "ab":
+            key = f"{t}{s}"
+            if key in faces:
+                parts.append("|".join(faces[key]["down_right"] + faces[key]["leftward"]))
+                used.append(key)
+            else:
+                parts.append("".join(load.letters(r) for r in load.leaves().get(key, [])))
+        out[t] = "|".join(parts)
+    return out, used
+
+
 def run():
-    tables = load.all_tables()
+    tables, decoded_faces = decoded_tables(load.all_tables())
     tabs = sorted(tables)
     rows = []
     counts = []

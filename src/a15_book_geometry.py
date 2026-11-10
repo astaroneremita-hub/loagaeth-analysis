@@ -154,10 +154,16 @@ def run():
         cw = []
     f = Counter(full_txt)
     n = len(full_txt)
+    dec_path = os.path.join(os.path.dirname(HERE), "data", "loagaeth_diagonal_decoded.json")
+    dec_lines = []
+    if os.path.exists(dec_path):
+        faces = json.load(open(dec_path, encoding="utf-8"))["faces"]
+        dec_lines = [l for k, v in faces.items() if k != "25b" for l in v["down_right"] + v["leftward"]]
     rule = {
         "full_tables_2_25": round(doubled(ref), 4),
         "diamond_tables_29_48": round(doubled(diag), 4),
-        "tables_26_28": round(doubled([r for t in (26, 27, 28) for s in "ab" for r in side_rows(f"{t}{s}")]), 4),
+        "tables_26_28_read_by_rows": round(doubled([r for t in (26, 27, 28) for s in "ab" for r in side_rows(f"{t}{s}")]), 4),
+        "tables_26_28_read_on_diagonals": round(doubled(dec_lines), 4) if dec_lines else None,
         "leaf1_words": round(doubled(l1), 4),
         "calls_words": round(doubled(cw), 4) if cw else None,
         "chance_from_letter_freq": round(sum((v / n) ** 2 for v in f.values()), 4),
@@ -175,15 +181,16 @@ def run():
     res = {
         "A_formats": fmt,
         "B_text_direction_in_diamond_tables": direction,
-        "C_tables_26_28": void,
+        "C_tables_26_28_read_by_rows": void,
+        "C_note": ("Read by rows, tables 26-28 look like noise. They are written on the diagonals in two "
+                   "colour currents and decode into ordinary text (module a18)."),
         "D_no_doubled_letters": rule,
         "E_per_table": per_table,
-        "conclusion": ("Three formats: word-spaced prophecy (table 1), full 49x49 grids written in rows "
-                       "(2-28), and 49x49 grids split into the two chessboard colours, each written as a "
-                       "diamond along the diagonals (29-48). In the diamond tables the language runs along "
-                       "the diagonals; the rebuilt square's rows are noise. Tables 26-28 show no sequential "
-                       "structure at all and break the no-doubled-letter rule. Raw per-table counts must be "
-                       "normalised: the diamond tables hold half the letters per side."),
+        "conclusion": ("Formats: word-spaced prophecy (table 1); full 49x49 grids written in rows (2-25a); "
+                       "full 49x49 squares written on the diagonals in two chessboard-colour currents "
+                       "(25b-28b); and 49x49 grids split into the two colours, each written as a diamond along "
+                       "the diagonals (29-48). Read in their own direction, all of them carry the same language. "
+                       "Raw per-table counts must be normalised: the diamond tables hold half the letters per side."),
     }
     load.save_result("15_book_geometry", res)
     return res

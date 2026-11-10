@@ -175,29 +175,29 @@
    "table": 25,
    "chastor": 7,
    "chustor": 0,
-   "local_ruler": "ANZACH",
+   "local_ruler": "DNOCHA",
    "zone": "CHASTOR"
   },
   {
    "table": 26,
-   "chastor": 0,
+   "chastor": 3,
    "chustor": 0,
-   "local_ruler": "DTAAAX",
-   "zone": "frontier"
+   "local_ruler": "LGETHA",
+   "zone": "CHASTOR"
   },
   {
    "table": 27,
-   "chastor": 0,
+   "chastor": 8,
    "chustor": 0,
-   "local_ruler": null,
-   "zone": "void"
+   "local_ruler": "ALGETH",
+   "zone": "CHASTOR"
   },
   {
    "table": 28,
-   "chastor": 0,
+   "chastor": 5,
    "chustor": 0,
-   "local_ruler": null,
-   "zone": "void"
+   "local_ruler": "RGETHA",
+   "zone": "CHASTOR"
   },
   {
    "table": 29,

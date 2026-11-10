@@ -18,6 +18,8 @@ import a04_morphology
 import a05_signature_names
 import a06_call_bridge
 import a08_refutations
+import a09_letter_grammar
+import a10_territory
 
 MODULES = [
     ("01_basic_stats", a01_basic_stats),
@@ -27,6 +29,8 @@ MODULES = [
     ("05_signature_names", a05_signature_names),
     ("06_call_bridge", a06_call_bridge),
     ("08_refutations", a08_refutations),
+    ("09_letter_grammar", a09_letter_grammar),
+    ("10_territory", a10_territory),
 ]
 
 

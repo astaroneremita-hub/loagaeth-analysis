@@ -1,0 +1,343 @@
+{
+ "meta": {
+  "description": "Per-table master-name territory of the Loagaeth. local_ruler = most frequent recurring 6-gram (statistical, not an attested king)."
+ },
+ "tables": [
+  {
+   "table": 1,
+   "chastor": 0,
+   "chustor": 0,
+   "local_ruler": "EMBLOH",
+   "zone": "prophecy"
+  },
+  {
+   "table": 2,
+   "chastor": 0,
+   "chustor": 0,
+   "local_ruler": "CAPNAG",
+   "zone": "frontier"
+  },
+  {
+   "table": 3,
+   "chastor": 0,
+   "chustor": 0,
+   "local_ruler": "DMACHE",
+   "zone": "frontier"
+  },
+  {
+   "table": 4,
+   "chastor": 0,
+   "chustor": 0,
+   "local_ruler": "ADMACH",
+   "zone": "frontier"
+  },
+  {
+   "table": 5,
+   "chastor": 0,
+   "chustor": 0,
+   "local_ruler": "OXARVA",
+   "zone": "frontier"
+  },
+  {
+   "table": 6,
+   "chastor": 6,
+   "chustor": 0,
+   "local_ruler": "CHADNA",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 7,
+   "chastor": 7,
+   "chustor": 0,
+   "local_ruler": "CHANZA",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 8,
+   "chastor": 4,
+   "chustor": 0,
+   "local_ruler": "ADNACH",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 9,
+   "chastor": 4,
+   "chustor": 0,
+   "local_ruler": "CHADNA",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 10,
+   "chastor": 5,
+   "chustor": 0,
+   "local_ruler": "ADNACH",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 11,
+   "chastor": 7,
+   "chustor": 0,
+   "local_ruler": "NZACHA",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 12,
+   "chastor": 5,
+   "chustor": 0,
+   "local_ruler": "DNOCHA",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 13,
+   "chastor": 3,
+   "chustor": 0,
+   "local_ruler": "DNOCHA",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 14,
+   "chastor": 8,
+   "chustor": 0,
+   "local_ruler": "DNOCHA",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 15,
+   "chastor": 4,
+   "chustor": 0,
+   "local_ruler": "DNOCHA",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 16,
+   "chastor": 10,
+   "chustor": 0,
+   "local_ruler": "DNOCHA",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 17,
+   "chastor": 12,
+   "chustor": 0,
+   "local_ruler": "ADNACH",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 18,
+   "chastor": 10,
+   "chustor": 0,
+   "local_ruler": "DNOCHA",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 19,
+   "chastor": 6,
+   "chustor": 0,
+   "local_ruler": "DNOCHA",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 20,
+   "chastor": 7,
+   "chustor": 0,
+   "local_ruler": "DNOCHA",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 21,
+   "chastor": 6,
+   "chustor": 1,
+   "local_ruler": "DNOCHA",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 22,
+   "chastor": 9,
+   "chustor": 0,
+   "local_ruler": "DNOCHA",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 23,
+   "chastor": 3,
+   "chustor": 3,
+   "local_ruler": "DNOCHA",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 24,
+   "chastor": 9,
+   "chustor": 1,
+   "local_ruler": "DNOCHA",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 25,
+   "chastor": 7,
+   "chustor": 0,
+   "local_ruler": "ANZACH",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 26,
+   "chastor": 0,
+   "chustor": 0,
+   "local_ruler": "DTAAAX",
+   "zone": "frontier"
+  },
+  {
+   "table": 27,
+   "chastor": 0,
+   "chustor": 0,
+   "local_ruler": null,
+   "zone": "frontier"
+  },
+  {
+   "table": 28,
+   "chastor": 0,
+   "chustor": 0,
+   "local_ruler": null,
+   "zone": "frontier"
+  },
+  {
+   "table": 29,
+   "chastor": 7,
+   "chustor": 0,
+   "local_ruler": "AXACLA",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 30,
+   "chastor": 2,
+   "chustor": 0,
+   "local_ruler": "ACLAXT",
+   "zone": "border"
+  },
+  {
+   "table": 31,
+   "chastor": 4,
+   "chustor": 0,
+   "local_ruler": "GETHAX",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 32,
+   "chastor": 9,
+   "chustor": 0,
+   "local_ruler": "CHASTO",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 33,
+   "chastor": 3,
+   "chustor": 0,
+   "local_ruler": "NOCHAL",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 34,
+   "chastor": 3,
+   "chustor": 0,
+   "local_ruler": "THAXAR",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 35,
+   "chastor": 2,
+   "chustor": 0,
+   "local_ruler": "XARDRA",
+   "zone": "border"
+  },
+  {
+   "table": 36,
+   "chastor": 3,
+   "chustor": 0,
+   "local_ruler": "ALGETH",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 37,
+   "chastor": 2,
+   "chustor": 0,
+   "local_ruler": "CHEPHA",
+   "zone": "border"
+  },
+  {
+   "table": 38,
+   "chastor": 3,
+   "chustor": 0,
+   "local_ruler": "CHASTO",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 39,
+   "chastor": 3,
+   "chustor": 0,
+   "local_ruler": "ANZACH",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 40,
+   "chastor": 4,
+   "chustor": 0,
+   "local_ruler": "CHASTO",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 41,
+   "chastor": 0,
+   "chustor": 0,
+   "local_ruler": "ZIDNOP",
+   "zone": "frontier"
+  },
+  {
+   "table": 42,
+   "chastor": 4,
+   "chustor": 0,
+   "local_ruler": "CHASTO",
+   "zone": "CHASTOR"
+  },
+  {
+   "table": 43,
+   "chastor": 2,
+   "chustor": 0,
+   "local_ruler": "GETHAL",
+   "zone": "border"
+  },
+  {
+   "table": 44,
+   "chastor": 0,
+   "chustor": 3,
+   "local_ruler": "UXURNO",
+   "zone": "CHUSTOR"
+  },
+  {
+   "table": 45,
+   "chastor": 0,
+   "chustor": 3,
+   "local_ruler": "CHUSTO",
+   "zone": "CHUSTOR"
+  },
+  {
+   "table": 46,
+   "chastor": 0,
+   "chustor": 2,
+   "local_ruler": "LPHZIR",
+   "zone": "CHUSTOR"
+  },
+  {
+   "table": 47,
+   "chastor": 1,
+   "chustor": 1,
+   "local_ruler": "DETHCO",
+   "zone": "border"
+  },
+  {
+   "table": 48,
+   "chastor": 0,
+   "chustor": 5,
+   "local_ruler": "CHUSTO",
+   "zone": "CHUSTOR"
+  }
+ ]
+}

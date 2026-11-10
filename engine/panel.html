@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enochian Pattern Engine — Live</title>
+<style>
+  :root{
+    --bg:#0c0e14; --panel:#141824; --panel2:#1b2030; --ink:#e6e9f2; --dim:#8b93a7;
+    --line:#262c3d; --confirmed:#35d07f; --indication:#e8b84b; --coincidence:#5b6477;
+    --candidate:#6aa3ff; --known:#9aa0b3; --accent:#8a7dff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 -apple-system,Segoe UI,Roboto,sans-serif}
+  header{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+  h1{font-size:16px;margin:0;font-weight:650;letter-spacing:.2px}
+  .tag{font-size:11px;color:var(--dim)}
+  .wrap{max-width:1000px;margin:0 auto;padding:16px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .num{font-size:26px;font-weight:700}
+  .lbl{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.6px}
+  .bars{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+  .pill{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--panel2);border:1px solid var(--line)}
+  button{background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:7px 12px;cursor:pointer;font-size:13px}
+  button:hover{border-color:var(--accent)}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:6px}
+  .on{background:var(--confirmed);box-shadow:0 0 8px var(--confirmed)}
+  .off{background:var(--coincidence)}
+  h2{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.6px;margin:18px 0 8px}
+  .feed{display:flex;flex-direction:column;gap:8px}
+  .item{background:var(--panel);border:1px solid var(--line);border-left-width:3px;border-radius:10px;padding:10px 12px}
+  .item.CONFIRMED{border-left-color:var(--confirmed)}
+  .item.indication{border-left-color:var(--indication)}
+  .item.coincidence{border-left-color:var(--coincidence);opacity:.72}
+  .item .top{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .badge{font-size:10px;font-weight:700;padding:1px 7px;border-radius:5px;text-transform:uppercase;letter-spacing:.4px}
+  .b-CONFIRMED{background:rgba(53,208,127,.15);color:var(--confirmed)}
+  .b-indication{background:rgba(232,184,75,.15);color:var(--indication)}
+  .b-coincidence{background:rgba(91,100,119,.18);color:var(--coincidence)}
+  .cls{font-size:10px;padding:1px 6px;border-radius:5px;border:1px solid var(--line)}
+  .cls.candidate{color:var(--candidate);border-color:var(--candidate)}
+  .cls.known{color:var(--known)}
+  .title{font-weight:600;margin:3px 0}
+  .meta{font-size:12px;color:var(--dim)}
+  .caveat{font-size:12px;color:var(--dim);margin-top:4px;font-style:italic}
+  .p{font-variant-numeric:tabular-nums;font-weight:700}
+  .filters{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 2px}
+  .filters button.active{border-color:var(--accent);color:#fff}
+  @media(prefers-color-scheme:light){:root{--bg:#f4f5f8;--panel:#fff;--panel2:#eef0f5;--ink:#141824;--dim:#5a6party;--line:#e2e5ec}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Enochian Pattern Engine</h1>
+  <span class="tag">live — a self-feeding loop with a null model per probe</span>
+  <span style="flex:1"></span>
+  <span id="loopstate"><span class="dot off"></span>…</span>
+  <button id="toggle">Pause</button>
+</header>
+<div class="wrap">
+  <div class="grid">
+    <div class="card"><div class="lbl">Round</div><div class="num" id="round">–</div></div>
+    <div class="card"><div class="lbl">Findings stored</div><div class="num" id="total">–</div></div>
+    <div class="card"><div class="lbl">Running probe</div><div class="num" id="probe" style="font-size:14px;word-break:break-all">–</div></div>
+    <div class="card"><div class="lbl">Verdicts</div><div class="bars" id="verdicts"></div></div>
+  </div>
+
+  <h2>Best candidates (lowest p, would matter if real)</h2>
+  <div id="best" class="feed"></div>
+
+  <h2>Live feed</h2>
+  <div class="filters" id="filters">
+    <button data-f="" class="active">all</button>
+    <button data-f="CONFIRMED">confirmed</button>
+    <button data-f="indication">indication</button>
+    <button data-f="candidate">candidate</button>
+    <button data-f="known">known</button>
+  </div>
+  <div id="feed" class="feed"></div>
+</div>
+
+<script>
+let filter = "";
+const $ = s => document.querySelector(s);
+
+async function j(u, opt){ const r = await fetch(u, opt); return r.json(); }
+
+function verdictOf(f){ return f.verdict; }
+
+function itemHTML(f){
+  const v = f.verdict, c = f.class || "", p = f.stat && f.stat.p;
+  return `<div class="item ${v}">
+    <div class="top">
+      <span class="badge b-${v}">${v}</span>
+      <span class="cls ${c}">${c}</span>
+      <span class="meta">${f.lens}</span>
+      <span style="flex:1"></span>
+      <span class="meta">p=<span class="p">${p}</span></span>
+    </div>
+    <div class="title">${f.title||""}</div>
+    <div class="meta">${f.technique||""}</div>
+    <div class="caveat">${f.caveat||""}</div>
+  </div>`;
+}
+
+async function tick(){
+  try{
+    const s = await j("/api/state");
+    $("#round").textContent = s.round ?? "–";
+    $("#total").textContent = s.findings_on_disk ?? s.total ?? "–";
+    $("#probe").textContent = s.running ? (s.probe||"…") : "idle";
+    const on = s.loop_on;
+    $("#loopstate").innerHTML = `<span class="dot ${on?'on':'off'}"></span>${on?'searching':'paused'}`;
+    $("#toggle").textContent = on ? "Pause" : "Resume";
+
+    const sum = await j("/api/summary");
+    $("#verdicts").innerHTML = Object.entries(sum.by_verdict||{})
+      .map(([k,v])=>`<span class="pill">${k}: ${v}</span>`).join("")
+      + Object.entries(sum.by_class||{}).map(([k,v])=>`<span class="pill">${k}: ${v}</span>`).join("");
+    $("#best").innerHTML = (sum.best_candidates||[]).length
+      ? sum.best_candidates.map(b=>`<div class="item ${b.verdict}">
+          <div class="top"><span class="badge b-${b.verdict}">${b.verdict}</span>
+          <span class="cls candidate">candidate ×${b.variants}</span>
+          <span style="flex:1"></span><span class="meta">p=<span class="p">${b.p}</span></span></div>
+          <div class="title">${b.title}</div></div>`).join("")
+      : `<div class="item coincidence"><div class="meta">No surviving candidate yet. Every CONFIRMED finding so far is <b>known</b> (expected by construction) — the honest result.</div></div>`;
+
+    const q = ["CONFIRMED","indication","coincidence"].includes(filter) ? "verdict="+filter
+            : (["candidate","known"].includes(filter) ? "class="+filter : "");
+    const ff = await j("/api/findings?limit=60"+(q?"&"+q:""));
+    $("#feed").innerHTML = (ff.findings||[]).map(itemHTML).join("");
+  }catch(e){ /* server starting */ }
+}
+
+$("#toggle").onclick = async ()=>{
+  const on = $("#toggle").textContent === "Pause";
+  await j(on?"/api/stop":"/api/start", {method:"POST"});
+  tick();
+};
+document.querySelectorAll("#filters button").forEach(b=>{
+  b.onclick = ()=>{ filter=b.dataset.f;
+    document.querySelectorAll("#filters button").forEach(x=>x.classList.remove("active"));
+    b.classList.add("active"); tick(); };
+});
+
+tick();
+setInterval(tick, 2000);
+</script>
+</body>
+</html>

@@ -20,6 +20,12 @@ import a06_call_bridge
 import a08_refutations
 import a09_letter_grammar
 import a10_territory
+import a11_lineages
+import a12_empire
+import a13_numbers
+import a14_anzach
+import a15_book_geometry
+import make_figures
 
 MODULES = [
     ("01_basic_stats", a01_basic_stats),
@@ -31,6 +37,11 @@ MODULES = [
     ("08_refutations", a08_refutations),
     ("09_letter_grammar", a09_letter_grammar),
     ("10_territory", a10_territory),
+    ("11_lineages", a11_lineages),
+    ("12_empire", a12_empire),
+    ("13_numbers", a13_numbers),
+    ("14_anzach", a14_anzach),
+    ("15_book_geometry", a15_book_geometry),
 ]
 
 
@@ -44,6 +55,9 @@ def main():
         print(f"ok ({time.time()-t:.1f}s)")
     load.save_result("summary", summary)
     print("\nWrote results/summary.json and per-module files.")
+    print("\n[figures]")
+    for f in make_figures.run():
+        print("  " + f)
 
 
 if __name__ == "__main__":

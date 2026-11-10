@@ -48,7 +48,7 @@ def run():
             zone = "CHUSTOR"
         elif ch > 0:
             zone = "border"
-        elif len(s) < 400:
+        elif len(s) < 400 or ruler(s) is None:
             zone = "void"
         else:
             zone = "frontier"

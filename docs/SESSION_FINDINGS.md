@@ -99,6 +99,118 @@ the referents are not.
   Angelical function/sacred words, not the proper names. Meaning for CHASTOR, if it comes,
   comes from outside the text (attestation or evocation), then to the bench.
 
+### 11. The queen and the "rival house": CHAST vs GETH — module `a11`
+- **CHAST is a head-stem.** Its right side is almost fixed (followed by -OR in 80% of 231
+  cases; right-context entropy 1.49 bits) while its left side varies (9 prefix types: NO 77,
+  NE 24, ZI 18, NA 12, PLI, PRI…). It is the paradigm-maker.
+- **GETH is the most pervasive element.** 504 occurrences across 43 tables (more than CHAST's
+  36), high-entropy contexts on both sides (preceded mostly by AL/AR/OL/AN, followed by the
+  start of a new name). It ends in H, the measured terminator.
+- **They are not rivals.** Per-table counts correlate r = 0.64 — exactly what any string of
+  that frequency shows (null 0.66 ± 0.04, z = −0.8). Every table with CHAST also has GETH. No
+  local attraction (mean distance z = −1.9) and no phrase syntax (GETH is never immediately
+  followed by NOCHAST: 0/60 vs a 2.2% base rate).
+- Two kinds of "power": **ubiquity** (GETH) vs **depth of rank** (CHASTOR).
+
+### 12. The empire up close: stems + a stackable title-chain — module `a12`
+- The wider project's **"seven Lords"** (CHASTOR, HANZACH, ALGETHA, ADNOCHA, ADNACHA, ACHEPHA,
+  ANTANTO) were the seven most recurrent 7-letter strings. They are real, but they **overlap
+  and nest** (ADNOCHA·STOR, NOC·HANZACH, ADN·ACHEPHA) rather than being seven independent beings.
+- Underneath: **a few stem-names + a shared title-chain that stacks.**
+  CHASTOR 184 ⊃ NOCHASTOR 61 ⊃ ADNOCHASTOR 10 · CHAPH 100 ⊃ NOCHAPH 47 ⊃ ADNOCHAPH 20 ·
+  ANZACH 153 ⊃ NOCHANZACH 11 ⊃ ADNOCHANZACH 5 · CHEPHA 70 ⊃ ACHEPHA 49 ⊃ ADNACHEPHA 10.
+  The title itself (NOCHA 544; AD-/ED-/ID-/AG-NOCHA) recurs with a free vowel. **Each added
+  title cuts frequency about threefold** — rank-like compounding.
+- **ANZACH** (153 occurrences, 39 tables) is a second great stem, nearly as large as CHASTOR.
+- **"Queen of the hive", tested:** yes structurally — the stem is carried inside every titled
+  form. But shorter forms are more frequent (length vs occurrences ρ = −0.39), and gematria
+  does not track power (ρ = +0.11).
+- Refuted here: **CHA as a closed core** (2,811×, tail entropy 9.4 bits — a generic syllable);
+  **vowel twins as a noble mark** (100% of the Lords have one, but so do 99% of any frequent
+  7-gram — vowel alternation is language-wide).
+- **Literature check:** zero mentions of CHASTOR, NOCHASTOR, ALGETH or CHUSTOR in the 81
+  reference books held by the project.
+
+### 13. The governors' numbers: a generative architecture — module `a13`
+Beyond "2, 3, 6 dominate" (z ≈ 11): every test below uses a null that **shuffles all digits
+across the 91 numbers, keeping lengths** — so the global 2/3/6 excess is already priced in.
+- 2, 3, 6 appear **together in one number**: 34 vs 11.8 (z = 7.6).
+- As a **contiguous block** (632, 362, 236…): 30 vs 7.6 (z = 9.0).
+- **The block sits at the end** (last three digits a 236-permutation): 20 vs 4.2 (z = 8.3).
+- **Zero padding** (number ends in 0: 2360, 3620, 6320…): 28 vs 10.1 (z = 6.7).
+- **Exact duplicates**: 13 pairs vs 1.7 (z = 8.5). **Anagram pairs** (same digit multiset):
+  92 vs 20.6 (z = 13.7).
+- **Architecture:** *number = [head digit] + [the 2-3-6 block, permuted, sometimes zero-padded]*
+  (7|632, 9|236, 5|362, 2|360).
+- **The head digit belongs to the Aethyr** — and only in the second half. Governors of the same
+  Aethyr share their first digit: Aethyrs 1–14, 2 pairs vs 5.0 (z = −1.4, no rule); **Aethyrs
+  15–30, 25 vs 6.1 (z = 8.2)**. Aethyrs 15, 16, 21, 22, 23, 24, 27 have all heads identical
+  (1, 9, 5, 2, 7, 8, 7). The construction **changes regime at the midpoint** of the 30.
+- Nothing else sets the head: part in Aethyr (p = 0.78), tribe 1–12 (p = 0.74), name initial
+  (p = 0.14). The exact rule choosing each head digit and permutation is still unknown.
+- Textual note: Dee's declared sum for Aethyr 2 (6660) disagrees with its parts (14960); it
+  would fit exactly if DIALIVA were 662, but every source gives 8962 — so the declared sum is
+  the likelier slip. Hypothesis only.
+
+### 14. ANZACH, the sibling stem — module `a14`
+- **153 occurrences across 39 tables** (wider reach than CHASTOR's 35), present already in the
+  opening tables 2–5 where CHASTOR is absent.
+- **Built like CHASTOR:** preceded by OCH/ACH → **NO·CHA·NZACH** in parallel to **NO·CHA·STOR**.
+  Title nesting: ANZACH 153 ⊃ HANZACH 76 ⊃ NOCHANZACH 11 ⊃ ADNOCHANZACH 5. Variants ONZACH 77,
+  ANZACHA 67.
+- **A real word:** ANZACH stands alone as a word in the prophetic leaf 1 (which has word
+  boundaries), alongside HANZAH, ORANZA, ANZAZED.
+- **No rivalry, no precedence:** territory correlation with CHASTOR r = 0.58 vs a density null
+  of 0.62 ± 0.06 (z = −0.5); in the 34 tables holding both, each comes first 17 times.
+- **NOCHA as a closed title — refuted.** NOCHA (544×) is followed by an open range of
+  continuations (7.7 bits; top five cover 18%). What is solid: it is preceded by vowel+D (AD 176,
+  ED 72, ID 35, YD 16 → the unit DNOCHA, the heartland's dominant name), and its most common
+  continuations are STOR (61), PH (47), NZACH (11).
+
+### 15. The book's physical geometry — module `a15`
+- **Four segments.** Table 1: word-spaced prophecy. Tables 2–28: full 49×49 grids written in
+  rows. Tables 29–48: each side is a **diamond** — row lengths 1,3,5…49…3,1 (1201 cells) on one
+  side and 2,4…48,48…4,2 (1200 cells) on the other; 1201 + 1200 = 2401 = 49². Tables 44–48 use an
+  irregular diamond pairing and carry almost no recurring names. Table 49 is not in the data.
+- **The diamonds are the two colours of a chessboard.** Placing one side on the even
+  anti-diagonals (r+c = 2u) and the other on the odd ones rebuilds one complete 49×49 grid; each
+  diamond row is one diagonal of that grid (the paper turned 45°).
+- **The language runs along the diagonals.** In the 13 cleanly paired tables, reading the
+  diamond rows as written gives recurring-name share 0.150, conditional entropy 3.24 bits,
+  doubled letters 0.43%. Reading the rebuilt square by rows or columns gives 0.001 / 0.000, 4.02
+  bits, 8.3–8.5% — noise. This is the geometric form of Peterson's note that Kelley skipped every
+  other letter and that the paper was reoriented. (A naive "every-other-letter along the row"
+  version of that idea is refuted: the diamond rows match ordinary adjacent-letter statistics,
+  JS 0.09, not skip-one statistics, JS 0.35.)
+- **Tables 26–28 are statistical noise.** Conditional entropy equals a shuffled copy of the same
+  table (e.g. 3.752 vs 3.751), no recurring names (0.001), doubled letters at chance. They are not
+  a permutation of any other table and show no row periodicity. They are the last three full
+  tables before the format change.
+- **Method correction.** Because the diamond tables hold half the letters per side, raw
+  per-table counts (module `a10`, `a11`, `a14`) are not comparable across the two formats. Length-
+  normalised, CHASTOR's density is steady from table 6 to 43; the real breaks are at table 6
+  (CHASTOR appears) and table 44 (recurring names collapse).
+
+### 16. The no-doubled-letter rule — module `a15`
+- Adjacent identical letters: full tables 0.76%, diamond tables 0.43%, leaf 1 0.61% — against
+  8.6% expected from the letter frequencies: **about 11× below chance**. The Calls 1.85%
+  (avoided, but less strictly). Tables 26–28: 9.6%, at chance.
+
+### 17. The numbers, further — module `a13`
+- **The 2-3-6 block prefers its natural order:** "236" in 13 of the 30 numbers that contain the
+  block contiguously, vs 5 expected if all six orders were equal (binomial p = 0.0005).
+- **No known rule sets the head digit.** 30 candidate rules (gematria of the Aethyr name in all 13
+  systems, index transforms, sums of the parts) were tried; the null re-runs the entire search on
+  shuffled heads. Best 4/16 vs 4.3 expected by chance (p = 0.83). Honest negative.
+
+### Provenance warning: the grimoire's "powers"
+The wider project generated a grimoire that assigns each Lord a sefira, planet, talisman,
+how-to-call and danger grade. Its own generator states these layers were *"constructed
+(Golden Dawn method), not deciphered"*, and its provenance file marks "7 Lords = 7 lower
+sefirot" and "gematria → sefira/planet" as **convention**. The same name received two
+incompatible assignments (CHASTOR as Tiferet/Sun and as Chesed/Jupiter) depending on the
+mapping. Treat those powers as a ritual design choice, not as properties of the names.
+
 ## What we tested and threw out (this is the discipline)
 
 All refuted against a strong (Markov / frequency-controlled / within-word-shuffle) null:

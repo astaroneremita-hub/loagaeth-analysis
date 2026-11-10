@@ -1,0 +1,2 @@
+# No third-party dependencies. Python 3.8+ standard library only.
+# Run: python src/run_all.py

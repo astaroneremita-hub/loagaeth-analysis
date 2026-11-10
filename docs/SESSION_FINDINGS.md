@@ -316,6 +316,23 @@ across the 91 numbers, keeping lengths** — so the global 2/3/6 excess is alrea
   0.264 vs 0.280 elsewhere.
 - Golden-Dawn-style quadrant rearrangement: original best in 35/35 tables (mean best gain −0.014).
 
+### 27. Peterson's Index Verborum, Heptarchy numbers, gematria — module `a21`
+- The index (angelix, © 1986) is a concordance of leaf 1 only: t1 = 1a, t2 = 1b; no glosses.
+  97.5% of 3,589 references on the stated line; 2.0% variant readings (Z/X, U/B, N/U, R/X).
+- Line map: 1b line 20 is split over two transcription rows; 1b has 49 lines.
+- Gold standard: Peterson's division of the nine unspaced lines of 1b vs our word model trained on
+  the spaced lines — F1 0.33 vs 0.16 random (p < 0.0005). REAL.
+- Letter counts vs 7/42/49: chance. Total 177,226 ≡ 0 mod 7 (49×49 build). B opens all 49
+  Heptarchic names (16% of their letters) but is 1.2% of the Loagaeth.
+- AONHLDRC… as a string: AONH 1×, ONHL 1×, nothing longer. Gematria 6/5 came from mistyped counts;
+  GD sum is 1,486 and order-independent.
+
+### 28. 3D overlays: heat map, trail, closed pyramid, tesseract, icosahedron (viewer)
+- Stack of the 36 exact 49×49 sides of 2a–25a with a within-side shuffle null.
+- Interior hotspots match the null (ratios 2.2–5.5 vs 2.3–4.8). Only the row edges stand out
+  (X col 1 0.01× / col 49 1.62×; H 0.10× / 2.03×; G 1.89× / 0.52×; null 0.82–1.12×).
+- The letter trail and the master-name overlay form no symbol; names are short row streaks.
+
 ### Provenance warning: the grimoire's "powers"
 The wider project generated a grimoire that assigns each Lord a sefira, planet, talisman,
 how-to-call and danger grade. Its own generator states these layers were *"constructed

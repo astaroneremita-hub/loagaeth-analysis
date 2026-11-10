@@ -630,9 +630,70 @@ def fig_houses():
                "The NOCHA house leads the first half; the GETH/ACLAX house holds or grows in the second.", body)
 
 
+# ---------------------------------------------------------------- 20. Peterson's index checked
+def fig_index_check():
+    a = res("21_index_heptarchy_numbers")["A_index"]
+    v = a["verification"]
+    parts = [("found as a word on the stated line", v["whole_word"], P6),
+             ("inside a dense / longer token", v["inside_a_longer_or_dense_token"], P2),
+             ("variant reading (1–2 letters differ)", v["variant_reading"], AMBER),
+             ("not found", v["not_found"], CORAL)]
+    tot = sum(n for _, n, _ in parts)
+    body, x0, W = [], 24, 600
+    body.append(text(x0, 78, f"{a['references']} line references of the index ({a['entries']} entries), checked against our transcription", 12, INK, weight=600))
+    cx = x0
+    for lab, n, c in parts:
+        w = n / tot * W
+        body.append(rect(cx, 88, max(w, 1.5), 22, c, 2))
+        cx += w
+    for i, (lab, n, c) in enumerate(parts):
+        body.append(rect(x0, 124 + i * 20, 12, 12, c, 2))
+        body.append(text(x0 + 18, 134 + i * 20, f"{lab}: {n} ({n / tot * 100:.1f}%)", 12, MUTED))
+    y = 226
+    body.append(text(x0, y, "Line map, leaf 1b: index line → our row (purple = same row, amber = one row lower)", 12, INK, weight=600))
+    for i, s in enumerate(a["line_shift_1b"]):
+        c = P6 if s == 0 else AMBER
+        body.append(rect(x0 + i * 12, y + 10, 10, 18, c, 1))
+        if (i + 1) in (1, 20, 49):
+            body.append(text(x0 + i * 12 + 5, y + 44, str(i + 1), 10, MUTED, "middle"))
+    body.append(text(x0, y + 64, "Manuscript line 20 of leaf 1b is split over two rows in the transcription, so 1b also has 49 lines.", 11, MUTED))
+    body.append(text(x0, y + 80, "The index covers only leaf 1 (t1 = 1a, t2 = 1b) and carries no meanings: it is a concordance.", 11, MUTED))
+    return svg("fig_index_check", 660, y + 98, "Peterson's Index Verborum, checked line by line",
+               "Almost every reference lands on the stated line; the differences are old readings (Z/X, U/B, N/U).", body)
+
+
+# ---------------------------------------------------------------- 21. dense lines: Peterson's division vs our model
+def fig_dense_division():
+    b = res("21_index_heptarchy_numbers")["B_segmentation_gold"]
+    body, x0 = [], 24
+    body.append(text(x0, 78, "The nine unspaced 49-letter lines closing leaf 1b — ▼ Peterson's word breaks, ▲ our model's", 12, INK, weight=600))
+    cw = 12.4
+    for k, L in enumerate(b["per_line"]):
+        y = 96 + k * 40
+        g, m = set(L["gold_cut_positions"]), set(L["model_cut_positions"])
+        body.append(text(x0, y + 18, f"row {L['row']}", 10, MUTED))
+        for i, ch in enumerate(L["letters"]):
+            body.append(text(x0 + 52 + i * cw, y + 18, ch, 11, INK, "middle"))
+        for p in range(1, len(L["letters"])):
+            xx = x0 + 52 + (p - 0.5) * cw
+            if p in g:
+                body.append(text(xx, y + 6, "▼", 8, P6, "middle"))
+            if p in m:
+                body.append(text(xx, y + 31, "▲", 8, TEAL if p in g else GRAY, "middle"))
+        body.append(text(x0 + 52 + 49 * cw + 8, y + 18, f"F1 {L['F1']:.2f}", 10, MUTED))
+    yy = 96 + len(b["per_line"]) * 40 + 8
+    m, r = b["model"], b["random_cuts_same_number"]
+    body.append(text(x0, yy, f"Our word model (trained only on the spaced lines of leaf 1): F1 {m['F1']} (precision {m['precision']}, recall {m['recall']}).", 11, INK))
+    body.append(text(x0, yy + 16, f"Random breaks, same number: F1 {r['F1_mean']} (95th pct {r['F1_95th']}); p < 0.0005. Teal ▲ = a break both agree on.", 11, MUTED))
+    body.append(text(x0, yy + 32, "Peterson's breaks are an editor's reading (1986), not Dee's; the model over-cuts but finds his breaks twice as often as chance.", 11, MUTED))
+    return svg("fig_dense_division", 760, yy + 50, "A gold standard for dividing dense Loagaeth text",
+               "Peterson's index divides the unspaced lines into words — an independent check on word segmentation.", body)
+
+
 FIGURES = [fig_territory, fig_digits, fig_head_regime, fig_nesting, fig_hive, fig_series, fig_letter_grammar,
            fig_book_formats, fig_diamond, fig_doubled, fig_letter_counts, fig_letters_segments, fig_u_register,
-           fig_row_edges, fig_plan_7x7, fig_houses, fig_two_currents, fig_machine, fig_energy]
+           fig_row_edges, fig_plan_7x7, fig_houses, fig_two_currents, fig_machine, fig_energy,
+           fig_index_check, fig_dense_division]
 
 
 def run():

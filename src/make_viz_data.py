@@ -17,6 +17,7 @@ Usage:  python src/make_viz_data.py
 """
 import json
 import os
+import random
 import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -84,6 +85,71 @@ def diagonal_occurrences(rows):
     return best
 
 
+NULL_SEED = 1583  # fixed seed for the shuffled ("null") stack
+
+
+def enc(counts):
+    """Encode small non-negative ints (< 75) as one character each (chr(48 + n))."""
+    return "".join(chr(48 + n) for n in counts)
+
+
+def stack_counts(sides_rows):
+    """Per-cell counts across sides: letters[L][cell] and names[k][cell] (k = 8 means any name)."""
+    letters = {ch: [0] * (N * N) for ch in "ABCDEFGHIJKLMNOPQRSTUVWXYZ"}
+    names = [[0] * (N * N) for _ in range(len(NAMES) + 1)]
+    for rows in sides_rows:
+        for r, row in enumerate(rows):
+            for c, ch in enumerate(row):
+                letters[ch][r * N + c] += 1
+        per_name = [set() for _ in NAMES]
+        for k, r, c, ln, _dr, _dc in row_occurrences(rows):
+            for i in range(ln):
+                per_name[k].add(r * N + c + i)
+        for k, cells in enumerate(per_name):
+            for cell in cells:
+                names[k][cell] += 1
+        for cell in set().union(*per_name):
+            names[len(NAMES)][cell] += 1
+    letters = {ch: v for ch, v in letters.items() if sum(v)}
+    return letters, names
+
+
+def build_stack(tables):
+    """Stack of the clean 49x49 row-written sides (2a-25a) plus a shuffled null stack.
+
+    Clean = 49 rows of exactly 49 letters after stripping non-letters. The null
+    shuffles the letters inside each side (fixed seed), keeping each side's
+    letter composition but destroying position.
+    """
+    keys = sorted((k for k, e in tables.items() if e["f"] == "square-rows"
+                   and len(e["rows"]) == N and all(len(r) == N for r in e["rows"])),
+                  key=lambda k: (int(k[:-1]), k[-1]))
+    obs_rows = [tables[k]["rows"] for k in keys]
+    rng = random.Random(NULL_SEED)
+    null_rows = []
+    for rows in obs_rows:
+        cells = list("".join(rows))
+        rng.shuffle(cells)
+        s = "".join(cells)
+        null_rows.append([s[i * N:(i + 1) * N] for i in range(N)])
+    lo, no = stack_counts(obs_rows)
+    ln_, nn = stack_counts(null_rows)
+    freq = sorted(lo, key=lambda ch: -sum(lo[ch]))
+    excluded = sorted((k for k, e in tables.items() if e["f"] == "square-rows" and k not in keys),
+                      key=lambda k: (int(k[:-1]), k[-1]))
+    print("stack sides:", len(keys), " excluded (not 49x49 after cleaning):", " ".join(excluded))
+    print("letter frequency order in stack:", "".join(freq[:14]))
+    return {
+        "sides": keys,
+        "excluded": excluded,
+        "seed": NULL_SEED,
+        "freq": "".join(freq),
+        "obs": {"letters": {ch: enc(v) for ch, v in lo.items()}, "names": [enc(v) for v in no]},
+        "nul": {"letters": {ch: enc(v) for ch, v in ln_.items()}, "names": [enc(v) for v in nn],
+                "rows": {k: r for k, r in zip(keys, null_rows)}},
+    }
+
+
 def main():
     with open(SRC, encoding="utf-8") as fh:
         leaves = json.load(fh)["leaves"]
@@ -116,7 +182,10 @@ def main():
         tables[key] = entry
         counts[key] = len(entry["occ"])
 
+    stack = build_stack(tables)
+
     data = {
+        "stack": stack,
         "meta": {
             "source": "John Dee, Liber Loagaeth (Sloane MS 3189); transcription in data/loagaeth_tables.json",
             "note": "Non A-Z characters stripped; table 49 missing; leaf 1 is prose.",

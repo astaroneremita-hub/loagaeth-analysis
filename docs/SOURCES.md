@@ -29,6 +29,12 @@ manuscript; we ship the extracted JSON, not the facsimile images.
   (`data/raw/soyga_aries_columns.json`, git-ignored) to compare periodicity. Nothing from that
   edition is shipped in this repository.
 
+- **Index Verborum:** Joseph H. Peterson, *Index Verborum of the "Angelic Language" from Liber
+  Logaeth* (© 1986, all rights reserved), `https://www.esotericarchives.com/dee/angelix.htm`.
+  Module `a21` downloads it into `data/raw/` (git-ignored, not redistributed) and writes only
+  aggregate checks to `results/21_index_heptarchy_numbers.json` (verification counts, the line map,
+  and the cut positions of the nine dense lines of leaf 1b used as a segmentation gold standard).
+
 ## Derived Loagaeth datasets (produced by this project)
 
 - `data/loagaeth_vocabulary.json` - word list obtained by segmenting the dense tables;

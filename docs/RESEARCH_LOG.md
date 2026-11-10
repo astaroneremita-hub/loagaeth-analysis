@@ -110,6 +110,18 @@ text's own texture.
 | 58 | 7×7 gradual division / central cross | edge effect only / not special | REFUTED | a20 |
 | 59 | Golden-Dawn quadrant rearrangement | original best 35/35 | REFUTED | a20 |
 
+## Phase 9 — Peterson's index, the Heptarchy, the numbers
+
+| # | Question | Result | Tag | Module |
+|---|---|---|---|---|
+| 60 | What is the angelix index? | Concordance of leaf 1 only (t1 = 1a, t2 = 1b), no glosses; 97.5% of 3,589 references on the stated line | REAL | a21 |
+| 61 | Does the index line up with our rows? | Leaf 1b line 20 is split over two rows in the transcription; later lines +1; 1b has 49 lines | REAL (data correction) | a21 |
+| 62 | Variant readings | 71 refs differ by 1–2 letters: Z/X, U/B, N/U, R/X | DESCRIPTIVE | a21 |
+| 63 | Do the dense lines of 1b have word structure an outside reader agrees with? | Model vs Peterson's breaks F1 0.33 vs 0.16 random (p < 0.0005) | REAL | a21 |
+| 64 | Letter counts vs 7 / 42 / 49 | at chance; total ≡ 0 mod 7 from the 49×49 build; B 16% in Heptarchic names vs 1.2% in Loagaeth | REFUTED (numerology) | a21 |
+| 65 | AONHLDRC… as a string | AONH 1×, ONHL 1×, nothing longer; in no name pool | REFUTED | a21 |
+| 66 | Gematria 6 and 5 of the counts | came from mistyped counts; GD sum 1,486 (not 1,446), order-independent | REFUTED | a21 |
+
 ## Side tracks (recorded, not findings)
 
 - **Tarot dialogue.** Questions to the cards were turned into tests: "the Wheel" → CHASTOR's

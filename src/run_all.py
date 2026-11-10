@@ -30,6 +30,7 @@ import a17_kingdom
 import a18_markup_decoding
 import a19_machine
 import a20_energy_fibonacci_gd
+import a21_index_heptarchy_numbers
 import make_figures
 import make_viz_data
 
@@ -55,6 +56,7 @@ MODULES = [
     ("17_kingdom", a17_kingdom),
     ("19_machine", a19_machine),
     ("20_energy_fibonacci_gd", a20_energy_fibonacci_gd),
+    ("21_index_heptarchy_numbers", a21_index_heptarchy_numbers),
 ]
 
 

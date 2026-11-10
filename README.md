@@ -111,6 +111,7 @@ src/                          LAYER A - the Loagaeth analysis
   a18_markup_decoding.py      Peterson's marks, leaf titles, decoding tables 25b-28b (two currents)
   a19_machine.py              Soyga vs Loagaeth, 2-D rule, compression, language model, generator
   a20_energy_fibonacci_gd.py  letter energy by realm, Fibonacci, 7x7 division, GD rearrangement
+  a21_index_heptarchy_numbers.py  Peterson's index checked, dense-line gold standard, Heptarchy numbers, gematria
   make_figures.py             draws every figure in figures/ from the results
   make_viz_data.py            builds viz/loagaeth_viz_data.js for the 3D viewer
 viz/                          loagaeth_3d.html - interactive three.js viewer
@@ -432,6 +433,54 @@ with the meanings of the proper names still sealed.
   1+3+…+49 = 625 = 25² above and 576 = 24² below (1201 = 25² + 24²); the even diamond holds
   2·24·25 = 1200.
 
+### Peterson's Index Verborum, and a gold standard for dense text `[a21]`
+
+![Index check](figures/fig_index_check.svg)
+
+Joseph Peterson's *Index Verborum of the "Angelic Language" from Liber Logaeth* (1986, Esoteric
+Archives `angelix.htm`) lists 2,779 word forms as `word t<side> line[*count]`. Checked against our
+transcription:
+
+- **It covers leaf 1 only.** `t1` = leaf 1a, `t2` = leaf 1b (98% / 96% of their words are found
+  there, ≤ 11% on any other leaf). There is no `t3`. It is a **concordance, not a dictionary** — it
+  carries no meanings, so it cannot unseal CHASTOR or any other name.
+- **97.5% of its 3,589 references land on the stated line.** 2.0% are variant readings that differ
+  by one or two letters — the classic confusions of Dee's hand (Z/X, U/B, N/U, R/X); 0.5% are not
+  found.
+- **The line map exposed a split line.** In leaf 1b, the index's line 20 is our rows 20 + 21 and
+  every later line sits one row lower: the transcription breaks manuscript line 20 in two. Leaf 1b
+  therefore has 49 lines, like 1a and like every table.
+- **Only 164 of our 3,672 leaf-1 tokens are not indexed as such**, mostly one- to three-letter
+  particles (A, NA, GEM, AX…).
+
+![Dense division](figures/fig_dense_division.svg)
+
+**Completing what was missing.** Leaf 1b ends with nine lines of 49 letters written without spaces.
+The index still divides them into words — an editor's reading, but one our methods never saw. That
+makes it a **gold standard for segmenting dense Loagaeth text**. A simple word model trained only on
+the spaced lines of leaf 1 recovers Peterson's breaks with F1 **0.33**, against **0.16** for the same
+number of random breaks (95th percentile 0.22, p < 0.0005). The model over-cuts (precision 0.25,
+recall 0.49): the dense lines are made of longer words than the spaced ones. **REAL** — the dense
+text carries word structure that agrees with an independent reader.
+
+**Letter counts and the Heptarchy (7 kings, 7 princes, 42 ministers, 49 good angels).** Of the 21
+letter counts, 3 are divisible by 7 (3.6 expected), 1 by 42 (0.6), 1 by 49 (0.5) — chance. The
+total, 177,226, is a multiple of 7, which mostly follows from the book being built of 49 × 49
+squares (2,401 = 7⁴ letters per table). The clear contrast is **B**: it opens every one of the 49
+Heptarchic names (16% of their letters) but is 1.2% of the Loagaeth. **REFUTED** as numerology.
+
+**The top letters as a string (AONHLDRC…).** Frequency order is a property of the count, not a text.
+As contiguous strings: AON 66× (97 expected from letter pairs), AONH 1×, ONHL 1×, nothing of length
+5+; DRC is strongly avoided (1 vs 56). No Watchtower name, Call word or index word contains AON.
+**REFUTED.**
+
+**Gematria of the counts.** The true counts are A 33,441, O 16,361, N 15,892, H 12,099 (digit roots
+6, 8, 7, 3). The "6 and 5" in a pasted calculation came from mistyped numbers with an extra digit
+(334,441, 166,361, 158,892). The Golden Dawn values of all 21 letters sum to **1,486** (the pasted
+1,446 gave Q = 50 instead of 90), and that sum is the same in every order, so it says nothing about
+frequency. "A = 6, B = 5" is real — it is Crowley's column (and two GD-derived columns) in our
+bundled tables. Digit roots of large counts fall on each of 1–9 about 1/9 of the time.
+
 ### 3D viewer — the tables as squares, diamonds and pyramids
 
 ![3D pyramid view](figures/viz_pyramid.jpg)
@@ -457,6 +506,32 @@ then visit `http://localhost:8860/viz/loagaeth_3d.html`. Views:
   finding: what is established is only that each diamond side is two stepped pyramids joined at
   its widest row.
 - **Book** — the 49 tables on the 7×7 plan, coloured by territory; click a plate to open it.
+- **Heatmap** — the 36 sides of 2a–25a that are exact 49×49 grids stacked into one: per cell, how
+  many sides put a master name there, or observed/expected for any letter. A **Null** toggle swaps
+  in the same sides with letters shuffled inside each side (seed 1583).
+- **Trail** — the top letters' hotspots joined in order (A O N H L D R C X E G T, or true frequency
+  order) by a gold tube, with the shuffled null's trail in cyan; on the stack or any single side.
+- **Closed pyramid** — the base carries the stacked name heat; the 1,802 master-name cells of all
+  diamond sides 29–48 glow on the four faces.
+- **Tesseract** — a hypercube (24 square faces) turning in 4D, wearing 24 consecutive square sides.
+- **Icosahedron** — 20 triangular faces carrying the upper and lower halves of ten diamond sides.
+
+Every view links by URL hash (e.g. `#view=heat&hMode=letter&hLetter=X&hNull=1`).
+
+| Heat map (letter X) | Trail, observed vs null | Closed pyramid |
+|---|---|---|
+| ![heat](figures/viz_heatmap.jpg) | ![trail](figures/viz_trail.jpg) | ![closed](figures/viz_closed_pyramid.jpg) |
+| **Tesseract** | **Icosahedron** | |
+| ![tesseract](figures/viz_tesseract.jpg) | ![ico](figures/viz_icosahedron.jpg) | |
+
+**What the overlays show — no symbol.** Inside the grid, the hottest cells of every letter (ratio
+2.2–5.5) are matched by the shuffled null (2.3–4.8): noise. The one real structure is the **row
+edges** already found in `[a16]`: X sits at column 1 only 0.01× its average and at column 49 1.62×;
+H 0.10× → 2.03×; G 1.89× → 0.52×; C 1.67× → 0.58× (null: 0.82–1.12× for every letter). So the trail
+is pulled to the edges (O, H at the end of the row; L, C at the start) and otherwise zig-zags like
+the null's. Master names hit any one cell in at most 9 of 36 sides, with no figure; on the closed
+pyramid they are short horizontal streaks on all four faces, nothing at the apex or along the edges.
+The tesseract and icosahedron are ways to look, not results.
 
 ### What we tested and threw out (the discipline)
 Mirror/reversal (syllable-pool artifact), decimation-by-2 (names are contiguous), Semitic

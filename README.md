@@ -118,27 +118,83 @@ docs/
 
 ---
 
-## What held up, in one screen
+## Everything we discovered
 
-Run `src/run_all.py` for the live numbers; for orientation:
+Run `src/run_all.py` for the live numbers. Every claim below beat a null model or is true
+by direct inspection; the module that reproduces it is named in brackets. The full write-up
+with method is in [`docs/SESSION_FINDINGS.md`](docs/SESSION_FINDINGS.md); what we ruled out
+is in [`docs/EXPLORED.md`](docs/EXPLORED.md).
 
-- **It's a catalog of names, not prose** (type/token, repetition structure).
-- **A scale-free name-network**: ~4,300 recurring-string nodes, a few dominant hubs.
-- **CHASTOR is the master stem**: 184 occurrences across 35 of 48 tables (72.9%);
-  with NOCHASTOR, 61 more across 27; CHUSTOR is its A/U vowel twin.
-- **Productive morphology**: the stem takes a closed prefix set (NO- NE- ZI- NA- OL-)
-  giving a clear paradigm (NOCHASTOR, NECHASTOR, ZICHASTOR, NOCHASTORAD, ...). The most
-  language-like behavior in the book.
-- **Per-table signature names**: each of the 48 tables has its own distinct name; none
-  are CHASTOR-family.
-- **A small real bridge to the Calls**: a handful of leaf-1 words are attested Angelical
-  with known meanings (IAD god, GAH spirits, ORS darkness, URAN elders).
+**The one-line picture:** the Loagaeth is not a cipher to translate — it is the **name-book
+of the Angelical language**. It is written in the *same tongue* as the 48 Calls, but its
+content is that language's **names**, with a real grammar and a political geography, and
+with the meanings of the proper names still sealed.
 
-And what we **threw out** (tested, failed its strong null): mirror/reversal, Semitic
-roots, Call-vocabulary-as-key, Gebofal reordering, four geometric models, divine-name
-ciphers, and - from the engine's broader sweep - most gematria and the 3-6-9 / sefirotic
-claims (they belong to the value system or to grid geometry, not to a hidden code). Full
-account in [`docs/EXPLORED.md`](docs/EXPLORED.md).
+### Structure
+- **It is a catalog of names, not prose** `[a01,a03]` — 195,548 letters; entropy 4.03 bits,
+  conditional 3.44 (strong syllable structure); type/token 0.81; no prose-like grammar.
+- **A scale-free name-network** `[a02]` — ~4,300 recurring-string nodes, a heavy tail of a
+  few dominant hubs (the "hive").
+
+### The master stem CHASTOR
+- **CHASTOR rules the book** `[a03]` — 184 occurrences across 35 of 48 tables (72.9%); with
+  NOCHASTOR, 61 more across 27. **CHUSTOR** is its A→U vowel twin.
+- **Productive morphology** `[a04]` — CHASTOR takes a closed prefix set (NO- 77, NE- 24,
+  ZI- 18, NA- 12, OL- 11): NOCHASTOR, NECHASTOR, ZICHASTOR, NOCHASTORAD… The **family
+  forest**: three roots take ≥3 prefixes — CHASTOR (8), DAX (4), CHADAX (3). CHASTOR is the
+  trunk.
+
+### The alphabet is a real grammar
+- **Letters carry positional roles** `[a09]` — mutual information MI(letter; position) =
+  0.181 bits vs a within-word-shuffle null of 0.003, **z ≈ 331**. **G, V are onsets; H is a
+  terminator.** Names parse as `[onset][root][terminator]` (ZURAH = ZU·RA·H, NOGAH = NO·GA·H).
+- **Same Angelical tongue as the Calls** `[a09]` — the per-letter word-ending profile
+  correlates **Loagaeth↔Calls r = 0.71** vs Loagaeth↔English r = 0.22 (control). Same
+  sound-grammar, different lexicon. The Loagaeth is the *more alien / older* layer.
+
+### A political geography of names
+- **Territorial map** `[a10]`, dataset `data/loagaeth_territories.json` — the book is
+  partitioned. **CHASTOR** rules the heartland (tables 6–25) and a second realm (29–43);
+  **CHUSTOR** rules the end (44–48); the opening (2–5) holds small independent realms;
+  table 1 is the prophecy (and the *last* leaf in reading order). The zonation is real:
+  per-table CHASTOR counts have lag-1 autocorrelation 0.51 vs a shuffle null of 0.20.
+- **Refined honestly** — only CHASTOR is a true dynasty; CHUSTOR is a lone twin (no
+  prefix-family); the opening realms share no large family. One empire + a twin + small realms.
+- **Per-table signature names** `[a05]` — all 48 tables have a distinct local name; none are
+  CHASTOR-family.
+
+### The readable layer, and the sealed one
+- **A small real bridge to the Calls** `[a06]` — ~20 whole words in the prophetic leaf 1 are
+  attested Angelical with known meanings: MAD (of god), IAD (the god), GAH (spirits), ORS
+  (with darkness), ZIR (I am), GOHO (sayeth), VORS ("now the seas appear", recurs 47×). These
+  are the shared sacred **particles**.
+- **The proper names are sealed** — an exhaustive lexicon search finds **zero** glosses for
+  CHASTOR or its family. The master names have no attested meaning in any source we hold.
+
+### The one unexplained number
+- **The 2/3/6 anomaly** — the numbers Dee attached to the 91 governors are dominated by the
+  digits 2 (71×), 3 (75×), 6 (69×): 59% of all digits vs a chance ≈ 30%, **z = 11.4**. 62 of
+  91 numbers contain a 6. The single strongest pattern with no known construction rule — the
+  open lead for a Reeds-style generative rule.
+
+### What we tested and threw out (the discipline)
+Mirror/reversal (syllable-pool artifact), decimation-by-2 (names are contiguous), Semitic
+roots (ratio ~1.3, English-like), prefix-as-region (matches a frequency null), the
+CHASTOR-family numeric signature (spread, not 2/3/6), the prologue acrostic (gibberish),
+Call-vocabulary-as-key, Gebofal reordering, four geometric models, divine-name ciphers, and —
+from the engine's broader 72-hypothesis sweep — most gematria and the 3-6-9 / sefirotic
+claims (they belong to the value system or grid geometry, not a hidden code). Watchtower-style
+geometric name-extraction from the 49×49 grids also fails its null (`engine/extract_names.py`):
+the names live in the linear reading, not a Great-Cross geometry.
+
+### Where this leaves us
+We have the **form** of the names — network, morphology, letter-grammar, territory — and the
+fact that it is one language with the Calls. We do not have the **referents** of the proper
+names. The only path to meaning is an **external anchor**: the attested sense of a single
+name (CHASTOR first). Per Dee's own source the highest names were "not to be pronounced," so
+this layer may be sealed by design. Honest bottom line: we have not deciphered the Loagaeth —
+we have mapped its skeleton, proved it is a real name-language, and ruled out a stack of
+popular keys, further than any published treatment we could find.
 
 ---
 

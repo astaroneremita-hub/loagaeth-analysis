@@ -25,6 +25,8 @@ import a12_empire
 import a13_numbers
 import a14_anzach
 import a15_book_geometry
+import a16_letters
+import a17_kingdom
 import make_figures
 
 MODULES = [
@@ -42,6 +44,8 @@ MODULES = [
     ("13_numbers", a13_numbers),
     ("14_anzach", a14_anzach),
     ("15_book_geometry", a15_book_geometry),
+    ("16_letters", a16_letters),
+    ("17_kingdom", a17_kingdom),
 ]
 
 

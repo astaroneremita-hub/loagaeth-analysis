@@ -203,6 +203,61 @@ across the 91 numbers, keeping lengths** — so the global 2/3/6 excess is alrea
   systems, index transforms, sums of the parts) were tried; the null re-runs the entire search on
   shuffled heads. Best 4/16 vs 4.3 expected by chance (p = 0.83). Honest negative.
 
+### 18. Every letter, mapped — module `a16`
+- Counts over tables 2–48: A 33,441 (18.9%), O 9.2%, N 9.0%, H 6.8%, L 6.3%, D 5.8%, R 5.5%,
+  C 4.8%, X 4.7%, E 4.0%, G 4.0%, T 3.9%, V 3.2%, P 3.0%, Z 2.4%, U 2.0%, I 1.8%, M 1.5%, S 1.2%,
+  B 1.2%, Y 0.6%, F 0.3%, Q 0.09%; W and K virtually absent. Each letter's value in all 13
+  gematria systems is stored with the counts (reference only — those systems are later
+  conventions, and raw counts depend on the transcription's size, so they carry no meaning of
+  their own).
+- **No hidden name in the top letters** (k = 3…8, exact anagram against the attested lexicon and
+  the Loagaeth vocabulary; nulls give the chance of a hit).
+- **Frequency vs letter value:** no relation in any system after Bonferroni (13 tests; the lowest
+  p = 0.02 for an unspecified "English Qabalah" table does not survive).
+- **Position in the full grids:** the letter × region table (four quadrants + central cross)
+  departs from a within-grid shuffle (χ² 161.5 vs 95th percentile ≈ 108–115). The cause is the row
+  edges: rows open with onsets (V 5.3×, P 3.0×, Z 2.4×, G 1.9×) and close with terminators
+  (S 3.4×, H 2.0×, O 1.7×, X 1.6×) — the 49-letter lines follow word boundaries. Without the three
+  outer columns, left and right halves are alike (ratios 0.95–1.12). The centre cell (25,25) has
+  no special letter (O 7 of 36 grids, p ≈ 0.06).
+- **Segments have distinct letter mixes** (χ² ≈ 11,100 vs ≤ 3,800 with tables shuffled between
+  segments).
+
+### 19. The U register — module `a16`
+- End segment (44–48) vs heartland (6–25), recurring 5-grams in common: 228 as written; 387 with
+  A→U; 146 / 166 / 169 with A→E / A→I / A→O. Only A→U brings them together; 28% of the end's
+  recurring 5-grams are heartland 5-grams with A turned into U (36% counting both ways).
+  Examples: CHAST→CHUST, HASTO→HUSTO, ASTOR→USTOR, RANCH→RUNCH, VANCH→VUNCH, RAPHA→RUPHU,
+  APHAR→UPHUR, ANCHA→UNCHU. In the end segment A drops to 5.8% and U rises to 10.1%.
+- This sharpens an earlier A↔U hypothesis that had failed across a different grouping (tables
+  with vs without CHASTOR). Caveat: one transcription cannot separate a deliberate register from a
+  reading habit in those leaves.
+
+### 20. Sides, mirrors and the 7×7 plan — module `a17`
+- **Sides:** exact baseline (centre of a k-letter name falls left with known probability; rows
+  uniform). Left/right: all |z| ≤ 1.7 — no preference. Top/bottom: **ALGETH z = −3.1** (lower half,
+  passes Bonferroni for 14 tests); GETH −2.3 and NOCHA +1.8 only lean.
+- **Mirrors:** diamond row vs its mirror 0.029 vs random same-length row 0.047 (trigram Jaccard);
+  full-grid row vs mirror 0.071 vs random row of the same table 0.073. No mirror symmetry.
+- **The 7×7 plan:** CHASTOR appears at table 6 (week 1, pos 6); the heartland ends at table 25 —
+  the exact centre of the plan (week 4, pos 4) and of 1..49; noise 26–28 completes week 4; the 45°
+  format begins at table 29 (week 5, pos 1); the U register at 44 (week 7, pos 2). Descriptive,
+  post hoc, no p-value claimed.
+
+### 21. The implicit correlation zone: two houses — module `a17`
+- Per-table densities of 15 names, regressed on the table's overall name density; residual
+  correlations; family-wise 95% threshold from shuffled series (|r| > 0.53). Pairs where one name
+  contains the other (GETH⊂ALGETH, NOCHAPH/ADNOCHA via ADNOCHAPH) are trivial and set aside.
+- The non-trivial strong pairs are all **antagonisms**: NODAX × ALGETH −0.65, ADNOCHA × ACLAX
+  −0.60, ADNOCHA × ALGETH −0.57.
+- **Re-tested inside each realm** (so living in different realms cannot explain it):
+  ADNOCHA × ACLAX −0.58 heartland (p = 0.004), −0.66 diamonds (p = 0.007); NODAX × ALGETH −0.60
+  heartland (p = 0.001), +0.13 diamonds (n.s.); NOCHAPH × ACLAX −0.24 heartland (n.s.), −0.73
+  diamonds (p = 0.002); ADNOCHA × ALGETH marginal (p ≈ 0.05 / 0.12).
+- Densities per 1000 letters (opening / heartland / diamonds / end): ADNOCHA 0 / 1.75 / 0.22 / 0;
+  ALGETH 0.10 / 0.78 / 1.03 / 0; ACLAX 0 / 1.23 / 1.06 / 0. **Two houses alternate table by
+  table; the NOCHA house leads the first half, the GETH/ACLAX house holds or grows in the second.**
+
 ### Provenance warning: the grimoire's "powers"
 The wider project generated a grimoire that assigns each Lord a sefira, planet, talisman,
 how-to-call and danger grade. Its own generator states these layers were *"constructed

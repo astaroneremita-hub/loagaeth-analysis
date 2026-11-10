@@ -43,7 +43,21 @@ def rect(x, y, w, h, fill, rx=3, stroke=None):
     return f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{rx}" fill="{fill}"{st}/>'
 
 
+def _text_extent(parts):
+    """Rough right-most x reached by any <text> (≈0.56·font-size per character)."""
+    import re as _re
+    right = 0.0
+    for p in parts:
+        for m in _re.finditer(r'<text x="([\d.\-]+)" y="[\d.\-]+" font-size="([\d.]+)"[^>]*text-anchor="(\w+)"[^>]*>([^<]*)</text>', p):
+            x, fs, anc, s = float(m.group(1)), float(m.group(2)), m.group(3), m.group(4)
+            w = len(s) * fs * 0.56
+            x1 = x if anc == "end" else (x + w / 2 if anc == "middle" else x + w)
+            right = max(right, x1)
+    return right
+
+
 def svg(name, w, h, title, subtitle, body):
+    w = max(w, int(_text_extent(body + [text(24, 32, title, 16, weight=600), text(24, 52, subtitle, 12)]) + 24))
     head = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" '
             f'font-family="Segoe UI, Helvetica, Arial, sans-serif" role="img">'
             f'<title>{esc(title)}</title>'
@@ -348,8 +362,169 @@ def fig_doubled():
                "Share of adjacent identical letters. The Loagaeth avoids them ~11× below chance; tables 26–28 do not.", body)
 
 
+# ---------------------------------------------------------------- 11. every letter, with gematria value
+def fig_letter_counts():
+    r = res("16_letters")["A_letters"]
+    r = [x for x in r if x["count"] >= 100]
+    mx = max(x["count"] for x in r)
+    body, x0, base = [], 40, 250
+    for i, x in enumerate(r):
+        h = x["count"] / mx * 170
+        bx = x0 + i * 27
+        body.append(rect(bx, base - h, 20, h, P6 if i < 3 else P4, 3))
+        body.append(text(bx + 10, base - h - 5, x["count"], 9, INK, "middle"))
+        body.append(text(bx + 10, base + 15, x["letter"], 12, INK, "middle", 600))
+        gd = x["values"].get("golden_dawn_coluna__F08")
+        body.append(text(bx + 10, base + 30, gd if gd is not None else "–", 9, MUTED, "middle"))
+    body.append(f'<line x1="{x0-4}" y1="{base}" x2="{x0+len(r)*27}" y2="{base}" stroke="{LINE}"/>')
+    body.append(text(x0, base + 50, "Second row under each letter: its value in the Golden Dawn Enochian gematria (reference only).", 11, MUTED))
+    body.append(text(x0, base + 66, "The top letters A, O, N, H, L, D… spell no attested name (tested up to 8 letters against a null).", 11, MUTED))
+    return svg("fig_letter_counts", x0 * 2 + len(r) * 27, 340, "Every letter of the Loagaeth, counted",
+               "Occurrences in the dense tables 2–48. A alone is 19% of the text.", body)
+
+
+# ---------------------------------------------------------------- 12. letters by segment (heat table)
+def fig_letters_segments():
+    sh = res("16_letters")["E_segments"]["shares_percent"]
+    segs = list(sh)
+    lab = {"opening_2_5": "opening 2–5", "heartland_6_25": "heartland 6–25", "diamonds_29_43": "diamonds 29–43", "end_44_48": "end 44–48"}
+    letters = list(sh[segs[0]])
+    x0, y0, cw, ch = 120, 70, 28, 24
+    body = []
+    vmax = max(v for s in segs for v in sh[s].values())
+    for j, L in enumerate(letters):
+        body.append(text(x0 + j * cw + cw / 2, y0 - 6, L, 12, INK, "middle", 600))
+    for i, s in enumerate(segs):
+        body.append(text(x0 - 8, y0 + i * ch + 16, lab.get(s, s), 12, INK, "end"))
+        for j, L in enumerate(letters):
+            v = sh[s][L]
+            a = 0.08 + 0.92 * (v / vmax) ** 0.6
+            body.append(f'<rect x="{x0+j*cw}" y="{y0+i*ch}" width="{cw-2}" height="{ch-2}" rx="2" fill="{P6}" fill-opacity="{a:.2f}"/>')
+            body.append(text(x0 + j * cw + cw / 2, y0 + i * ch + 15, f"{v:.0f}" if v >= 1 else f"{v:.1f}", 9,
+                             "#FFFFFF" if a > 0.55 else INK, "middle"))
+    s16 = res("16_letters")["E_segments"]
+    body.append(text(24, y0 + 4 * ch + 26, f"Letter mix differs by segment far beyond chance (χ² {s16['chi2']} vs tables shuffled ≤ {s16['null_max']}).", 12, MUTED))
+    body.append(text(24, y0 + 4 * ch + 44, "Watch A and U: in the end segment A falls from ~20% to ~6% and U rises to ~10% — the U register.", 12, MUTED))
+    return svg("fig_letters_by_segment", x0 + len(letters) * cw + 30, y0 + 4 * ch + 64, "Each realm has its own letter mix",
+               "Share (%) of each letter inside each segment of the book.", body)
+
+
+# ---------------------------------------------------------------- 13. U register
+def fig_u_register():
+    u = res("16_letters")["F_u_register"]
+    ov = u["overlap_with_heartland"]
+    items = [("as written", ov["as_is"], GRAY), ("A→E", ov["A->E"], GRAY2), ("A→I", ov["A->I"], GRAY2),
+             ("A→O", ov["A->O"], GRAY2), ("A→U", ov["A->U"], P6)]
+    mx = max(v for _, v, _ in items)
+    body, x0 = [], 150
+    for i, (lab, v, c) in enumerate(items):
+        y = 74 + i * 30
+        body.append(text(24, y + 15, lab, 12, INK))
+        body.append(rect(x0, y + 3, v / mx * 300, 18, c, 3))
+        body.append(text(x0 + v / mx * 300 + 6, y + 17, v, 11, INK))
+    body.append(text(24, 246, "Recurring 5-grams of the end tables (44–48) also found in the heartland (6–25):", 12, INK))
+    ex = u["examples"][:8]
+    for i, e in enumerate(ex):
+        body.append(text(24 + (i % 4) * 150, 270 + (i // 4) * 20, f"{e['heartland']} → {e['end']}", 12, "#3C3489"))
+    return svg("fig_u_register", 640, 320, "The end of the book speaks the heartland's names in a U register",
+               "Only replacing A by U brings the two segments together; other vowel swaps push them apart.", body)
+
+
+# ---------------------------------------------------------------- 14. row edges
+def fig_row_edges():
+    d = res("16_letters")["D_space"]
+    st, en = d["row_start_enrichment"][:5], d["row_end_enrichment"][:5]
+    mx = max(v for _, v in st + en)
+    body = [text(24, 76, "first letter of a row", 12, INK, weight=600), text(340, 76, "last letter of a row", 12, INK, weight=600)]
+    for i, (L, v) in enumerate(st):
+        y = 86 + i * 28
+        body.append(text(24, y + 15, L, 13, INK, weight=600))
+        body.append(rect(44, y + 3, v / mx * 230, 18, P6, 3))
+        body.append(text(50 + v / mx * 230, y + 17, f"{v}×", 11, INK))
+    for i, (L, v) in enumerate(en):
+        y = 86 + i * 28
+        body.append(text(340, y + 15, L, 13, INK, weight=600))
+        body.append(rect(360, y + 3, v / mx * 230, 18, TEAL, 3))
+        body.append(text(366 + v / mx * 230, y + 17, f"{v}×", 11, INK))
+    body.append(text(24, 246, "Ratio vs the same letter in the middle of rows. Rows open with onsets and close with terminators:", 12, MUTED))
+    body.append(text(24, 262, "the 49-letter lines follow word boundaries. Away from the edges, left and right are alike.", 12, MUTED))
+    return svg("fig_row_edges", 640, 280, "Rows start and end on word boundaries",
+               "Full 49×49 grids, tables 2–25.", body)
+
+
+# ---------------------------------------------------------------- 15. the 7x7 plan of the book
+def fig_plan_7x7():
+    seg = {}
+    for t in range(1, 50):
+        if t == 1:
+            seg[t] = ("prophecy", GRAY)
+        elif t <= 5:
+            seg[t] = ("opening", GREEN)
+        elif t <= 25:
+            seg[t] = ("CHASTOR heartland", P6)
+        elif t <= 28:
+            seg[t] = ("noise", CORAL)
+        elif t <= 43:
+            seg[t] = ("diamonds", TEAL)
+        elif t <= 48:
+            seg[t] = ("end · U register", BLUE)
+        else:
+            seg[t] = ("missing", "#F1EFE8")
+    x0, y0, cs = 160, 74, 44
+    body = []
+    for w in range(7):
+        body.append(text(x0 - 10, y0 + w * cs + 27, f"week {w+1}", 12, MUTED, "end"))
+        for p in range(7):
+            t = w * 7 + p + 1
+            nm, c = seg[t]
+            body.append(rect(x0 + p * cs, y0 + w * cs, cs - 4, cs - 4, c, 4, "#C3C2B7" if t == 49 else None))
+            body.append(text(x0 + p * cs + (cs - 4) / 2, y0 + w * cs + 25, t, 12,
+                             "#FFFFFF" if c in (P6, TEAL, BLUE, CORAL) else INK, "middle", 600 if t == 25 else 400))
+    c25x, c25y = x0 + 3 * cs, y0 + 3 * cs
+    body.append(f'<rect x="{c25x-3}" y="{c25y-3}" width="{cs+2}" height="{cs+2}" rx="6" fill="none" stroke="{AMBER}" stroke-width="2.5"/>')
+    lx = x0 + 7 * cs + 20
+    seen = []
+    for t in range(1, 50):
+        if seg[t] not in seen:
+            seen.append(seg[t])
+    for i, (nm, c) in enumerate(seen):
+        body.append(rect(lx, y0 + i * 24, 12, 12, c, 2))
+        body.append(text(lx + 18, y0 + i * 24 + 11, nm, 12, MUTED))
+    body.append(text(lx, y0 + len(seen) * 24 + 16, "gold frame: table 25,", 12, AMBER))
+    body.append(text(lx, y0 + len(seen) * 24 + 32, "centre of the plan", 12, AMBER))
+    return svg("fig_plan_7x7", lx + 180, y0 + 7 * cs + 30, "The 49 tables on the 7×7 plan",
+               "CHASTOR's heartland ends at the exact centre; the 45° format begins with week 5.", body)
+
+
+# ---------------------------------------------------------------- 16. the two houses
+def fig_houses():
+    k = res("17_kingdom")["D_correlation_zone"]
+    dens = k["house_density_per_1000_letters"]
+    segs = ["opening", "heartland", "diamonds", "end"]
+    hn = [("ADNOCHA", P6), ("NOCHAPH", P4), ("NODAX", P2), ("ALGETH", TEAL), ("ACLAX", "#5DCAA5")]
+    mx = max(dens[n][s] for n, _ in hn for s in segs) or 1
+    body, x0, base = [], 50, 230
+    for si, s in enumerate(segs):
+        gx = x0 + si * 140
+        for ni, (n, c) in enumerate(hn):
+            v = dens[n][s]
+            h = v / mx * 140
+            body.append(rect(gx + ni * 22, base - h, 18, max(h, 1), c, 2))
+        body.append(text(gx + 52, base + 18, s, 12, INK, "middle"))
+    body.append(f'<line x1="{x0-4}" y1="{base}" x2="{x0+560}" y2="{base}" stroke="{LINE}"/>')
+    body += legend(50, 274, [(c, n) for n, c in hn])
+    hw = k["houses_within_segments"]
+    a = hw["ADNOCHA~ACLAX"]
+    body.append(text(50, 302, f"Beyond overall density they exclude each other table by table — ADNOCHA × ACLAX r = {a['heartland_6_25']['r']} "
+                              f"(heartland), {a['diamonds_29_43']['r']} (diamonds).", 11, MUTED))
+    body.append(text(50, 318, "Purple = NOCHA house, green = GETH/ACLAX house. Bars: occurrences per 1000 letters in each segment.", 11, MUTED))
+    return svg("fig_two_houses", 660, 336, "Two houses that alternate across the tables",
+               "The NOCHA house leads the first half; the GETH/ACLAX house holds or grows in the second.", body)
+
+
 FIGURES = [fig_territory, fig_digits, fig_head_regime, fig_nesting, fig_hive, fig_series, fig_letter_grammar,
-           fig_book_formats, fig_diamond, fig_doubled]
+           fig_book_formats, fig_diamond, fig_doubled, fig_letter_counts, fig_letters_segments, fig_u_register,
+           fig_row_edges, fig_plan_7x7, fig_houses]
 
 
 def run():

@@ -1,0 +1,95 @@
+{
+ "types_3plus": 11375,
+ "match_lexicon": 3,
+ "pseudowords_mean": 4.6,
+ "pseudowords_max": 11,
+ "words": [
+  {
+   "word": "ZURAH",
+   "occurrences": 3,
+   "leaves": 3,
+   "glosas": [
+    "Zure (zur-AY)",
+    "nla",
+    "Z1iresch (zur-ESK)"
+   ],
+   "contexto": {
+    "antes": [
+     [
+      "ADRIOHA",
+      1
+     ],
+     [
+      "GEHUDACHAN",
+      1
+     ],
+     [
+      "PHIANTASA",
+      1
+     ]
+    ],
+    "depois": [
+     [
+      "OXARDAUAX",
+      1
+     ],
+     [
+      "PRICLAIZACH",
+      1
+     ],
+     [
+      "ZINACLIA",
+      1
+     ]
+    ]
+   }
+  },
+  {
+   "word": "ROR",
+   "occurrences": 1,
+   "leaves": 1,
+   "glosas": [
+    "the sonne",
+    "Sol"
+   ],
+   "contexto": {
+    "antes": [
+     [
+      "NOXALDAX",
+      1
+     ]
+    ],
+    "depois": [
+     [
+      "ARGETH",
+      1
+     ]
+    ]
+   }
+  },
+  {
+   "word": "LAIAD",
+   "occurrences": 1,
+   "leaves": 1,
+   "glosas": [
+    "the secrets of truth",
+    "Note",
+    "Compare from Loagaeth"
+   ],
+   "contexto": {
+    "antes": [
+     [
+      "LUCNDNCAH",
+      1
+     ]
+    ],
+    "depois": [
+     [
+      "GRPNNX",
+      1
+     ]
+    ]
+   }
+  }
+ ]
+}

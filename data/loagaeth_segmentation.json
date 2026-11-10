@@ -1,0 +1,32 @@
+{
+ "evaluation": {
+  "modelo": {
+   "precision": 0.414,
+   "recall": 0.503,
+   "F1": 0.454
+  },
+  "cortes_aleatorios": {
+   "precision": 0.092,
+   "recall": 0.092,
+   "F1": 0.092
+  },
+  "so_letras_sem_tamanho": {
+   "precision": 0.337,
+   "recall": 0.569,
+   "F1": 0.423
+  },
+  "parametros": {
+   "alpha": 1000000000.0,
+   "peso_tamanho": 1.0
+  },
+  "linhas_de_teste": 37,
+  "cortes_de_dee_no_teste": 153
+ },
+ "test_leaves": [
+  "4a",
+  "4b",
+  "5a"
+ ],
+ "train_words": 862,
+ "leaf1": 3672
+}

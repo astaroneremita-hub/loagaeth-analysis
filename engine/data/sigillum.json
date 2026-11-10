@@ -1,0 +1,1965 @@
+{
+ "titulo": "Sigillum Dei Aemeth (Sloane MS 3188, Liber II, 1582)",
+ "fontes": [
+  {
+   "id": "JDPP_SECUNDUS",
+   "tipo": "transcricao/reconstrucao eletronica do manuscrito",
+   "manuscrito": "British Library, Sloane MS 3188, 'Mysteriorum Liber Secundus' (acoes de 19 a 21 de marco de 1582)",
+   "editor": "Clay Holden / John Dee Publication Project (1996); segue a grafia de Dee; lacunas preenchidas por Ashmole (Sloane 3677)",
+   "url": "http://www.john-dee.org/Secundus.pdf",
+   "sha256": "6c34e0c6710a86eb19e67112e9c2cf30e1581d469e5f5001d1ea1d16a35df0d2",
+   "paginas_usadas": "pp. 4-28 (texto) e p. 29 do PDF impresso = pag. 31 do arquivo (desenho completo do selo)"
+  },
+  {
+   "id": "JDPP_SDA",
+   "tipo": "desenho do selo (mesma reconstrucao)",
+   "url": "http://www.john-dee.org/SDA.pdf",
+   "sha256": "b10934644b672fe606181c070b7c6d46b875ca61aaa75b7e5ef8bb1738774d8c"
+  },
+  {
+   "id": "JDPP_INDEX",
+   "tipo": "pagina de indice do projeto",
+   "url": "https://john-dee.org/"
+  },
+  {
+   "id": "JHP_AEMETHD",
+   "tipo": "desenho do selo por Joseph H. Peterson (ligado em sl3188.htm como 'The Form of the Sigillum DEI EMETH')",
+   "url": "http://www.esotericarchives.com/dee/aemethd.jpg",
+   "sha256": "65425441b6625123ee63de3947477a29b18af1d1badfb78cf9bb686fa30972d8",
+   "uso": "segundo testemunho para conferencia visual (resolucao 1600x1600 px)"
+  },
+  {
+   "id": "JHP_SL3188_SUMARIO",
+   "tipo": "sumario da edicao de Peterson (sem o texto completo)",
+   "url": "http://www.esotericarchives.com/dee/sl3188.htm"
+  },
+  {
+   "id": "JHP_HM",
+   "tipo": "transcricao de De Heptarchia Mystica (Sloane 3191), citacoes de 1582-1583 sobre o selo",
+   "url": "http://www.esotericarchives.com/dee/hm.htm",
+   "sha256": "9cabad394066eed677a5abce8d0248f265d9609d1c5924c1a29898fbe18959cd"
+  }
+ ],
+ "convencoes": {
+  "indices": "linhas e colunas 1-based; anel externo 0-based (0 = T no topo)",
+  "sentido_anel": "indice crescente = 'para a mao direita' na regra de Dee = sentido horario no desenho com T no topo",
+  "numero_acima_abaixo": "'acima' = lado externo da casa ('over' de Dee); 'abaixo' = lado interno ('under')",
+  "ponto": "'ponto' = o prick de Dee junto a um numero; segundo Uriel, indica se o numero deve ser procurado acima ou abaixo da letra no circulo maior",
+  "grafia": "letras como em Dee (maiusculas/minusculas do desenho); u/v e i/j sem normalizar",
+  "omega": "ω = omega grego da casa 39"
+ },
+ "anel_externo_40": {
+  "descricao": "circulo externo dividido em 40 partes (primeiro em 4, depois cada uma em 10); cada casa recebeu de uma das 40 criaturas uma letra e, na maioria, um numero",
+  "agrupamento_relatado": "as 40 criaturas estavam em 8 companhias de 5",
+  "casas": [
+   {
+    "i": 0,
+    "letra": "T",
+    "numero": 4,
+    "posicao_numero": "acima"
+   },
+   {
+    "i": 1,
+    "letra": "G",
+    "numero": 9,
+    "posicao_numero": "acima"
+   },
+   {
+    "i": 2,
+    "letra": "n",
+    "numero": 7,
+    "posicao_numero": "acima"
+   },
+   {
+    "i": 3,
+    "letra": "t",
+    "numero": 9,
+    "posicao_numero": "abaixo"
+   },
+   {
+    "i": 4,
+    "letra": "h",
+    "numero": 22,
+    "posicao_numero": "acima"
+   },
+   {
+    "i": 5,
+    "letra": "n",
+    "numero": null,
+    "posicao_numero": null
+   },
+   {
+    "i": 6,
+    "letra": "m",
+    "numero": 6,
+    "posicao_numero": "acima"
+   },
+   {
+    "i": 7,
+    "letra": "o",
+    "numero": 22,
+    "posicao_numero": "acima"
+   },
+   {
+    "i": 8,
+    "letra": "a",
+    "numero": 20,
+    "posicao_numero": "acima",
+    "nota": "relato: 22 acima; nota marginal: corrigido por Uriel para 20"
+   },
+   {
+    "i": 9,
+    "letra": "n",
+    "numero": 14,
+    "posicao_numero": "acima"
+   },
+   {
+    "i": 10,
+    "letra": "a",
+    "numero": 6,
+    "posicao_numero": "acima"
+   },
+   {
+    "i": 11,
+    "letra": "h",
+    "numero": null,
+    "posicao_numero": null
+   },
+   {
+    "i": 12,
+    "letra": "o",
+    "numero": 18,
+    "posicao_numero": "acima"
+   },
+   {
+    "i": 13,
+    "letra": "l",
+    "numero": 26,
+    "posicao_numero": "acima"
+   },
+   {
+    "i": 14,
+    "letra": "l",
+    "numero": 30,
+    "posicao_numero": "abaixo"
+   },
+   {
+    "i": 15,
+    "letra": "n",
+    "numero": null,
+    "posicao_numero": null
+   },
+   {
+    "i": 16,
+    "letra": "l",
+    "numero": 8,
+    "posicao_numero": "abaixo"
+   },
+   {
+    "i": 17,
+    "letra": "G",
+    "numero": 7,
+    "posicao_numero": "acima"
+   },
+   {
+    "i": 18,
+    "letra": "r",
+    "numero": 13,
+    "posicao_numero": "acima"
+   },
+   {
+    "i": 19,
+    "letra": "H",
+    "numero": 12,
+    "posicao_numero": "abaixo",
+    "nota": "relato (texto de Holden): 'under it 22'; selo final (Holden e Peterson): 12 abaixo"
+   },
+   {
+    "i": 20,
+    "letra": "og",
+    "numero": null,
+    "posicao_numero": null,
+    "nota": "letra composta 'og' numa so casa (coracao com o e g 'per pale'); Michael manda ler 'og' e nao 'go'"
+   },
+   {
+    "i": 21,
+    "letra": "y",
+    "numero": 15,
+    "posicao_numero": "abaixo",
+    "nota": "relato: y com 15 abaixo; mandado para 'o lugar anterior' (troca de ordem com o t seguinte)"
+   },
+   {
+    "i": 22,
+    "letra": "t",
+    "numero": 11,
+    "posicao_numero": "abaixo",
+    "nota": "relato: t com 11 abaixo, mostrado antes do y; mandado para 'o segundo lugar'"
+   },
+   {
+    "i": 23,
+    "letra": "o",
+    "numero": 8,
+    "posicao_numero": "abaixo"
+   },
+   {
+    "i": 24,
+    "letra": "e",
+    "numero": 21,
+    "posicao_numero": "abaixo"
+   },
+   {
+    "i": 25,
+    "letra": "b",
+    "numero": 10,
+    "posicao_numero": "acima"
+   },
+   {
+    "i": 26,
+    "letra": "A",
+    "numero": 11,
+    "posicao_numero": "acima"
+   },
+   {
+    "i": 27,
+    "letra": "I",
+    "numero": 15,
+    "posicao_numero": "acima"
+   },
+   {
+    "i": 28,
+    "letra": "a",
+    "numero": 8,
+    "posicao_numero": "acima"
+   },
+   {
+    "i": 29,
+    "letra": "r",
+    "numero": 16,
+    "posicao_numero": "abaixo",
+    "nota": "relato: '16 over it'; selo final (Holden): 16 abaixo"
+   },
+   {
+    "i": 30,
+    "letra": "n",
+    "numero": null,
+    "posicao_numero": null
+   },
+   {
+    "i": 31,
+    "letra": "A",
+    "numero": 6,
+    "posicao_numero": "acima",
+    "nota": "mostrador exibiu 666 em triangulo; no selo final fica um 6 acima do A"
+   },
+   {
+    "i": 32,
+    "letra": "o",
+    "numero": 10,
+    "posicao_numero": "abaixo"
+   },
+   {
+    "i": 33,
+    "letra": "G",
+    "numero": 5,
+    "posicao_numero": "acima"
+   },
+   {
+    "i": 34,
+    "letra": "h",
+    "numero": 14,
+    "posicao_numero": "abaixo"
+   },
+   {
+    "i": 35,
+    "letra": "o",
+    "numero": 17,
+    "posicao_numero": "abaixo"
+   },
+   {
+    "i": 36,
+    "letra": "s",
+    "numero": null,
+    "posicao_numero": null,
+    "nota": "Dee: e uma letra (s) e tambem o numero 5; Holden desenha um glifo em forma de 5, Peterson desenha 's'. Casa suprida depois por Uriel (o vidente omitira)"
+   },
+   {
+    "i": 37,
+    "letra": "a",
+    "numero": 5,
+    "posicao_numero": "abaixo"
+   },
+   {
+    "i": 38,
+    "letra": "a",
+    "numero": 24,
+    "posicao_numero": "abaixo"
+   },
+   {
+    "i": 39,
+    "letra": "ω",
+    "numero": 6,
+    "posicao_numero": "acima",
+    "nota": "omega grego (w); o 6 vem dos tres 6 (666) do mostrador da casa 31, dos quais Michael apagou os dois de baixo"
+   }
+  ],
+  "ordem_de_revelacao": {
+   "descricao": "indice final de cada casa na ordem em que as criaturas apareceram (so o par 21/22 difere)",
+   "indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    22,
+    21,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39
+   ]
+  },
+  "regra_de_leitura_declarada": {
+   "fonte": "Michael, Sloane 3188 (Liber II), 20 mar 1582",
+   "resumo_proprio": "comecar numa letra; numero acima = andar esse numero de casas para a direita (horario), numero abaixo = andar para a esquerda; contar a partir da casa atual exclusive; repetir ate cair numa letra sem numero, que fecha o nome. Quando aparecem dois 'a' seguidos no meio do nome, o primeiro nao entra no nome. Michael reordenou os nomes obtidos por Dee.",
+   "ordem_final_dos_nomes": [
+    "Galas",
+    "Gethog",
+    "Thaoth",
+    "Horlwn",
+    "Innon",
+    "Aaoth",
+    "Galethog"
+   ],
+   "grafia_dee_horlwn": "Horlωn (com omega)",
+   "primeira_tentativa_de_dee": [
+    "ThAaoth",
+    "Galaas",
+    "Gethog",
+    "Horlwn",
+    "Innon",
+    "Aaoth",
+    "Galetsog (corrigido para Galethog)"
+   ],
+   "partida_de_cada_nome": {
+    "Galas": 1,
+    "Gethog": 17,
+    "Thaoth": 0,
+    "Horlwn": 19,
+    "Innon": 27,
+    "Aaoth": 31,
+    "Galethog": 33
+   },
+   "nota": "os pontos de partida nao sao dados por Dee; sao casas a partir das quais a regra reproduz cada nome (conferido no script). Aaoth tambem sai partindo da casa 26 (o A do meio de ThAaoth)"
+  }
+ },
+ "angulos_7": {
+  "descricao": "7 letras com cruzes nas 7 pontas entre o circulo e o heptagono externo, mostradas em placas em forma de segmento de circulo; ordem 'da direita para a esquerda' (no desenho de Holden: anti-horario a partir da ponta superior esquerda)",
+  "letras": [
+   {
+    "ordem": 1,
+    "letra": "G",
+    "numero": 5,
+    "marca": "cruz acima"
+   },
+   {
+    "ordem": 2,
+    "letra": "A",
+    "numero": 24,
+    "marca": "cruz junto"
+   },
+   {
+    "ordem": 3,
+    "letra": "L",
+    "numero": 30,
+    "marca": "cruz junto (forma +oL)"
+   },
+   {
+    "ordem": 4,
+    "letra": "E",
+    "numero": 21,
+    "marca": "X junto (forma XE)"
+   },
+   {
+    "ordem": 5,
+    "letra": "T",
+    "numero": 9,
+    "marca": "T com circulo/cruz"
+   },
+   {
+    "ordem": 6,
+    "letra": "H",
+    "numero": 14,
+    "marca": "cruz acima"
+   },
+   {
+    "ordem": 7,
+    "letra": "OG",
+    "numero": null,
+    "marca": "letra composta dentro de circulo com cruz"
+   }
+  ],
+  "leitura": "GALETHOG (identificado por Dee e confirmado por Uriel); os numeros remetem ao circulo superior"
+ },
+ "tabela_dos_cestos_49": {
+  "descricao": "7 cestos de ouro, cada um com uma ave que mostrou 7 letras; 48 letras + 1 cruz = 49; ocupa a faixa do heptagono externo (7 lados x 7 casas)",
+  "linhas": [
+   {
+    "cesto": 1,
+    "ave": "ave branca como pomba (7 penas no peito)",
+    "letras": [
+     "Z",
+     "l",
+     "l",
+     "R",
+     "H",
+     "i",
+     "a"
+    ]
+   },
+   {
+    "cesto": 2,
+    "ave": "ave branca do tamanho de um cisne",
+    "letras": [
+     "a",
+     "Z",
+     "C",
+     "a",
+     "a",
+     "c",
+     "b"
+    ]
+   },
+   {
+    "cesto": 3,
+    "ave": "ave verde como pavao",
+    "letras": [
+     "p",
+     "a",
+     "u",
+     "p",
+     "n",
+     "h",
+     "r"
+    ]
+   },
+   {
+    "cesto": 4,
+    "ave": "ave como grifo, vermelha, escamas de latao",
+    "letras": [
+     "h",
+     "d",
+     "m",
+     "h",
+     "i",
+     "a",
+     "i"
+    ]
+   },
+   {
+    "cesto": 5,
+    "ave": "aguia dourada (circulo de penas: 12 quadrados entre 4 paralelas + 1 no topo)",
+    "letras": [
+     "k",
+     "k",
+     "a",
+     "a",
+     "e",
+     "e",
+     "e"
+    ]
+   },
+   {
+    "cesto": 6,
+    "ave": "fenix ou pelicano (quadrangulo de penas; cesto aberto por Uriel)",
+    "letras": [
+     "i",
+     "i",
+     "e",
+     "e",
+     "l",
+     "l",
+     "l"
+    ]
+   },
+   {
+    "cesto": 7,
+    "ave": "ave estranha de muitas asas (tabuleta circular na testa)",
+    "letras": [
+     "e",
+     "e",
+     "l",
+     "l",
+     "M",
+     "G",
+     "+"
+    ]
+   }
+  ],
+  "regra_declarada": "Uriel: escrever as letras de 7 em 7 e ler 'de cima para baixo' comecando pela primeira (colunas lidas em sequencia continua)",
+  "leitura_de_dee": [
+   "Zaphkiel",
+   "Zadkiel",
+   "Cumael",
+   "Raphael",
+   "Haniel",
+   "Michael",
+   "Gabriel"
+  ],
+  "notas": [
+   "Dee: 48 letras e uma cruz que faz a 49a",
+   "Dee: cada letra contem 72 virtudes; 72 x 48 = 3456 (conta de Dee na margem)",
+   "nota marginal de Dee: Michael era o sexto nome",
+   "no selo, a linha do cesto n fica no lado n do heptagono externo, a partir do lado superior direito em sentido horario (desenho de Holden)"
+  ]
+ },
+ "tabela_7x7": {
+  "descricao": "tabela quadrada de 7 revelada por 7 companhias de 7 pilares (21 mar 1582) e 'aperfeicoada' em seguida; dela saem os 7 nomes de Deus, os 7 anjos e as 4 familias",
+  "celulas": [
+   [
+    {
+     "letra": "S",
+     "linha": 1,
+     "coluna": 1
+    },
+    {
+     "letra": "A",
+     "linha": 1,
+     "coluna": 2
+    },
+    {
+     "letra": "A",
+     "linha": 1,
+     "coluna": 3
+    },
+    {
+     "letra": "I",
+     "numeros": [
+      21,
+      8
+     ],
+     "ponto": "abaixo",
+     "ponto_no_numero": 8,
+     "linha": 1,
+     "coluna": 4
+    },
+    {
+     "letra": "E",
+     "linha": 1,
+     "coluna": 5
+    },
+    {
+     "letra": "M",
+     "linha": 1,
+     "coluna": 6
+    },
+    {
+     "letra": "E",
+     "numeros": [
+      8
+     ],
+     "ponto": "abaixo",
+     "ponto_no_numero": 8,
+     "linha": 1,
+     "coluna": 7
+    }
+   ],
+   [
+    {
+     "letra": "B",
+     "linha": 2,
+     "coluna": 1
+    },
+    {
+     "letra": "T",
+     "linha": 2,
+     "coluna": 2
+    },
+    {
+     "letra": "Z",
+     "linha": 2,
+     "coluna": 3
+    },
+    {
+     "letra": "K",
+     "linha": 2,
+     "coluna": 4
+    },
+    {
+     "letra": "A",
+     "linha": 2,
+     "coluna": 5
+    },
+    {
+     "letra": "S",
+     "linha": 2,
+     "coluna": 6
+    },
+    {
+     "letra": "E",
+     "numeros": [
+      30
+     ],
+     "ponto": "abaixo",
+     "ponto_no_numero": 30,
+     "linha": 2,
+     "coluna": 7
+    }
+   ],
+   [
+    {
+     "letra": "H",
+     "linha": 3,
+     "coluna": 1
+    },
+    {
+     "letra": "E",
+     "linha": 3,
+     "coluna": 2
+    },
+    {
+     "letra": "I",
+     "linha": 3,
+     "coluna": 3
+    },
+    {
+     "letra": "D",
+     "linha": 3,
+     "coluna": 4
+    },
+    {
+     "letra": "E",
+     "linha": 3,
+     "coluna": 5
+    },
+    {
+     "letra": "N",
+     "linha": 3,
+     "coluna": 6
+    },
+    {
+     "letra": "E",
+     "linha": 3,
+     "coluna": 7
+    }
+   ],
+   [
+    {
+     "letra": "D",
+     "linha": 4,
+     "coluna": 1
+    },
+    {
+     "letra": "E",
+     "linha": 4,
+     "coluna": 2
+    },
+    {
+     "letra": "I",
+     "linha": 4,
+     "coluna": 3
+    },
+    {
+     "letra": "M",
+     "linha": 4,
+     "coluna": 4
+    },
+    {
+     "letra": "O",
+     "linha": 4,
+     "coluna": 5
+    },
+    {
+     "letra": null,
+     "numeros": [
+      30
+     ],
+     "ponto": "abaixo",
+     "ponto_no_numero": 30,
+     "linha": 4,
+     "coluna": 6
+    },
+    {
+     "letra": "A",
+     "linha": 4,
+     "coluna": 7
+    }
+   ],
+   [
+    {
+     "letra": "I",
+     "numeros": [
+      26
+     ],
+     "ponto": "acima",
+     "ponto_no_numero": 26,
+     "linha": 5,
+     "coluna": 1
+    },
+    {
+     "letra": "M",
+     "linha": 5,
+     "coluna": 2
+    },
+    {
+     "letra": "E",
+     "linha": 5,
+     "coluna": 3
+    },
+    {
+     "letra": "G",
+     "linha": 5,
+     "coluna": 4
+    },
+    {
+     "letra": "C",
+     "linha": 5,
+     "coluna": 5
+    },
+    {
+     "letra": "B",
+     "linha": 5,
+     "coluna": 6
+    },
+    {
+     "letra": "E",
+     "linha": 5,
+     "coluna": 7
+    }
+   ],
+   [
+    {
+     "letra": "I",
+     "linha": 6,
+     "coluna": 1
+    },
+    {
+     "letra": "L",
+     "linha": 6,
+     "coluna": 2
+    },
+    {
+     "letra": "A",
+     "linha": 6,
+     "coluna": 3
+    },
+    {
+     "letra": "O",
+     "linha": 6,
+     "coluna": 4
+    },
+    {
+     "letra": "I",
+     "numeros": [
+      21,
+      8
+     ],
+     "ponto": "abaixo",
+     "ponto_no_numero": 8,
+     "linha": 6,
+     "coluna": 5
+    },
+    {
+     "letra": "V",
+     "linha": 6,
+     "coluna": 6
+    },
+    {
+     "letra": "N",
+     "linha": 6,
+     "coluna": 7
+    }
+   ],
+   [
+    {
+     "letra": "I",
+     "linha": 7,
+     "coluna": 1
+    },
+    {
+     "letra": "H",
+     "linha": 7,
+     "coluna": 2
+    },
+    {
+     "letra": "R",
+     "linha": 7,
+     "coluna": 3
+    },
+    {
+     "letra": "L",
+     "linha": 7,
+     "coluna": 4
+    },
+    {
+     "letra": "A",
+     "linha": 7,
+     "coluna": 5
+    },
+    {
+     "letra": "A",
+     "linha": 7,
+     "coluna": 6
+    },
+    {
+     "letra": null,
+     "numeros": [
+      21,
+      8
+     ],
+     "ponto": "abaixo",
+     "ponto_no_numero": 8,
+     "linha": 7,
+     "coluna": 7
+    }
+   ]
+  ],
+  "linhas_texto": [
+   "SAAI[21/8.]EME[8.]",
+   "BTZKASE[30.]",
+   "HEIDENE",
+   "DEIMO[30.]A",
+   "I[26']MEGCBE",
+   "ILAOI[21/8.]VN",
+   "IHRLAA[21/8.]"
+  ],
+  "notacao_linhas_texto": "[21/8.] = 21 sobre 8 com ponto abaixo do 8; [30.] = 30 com ponto abaixo; [26'] = 26 com ponto acima",
+  "valor_das_anotacoes_declarado": {
+   "valores": {
+    "21": "e",
+    "8": "l"
+   },
+   "texto": "21 = e; 8 com ponto abaixo = l; 21 sobre 8 = El (as duas letras compostas numa so)",
+   "fonte": "Uriel, 21 mar 1582",
+   "nota": "30 e 26 nao tem valor declarado; o script os resolve pelo anel externo (casa com esse numero na posicao indicada pelo ponto)"
+  },
+  "uso_declarado_das_anotacoes": [
+   "o 30 junto ao E da 2a linha (canto superior direito) 'serve para outro proposito' e nao para as primeiras filhas",
+   "o 26 junto ao I 'serve para outro proposito', nao para as filhas das filhas",
+   "os nomes no Grande Selo devem seguir a ortografia desta tabela"
+  ],
+  "rascunho_vs_final": [
+   {
+    "celula": [
+     1,
+     5
+    ],
+    "rascunho": "M",
+    "final": "E",
+    "como": "M riscado, E escrito acima"
+   },
+   {
+    "celula": [
+     1,
+     6
+    ],
+    "rascunho": "E",
+    "final": "M",
+    "como": "E riscado, M escrito acima"
+   },
+   {
+    "celula": [
+     6,
+     2
+    ],
+    "rascunho": "A",
+    "final": "L",
+    "como": "A riscado, L acima"
+   },
+   {
+    "celula": [
+     6,
+     3
+    ],
+    "rascunho": "L",
+    "final": "A",
+    "como": "L riscado, A acima"
+   },
+   {
+    "celula": [
+     6,
+     6
+    ],
+    "rascunho": "21/8 (anotacao numerica)",
+    "final": "V",
+    "como": "numero riscado, V escrito; nota marginal de Dee: um V fora omitido por descuido"
+   }
+  ],
+  "frases_ao_lado_das_linhas": [
+   "Vivit in caelis",
+   "Deus noster",
+   "Dux noster",
+   "Hic est",
+   "Lux in aeternum",
+   "Finis est",
+   "Vera est haec tabula"
+  ]
+ },
+ "nomes_de_deus_7": {
+  "regra_declarada": "Uriel: os 7 nomes que vao da esquerda para a direita (as linhas) sao nomes de Deus nao conhecidos dos anjos, que nao podem ser falados nem lidos pelo homem",
+  "nomes": [
+   {
+    "linha": 1,
+    "com_anotacoes": "SAAI[21/8.]EME[8.]"
+   },
+   {
+    "linha": 2,
+    "com_anotacoes": "BTZKASE[30.]"
+   },
+   {
+    "linha": 3,
+    "com_anotacoes": "HEIDENE"
+   },
+   {
+    "linha": 4,
+    "com_anotacoes": "DEIMO[30.]A"
+   },
+   {
+    "linha": 5,
+    "com_anotacoes": "I[26']MEGCBE"
+   },
+   {
+    "linha": 6,
+    "com_anotacoes": "ILAOI[21/8.]VN"
+   },
+   {
+    "linha": 7,
+    "com_anotacoes": "IHRLAA[21/8.]"
+   }
+  ],
+  "no_selo": "escritos nos 7 lados internos do heptagono externo (desenho de Holden e de Peterson)"
+ },
+ "anjos_7": {
+  "regra_declarada": "Uriel: comecar no canto superior esquerdo, depois a casa a direita na linha de cima, depois a de baixo da primeira, depois a 3a da linha de cima e descer em diagonal para a esquerda, e assim por diante (anti-diagonais lidas de cima-direita para baixo-esquerda, como uma sequencia continua de 49 casas)",
+  "papel_declarado": "anjos dos 7 circulos do ceu, que governam as luzes dos 7 circulos e estao diante de Deus",
+  "anjos": [
+   {
+    "nome_dee": "Zabathiel",
+    "leitura_da_tabela": "SABATHIEL",
+    "caminho": [
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      1,
+      4
+     ]
+    ]
+   },
+   {
+    "nome_dee": "Zedekieil",
+    "leitura_da_tabela": "ZEDEKIEIL",
+    "caminho": [
+     [
+      2,
+      3
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      5,
+      1
+     ]
+    ]
+   },
+   {
+    "nome_dee": "Madimiel",
+    "leitura_da_tabela": "MADIMIEL",
+    "caminho": [
+     [
+      1,
+      6
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      1,
+      7
+     ]
+    ]
+   },
+   {
+    "nome_dee": "Semeliel",
+    "leitura_da_tabela": "SEMELIEL",
+    "caminho": [
+     [
+      2,
+      6
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      6,
+      2
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      2,
+      7
+     ]
+    ]
+   },
+   {
+    "nome_dee": "Nogahel",
+    "leitura_da_tabela": "NOGAHEL",
+    "caminho": [
+     [
+      3,
+      6
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      6,
+      3
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      3,
+      7
+     ],
+     [
+      4,
+      6
+     ]
+    ]
+   },
+   {
+    "nome_dee": "Corabiel",
+    "leitura_da_tabela": "CORABIEL",
+    "caminho": [
+     [
+      5,
+      5
+     ],
+     [
+      6,
+      4
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      4,
+      7
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      6,
+      5
+     ]
+    ]
+   },
+   {
+    "nome_dee": "Levanael",
+    "leitura_da_tabela": "LEVANAEL",
+    "caminho": [
+     [
+      7,
+      4
+     ],
+     [
+      5,
+      7
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      6,
+      7
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      7,
+      7
+     ]
+    ]
+   }
+  ],
+  "nota_Z_S": "Dee escreve 'Zabathiel' (com Z) no texto e no selo, mas a celula (1,1) da tabela tem S; por isso a leitura literal da tabela e SABATHIEL. A grafia 'Sabathiel' da literatura posterior corresponde a tabela.",
+  "no_selo": {
+   "Zabathiel": "letras distribuidas uma por lado no heptagono mais interno: Z A B A T H I(21/8) - 'IEL' feito com o I e o 21 anexo",
+   "Zedekieil, Madimiel, Semeliel, Nogahel, Corabiel": "um nome em cada ponta do pentagrama; inicial maiuscula no angulo agudo interno, resto no angulo obtuso externo; Z de Zedekieil na ponta voltada para o inicio do circulo maior, seguindo para a direita",
+   "Levanael": "no centro do pentagrama, numa cruz: LE VA NA el"
+  }
+ },
+ "familias_4": {
+  "filiae_bonitatis": {
+   "rotulo_dee": "Filiae Bonitatis (tambem 'Filiolae Lucis')",
+   "aparicao": "7 mulheres jovens de verde, nome numa pequena tabuleta azul na testa",
+   "regra": "diagonais descendentes para a direita no triangulo superior-direito, comecando no canto superior direito e terminando na diagonal principal ('do angulo da direita, fendendo o meio')",
+   "nomes": [
+    {
+     "nome": "El",
+     "caminho": [
+      [
+       1,
+       7
+      ]
+     ]
+    },
+    {
+     "nome": "Me",
+     "caminho": [
+      [
+       1,
+       6
+      ],
+      [
+       2,
+       7
+      ]
+     ]
+    },
+    {
+     "nome": "Ese",
+     "caminho": [
+      [
+       1,
+       5
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       3,
+       7
+      ]
+     ]
+    },
+    {
+     "nome": "Iana",
+     "caminho": [
+      [
+       1,
+       4
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       4,
+       7
+      ]
+     ]
+    },
+    {
+     "nome": "Akele",
+     "caminho": [
+      [
+       1,
+       3
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       5,
+       7
+      ]
+     ]
+    },
+    {
+     "nome": "Azdobn",
+     "caminho": [
+      [
+       1,
+       2
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       6,
+       7
+      ]
+     ]
+    },
+    {
+     "nome": "Stimcul",
+     "caminho": [
+      [
+       1,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       3,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       7,
+       7
+      ]
+     ]
+    }
+   ]
+  },
+  "filii_lucis": {
+   "rotulo_dee": "Filii Lucis",
+   "aparicao": "7 rapazes de branco; bolas de metal na mao: ouro, prata, cobre, estanho, ferro, mercurio, chumbo (nessa ordem); nome em tabuleta redonda de ouro no peito",
+   "metais_na_ordem": [
+    "ouro",
+    "prata",
+    "cobre",
+    "estanho",
+    "ferro",
+    "mercurio (quicksilver)",
+    "chumbo"
+   ],
+   "regra": "diagonais descendentes para a direita no triangulo inferior-esquerdo, comecando no canto inferior esquerdo e terminando no centro (diagonal principal)",
+   "nomes": [
+    {
+     "nome": "I",
+     "caminho": [
+      [
+       7,
+       1
+      ]
+     ]
+    },
+    {
+     "nome": "Ih",
+     "caminho": [
+      [
+       6,
+       1
+      ],
+      [
+       7,
+       2
+      ]
+     ]
+    },
+    {
+     "nome": "Ilr",
+     "caminho": [
+      [
+       5,
+       1
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       7,
+       3
+      ]
+     ]
+    },
+    {
+     "nome": "Dmal",
+     "caminho": [
+      [
+       4,
+       1
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       6,
+       3
+      ],
+      [
+       7,
+       4
+      ]
+     ]
+    },
+    {
+     "nome": "Heeoa",
+     "caminho": [
+      [
+       3,
+       1
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       7,
+       5
+      ]
+     ]
+    },
+    {
+     "nome": "Beigia",
+     "caminho": [
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       2
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       6,
+       5
+      ],
+      [
+       7,
+       6
+      ]
+     ]
+    },
+    {
+     "nome": "Stimcul",
+     "caminho": [
+      [
+       1,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       3,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       7,
+       7
+      ]
+     ]
+    }
+   ]
+  },
+  "filiae_filiarum": {
+   "rotulo_dee": "Filiae Filiarum (Lucis)",
+   "aparicao": "7 meninas de seda branca; tabuletas quadradas como de marfim branco",
+   "regra": "anti-diagonais do triangulo superior-esquerdo, cada uma lida da linha 1 para baixo-esquerda, a partir do canto superior esquerdo",
+   "nomes": [
+    {
+     "nome": "S",
+     "caminho": [
+      [
+       1,
+       1
+      ]
+     ]
+    },
+    {
+     "nome": "Ab",
+     "caminho": [
+      [
+       1,
+       2
+      ],
+      [
+       2,
+       1
+      ]
+     ]
+    },
+    {
+     "nome": "Ath",
+     "caminho": [
+      [
+       1,
+       3
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       3,
+       1
+      ]
+     ]
+    },
+    {
+     "nome": "Ized",
+     "caminho": [
+      [
+       1,
+       4
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       3,
+       2
+      ],
+      [
+       4,
+       1
+      ]
+     ]
+    },
+    {
+     "nome": "Ekiei",
+     "caminho": [
+      [
+       1,
+       5
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       3,
+       3
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       5,
+       1
+      ]
+     ]
+    },
+    {
+     "nome": "Madimi",
+     "caminho": [
+      [
+       1,
+       6
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       6,
+       1
+      ]
+     ]
+    },
+    {
+     "nome": "Esemeli",
+     "caminho": [
+      [
+       1,
+       7
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       7,
+       1
+      ]
+     ]
+    }
+   ]
+  },
+  "filii_filiorum": {
+   "rotulo_dee": "Filii Filiorum (Lucis)",
+   "aparicao": "7 meninos de purpura com mangas pendentes; tabuletas triangulares verdes; o primeiro tinha duas letras numa so (E e L)",
+   "regra": "anti-diagonais do triangulo inferior-direito, cada uma lida da linha 7 para cima-direita, a partir do canto inferior direito",
+   "nomes": [
+    {
+     "nome": "El",
+     "caminho": [
+      [
+       7,
+       7
+      ]
+     ]
+    },
+    {
+     "nome": "An",
+     "caminho": [
+      [
+       7,
+       6
+      ],
+      [
+       6,
+       7
+      ]
+     ]
+    },
+    {
+     "nome": "Ave",
+     "caminho": [
+      [
+       7,
+       5
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       5,
+       7
+      ]
+     ]
+    },
+    {
+     "nome": "Liba",
+     "caminho": [
+      [
+       7,
+       4
+      ],
+      [
+       6,
+       5
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       4,
+       7
+      ]
+     ]
+    },
+    {
+     "nome": "Rocle",
+     "caminho": [
+      [
+       7,
+       3
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       3,
+       7
+      ]
+     ]
+    },
+    {
+     "nome": "Hagonel",
+     "caminho": [
+      [
+       7,
+       2
+      ],
+      [
+       6,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       2,
+       7
+      ]
+     ]
+    },
+    {
+     "nome": "Ilemese",
+     "caminho": [
+      [
+       7,
+       1
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       1,
+       7
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "no_selo_disposicao": {
+  "heptagrama_pontas": "Filiae Bonitatis (El, Me, Ese, Iana, Akele, Azdobn, Stimcul)",
+  "heptagrama_linhas": "Filii Lucis (I, Ih, Ilr, Dmal, Heeoa, Beigia, Stimcul)",
+  "faixa_heptagonal_seguinte": "Filiae Filiarum (S, Ab, Ath, Ized, Ekiei, Madimi, Esemeli)",
+  "faixa_heptagonal_interna": "Filii Filiorum (E/El, An, Ave, Liba, Rocle, Hagonel, Ilemese)",
+  "nota": "disposicao conforme os dois desenhos (Holden e Peterson); Michael manda escrever Zabathiel etc. 'logo abaixo' de An, Ave..."
+ },
+ "chm_planetas_dos_pares": {
+  "fonte": "Compendium Heptarchiae Mysticae, BL Add. MS 36674 (1588), transcricao JHP: http://www.esotericarchives.com/dee/chm.htm",
+  "pares": [
+   {
+    "filius_lucis": "I",
+    "filius_filiorum": "El",
+    "planeta": "Venus"
+   },
+   {
+    "filius_lucis": "Ih",
+    "filius_filiorum": "An",
+    "planeta": "Mercurio"
+   },
+   {
+    "filius_lucis": "Ilr",
+    "filius_filiorum": "Ave",
+    "planeta": "Sol"
+   },
+   {
+    "filius_lucis": "Dmal",
+    "filius_filiorum": "Liba",
+    "planeta": "Marte"
+   },
+   {
+    "filius_lucis": "Heeoa",
+    "filius_filiorum": "Rocle",
+    "planeta": "Jupiter"
+   },
+   {
+    "filius_lucis": "Beigia",
+    "filius_filiorum": "Hagonel",
+    "planeta": "Saturno"
+   },
+   {
+    "filius_lucis": "Stimcul",
+    "filius_filiorum": "Ilemese",
+    "planeta": "Lua"
+   }
+  ],
+  "nota": "na fonte, o 'El' aparece riscado e substituido pelo glifo da ligadura E-L"
+ },
+ "especificacao_fisica_declarada": {
+  "fonte": "citacoes de Sloane 3188 em De Heptarchia Mystica (Sloane 3191), transcricao JHP",
+  "material": "cera pura",
+  "diametro_polegadas": 9,
+  "circunferencia_polegadas": "27 'e algo mais'",
+  "espessura_polegadas": 1.125,
+  "verso": "figura de cruz",
+  "mesa": "mesa quadrada de 2 cubitos de madeira doce; 4 selos menores sob os pes",
+  "nota": "Dee anota 'square [or diameter]' para as 9 polegadas"
+ },
+ "variantes": {
+  "descricao": "diferencas entre o relato da revelacao e o selo final, e entre os dois desenhos (Holden/JDPP x Peterson/JHP). Comparacao visual do desenho JHP feita na resolucao disponivel (1600 px); a posicao acima/abaixo dos numeros no desenho JHP so foi conferida por amostragem.",
+  "itens": [
+   {
+    "elemento": "anel, casa 8 (a)",
+    "relato": "22 acima",
+    "selo_JDPP": "20 acima",
+    "selo_JHP": "20 (posicao nao conferida)",
+    "nota_ms": "margem: corrigido por Uriel para 20",
+    "conferivel_pela_regra": true,
+    "regra_exige": "20 acima (nome Galas)"
+   },
+   {
+    "elemento": "anel, casa 19 (H)",
+    "relato": "22 abaixo",
+    "selo_JDPP": "12 abaixo",
+    "selo_JHP": "12",
+    "conferivel_pela_regra": true,
+    "regra_exige": "12 abaixo (nome Horlwn)"
+   },
+   {
+    "elemento": "anel, casa 29 (r)",
+    "relato": "16 acima",
+    "selo_JDPP": "16 abaixo",
+    "selo_JHP": "16 (posicao nao conferida)",
+    "conferivel_pela_regra": true,
+    "regra_exige": "16 abaixo (nome Horlwn)"
+   },
+   {
+    "elemento": "anel, casas 21/22 (y, t)",
+    "relato": "t mostrado antes de y",
+    "selo_JDPP": "y (21) antes de t (22)",
+    "selo_JHP": "y antes de t",
+    "conferivel_pela_regra": true,
+    "regra_exige": "t na casa 22 (nomes Thaoth e Aaoth)"
+   },
+   {
+    "elemento": "anel, casa 21 (y)",
+    "selo_JDPP": "15 abaixo (o texto do relato tambem diz 15)",
+    "selo_JHP": "lido como 14; o desenho JHP poe um asterisco sob esta casa; leitura do algarismo incerta",
+    "conferivel_pela_regra": false,
+    "nota": "casa nao usada por nenhum dos 7 nomes"
+   },
+   {
+    "elemento": "anel, casa 36",
+    "selo_JDPP": "glifo em forma de 5",
+    "selo_JHP": "s",
+    "nota": "Dee registra que e letra s e numero 5 ao mesmo tempo; a regra so exige que a casa nao tenha numero (fecha Galas)"
+   },
+   {
+    "elemento": "faixa dos cestos, linha 6, casa 2",
+    "JDPP_tabela_e_selo": "i",
+    "selo_JHP": "glifo parecido com t (talvez i com traco)",
+    "conferivel_pela_regra": true,
+    "regra_exige": "i (Zadkiel)"
+   },
+   {
+    "elemento": "anjo 1",
+    "texto_dee": "Zabathiel",
+    "celula_(1,1)": "S",
+    "selo_JDPP_e_JHP": "Z no heptagono interno",
+    "nota": "divergencia interna da propria fonte; nada corrigido aqui"
+   },
+   {
+    "elemento": "tabela 7x7",
+    "nota": "rascunho x versao final: ver tabela_7x7.rascunho_vs_final (5 celulas)"
+   }
+  ],
+  "nao_aplicavel": "nao ha versao 'reformada' (Raphael 1587) nem Golden Dawn para o Sigillum; nao foi feita busca de outras reconstrucoes modernas"
+ }
+}

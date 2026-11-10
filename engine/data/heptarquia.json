@@ -1,0 +1,3652 @@
+{
+ "titulo": "Heptarquia mistica: Tabula Collecta, as 7 tabelas, reis, principes e ministros",
+ "fontes": [
+  {
+   "id": "JDPP_TERTIUS",
+   "url": "http://www.john-dee.org/Tertius.pdf",
+   "sha256": "a7bd8cd68a98c0d6b19682796ba73f2124a8122dbf64a084ca53c9f610ee2045",
+   "conteudo": "Sloane 3188 Liber III (29 abr 1582): 7 tabelas, Tabula Collecta, Coordinatio; tabelas extraidas do texto vetorial do PDF por coordenadas"
+  },
+  {
+   "id": "JHP_HM",
+   "url": "http://www.esotericarchives.com/dee/hm.htm",
+   "sha256": "9cabad394066eed677a5abce8d0248f265d9609d1c5924c1a29898fbe18959cd",
+   "conteudo": "De Heptarchia Mystica, Sloane 3191 (autografo de Dee), ed. J. H. Peterson"
+  },
+  {
+   "id": "JHP_CHM",
+   "url": "http://www.esotericarchives.com/dee/chm.htm",
+   "sha256": "4952c0b83602b71d4bd52bc5484ee625e3454ead41001c6525cf49dc01692945",
+   "conteudo": "Compendium Heptarchiae Mysticae, BL Add. MS 36674 (1588), ed. J. H. Peterson"
+  },
+  {
+   "id": "JHP_HM_TABULA49",
+   "url": "http://www.esotericarchives.com/dee/hm27.jpg",
+   "sha256": "4c655972945b2c56b5ee0789aa7a38f9966fb8b6fe1ff9306cccf35dae573e6a",
+   "conteudo": "Sloane 3191 f. 51r 'Tabula Angelorum Bonorum 49' (imagem)"
+  }
+ ],
+ "tabula_collecta": {
+  "titulo_dee": "Tabula Collecta: 49 Angelorum Bonorum, Nomina continens",
+  "nomes": [
+   {
+    "n": 1,
+    "nome": "BALIGON",
+    "grupo": 1,
+    "planeta_coordinatio": "Venus",
+    "maiusculas_na_fonte": true
+   },
+   {
+    "n": 2,
+    "nome": "BORNOGO",
+    "grupo": 1,
+    "planeta_coordinatio": "Venus",
+    "maiusculas_na_fonte": true
+   },
+   {
+    "n": 3,
+    "nome": "Bapnido",
+    "grupo": 1,
+    "planeta_coordinatio": "Venus",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 4,
+    "nome": "Besgeme",
+    "grupo": 1,
+    "planeta_coordinatio": "Venus",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 5,
+    "nome": "Blumapo",
+    "grupo": 1,
+    "planeta_coordinatio": "Venus",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 6,
+    "nome": "Bmamgal",
+    "grupo": 1,
+    "planeta_coordinatio": "Venus",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 7,
+    "nome": "Basledf",
+    "grupo": 1,
+    "planeta_coordinatio": "Venus",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 8,
+    "nome": "BOBOGEL",
+    "grupo": 2,
+    "planeta_coordinatio": "Sol",
+    "maiusculas_na_fonte": true
+   },
+   {
+    "n": 9,
+    "nome": "BEFAFES",
+    "grupo": 2,
+    "planeta_coordinatio": "Sol",
+    "maiusculas_na_fonte": true
+   },
+   {
+    "n": 10,
+    "nome": "Basmelo",
+    "grupo": 2,
+    "planeta_coordinatio": "Sol",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 11,
+    "nome": "Bernole",
+    "grupo": 2,
+    "planeta_coordinatio": "Sol",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 12,
+    "nome": "Branglo",
+    "grupo": 2,
+    "planeta_coordinatio": "Sol",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 13,
+    "nome": "Brisfli",
+    "grupo": 2,
+    "planeta_coordinatio": "Sol",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 14,
+    "nome": "Bnagole",
+    "grupo": 2,
+    "planeta_coordinatio": "Sol",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 15,
+    "nome": "BABALEL",
+    "grupo": 3,
+    "planeta_coordinatio": "Marte",
+    "maiusculas_na_fonte": true
+   },
+   {
+    "n": 16,
+    "nome": "BVTMONO",
+    "grupo": 3,
+    "planeta_coordinatio": "Marte",
+    "maiusculas_na_fonte": true
+   },
+   {
+    "n": 17,
+    "nome": "Bazpama",
+    "grupo": 3,
+    "planeta_coordinatio": "Marte",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 18,
+    "nome": "Blintom",
+    "grupo": 3,
+    "planeta_coordinatio": "Marte",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 19,
+    "nome": "Bragiop",
+    "grupo": 3,
+    "planeta_coordinatio": "Marte",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 20,
+    "nome": "Bermale",
+    "grupo": 3,
+    "planeta_coordinatio": "Marte",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 21,
+    "nome": "Bonefon",
+    "grupo": 3,
+    "planeta_coordinatio": "Marte",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 22,
+    "nome": "BYNEPOR",
+    "grupo": 4,
+    "planeta_coordinatio": "Jupiter",
+    "maiusculas_na_fonte": true
+   },
+   {
+    "n": 23,
+    "nome": "BLISDON",
+    "grupo": 4,
+    "planeta_coordinatio": "Jupiter",
+    "maiusculas_na_fonte": true
+   },
+   {
+    "n": 24,
+    "nome": "Balceor",
+    "grupo": 4,
+    "planeta_coordinatio": "Jupiter",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 25,
+    "nome": "Belmara",
+    "grupo": 4,
+    "planeta_coordinatio": "Jupiter",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 26,
+    "nome": "Benpagi",
+    "grupo": 4,
+    "planeta_coordinatio": "Jupiter",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 27,
+    "nome": "Barnafa",
+    "grupo": 4,
+    "planeta_coordinatio": "Jupiter",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 28,
+    "nome": "Bmilges",
+    "grupo": 4,
+    "planeta_coordinatio": "Jupiter",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 29,
+    "nome": "BNASPOL",
+    "grupo": 5,
+    "planeta_coordinatio": "Mercurio",
+    "maiusculas_na_fonte": true
+   },
+   {
+    "n": 30,
+    "nome": "BRORGES",
+    "grupo": 5,
+    "planeta_coordinatio": "Mercurio",
+    "maiusculas_na_fonte": true
+   },
+   {
+    "n": 31,
+    "nome": "Baspalo",
+    "grupo": 5,
+    "planeta_coordinatio": "Mercurio",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 32,
+    "nome": "Binodab",
+    "grupo": 5,
+    "planeta_coordinatio": "Mercurio",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 33,
+    "nome": "Bariges",
+    "grupo": 5,
+    "planeta_coordinatio": "Mercurio",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 34,
+    "nome": "Binofon",
+    "grupo": 5,
+    "planeta_coordinatio": "Mercurio",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 35,
+    "nome": "Baldago",
+    "grupo": 5,
+    "planeta_coordinatio": "Mercurio",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 36,
+    "nome": "BNAPSEN",
+    "grupo": 6,
+    "planeta_coordinatio": "Saturno",
+    "maiusculas_na_fonte": true
+   },
+   {
+    "n": 37,
+    "nome": "BRALGES",
+    "grupo": 6,
+    "planeta_coordinatio": "Saturno",
+    "maiusculas_na_fonte": true
+   },
+   {
+    "n": 38,
+    "nome": "Bormila",
+    "grupo": 6,
+    "planeta_coordinatio": "Saturno",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 39,
+    "nome": "Buscnab",
+    "grupo": 6,
+    "planeta_coordinatio": "Saturno",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 40,
+    "nome": "Bminpol",
+    "grupo": 6,
+    "planeta_coordinatio": "Saturno",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 41,
+    "nome": "Bartiro",
+    "grupo": 6,
+    "planeta_coordinatio": "Saturno",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 42,
+    "nome": "Bliigan",
+    "grupo": 6,
+    "planeta_coordinatio": "Saturno",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 43,
+    "nome": "BLVMAZA",
+    "grupo": 7,
+    "planeta_coordinatio": "Lua",
+    "maiusculas_na_fonte": true
+   },
+   {
+    "n": 44,
+    "nome": "BAGENOL",
+    "grupo": 7,
+    "planeta_coordinatio": "Lua",
+    "maiusculas_na_fonte": true
+   },
+   {
+    "n": 45,
+    "nome": "Bablibo",
+    "grupo": 7,
+    "planeta_coordinatio": "Lua",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 46,
+    "nome": "Busduna",
+    "grupo": 7,
+    "planeta_coordinatio": "Lua",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 47,
+    "nome": "Blingef",
+    "grupo": 7,
+    "planeta_coordinatio": "Lua",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 48,
+    "nome": "Barfort",
+    "grupo": 7,
+    "planeta_coordinatio": "Lua",
+    "maiusculas_na_fonte": false
+   },
+   {
+    "n": 49,
+    "nome": "Bamnode",
+    "grupo": 7,
+    "planeta_coordinatio": "Lua",
+    "maiusculas_na_fonte": false
+   }
+  ],
+  "nota": "os 14 nomes em maiusculas na fonte sao os 7 reis e os 7 principes; Holden registra 'per Delta' (feita por Dee)"
+ },
+ "coordinatio_49": {
+  "titulo_dee": "Coordinatio Angelorum bonorum 49, per Jo: Dee, ita disposita",
+  "descricao": "circulo em 7 setores de 7 nomes (na ordem da Tabula Collecta), cada setor com simbolo planetario",
+  "setores": [
+   {
+    "grupo": 1,
+    "nomes": [
+     "BALIGON",
+     "BORNOGO",
+     "Bapnido",
+     "Besgeme",
+     "Blumapo",
+     "Bmamgal",
+     "Basledf"
+    ],
+    "planeta": "Venus",
+    "simbolo": "♀",
+    "numero_pontuado_junto_ao_simbolo": 7,
+    "numero_pequeno_junto_ao_simbolo": 7
+   },
+   {
+    "grupo": 2,
+    "nomes": [
+     "BOBOGEL",
+     "BEFAFES",
+     "Basmelo",
+     "Bernole",
+     "Branglo",
+     "Brisfli",
+     "Bnagole"
+    ],
+    "planeta": "Sol",
+    "simbolo": "☉",
+    "numero_pontuado_junto_ao_simbolo": 1,
+    "numero_pequeno_junto_ao_simbolo": 2
+   },
+   {
+    "grupo": 3,
+    "nomes": [
+     "BABALEL",
+     "BVTMONO",
+     "Bazpama",
+     "Blintom",
+     "Bragiop",
+     "Bermale",
+     "Bonefon"
+    ],
+    "planeta": "Marte",
+    "simbolo": "♂",
+    "numero_pontuado_junto_ao_simbolo": 2,
+    "numero_pequeno_junto_ao_simbolo": 3
+   },
+   {
+    "grupo": 4,
+    "nomes": [
+     "BYNEPOR",
+     "BLISDON",
+     "Balceor",
+     "Belmara",
+     "Benpagi",
+     "Barnafa",
+     "Bmilges"
+    ],
+    "planeta": "Jupiter",
+    "simbolo": "♃",
+    "numero_pontuado_junto_ao_simbolo": 3,
+    "numero_pequeno_junto_ao_simbolo": 4
+   },
+   {
+    "grupo": 5,
+    "nomes": [
+     "BNASPOL",
+     "BRORGES",
+     "Baspalo",
+     "Binodab",
+     "Bariges",
+     "Binofon",
+     "Baldago"
+    ],
+    "planeta": "Mercurio",
+    "simbolo": "☿",
+    "numero_pontuado_junto_ao_simbolo": 4,
+    "numero_pequeno_junto_ao_simbolo": 5
+   },
+   {
+    "grupo": 6,
+    "nomes": [
+     "BNAPSEN",
+     "BRALGES",
+     "Bormila",
+     "Buscnab",
+     "Bminpol",
+     "Bartiro",
+     "Bliigan"
+    ],
+    "planeta": "Saturno",
+    "simbolo": "♄",
+    "numero_pontuado_junto_ao_simbolo": 5,
+    "numero_pequeno_junto_ao_simbolo": 6
+   },
+   {
+    "grupo": 7,
+    "nomes": [
+     "BLVMAZA",
+     "BAGENOL",
+     "Bablibo",
+     "Busduna",
+     "Blingef",
+     "Barfort",
+     "Bamnode"
+    ],
+    "planeta": "Lua",
+    "simbolo": "☽",
+    "numero_pontuado_junto_ao_simbolo": 6,
+    "numero_pequeno_junto_ao_simbolo": 1
+   }
+  ],
+  "nota": "os dois numeros junto a cada simbolo foram lidos do tracado de Holden; a fonte nao explica o seu sentido",
+  "testemunho_hm_f51r": "a 'Tabula Angelorum Bonorum 49' de De Heptarchia Mystica (imagem hm27.jpg) tem o mesmo arranjo circular com os mesmos simbolos planetarios por setor e 'HEPTARCHIA' no centro; conferidos visualmente os simbolos e os nomes em maiusculas, sem transcricao letra a letra da imagem"
+ },
+ "sete_tabelas": {
+  "data": "29 abr 1582 (Sloane 3188, Liber III)",
+  "figura": "as 7 tabelas juntas: grande quadrado central, um igual de cada lado, dois meios-quadrados acima e dois abaixo, tudo dentro de um circulo brilhante vazio",
+  "regra_declarada": "Uriel: as letras estao sobre 7 numeros iguais; o numero antes de cada letra indica quais letras se juntam, da primeira tabela a ultima, comecando todas por B, ate formar os nomes; os 29 primeiros sao mais excelentes; ao todo 49. O primeiro nome e BALIGON.",
+  "tabelas": [
+   {
+    "id": "T1",
+    "posicao": "centro (grande)",
+    "dom_declarado": "sagacidade e sabedoria ('witt and wisdome')",
+    "objeto_da_portadora": "livros",
+    "rotulo_marginal_dee": null,
+    "celulas": [
+     [
+      {
+       "linha": 1,
+       "coluna": 1,
+       "numero": 1,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 1,
+       "coluna": 2,
+       "numero": 2,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 1,
+       "coluna": 3,
+       "numero": 3,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 1,
+       "coluna": 4,
+       "numero": 4,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 1,
+       "coluna": 5,
+       "numero": 5,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 1,
+       "coluna": 6,
+       "numero": 6,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 1,
+       "coluna": 7,
+       "numero": 7,
+       "letra": "B",
+       "sobrescrito": "1"
+      }
+     ],
+     [
+      {
+       "linha": 2,
+       "coluna": 1,
+       "numero": 8,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 2,
+       "coluna": 2,
+       "numero": 9,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 2,
+       "coluna": 3,
+       "numero": 10,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 2,
+       "coluna": 4,
+       "numero": 11,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 2,
+       "coluna": 5,
+       "numero": 12,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 2,
+       "coluna": 6,
+       "numero": 13,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 2,
+       "coluna": 7,
+       "numero": 14,
+       "letra": "B",
+       "sobrescrito": "1"
+      }
+     ],
+     [
+      {
+       "linha": 3,
+       "coluna": 1,
+       "numero": 15,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 3,
+       "coluna": 2,
+       "numero": 16,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 3,
+       "coluna": 3,
+       "numero": 17,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 3,
+       "coluna": 4,
+       "numero": 18,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 3,
+       "coluna": 5,
+       "numero": 19,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 3,
+       "coluna": 6,
+       "numero": 20,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 3,
+       "coluna": 7,
+       "numero": 21,
+       "letra": "B",
+       "sobrescrito": "1"
+      }
+     ],
+     [
+      {
+       "linha": 4,
+       "coluna": 1,
+       "numero": 22,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 4,
+       "coluna": 2,
+       "numero": 23,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 4,
+       "coluna": 3,
+       "numero": 24,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 4,
+       "coluna": 4,
+       "numero": 25,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 4,
+       "coluna": 5,
+       "numero": 26,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 4,
+       "coluna": 6,
+       "numero": 27,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 4,
+       "coluna": 7,
+       "numero": 28,
+       "letra": "B",
+       "sobrescrito": "1"
+      }
+     ],
+     [
+      {
+       "linha": 5,
+       "coluna": 1,
+       "numero": 29,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 5,
+       "coluna": 2,
+       "numero": 30,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 5,
+       "coluna": 3,
+       "numero": 31,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 5,
+       "coluna": 4,
+       "numero": 32,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 5,
+       "coluna": 5,
+       "numero": 33,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 5,
+       "coluna": 6,
+       "numero": 34,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 5,
+       "coluna": 7,
+       "numero": 35,
+       "letra": "B",
+       "sobrescrito": "1"
+      }
+     ],
+     [
+      {
+       "linha": 6,
+       "coluna": 1,
+       "numero": 36,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 6,
+       "coluna": 2,
+       "numero": 37,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 6,
+       "coluna": 3,
+       "numero": 38,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 6,
+       "coluna": 4,
+       "numero": 39,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 6,
+       "coluna": 5,
+       "numero": 40,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 6,
+       "coluna": 6,
+       "numero": 41,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 6,
+       "coluna": 7,
+       "numero": 42,
+       "letra": "B",
+       "sobrescrito": "1"
+      }
+     ],
+     [
+      {
+       "linha": 7,
+       "coluna": 1,
+       "numero": 43,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 7,
+       "coluna": 2,
+       "numero": 44,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 7,
+       "coluna": 3,
+       "numero": 45,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 7,
+       "coluna": 4,
+       "numero": 46,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 7,
+       "coluna": 5,
+       "numero": 47,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 7,
+       "coluna": 6,
+       "numero": 48,
+       "letra": "B",
+       "sobrescrito": "1"
+      },
+      {
+       "linha": 7,
+       "coluna": 7,
+       "numero": 49,
+       "letra": "B",
+       "sobrescrito": "1"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "T2",
+    "posicao": "acima, metade esquerda",
+    "dom_declarado": "exaltacao e governo dos principes",
+    "objeto_da_portadora": "coroa",
+    "rotulo_marginal_dee": "Kings",
+    "celulas": [
+     [
+      {
+       "linha": 1,
+       "coluna": 1,
+       "numero": 7,
+       "letra": "A"
+      },
+      {
+       "linha": 1,
+       "coluna": 2,
+       "numero": 21,
+       "letra": "O"
+      },
+      {
+       "linha": 1,
+       "coluna": 3,
+       "numero": 1,
+       "letra": "A"
+      },
+      {
+       "linha": 1,
+       "coluna": 4,
+       "numero": 26,
+       "letra": "E"
+      },
+      {
+       "linha": 1,
+       "coluna": 5,
+       "numero": 48,
+       "letra": "A"
+      },
+      {
+       "linha": 1,
+       "coluna": 6,
+       "numero": 24,
+       "letra": "A"
+      },
+      {
+       "linha": 1,
+       "coluna": 7,
+       "numero": 13,
+       "letra": "R"
+      }
+     ],
+     [
+      {
+       "linha": 2,
+       "coluna": 1,
+       "numero": 34,
+       "letra": "I"
+      },
+      {
+       "linha": 2,
+       "coluna": 2,
+       "numero": 8,
+       "letra": "O"
+      },
+      {
+       "linha": 2,
+       "coluna": 3,
+       "numero": 29,
+       "letra": "M"
+      },
+      {
+       "linha": 2,
+       "coluna": 4,
+       "numero": 2,
+       "letra": "O"
+      },
+      {
+       "linha": 2,
+       "coluna": 5,
+       "numero": 33,
+       "letra": "A"
+      },
+      {
+       "linha": 2,
+       "coluna": 6,
+       "numero": 6,
+       "letra": "M"
+      },
+      {
+       "linha": 2,
+       "coluna": 7,
+       "numero": 25,
+       "letra": "E"
+      }
+     ],
+     [
+      {
+       "linha": 3,
+       "coluna": 1,
+       "numero": 49,
+       "letra": "A"
+      },
+      {
+       "linha": 3,
+       "coluna": 2,
+       "numero": 4,
+       "letra": "E"
+      },
+      {
+       "linha": 3,
+       "coluna": 3,
+       "numero": 35,
+       "letra": "A"
+      },
+      {
+       "linha": 3,
+       "coluna": 4,
+       "numero": 40,
+       "letra": "M"
+      },
+      {
+       "linha": 3,
+       "coluna": 5,
+       "numero": 18,
+       "letra": "L"
+      },
+      {
+       "linha": 3,
+       "coluna": 6,
+       "numero": 28,
+       "letra": "M"
+      },
+      {
+       "linha": 3,
+       "coluna": 7,
+       "numero": 23,
+       "letra": "L"
+      }
+     ],
+     [
+      {
+       "linha": 4,
+       "coluna": 1,
+       "numero": 39,
+       "letra": "V"
+      },
+      {
+       "linha": 4,
+       "coluna": 2,
+       "numero": 47,
+       "letra": "L"
+      },
+      {
+       "linha": 4,
+       "coluna": 3,
+       "numero": 3,
+       "letra": "A"
+      },
+      {
+       "linha": 4,
+       "coluna": 4,
+       "numero": 5,
+       "letra": "L"
+      },
+      {
+       "linha": 4,
+       "coluna": 5,
+       "numero": 15,
+       "letra": "A",
+       "marca_holden": "casa com fundo preto"
+      },
+      {
+       "linha": 4,
+       "coluna": 6,
+       "numero": 36,
+       "letra": "N"
+      },
+      {
+       "linha": 4,
+       "coluna": 7,
+       "numero": 30,
+       "letra": "R",
+       "marca_holden": "casa com fundo preto"
+      }
+     ],
+     [
+      {
+       "linha": 5,
+       "coluna": 1,
+       "numero": 20,
+       "letra": "E"
+      },
+      {
+       "linha": 5,
+       "coluna": 2,
+       "numero": 19,
+       "letra": "R"
+      },
+      {
+       "linha": 5,
+       "coluna": 3,
+       "numero": 45,
+       "letra": "A"
+      },
+      {
+       "linha": 5,
+       "coluna": 4,
+       "numero": 37,
+       "letra": "R"
+      },
+      {
+       "linha": 5,
+       "coluna": 5,
+       "numero": 32,
+       "letra": "I"
+      },
+      {
+       "linha": 5,
+       "coluna": 6,
+       "numero": 17,
+       "letra": "A"
+      },
+      {
+       "linha": 5,
+       "coluna": 7,
+       "numero": 41,
+       "letra": "A",
+       "marca_holden": "casa com fundo preto"
+      }
+     ],
+     [
+      {
+       "linha": 6,
+       "coluna": 1,
+       "numero": 10,
+       "letra": "A"
+      },
+      {
+       "linha": 6,
+       "coluna": 2,
+       "numero": 38,
+       "letra": "O"
+      },
+      {
+       "linha": 6,
+       "coluna": 3,
+       "numero": 16,
+       "letra": "V"
+      },
+      {
+       "linha": 6,
+       "coluna": 4,
+       "numero": 27,
+       "letra": "A"
+      },
+      {
+       "linha": 6,
+       "coluna": 5,
+       "numero": 12,
+       "letra": "R"
+      },
+      {
+       "linha": 6,
+       "coluna": 6,
+       "numero": 43,
+       "letra": "R",
+       "marca_holden": "letra e numero em vermelho"
+      },
+      {
+       "linha": 6,
+       "coluna": 7,
+       "numero": 22,
+       "letra": "Y"
+      }
+     ],
+     [
+      {
+       "linha": 7,
+       "coluna": 1,
+       "numero": 9,
+       "letra": "E"
+      },
+      {
+       "linha": 7,
+       "coluna": 2,
+       "numero": 44,
+       "letra": "A"
+      },
+      {
+       "linha": 7,
+       "coluna": 3,
+       "numero": 11,
+       "letra": "E"
+      },
+      {
+       "linha": 7,
+       "coluna": 4,
+       "numero": 42,
+       "letra": "L"
+      },
+      {
+       "linha": 7,
+       "coluna": 5,
+       "numero": 31,
+       "letra": "A"
+      },
+      {
+       "linha": 7,
+       "coluna": 6,
+       "numero": 14,
+       "letra": "N"
+      },
+      {
+       "linha": 7,
+       "coluna": 7,
+       "numero": 46,
+       "letra": "V"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "T3",
+    "posicao": "acima, metade direita",
+    "dom_declarado": "conselho e nobreza",
+    "objeto_da_portadora": "vestes",
+    "rotulo_marginal_dee": "Nobilitie",
+    "celulas": [
+     [
+      {
+       "linha": 1,
+       "coluna": 1,
+       "numero": 6,
+       "letra": "A"
+      },
+      {
+       "linha": 1,
+       "coluna": 2,
+       "numero": 7,
+       "letra": "S"
+      },
+      {
+       "linha": 1,
+       "coluna": 3,
+       "numero": 29,
+       "letra": "A"
+      },
+      {
+       "linha": 1,
+       "coluna": 4,
+       "numero": 15,
+       "letra": "B"
+      },
+      {
+       "linha": 1,
+       "coluna": 5,
+       "numero": 23,
+       "letra": "I"
+      },
+      {
+       "linha": 1,
+       "coluna": 6,
+       "numero": 8,
+       "letra": "B"
+      },
+      {
+       "linha": 1,
+       "coluna": 7,
+       "numero": 17,
+       "letra": "Z"
+      }
+     ],
+     [
+      {
+       "linha": 2,
+       "coluna": 1,
+       "numero": 36,
+       "letra": "A"
+      },
+      {
+       "linha": 2,
+       "coluna": 2,
+       "numero": 39,
+       "letra": "S"
+      },
+      {
+       "linha": 2,
+       "coluna": 3,
+       "numero": 12,
+       "letra": "A"
+      },
+      {
+       "linha": 2,
+       "coluna": 4,
+       "numero": 30,
+       "letra": "O"
+      },
+      {
+       "linha": 2,
+       "coluna": 5,
+       "numero": 1,
+       "letra": "L"
+      },
+      {
+       "linha": 2,
+       "coluna": 6,
+       "numero": 10,
+       "letra": "S"
+      },
+      {
+       "linha": 2,
+       "coluna": 7,
+       "numero": 21,
+       "letra": "N"
+      }
+     ],
+     [
+      {
+       "linha": 3,
+       "coluna": 1,
+       "numero": 5,
+       "letra": "V"
+      },
+      {
+       "linha": 3,
+       "coluna": 2,
+       "numero": 31,
+       "letra": "S"
+      },
+      {
+       "linha": 3,
+       "coluna": 3,
+       "numero": 25,
+       "letra": "L"
+      },
+      {
+       "linha": 3,
+       "coluna": 4,
+       "numero": 45,
+       "letra": "B"
+      },
+      {
+       "linha": 3,
+       "coluna": 5,
+       "numero": 26,
+       "letra": "N"
+      },
+      {
+       "linha": 3,
+       "coluna": 6,
+       "numero": 32,
+       "letra": "N"
+      },
+      {
+       "linha": 3,
+       "coluna": 7,
+       "numero": 3,
+       "letra": "P"
+      }
+     ],
+     [
+      {
+       "linha": 4,
+       "coluna": 1,
+       "numero": 18,
+       "letra": "I",
+       "marca_holden": "casa com fundo preto"
+      },
+      {
+       "linha": 4,
+       "coluna": 2,
+       "numero": 19,
+       "letra": "A",
+       "marca_holden": "casa com fundo preto"
+      },
+      {
+       "linha": 4,
+       "coluna": 3,
+       "numero": 48,
+       "letra": "R",
+       "marca_holden": "casa com fundo preto"
+      },
+      {
+       "linha": 4,
+       "coluna": 4,
+       "numero": 4,
+       "letra": "S"
+      },
+      {
+       "linha": 4,
+       "coluna": 5,
+       "numero": 27,
+       "letra": "R"
+      },
+      {
+       "linha": 4,
+       "coluna": 6,
+       "numero": 34,
+       "letra": "N"
+      },
+      {
+       "linha": 4,
+       "coluna": 7,
+       "numero": 24,
+       "letra": "L"
+      }
+     ],
+     [
+      {
+       "linha": 5,
+       "coluna": 1,
+       "numero": 38,
+       "letra": "R",
+       "marca_holden": "casa com fundo preto"
+      },
+      {
+       "linha": 5,
+       "coluna": 2,
+       "numero": 44,
+       "letra": "G",
+       "marca_holden": "casa com fundo preto"
+      },
+      {
+       "linha": 5,
+       "coluna": 3,
+       "numero": 37,
+       "letra": "A"
+      },
+      {
+       "linha": 5,
+       "coluna": 4,
+       "numero": 20,
+       "letra": "R"
+      },
+      {
+       "linha": 5,
+       "coluna": 5,
+       "numero": 16,
+       "letra": "T"
+      },
+      {
+       "linha": 5,
+       "coluna": 6,
+       "numero": 2,
+       "letra": "R"
+      },
+      {
+       "linha": 5,
+       "coluna": 7,
+       "numero": 22,
+       "letra": "N"
+      }
+     ],
+     [
+      {
+       "linha": 6,
+       "coluna": 1,
+       "numero": 49,
+       "letra": "M"
+      },
+      {
+       "linha": 6,
+       "coluna": 2,
+       "numero": 43,
+       "letra": "V"
+      },
+      {
+       "linha": 6,
+       "coluna": 3,
+       "numero": 35,
+       "letra": "R",
+       "marca_holden": "letra e numero em vermelho"
+      },
+      {
+       "linha": 6,
+       "coluna": 4,
+       "numero": 47,
+       "letra": "I"
+      },
+      {
+       "linha": 6,
+       "coluna": 5,
+       "numero": 9,
+       "letra": "F"
+      },
+      {
+       "linha": 6,
+       "coluna": 6,
+       "numero": 33,
+       "letra": "R"
+      },
+      {
+       "linha": 6,
+       "coluna": 7,
+       "numero": 42,
+       "letra": "I"
+      }
+     ],
+     [
+      {
+       "linha": 7,
+       "coluna": 1,
+       "numero": 13,
+       "letra": "I"
+      },
+      {
+       "linha": 7,
+       "coluna": 2,
+       "numero": 46,
+       "letra": "S"
+      },
+      {
+       "linha": 7,
+       "coluna": 3,
+       "numero": 11,
+       "letra": "R"
+      },
+      {
+       "linha": 7,
+       "coluna": 4,
+       "numero": 41,
+       "letra": "R"
+      },
+      {
+       "linha": 7,
+       "coluna": 5,
+       "numero": 40,
+       "letra": "I"
+      },
+      {
+       "linha": 7,
+       "coluna": 6,
+       "numero": 28,
+       "letra": "I"
+      },
+      {
+       "linha": 7,
+       "coluna": 7,
+       "numero": 14,
+       "letra": "A"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "T4",
+    "posicao": "a direita do centro (grande)",
+    "dom_declarado": "ganho e comercio de mercadorias",
+    "objeto_da_portadora": "animal quadrupede de todas as cores",
+    "rotulo_marginal_dee": "Merchants / Aqua",
+    "celulas": [
+     [
+      {
+       "linha": 1,
+       "coluna": 1,
+       "numero": 6,
+       "letra": "M"
+      },
+      {
+       "linha": 1,
+       "coluna": 2,
+       "numero": 41,
+       "letra": "T"
+      },
+      {
+       "linha": 1,
+       "coluna": 3,
+       "numero": 39,
+       "letra": "C"
+      },
+      {
+       "linha": 1,
+       "coluna": 4,
+       "numero": 19,
+       "letra": "G"
+      },
+      {
+       "linha": 1,
+       "coluna": 5,
+       "numero": 49,
+       "letra": "N"
+      },
+      {
+       "linha": 1,
+       "coluna": 6,
+       "numero": 45,
+       "letra": "L"
+      },
+      {
+       "linha": 1,
+       "coluna": 7,
+       "numero": 14,
+       "letra": "G"
+      }
+     ],
+     [
+      {
+       "linha": 2,
+       "coluna": 1,
+       "numero": 31,
+       "letra": "P"
+      },
+      {
+       "linha": 2,
+       "coluna": 2,
+       "numero": 25,
+       "letra": "M"
+      },
+      {
+       "linha": 2,
+       "coluna": 3,
+       "numero": 2,
+       "letra": "N"
+      },
+      {
+       "linha": 2,
+       "coluna": 4,
+       "numero": 18,
+       "letra": "N"
+      },
+      {
+       "linha": 2,
+       "coluna": 5,
+       "numero": 44,
+       "letra": "E"
+      },
+      {
+       "linha": 2,
+       "coluna": 6,
+       "numero": 8,
+       "letra": "O"
+      },
+      {
+       "linha": 2,
+       "coluna": 7,
+       "numero": 30,
+       "letra": "R"
+      }
+     ],
+     [
+      {
+       "linha": 3,
+       "coluna": 1,
+       "numero": 7,
+       "letra": "L"
+      },
+      {
+       "linha": 3,
+       "coluna": 2,
+       "numero": 15,
+       "letra": "A"
+      },
+      {
+       "linha": 3,
+       "coluna": 3,
+       "numero": 38,
+       "letra": "M"
+      },
+      {
+       "linha": 3,
+       "coluna": 4,
+       "numero": 32,
+       "letra": "O"
+      },
+      {
+       "linha": 3,
+       "coluna": 5,
+       "numero": 43,
+       "letra": "M"
+      },
+      {
+       "linha": 3,
+       "coluna": 6,
+       "numero": 29,
+       "letra": "S"
+      },
+      {
+       "linha": 3,
+       "coluna": 7,
+       "numero": 28,
+       "letra": "L"
+      }
+     ],
+     [
+      {
+       "linha": 4,
+       "coluna": 1,
+       "numero": 35,
+       "letra": "D"
+      },
+      {
+       "linha": 4,
+       "coluna": 2,
+       "numero": 37,
+       "letra": "L"
+      },
+      {
+       "linha": 4,
+       "coluna": 3,
+       "numero": 3,
+       "letra": "N"
+      },
+      {
+       "linha": 4,
+       "coluna": 4,
+       "numero": 13,
+       "letra": "S"
+      },
+      {
+       "linha": 4,
+       "coluna": 5,
+       "numero": 42,
+       "letra": "I"
+      },
+      {
+       "linha": 4,
+       "coluna": 6,
+       "numero": 12,
+       "letra": "N"
+      },
+      {
+       "linha": 4,
+       "coluna": 7,
+       "numero": 33,
+       "letra": "I"
+      }
+     ],
+     [
+      {
+       "linha": 5,
+       "coluna": 1,
+       "numero": 1,
+       "letra": "I"
+      },
+      {
+       "linha": 5,
+       "coluna": 2,
+       "numero": 17,
+       "letra": "P"
+      },
+      {
+       "linha": 5,
+       "coluna": 3,
+       "numero": 16,
+       "letra": "M"
+      },
+      {
+       "linha": 5,
+       "coluna": 4,
+       "numero": 46,
+       "letra": "D"
+      },
+      {
+       "linha": 5,
+       "coluna": 5,
+       "numero": 5,
+       "letra": "M"
+      },
+      {
+       "linha": 5,
+       "coluna": 6,
+       "numero": 40,
+       "letra": "N"
+      },
+      {
+       "linha": 5,
+       "coluna": 7,
+       "numero": 21,
+       "letra": "E"
+      }
+     ],
+     [
+      {
+       "linha": 6,
+       "coluna": 1,
+       "numero": 27,
+       "letra": "N"
+      },
+      {
+       "linha": 6,
+       "coluna": 2,
+       "numero": 23,
+       "letra": "S"
+      },
+      {
+       "linha": 6,
+       "coluna": 3,
+       "numero": 4,
+       "letra": "G"
+      },
+      {
+       "linha": 6,
+       "coluna": 4,
+       "numero": 36,
+       "letra": "P"
+      },
+      {
+       "linha": 6,
+       "coluna": 5,
+       "numero": 26,
+       "letra": "P"
+      },
+      {
+       "linha": 6,
+       "coluna": 6,
+       "numero": 47,
+       "letra": "N"
+      },
+      {
+       "linha": 6,
+       "coluna": 7,
+       "numero": 20,
+       "letra": "M"
+      }
+     ],
+     [
+      {
+       "linha": 7,
+       "coluna": 1,
+       "numero": 9,
+       "letra": "A"
+      },
+      {
+       "linha": 7,
+       "coluna": 2,
+       "numero": 10,
+       "letra": "M"
+      },
+      {
+       "linha": 7,
+       "coluna": 3,
+       "numero": 24,
+       "letra": "C"
+      },
+      {
+       "linha": 7,
+       "coluna": 4,
+       "numero": 22,
+       "letra": "E"
+      },
+      {
+       "linha": 7,
+       "coluna": 5,
+       "numero": 34,
+       "letra": "O"
+      },
+      {
+       "linha": 7,
+       "coluna": 6,
+       "numero": 11,
+       "letra": "N"
+      },
+      {
+       "linha": 7,
+       "coluna": 7,
+       "numero": 48,
+       "letra": "F"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "T5",
+    "posicao": "abaixo, metade direita",
+    "dom_declarado": "qualidade da terra e das aguas",
+    "objeto_da_portadora": "ervas",
+    "rotulo_marginal_dee": "Terra",
+    "celulas": [
+     [
+      {
+       "linha": 1,
+       "coluna": 1,
+       "numero": 8,
+       "letra": "G"
+      },
+      {
+       "linha": 1,
+       "coluna": 2,
+       "numero": 41,
+       "letra": "I"
+      },
+      {
+       "linha": 1,
+       "coluna": 3,
+       "numero": 16,
+       "letra": "O"
+      },
+      {
+       "linha": 1,
+       "coluna": 4,
+       "numero": 48,
+       "letra": "O"
+      },
+      {
+       "linha": 1,
+       "coluna": 5,
+       "numero": 43,
+       "letra": "A"
+      },
+      {
+       "linha": 1,
+       "coluna": 6,
+       "numero": 7,
+       "letra": "A",
+       "numero_proposto": 17,
+       "nota": "numero 7 repetido na tabela e 17 ausente; a letra 'A' e a exigida pelo nome 17 da Tabula Collecta. Proposta derivada, nao leitura."
+      },
+      {
+       "linha": 1,
+       "coluna": 7,
+       "numero": 49,
+       "letra": "O"
+      }
+     ],
+     [
+      {
+       "linha": 2,
+       "coluna": 1,
+       "numero": 3,
+       "letra": "D",
+       "numero_proposto": 32,
+       "nota": "numero 3 repetido na tabela e 32 ausente; a letra 'D' e a exigida pelo nome 32 da Tabula Collecta. Proposta derivada, nao leitura."
+      },
+      {
+       "linha": 2,
+       "coluna": 2,
+       "numero": 19,
+       "letra": "I"
+      },
+      {
+       "linha": 2,
+       "coluna": 3,
+       "numero": 44,
+       "letra": "N"
+      },
+      {
+       "linha": 2,
+       "coluna": 4,
+       "numero": 13,
+       "letra": "F"
+      },
+      {
+       "linha": 2,
+       "coluna": 5,
+       "numero": 47,
+       "letra": "G"
+      },
+      {
+       "linha": 2,
+       "coluna": 6,
+       "numero": 38,
+       "letra": "I"
+      },
+      {
+       "linha": 2,
+       "coluna": 7,
+       "numero": 3,
+       "letra": "I"
+      }
+     ],
+     [
+      {
+       "linha": 3,
+       "coluna": 1,
+       "numero": 7,
+       "letra": "E"
+      },
+      {
+       "linha": 3,
+       "coluna": 2,
+       "numero": 15,
+       "letra": "A",
+       "numero_proposto": 35,
+       "nota": "numero 15 repetido na tabela e 35 ausente; a letra 'A' e a exigida pelo nome 35 da Tabula Collecta. Proposta derivada, nao leitura."
+      },
+      {
+       "linha": 3,
+       "coluna": 3,
+       "numero": 2,
+       "letra": "O"
+      },
+      {
+       "linha": 3,
+       "coluna": 4,
+       "numero": 27,
+       "letra": "A"
+      },
+      {
+       "linha": 3,
+       "coluna": 5,
+       "numero": 42,
+       "letra": "G"
+      },
+      {
+       "linha": 3,
+       "coluna": 6,
+       "numero": 10,
+       "letra": "E"
+      },
+      {
+       "linha": 3,
+       "coluna": 7,
+       "numero": 18,
+       "letra": "T"
+      }
+     ],
+     [
+      {
+       "linha": 4,
+       "coluna": 1,
+       "numero": 31,
+       "letra": "A"
+      },
+      {
+       "linha": 4,
+       "coluna": 2,
+       "numero": 12,
+       "letra": "G"
+      },
+      {
+       "linha": 4,
+       "coluna": 3,
+       "numero": 25,
+       "letra": "A"
+      },
+      {
+       "linha": 4,
+       "coluna": 4,
+       "numero": 20,
+       "letra": "A"
+      },
+      {
+       "linha": 4,
+       "coluna": 5,
+       "numero": 40,
+       "letra": "P"
+      },
+      {
+       "linha": 4,
+       "coluna": 6,
+       "numero": 15,
+       "letra": "L"
+      },
+      {
+       "linha": 4,
+       "coluna": 7,
+       "numero": 29,
+       "letra": "P"
+      }
+     ],
+     [
+      {
+       "linha": 5,
+       "coluna": 1,
+       "numero": 6,
+       "letra": "G"
+      },
+      {
+       "linha": 5,
+       "coluna": 2,
+       "numero": 23,
+       "letra": "D"
+      },
+      {
+       "linha": 5,
+       "coluna": 3,
+       "numero": 22,
+       "letra": "P"
+      },
+      {
+       "linha": 5,
+       "coluna": 4,
+       "numero": 1,
+       "letra": "G"
+      },
+      {
+       "linha": 5,
+       "coluna": 5,
+       "numero": 30,
+       "letra": "G"
+      },
+      {
+       "linha": 5,
+       "coluna": 6,
+       "numero": 5,
+       "letra": "A"
+      },
+      {
+       "linha": 5,
+       "coluna": 7,
+       "numero": 46,
+       "letra": "V"
+      }
+     ],
+     [
+      {
+       "linha": 6,
+       "coluna": 1,
+       "numero": 37,
+       "letra": "G"
+      },
+      {
+       "linha": 6,
+       "coluna": 2,
+       "numero": 9,
+       "letra": "F"
+      },
+      {
+       "linha": 6,
+       "coluna": 3,
+       "numero": 4,
+       "letra": "E"
+      },
+      {
+       "linha": 6,
+       "coluna": 4,
+       "numero": 24,
+       "letra": "E"
+      },
+      {
+       "linha": 6,
+       "coluna": 5,
+       "numero": 34,
+       "letra": "F"
+      },
+      {
+       "linha": 6,
+       "coluna": 6,
+       "numero": 33,
+       "letra": "G"
+      },
+      {
+       "linha": 6,
+       "coluna": 7,
+       "numero": 21,
+       "letra": "F"
+      }
+     ],
+     [
+      {
+       "linha": 7,
+       "coluna": 1,
+       "numero": 36,
+       "letra": "S"
+      },
+      {
+       "linha": 7,
+       "coluna": 2,
+       "numero": 45,
+       "letra": "I"
+      },
+      {
+       "linha": 7,
+       "coluna": 3,
+       "numero": 26,
+       "letra": "A"
+      },
+      {
+       "linha": 7,
+       "coluna": 4,
+       "numero": 14,
+       "letra": "O"
+      },
+      {
+       "linha": 7,
+       "coluna": 5,
+       "numero": 39,
+       "letra": "N"
+      },
+      {
+       "linha": 7,
+       "coluna": 6,
+       "numero": 11,
+       "letra": "O"
+      },
+      {
+       "linha": 7,
+       "coluna": 7,
+       "numero": 18,
+       "letra": "G",
+       "numero_proposto": 28,
+       "nota": "numero 18 repetido na tabela e 28 ausente; a letra 'G' e a exigida pelo nome 28 da Tabula Collecta. Proposta derivada, nao leitura."
+      }
+     ]
+    ]
+   },
+   {
+    "id": "T6",
+    "posicao": "abaixo, metade esquerda",
+    "dom_declarado": "movimento do ar e dos que nele se movem",
+    "objeto_da_portadora": "leque",
+    "rotulo_marginal_dee": "Aer",
+    "celulas": [
+     [
+      {
+       "linha": 1,
+       "coluna": 1,
+       "numero": 36,
+       "letra": "E"
+      },
+      {
+       "linha": 1,
+       "coluna": 2,
+       "numero": 47,
+       "letra": "E"
+      },
+      {
+       "linha": 1,
+       "coluna": 3,
+       "numero": 14,
+       "letra": "L"
+      },
+      {
+       "linha": 1,
+       "coluna": 4,
+       "numero": 27,
+       "letra": "F"
+      },
+      {
+       "linha": 1,
+       "coluna": 5,
+       "numero": 49,
+       "letra": "D"
+      },
+      {
+       "linha": 1,
+       "coluna": 6,
+       "numero": 13,
+       "letra": "L"
+      },
+      {
+       "linha": 1,
+       "coluna": 7,
+       "numero": 16,
+       "letra": "N"
+      }
+     ],
+     [
+      {
+       "linha": 2,
+       "coluna": 1,
+       "numero": 12,
+       "letra": "L"
+      },
+      {
+       "linha": 2,
+       "coluna": 2,
+       "numero": 32,
+       "letra": "A"
+      },
+      {
+       "linha": 2,
+       "coluna": 3,
+       "numero": 26,
+       "letra": "G"
+      },
+      {
+       "linha": 2,
+       "coluna": 4,
+       "numero": 24,
+       "letra": "O"
+      },
+      {
+       "linha": 2,
+       "coluna": 5,
+       "numero": 41,
+       "letra": "R"
+      },
+      {
+       "linha": 2,
+       "coluna": 6,
+       "numero": 31,
+       "letra": "L"
+      },
+      {
+       "linha": 2,
+       "coluna": 7,
+       "numero": 19,
+       "letra": "O"
+      }
+     ],
+     [
+      {
+       "linha": 3,
+       "coluna": 1,
+       "numero": 22,
+       "letra": "O"
+      },
+      {
+       "linha": 3,
+       "coluna": 2,
+       "numero": 29,
+       "letra": "O"
+      },
+      {
+       "linha": 3,
+       "coluna": 3,
+       "numero": 2,
+       "letra": "G"
+      },
+      {
+       "linha": 3,
+       "coluna": 4,
+       "numero": 7,
+       "letra": "D"
+      },
+      {
+       "linha": 3,
+       "coluna": 5,
+       "numero": 25,
+       "letra": "R"
+      },
+      {
+       "linha": 3,
+       "coluna": 6,
+       "numero": 1,
+       "letra": "O"
+      },
+      {
+       "linha": 3,
+       "coluna": 7,
+       "numero": 5,
+       "letra": "P"
+      }
+     ],
+     [
+      {
+       "linha": 4,
+       "coluna": 1,
+       "numero": 6,
+       "letra": "A"
+      },
+      {
+       "linha": 4,
+       "coluna": 2,
+       "numero": 15,
+       "letra": "E"
+      },
+      {
+       "linha": 4,
+       "coluna": 3,
+       "numero": 34,
+       "letra": "O"
+      },
+      {
+       "linha": 4,
+       "coluna": 4,
+       "numero": 4,
+       "letra": "M"
+      },
+      {
+       "linha": 4,
+       "coluna": 5,
+       "numero": 33,
+       "letra": "E"
+      },
+      {
+       "linha": 4,
+       "coluna": 6,
+       "numero": 30,
+       "letra": "E"
+      },
+      {
+       "linha": 4,
+       "coluna": 7,
+       "numero": 20,
+       "letra": "L"
+      }
+     ],
+     [
+      {
+       "linha": 5,
+       "coluna": 1,
+       "numero": 37,
+       "letra": "E"
+      },
+      {
+       "linha": 5,
+       "coluna": 2,
+       "numero": 9,
+       "letra": "E"
+      },
+      {
+       "linha": 5,
+       "coluna": 3,
+       "numero": 18,
+       "letra": "O"
+      },
+      {
+       "linha": 5,
+       "coluna": 4,
+       "numero": 10,
+       "letra": "L"
+      },
+      {
+       "linha": 5,
+       "coluna": 5,
+       "numero": 21,
+       "letra": "O"
+      },
+      {
+       "linha": 5,
+       "coluna": 6,
+       "numero": 28,
+       "letra": "E"
+      },
+      {
+       "linha": 5,
+       "coluna": 7,
+       "numero": 3,
+       "letra": "D"
+      }
+     ],
+     [
+      {
+       "linha": 6,
+       "coluna": 1,
+       "numero": 17,
+       "letra": "M"
+      },
+      {
+       "linha": 6,
+       "coluna": 2,
+       "numero": 39,
+       "letra": "A"
+      },
+      {
+       "linha": 6,
+       "coluna": 3,
+       "numero": 35,
+       "letra": "G"
+      },
+      {
+       "linha": 6,
+       "coluna": 4,
+       "numero": 38,
+       "letra": "L"
+      },
+      {
+       "linha": 6,
+       "coluna": 5,
+       "numero": 8,
+       "letra": "E"
+      },
+      {
+       "linha": 6,
+       "coluna": 6,
+       "numero": 11,
+       "letra": "L"
+      },
+      {
+       "linha": 6,
+       "coluna": 7,
+       "numero": 23,
+       "letra": "O"
+      }
+     ],
+     [
+      {
+       "linha": 7,
+       "coluna": 1,
+       "numero": 44,
+       "letra": "O"
+      },
+      {
+       "linha": 7,
+       "coluna": 2,
+       "numero": 43,
+       "letra": "Z"
+      },
+      {
+       "linha": 7,
+       "coluna": 3,
+       "numero": 48,
+       "letra": "R"
+      },
+      {
+       "linha": 7,
+       "coluna": 4,
+       "numero": 40,
+       "letra": "O"
+      },
+      {
+       "linha": 7,
+       "coluna": 5,
+       "numero": 45,
+       "letra": "B"
+      },
+      {
+       "linha": 7,
+       "coluna": 6,
+       "numero": 42,
+       "letra": "A"
+      },
+      {
+       "linha": 7,
+       "coluna": 7,
+       "numero": 46,
+       "letra": "A"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "T7",
+    "posicao": "a esquerda do centro (grande)",
+    "dom_declarado": "sabedoria; governo no fogo; 'no comeco e ate o fim'",
+    "objeto_da_portadora": "chama de fogo",
+    "rotulo_marginal_dee": "Ignis",
+    "celulas": [
+     [
+      {
+       "linha": 1,
+       "coluna": 1,
+       "numero": 14,
+       "letra": "E"
+      },
+      {
+       "linha": 1,
+       "coluna": 2,
+       "numero": 49,
+       "letra": "E"
+      },
+      {
+       "linha": 1,
+       "coluna": 3,
+       "numero": 7,
+       "letra": "F"
+      },
+      {
+       "linha": 1,
+       "coluna": 4,
+       "numero": 25,
+       "letra": "A"
+      },
+      {
+       "linha": 1,
+       "coluna": 5,
+       "numero": 13,
+       "letra": "I"
+      },
+      {
+       "linha": 1,
+       "coluna": 6,
+       "numero": 47,
+       "letra": "F"
+      },
+      {
+       "linha": 1,
+       "coluna": 7,
+       "numero": 16,
+       "letra": "O"
+      }
+     ],
+     [
+      {
+       "linha": 2,
+       "coluna": 1,
+       "numero": 46,
+       "letra": "A"
+      },
+      {
+       "linha": 2,
+       "coluna": 2,
+       "numero": 36,
+       "letra": "N"
+      },
+      {
+       "linha": 2,
+       "coluna": 3,
+       "numero": 44,
+       "letra": "L"
+      },
+      {
+       "linha": 2,
+       "coluna": 4,
+       "numero": 42,
+       "letra": "N"
+      },
+      {
+       "linha": 2,
+       "coluna": 5,
+       "numero": 18,
+       "letra": "M"
+      },
+      {
+       "linha": 2,
+       "coluna": 6,
+       "numero": 45,
+       "letra": "O"
+      },
+      {
+       "linha": 2,
+       "coluna": 7,
+       "numero": 6,
+       "letra": "L"
+      }
+     ],
+     [
+      {
+       "linha": 3,
+       "coluna": 1,
+       "numero": 12,
+       "letra": "O"
+      },
+      {
+       "linha": 3,
+       "coluna": 2,
+       "numero": 41,
+       "letra": "O"
+      },
+      {
+       "linha": 3,
+       "coluna": 3,
+       "numero": 26,
+       "letra": "I"
+      },
+      {
+       "linha": 3,
+       "coluna": 4,
+       "numero": 43,
+       "letra": "A"
+      },
+      {
+       "linha": 3,
+       "coluna": 5,
+       "numero": 29,
+       "letra": "L"
+      },
+      {
+       "linha": 3,
+       "coluna": 6,
+       "numero": 39,
+       "letra": "B"
+      },
+      {
+       "linha": 3,
+       "coluna": 7,
+       "numero": 33,
+       "letra": "S"
+      }
+     ],
+     [
+      {
+       "linha": 4,
+       "coluna": 1,
+       "numero": 48,
+       "letra": "T"
+      },
+      {
+       "linha": 4,
+       "coluna": 2,
+       "numero": 31,
+       "letra": "O"
+      },
+      {
+       "linha": 4,
+       "coluna": 3,
+       "numero": 2,
+       "letra": "O"
+      },
+      {
+       "linha": 4,
+       "coluna": 4,
+       "numero": 32,
+       "letra": "B"
+      },
+      {
+       "linha": 4,
+       "coluna": 5,
+       "numero": 9,
+       "letra": "S"
+      },
+      {
+       "linha": 4,
+       "coluna": 6,
+       "numero": 38,
+       "letra": "A"
+      },
+      {
+       "linha": 4,
+       "coluna": 7,
+       "numero": 8,
+       "letra": "L"
+      }
+     ],
+     [
+      {
+       "linha": 5,
+       "coluna": 1,
+       "numero": 28,
+       "letra": "S"
+      },
+      {
+       "linha": 5,
+       "coluna": 2,
+       "numero": 15,
+       "letra": "L"
+      },
+      {
+       "linha": 5,
+       "coluna": 3,
+       "numero": 17,
+       "letra": "A",
+       "nota": "o numero 17 aparece duas vezes em T7 e o 27 falta; as duas casas tem letra A, que serve aos dois nomes (17 Bazpama, 27 Barnafa); nao e possivel decidir qual das duas e o 27"
+      },
+      {
+       "linha": 5,
+       "coluna": 4,
+       "numero": 10,
+       "letra": "O"
+      },
+      {
+       "linha": 5,
+       "coluna": 5,
+       "numero": 3,
+       "letra": "O"
+      },
+      {
+       "linha": 5,
+       "coluna": 6,
+       "numero": 30,
+       "letra": "S"
+      },
+      {
+       "linha": 5,
+       "coluna": 7,
+       "numero": 20,
+       "letra": "E"
+      }
+     ],
+     [
+      {
+       "linha": 6,
+       "coluna": 1,
+       "numero": 40,
+       "letra": "L"
+      },
+      {
+       "linha": 6,
+       "coluna": 2,
+       "numero": 34,
+       "letra": "N"
+      },
+      {
+       "linha": 6,
+       "coluna": 3,
+       "numero": 37,
+       "letra": "S"
+      },
+      {
+       "linha": 6,
+       "coluna": 4,
+       "numero": 19,
+       "letra": "P"
+      },
+      {
+       "linha": 6,
+       "coluna": 5,
+       "numero": 4,
+       "letra": "E"
+      },
+      {
+       "linha": 6,
+       "coluna": 6,
+       "numero": 5,
+       "letra": "O"
+      },
+      {
+       "linha": 6,
+       "coluna": 7,
+       "numero": 22,
+       "letra": "R"
+      }
+     ],
+     [
+      {
+       "linha": 7,
+       "coluna": 1,
+       "numero": 24,
+       "letra": "R"
+      },
+      {
+       "linha": 7,
+       "coluna": 2,
+       "numero": 1,
+       "letra": "N"
+      },
+      {
+       "linha": 7,
+       "coluna": 3,
+       "numero": 35,
+       "letra": "O"
+      },
+      {
+       "linha": 7,
+       "coluna": 4,
+       "numero": 23,
+       "letra": "N"
+      },
+      {
+       "linha": 7,
+       "coluna": 5,
+       "numero": 11,
+       "letra": "E"
+      },
+      {
+       "linha": 7,
+       "coluna": 6,
+       "numero": 21,
+       "letra": "N"
+      },
+      {
+       "linha": 7,
+       "coluna": 7,
+       "numero": 17,
+       "letra": "A",
+       "nota": "o numero 17 aparece duas vezes em T7 e o 27 falta; as duas casas tem letra A, que serve aos dois nomes (17 Bazpama, 27 Barnafa); nao e possivel decidir qual das duas e o 27"
+      }
+     ]
+    ]
+   }
+  ],
+  "nota_rotulos": "Dee comenta a margem que estranha a terra e as aguas atribuidas a uma so (5a)",
+  "nota_correcao_t2": "Dee: na linha '39 V . 47 L ...' da segunda tabela havia 7 casas e so 6 numeros; no dia seguinte E.T. viu que o que estava na 6a casa ia para a 7a e que a casa vazia era a 6a, com '30 N' (assim na transcricao JDPP). A tabela publicada tem 36N na 6a casa e 30R na 7a; os nomes 36 (BNAPSEN) e 30 (BRORGES) exigem 36=N e 30=R, de modo que '30 N' parece lapso por '36 N' (de Dee ou da transcricao) - nao verificavel sem o manuscrito.",
+  "marcas_holden": "o PDF de Holden pinta algumas casas de preto (T2: 15A, 30R, 41A; T3: 18I, 19A, 48R, 38R, 44G) e poe outras em vermelho (T2: 43R; T3: 35R) sem explicar; registradas em 'marca_holden'"
+ },
+ "nomes_derivados_das_tabelas": [
+  {
+   "n": 1,
+   "tabula_collecta": "BALIGON",
+   "lido_das_tabelas": "BALIGON",
+   "com_renumeracao_proposta": "BALIGON",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 2,
+   "tabula_collecta": "BORNOGO",
+   "lido_das_tabelas": "BORNOGO",
+   "com_renumeracao_proposta": "BORNOGO",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 3,
+   "tabula_collecta": "Bapnido",
+   "lido_das_tabelas": "BAPN[D/I]DO",
+   "com_renumeracao_proposta": "BAPNIDO",
+   "status": "confere_com_renumeracao_proposta",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 4,
+   "tabula_collecta": "Besgeme",
+   "lido_das_tabelas": "BESGEME",
+   "com_renumeracao_proposta": "BESGEME",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 5,
+   "tabula_collecta": "Blumapo",
+   "lido_das_tabelas": "BLVMAPO",
+   "com_renumeracao_proposta": "BLVMAPO",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 6,
+   "tabula_collecta": "Bmamgal",
+   "lido_das_tabelas": "BMAMGAL",
+   "com_renumeracao_proposta": "BMAMGAL",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 7,
+   "tabula_collecta": "Basledf",
+   "lido_das_tabelas": "BASL[A/E]DF",
+   "com_renumeracao_proposta": "BASLEDF",
+   "status": "confere_com_renumeracao_proposta",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 8,
+   "tabula_collecta": "BOBOGEL",
+   "lido_das_tabelas": "BOBOGEL",
+   "com_renumeracao_proposta": "BOBOGEL",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 9,
+   "tabula_collecta": "BEFAFES",
+   "lido_das_tabelas": "BEFAFES",
+   "com_renumeracao_proposta": "BEFAFES",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 10,
+   "tabula_collecta": "Basmelo",
+   "lido_das_tabelas": "BASMELO",
+   "com_renumeracao_proposta": "BASMELO",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 11,
+   "tabula_collecta": "Bernole",
+   "lido_das_tabelas": "BERNOLE",
+   "com_renumeracao_proposta": "BERNOLE",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 12,
+   "tabula_collecta": "Branglo",
+   "lido_das_tabelas": "BRANGLO",
+   "com_renumeracao_proposta": "BRANGLO",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 13,
+   "tabula_collecta": "Brisfli",
+   "lido_das_tabelas": "BRISFLI",
+   "com_renumeracao_proposta": "BRISFLI",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 14,
+   "tabula_collecta": "Bnagole",
+   "lido_das_tabelas": "BNAGOLE",
+   "com_renumeracao_proposta": "BNAGOLE",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 15,
+   "tabula_collecta": "BABALEL",
+   "lido_das_tabelas": "BABA[A/L]EL",
+   "com_renumeracao_proposta": "BABALEL",
+   "status": "confere_com_renumeracao_proposta",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 16,
+   "tabula_collecta": "BVTMONO",
+   "lido_das_tabelas": "BVTMONO",
+   "com_renumeracao_proposta": "BVTMONO",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 17,
+   "tabula_collecta": "Bazpama",
+   "lido_das_tabelas": "BAZP?MA",
+   "com_renumeracao_proposta": "BAZPAMA",
+   "status": "confere_com_renumeracao_proposta",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 18,
+   "tabula_collecta": "Blintom",
+   "lido_das_tabelas": "BLIN[T/G]OM",
+   "com_renumeracao_proposta": "BLINTOM",
+   "status": "confere_com_renumeracao_proposta",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 19,
+   "tabula_collecta": "Bragiop",
+   "lido_das_tabelas": "BRAGIOP",
+   "com_renumeracao_proposta": "BRAGIOP",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 20,
+   "tabula_collecta": "Bermale",
+   "lido_das_tabelas": "BERMALE",
+   "com_renumeracao_proposta": "BERMALE",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 21,
+   "tabula_collecta": "Bonefon",
+   "lido_das_tabelas": "BONEFON",
+   "com_renumeracao_proposta": "BONEFON",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 22,
+   "tabula_collecta": "BYNEPOR",
+   "lido_das_tabelas": "BYNEPOR",
+   "com_renumeracao_proposta": "BYNEPOR",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 23,
+   "tabula_collecta": "BLISDON",
+   "lido_das_tabelas": "BLISDON",
+   "com_renumeracao_proposta": "BLISDON",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 24,
+   "tabula_collecta": "Balceor",
+   "lido_das_tabelas": "BALCEOR",
+   "com_renumeracao_proposta": "BALCEOR",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 25,
+   "tabula_collecta": "Belmara",
+   "lido_das_tabelas": "BELMARA",
+   "com_renumeracao_proposta": "BELMARA",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 26,
+   "tabula_collecta": "Benpagi",
+   "lido_das_tabelas": "BENPAGI",
+   "com_renumeracao_proposta": "BENPAGI",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 27,
+   "tabula_collecta": "Barnafa",
+   "lido_das_tabelas": "BARNAF?",
+   "com_renumeracao_proposta": "BARNAF?",
+   "status": "lacuna_numero_ausente",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 28,
+   "tabula_collecta": "Bmilges",
+   "lido_das_tabelas": "BMIL?ES",
+   "com_renumeracao_proposta": "BMILGES",
+   "status": "confere_com_renumeracao_proposta",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 29,
+   "tabula_collecta": "BNASPOL",
+   "lido_das_tabelas": "BMASPOL",
+   "com_renumeracao_proposta": "BMASPOL",
+   "status": "letra_diverge",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 30,
+   "tabula_collecta": "BRORGES",
+   "lido_das_tabelas": "BRORGES",
+   "com_renumeracao_proposta": "BRORGES",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 31,
+   "tabula_collecta": "Baspalo",
+   "lido_das_tabelas": "BASPALO",
+   "com_renumeracao_proposta": "BASPALO",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 32,
+   "tabula_collecta": "Binodab",
+   "lido_das_tabelas": "BINO?AB",
+   "com_renumeracao_proposta": "BINODAB",
+   "status": "confere_com_renumeracao_proposta",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 33,
+   "tabula_collecta": "Bariges",
+   "lido_das_tabelas": "BARIGES",
+   "com_renumeracao_proposta": "BARIGES",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 34,
+   "tabula_collecta": "Binofon",
+   "lido_das_tabelas": "BINOFON",
+   "com_renumeracao_proposta": "BINOFON",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 35,
+   "tabula_collecta": "Baldago",
+   "lido_das_tabelas": "BARD?GO",
+   "com_renumeracao_proposta": "BARDAGO",
+   "status": "letra_diverge",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 36,
+   "tabula_collecta": "BNAPSEN",
+   "lido_das_tabelas": "BNAPSEN",
+   "com_renumeracao_proposta": "BNAPSEN",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 37,
+   "tabula_collecta": "BRALGES",
+   "lido_das_tabelas": "BRALGES",
+   "com_renumeracao_proposta": "BRALGES",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 38,
+   "tabula_collecta": "Bormila",
+   "lido_das_tabelas": "BORMILA",
+   "com_renumeracao_proposta": "BORMILA",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 39,
+   "tabula_collecta": "Buscnab",
+   "lido_das_tabelas": "BVSCNAB",
+   "com_renumeracao_proposta": "BVSCNAB",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 40,
+   "tabula_collecta": "Bminpol",
+   "lido_das_tabelas": "BMINPOL",
+   "com_renumeracao_proposta": "BMINPOL",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 41,
+   "tabula_collecta": "Bartiro",
+   "lido_das_tabelas": "BARTIRO",
+   "com_renumeracao_proposta": "BARTIRO",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 42,
+   "tabula_collecta": "Bliigan",
+   "lido_das_tabelas": "BLIIGAN",
+   "com_renumeracao_proposta": "BLIIGAN",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 43,
+   "tabula_collecta": "BLVMAZA",
+   "lido_das_tabelas": "BRVMAZA",
+   "com_renumeracao_proposta": "BRVMAZA",
+   "status": "letra_diverge",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 44,
+   "tabula_collecta": "BAGENOL",
+   "lido_das_tabelas": "BAGENOL",
+   "com_renumeracao_proposta": "BAGENOL",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 45,
+   "tabula_collecta": "Bablibo",
+   "lido_das_tabelas": "BABLIBO",
+   "com_renumeracao_proposta": "BABLIBO",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 46,
+   "tabula_collecta": "Busduna",
+   "lido_das_tabelas": "BVSDVAA",
+   "com_renumeracao_proposta": "BVSDVAA",
+   "status": "letra_diverge",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 47,
+   "tabula_collecta": "Blingef",
+   "lido_das_tabelas": "BLINGEF",
+   "com_renumeracao_proposta": "BLINGEF",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 48,
+   "tabula_collecta": "Barfort",
+   "lido_das_tabelas": "BARFORT",
+   "com_renumeracao_proposta": "BARFORT",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  },
+  {
+   "n": 49,
+   "tabula_collecta": "Bamnode",
+   "lido_das_tabelas": "BAMNODE",
+   "com_renumeracao_proposta": "BAMNODE",
+   "status": "confere",
+   "nota_uv": "comparacao trata U e V como a mesma letra"
+  }
+ ],
+ "reis_e_principes": [
+  {
+   "rei": "BOBOGEL",
+   "principe": "BORNOGO",
+   "dia": "domingo",
+   "n_rei": 8,
+   "n_principe": 2,
+   "oficio_rei": "distribuir sabedoria e ciencia; ensino da verdadeira filosofia",
+   "oficio_principe": "mudar a corrupcao da natureza em perfeicao; conhecimento dos metais",
+   "aparicao_rei": "casaco de veludo preto, trajes de cavalheiro, rapieira dourada, barba longa",
+   "selo_principe": {
+    "descricao_dee": "'This is my Seale. This my true Character'",
+    "imagem": "http://www.esotericarchives.com/dee/hm9.jpg"
+   },
+   "caractere_rei": {
+    "imagem": "http://www.esotericarchives.com/dee/hm8.jpg",
+    "nomes_legiveis": [
+     "Aue"
+    ]
+   },
+   "mostrado_chm": "em quadrado e em circulo",
+   "ministros_42": {
+    "descricao": "tabela de 6 linhas x 7 letras, como escrita em HM e CHM",
+    "linhas_hm": [
+     "LEENARB",
+     "LNANAEB",
+     "ROEMNAB",
+     "LEAORIB",
+     "NEICIAB",
+     "AOIDIAB"
+    ],
+    "linhas_chm": [
+     "LEENARB",
+     "LNANAEB",
+     "ROEMNAB",
+     "LEAORIB",
+     "NEICIAB",
+     "AOIDIAB"
+    ],
+    "hm_igual_chm": true,
+    "colunas_derivadas": [
+     "LLRLNA",
+     "ENOEEO",
+     "EAEAII",
+     "NNMOCD",
+     "AANRII",
+     "REAIAA",
+     "BBBBBB"
+    ],
+    "nota": "Dee registra as duas contagens (6 nomes de 7 letras / 7 nomes) e diz nao conseguir concilia-las; as linhas e colunas aqui sao so a grade, sem afirmar qual e a leitura correta. HM usa o sinal Delta onde CHM tem D."
+   },
+   "planeta_coordinatio": "Sol",
+   "grupo_tabula_collecta": 2
+  },
+  {
+   "rei": "CARMARA (= BALIGON; entre os anjos MARMARA, sem pronunciar o M)",
+   "principe": "HAGONEL",
+   "dia": "segunda-feira",
+   "n_rei": 1,
+   "n_principe": null,
+   "oficio_rei": "ordenador de toda a doutrina heptarquica; recebeu de Uriel a vara de ouro de medir",
+   "oficio_principe": "a operacao da terra lhe e sujeita; 'o primeiro dos doze'; 'Primus et Quartus'; os Filii Lucis e seus filhos lhe sao sujeitos",
+   "aparicao_rei": "homem bem proporcionado, manto longo purpura, coroa tripla de ouro",
+   "selo_principe": {
+    "nome": "Barees",
+    "descricao_dee": "anel redondo com um ponto no meio (simbolo semelhante ao do Sol)",
+    "imagem": "http://www.esotericarchives.com/dee/hm4.gif"
+   },
+   "caractere_rei": {
+    "imagem": "http://www.esotericarchives.com/dee/hm2.jpg",
+    "descricao_dee": "'Ecce signum operis': duas letras, direita e invertida, numa bandeira branca"
+   },
+   "servos_do_principe": {
+    "filii_lucis": [
+     "I",
+     "Ih",
+     "Ilr",
+     "Dmal",
+     "Heeoa",
+     "Beigia",
+     "Stimcul"
+    ],
+    "filii_filiorum": [
+     "El",
+     "An",
+     "Aue",
+     "Liba",
+     "Rocle",
+     "Hagonel",
+     "Ilemese"
+    ],
+    "nota_dee": "'In Sigillo Emeth'"
+   },
+   "mostrado_chm": "so em quadrado",
+   "nota": "Hagonel nao esta entre os 49 da Tabula Collecta; aparece como sexto dos Filii Filiorum do Sigillum",
+   "ministros_42": {
+    "descricao": "tabela de 6 linhas x 7 letras, como escrita em HM e CHM",
+    "linhas_hm": [
+     "OESNGLE",
+     "AVZNILN",
+     "YLLMAFS",
+     "NRSOGOO",
+     "NRRCPRN",
+     "LABDGRE"
+    ],
+    "linhas_chm": [
+     "OESNGLE",
+     "AVZNILN",
+     "YLLMAFS",
+     "NRSOGOO",
+     "NRRCPRN",
+     "LABDGRE"
+    ],
+    "hm_igual_chm": true,
+    "colunas_derivadas": [
+     "OAYNNL",
+     "EVLRRA",
+     "SZLSRB",
+     "NNMOCD",
+     "GIAGPG",
+     "LLFORR",
+     "ENSONE"
+    ],
+    "nota": "Dee registra as duas contagens (6 nomes de 7 letras / 7 nomes) e diz nao conseguir concilia-las; as linhas e colunas aqui sao so a grade, sem afirmar qual e a leitura correta. HM usa o sinal Delta onde CHM tem D.",
+    "nota_chm_celula": "CHM: no ms. a 2a casa da 1a linha tem F com ponto embaixo e um E (tambem com ponto) acima"
+   },
+   "planeta_coordinatio": "Venus",
+   "grupo_tabula_collecta": 1
+  },
+  {
+   "rei": "BABALEL",
+   "principe": "BEFAFES",
+   "dia": "terca-feira",
+   "n_rei": 15,
+   "n_principe": 9,
+   "oficio_rei": "rei nas aguas; poder nas entranhas das aguas",
+   "oficio_principe": "principe dos mares; chamado OBELISON pelos egipcios",
+   "aparicao_rei": "coroa de ouro, manto esbranquicado, manga esquerda branca e direita preta, de pe sobre a agua, nome escrito na testa",
+   "selo_principe": {
+    "imagem": "http://www.esotericarchives.com/dee/hm12.jpg"
+   },
+   "caractere_rei": {
+    "imagem": "http://www.esotericarchives.com/dee/hm11.jpg",
+    "nomes_legiveis": [
+     "Liba"
+    ]
+   },
+   "mostrado_chm": "so em quadrado",
+   "ministros_42": {
+    "descricao": "tabela de 6 linhas x 7 letras, como escrita em HM e CHM",
+    "linhas_hm": [
+     "EILOMFO",
+     "NEOTPTA",
+     "SAGACIY",
+     "ONEDPON",
+     "NOONMAN",
+     "ETEVLGL"
+    ],
+    "linhas_chm": [
+     "EILOMFO",
+     "NEOTPTA",
+     "SAGACIY",
+     "ONEDPON",
+     "NOONMAN",
+     "ETEVLGL"
+    ],
+    "hm_igual_chm": true,
+    "colunas_derivadas": [
+     "ENSONE",
+     "IEANOT",
+     "LOGEOE",
+     "OTADNV",
+     "MPCPML",
+     "FTIOAG",
+     "OAYNNL"
+    ],
+    "nota": "Dee registra as duas contagens (6 nomes de 7 letras / 7 nomes) e diz nao conseguir concilia-las; as linhas e colunas aqui sao so a grade, sem afirmar qual e a leitura correta. HM usa o sinal Delta onde CHM tem D."
+   },
+   "planeta_coordinatio": "Marte",
+   "grupo_tabula_collecta": 3
+  },
+  {
+   "rei": "BNASPOL",
+   "principe": "BLISDON",
+   "dia": "quarta-feira",
+   "n_rei": 29,
+   "n_principe": 23,
+   "oficio_rei": "a terra com suas entranhas e segredos",
+   "oficio_principe": "as chaves dos misterios da terra",
+   "aparicao_rei": "manto vermelho e coroa",
+   "selo_principe": {
+    "imagem": "http://www.esotericarchives.com/dee/hm18.jpg"
+   },
+   "caractere_rei": {
+    "imagem": "http://www.esotericarchives.com/dee/hm17.jpg",
+    "nomes_legiveis": [
+     "An"
+    ]
+   },
+   "mostrado_chm": "so em circulo",
+   "nota": "Dee: Blisdon sera o principe proprio de Bnaspol (e Butmono de Bynepor), embora as falas os troquem",
+   "ministros_42": {
+    "descricao": "tabela de 6 linhas x 7 letras, como escrita em HM e CHM",
+    "linhas_hm": [
+     "ELGNSEB",
+     "NLINZVB",
+     "SFAMLLB",
+     "OOGOSRS",
+     "NRPCRRB",
+     "ergdbab"
+    ],
+    "linhas_chm": [
+     "ELGNSEB",
+     "NLINZVB",
+     "SFAMLLB",
+     "OOGOSRS",
+     "NRPCRRB",
+     "ergdbab"
+    ],
+    "hm_igual_chm": true,
+    "colunas_derivadas": [
+     "ENSONe",
+     "LLFORr",
+     "GIAGPg",
+     "NNMOCd",
+     "SZLSRb",
+     "EVLRRa",
+     "BBBSBb"
+    ],
+    "nota": "Dee registra as duas contagens (6 nomes de 7 letras / 7 nomes) e diz nao conseguir concilia-las; as linhas e colunas aqui sao so a grade, sem afirmar qual e a leitura correta. HM usa o sinal Delta onde CHM tem D."
+   },
+   "planeta_coordinatio": "Mercurio",
+   "grupo_tabula_collecta": 5
+  },
+  {
+   "rei": "BYNEPOR",
+   "principe": "BVTMONO",
+   "dia": "quinta-feira",
+   "n_rei": 22,
+   "n_principe": 16,
+   "oficio_rei": "da distribuicao de seu poder depende a condicao geral de todas as coisas",
+   "oficio_principe": "vida e sopro nas criaturas vivas",
+   "aparicao_rei": "como rei, seguido do principe e de 42 ministros",
+   "selo_principe": {
+    "imagem": "http://www.esotericarchives.com/dee/hm15.jpg"
+   },
+   "caractere_rei": {
+    "imagem": "http://www.esotericarchives.com/dee/hm14.jpg",
+    "nomes_legiveis": [
+     "Ized",
+     "Rocle"
+    ]
+   },
+   "mostrado_chm": "so em quadrado",
+   "ministros_42": {
+    "descricao": "tabela de 6 linhas x 7 letras, como escrita em HM e CHM",
+    "linhas_hm": [
+     "BBARNFL",
+     "BBAIGAO",
+     "BBALPAE",
+     "BBANIFG",
+     "BBOSNIA",
+     "BBASNOD"
+    ],
+    "linhas_chm": [
+     "BBARNFL",
+     "BBAIGAO",
+     "BBALPAE",
+     "BBANIFG",
+     "BBOSNIA",
+     "BBASNOD"
+    ],
+    "hm_igual_chm": true,
+    "colunas_derivadas": [
+     "BBBBBB",
+     "BBBBBB",
+     "AAAAOA",
+     "RILNSS",
+     "NGPINN",
+     "FAAFIO",
+     "LOEGAD"
+    ],
+    "nota": "Dee registra as duas contagens (6 nomes de 7 letras / 7 nomes) e diz nao conseguir concilia-las; as linhas e colunas aqui sao so a grade, sem afirmar qual e a leitura correta. HM usa o sinal Delta onde CHM tem D."
+   },
+   "planeta_coordinatio": "Jupiter",
+   "grupo_tabula_collecta": 4
+  },
+  {
+   "rei": "BALIGON (= CARMARA)",
+   "principe": "BAGENOL",
+   "dia": "sexta-feira",
+   "n_rei": 1,
+   "n_principe": 44,
+   "oficio_rei": "tudo o que se pode operar em acoes aereas; indicou a pedra de visao",
+   "oficio_principe": null,
+   "aparicao_rei": "o mesmo Carmara: manto purpura, coroa tripla, vara de medir de ouro",
+   "selo_principe": null,
+   "caractere_rei": {
+    "imagem": "http://www.esotericarchives.com/dee/hm23.jpg",
+    "nomes_legiveis": [
+     "eL"
+    ]
+   },
+   "mostrado_chm": "so em circulo",
+   "nota": "Bagenol 'ainda nao apareceu com esse nome'; o rei governa ele mesmo os 42 ministros",
+   "ministros_42": {
+    "descricao": "tabela de 6 linhas x 7 letras, como escrita em HM e CHM",
+    "linhas_hm": [
+     "AOAYNNL",
+     "LBBNAAV",
+     "IOAESPM",
+     "GGLPPSA",
+     "OEEOOEZ",
+     "NLLRLNA"
+    ],
+    "linhas_chm": [
+     "AOAYNNL",
+     "LBBNAAV",
+     "IOAESPM",
+     "GGLPPSA",
+     "OEEOOEZ",
+     "NLLRLNA"
+    ],
+    "hm_igual_chm": true,
+    "colunas_derivadas": [
+     "ALIGON",
+     "OBOGEL",
+     "ABALEL",
+     "YNEPOR",
+     "NASPOL",
+     "NAPSEN",
+     "LVMAZA"
+    ],
+    "nota": "Dee registra as duas contagens (6 nomes de 7 letras / 7 nomes) e diz nao conseguir concilia-las; as linhas e colunas aqui sao so a grade, sem afirmar qual e a leitura correta. HM usa o sinal Delta onde CHM tem D."
+   },
+   "planeta_coordinatio": "Venus",
+   "grupo_tabula_collecta": 1
+  },
+  {
+   "rei": "BNAPSEN",
+   "principe": "BRORGES",
+   "dia": "sabado",
+   "n_rei": 36,
+   "n_principe": 30,
+   "oficio_rei": "expulsar o poder dos espiritos maus; conhecer as praticas dos homens maus",
+   "oficio_principe": "'Noui Ianuam Mortis'",
+   "aparicao_rei": "como rei, coroado",
+   "selo_principe": {
+    "imagem": "http://www.esotericarchives.com/dee/hm21.jpg"
+   },
+   "caractere_rei": {
+    "imagem": "http://www.esotericarchives.com/dee/hm20.jpg",
+    "nomes_legiveis": [
+     "HAGONEL"
+    ]
+   },
+   "mostrado_chm": "so em circulo",
+   "ministros_42": {
+    "descricao": "tabela de 6 linhas x 7 letras, como escrita em HM e CHM",
+    "linhas_hm": [
+     "BANSSZE",
+     "BYAPARE",
+     "BNAMGEN",
+     "BNVAGES",
+     "BLBOPOO",
+     "BABEPEN"
+    ],
+    "linhas_chm": [
+     "BANSSZE",
+     "BYAPARE",
+     "BNAMGEN",
+     "BNVAGES",
+     "BLBOPOO",
+     "BABEPEN"
+    ],
+    "hm_igual_chm": true,
+    "colunas_derivadas": [
+     "BBBBBB",
+     "AYNNLA",
+     "NAAVBB",
+     "SPMAOE",
+     "SAGGPP",
+     "ZREEOE",
+     "EENSON"
+    ],
+    "nota": "Dee registra as duas contagens (6 nomes de 7 letras / 7 nomes) e diz nao conseguir concilia-las; as linhas e colunas aqui sao so a grade, sem afirmar qual e a leitura correta. HM usa o sinal Delta onde CHM tem D."
+   },
+   "planeta_coordinatio": "Saturno",
+   "grupo_tabula_collecta": 6
+  },
+  {
+   "rei": "BLVMAZA",
+   "principe": "BRALGES",
+   "dia": null,
+   "n_rei": 43,
+   "n_principe": 37,
+   "oficio_rei": null,
+   "oficio_principe": "as criaturas do seu dominio sao invisiveis; 'ensinarei os nomes sem numeros'",
+   "aparicao_rei": "nao apareceu com esse nome",
+   "selo_principe": {
+    "descricao_dee": "selo de governo",
+    "imagem": "http://www.esotericarchives.com/dee/hm26b.jpg"
+   },
+   "caractere_rei": {
+    "imagem": "http://www.esotericarchives.com/dee/hm25.jpg",
+    "nomes_legiveis": [
+     "me?",
+     "se?"
+    ],
+    "nota": "leitura parcial e incerta"
+   },
+   "mostrado_chm": null,
+   "nota": "HM deixa em branco a metade superior da pagina de Blumaza e nao lhe da dia; CHM: Carmara supriu dois lugares de rei (segunda e sexta) e Blumaza nunca foi mencionado por ele",
+   "ministros_42": {
+    "descricao_dee": "poderes invisiveis, como pequenas fumacas brancas sem forma; sem tabela de letras"
+   },
+   "planeta_coordinatio": "Lua",
+   "grupo_tabula_collecta": 7
+  }
+ ],
+ "regras_hm": {
+  "planeta_e_dia": "HM cap. 7 da o dia de cada rei/principe; o planeta vem do setor da Coordinatio (e de HM f. 51r) em que o nome do rei abre o grupo",
+  "uso_diario": "rei e principe governam o dia inteiro; os demais (ministros) segundo as 6 partes do dia (Carmara, 20 nov 1582)",
+  "caracteres": "os caracteres dos reis estao no Globo; os dos principes, no Heptagono (Carmara, 21 nov 1582)",
+  "mesa_central": "Il (28 abr 1583): tirar os B dos 7 reis e 7 principes e dispo-los numa tabela de 12 x 7 (letras de tras para frente, comecando por Bobogel e Bornogo); resultado nao derivado aqui"
+ },
+ "hagonel_servos": {
+  "fonte": "HM f. 40r",
+  "filii_lucis": [
+   "I",
+   "Ih",
+   "Ilr",
+   "Dmal",
+   "Heeoa",
+   "Beigia",
+   "Stimcul"
+  ],
+  "filii_filiorum": [
+   "El",
+   "An",
+   "Aue",
+   "Liba",
+   "Rocle",
+   "Hagonel",
+   "Ilemese"
+  ],
+  "planetas_chm": {
+   "I/El": "Venus",
+   "Ih/An": "Mercurio",
+   "Ilr/Aue": "Sol",
+   "Dmal/Liba": "Marte",
+   "Heeoa/Rocle": "Jupiter",
+   "Beigia/Hagonel": "Saturno",
+   "Stimcul/Ilemese": "Lua"
+  }
+ },
+ "nao_obtido": [
+  "Tabula Angelorum Bonorum 49 de HM (f. 51r) nao transcrita letra a letra (so imagem; conferencia visual parcial)",
+  "tabela central de 12 x 7 da Mesa Santa (Mensa Foederis) nao derivada nem conferida",
+  "descricao dos selos dos principes: so referencias de imagem e frases de Dee; os desenhos nao foram vetorizados",
+  "versao 'reformada' ou da Golden Dawn da heptarquia: nao pesquisada (fora do escopo destas fontes)"
+ ]
+}

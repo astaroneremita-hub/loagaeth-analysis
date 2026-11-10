@@ -1,0 +1,1138 @@
+{
+ "titulo": "Palavras numericas das Chamadas (valor dado por Dee)",
+ "gerado_em": "2026-10-22",
+ "fontes": [
+  "chamadas.json (Sloane 3191 lido nas imagens + TFR/TCP A37412)"
+ ],
+ "convencoes": {
+  "posicao": "posicao da palavra na Chamada, numeracao de chamadas.json (Sloane 3191)",
+  "valor": "numero que Dee escreve no ingles (Sloane e/ou TFR). Nada inferido.",
+  "evidencia_tfr": "trecho do TFR (Casaubon 1659 = Cotton App. XLVI) com a pagina"
+ },
+ "cardinais": [
+  {
+   "chamada": 3,
+   "posicao": 8,
+   "palavra_sl3191": "os",
+   "chave": "os",
+   "ingles_sl3191": "12",
+   "valor": 12,
+   "tipo": "cardinal",
+   "forma_tfr": "OSLONDOH",
+   "ingles_tfr_tabela": "_12_ Kingdoms:",
+   "evidencia_tfr": [
+    {
+     "texto": "8 | HODNOLSO | 12 Kingdoms: | Os Lon doh  +  '[Os signifieth twelve]'",
+     "pagina": "97"
+    },
+    {
+     "texto": "lista numerada: '8 12 Kingdoms;'",
+     "pagina": "98"
+    }
+   ],
+   "nota_leitura_sl3191": null,
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 3,
+   "posicao": 10,
+   "palavra_sl3191": "Norz",
+   "chave": "norz",
+   "ingles_sl3191": "Six",
+   "valor": 6,
+   "tipo": "cardinal",
+   "forma_tfr": "NORZ",
+   "ingles_tfr_tabela": "six",
+   "evidencia_tfr": [
+    {
+     "texto": "9 | ZRON | six | Norz",
+     "pagina": "97"
+    },
+    {
+     "texto": "lista numerada: '9 six'",
+     "pagina": "98"
+    }
+   ],
+   "nota_leitura_sl3191": null,
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 3,
+   "posicao": 35,
+   "palavra_sl3191": "thil-n-os",
+   "chave": "thilnos",
+   "ingles_sl3191": "in seats 12",
+   "valor": 12,
+   "tipo": "cardinal dentro de palavra composta (\"in seats 12\")",
+   "forma_tfr": "THILNOS",
+   "ingles_tfr_tabela": "in seats _12._",
+   "evidencia_tfr": [
+    {
+     "texto": "33 | SONLIHT | in seats 12. | Thilnos",
+     "pagina": "96"
+    },
+    {
+     "texto": "lista numerada: '33 in seats 12 [or] in 12 seats'",
+     "pagina": "98"
+    }
+   ],
+   "nota_leitura_sl3191": null,
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 3,
+   "posicao": 42,
+   "palavra_sl3191": "Cla",
+   "chave": "cla",
+   "ingles_sl3191": ".456.",
+   "valor": 456,
+   "tipo": "cardinal",
+   "forma_tfr": "CLA",
+   "ingles_tfr_tabela": "456",
+   "evidencia_tfr": [
+    {
+     "texto": "40 | ALC | 456 | Cla",
+     "pagina": "96"
+    },
+    {
+     "texto": "lista numerada: '40 456.'",
+     "pagina": "98"
+    }
+   ],
+   "nota_leitura_sl3191": "palavra sublinhada",
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 4,
+   "posicao": 10,
+   "palavra_sl3191": "pd",
+   "chave": "pd",
+   "ingles_sl3191": "33",
+   "valor": 33,
+   "tipo": "cardinal",
+   "forma_tfr": "PD",
+   "ingles_tfr_tabela": "33",
+   "evidencia_tfr": [
+    {
+     "texto": "10 | DP | 33 | PD  (pronuncia 'Pe de')",
+     "pagina": "110"
+    },
+    {
+     "texto": "lista numerada: '11 — Thirty three'",
+     "pagina": "111"
+    }
+   ],
+   "nota_leitura_sl3191": null,
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 4,
+   "posicao": 15,
+   "palavra_sl3191": "Map-m",
+   "chave": "mapm",
+   "ingles_sl3191": ":9639:",
+   "valor": 9639,
+   "tipo": "cardinal",
+   "forma_tfr": "MAPM",
+   "ingles_tfr_tabela": "9639;",
+   "evidencia_tfr": [
+    {
+     "texto": "15 | MPAM | 9639; | Mapm",
+     "pagina": "110"
+    },
+    {
+     "texto": "lista numerada: '16 — 9639.'",
+     "pagina": "111"
+    }
+   ],
+   "nota_leitura_sl3191": "sublinhado",
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 4,
+   "posicao": 33,
+   "palavra_sl3191": "Cla",
+   "chave": "cla",
+   "ingles_sl3191": ":456:",
+   "valor": 456,
+   "tipo": "cardinal",
+   "forma_tfr": "CLA",
+   "ingles_tfr_tabela": "456",
+   "evidencia_tfr": [
+    {
+     "texto": "31 | ALC | 456 | Cla",
+     "pagina": "109"
+    },
+    {
+     "texto": "lista numerada: '33 — 456.'",
+     "pagina": "111"
+    }
+   ],
+   "nota_leitura_sl3191": "sublinhado",
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 5,
+   "posicao": 17,
+   "palavra_sl3191": "af",
+   "chave": "af",
+   "ingles_sl3191": "19",
+   "valor": 19,
+   "tipo": "cardinal",
+   "forma_tfr": "AF",
+   "ingles_tfr_tabela": "",
+   "evidencia_tfr": [
+    {
+     "texto": "ingles: 'nineteen —' {That is Af that word have not there.}",
+     "pagina": "191"
+    },
+    {
+     "texto": "recepcao: AF | Af.",
+     "pagina": "119"
+    }
+   ],
+   "nota_leitura_sl3191": "sublinhado",
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 5,
+   "posicao": 34,
+   "palavra_sl3191": "Peóal",
+   "chave": "peoal",
+   "ingles_sl3191": ":69636:",
+   "valor": 69636,
+   "tipo": "cardinal",
+   "forma_tfr": "PEOAL",
+   "ingles_tfr_tabela": "",
+   "evidencia_tfr": [
+    {
+     "texto": "ingles: '69636.' {Peral you want that word.}",
+     "pagina": "191"
+    },
+    {
+     "texto": "recepcao: PEOAL | Pe ó al.",
+     "pagina": "120"
+    }
+   ],
+   "nota_leitura_sl3191": "sublinhado",
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 6,
+   "posicao": 4,
+   "palavra_sl3191": "em",
+   "chave": "em",
+   "ingles_sl3191": "Nine,",
+   "valor": 9,
+   "tipo": "cardinal",
+   "forma_tfr": "EM",
+   "ingles_tfr_tabela": "",
+   "evidencia_tfr": [
+    {
+     "texto": "ingles: 'Nine'; 'There was no word there that signified Nine, the third word should be E M.'",
+     "pagina": "190"
+    },
+    {
+     "texto": "recepcao: EM | Em.",
+     "pagina": "121"
+    }
+   ],
+   "nota_leitura_sl3191": null,
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 6,
+   "posicao": 19,
+   "palavra_sl3191": "Acám",
+   "chave": "acam",
+   "ingles_sl3191": "7699:",
+   "valor": 7699,
+   "tipo": "cardinal",
+   "forma_tfr": "ACAM",
+   "ingles_tfr_tabela": "",
+   "evidencia_tfr": [
+    {
+     "texto": "ingles: '7699' {That word thou hast not, it is Acam.}",
+     "pagina": "190"
+    },
+    {
+     "texto": "recepcao: ACAM | A cám",
+     "pagina": "122"
+    }
+   ],
+   "nota_leitura_sl3191": "sublinhado",
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 7,
+   "posicao": 12,
+   "palavra_sl3191": "ni",
+   "chave": "ni",
+   "ingles_sl3191": ":28:",
+   "valor": 28,
+   "tipo": "cardinal",
+   "forma_tfr": "NI",
+   "ingles_tfr_tabela": "",
+   "evidencia_tfr": [
+    {
+     "texto": "ingles (Ilemese): 'Twenty eight' {Ile. .... Ni, That you have not.}",
+     "pagina": "199"
+    },
+    {
+     "texto": "recepcao: NI | Ni.",
+     "pagina": "124"
+    }
+   ],
+   "nota_leitura_sl3191": "sublinhado",
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 8,
+   "posicao": 6,
+   "palavra_sl3191": "ox",
+   "chave": "ox",
+   "ingles_sl3191": "26",
+   "valor": 26,
+   "tipo": "cardinal",
+   "forma_tfr": "OX",
+   "ingles_tfr_tabela": "",
+   "evidencia_tfr": [
+    {
+     "texto": "ingles: '26.'",
+     "pagina": "192"
+    },
+    {
+     "texto": "recepcao: OX | Ox.",
+     "pagina": "125"
+    }
+   ],
+   "nota_leitura_sl3191": "sublinhado",
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 9,
+   "posicao": 8,
+   "palavra_sl3191": "P",
+   "chave": "p",
+   "ingles_sl3191": ":8:",
+   "valor": 8,
+   "tipo": "cardinal",
+   "forma_tfr": null,
+   "ingles_tfr_tabela": null,
+   "evidencia_tfr": [
+    {
+     "texto": "ingles: 'eight' {Nal..... That is P. you have not mark the mysterie.}",
+     "pagina": "191"
+    },
+    {
+     "texto": "recepcao: 'You must after E fa fa fe, put a P.'",
+     "pagina": "128"
+    }
+   ],
+   "nota_leitura_sl3191": "sublinhado",
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 9,
+   "posicao": 26,
+   "palavra_sl3191": "cial",
+   "chave": "cial",
+   "ingles_sl3191": "9996",
+   "valor": 9996,
+   "tipo": "cardinal",
+   "forma_tfr": "CIAL",
+   "ingles_tfr_tabela": "",
+   "evidencia_tfr": [
+    {
+     "texto": "ingles: '9996 — That is,' {C. al, that you have not.}",
+     "pagina": "191"
+    },
+    {
+     "texto": "recepcao: CIAL {nota de margem '96'} | Si i. / Ci al.",
+     "pagina": "128"
+    }
+   ],
+   "nota_leitura_sl3191": "sublinhado",
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 10,
+   "posicao": 13,
+   "palavra_sl3191": "op",
+   "chave": "op",
+   "ingles_sl3191": ":22:",
+   "valor": 22,
+   "tipo": "cardinal",
+   "forma_tfr": null,
+   "ingles_tfr_tabela": null,
+   "evidencia_tfr": [
+    {
+     "texto": "ingles: 'Neasts 22.'",
+     "pagina": "192"
+    },
+    {
+     "texto": "recepcao: 'Between Chis and Virq, you must put in Op a word.'",
+     "pagina": "131"
+    }
+   ],
+   "nota_leitura_sl3191": "sublinhado",
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 10,
+   "posicao": 36,
+   "palavra_sl3191": "däox",
+   "chave": "daox",
+   "ingles_sl3191": "5678:",
+   "valor": 5678,
+   "tipo": "cardinal",
+   "forma_tfr": "DAOX",
+   "ingles_tfr_tabela": "",
+   "evidencia_tfr": [
+    {
+     "texto": "ingles: '5678.' {That is Daox that you have not.}",
+     "pagina": "192"
+    },
+    {
+     "texto": "recepcao: DAOX | Da ox; nota de margem '5678.' na linha seguinte",
+     "pagina": "131"
+    }
+   ],
+   "nota_leitura_sl3191": "sublinhado",
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 10,
+   "posicao": 38,
+   "palavra_sl3191": "ol",
+   "chave": "ol",
+   "ingles_sl3191": "[in ye 24th part]",
+   "valor": 24,
+   "tipo": "ordinal/fracao (\"in ye 24th part\")",
+   "forma_tfr": "OL",
+   "ingles_tfr_tabela": "",
+   "evidencia_tfr": [
+    {
+     "texto": "ingles: 'in the 24th. parte' / 'of a moment {Ol. That you have not.}'",
+     "pagina": "192"
+    },
+    {
+     "texto": "recepcao: OL | O l.",
+     "pagina": "132"
+    }
+   ],
+   "nota_leitura_sl3191": "sublinhado; ingles entre colchetes no manuscrito",
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 10,
+   "posicao": 59,
+   "palavra_sl3191": "matb",
+   "chave": "matb",
+   "ingles_sl3191": "1000",
+   "valor": 1000,
+   "tipo": "cardinal",
+   "forma_tfr": null,
+   "ingles_tfr_tabela": null,
+   "evidencia_tfr": [
+    {
+     "texto": "ingles: 'One rock bringeth out {Nal. ..... Math. you have it not.} a thousand —'",
+     "pagina": "192"
+    }
+   ],
+   "nota_leitura_sl3191": "sublinhado",
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 11,
+   "posicao": 5,
+   "palavra_sl3191": "O",
+   "chave": "o",
+   "ingles_sl3191": ":5:",
+   "valor": 5,
+   "tipo": "cardinal",
+   "forma_tfr": "O",
+   "ingles_tfr_tabela": "",
+   "evidencia_tfr": [
+    {
+     "texto": "ingles: 'there were Thunders 5.'",
+     "pagina": "193"
+    },
+    {
+     "texto": "recepcao: O | O.",
+     "pagina": "133"
+    }
+   ],
+   "nota_leitura_sl3191": "sublinhado",
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 11,
+   "posicao": 26,
+   "palavra_sl3191": "i-ga",
+   "chave": "iga",
+   "ingles_sl3191": "is 31:",
+   "valor": 31,
+   "tipo": "cardinal (Dee escreve \"i-ga\" = \"is 31\"; \"ga\" sublinhado)",
+   "forma_tfr": "IGA",
+   "ingles_tfr_tabela": "",
+   "evidencia_tfr": [
+    {
+     "texto": "ingles: 'whose Number is 31 — Ga.'",
+     "pagina": "193"
+    },
+    {
+     "texto": "recepcao: IGA | I ga.",
+     "pagina": "134"
+    }
+   ],
+   "nota_leitura_sl3191": "'ga' sublinhado",
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 12,
+   "posicao": 6,
+   "palavra_sl3191": "ob",
+   "chave": "ob",
+   "ingles_sl3191": ":28:",
+   "valor": 28,
+   "tipo": "cardinal",
+   "forma_tfr": "OB",
+   "ingles_tfr_tabela": "",
+   "evidencia_tfr": [
+    {
+     "texto": "ingles: 'are {ob..... That you have not} 28.'",
+     "pagina": "193"
+    },
+    {
+     "texto": "recepcao: OB | Ob.",
+     "pagina": "134"
+    }
+   ],
+   "nota_leitura_sl3191": "sublinhado",
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 12,
+   "posicao": 15,
+   "palavra_sl3191": "Mian",
+   "chave": "mian",
+   "ingles_sl3191": ":3663:",
+   "valor": 3663,
+   "tipo": "cardinal",
+   "forma_tfr": "MIAN",
+   "ingles_tfr_tabela": "",
+   "evidencia_tfr": [
+    {
+     "texto": "ingles: '3663.' {Mian.....}",
+     "pagina": "193"
+    },
+    {
+     "texto": "recepcao: MIAN | Mi an.",
+     "pagina": "135"
+    }
+   ],
+   "nota_leitura_sl3191": "sublinhado",
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 13,
+   "posicao": 4,
+   "palavra_sl3191": "vx",
+   "chave": "vx",
+   "ingles_sl3191": ":42:",
+   "valor": 42,
+   "tipo": "cardinal",
+   "forma_tfr": null,
+   "ingles_tfr_tabela": null,
+   "evidencia_tfr": [
+    {
+     "texto": "ingles: 'which have 42 — Ux. eyes'",
+     "pagina": "193"
+    },
+    {
+     "texto": "recepcao: 'Ux.' na coluna de pronuncia da linha OOAONA",
+     "pagina": "136"
+    }
+   ],
+   "nota_leitura_sl3191": "sublinhado",
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 14,
+   "posicao": 8,
+   "palavra_sl3191": "ol",
+   "chave": "ol",
+   "ingles_sl3191": "24",
+   "valor": 24,
+   "tipo": "cardinal (no Sloane 3191 ha \"ob\" escrito acima de \"ol\")",
+   "forma_tfr": null,
+   "ingles_tfr_tabela": null,
+   "evidencia_tfr": [
+    {
+     "texto": "ingles: 'which sit {Nal.... Ol....} on 24 seats'",
+     "pagina": "193"
+    }
+   ],
+   "nota_leitura_sl3191": "'ob' escrito acima (variante; TFR margem 'Ol')",
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 14,
+   "posicao": 16,
+   "palavra_sl3191": "Quar",
+   "chave": "quar",
+   "ingles_sl3191": ":1636:",
+   "valor": 1636,
+   "tipo": "cardinal",
+   "forma_tfr": null,
+   "ingles_tfr_tabela": null,
+   "evidencia_tfr": [
+    {
+     "texto": "ingles: 'which have under you {Nal.....Quar.} 1636.'",
+     "pagina": "193"
+    }
+   ],
+   "nota_leitura_sl3191": "sublinhado",
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 15,
+   "posicao": 7,
+   "palavra_sl3191": "darg",
+   "chave": "darg",
+   "ingles_sl3191": "6739",
+   "valor": 6739,
+   "tipo": "cardinal",
+   "forma_tfr": null,
+   "ingles_tfr_tabela": null,
+   "evidencia_tfr": [
+    {
+     "texto": "ingles: '6739.' {At large. Darg.....}",
+     "pagina": "193"
+    }
+   ],
+   "nota_leitura_sl3191": "sublinhado; pequeno sinal ('dg'?) sobre o g",
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 16,
+   "posicao": 14,
+   "palavra_sl3191": "Ëmod",
+   "chave": "emod",
+   "ingles_sl3191": "8763",
+   "valor": 8763,
+   "tipo": "cardinal",
+   "forma_tfr": "EMOD",
+   "ingles_tfr_tabela": "",
+   "evidencia_tfr": [
+    {
+     "texto": "ingles: 'with feet 8763 —' {Emod.}",
+     "pagina": "194"
+    },
+    {
+     "texto": "recepcao: EMOD | E mod.",
+     "pagina": "136"
+    }
+   ],
+   "nota_leitura_sl3191": "sublinhado",
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 17,
+   "posicao": 11,
+   "palavra_sl3191": "Faxs",
+   "chave": "faxs",
+   "ingles_sl3191": "7336",
+   "valor": 7336,
+   "tipo": "cardinal",
+   "forma_tfr": "TAXS",
+   "ingles_tfr_tabela": "",
+   "evidencia_tfr": [
+    {
+     "texto": "ingles: 'and hast 7336' {Faxs — Faxes or Faxis to be sounded. I find in the Call Taxs. I finde also in some words T or F indifferently used.}",
+     "pagina": "194"
+    },
+    {
+     "texto": "recepcao: TAXS | Taxs.",
+     "pagina": "135"
+    }
+   ],
+   "nota_leitura_sl3191": "sublinhado; na margem esquerda 'Δ Taxs' (variante)",
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  },
+  {
+   "chamada": 18,
+   "posicao": 14,
+   "palavra_sl3191": "erán",
+   "chave": "eran",
+   "ingles_sl3191": "6332",
+   "valor": 6332,
+   "tipo": "cardinal",
+   "forma_tfr": "ERAN",
+   "ingles_tfr_tabela": "",
+   "evidencia_tfr": [
+    {
+     "texto": "ingles: 'the secrets of Truth 6332 have their abiding' {Eran —}",
+     "pagina": "193-194"
+    },
+    {
+     "texto": "recepcao: ERAN | E ran.",
+     "pagina": "137"
+    }
+   ],
+   "nota_leitura_sl3191": "sublinhado",
+   "confere_ingles_sl3191": true,
+   "confere_tfr": true
+  }
+ ],
+ "somente_no_tfr": [
+  {
+   "chamada": 10,
+   "palavra_tfr": "Torb",
+   "valor": 100,
+   "evidencia": "ingles: 'roar with an hundred — Torb. mighty Earth-quakes.'",
+   "pagina_tfr": "192",
+   "situacao": "palavra nao presente no Sloane 3191 nem na recepcao do TFR; o Sloane cobre 'vohim ol gizyax od eors cocasg plosi' com o ingles de margem 'with a hundred mighty erthquakes and a thousand tymes as many', sem dividir por palavra"
+  },
+  {
+   "chamada": 10,
+   "palavra_tfr": "Math",
+   "valor": 1000,
+   "evidencia": "ingles: 'And a Thousand — Math. surges which rest not'",
+   "pagina_tfr": "192",
+   "situacao": "neste ponto (antes de 'surges' = molui) o Sloane 3191 nao tem 'matb'; o grupo de margem traz 'and a thousand tymes as many' sobre 'od eors cocasg plosi'. Nao resolvido qual palavra do Sloane corresponde a 'a thousand' aqui."
+  }
+ ],
+ "ordinais_unidades_fracoes": [
+  {
+   "chamada": 2,
+   "posicao": 6,
+   "palavra_sl3191": "vi-i-v",
+   "ingles_sl3191": "ô you the second",
+   "valor": 2,
+   "tipo": "ordinal"
+  },
+  {
+   "chamada": 2,
+   "posicao": 7,
+   "palavra_sl3191": "L",
+   "ingles_sl3191": "of the first,",
+   "valor": 1,
+   "tipo": "ordinal"
+  },
+  {
+   "chamada": 2,
+   "posicao": 40,
+   "palavra_sl3191": "goheL",
+   "ingles_sl3191": "sayth the First",
+   "valor": 1,
+   "tipo": "ordinal (dentro da palavra; L final maiuscula)"
+  },
+  {
+   "chamada": 3,
+   "posicao": 30,
+   "palavra_sl3191": "ili",
+   "ingles_sl3191": "In the first",
+   "valor": 1,
+   "tipo": "ordinal"
+  },
+  {
+   "chamada": 4,
+   "posicao": 19,
+   "palavra_sl3191": "c-rp-l",
+   "ingles_sl3191": "but one,",
+   "valor": 1,
+   "tipo": "unidade"
+  },
+  {
+   "chamada": 4,
+   "posicao": 32,
+   "palavra_sl3191": "ta-lo",
+   "ingles_sl3191": "as the first",
+   "valor": 1,
+   "tipo": "ordinal"
+  },
+  {
+   "chamada": 5,
+   "posicao": 27,
+   "palavra_sl3191": "L",
+   "ingles_sl3191": "of the first",
+   "valor": 1,
+   "tipo": "ordinal"
+  },
+  {
+   "chamada": 5,
+   "posicao": 28,
+   "palavra_sl3191": "tavíu",
+   "ingles_sl3191": "and second",
+   "valor": 2,
+   "tipo": "ordinal"
+  },
+  {
+   "chamada": 5,
+   "posicao": 39,
+   "palavra_sl3191": "la",
+   "ingles_sl3191": "the first",
+   "valor": 1,
+   "tipo": "ordinal (\"ta la\" = \"as the first\")"
+  },
+  {
+   "chamada": 5,
+   "posicao": 56,
+   "palavra_sl3191": "i-L",
+   "ingles_sl3191": "is all One.",
+   "valor": 1,
+   "tipo": "unidade"
+  },
+  {
+   "chamada": 6,
+   "posicao": 8,
+   "palavra_sl3191": "El",
+   "ingles_sl3191": "the first",
+   "valor": 1,
+   "tipo": "ordinal"
+  },
+  {
+   "chamada": 6,
+   "posicao": 29,
+   "palavra_sl3191": "ta viv",
+   "ingles_sl3191": "as the second",
+   "valor": 2,
+   "tipo": "ordinal"
+  },
+  {
+   "chamada": 6,
+   "posicao": 31,
+   "palavra_sl3191": "d",
+   "ingles_sl3191": "the third",
+   "valor": 3,
+   "tipo": "ordinal"
+  },
+  {
+   "chamada": 7,
+   "posicao": 27,
+   "palavra_sl3191": "chis tad",
+   "ingles_sl3191": "are as the third",
+   "valor": 3,
+   "tipo": "ordinal"
+  },
+  {
+   "chamada": 7,
+   "posicao": 28,
+   "palavra_sl3191": "odés",
+   "ingles_sl3191": "and fourth",
+   "valor": 4,
+   "tipo": "ordinal"
+  },
+  {
+   "chamada": 9,
+   "posicao": 10,
+   "palavra_sl3191": "olani",
+   "ingles_sl3191": "for two tymes",
+   "valor": 2,
+   "tipo": "multiplicativo"
+  },
+  {
+   "chamada": 9,
+   "posicao": 12,
+   "palavra_sl3191": "obza",
+   "ingles_sl3191": "a half:",
+   "valor": 0.5,
+   "tipo": "fracao"
+  },
+  {
+   "chamada": 10,
+   "posicao": 57,
+   "palavra_sl3191": "L pátralx",
+   "ingles_sl3191": "One rock",
+   "valor": 1,
+   "tipo": "unidade"
+  },
+  {
+   "chamada": 15,
+   "posicao": 3,
+   "palavra_sl3191": "Lialprt",
+   "ingles_sl3191": "of the first flame",
+   "valor": 1,
+   "tipo": "ordinal (dentro da palavra)"
+  },
+  {
+   "chamada": 16,
+   "posicao": 2,
+   "palavra_sl3191": "viuiälprt",
+   "ingles_sl3191": "second flame",
+   "valor": 2,
+   "tipo": "ordinal (dentro da palavra)"
+  },
+  {
+   "chamada": 17,
+   "posicao": 2,
+   "palavra_sl3191": "dialprt",
+   "ingles_sl3191": "third flame",
+   "valor": 3,
+   "tipo": "ordinal (dentro da palavra)"
+  },
+  {
+   "chamada": 19,
+   "posicao": 3,
+   "palavra_sl3191": "LIL",
+   "ingles_sl3191": "in the first Ayre,",
+   "valor": 1,
+   "tipo": "ordinal (nome do 1o Aire; troca a cada Aire)"
+  },
+  {
+   "chamada": 19,
+   "posicao": 65,
+   "palavra_sl3191": "Lnibm",
+   "ingles_sl3191": "One season",
+   "valor": 1,
+   "tipo": "unidade"
+  },
+  {
+   "chamada": 19,
+   "posicao": 107,
+   "palavra_sl3191": "L capimao",
+   "ingles_sl3191": "One while",
+   "valor": 1,
+   "tipo": "unidade"
+  },
+  {
+   "chamada": 19,
+   "posicao": 81,
+   "palavra_sl3191": "Ag L tortorn",
+   "ingles_sl3191": "no one Creature",
+   "valor": 1,
+   "tipo": "unidade"
+  },
+  {
+   "chamada": 19,
+   "posicao": 88,
+   "palavra_sl3191": "Lsmnad",
+   "ingles_sl3191": "one an other:",
+   "valor": 1,
+   "tipo": "unidade"
+  }
+ ],
+ "outros_candidatos_nao_classificados": [
+  {
+   "chamada": 3,
+   "posicao": 38,
+   "palavra_sl3191": "vomsarg",
+   "ingles_sl3191": "unto every one of you"
+  },
+  {
+   "chamada": 4,
+   "posicao": 12,
+   "palavra_sl3191": "vi-v-di-v",
+   "ingles_sl3191": "in the second Angle?"
+  },
+  {
+   "chamada": 4,
+   "posicao": 21,
+   "palavra_sl3191": "croodzi",
+   "ingles_sl3191": "the second beginning of things"
+  },
+  {
+   "chamada": 5,
+   "posicao": 3,
+   "palavra_sl3191": "du-i-v",
+   "ingles_sl3191": "in ye 3d Angle"
+  },
+  {
+   "chamada": 6,
+   "posicao": 2,
+   "palavra_sl3191": "s diu",
+   "ingles_sl3191": "of ye 4th Angle"
+  },
+  {
+   "chamada": 7,
+   "posicao": 6,
+   "palavra_sl3191": "ialpirgah",
+   "ingles_sl3191": "the flames of first glory"
+  },
+  {
+   "chamada": 8,
+   "posicao": 1,
+   "palavra_sl3191": "Bazmëlo",
+   "ingles_sl3191": "The Midday the first"
+  },
+  {
+   "chamada": 8,
+   "posicao": 3,
+   "palavra_sl3191": "piripson",
+   "ingles_sl3191": "the third heaven"
+  },
+  {
+   "chamada": 9,
+   "posicao": 4,
+   "palavra_sl3191": "napta",
+   "ingles_sl3191": "wth two edged swords"
+  },
+  {
+   "chamada": 10,
+   "grupo": "G1",
+   "ingles_grupo_sl3191": "with a hundred mighty erthquakes and a thousand tymes as many",
+   "palavras": [
+    "vohim",
+    "ol",
+    "gizyax",
+    "od",
+    "eors"
+   ]
+  },
+  {
+   "chamada": 19,
+   "posicao": 138,
+   "palavra_sl3191": "sagacor",
+   "ingles_sl3191": "in one number:"
+  }
+ ],
+ "conferencia": [
+  {
+   "conferencia": "mesma palavra, mesmo valor: 'cla'",
+   "ok": true,
+   "detalhe": [
+    {
+     "chamada": 3,
+     "posicao": 42,
+     "valor": 456,
+     "ingles_sl3191": ".456."
+    },
+    {
+     "chamada": 4,
+     "posicao": 33,
+     "valor": 456,
+     "ingles_sl3191": ":456:"
+    }
+   ]
+  },
+  {
+   "conferencia": "mesma palavra, mesmo valor: 'ol'",
+   "ok": true,
+   "detalhe": [
+    {
+     "chamada": 10,
+     "posicao": 38,
+     "valor": 24,
+     "ingles_sl3191": "[in ye 24th part]"
+    },
+    {
+     "chamada": 14,
+     "posicao": 8,
+     "valor": 24,
+     "ingles_sl3191": "24"
+    }
+   ]
+  },
+  {
+   "conferencia": "'os' = 12 tambem dentro de 'thil-n-os' (Chamada 3)",
+   "ok": true,
+   "detalhe": "Chamada 3: 'os' (pos 8) = 12 e 'thil-n-os' (pos 35) = 'in seats 12'; o TFR anota '[Os signifieth twelve]' (p. 97)"
+  },
+  {
+   "conferencia": "valor 12 dado por palavras diferentes",
+   "ok": null,
+   "detalhe": [
+    {
+     "chamada": 3,
+     "palavra": "os"
+    },
+    {
+     "chamada": 3,
+     "palavra": "thil-n-os"
+    }
+   ]
+  },
+  {
+   "conferencia": "valor 28 dado por palavras diferentes",
+   "ok": null,
+   "detalhe": [
+    {
+     "chamada": 7,
+     "palavra": "ni"
+    },
+    {
+     "chamada": 12,
+     "palavra": "ob"
+    }
+   ]
+  },
+  {
+   "conferencia": "Chamada 14: Sloane escreve 'ob' acima de 'ol' (24); 'ob' vale 28 na Chamada 12",
+   "ok": false,
+   "detalhe": {
+    "ol_chamada14": {
+     "pos": 8,
+     "ingles": "24",
+     "nota": "'ob' escrito acima (variante; TFR margem 'Ol')"
+    },
+    "ob_chamada12": {
+     "pos": 6,
+     "ingles": ":28:"
+    },
+    "tfr": "no ingles do TFR (p. 193) a nota e 'Nal.... Ol....' (24 seats). Ha conflito entre a correcao acima da linha no Sloane e o valor 24."
+   }
+  },
+  {
+   "conferencia": "valor do ingles do Sloane = valor da evidencia do TFR (todas as palavras cardinais)",
+   "ok": true,
+   "detalhe": "todas conferem"
+  },
+  {
+   "conferencia": "todo numero em algarismos no ingles do TFR (5 jul e 11 jul 1584) corresponde a uma palavra numerica registrada",
+   "ok": true,
+   "detalhe": {
+    "numeros_encontrados": [
+     5,
+     22,
+     24,
+     26,
+     28,
+     31,
+     42,
+     1636,
+     3663,
+     5678,
+     6332,
+     6739,
+     7336,
+     7699,
+     8763,
+     9996,
+     69636
+    ],
+    "sem_palavra": []
+   }
+  }
+ ]
+}

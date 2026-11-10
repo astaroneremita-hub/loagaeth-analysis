@@ -1,0 +1,3606 @@
+{
+ "types": 11401,
+ "tokens": 11910,
+ "vocabulary": [
+  {
+   "word": "NOCHASTOR",
+   "occurrences": 24,
+   "leaves": 18,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCHAPH",
+   "occurrences": 11,
+   "leaves": 7,
+   "in_leaf1": false
+  },
+  {
+   "word": "UDRAX",
+   "occurrences": 8,
+   "leaves": 7,
+   "in_leaf1": false
+  },
+  {
+   "word": "NODAX",
+   "occurrences": 8,
+   "leaves": 7,
+   "in_leaf1": true
+  },
+  {
+   "word": "NOCHA",
+   "occurrences": 8,
+   "leaves": 8,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOLZAD",
+   "occurrences": 8,
+   "leaves": 7,
+   "in_leaf1": false
+  },
+  {
+   "word": "ALGETH",
+   "occurrences": 7,
+   "leaves": 7,
+   "in_leaf1": false
+  },
+  {
+   "word": "GRADAX",
+   "occurrences": 7,
+   "leaves": 6,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCHAD",
+   "occurrences": 6,
+   "leaves": 5,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCLAX",
+   "occurrences": 6,
+   "leaves": 4,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCHAPAL",
+   "occurrences": 5,
+   "leaves": 5,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCHANZACH",
+   "occurrences": 5,
+   "leaves": 5,
+   "in_leaf1": false
+  },
+  {
+   "word": "NECHASTOR",
+   "occurrences": 5,
+   "leaves": 4,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCHADAX",
+   "occurrences": 4,
+   "leaves": 4,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOXAD",
+   "occurrences": 4,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "GETH",
+   "occurrences": 4,
+   "leaves": 4,
+   "in_leaf1": true
+  },
+  {
+   "word": "ALGED",
+   "occurrences": 4,
+   "leaves": 4,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXA",
+   "occurrences": 4,
+   "leaves": 4,
+   "in_leaf1": true
+  },
+  {
+   "word": "NOCHAST",
+   "occurrences": 4,
+   "leaves": 4,
+   "in_leaf1": false
+  },
+  {
+   "word": "LAX",
+   "occurrences": 4,
+   "leaves": 4,
+   "in_leaf1": true
+  },
+  {
+   "word": "ACHED",
+   "occurrences": 4,
+   "leaves": 4,
+   "in_leaf1": false
+  },
+  {
+   "word": "UOL",
+   "occurrences": 4,
+   "leaves": 4,
+   "in_leaf1": true
+  },
+  {
+   "word": "NOCHAP",
+   "occurrences": 4,
+   "leaves": 4,
+   "in_leaf1": false
+  },
+  {
+   "word": "ZICHASTOR",
+   "occurrences": 4,
+   "leaves": 4,
+   "in_leaf1": false
+  },
+  {
+   "word": "GEHUDRAX",
+   "occurrences": 4,
+   "leaves": 4,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOX",
+   "occurrences": 4,
+   "leaves": 3,
+   "in_leaf1": true
+  },
+  {
+   "word": "ACLAX",
+   "occurrences": 4,
+   "leaves": 4,
+   "in_leaf1": false
+  },
+  {
+   "word": "ADNOCHA",
+   "occurrences": 4,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "ADNOCHAPH",
+   "occurrences": 4,
+   "leaves": 4,
+   "in_leaf1": false
+  },
+  {
+   "word": "UOLCHASTOR",
+   "occurrences": 4,
+   "leaves": 4,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCHAPHAL",
+   "occurrences": 4,
+   "leaves": 4,
+   "in_leaf1": false
+  },
+  {
+   "word": "NACHASTOR",
+   "occurrences": 4,
+   "leaves": 4,
+   "in_leaf1": false
+  },
+  {
+   "word": "ALCHED",
+   "occurrences": 4,
+   "leaves": 4,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCLADAX",
+   "occurrences": 4,
+   "leaves": 4,
+   "in_leaf1": false
+  },
+  {
+   "word": "ARGETH",
+   "occurrences": 4,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "ARGETHAN",
+   "occurrences": 4,
+   "leaves": 4,
+   "in_leaf1": false
+  },
+  {
+   "word": "LUDRAX",
+   "occurrences": 4,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "ACHEL",
+   "occurrences": 4,
+   "leaves": 4,
+   "in_leaf1": false
+  },
+  {
+   "word": "UORGETH",
+   "occurrences": 4,
+   "leaves": 4,
+   "in_leaf1": false
+  },
+  {
+   "word": "ACLAXT",
+   "occurrences": 4,
+   "leaves": 4,
+   "in_leaf1": false
+  },
+  {
+   "word": "ADNAH",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": true
+  },
+  {
+   "word": "OCHADAX",
+   "occurrences": 3,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXADRAH",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXARDRAH",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "GRAPHAX",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "ZURAH",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "ZUREH",
+   "occurrences": 3,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ZUBLAH",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXADNACH",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOGAL",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "GEMNAPHE",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "UARGED",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "ACHANUAH",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "NACHO",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "ACHARDAN",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "ALDAX",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "UORTEX",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "ZUCHASTOR",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCHAR",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "ZINTAGNO",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "ACLAH",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "PLICHASTOR",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "UOLZED",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "HUDRAH",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "ADNOCHAD",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "ZIDNOCHA",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "UOCASTOR",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "ULGETH",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "UOLZAD",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "ANDRAX",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCHATH",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "UOLGED",
+   "occurrences": 3,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ALZEDNOCHA",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "GRAPHAD",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXATERON",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "UORTAX",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXALGED",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "PALGETH",
+   "occurrences": 3,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NACLAX",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "UARGETH",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "ALZEDNOC",
+   "occurrences": 3,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ACHANZACH",
+   "occurrences": 3,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "DRAX",
+   "occurrences": 3,
+   "leaves": 3,
+   "in_leaf1": false
+  },
+  {
+   "word": "NAXTAL",
+   "occurrences": 3,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NEOTERON",
+   "occurrences": 3,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "PRAH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": true
+  },
+  {
+   "word": "ARUANOL",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ONTANT",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "LUDRAH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ZANQUAH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "HANZACH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "UORT",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": true
+  },
+  {
+   "word": "NOXADNAH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORDRA",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ACHARMAH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "OLZAD",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ARAD",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NAPAH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ALCHADAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "UDAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "UOLTABNA",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "GEPHA",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "PARCHOL",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ALDIMACH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ADMACHAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORZACHAPH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "UDRAH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ONZADMACH",
+   "occurrences": 2,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ADOX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORCHAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCAS",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": true
+  },
+  {
+   "word": "NODANGED",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOXADAH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXANOL",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "GEMNACHO",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "UORTAL",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXADNACHO",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "UAGETH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXADUAH",
+   "occurrences": 2,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCHANUA",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXADNOPH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "DOH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": true
+  },
+  {
+   "word": "UOXADRAH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOPALGEN",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXANDAPH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ACHANZAN",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXANDRAH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXALGE",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "UORGEF",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ALDEN",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "LEX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOLZAB",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ACLAXTOH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "GEMNADOXA",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "GENUADAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "UNADAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NEH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": true
+  },
+  {
+   "word": "DRUX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": true
+  },
+  {
+   "word": "LAH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": true
+  },
+  {
+   "word": "PARCHEF",
+   "occurrences": 2,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GUDABRA",
+   "occurrences": 2,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORCHA",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": true
+  },
+  {
+   "word": "DRO",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NACHEPHAL",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXALGRADAH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "PARGETH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCHAN",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ZICHADAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "GED",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": true
+  },
+  {
+   "word": "UOLZACHA",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NACHED",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ALGEDNOCHA",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "UNGEN",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NAPHAN",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "GEHUDRAH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "LOGED",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXADOXA",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORZIBLETH",
+   "occurrences": 2,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ULDAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ALCHIDON",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NADONZACHI",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "GALZED",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "UDRACLAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOXADNO",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ADNOCHAN",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "UAGES",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": true
+  },
+  {
+   "word": "ACHALDAN",
+   "occurrences": 2,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ADNOCHAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "AXAL",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "PRACHAD",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ALZACHAN",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "GENTAGLAD",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ADNACHADAN",
+   "occurrences": 2,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ALGEBRAH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NAC",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": true
+  },
+  {
+   "word": "ALZICHAD",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "DAXALGRA",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "PROXTAXAL",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXADNO",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NODANTAGETH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ALCHIDONAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "OLGLADAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ALGRADAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ALCHUDAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ONZACHAR",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "GRANAD",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ALCHANTAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ADNACHO",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "UOLZIBLAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "TOTERON",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ALZUDRAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "DRAH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORINTAGNAH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "UNZACHAP",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOLZADNOCHA",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "UOXARDRAH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ACHADNAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "PRICHASTOR",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "GULAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOXADNACHA",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCHANTAG",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCHASTER",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ADROX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NACHODAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "GENSODAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "UALGED",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ADNACHAN",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "DOLZACHI",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ZUDAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ZACHALZED",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOXADNOCHA",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "LAXTOR",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ACHENZAD",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "OLCHADOX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCHARTAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "APLAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "PROXTAL",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NODAL",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "CLAXTOR",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NAPLAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ADRONZA",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "CLANTAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOGAH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "TANTOXAL",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCHASTORA",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCHAS",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": true
+  },
+  {
+   "word": "ADONZACH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ZABULAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ZINTAGNACHO",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "AXULGETH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ULZADCHA",
+   "occurrences": 2,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOZADNA",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "UNGETH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ADNOCHEPH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ZACHIDAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOXAL",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ADROXACH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "DRAGATH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "GETHACLOX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NECHAST",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOXALGETH",
+   "occurrences": 2,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ALZED",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "UALZED",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCHADAN",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "OLGATH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOGRAPH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ALGETHA",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "UICRAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORGETH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": true
+  },
+  {
+   "word": "NOCHANZO",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NEOTEROH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCHANTANT",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "GETHAN",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "CLAXT",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ASTORAH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "TALGETHA",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ADNACHEPH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "UANTOL",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "DROXA",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "DRON",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": true
+  },
+  {
+   "word": "ONZACHI",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NECHAL",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "GEDOTHA",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ZINTAGLAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCLAD",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOTALGATH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "GEDNOCHA",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCHANTAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCHATERON",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "AUINTO",
+   "occurrences": 2,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "CLAXTOTER",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NAXOCH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOGRADAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "DONTAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "URGETH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ZINTAG",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXAD",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": true
+  },
+  {
+   "word": "NOXTALGED",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "LEOD",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "LEXOD",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ALCHAD",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ALGETHAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOGRAX",
+   "occurrences": 2,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCATH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ACLAXTAR",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "AXARGETH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCHARP",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NECHASTORA",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ARCHID",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOXTAL",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "DONGRAPHA",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCLADAN",
+   "occurrences": 2,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UOLCHEF",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ACHAD",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "URGENOTH",
+   "occurrences": 2,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UNZACH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "UALGETH",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ZINTOX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ARDROX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ZACHAD",
+   "occurrences": 2,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ACHEROX",
+   "occurrences": 2,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "NAX",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": true
+  },
+  {
+   "word": "AXTOTERO",
+   "occurrences": 2,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "NODANZACH",
+   "occurrences": 2,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ANNT",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ARDA",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "LAZ",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": true
+  },
+  {
+   "word": "AXA",
+   "occurrences": 2,
+   "leaves": 1,
+   "in_leaf1": true
+  },
+  {
+   "word": "ARNA",
+   "occurrences": 2,
+   "leaves": 2,
+   "in_leaf1": false
+  },
+  {
+   "word": "ABIMACHA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UORTNA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "LUMANGEN",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UADAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOTAGEL",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "DOMCHA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORPRICAAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "SEMDAPHAN",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "LONDARSAMUI",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GAHORNAB",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GANSASTROPHE",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXARUAS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ULLAMPHRA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ONELDAR",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "SEQNAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UORTIBAL",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GEMAHOXAB",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "NAPUSAGET",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "URODANSEL",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "AUIOLIGAX",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "BRIDAGES",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORMONUANS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "CAPNAGOL",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ARUAHGOLS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ARDNAHOH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "SABLIGAN",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UONLOHADUREL",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOCAPLIGAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UORTS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": true
+  },
+  {
+   "word": "ALAPHO",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOMRUSTAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UOXUOLSA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "CABNAGEMGLEM",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ARGEPSAGEPH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORSONADAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GILBAFA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXIFALASQAM",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ODIBRAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GEHOHADAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UORTOLAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UNDAPAR",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "APINAS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXARUAGAT",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ANQUANZOH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GEBURNAX",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UOLS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GEDURA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOBALSET",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ARQUINAR",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORANDAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UORSABAGEL",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ARMAUAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GOLSAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GELZADOCH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UANCHANOL",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "URNDAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UASTERMAX",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GASPICHADAN",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "LORADOXMAR",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UAHANGAR",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UAHOHADNAB",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "EPANFLAS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORSTAMPALOR",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "NODAGEUOXA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "FRANAGLAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORCHADUAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "NAMPICHADON",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UARNTGEM",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "DOLPHAS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OCARDANS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORSEMBLOHHAR",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GABURBAGET",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "AXUANEL",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORDAMHAP",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ASCHADAMPRAX",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OLSEGANAR",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORDEPHAL",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "CANUIBULOH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GAUAR",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GETHOTHAX",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GNABLAP",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORSESQUAMAX",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UIRDRAL",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OMPRINGEM",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "MAXUAR",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OLCALPSADA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OMPHILOH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "IOMNA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UOXARSUBRAL",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "NAXORNA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UILGLOLAX",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ARGGAMNAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORNAMUAIOD",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GALSAQUAX",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UORDASAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OSCHAMEL",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ONDAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": true
+  },
+  {
+   "word": "UARSTATQSGAL",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GINACHAX",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "LORNEFA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "CAMPIDAU",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UONS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": true
+  },
+  {
+   "word": "URDUGLAQ",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "SEBNAGEMFAL",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORCHMINAX",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UOSTARQ",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "CONSANGLAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORPINGEU",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UOMNARGEM",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OLOGATARMA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "NODORPHA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "NADULGES",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ASTODAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "DABAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UONSARDNABRA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GEHOHANS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UNGABA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "LODARGEMAHAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOBTHU",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UDRUMAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OLZAXCOH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ZEDBAAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "NORGEH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ALPHAD",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "NURNGANFAGEN",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "SELDAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXIRDEE",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ODFALDNAS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ULATQUAMAR",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ANGELSCOH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ADORNPAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GELSABA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORDAMBH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXORGUNSA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UOMFAGEM",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "NORUAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OSTORNAB",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GEDACHE",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "MANSEBAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORSAGENS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "LANTAF",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXAGCI",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ARPQUANS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "TENSAGOH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OPPOHACHAN",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "DORS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "NAPOTTA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ULZECHORDA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UONSEMBLADOX",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UARSISTAMAN",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ONCLIARGED",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORCHANNAB",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "PHA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": true
+  },
+  {
+   "word": "DOLSAPOGEM",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "PARCHAFAF",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ALNOHANAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "CAPNARCOLSA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "LAUENOB",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "SEMBLACMAR",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ONOLA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "SATAGENS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ARCHUBAMNI",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GEHOLCHAF",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UOROMAX",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "SENTIGANABAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "DADADAB",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORXAMGEDCHU",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UARFES",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORCHAPLUHO",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "QUALTAQ",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "HONFAS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GETHUDABAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORNACHES",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "DONSI",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "CHAMLCTAT",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "FALSISTHNI",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "FROMSABUAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "TORSAGLAD",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "DORAMPHAN",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GEDHADMAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "LUZANSARCHU",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "POLNAPFAF",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXMAL",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ZURAGED",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "DALPLAPS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ANFAXURNOH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "LAMZADONFAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "LUZONCHE",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ZAZMAFAL",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GANGEPARNAL",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UOMFEROCAX",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "SZUMNALZEB",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "LOHODADMAR",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOGASTROPAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OLCHINADAX",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UARUESE",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXNOLSAP",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "APPRILSANFAX",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "URZANGEZ",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OLPILZACAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ZURDAPHOLDAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ODARUAN",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ONDEMBLEH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "NABLARUMAX",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ZONGHOXAR",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "PANFAS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORZAXMALS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ZALDBLAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ONZAPORCHEF",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "LAPNAGE",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ARDUMAN",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "LONSAGLIGARB",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UNAHTEMPAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXLAGES",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ARCHU",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "NOLZAX",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ARNIDONBRAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "DAXLAF",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORGILABA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXPASEH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GRANS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "SENONAPEN",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "DOLBABALAX",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "NODCHADARPH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ASCHLAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "DALUMNAGENS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORCHALDABRAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "CAPNACOFAN",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ALGEDUAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ZONGLAFA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UXCHALS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORPHINGANPH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "AMPUGEDH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GALZEPT",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORZAZAX",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "PROM",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "MOCHADOLBAD",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ADAGRAN",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "HUNZARAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXARUAGEM",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "DOLDAX",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "POLIPODNS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "AUNA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UOLSEDBRA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OLPHANCHES",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORSAMPHOCHA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "POLZANOXUAM",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ABBROHDAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GEPSAB",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OLDAMPNAGEB",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "DOLBADAB",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ARBIMADON",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "TALZEBRAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OXCHILAZED",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ONDRIN",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "LUDUBRAXO",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GAMAXODAA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OLTAQUAL",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "LONGELS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ASCHUNAD",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ONSABULAXT",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORGEDON",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ANQUARTAPAN",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "DOCHABAMANOH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GESDAMAN",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "OLPALGED",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "DODDABULAD",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ASCHIMAN",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ARNUAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GUBRUHHO",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GALSAITONAM",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "PAMLASETH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORSABLAX",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "DOTHMAL",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORPHANZOH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GELBAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORCHINAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "DOXAM",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": true
+  },
+  {
+   "word": "ALPAMLAP",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "UOXTOA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "BAZIOCADA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "MACOLZEDGAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ONGEHALZA",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "PIMACHEPH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "LATQUANS",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ULSGOT",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "NACHAPOLAH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "GEMBELIOH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ARDAMUAGEL",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  },
+  {
+   "word": "ORCAMINOH",
+   "occurrences": 1,
+   "leaves": 1,
+   "in_leaf1": false
+  }
+ ]
+}

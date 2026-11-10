@@ -1,126 +1,185 @@
 # Loagaeth Analysis
 
-A reproducible, dependency-free statistical analysis of John Dee's *Liber Loagaeth*
-(the 49 tables of the Angelical / Enochian system, British Library Sloane MS 3189).
+A reproducible, dependency-free toolkit for studying John Dee's Enochian / Angelical
+system as **data** - above all the *Liber Loagaeth* (the 49 tables of letters,
+British Library Sloane MS 3189), plus the Great Table, the 91 governors, the 19 Calls,
+the Heptarchia and the Sigillum.
 
-It treats the tables as data and asks one question with discipline: **which apparent
-patterns survive a proper null model, and which are artifacts of the text's own
-texture?** Everything here runs on the Python standard library alone. Fixed random
-seeds, so every number below is reproducible by running the code.
+It has one discipline and one promise. The discipline: **no apparent pattern counts as
+a finding until it beats a null model** that preserves the text's own texture, so we
+report what fails as loudly as what survives. The promise: everything runs on the
+Python standard library alone, with fixed seeds, so every number in these docs is one
+command away from being reproduced or refuted.
 
-> **Honest framing.** This does not decipher the Loagaeth. It maps its structure,
-> shows what looks like real word-formation, and rules out a stack of popular
-> "keys." The meaning is still sealed and probably opens only from an external
-> anchor (the attested sense of a single Loagaeth name). Negative results are
-> shipped as first-class findings (see module 08).
+> This does **not** decipher the Loagaeth. It maps the structure, shows what looks like
+> real word-formation, rules out a stack of popular "keys," and ships the recursive
+> engine we used to tell structure from coincidence. The meaning is still sealed and
+> probably opens only from an external anchor (the attested sense of one name).
 
-## Quick start
+---
+
+## What you need
+
+- Python 3.8+ . Nothing else. No pip install for the core.
+- Optional: an LLM backend (an Anthropic API key, **or** a local Ollama) only if you
+  want the engine to propose new hypotheses on its own - see [Self-improving loop](#self-improving-loop).
+
+## What you get when you run it
+
+Two layers you can run independently:
+
+**A. The Loagaeth analysis** (`src/`) - characterizes the 49 tables and prints:
+the entropy/structure profile, the scale-free name-network and its hubs, the master
+stem **CHASTOR** and its coverage, the **productive morphology** (a stem + a closed set
+of prefixes/suffixes), the per-table signature names, the bridge to the Calls, and the
+**refutation tests** (what died against the strong null).
+
+**B. The recursive pattern engine** (`engine/`) - the self-feeding loop that sweeps 12
+probes (gematria, geometry, symmetry, numerology, kabbalah, frequency, skip-ciphers...)
+across the whole Enochian corpus, each probe with its own null model, dedupes against a
+persistent memory, writes only what is new, and labels every finding `candidate` vs
+`known` (circular/by-construction) with a p-value verdict.
 
 ```bash
+# A - the Loagaeth analysis (writes results/*.json)
 python src/run_all.py
+
+# B - the recursive engine, one full sweep (writes engine/results/*)
+cd engine && python loop.py --rodadas 13
 ```
 
-No install step. Requires Python 3.8+. Outputs land in `results/` as JSON, plus a
-combined `results/summary.json`. Each module also runs standalone, e.g.
-`python src/a04_morphology.py`.
+---
+
+## How to load the data yourself
+
+Every dataset is plain JSON under `data/` (study data) and `engine/data/` (the Enochian
+sources the engine reads). Load any of them directly:
+
+```python
+import json
+
+# the Loagaeth itself: {"meta": {...}, "leaves": {"1a": [rows...], "1b": [...], "2a": [...]}}
+loa = json.load(open("data/loagaeth_tables.json", encoding="utf-8"))
+leaves = loa["leaves"]
+dense_1a = "".join(leaves["2a"])          # a dense 49x49 table as one letter stream
+
+# the derived word list (segmented): [{"word","occurrences","leaves","in_leaf1"}, ...]
+vocab = json.load(open("data/loagaeth_vocabulary.json", encoding="utf-8"))["vocabulary"]
+```
+
+Or use the shared helpers in `src/load.py`, which handle letters, tables, n-grams and
+null models for you:
+
+```python
+import sys; sys.path.insert(0, "src")
+import load
+load.table_text(1)         # all letters of table 1 (both sides)
+load.dense_stream()        # the whole book as one stream
+load.spaced_words()        # word tokens from the two word-spaced leaves (1a, 1b)
+```
+
+See [`docs/DATA.md`](docs/DATA.md) for every file, its fields, and what it contains, and
+[`docs/SOURCES.md`](docs/SOURCES.md) for where each dataset comes from (the Loagaeth
+transcription, the Great Table, the governors, the gematria systems).
+
+---
 
 ## Layout
 
 ```
-data/
-  loagaeth_tables.json   49 tables, Sloane MS 3189. Leaves 1a/1b are word-spaced;
-                         the rest are dense 49x49 grids. '?' = null cell.
-  call_lexicon.json      attested Angelical vocabulary from the 48 Calls, with the
-                         handful of known glosses, used only for the bridge test.
-src/
-  load.py                shared loader + helpers (letters, tables, n-grams, nulls)
-  a01_basic_stats.py     entropy, index of coincidence, type/token, Zipf
-  a02_network.py         name-network: hubs, degree distribution, power-law alpha
-  a03_master_name.py     CHASTOR / NOCHASTOR / CHUSTOR coverage across tables
-  a04_morphology.py      affix paradigm on a small set of stems (the strongest find)
-  a05_signature_names.py per-table distinctive names
-  a06_call_bridge.py     whole-word matches between leaf-1 and the Calls
-  a07_null_models.py     shuffle + order-k Markov surrogate generators
-  a08_refutations.py     patterns that FAILED the strong null (reversal, Semitic root)
-  run_all.py             runs everything, writes results/summary.json
-results/                 generated JSON outputs
-METHODOLOGY.md           how the null models work and why Markov is the real bar
+data/                         study data (impersonal, English keys)
+  loagaeth_tables.json        the 49 tables (Sloane MS 3189). '?' = null cell
+  loagaeth_vocabulary.json    segmented word list with per-leaf counts
+  loagaeth_segmentation.json  the segmentation model + its precision/recall
+  loagaeth_crossing.json      cross-check of recurrent words vs the Call lexicon
+  call_lexicon.json           attested Angelical vocabulary (for the bridge test)
+  hive_graph.json             the name-network (nodes/edges) as data
+src/                          LAYER A - the Loagaeth analysis
+  load.py                     shared loader + helpers (letters, tables, n-grams, nulls)
+  a01..a06_*.py               the six analyses
+  a07_null_models.py          shuffle + order-k Markov surrogate generators
+  a08_refutations.py          the patterns that FAILED the strong null
+  run_all.py                  runs everything -> results/summary.json
+engine/                       LAYER B - the recursive pattern engine
+  enoch.py  fontes.py         Great-Table derivation + Dee's primary sources
+  nucleo.py                   data, gematria, statistics, persistent memory
+  sondas.py                   the 12 probes, each with its own null model
+  loop.py                     the self-feeding runner
+  llm_agent.py                optional: an LLM proposes new hypotheses (API key or Ollama)
+  data/                       the Enochian source JSON the engine reads
+  README.md                   how the engine works, probe by probe
+docs/
+  SOURCES.md                  provenance of every dataset (the "where did this come from")
+  DATA.md                     every dataset's fields + how to load it
+  EXPLORED.md                 everything we tried: what held up, what we threw out
+  EXPERIMENTS_72_hypotheses.md the full 72-hypothesis audit across the whole system
+  METHODOLOGY.md              the null models and why Markov is the real bar
 ```
 
-## What the code finds (reproduced numbers)
+---
 
-All figures below are emitted by `run_all.py` on the bundled data.
+## What held up, in one screen
 
-### Structure
-- **195,548 letters.** Unigram entropy **4.03 bits/letter**; conditional (bigram)
-  entropy drops to **3.44 bits** — strong local predictability (syllable structure).
-- **Index of coincidence 0.079**, about twice the uniform reference (0.038): the
-  letter distribution is far from random.
-- **Type/token ratio 0.81** over the word-spaced leaves: lots of distinct forms,
-  consistent with a list of names rather than repetitive prose.
+Run `src/run_all.py` for the live numbers; for orientation:
 
-### It's a name-network ("hive")
-- 6-grams recurring 5+ times form a graph of **4,291 nodes / 13,779 edges**.
-- The degree distribution is heavy-tailed: mean degree 6.4, a few dominant hubs.
-  Hill power-law exponent **alpha ~1.4 on this 6-gram adjacency graph** (the exact
-  value is construction-dependent; the point is the heavy tail, not a magic number).
+- **It's a catalog of names, not prose** (type/token, repetition structure).
+- **A scale-free name-network**: ~4,300 recurring-string nodes, a few dominant hubs.
+- **CHASTOR is the master stem**: 184 occurrences across 35 of 48 tables (72.9%);
+  with NOCHASTOR, 61 more across 27; CHUSTOR is its A/U vowel twin.
+- **Productive morphology**: the stem takes a closed prefix set (NO- NE- ZI- NA- OL-)
+  giving a clear paradigm (NOCHASTOR, NECHASTOR, ZICHASTOR, NOCHASTORAD, ...). The most
+  language-like behavior in the book.
+- **Per-table signature names**: each of the 48 tables has its own distinct name; none
+  are CHASTOR-family.
+- **A small real bridge to the Calls**: a handful of leaf-1 words are attested Angelical
+  with known meanings (IAD god, GAH spirits, ORS darkness, URAN elders).
 
-### The master stem CHASTOR
-- **CHASTOR: 184 occurrences across 35 of 48 tables (72.9%).**
-- **NOCHASTOR: 61 across 27 tables (56.2%).**
-- **CHUSTOR** (A→U vowel variant): 19 across 8 tables. Of the 13 tables with no
-  CHASTOR, CHUSTOR appears in **4** of them (a partial, not total, filler — stated
-  precisely here because the raw counts matter).
+And what we **threw out** (tested, failed its strong null): mirror/reversal, Semitic
+roots, Call-vocabulary-as-key, Gebofal reordering, four geometric models, divine-name
+ciphers, and - from the engine's broader sweep - most gematria and the 3-6-9 / sefirotic
+claims (they belong to the value system or to grid geometry, not to a hidden code). Full
+account in [`docs/EXPLORED.md`](docs/EXPLORED.md).
 
-### Productive morphology (the strongest result)
-The CHAST stem takes a small, repeating prefix inventory:
-`NO- (77), NE- (24), ZI- (18), NA- (12), OL- (11)`, yielding a clear paradigm:
+---
 
+## Self-improving loop
+
+The engine can keep searching on its own: an LLM reads the findings and proposes new
+testable hypotheses, which you then code as probes - but the **null models stay the only
+judge of truth**. Set one backend:
+
+```bash
+# cloud (Anthropic)
+pip install anthropic
+set ANTHROPIC_API_KEY=sk-...
+cd engine && python llm_agent.py --watch --rounds 13 --every 3
+
+# local (Ollama, no key, stdlib only)
+set LLM_BACKEND=ollama
+set OLLAMA_MODEL=qwen2.5:7b
+cd engine && python llm_agent.py --n 5
 ```
-NOCHASTOR 61   NOCHASTORA 37   NECHASTOR 19   ZICHASTOR 13
-NOCHASTORAD 11 NACHASTOR 9     PLICHASTOR 5   PRICHASTOR 4
-```
 
-The same affix set recurs on other stems (-GETH, -DAX families, AD- compounds).
-This is concatenative word-formation on a closed root set — the most language-like
-behavior in the manuscript.
+Suggestions are appended to `engine/results/llm_suggestions.jsonl`. The LLM never
+decides what is real; it only widens the search. See `engine/README.md`.
 
-### Per-table signature names
-Every one of the 48 tables has a distinctive name of its own (table 1 HZEMBL,
-table 2 DAHOXI, table 3 DOMNAG, ...). **0 of 48** belong to the CHASTOR family. One
-shared master stem + a unique local name per table.
+---
 
-### Bridge to the Calls
-Of 2,619 word-spaced tokens, **23 exactly match** attested Angelical word-forms
-(0.88%, vs a chance null of ~2.5). Four carry known meanings: **IAD** (god),
-**GAH** (spirits), **ORS** (darkness), **URAN** (elders). Small but real.
+## How to simulate and test
 
-## What FAILED (module 08 — read this one)
+- Change the data: drop in a second transcription of Sloane 3189 as
+  `data/loagaeth_tables.json` and re-run - does CHASTOR survive the new source?
+- Add a hypothesis: write a probe in `engine/sondas.py` returning a finding dict with its
+  own null model (copy the shape of `s6`), add it to `SONDAS` and the loop's `plano`.
+- Break a claim: every result ships its null; if you think a finding is an artifact,
+  harden its surrogate in `src/a07_null_models.py` and show it falls. That is exactly how
+  we killed the reversal idea (see `docs/METHODOLOGY.md`).
 
-- **Mirror / reversal.** Observed 6-gram↔reverse co-occurrences: 102. Against a
-  letter-shuffle null (3.3) it looks huge; against the **Markov-3 null (92.8,
-  z≈0.95) it is dead.** It's a syllable-pool artifact, not intentional reversal.
-- **Semitic triliteral roots.** Words-per-consonant-skeleton ratio is **1.38**,
-  English-like, nowhere near the >2 that root-and-pattern languages produce. The
-  morphology in module 04 is concatenative (prefix/suffix), not Semitic.
+## Provenance & honesty
 
-Other ideas tested and discarded in the broader project (not all re-run here):
-Call-vocabulary as a decode key, Gebofal reordering, several geometric models
-(pentagonal solid, honeycomb, tesseract, "CHASTOR cube"), and divine-name ciphers
-(YHVH/MAD). None beat their null.
-
-## How to help / extend
-
-- Cross-check `data/loagaeth_tables.json` against a second transcription of Sloane
-  3189. Transcription error could inflate or hide hubs.
-- Work the **numeric layer** (the numbers Dee attached to the leaves). In the wider
-  Enochian corpus the digits 2, 3, 6 dominate the 91 governors' numbers at
-  p < 3e-4 with no known construction reason — the most promising unexplained thread.
-- Supply an attested gloss for any single Loagaeth name (CHASTOR first). One real
-  anchor lets the neighbors be tested as a key.
-
-## Provenance & caveats
-
-Word boundaries on the dense tables are the analysis's own segmentation, not Dee's;
-treat the morphology as a strong hypothesis. The data is compiled from public-domain
-facsimiles. See `METHODOLOGY.md` for the null-model details and `LICENSE`.
+Word boundaries on the dense tables are our own segmentation, not Dee's - treat the
+morphology as a strong hypothesis. The Loagaeth text is transcribed from a public-domain
+facsimile of Sloane MS 3189; the Great-Table and gematria layers come from the Golden
+Dawn line and Dee's diaries. Nothing here is personal data. Full provenance in
+[`docs/SOURCES.md`](docs/SOURCES.md). License: MIT (code and compiled data; the historical
+sources are public domain).

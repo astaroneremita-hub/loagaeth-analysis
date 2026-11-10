@@ -1,0 +1,11864 @@
+{
+ "titulo": "Quatro Torres de Vigia — 'Tabula recensa', reformada por Raphael (Sloane 3191: 'Die ☽ 20 Aprilis, 1587. thus reformed by Raphael.')",
+ "gerado_em": "2026-10-21",
+ "convencoes": {
+  "linhas_colunas": "linha 1-13 de cima para baixo, coluna 1-12 da esquerda para a direita, exatamente como na fonte (sem espelhar)",
+  "celula": "string com a letra como está na fonte (maiúscula/minúscula preservada); null = célula vazia, ilegível ou (nas grades de referência) leitura em disputa",
+  "tokens_especiais": {
+   "И": "N invertido",
+   "⅃": "L invertido",
+   "ꟼ": "P invertido",
+   "⊙": "círculo com ponto (lido como O)",
+   "Æ": "glifo impresso no TFR",
+   "Q": "glifo impresso no TFR (P invertido)",
+   "yl": "glifo impresso no TFR (N invertido)",
+   "]": "glifo impresso no TFR (L invertido)",
+   "x/y": "a fonte registra duas letras na célula (letra dupla, correção ou leitura incerta)"
+  },
+  "comparacao": "para comparar, as letras são normalizadas: minúscula, u=v, i=j, И->n, ⅃->l, ꟼ->p, ⊙->o. Diferenças só de caixa são listadas à parte.",
+  "torres": "identificadas pelos três nomes de Deus da linha 7: ORO (oro ibah aozpi), MOR (mor dial hctga), OIP (oip teaa pdoce), MPH (mph arsl gaiol)"
+ },
+ "torres": {
+  "ORO": {
+   "nomes_de_deus": [
+    "ORO",
+    "IBAH",
+    "AOZPI"
+   ],
+   "linha_7_cotton": "oroibAhaozpi",
+   "direcao_dee_livro_suplicas": "ORIENS (Leste)",
+   "golden_dawn": {
+    "campo_quadrados_json": "ar",
+    "elemento": "Ar",
+    "direcao": "Leste"
+   },
+   "rei_dee": "BATAIVA / BATAIVH",
+   "ordem_no_ditado_tfr": 1,
+   "nota_tfr": "primeira tábua ditada (TFR p. 175-176)"
+  },
+  "MOR": {
+   "nomes_de_deus": [
+    "MOR",
+    "DIAL",
+    "HCTGA"
+   ],
+   "linha_7_cotton": "mordialhCtGa",
+   "direcao_dee_livro_suplicas": "MERIDIES (Sul)",
+   "golden_dawn": {
+    "campo_quadrados_json": "terra",
+    "elemento": "Terra",
+    "direcao": "Norte"
+   },
+   "rei_dee": "ICZHHCA / ICZHHCL",
+   "ordem_no_ditado_tfr": 2,
+   "nota_tfr": "TFR p. 176: 'Take the second, that is the third that was written'"
+  },
+  "OIP": {
+   "nomes_de_deus": [
+    "OIP",
+    "TEAA",
+    "PDOCE"
+   ],
+   "linha_7_cotton": "oiPteaapdoce",
+   "direcao_dee_livro_suplicas": "SEPTENTRIO (Norte)",
+   "golden_dawn": {
+    "campo_quadrados_json": "fogo",
+    "elemento": "Fogo",
+    "direcao": "Sul"
+   },
+   "rei_dee": "EDLPRNA",
+   "ordem_no_ditado_tfr": 3,
+   "nota_tfr": "TFR p. 176 margem: 'This is the Table that hath 4. and D on the top, by me so noted'"
+  },
+  "MPH": {
+   "nomes_de_deus": [
+    "MPH",
+    "ARSL",
+    "GAIOL"
+   ],
+   "linha_7_cotton": "mpharslgaiol",
+   "direcao_dee_livro_suplicas": "OCCIDENS (Oeste)",
+   "golden_dawn": {
+    "campo_quadrados_json": "agua",
+    "elemento": "Água",
+    "direcao": "Oeste"
+   },
+   "rei_dee": "RAAGIOS / RAAGIOL",
+   "ordem_no_ditado_tfr": 4,
+   "nota_tfr": "TFR p. 177: 'the Table that had the little round smoke' / 'No, it was the Table before'"
+  }
+ },
+ "fontes": {
+  "sloane3191_recensa_peterson_tipografia": {
+   "tipo": "reprodução tipográfica de Joseph H. Peterson do manuscrito (imagem invocat3_sl3191.jpg), grade completa 27x25 com a cruz negra",
+   "manuscrito": "Sloane MS 3191, fólio [53v-54r] na numeração de Peterson, sob a nota 'Die ☽ 20 Aprilis, 1587. thus reformed by Raphael.' (vovina cita fols. 55v-56r)",
+   "urls": [
+    "https://www.esotericarchives.com/dee/invocat.htm",
+    "https://www.esotericarchives.com/dee/invocat3_sl3191.jpg"
+   ],
+   "como_obtido": "leitura visual da imagem nesta sessão (ampliada por quadrantes)",
+   "observacoes": "os retângulos vermelhos são marcação editorial de Peterson (cruzes), não do manuscrito."
+  },
+  "sloane3191_recensa_peterson_comentario_html": {
+   "tipo": "texto puro da mesma tábua, deixado por Peterson num comentário HTML oculto da página invocat.htm (versão mais antiga)",
+   "urls": [
+    "https://www.esotericarchives.com/dee/invocat.htm"
+   ],
+   "observacoes": "lido diretamente do código-fonte; difere da tipografia em poucos pontos (ver diferencas_tabuas.md)."
+  },
+  "sloane3191_recensa_peterson_hm31_metade_direita": {
+   "tipo": "transcrição datilografada antiga de Peterson só da metade direita (MPH em cima, OIP embaixo, com a linha da cruz)",
+   "urls": [
+    "https://www.esotericarchives.com/dee/invocat.htm",
+    "https://www.esotericarchives.com/dee/hm31.gif"
+   ]
+  },
+  "sloane3191_recensa_facsimile_hm30s": {
+   "tipo": "fac-símile (baixa resolução) da página esquerda do manuscrito (ORO em cima, MOR embaixo) — usado só para conferir células pontuais",
+   "urls": [
+    "https://www.esotericarchives.com/dee/hm30s.gif"
+   ]
+  },
+  "sloane3191_recensa_vovina": {
+   "tipo": "transcrição moderna (vovina) da recensa em Sloane 3191, por torre",
+   "urls": [
+    "https://vovina-archives.statichost.eu/docs/tabula-recensa-1/",
+    "https://vovina-archives.statichost.eu/docs/tabula-recensa-2/",
+    "https://vovina-archives.statichost.eu/docs/tabula-recensa-3/",
+    "https://vovina-archives.statichost.eu/docs/tabula-recensa-4/",
+    "https://vovina-archives.statichost.eu/images/91-parts-of-the-earth/oroibAhaozpi-3191-recensa-labeled.png",
+    "https://vovina-archives.statichost.eu/images/91-parts-of-the-earth/MOrdialhCtGa-3191-recensa-labeled.png",
+    "https://vovina-archives.statichost.eu/images/91-parts-of-the-earth/oiPteaapDoce-3191-recensa-labeled.png",
+    "https://vovina-archives.statichost.eu/images/91-parts-of-the-earth/mpharslgaiol-3191-recensa-labeled.png"
+   ],
+   "licenca": "CC BY-NC-SA 4.0"
+  },
+  "cotton_xlvi_pt2_recensa_vovina": {
+   "tipo": "transcrição moderna (vovina) da cópia da recensa em Cotton Appendix XLVI pt. 2 (quase toda em minúsculas)",
+   "urls": [
+    "https://vovina-archives.statichost.eu/docs/tabula-recensa-1/",
+    "https://vovina-archives.statichost.eu/docs/tabula-recensa-2/",
+    "https://vovina-archives.statichost.eu/docs/tabula-recensa-3/",
+    "https://vovina-archives.statichost.eu/docs/tabula-recensa-4/",
+    "https://vovina-archives.statichost.eu/images/91-parts-of-the-earth/oroibAhaozpi-cotton-recensa-labeled.png",
+    "https://vovina-archives.statichost.eu/images/91-parts-of-the-earth/MOrdialhCtGa-cotton-recensa-labeled.png",
+    "https://vovina-archives.statichost.eu/images/91-parts-of-the-earth/oiPteaapDoce-cotton-recensa-labeled.png",
+    "https://vovina-archives.statichost.eu/images/91-parts-of-the-earth/mpharslgaiol-cotton-recensa-labeled.png"
+   ],
+   "licenca": "CC BY-NC-SA 4.0"
+  }
+ },
+ "grades_por_fonte": {
+  "sloane3191_recensa_peterson_tipografia": {
+   "ORO": [
+    [
+     "r",
+     "Z",
+     "i",
+     "l",
+     "a",
+     "f",
+     "A",
+     "y",
+     "t",
+     "l",
+     "p",
+     "a"
+    ],
+    [
+     "a",
+     "r",
+     "d",
+     "Z",
+     "a",
+     "i",
+     "d",
+     "p",
+     "a",
+     "L",
+     "a",
+     "m"
+    ],
+    [
+     "c",
+     "z",
+     "o",
+     "n",
+     "s",
+     "a",
+     "r",
+     "o",
+     "Y",
+     "a",
+     "v",
+     "b"
+    ],
+    [
+     "T",
+     "o",
+     "i",
+     "T",
+     "t",
+     "z",
+     "o",
+     "P",
+     "a",
+     "c",
+     "o",
+     "C"
+    ],
+    [
+     "S",
+     "i",
+     "g",
+     "a",
+     "s",
+     "o",
+     "m",
+     "r",
+     "b",
+     "z",
+     "n",
+     "h"
+    ],
+    [
+     "f",
+     "m",
+     "o",
+     "n",
+     "d",
+     "a",
+     "T",
+     "d",
+     "i",
+     "a",
+     "r",
+     "i"
+    ],
+    [
+     "o",
+     "r",
+     "o",
+     "i",
+     "b",
+     "A",
+     "h",
+     "a",
+     "o",
+     "z",
+     "p",
+     "i"
+    ],
+    [
+     "t",
+     "N",
+     "a",
+     "b",
+     "r",
+     "V",
+     "i",
+     "x",
+     "g",
+     "a",
+     "s",
+     "d"
+    ],
+    [
+     "O",
+     "i",
+     "i",
+     "i",
+     "t",
+     "T",
+     "p",
+     "a",
+     "l",
+     "O",
+     "a",
+     "i"
+    ],
+    [
+     "A",
+     "b",
+     "a",
+     "m",
+     "o",
+     "o",
+     "o",
+     "a",
+     "C",
+     "u",
+     "c",
+     "a"
+    ],
+    [
+     "N",
+     "a",
+     "o",
+     "c",
+     "O",
+     "T",
+     "t",
+     "n",
+     "p",
+     "r",
+     "n",
+     "T"
+    ],
+    [
+     "o",
+     "c",
+     "a",
+     "n",
+     "m",
+     "a",
+     "g",
+     "o",
+     "t",
+     "r",
+     "o",
+     "i"
+    ],
+    [
+     "S",
+     "b",
+     "i",
+     "a",
+     "l",
+     "r",
+     "a",
+     "p",
+     "m",
+     "z",
+     "o",
+     "x"
+    ]
+   ],
+   "MOR": [
+    [
+     "b",
+     "O",
+     "a",
+     "Z",
+     "a",
+     "R",
+     "o",
+     "p",
+     "h",
+     "a",
+     "R",
+     "a"
+    ],
+    [
+     "u",
+     "N",
+     "n",
+     "a",
+     "x",
+     "o",
+     "P",
+     "S",
+     "o",
+     "n",
+     "d",
+     "n"
+    ],
+    [
+     "a",
+     "i",
+     "g",
+     "r",
+     "a",
+     "n",
+     "o",
+     "o",
+     "m",
+     "a",
+     "g",
+     "g"
+    ],
+    [
+     "o",
+     "r",
+     "p",
+     "m",
+     "n",
+     "i",
+     "n",
+     "g",
+     "b",
+     "e",
+     "a",
+     "l"
+    ],
+    [
+     "r",
+     "s",
+     "O",
+     "n",
+     "i",
+     "z",
+     "i",
+     "r",
+     "l",
+     "e",
+     "m",
+     "v"
+    ],
+    [
+     "i",
+     "z",
+     "i",
+     "n",
+     "r",
+     "C",
+     "z",
+     "i",
+     "a",
+     "M",
+     "h",
+     "l"
+    ],
+    [
+     "M",
+     "O",
+     "r",
+     "d",
+     "i",
+     "a",
+     "l",
+     "h",
+     "C",
+     "t",
+     "G",
+     "a"
+    ],
+    [
+     "⊙",
+     "c",
+     "a",
+     "n",
+     "c",
+     "h",
+     "i",
+     "a",
+     "s",
+     "o",
+     "m",
+     "t"
+    ],
+    [
+     "A",
+     "r",
+     "b",
+     "i",
+     "z",
+     "m",
+     "i",
+     "i",
+     "l",
+     "p",
+     "i",
+     "z"
+    ],
+    [
+     "O",
+     "p",
+     "a",
+     "n",
+     "a",
+     "l",
+     "a",
+     "m",
+     "S",
+     "m",
+     "a",
+     "P"
+    ],
+    [
+     "d",
+     "O",
+     "l",
+     "o",
+     "P",
+     "i",
+     "n",
+     "i",
+     "a",
+     "n",
+     "b",
+     "a"
+    ],
+    [
+     "r",
+     "x",
+     "p",
+     "a",
+     "o",
+     "c",
+     "s",
+     "i",
+     "z",
+     "i",
+     "x",
+     "p"
+    ],
+    [
+     "a",
+     "x",
+     "t",
+     "i",
+     "r",
+     "V",
+     "a",
+     "s",
+     "t",
+     "r",
+     "i",
+     "m"
+    ]
+   ],
+   "OIP": [
+    [
+     "d",
+     "o",
+     "n",
+     "p",
+     "a",
+     "T",
+     "d",
+     "a",
+     "n",
+     "V",
+     "a",
+     "a"
+    ],
+    [
+     "o",
+     "l",
+     "o",
+     "a",
+     "G",
+     "e",
+     "o",
+     "o",
+     "b",
+     "a",
+     "u",
+     "a"
+    ],
+    [
+     "O",
+     "P",
+     "a",
+     "m",
+     "n",
+     "o",
+     "V",
+     "G",
+     "m",
+     "d",
+     "n",
+     "m"
+    ],
+    [
+     "a",
+     "p",
+     "l",
+     "s",
+     "T",
+     "e",
+     "d",
+     "e",
+     "c",
+     "a",
+     "o",
+     "p"
+    ],
+    [
+     "s",
+     "c",
+     "m",
+     "i",
+     "o",
+     "o",
+     "n",
+     "A",
+     "m",
+     "l",
+     "o",
+     "x"
+    ],
+    [
+     "V",
+     "a",
+     "r",
+     "s",
+     "G",
+     "d",
+     "L",
+     "b",
+     "r",
+     "i",
+     "a",
+     "p"
+    ],
+    [
+     "o",
+     "i",
+     "P",
+     "t",
+     "e",
+     "a",
+     "a",
+     "p",
+     "D",
+     "o",
+     "c",
+     "e"
+    ],
+    [
+     "p",
+     "s",
+     "u",
+     "a",
+     "c",
+     "N",
+     "r",
+     "Z",
+     "i",
+     "r",
+     "Z",
+     "a"
+    ],
+    [
+     "s",
+     "i",
+     "o",
+     "d",
+     "a",
+     "o",
+     "i",
+     "n",
+     "r",
+     "z",
+     "f",
+     "m"
+    ],
+    [
+     "d",
+     "a",
+     "l",
+     "t",
+     "T",
+     "d",
+     "n",
+     "a",
+     "d",
+     "i",
+     "r",
+     "e"
+    ],
+    [
+     "d",
+     "i",
+     "x",
+     "o",
+     "m",
+     "o",
+     "n",
+     "s",
+     "i",
+     "o",
+     "s",
+     "p"
+    ],
+    [
+     "O",
+     "o",
+     "D",
+     "p",
+     "z",
+     "i",
+     "A",
+     "p",
+     "a",
+     "n",
+     "l",
+     "i"
+    ],
+    [
+     "r",
+     "g",
+     "o",
+     "a",
+     "n",
+     "n",
+     "ꟼ",
+     "A",
+     "C",
+     "r",
+     "a",
+     "r"
+    ]
+   ],
+   "MPH": [
+    [
+     "T",
+     "a",
+     "O",
+     "A",
+     "d",
+     "v",
+     "p",
+     "t",
+     "D",
+     "n",
+     "i",
+     "m"
+    ],
+    [
+     "a",
+     "a",
+     "b",
+     "c",
+     "o",
+     "o",
+     "r",
+     "o",
+     "m",
+     "e",
+     "b",
+     "b"
+    ],
+    [
+     "T",
+     "o",
+     "g",
+     "c",
+     "o",
+     "n",
+     "x",
+     "m",
+     "a",
+     "l",
+     "G",
+     "m"
+    ],
+    [
+     "n",
+     "h",
+     "o",
+     "d",
+     "D",
+     "i",
+     "a",
+     "l",
+     "e",
+     "a",
+     "o",
+     "c"
+    ],
+    [
+     "p",
+     "a",
+     "t",
+     "A",
+     "x",
+     "i",
+     "o",
+     "V",
+     "s",
+     "P",
+     "s",
+     "И"
+    ],
+    [
+     "S",
+     "a",
+     "a",
+     "i",
+     "x",
+     "a",
+     "a",
+     "r",
+     "V",
+     "r",
+     "o",
+     "i"
+    ],
+    [
+     "m",
+     "p",
+     "h",
+     "a",
+     "r",
+     "s",
+     "l",
+     "g",
+     "a",
+     "i",
+     "o",
+     "l"
+    ],
+    [
+     "M",
+     "a",
+     "m",
+     "g",
+     "l",
+     "o",
+     "i",
+     "n",
+     "L",
+     "i",
+     "r",
+     "x"
+    ],
+    [
+     "o",
+     "l",
+     "a",
+     "a",
+     "D",
+     "n",
+     "g",
+     "a",
+     "T",
+     "a",
+     "p",
+     "a"
+    ],
+    [
+     "p",
+     "a",
+     "L",
+     "c",
+     "o",
+     "i",
+     "d",
+     "x",
+     "P",
+     "a",
+     "c",
+     "n"
+    ],
+    [
+     "n",
+     "d",
+     "a",
+     "z",
+     "N",
+     "z",
+     "i",
+     "V",
+     "a",
+     "a",
+     "s",
+     "a"
+    ],
+    [
+     "i",
+     "i",
+     "d",
+     "P",
+     "o",
+     "n",
+     "s",
+     "d",
+     "A",
+     "s",
+     "p",
+     "i"
+    ],
+    [
+     "x",
+     "r",
+     "i",
+     "n",
+     "h",
+     "t",
+     "a",
+     "r",
+     "n",
+     "d",
+     "i",
+     "⅃"
+    ]
+   ]
+  },
+  "sloane3191_recensa_peterson_comentario_html": {
+   "ORO": [
+    [
+     "r",
+     "Z",
+     "i",
+     "l",
+     "a",
+     "f",
+     "A",
+     "y",
+     "t",
+     "l",
+     "p",
+     "a"
+    ],
+    [
+     "a",
+     "r",
+     "d",
+     "Z",
+     "a",
+     "i",
+     "d",
+     "p",
+     "a",
+     "L",
+     "a",
+     "m"
+    ],
+    [
+     "c",
+     "z",
+     "o",
+     "n",
+     "s",
+     "a",
+     "r",
+     "o",
+     "Y",
+     "a",
+     "v",
+     "b"
+    ],
+    [
+     "T",
+     "o",
+     "i",
+     "T",
+     "t",
+     "z",
+     "o",
+     "P",
+     "q",
+     "c",
+     "o",
+     "C"
+    ],
+    [
+     "S",
+     "i",
+     "g",
+     "a",
+     "s",
+     "o",
+     "m",
+     "r",
+     "b",
+     "z",
+     "n",
+     "h"
+    ],
+    [
+     "f",
+     "m",
+     "o",
+     "n",
+     "d",
+     "a",
+     "T",
+     "d",
+     "i",
+     "a",
+     "r",
+     "i"
+    ],
+    [
+     "o",
+     "r",
+     "o",
+     "i",
+     "b",
+     "A",
+     "h",
+     "a",
+     "o",
+     "z",
+     "p",
+     "i"
+    ],
+    [
+     "t",
+     "N",
+     "a",
+     "b",
+     "r",
+     "V",
+     "i",
+     "x",
+     "g",
+     "a",
+     "s",
+     "d"
+    ],
+    [
+     "O",
+     "i",
+     "i",
+     "i",
+     "t",
+     "T",
+     "p",
+     "a",
+     "l",
+     "O",
+     "a",
+     "i"
+    ],
+    [
+     "A",
+     "b",
+     "a",
+     "m",
+     "o",
+     "o",
+     "o",
+     "a",
+     "C",
+     "u",
+     "c",
+     "a"
+    ],
+    [
+     "N",
+     "a",
+     "o",
+     "c",
+     "O",
+     "T",
+     "t",
+     "n",
+     "p",
+     "r",
+     "n",
+     "T"
+    ],
+    [
+     "o",
+     "c",
+     "a",
+     "n",
+     "m",
+     "a",
+     "g",
+     "o",
+     "t",
+     "r",
+     "o",
+     "i"
+    ],
+    [
+     "S",
+     "b",
+     "i",
+     "a",
+     "l",
+     "r",
+     "a",
+     "p",
+     "m",
+     "z",
+     "o",
+     "x"
+    ]
+   ],
+   "MOR": [
+    [
+     "b",
+     "O",
+     "a",
+     "Z",
+     "a",
+     "R",
+     "o",
+     "p",
+     "h",
+     "a",
+     "R",
+     "a"
+    ],
+    [
+     "u",
+     "N",
+     "n",
+     "a",
+     "x",
+     "o",
+     "P",
+     "S",
+     "o",
+     "n",
+     "d",
+     "n"
+    ],
+    [
+     "a",
+     "i",
+     "g",
+     "r",
+     "a",
+     "n",
+     "o",
+     "o",
+     "m",
+     "a",
+     "g",
+     "g"
+    ],
+    [
+     "o",
+     "r",
+     "p",
+     "m",
+     "n",
+     "i",
+     "n",
+     "g",
+     "b",
+     "e",
+     "a",
+     "l"
+    ],
+    [
+     "r",
+     "s",
+     "O",
+     "n",
+     "i",
+     "z",
+     "i",
+     "r",
+     "l",
+     "e",
+     "m",
+     "v"
+    ],
+    [
+     "i",
+     "z",
+     "i",
+     "n",
+     "r",
+     "C",
+     "z",
+     "i",
+     "a",
+     "M",
+     "h",
+     "l"
+    ],
+    [
+     "M",
+     "O",
+     "r",
+     "d",
+     "i",
+     "a",
+     "l",
+     "h",
+     "C",
+     "t",
+     "G",
+     "a"
+    ],
+    [
+     "O",
+     "c",
+     "a",
+     "n",
+     "c",
+     "h",
+     "i",
+     "a",
+     "s",
+     "o",
+     "m",
+     "t"
+    ],
+    [
+     "A",
+     "r",
+     "b",
+     "i",
+     "z",
+     "m",
+     "i",
+     "i",
+     "l",
+     "p",
+     "i",
+     "z"
+    ],
+    [
+     "O",
+     "p",
+     "a",
+     "n",
+     "a",
+     "l",
+     "a",
+     "m",
+     "S",
+     "m",
+     "a",
+     "P"
+    ],
+    [
+     "d",
+     "O",
+     "l",
+     "o",
+     "P",
+     "i",
+     "n",
+     "i",
+     "a",
+     "n",
+     "b",
+     "a"
+    ],
+    [
+     "r",
+     "x",
+     "p",
+     "a",
+     "o",
+     "c",
+     "s",
+     "i",
+     "z",
+     "i",
+     "x",
+     "p"
+    ],
+    [
+     "a",
+     "x",
+     "t",
+     "i",
+     "r",
+     "V",
+     "a",
+     "s",
+     "t",
+     "r",
+     "i",
+     "m"
+    ]
+   ],
+   "OIP": [
+    [
+     "d",
+     "o",
+     "n",
+     "p",
+     "a",
+     "T",
+     "d",
+     "a",
+     "n",
+     "V",
+     "a",
+     "a"
+    ],
+    [
+     "o",
+     "l",
+     "o",
+     "a",
+     "G",
+     "e",
+     "o",
+     "o",
+     "b",
+     "a",
+     "u",
+     "a"
+    ],
+    [
+     "O",
+     "P",
+     "a",
+     "m",
+     "n",
+     "o",
+     "V",
+     "G",
+     "m",
+     "d",
+     "n",
+     "m"
+    ],
+    [
+     "a",
+     "p",
+     "l",
+     "s",
+     "T",
+     "e",
+     "d",
+     "e",
+     "c",
+     "a",
+     "o",
+     "p"
+    ],
+    [
+     "s",
+     "c",
+     "m",
+     "i",
+     "o",
+     "o",
+     "n",
+     "A",
+     "m",
+     "l",
+     "o",
+     "x"
+    ],
+    [
+     "V",
+     "a",
+     "r",
+     "s",
+     "G",
+     "d",
+     "L",
+     "b",
+     "r",
+     "i",
+     "a",
+     "p"
+    ],
+    [
+     "o",
+     "i",
+     "P",
+     "t",
+     "e",
+     "a",
+     "a",
+     "p",
+     "D",
+     "o",
+     "c",
+     "e"
+    ],
+    [
+     "p",
+     "s",
+     "u",
+     "a",
+     "c",
+     "N",
+     "r",
+     "Z",
+     "i",
+     "r",
+     "Z",
+     "a"
+    ],
+    [
+     "s",
+     "i",
+     "o",
+     "d",
+     "a",
+     "o",
+     "i",
+     "n",
+     "r",
+     "z",
+     "f",
+     "m"
+    ],
+    [
+     "d",
+     "a",
+     "l",
+     "t",
+     "T",
+     "d",
+     "n",
+     "a",
+     "d",
+     "i",
+     "r",
+     "e"
+    ],
+    [
+     "d",
+     "i",
+     "x",
+     "o",
+     "m",
+     "o",
+     "n",
+     "s",
+     "i",
+     "o",
+     "s",
+     "p"
+    ],
+    [
+     "O",
+     "o",
+     "D",
+     "p",
+     "z",
+     "i",
+     "A",
+     "p",
+     "a",
+     "n",
+     "l",
+     "i"
+    ],
+    [
+     "r",
+     "g",
+     "o",
+     "a",
+     "n",
+     "n",
+     "P",
+     "A",
+     "C",
+     "r",
+     "a",
+     "r"
+    ]
+   ],
+   "MPH": [
+    [
+     "T",
+     "a",
+     "O",
+     "A",
+     "d",
+     "v",
+     "p",
+     "t",
+     "D",
+     "n",
+     "i",
+     "m"
+    ],
+    [
+     "a",
+     "a",
+     "b",
+     "c",
+     "o",
+     "o",
+     "r",
+     "o",
+     "m",
+     "e",
+     "b",
+     "b"
+    ],
+    [
+     "T",
+     "o",
+     "g",
+     "c",
+     "o",
+     "n",
+     "x",
+     "m",
+     "a",
+     "l",
+     "G",
+     "m"
+    ],
+    [
+     "n",
+     "h",
+     "o",
+     "d",
+     "D",
+     "i",
+     "a",
+     "l",
+     "e",
+     "a",
+     "o",
+     "c"
+    ],
+    [
+     "p",
+     "a",
+     "t",
+     "A",
+     "x",
+     "i",
+     "o",
+     "V",
+     "s",
+     "P",
+     "s",
+     "N"
+    ],
+    [
+     "S",
+     "a",
+     "a",
+     "i",
+     "x",
+     "a",
+     "a",
+     "r",
+     "V",
+     "r",
+     "o",
+     "i"
+    ],
+    [
+     "m",
+     "p",
+     "h",
+     "a",
+     "r",
+     "s",
+     "l",
+     "g",
+     "a",
+     "i",
+     "o",
+     "l"
+    ],
+    [
+     "M",
+     "a",
+     "m",
+     "g",
+     "l",
+     "o",
+     "i",
+     "n",
+     "L",
+     "i",
+     "r",
+     "x"
+    ],
+    [
+     "o",
+     "l",
+     "a",
+     "a",
+     "D",
+     "n",
+     "g",
+     "a",
+     "T",
+     "a",
+     "p",
+     "a"
+    ],
+    [
+     "p",
+     "a",
+     "L",
+     "c",
+     "o",
+     "i",
+     "d",
+     "x",
+     "P",
+     "a",
+     "c",
+     "n"
+    ],
+    [
+     "n",
+     "d",
+     "a",
+     "z",
+     "N",
+     "z",
+     "i",
+     "V",
+     "a",
+     "a",
+     "s",
+     "a"
+    ],
+    [
+     "i",
+     "i",
+     "d",
+     "P",
+     "o",
+     "n",
+     "s",
+     "d",
+     "A",
+     "s",
+     "p",
+     "i"
+    ],
+    [
+     "x",
+     "r",
+     "i",
+     "n",
+     "h",
+     "t",
+     "a",
+     "r",
+     "n",
+     "d",
+     "i",
+     "L"
+    ]
+   ]
+  },
+  "sloane3191_recensa_peterson_hm31_metade_direita": {
+   "OIP": [
+    [
+     "d",
+     "o",
+     "n",
+     "p",
+     "a",
+     "T",
+     "d",
+     "a",
+     "n",
+     "V",
+     "a",
+     "a"
+    ],
+    [
+     "o",
+     "l",
+     "o",
+     "a",
+     "G",
+     "e",
+     "o",
+     "o",
+     "b",
+     "a",
+     "u",
+     "a"
+    ],
+    [
+     "O",
+     "P",
+     "a",
+     "m",
+     "n",
+     "o",
+     "V",
+     "G",
+     "m",
+     "d",
+     "n",
+     "m"
+    ],
+    [
+     "a",
+     "p",
+     "l",
+     "s",
+     "T",
+     "e",
+     "d",
+     "e",
+     "c",
+     "a",
+     "o",
+     "p"
+    ],
+    [
+     "s",
+     "c",
+     "m",
+     "i",
+     "o",
+     "o",
+     "n",
+     "A",
+     "m",
+     "l",
+     "o",
+     "x"
+    ],
+    [
+     "V",
+     "a",
+     "r",
+     "s",
+     "G",
+     "d",
+     "L",
+     "b",
+     "r",
+     "i",
+     "a",
+     "p"
+    ],
+    [
+     "o",
+     "i",
+     "P",
+     "t",
+     "e",
+     "a",
+     "a",
+     "p",
+     "D",
+     "o",
+     "c",
+     "e"
+    ],
+    [
+     "p",
+     "s",
+     "u",
+     "a",
+     "c",
+     "N",
+     "r",
+     "Z",
+     "i",
+     "r",
+     "Z",
+     "a"
+    ],
+    [
+     "S",
+     "i",
+     "o",
+     "d",
+     "a",
+     "o",
+     "i",
+     "n",
+     "r",
+     "z",
+     "f",
+     "m"
+    ],
+    [
+     "d",
+     "a",
+     "b",
+     "t",
+     "T",
+     "d",
+     "n",
+     "a",
+     "d",
+     "i",
+     "r",
+     "e"
+    ],
+    [
+     "d",
+     "i",
+     "x",
+     "o",
+     "m",
+     "o",
+     "n",
+     "s",
+     "i",
+     "o",
+     "s",
+     "p"
+    ],
+    [
+     "O",
+     "o",
+     "D",
+     "p",
+     "z",
+     "i",
+     "A",
+     "p",
+     "a",
+     "n",
+     "l",
+     "i"
+    ],
+    [
+     "r",
+     "g",
+     "o",
+     "a",
+     "n",
+     "n",
+     "ꟼ",
+     "A",
+     "C",
+     "r",
+     "a",
+     "r"
+    ]
+   ],
+   "MPH": [
+    [
+     "T",
+     "a",
+     "O",
+     "A",
+     "d",
+     "v",
+     "p",
+     "t",
+     "D",
+     "n",
+     "i",
+     "m"
+    ],
+    [
+     "a",
+     "a",
+     "b",
+     "c",
+     "o",
+     "o",
+     "r",
+     "o",
+     "m",
+     "e",
+     "b",
+     "b"
+    ],
+    [
+     "T",
+     "o",
+     "g",
+     "c",
+     "o",
+     "n",
+     "x",
+     "m",
+     "a",
+     "l",
+     "G",
+     "m"
+    ],
+    [
+     "n",
+     "h",
+     "o",
+     "d",
+     "D",
+     "i",
+     "a",
+     "l",
+     "e",
+     "a",
+     "o",
+     "c"
+    ],
+    [
+     "p",
+     "a",
+     "t",
+     "A",
+     "x",
+     "i",
+     "o",
+     "V",
+     "s",
+     "P",
+     "s",
+     "И"
+    ],
+    [
+     "S",
+     "a",
+     "a",
+     "i",
+     "x",
+     "a",
+     "a",
+     "r",
+     "V",
+     "r",
+     "o",
+     "i"
+    ],
+    [
+     "m",
+     "p",
+     "h",
+     "a",
+     "r",
+     "s",
+     "l",
+     "g",
+     "a",
+     "i",
+     "o",
+     "l"
+    ],
+    [
+     "M",
+     "a",
+     "m",
+     "g",
+     "l",
+     "o",
+     "i",
+     "n",
+     "L",
+     "i",
+     "r",
+     "x"
+    ],
+    [
+     "o",
+     "l",
+     "a",
+     "a",
+     "D",
+     "n",
+     "g",
+     "a",
+     "T",
+     "a",
+     "p",
+     "a"
+    ],
+    [
+     "p",
+     "a",
+     "L",
+     "c",
+     "o",
+     "i",
+     "d",
+     "x",
+     "P",
+     "a",
+     "c",
+     "n"
+    ],
+    [
+     "n",
+     "d",
+     "a",
+     "z",
+     "N",
+     "z",
+     "i",
+     "V",
+     "a",
+     "a",
+     "s",
+     "a"
+    ],
+    [
+     "i",
+     "i",
+     "d",
+     "P",
+     "o",
+     "n",
+     "s",
+     "d",
+     "A",
+     "s",
+     "p",
+     "i"
+    ],
+    [
+     "x",
+     "r",
+     "i",
+     "n",
+     "h",
+     "t",
+     "a",
+     "r",
+     "n",
+     "d",
+     "i",
+     "⅃"
+    ]
+   ]
+  },
+  "sloane3191_recensa_vovina": {
+   "ORO": [
+    [
+     "r",
+     "Z",
+     "i",
+     "l",
+     "a",
+     "f",
+     "A",
+     "y",
+     "t",
+     "l",
+     "p",
+     "a"
+    ],
+    [
+     "a",
+     "r",
+     "d",
+     "Z",
+     "a",
+     "i",
+     "d",
+     "p",
+     "a",
+     "L",
+     "a",
+     "m"
+    ],
+    [
+     "c",
+     "z",
+     "o",
+     "n",
+     "s",
+     "a",
+     "r",
+     "o",
+     "Y",
+     "a",
+     "v",
+     "b"
+    ],
+    [
+     "T",
+     "o",
+     "i",
+     "T",
+     "t",
+     "z",
+     "o",
+     "P",
+     "a",
+     "c",
+     "o",
+     "C"
+    ],
+    [
+     "S",
+     "i",
+     "g",
+     "a",
+     "s",
+     "o",
+     "m",
+     "r",
+     "b",
+     "z",
+     "n",
+     "h"
+    ],
+    [
+     "f",
+     "m",
+     "o",
+     "n",
+     "d",
+     "a",
+     "T",
+     "d",
+     "i",
+     "a",
+     "r",
+     "i"
+    ],
+    [
+     "o",
+     "r",
+     "o",
+     "i",
+     "b",
+     "A",
+     "h",
+     "a",
+     "o",
+     "z",
+     "p",
+     "i"
+    ],
+    [
+     "t",
+     "N",
+     "a",
+     "b",
+     "r",
+     "V",
+     "i",
+     "x",
+     "g",
+     "a",
+     "s",
+     "d"
+    ],
+    [
+     "O",
+     "i",
+     "i",
+     "i",
+     "t",
+     "T",
+     "p",
+     "a",
+     "l",
+     "O",
+     "a",
+     "i"
+    ],
+    [
+     "A",
+     "b",
+     "a",
+     "m",
+     "o",
+     "o",
+     "o",
+     "a",
+     "C",
+     "u",
+     "c",
+     "a"
+    ],
+    [
+     "N",
+     "a",
+     "o",
+     "c",
+     "O",
+     "T/t",
+     "t/T",
+     "n",
+     "p",
+     "r",
+     "n",
+     "T"
+    ],
+    [
+     "o",
+     "c",
+     "a",
+     "n",
+     "m",
+     "a",
+     "g",
+     "o",
+     "t",
+     "r",
+     "o",
+     "i"
+    ],
+    [
+     "S",
+     "h",
+     "i",
+     "a",
+     "l",
+     "r",
+     "a",
+     "p",
+     "m",
+     "z",
+     "o",
+     "x"
+    ]
+   ],
+   "MOR": [
+    [
+     "b",
+     "O",
+     "a",
+     "Z",
+     "a",
+     "R",
+     "o",
+     "p",
+     "h",
+     "a",
+     "R",
+     "a"
+    ],
+    [
+     "u",
+     "N",
+     "n",
+     "a",
+     "x",
+     "o",
+     "P",
+     "S",
+     "o",
+     "n",
+     "d",
+     "n"
+    ],
+    [
+     "a",
+     "i",
+     "g",
+     "r",
+     "a",
+     "n",
+     "o",
+     "o",
+     "m",
+     "a",
+     "g",
+     "g"
+    ],
+    [
+     "o",
+     "r",
+     "p",
+     "m",
+     "n",
+     "i",
+     "n",
+     "g",
+     "b",
+     "e",
+     "a",
+     "l"
+    ],
+    [
+     "r",
+     "s",
+     "O",
+     "n",
+     "i",
+     "z",
+     "i",
+     "r",
+     "l",
+     "e",
+     "m",
+     "v"
+    ],
+    [
+     "i",
+     "z",
+     "i",
+     "n",
+     "r",
+     "C",
+     "z",
+     "i",
+     "a",
+     "M",
+     "h",
+     "l"
+    ],
+    [
+     "M",
+     "O",
+     "r",
+     "d",
+     "i",
+     "a",
+     "l",
+     "h",
+     "C",
+     "t",
+     "G",
+     "a"
+    ],
+    [
+     "o",
+     "c",
+     "a",
+     "n",
+     "c",
+     "h",
+     "i",
+     "a",
+     "s",
+     "o",
+     "m",
+     "t"
+    ],
+    [
+     "A",
+     "r",
+     "b",
+     "i",
+     "z",
+     "m",
+     "i",
+     "i",
+     "l",
+     "p",
+     "i",
+     "z"
+    ],
+    [
+     "O",
+     "p",
+     "a",
+     "n",
+     "a",
+     "l",
+     "a",
+     "m",
+     "S",
+     "m",
+     "a",
+     "P"
+    ],
+    [
+     "d",
+     "O",
+     "l",
+     "o",
+     "P",
+     "i",
+     "n",
+     "i",
+     "a",
+     "n",
+     "b",
+     "a"
+    ],
+    [
+     "r",
+     "x",
+     "p",
+     "a",
+     "o",
+     "c",
+     "s",
+     "i",
+     "z",
+     "i",
+     "x",
+     "p"
+    ],
+    [
+     "a",
+     "x",
+     "t",
+     "i",
+     "r",
+     "V",
+     "a",
+     "s",
+     "t",
+     "r",
+     "i",
+     "m"
+    ]
+   ],
+   "OIP": [
+    [
+     "d",
+     "o",
+     "n",
+     "p",
+     "a",
+     "T",
+     "d",
+     "a",
+     "n",
+     "V",
+     "a",
+     "a"
+    ],
+    [
+     "o",
+     "l",
+     "o",
+     "a",
+     "G",
+     "e",
+     "o",
+     "o",
+     "b",
+     "a",
+     "u",
+     "a"
+    ],
+    [
+     "O",
+     "P",
+     "a",
+     "m",
+     "n",
+     "o",
+     "V",
+     "G",
+     "m",
+     "d",
+     "n",
+     "m"
+    ],
+    [
+     "a",
+     "p",
+     "l",
+     "s",
+     "T",
+     "e",
+     "d",
+     "e",
+     "c",
+     "a",
+     "o",
+     "p"
+    ],
+    [
+     "s",
+     "c",
+     "m",
+     "i",
+     "o",
+     "o",
+     "n",
+     "A",
+     "m",
+     "l",
+     "o",
+     "x"
+    ],
+    [
+     "V",
+     "a",
+     "r",
+     "s",
+     "G",
+     "d",
+     "L",
+     "b",
+     "r",
+     "i",
+     "a",
+     "p"
+    ],
+    [
+     "o",
+     "i",
+     "P",
+     "t",
+     "e",
+     "a",
+     "a",
+     "p",
+     "D",
+     "o",
+     "c",
+     "e"
+    ],
+    [
+     "p",
+     "s",
+     "u",
+     "a",
+     "c",
+     "N",
+     "r",
+     "Z",
+     "i",
+     "r",
+     "Z",
+     "a"
+    ],
+    [
+     "S",
+     "i",
+     "o",
+     "d",
+     "a",
+     "o",
+     "i",
+     "n",
+     "r",
+     "z",
+     "f",
+     "m"
+    ],
+    [
+     "d",
+     "a",
+     "b",
+     "t",
+     "T",
+     "d",
+     "n",
+     "a",
+     "d",
+     "i",
+     "r",
+     "e"
+    ],
+    [
+     "d",
+     "i",
+     "x",
+     "o",
+     "m",
+     "o",
+     "n",
+     "s",
+     "i",
+     "o",
+     "s",
+     "p"
+    ],
+    [
+     "O",
+     "o",
+     "D",
+     "p",
+     "z",
+     "i",
+     "A",
+     "p",
+     "a",
+     "n",
+     "l",
+     "i"
+    ],
+    [
+     "r",
+     "g",
+     "o",
+     "a",
+     "n",
+     "n",
+     "P",
+     "A",
+     "C",
+     "r",
+     "a",
+     "r"
+    ]
+   ],
+   "MPH": [
+    [
+     "T",
+     "a",
+     "O",
+     "A",
+     "d",
+     "v",
+     "p",
+     "t",
+     "D",
+     "n",
+     "i",
+     "m"
+    ],
+    [
+     "a",
+     "a",
+     "b",
+     "c",
+     "o",
+     "o",
+     "r",
+     "o",
+     "m",
+     "e",
+     "b",
+     "b"
+    ],
+    [
+     "T",
+     "o",
+     "g",
+     "c",
+     "o",
+     "n",
+     "x",
+     "m",
+     "a",
+     "l",
+     "G",
+     "m"
+    ],
+    [
+     "n",
+     "h",
+     "o",
+     "d",
+     "D",
+     "i",
+     "a",
+     "l",
+     "e",
+     "a",
+     "o",
+     "c"
+    ],
+    [
+     "p",
+     "a",
+     "t",
+     "A",
+     "x",
+     "i",
+     "o",
+     "V",
+     "s",
+     "P",
+     "s",
+     "N"
+    ],
+    [
+     "S",
+     "a",
+     "a",
+     "i",
+     "x/p",
+     "a",
+     "a",
+     "r",
+     "V",
+     "r",
+     "o",
+     "i"
+    ],
+    [
+     "m",
+     "p",
+     "h",
+     "a",
+     "r",
+     "s",
+     "l",
+     "g",
+     "a",
+     "i",
+     "o",
+     "l"
+    ],
+    [
+     "M",
+     "a",
+     "m",
+     "g",
+     "l",
+     "o",
+     "i",
+     "n",
+     "L",
+     "i",
+     "r",
+     "x"
+    ],
+    [
+     "o",
+     "l",
+     "a",
+     "a",
+     "D",
+     "n",
+     "g",
+     "a",
+     "T",
+     "a",
+     "p",
+     "a"
+    ],
+    [
+     "p",
+     "a",
+     "L",
+     "c",
+     "o",
+     "i",
+     "d",
+     "x",
+     "P",
+     "a",
+     "c",
+     "n"
+    ],
+    [
+     "n",
+     "d",
+     "a",
+     "z",
+     "N",
+     "z",
+     "i",
+     "V",
+     "a",
+     "a",
+     "s",
+     "a"
+    ],
+    [
+     "i",
+     "i",
+     "d",
+     "P",
+     "o",
+     "n",
+     "s",
+     "d",
+     "A",
+     "s",
+     "p",
+     "i"
+    ],
+    [
+     "x",
+     "r",
+     "i",
+     "n",
+     "h",
+     "t",
+     "a",
+     "r",
+     "n",
+     "d",
+     "i",
+     "L"
+    ]
+   ]
+  },
+  "cotton_xlvi_pt2_recensa_vovina": {
+   "ORO": [
+    [
+     "r",
+     "z",
+     "i",
+     "l",
+     "a",
+     "f",
+     "a",
+     "y",
+     "t",
+     "l",
+     "p",
+     "a"
+    ],
+    [
+     "a",
+     "r",
+     "d",
+     "z",
+     "a",
+     "i",
+     "d",
+     "p",
+     "a",
+     "l",
+     "a",
+     "m"
+    ],
+    [
+     "c",
+     "z",
+     "o",
+     "n",
+     "s",
+     "a",
+     "r",
+     "o",
+     "y",
+     "a",
+     "v",
+     "b"
+    ],
+    [
+     "t",
+     "o",
+     "i",
+     "t",
+     "t",
+     "z",
+     "o",
+     "p",
+     "a",
+     "c",
+     "o",
+     "c"
+    ],
+    [
+     "s",
+     "i",
+     "g",
+     "a",
+     "s",
+     "o",
+     "m",
+     "r",
+     "b",
+     "z",
+     "n",
+     "h"
+    ],
+    [
+     "f",
+     "m",
+     "o",
+     "n",
+     "d",
+     "a",
+     "t",
+     "d",
+     "i",
+     "a",
+     "r",
+     "i"
+    ],
+    [
+     "o",
+     "r",
+     "o",
+     "i",
+     "b",
+     "a",
+     "h",
+     "a",
+     "o",
+     "z",
+     "p",
+     "i"
+    ],
+    [
+     "t",
+     "n",
+     "a",
+     "b",
+     "r",
+     "v",
+     "i",
+     "x",
+     "g",
+     "a",
+     "s",
+     "d"
+    ],
+    [
+     "o",
+     "i",
+     "i",
+     "i",
+     "t",
+     "T",
+     "p",
+     "a",
+     "l",
+     "o",
+     "a",
+     "i"
+    ],
+    [
+     "a",
+     "b",
+     "a",
+     "m",
+     "o",
+     "o",
+     "o",
+     "a",
+     "c",
+     "v",
+     "c",
+     "a"
+    ],
+    [
+     "n",
+     "a",
+     "o",
+     "c",
+     "o",
+     "t",
+     "T",
+     "n",
+     "p",
+     "r",
+     "n",
+     "t"
+    ],
+    [
+     "o",
+     "c",
+     "a",
+     "n",
+     "m",
+     "a",
+     "g",
+     "o",
+     "t",
+     "r",
+     "o",
+     "i"
+    ],
+    [
+     "s",
+     "h",
+     "i",
+     "a",
+     "l",
+     "r",
+     "a",
+     "p",
+     "m",
+     "z",
+     "o",
+     "x"
+    ]
+   ],
+   "MOR": [
+    [
+     "b",
+     "o",
+     "a",
+     "z",
+     "a",
+     "r",
+     "o",
+     "p",
+     "h",
+     "a",
+     "r",
+     "a"
+    ],
+    [
+     "v",
+     "n",
+     "n",
+     "a",
+     "x",
+     "o",
+     "p",
+     "s",
+     "o",
+     "n",
+     "d",
+     "n"
+    ],
+    [
+     "a",
+     "i",
+     "g",
+     "r",
+     "a",
+     "n",
+     "o",
+     "o",
+     "m",
+     "a",
+     "g",
+     "g"
+    ],
+    [
+     "o",
+     "r",
+     "p",
+     "m",
+     "n",
+     "i",
+     "n",
+     "g",
+     "b",
+     "e",
+     "a",
+     "l"
+    ],
+    [
+     "r",
+     "s",
+     "o",
+     "n",
+     "i",
+     "z",
+     "i",
+     "r",
+     "l",
+     "e",
+     "m",
+     "v"
+    ],
+    [
+     "i",
+     "z",
+     "i",
+     "n",
+     "r",
+     "c",
+     "z",
+     "i",
+     "a",
+     "m",
+     "h",
+     "l"
+    ],
+    [
+     "m",
+     "o",
+     "r",
+     "d",
+     "i",
+     "a",
+     "l",
+     "h",
+     "c",
+     "t",
+     "g",
+     "a"
+    ],
+    [
+     "o",
+     "c",
+     "a",
+     "n",
+     "c",
+     "h",
+     "i",
+     "a",
+     "s",
+     "o",
+     "m",
+     "t"
+    ],
+    [
+     "a",
+     "r",
+     "b",
+     "i",
+     "z",
+     "m",
+     "i",
+     "i",
+     "l",
+     "p",
+     "i",
+     "z"
+    ],
+    [
+     "o",
+     "p",
+     "a",
+     "n",
+     "a",
+     "l",
+     "a",
+     "m",
+     "s",
+     "m",
+     "a",
+     "p"
+    ],
+    [
+     "d",
+     "o",
+     "l",
+     "o",
+     "p",
+     "i",
+     "n",
+     "i",
+     "a",
+     "n",
+     "b",
+     "a"
+    ],
+    [
+     "r",
+     "x",
+     "p",
+     "a",
+     "o",
+     "c",
+     "s",
+     "i",
+     "z",
+     "i",
+     "x",
+     "p"
+    ],
+    [
+     "a",
+     "x",
+     "t",
+     "i",
+     "r",
+     "v",
+     "a",
+     "s",
+     "t",
+     "r",
+     "i",
+     "m"
+    ]
+   ],
+   "OIP": [
+    [
+     "d",
+     "o",
+     "n",
+     "p",
+     "a",
+     "t",
+     "d",
+     "a",
+     "n",
+     "v",
+     "a",
+     "a"
+    ],
+    [
+     "o",
+     "l",
+     "o",
+     "a",
+     "g",
+     "e",
+     "o",
+     "o",
+     "b",
+     "a",
+     "v",
+     "a"
+    ],
+    [
+     "o",
+     "p",
+     "a",
+     "m",
+     "n",
+     "o",
+     "v",
+     "g",
+     "m",
+     "d",
+     "n",
+     "m"
+    ],
+    [
+     "a",
+     "p",
+     "l",
+     "s",
+     "t",
+     "e",
+     "d",
+     "e",
+     "c",
+     "a",
+     "o",
+     "p"
+    ],
+    [
+     "s",
+     "c",
+     "m",
+     "i",
+     "o",
+     "o",
+     "n",
+     "a",
+     "m",
+     "l",
+     "o",
+     "x"
+    ],
+    [
+     "v",
+     "a",
+     "r",
+     "s",
+     "g",
+     "d",
+     "l",
+     "b",
+     "r",
+     "i",
+     "a",
+     "p"
+    ],
+    [
+     "o",
+     "i",
+     "p",
+     "t",
+     "e",
+     "a",
+     "a",
+     "p",
+     "d",
+     "o",
+     "c",
+     "e"
+    ],
+    [
+     "x",
+     "s",
+     "v",
+     "a",
+     "c",
+     "N",
+     "r",
+     "z",
+     "i",
+     "r",
+     "z",
+     "a"
+    ],
+    [
+     "s",
+     "i",
+     "o",
+     "d",
+     "a",
+     "o",
+     "i",
+     "n",
+     "r",
+     "z",
+     "f",
+     "m"
+    ],
+    [
+     "d",
+     "a",
+     "l",
+     "t",
+     "t",
+     "d",
+     "n",
+     "a",
+     "d",
+     "i",
+     "r",
+     "e"
+    ],
+    [
+     "d",
+     "i",
+     "x",
+     "o",
+     "m",
+     "o",
+     "n",
+     "s",
+     "i",
+     "o",
+     "s",
+     "p"
+    ],
+    [
+     "o",
+     "o",
+     "d",
+     "x",
+     "z",
+     "i",
+     "a",
+     "p",
+     "a",
+     "n",
+     "l",
+     "i"
+    ],
+    [
+     "r",
+     "g",
+     "o",
+     "a",
+     "n",
+     "n",
+     "P",
+     "a",
+     "c",
+     "r",
+     "a",
+     "r"
+    ]
+   ],
+   "MPH": [
+    [
+     "t",
+     "a",
+     "o",
+     "a",
+     "d",
+     "v",
+     "p",
+     "t",
+     "d",
+     "n",
+     "i",
+     "m"
+    ],
+    [
+     "a",
+     "a",
+     "b",
+     "c",
+     "o",
+     "o",
+     "r",
+     "o",
+     "m",
+     "e",
+     "b",
+     "b"
+    ],
+    [
+     "t",
+     "o",
+     "g",
+     "c",
+     "o",
+     "n",
+     "x",
+     "m",
+     "a",
+     "l",
+     "g",
+     "m"
+    ],
+    [
+     "n",
+     "h",
+     "o",
+     "d",
+     "d",
+     "i",
+     "a",
+     "l",
+     "e",
+     "a",
+     "o",
+     "c"
+    ],
+    [
+     "p",
+     "a",
+     "t",
+     "a",
+     "x",
+     "i",
+     "o",
+     "v",
+     "s",
+     "p",
+     "s",
+     "n"
+    ],
+    [
+     "s",
+     "a",
+     "a",
+     "i",
+     "x",
+     "a",
+     "a",
+     "r",
+     "v",
+     "r",
+     "o",
+     "i"
+    ],
+    [
+     "m",
+     "p",
+     "h",
+     "a",
+     "r",
+     "s",
+     "l",
+     "g",
+     "a",
+     "i",
+     "o",
+     "l"
+    ],
+    [
+     "m",
+     "a",
+     "m",
+     "g",
+     "l",
+     "o",
+     "i",
+     "n",
+     "l",
+     "i",
+     "r",
+     "x"
+    ],
+    [
+     "o",
+     "l",
+     "a",
+     "a",
+     "d",
+     "n",
+     "g",
+     "a",
+     "t",
+     "a",
+     "p",
+     "a"
+    ],
+    [
+     "p",
+     "a",
+     "l",
+     "c",
+     "o",
+     "i",
+     "d",
+     "x",
+     "p",
+     "a",
+     "c",
+     "n"
+    ],
+    [
+     "n",
+     "d",
+     "a",
+     "z",
+     "n",
+     "z",
+     "i",
+     "v",
+     "a",
+     "a",
+     "s",
+     "a"
+    ],
+    [
+     "i",
+     "i",
+     "d",
+     "p",
+     "o",
+     "n",
+     "s",
+     "d",
+     "a",
+     "s",
+     "p",
+     "i"
+    ],
+    [
+     "x",
+     "r",
+     "i",
+     "n",
+     "h",
+     "t",
+     "a",
+     "r",
+     "n",
+     "d",
+     "i",
+     "L"
+    ]
+   ]
+  }
+ },
+ "comentario_html_peterson_texto_bruto": [
+  "r Z i l a f A y t l p a e\tT a O A d v p t D n i m",
+  "a r d Z a i d p a L a m  \ta a b c o o r o m e b b",
+  "c z o n s a r o Y a v b x\tT o g c o n x m a l G m",
+  "T o i T t z o P q c o C a\tn h o d D i a l e a o c",
+  "S i g a s o m r b z n h r\tp a t A x i o V s P s N",
+  "f m o n d a T d i a r i p\tS a a i x a a r V r o i",
+  "o r o i b A h a o z p i\t\tm p h a r s l g a i o l",
+  "t N a b r V i x g a s d h\tM a m g l o i n L i r x",
+  "O i i i t T p a l O a i  \to l a a D n g a T a p a",
+  "A b a m o o o a C u c a C\tp a L c o i d x P a c n",
+  "N a o c O T t n p r n T o\tn d a z N z i V a a s a",
+  "o c a n m a g o t r o i m\ti i d P o n s d A s p i",
+  "S b i a l r a p m z o x a\tx r i n h t a r n d i L",
+  "m o t i b     a T n a n  \tn a n T a     b i t o m",
+  "b O a Z a R o p h a R a a\td o n p a T d a n V a a",
+  "u N n a x o P S o n d n  \to l o a G e o o b a u a",
+  "a i g r a n o o m a g g m\tO P a m n o V G m d n m",
+  "o r p m n i n g b e a l o\ta p l s T e d e c a o p",
+  "r s O n i z i r l e m v C\ts c m i o o n A m l o x",
+  "i z i n r C z i a M h l h\tV a r s G d L b r i a p",
+  "M O r d i a l h C t G a  \to i P t e a a p D o c e",
+  "O c a n c h i a s o m t p\tp s u a c N r Z i r Z a",
+  "A r b i z m i i l p i z  \ts i o d a o i n r z f m",
+  "O p a n a l a m S m a P r\td a l t T d n a d i r e",
+  "d O l o P i n i a n b a a\td i x o m o n s i o s p",
+  "r x p a o c s i z i x p x\tO o D p z i A p a n l i",
+  "a x t i r V a s t r i m e\tr g o a n n P A C r a r"
+ ],
+ "grade_de_referencia": {
+  "criterio": "letra da tipografia de Peterson quando a transcrição vovina de Sloane 3191 concorda (normalizado; leitura dupla da vovina que contém a letra de Peterson conta como acordo); senão null com as leituras",
+  "grades": {
+   "ORO": [
+    [
+     "r",
+     "Z",
+     "i",
+     "l",
+     "a",
+     "f",
+     "A",
+     "y",
+     "t",
+     "l",
+     "p",
+     "a"
+    ],
+    [
+     "a",
+     "r",
+     "d",
+     "Z",
+     "a",
+     "i",
+     "d",
+     "p",
+     "a",
+     "L",
+     "a",
+     "m"
+    ],
+    [
+     "c",
+     "z",
+     "o",
+     "n",
+     "s",
+     "a",
+     "r",
+     "o",
+     "Y",
+     "a",
+     "v",
+     "b"
+    ],
+    [
+     "T",
+     "o",
+     "i",
+     "T",
+     "t",
+     "z",
+     "o",
+     "P",
+     "a",
+     "c",
+     "o",
+     "C"
+    ],
+    [
+     "S",
+     "i",
+     "g",
+     "a",
+     "s",
+     "o",
+     "m",
+     "r",
+     "b",
+     "z",
+     "n",
+     "h"
+    ],
+    [
+     "f",
+     "m",
+     "o",
+     "n",
+     "d",
+     "a",
+     "T",
+     "d",
+     "i",
+     "a",
+     "r",
+     "i"
+    ],
+    [
+     "o",
+     "r",
+     "o",
+     "i",
+     "b",
+     "A",
+     "h",
+     "a",
+     "o",
+     "z",
+     "p",
+     "i"
+    ],
+    [
+     "t",
+     "N",
+     "a",
+     "b",
+     "r",
+     "V",
+     "i",
+     "x",
+     "g",
+     "a",
+     "s",
+     "d"
+    ],
+    [
+     "O",
+     "i",
+     "i",
+     "i",
+     "t",
+     "T",
+     "p",
+     "a",
+     "l",
+     "O",
+     "a",
+     "i"
+    ],
+    [
+     "A",
+     "b",
+     "a",
+     "m",
+     "o",
+     "o",
+     "o",
+     "a",
+     "C",
+     "u",
+     "c",
+     "a"
+    ],
+    [
+     "N",
+     "a",
+     "o",
+     "c",
+     "O",
+     "T",
+     "t",
+     "n",
+     "p",
+     "r",
+     "n",
+     "T"
+    ],
+    [
+     "o",
+     "c",
+     "a",
+     "n",
+     "m",
+     "a",
+     "g",
+     "o",
+     "t",
+     "r",
+     "o",
+     "i"
+    ],
+    [
+     "S",
+     null,
+     "i",
+     "a",
+     "l",
+     "r",
+     "a",
+     "p",
+     "m",
+     "z",
+     "o",
+     "x"
+    ]
+   ],
+   "MOR": [
+    [
+     "b",
+     "O",
+     "a",
+     "Z",
+     "a",
+     "R",
+     "o",
+     "p",
+     "h",
+     "a",
+     "R",
+     "a"
+    ],
+    [
+     "u",
+     "N",
+     "n",
+     "a",
+     "x",
+     "o",
+     "P",
+     "S",
+     "o",
+     "n",
+     "d",
+     "n"
+    ],
+    [
+     "a",
+     "i",
+     "g",
+     "r",
+     "a",
+     "n",
+     "o",
+     "o",
+     "m",
+     "a",
+     "g",
+     "g"
+    ],
+    [
+     "o",
+     "r",
+     "p",
+     "m",
+     "n",
+     "i",
+     "n",
+     "g",
+     "b",
+     "e",
+     "a",
+     "l"
+    ],
+    [
+     "r",
+     "s",
+     "O",
+     "n",
+     "i",
+     "z",
+     "i",
+     "r",
+     "l",
+     "e",
+     "m",
+     "v"
+    ],
+    [
+     "i",
+     "z",
+     "i",
+     "n",
+     "r",
+     "C",
+     "z",
+     "i",
+     "a",
+     "M",
+     "h",
+     "l"
+    ],
+    [
+     "M",
+     "O",
+     "r",
+     "d",
+     "i",
+     "a",
+     "l",
+     "h",
+     "C",
+     "t",
+     "G",
+     "a"
+    ],
+    [
+     "⊙",
+     "c",
+     "a",
+     "n",
+     "c",
+     "h",
+     "i",
+     "a",
+     "s",
+     "o",
+     "m",
+     "t"
+    ],
+    [
+     "A",
+     "r",
+     "b",
+     "i",
+     "z",
+     "m",
+     "i",
+     "i",
+     "l",
+     "p",
+     "i",
+     "z"
+    ],
+    [
+     "O",
+     "p",
+     "a",
+     "n",
+     "a",
+     "l",
+     "a",
+     "m",
+     "S",
+     "m",
+     "a",
+     "P"
+    ],
+    [
+     "d",
+     "O",
+     "l",
+     "o",
+     "P",
+     "i",
+     "n",
+     "i",
+     "a",
+     "n",
+     "b",
+     "a"
+    ],
+    [
+     "r",
+     "x",
+     "p",
+     "a",
+     "o",
+     "c",
+     "s",
+     "i",
+     "z",
+     "i",
+     "x",
+     "p"
+    ],
+    [
+     "a",
+     "x",
+     "t",
+     "i",
+     "r",
+     "V",
+     "a",
+     "s",
+     "t",
+     "r",
+     "i",
+     "m"
+    ]
+   ],
+   "OIP": [
+    [
+     "d",
+     "o",
+     "n",
+     "p",
+     "a",
+     "T",
+     "d",
+     "a",
+     "n",
+     "V",
+     "a",
+     "a"
+    ],
+    [
+     "o",
+     "l",
+     "o",
+     "a",
+     "G",
+     "e",
+     "o",
+     "o",
+     "b",
+     "a",
+     "u",
+     "a"
+    ],
+    [
+     "O",
+     "P",
+     "a",
+     "m",
+     "n",
+     "o",
+     "V",
+     "G",
+     "m",
+     "d",
+     "n",
+     "m"
+    ],
+    [
+     "a",
+     "p",
+     "l",
+     "s",
+     "T",
+     "e",
+     "d",
+     "e",
+     "c",
+     "a",
+     "o",
+     "p"
+    ],
+    [
+     "s",
+     "c",
+     "m",
+     "i",
+     "o",
+     "o",
+     "n",
+     "A",
+     "m",
+     "l",
+     "o",
+     "x"
+    ],
+    [
+     "V",
+     "a",
+     "r",
+     "s",
+     "G",
+     "d",
+     "L",
+     "b",
+     "r",
+     "i",
+     "a",
+     "p"
+    ],
+    [
+     "o",
+     "i",
+     "P",
+     "t",
+     "e",
+     "a",
+     "a",
+     "p",
+     "D",
+     "o",
+     "c",
+     "e"
+    ],
+    [
+     "p",
+     "s",
+     "u",
+     "a",
+     "c",
+     "N",
+     "r",
+     "Z",
+     "i",
+     "r",
+     "Z",
+     "a"
+    ],
+    [
+     "s",
+     "i",
+     "o",
+     "d",
+     "a",
+     "o",
+     "i",
+     "n",
+     "r",
+     "z",
+     "f",
+     "m"
+    ],
+    [
+     "d",
+     "a",
+     null,
+     "t",
+     "T",
+     "d",
+     "n",
+     "a",
+     "d",
+     "i",
+     "r",
+     "e"
+    ],
+    [
+     "d",
+     "i",
+     "x",
+     "o",
+     "m",
+     "o",
+     "n",
+     "s",
+     "i",
+     "o",
+     "s",
+     "p"
+    ],
+    [
+     "O",
+     "o",
+     "D",
+     "p",
+     "z",
+     "i",
+     "A",
+     "p",
+     "a",
+     "n",
+     "l",
+     "i"
+    ],
+    [
+     "r",
+     "g",
+     "o",
+     "a",
+     "n",
+     "n",
+     "ꟼ",
+     "A",
+     "C",
+     "r",
+     "a",
+     "r"
+    ]
+   ],
+   "MPH": [
+    [
+     "T",
+     "a",
+     "O",
+     "A",
+     "d",
+     "v",
+     "p",
+     "t",
+     "D",
+     "n",
+     "i",
+     "m"
+    ],
+    [
+     "a",
+     "a",
+     "b",
+     "c",
+     "o",
+     "o",
+     "r",
+     "o",
+     "m",
+     "e",
+     "b",
+     "b"
+    ],
+    [
+     "T",
+     "o",
+     "g",
+     "c",
+     "o",
+     "n",
+     "x",
+     "m",
+     "a",
+     "l",
+     "G",
+     "m"
+    ],
+    [
+     "n",
+     "h",
+     "o",
+     "d",
+     "D",
+     "i",
+     "a",
+     "l",
+     "e",
+     "a",
+     "o",
+     "c"
+    ],
+    [
+     "p",
+     "a",
+     "t",
+     "A",
+     "x",
+     "i",
+     "o",
+     "V",
+     "s",
+     "P",
+     "s",
+     "И"
+    ],
+    [
+     "S",
+     "a",
+     "a",
+     "i",
+     "x",
+     "a",
+     "a",
+     "r",
+     "V",
+     "r",
+     "o",
+     "i"
+    ],
+    [
+     "m",
+     "p",
+     "h",
+     "a",
+     "r",
+     "s",
+     "l",
+     "g",
+     "a",
+     "i",
+     "o",
+     "l"
+    ],
+    [
+     "M",
+     "a",
+     "m",
+     "g",
+     "l",
+     "o",
+     "i",
+     "n",
+     "L",
+     "i",
+     "r",
+     "x"
+    ],
+    [
+     "o",
+     "l",
+     "a",
+     "a",
+     "D",
+     "n",
+     "g",
+     "a",
+     "T",
+     "a",
+     "p",
+     "a"
+    ],
+    [
+     "p",
+     "a",
+     "L",
+     "c",
+     "o",
+     "i",
+     "d",
+     "x",
+     "P",
+     "a",
+     "c",
+     "n"
+    ],
+    [
+     "n",
+     "d",
+     "a",
+     "z",
+     "N",
+     "z",
+     "i",
+     "V",
+     "a",
+     "a",
+     "s",
+     "a"
+    ],
+    [
+     "i",
+     "i",
+     "d",
+     "P",
+     "o",
+     "n",
+     "s",
+     "d",
+     "A",
+     "s",
+     "p",
+     "i"
+    ],
+    [
+     "x",
+     "r",
+     "i",
+     "n",
+     "h",
+     "t",
+     "a",
+     "r",
+     "n",
+     "d",
+     "i",
+     "⅃"
+    ]
+   ]
+  },
+  "celulas_em_disputa_ou_com_leitura_dupla": {
+   "ORO": [
+    {
+     "linha": 13,
+     "coluna": 2,
+     "leituras": {
+      "sloane3191_recensa_peterson_tipografia": "b",
+      "sloane3191_recensa_vovina": "h",
+      "sloane3191_recensa_peterson_comentario_html": "b",
+      "cotton_xlvi_pt2_recensa_vovina": "h"
+     },
+     "motivo": "as duas transcricoes desta mesma pagina divergem",
+     "decisao": null
+    }
+   ],
+   "MOR": [],
+   "OIP": [
+    {
+     "linha": 10,
+     "coluna": 3,
+     "leituras": {
+      "sloane3191_recensa_peterson_tipografia": "l",
+      "sloane3191_recensa_vovina": "b",
+      "sloane3191_recensa_peterson_comentario_html": "l",
+      "sloane3191_recensa_peterson_hm31_metade_direita": "b",
+      "cotton_xlvi_pt2_recensa_vovina": "l"
+     },
+     "motivo": "as duas transcricoes desta mesma pagina divergem",
+     "decisao": null
+    }
+   ],
+   "MPH": [
+    {
+     "linha": 6,
+     "coluna": 5,
+     "decisao": "x",
+     "motivo": "sloane3191_recensa_peterson_tipografia=x; sloane3191_recensa_vovina registra x/p (leitura dupla/alternativa); mantida a leitura comum",
+     "leituras": {
+      "sloane3191_recensa_peterson_tipografia": "x",
+      "sloane3191_recensa_vovina": "x/p",
+      "sloane3191_recensa_peterson_comentario_html": "x",
+      "sloane3191_recensa_peterson_hm31_metade_direita": "x",
+      "cotton_xlvi_pt2_recensa_vovina": "x"
+     }
+    }
+   ]
+  }
+ },
+ "grade_completa_27x25": {
+  "disposicao": {
+   "sup_esq": "ORO",
+   "sup_dir": "MPH",
+   "inf_esq": "MOR",
+   "inf_dir": "OIP"
+  },
+  "nota": "linha 14 e coluna 13 = cruz negra; null = célula vazia da cruz",
+  "peterson_tipografia": [
+   [
+    "r",
+    "Z",
+    "i",
+    "l",
+    "a",
+    "f",
+    "A",
+    "y",
+    "t",
+    "l",
+    "p",
+    "a",
+    "e",
+    "T",
+    "a",
+    "O",
+    "A",
+    "d",
+    "v",
+    "p",
+    "t",
+    "D",
+    "n",
+    "i",
+    "m"
+   ],
+   [
+    "a",
+    "r",
+    "d",
+    "Z",
+    "a",
+    "i",
+    "d",
+    "p",
+    "a",
+    "L",
+    "a",
+    "m",
+    null,
+    "a",
+    "a",
+    "b",
+    "c",
+    "o",
+    "o",
+    "r",
+    "o",
+    "m",
+    "e",
+    "b",
+    "b"
+   ],
+   [
+    "c",
+    "z",
+    "o",
+    "n",
+    "s",
+    "a",
+    "r",
+    "o",
+    "Y",
+    "a",
+    "v",
+    "b",
+    "x",
+    "T",
+    "o",
+    "g",
+    "c",
+    "o",
+    "n",
+    "x",
+    "m",
+    "a",
+    "l",
+    "G",
+    "m"
+   ],
+   [
+    "T",
+    "o",
+    "i",
+    "T",
+    "t",
+    "z",
+    "o",
+    "P",
+    "a",
+    "c",
+    "o",
+    "C",
+    "a",
+    "n",
+    "h",
+    "o",
+    "d",
+    "D",
+    "i",
+    "a",
+    "l",
+    "e",
+    "a",
+    "o",
+    "c"
+   ],
+   [
+    "S",
+    "i",
+    "g",
+    "a",
+    "s",
+    "o",
+    "m",
+    "r",
+    "b",
+    "z",
+    "n",
+    "h",
+    "r",
+    "p",
+    "a",
+    "t",
+    "A",
+    "x",
+    "i",
+    "o",
+    "V",
+    "s",
+    "P",
+    "s",
+    "И"
+   ],
+   [
+    "f",
+    "m",
+    "o",
+    "n",
+    "d",
+    "a",
+    "T",
+    "d",
+    "i",
+    "a",
+    "r",
+    "i",
+    "p",
+    "S",
+    "a",
+    "a",
+    "i",
+    "x",
+    "a",
+    "a",
+    "r",
+    "V",
+    "r",
+    "o",
+    "i"
+   ],
+   [
+    "o",
+    "r",
+    "o",
+    "i",
+    "b",
+    "A",
+    "h",
+    "a",
+    "o",
+    "z",
+    "p",
+    "i",
+    null,
+    "m",
+    "p",
+    "h",
+    "a",
+    "r",
+    "s",
+    "l",
+    "g",
+    "a",
+    "i",
+    "o",
+    "l"
+   ],
+   [
+    "t",
+    "N",
+    "a",
+    "b",
+    "r",
+    "V",
+    "i",
+    "x",
+    "g",
+    "a",
+    "s",
+    "d",
+    "h",
+    "M",
+    "a",
+    "m",
+    "g",
+    "l",
+    "o",
+    "i",
+    "n",
+    "L",
+    "i",
+    "r",
+    "x"
+   ],
+   [
+    "O",
+    "i",
+    "i",
+    "i",
+    "t",
+    "T",
+    "p",
+    "a",
+    "l",
+    "O",
+    "a",
+    "i",
+    null,
+    "o",
+    "l",
+    "a",
+    "a",
+    "D",
+    "n",
+    "g",
+    "a",
+    "T",
+    "a",
+    "p",
+    "a"
+   ],
+   [
+    "A",
+    "b",
+    "a",
+    "m",
+    "o",
+    "o",
+    "o",
+    "a",
+    "C",
+    "u",
+    "c",
+    "a",
+    "C",
+    "p",
+    "a",
+    "L",
+    "c",
+    "o",
+    "i",
+    "d",
+    "x",
+    "P",
+    "a",
+    "c",
+    "n"
+   ],
+   [
+    "N",
+    "a",
+    "o",
+    "c",
+    "O",
+    "T",
+    "t",
+    "n",
+    "p",
+    "r",
+    "n",
+    "T",
+    "o",
+    "n",
+    "d",
+    "a",
+    "z",
+    "N",
+    "z",
+    "i",
+    "V",
+    "a",
+    "a",
+    "s",
+    "a"
+   ],
+   [
+    "o",
+    "c",
+    "a",
+    "n",
+    "m",
+    "a",
+    "g",
+    "o",
+    "t",
+    "r",
+    "o",
+    "i",
+    "m",
+    "i",
+    "i",
+    "d",
+    "P",
+    "o",
+    "n",
+    "s",
+    "d",
+    "A",
+    "s",
+    "p",
+    "i"
+   ],
+   [
+    "S",
+    "b",
+    "i",
+    "a",
+    "l",
+    "r",
+    "a",
+    "p",
+    "m",
+    "z",
+    "o",
+    "x",
+    "a",
+    "x",
+    "r",
+    "i",
+    "n",
+    "h",
+    "t",
+    "a",
+    "r",
+    "n",
+    "d",
+    "i",
+    "⅃"
+   ],
+   [
+    "m",
+    "o",
+    "t",
+    "i",
+    "b",
+    null,
+    null,
+    "a",
+    "T",
+    "n",
+    "a",
+    "n",
+    null,
+    "n",
+    "a",
+    "n",
+    "T",
+    "a",
+    null,
+    null,
+    "b",
+    "i",
+    "t",
+    "o",
+    "m"
+   ],
+   [
+    "b",
+    "O",
+    "a",
+    "Z",
+    "a",
+    "R",
+    "o",
+    "p",
+    "h",
+    "a",
+    "R",
+    "a",
+    "a",
+    "d",
+    "o",
+    "n",
+    "p",
+    "a",
+    "T",
+    "d",
+    "a",
+    "n",
+    "V",
+    "a",
+    "a"
+   ],
+   [
+    "u",
+    "N",
+    "n",
+    "a",
+    "x",
+    "o",
+    "P",
+    "S",
+    "o",
+    "n",
+    "d",
+    "n",
+    null,
+    "o",
+    "l",
+    "o",
+    "a",
+    "G",
+    "e",
+    "o",
+    "o",
+    "b",
+    "a",
+    "u",
+    "a"
+   ],
+   [
+    "a",
+    "i",
+    "g",
+    "r",
+    "a",
+    "n",
+    "o",
+    "o",
+    "m",
+    "a",
+    "g",
+    "g",
+    "m",
+    "O",
+    "P",
+    "a",
+    "m",
+    "n",
+    "o",
+    "V",
+    "G",
+    "m",
+    "d",
+    "n",
+    "m"
+   ],
+   [
+    "o",
+    "r",
+    "p",
+    "m",
+    "n",
+    "i",
+    "n",
+    "g",
+    "b",
+    "e",
+    "a",
+    "l",
+    "o",
+    "a",
+    "p",
+    "l",
+    "s",
+    "T",
+    "e",
+    "d",
+    "e",
+    "c",
+    "a",
+    "o",
+    "p"
+   ],
+   [
+    "r",
+    "s",
+    "O",
+    "n",
+    "i",
+    "z",
+    "i",
+    "r",
+    "l",
+    "e",
+    "m",
+    "v",
+    "C",
+    "s",
+    "c",
+    "m",
+    "i",
+    "o",
+    "o",
+    "n",
+    "A",
+    "m",
+    "l",
+    "o",
+    "x"
+   ],
+   [
+    "i",
+    "z",
+    "i",
+    "n",
+    "r",
+    "C",
+    "z",
+    "i",
+    "a",
+    "M",
+    "h",
+    "l",
+    "h",
+    "V",
+    "a",
+    "r",
+    "s",
+    "G",
+    "d",
+    "L",
+    "b",
+    "r",
+    "i",
+    "a",
+    "p"
+   ],
+   [
+    "M",
+    "O",
+    "r",
+    "d",
+    "i",
+    "a",
+    "l",
+    "h",
+    "C",
+    "t",
+    "G",
+    "a",
+    null,
+    "o",
+    "i",
+    "P",
+    "t",
+    "e",
+    "a",
+    "a",
+    "p",
+    "D",
+    "o",
+    "c",
+    "e"
+   ],
+   [
+    "⊙",
+    "c",
+    "a",
+    "n",
+    "c",
+    "h",
+    "i",
+    "a",
+    "s",
+    "o",
+    "m",
+    "t",
+    "p",
+    "p",
+    "s",
+    "u",
+    "a",
+    "c",
+    "N",
+    "r",
+    "Z",
+    "i",
+    "r",
+    "Z",
+    "a"
+   ],
+   [
+    "A",
+    "r",
+    "b",
+    "i",
+    "z",
+    "m",
+    "i",
+    "i",
+    "l",
+    "p",
+    "i",
+    "z",
+    null,
+    "s",
+    "i",
+    "o",
+    "d",
+    "a",
+    "o",
+    "i",
+    "n",
+    "r",
+    "z",
+    "f",
+    "m"
+   ],
+   [
+    "O",
+    "p",
+    "a",
+    "n",
+    "a",
+    "l",
+    "a",
+    "m",
+    "S",
+    "m",
+    "a",
+    "P",
+    "r",
+    "d",
+    "a",
+    "l",
+    "t",
+    "T",
+    "d",
+    "n",
+    "a",
+    "d",
+    "i",
+    "r",
+    "e"
+   ],
+   [
+    "d",
+    "O",
+    "l",
+    "o",
+    "P",
+    "i",
+    "n",
+    "i",
+    "a",
+    "n",
+    "b",
+    "a",
+    "a",
+    "d",
+    "i",
+    "x",
+    "o",
+    "m",
+    "o",
+    "n",
+    "s",
+    "i",
+    "o",
+    "s",
+    "p"
+   ],
+   [
+    "r",
+    "x",
+    "p",
+    "a",
+    "o",
+    "c",
+    "s",
+    "i",
+    "z",
+    "i",
+    "x",
+    "p",
+    "x",
+    "O",
+    "o",
+    "D",
+    "p",
+    "z",
+    "i",
+    "A",
+    "p",
+    "a",
+    "n",
+    "l",
+    "i"
+   ],
+   [
+    "a",
+    "x",
+    "t",
+    "i",
+    "r",
+    "V",
+    "a",
+    "s",
+    "t",
+    "r",
+    "i",
+    "m",
+    "e",
+    "r",
+    "g",
+    "o",
+    "a",
+    "n",
+    "n",
+    "ꟼ",
+    "A",
+    "C",
+    "r",
+    "a",
+    "r"
+   ]
+  ],
+  "peterson_comentario_html": [
+   [
+    "r",
+    "Z",
+    "i",
+    "l",
+    "a",
+    "f",
+    "A",
+    "y",
+    "t",
+    "l",
+    "p",
+    "a",
+    "e",
+    "T",
+    "a",
+    "O",
+    "A",
+    "d",
+    "v",
+    "p",
+    "t",
+    "D",
+    "n",
+    "i",
+    "m"
+   ],
+   [
+    "a",
+    "r",
+    "d",
+    "Z",
+    "a",
+    "i",
+    "d",
+    "p",
+    "a",
+    "L",
+    "a",
+    "m",
+    null,
+    "a",
+    "a",
+    "b",
+    "c",
+    "o",
+    "o",
+    "r",
+    "o",
+    "m",
+    "e",
+    "b",
+    "b"
+   ],
+   [
+    "c",
+    "z",
+    "o",
+    "n",
+    "s",
+    "a",
+    "r",
+    "o",
+    "Y",
+    "a",
+    "v",
+    "b",
+    "x",
+    "T",
+    "o",
+    "g",
+    "c",
+    "o",
+    "n",
+    "x",
+    "m",
+    "a",
+    "l",
+    "G",
+    "m"
+   ],
+   [
+    "T",
+    "o",
+    "i",
+    "T",
+    "t",
+    "z",
+    "o",
+    "P",
+    "q",
+    "c",
+    "o",
+    "C",
+    "a",
+    "n",
+    "h",
+    "o",
+    "d",
+    "D",
+    "i",
+    "a",
+    "l",
+    "e",
+    "a",
+    "o",
+    "c"
+   ],
+   [
+    "S",
+    "i",
+    "g",
+    "a",
+    "s",
+    "o",
+    "m",
+    "r",
+    "b",
+    "z",
+    "n",
+    "h",
+    "r",
+    "p",
+    "a",
+    "t",
+    "A",
+    "x",
+    "i",
+    "o",
+    "V",
+    "s",
+    "P",
+    "s",
+    "N"
+   ],
+   [
+    "f",
+    "m",
+    "o",
+    "n",
+    "d",
+    "a",
+    "T",
+    "d",
+    "i",
+    "a",
+    "r",
+    "i",
+    "p",
+    "S",
+    "a",
+    "a",
+    "i",
+    "x",
+    "a",
+    "a",
+    "r",
+    "V",
+    "r",
+    "o",
+    "i"
+   ],
+   [
+    "o",
+    "r",
+    "o",
+    "i",
+    "b",
+    "A",
+    "h",
+    "a",
+    "o",
+    "z",
+    "p",
+    "i",
+    null,
+    "m",
+    "p",
+    "h",
+    "a",
+    "r",
+    "s",
+    "l",
+    "g",
+    "a",
+    "i",
+    "o",
+    "l"
+   ],
+   [
+    "t",
+    "N",
+    "a",
+    "b",
+    "r",
+    "V",
+    "i",
+    "x",
+    "g",
+    "a",
+    "s",
+    "d",
+    "h",
+    "M",
+    "a",
+    "m",
+    "g",
+    "l",
+    "o",
+    "i",
+    "n",
+    "L",
+    "i",
+    "r",
+    "x"
+   ],
+   [
+    "O",
+    "i",
+    "i",
+    "i",
+    "t",
+    "T",
+    "p",
+    "a",
+    "l",
+    "O",
+    "a",
+    "i",
+    null,
+    "o",
+    "l",
+    "a",
+    "a",
+    "D",
+    "n",
+    "g",
+    "a",
+    "T",
+    "a",
+    "p",
+    "a"
+   ],
+   [
+    "A",
+    "b",
+    "a",
+    "m",
+    "o",
+    "o",
+    "o",
+    "a",
+    "C",
+    "u",
+    "c",
+    "a",
+    "C",
+    "p",
+    "a",
+    "L",
+    "c",
+    "o",
+    "i",
+    "d",
+    "x",
+    "P",
+    "a",
+    "c",
+    "n"
+   ],
+   [
+    "N",
+    "a",
+    "o",
+    "c",
+    "O",
+    "T",
+    "t",
+    "n",
+    "p",
+    "r",
+    "n",
+    "T",
+    "o",
+    "n",
+    "d",
+    "a",
+    "z",
+    "N",
+    "z",
+    "i",
+    "V",
+    "a",
+    "a",
+    "s",
+    "a"
+   ],
+   [
+    "o",
+    "c",
+    "a",
+    "n",
+    "m",
+    "a",
+    "g",
+    "o",
+    "t",
+    "r",
+    "o",
+    "i",
+    "m",
+    "i",
+    "i",
+    "d",
+    "P",
+    "o",
+    "n",
+    "s",
+    "d",
+    "A",
+    "s",
+    "p",
+    "i"
+   ],
+   [
+    "S",
+    "b",
+    "i",
+    "a",
+    "l",
+    "r",
+    "a",
+    "p",
+    "m",
+    "z",
+    "o",
+    "x",
+    "a",
+    "x",
+    "r",
+    "i",
+    "n",
+    "h",
+    "t",
+    "a",
+    "r",
+    "n",
+    "d",
+    "i",
+    "L"
+   ],
+   [
+    "m",
+    "o",
+    "t",
+    "i",
+    "b",
+    null,
+    null,
+    "a",
+    "T",
+    "n",
+    "a",
+    "n",
+    null,
+    "n",
+    "a",
+    "n",
+    "T",
+    "a",
+    null,
+    null,
+    "b",
+    "i",
+    "t",
+    "o",
+    "m"
+   ],
+   [
+    "b",
+    "O",
+    "a",
+    "Z",
+    "a",
+    "R",
+    "o",
+    "p",
+    "h",
+    "a",
+    "R",
+    "a",
+    "a",
+    "d",
+    "o",
+    "n",
+    "p",
+    "a",
+    "T",
+    "d",
+    "a",
+    "n",
+    "V",
+    "a",
+    "a"
+   ],
+   [
+    "u",
+    "N",
+    "n",
+    "a",
+    "x",
+    "o",
+    "P",
+    "S",
+    "o",
+    "n",
+    "d",
+    "n",
+    null,
+    "o",
+    "l",
+    "o",
+    "a",
+    "G",
+    "e",
+    "o",
+    "o",
+    "b",
+    "a",
+    "u",
+    "a"
+   ],
+   [
+    "a",
+    "i",
+    "g",
+    "r",
+    "a",
+    "n",
+    "o",
+    "o",
+    "m",
+    "a",
+    "g",
+    "g",
+    "m",
+    "O",
+    "P",
+    "a",
+    "m",
+    "n",
+    "o",
+    "V",
+    "G",
+    "m",
+    "d",
+    "n",
+    "m"
+   ],
+   [
+    "o",
+    "r",
+    "p",
+    "m",
+    "n",
+    "i",
+    "n",
+    "g",
+    "b",
+    "e",
+    "a",
+    "l",
+    "o",
+    "a",
+    "p",
+    "l",
+    "s",
+    "T",
+    "e",
+    "d",
+    "e",
+    "c",
+    "a",
+    "o",
+    "p"
+   ],
+   [
+    "r",
+    "s",
+    "O",
+    "n",
+    "i",
+    "z",
+    "i",
+    "r",
+    "l",
+    "e",
+    "m",
+    "v",
+    "C",
+    "s",
+    "c",
+    "m",
+    "i",
+    "o",
+    "o",
+    "n",
+    "A",
+    "m",
+    "l",
+    "o",
+    "x"
+   ],
+   [
+    "i",
+    "z",
+    "i",
+    "n",
+    "r",
+    "C",
+    "z",
+    "i",
+    "a",
+    "M",
+    "h",
+    "l",
+    "h",
+    "V",
+    "a",
+    "r",
+    "s",
+    "G",
+    "d",
+    "L",
+    "b",
+    "r",
+    "i",
+    "a",
+    "p"
+   ],
+   [
+    "M",
+    "O",
+    "r",
+    "d",
+    "i",
+    "a",
+    "l",
+    "h",
+    "C",
+    "t",
+    "G",
+    "a",
+    null,
+    "o",
+    "i",
+    "P",
+    "t",
+    "e",
+    "a",
+    "a",
+    "p",
+    "D",
+    "o",
+    "c",
+    "e"
+   ],
+   [
+    "O",
+    "c",
+    "a",
+    "n",
+    "c",
+    "h",
+    "i",
+    "a",
+    "s",
+    "o",
+    "m",
+    "t",
+    "p",
+    "p",
+    "s",
+    "u",
+    "a",
+    "c",
+    "N",
+    "r",
+    "Z",
+    "i",
+    "r",
+    "Z",
+    "a"
+   ],
+   [
+    "A",
+    "r",
+    "b",
+    "i",
+    "z",
+    "m",
+    "i",
+    "i",
+    "l",
+    "p",
+    "i",
+    "z",
+    null,
+    "s",
+    "i",
+    "o",
+    "d",
+    "a",
+    "o",
+    "i",
+    "n",
+    "r",
+    "z",
+    "f",
+    "m"
+   ],
+   [
+    "O",
+    "p",
+    "a",
+    "n",
+    "a",
+    "l",
+    "a",
+    "m",
+    "S",
+    "m",
+    "a",
+    "P",
+    "r",
+    "d",
+    "a",
+    "l",
+    "t",
+    "T",
+    "d",
+    "n",
+    "a",
+    "d",
+    "i",
+    "r",
+    "e"
+   ],
+   [
+    "d",
+    "O",
+    "l",
+    "o",
+    "P",
+    "i",
+    "n",
+    "i",
+    "a",
+    "n",
+    "b",
+    "a",
+    "a",
+    "d",
+    "i",
+    "x",
+    "o",
+    "m",
+    "o",
+    "n",
+    "s",
+    "i",
+    "o",
+    "s",
+    "p"
+   ],
+   [
+    "r",
+    "x",
+    "p",
+    "a",
+    "o",
+    "c",
+    "s",
+    "i",
+    "z",
+    "i",
+    "x",
+    "p",
+    "x",
+    "O",
+    "o",
+    "D",
+    "p",
+    "z",
+    "i",
+    "A",
+    "p",
+    "a",
+    "n",
+    "l",
+    "i"
+   ],
+   [
+    "a",
+    "x",
+    "t",
+    "i",
+    "r",
+    "V",
+    "a",
+    "s",
+    "t",
+    "r",
+    "i",
+    "m",
+    "e",
+    "r",
+    "g",
+    "o",
+    "a",
+    "n",
+    "n",
+    "P",
+    "A",
+    "C",
+    "r",
+    "a",
+    "r"
+   ]
+  ],
+  "referencia": [
+   [
+    "r",
+    "Z",
+    "i",
+    "l",
+    "a",
+    "f",
+    "A",
+    "y",
+    "t",
+    "l",
+    "p",
+    "a",
+    "e",
+    "T",
+    "a",
+    "O",
+    "A",
+    "d",
+    "v",
+    "p",
+    "t",
+    "D",
+    "n",
+    "i",
+    "m"
+   ],
+   [
+    "a",
+    "r",
+    "d",
+    "Z",
+    "a",
+    "i",
+    "d",
+    "p",
+    "a",
+    "L",
+    "a",
+    "m",
+    null,
+    "a",
+    "a",
+    "b",
+    "c",
+    "o",
+    "o",
+    "r",
+    "o",
+    "m",
+    "e",
+    "b",
+    "b"
+   ],
+   [
+    "c",
+    "z",
+    "o",
+    "n",
+    "s",
+    "a",
+    "r",
+    "o",
+    "Y",
+    "a",
+    "v",
+    "b",
+    "x",
+    "T",
+    "o",
+    "g",
+    "c",
+    "o",
+    "n",
+    "x",
+    "m",
+    "a",
+    "l",
+    "G",
+    "m"
+   ],
+   [
+    "T",
+    "o",
+    "i",
+    "T",
+    "t",
+    "z",
+    "o",
+    "P",
+    "a",
+    "c",
+    "o",
+    "C",
+    "a",
+    "n",
+    "h",
+    "o",
+    "d",
+    "D",
+    "i",
+    "a",
+    "l",
+    "e",
+    "a",
+    "o",
+    "c"
+   ],
+   [
+    "S",
+    "i",
+    "g",
+    "a",
+    "s",
+    "o",
+    "m",
+    "r",
+    "b",
+    "z",
+    "n",
+    "h",
+    "r",
+    "p",
+    "a",
+    "t",
+    "A",
+    "x",
+    "i",
+    "o",
+    "V",
+    "s",
+    "P",
+    "s",
+    "И"
+   ],
+   [
+    "f",
+    "m",
+    "o",
+    "n",
+    "d",
+    "a",
+    "T",
+    "d",
+    "i",
+    "a",
+    "r",
+    "i",
+    "p",
+    "S",
+    "a",
+    "a",
+    "i",
+    "x",
+    "a",
+    "a",
+    "r",
+    "V",
+    "r",
+    "o",
+    "i"
+   ],
+   [
+    "o",
+    "r",
+    "o",
+    "i",
+    "b",
+    "A",
+    "h",
+    "a",
+    "o",
+    "z",
+    "p",
+    "i",
+    null,
+    "m",
+    "p",
+    "h",
+    "a",
+    "r",
+    "s",
+    "l",
+    "g",
+    "a",
+    "i",
+    "o",
+    "l"
+   ],
+   [
+    "t",
+    "N",
+    "a",
+    "b",
+    "r",
+    "V",
+    "i",
+    "x",
+    "g",
+    "a",
+    "s",
+    "d",
+    "h",
+    "M",
+    "a",
+    "m",
+    "g",
+    "l",
+    "o",
+    "i",
+    "n",
+    "L",
+    "i",
+    "r",
+    "x"
+   ],
+   [
+    "O",
+    "i",
+    "i",
+    "i",
+    "t",
+    "T",
+    "p",
+    "a",
+    "l",
+    "O",
+    "a",
+    "i",
+    null,
+    "o",
+    "l",
+    "a",
+    "a",
+    "D",
+    "n",
+    "g",
+    "a",
+    "T",
+    "a",
+    "p",
+    "a"
+   ],
+   [
+    "A",
+    "b",
+    "a",
+    "m",
+    "o",
+    "o",
+    "o",
+    "a",
+    "C",
+    "u",
+    "c",
+    "a",
+    "C",
+    "p",
+    "a",
+    "L",
+    "c",
+    "o",
+    "i",
+    "d",
+    "x",
+    "P",
+    "a",
+    "c",
+    "n"
+   ],
+   [
+    "N",
+    "a",
+    "o",
+    "c",
+    "O",
+    "T",
+    "t",
+    "n",
+    "p",
+    "r",
+    "n",
+    "T",
+    "o",
+    "n",
+    "d",
+    "a",
+    "z",
+    "N",
+    "z",
+    "i",
+    "V",
+    "a",
+    "a",
+    "s",
+    "a"
+   ],
+   [
+    "o",
+    "c",
+    "a",
+    "n",
+    "m",
+    "a",
+    "g",
+    "o",
+    "t",
+    "r",
+    "o",
+    "i",
+    "m",
+    "i",
+    "i",
+    "d",
+    "P",
+    "o",
+    "n",
+    "s",
+    "d",
+    "A",
+    "s",
+    "p",
+    "i"
+   ],
+   [
+    "S",
+    null,
+    "i",
+    "a",
+    "l",
+    "r",
+    "a",
+    "p",
+    "m",
+    "z",
+    "o",
+    "x",
+    "a",
+    "x",
+    "r",
+    "i",
+    "n",
+    "h",
+    "t",
+    "a",
+    "r",
+    "n",
+    "d",
+    "i",
+    "⅃"
+   ],
+   [
+    "m",
+    "o",
+    "t",
+    "i",
+    "b",
+    null,
+    null,
+    "a",
+    "T",
+    "n",
+    "a",
+    "n",
+    null,
+    "n",
+    "a",
+    "n",
+    "T",
+    "a",
+    null,
+    null,
+    "b",
+    "i",
+    "t",
+    "o",
+    "m"
+   ],
+   [
+    "b",
+    "O",
+    "a",
+    "Z",
+    "a",
+    "R",
+    "o",
+    "p",
+    "h",
+    "a",
+    "R",
+    "a",
+    "a",
+    "d",
+    "o",
+    "n",
+    "p",
+    "a",
+    "T",
+    "d",
+    "a",
+    "n",
+    "V",
+    "a",
+    "a"
+   ],
+   [
+    "u",
+    "N",
+    "n",
+    "a",
+    "x",
+    "o",
+    "P",
+    "S",
+    "o",
+    "n",
+    "d",
+    "n",
+    null,
+    "o",
+    "l",
+    "o",
+    "a",
+    "G",
+    "e",
+    "o",
+    "o",
+    "b",
+    "a",
+    "u",
+    "a"
+   ],
+   [
+    "a",
+    "i",
+    "g",
+    "r",
+    "a",
+    "n",
+    "o",
+    "o",
+    "m",
+    "a",
+    "g",
+    "g",
+    "m",
+    "O",
+    "P",
+    "a",
+    "m",
+    "n",
+    "o",
+    "V",
+    "G",
+    "m",
+    "d",
+    "n",
+    "m"
+   ],
+   [
+    "o",
+    "r",
+    "p",
+    "m",
+    "n",
+    "i",
+    "n",
+    "g",
+    "b",
+    "e",
+    "a",
+    "l",
+    "o",
+    "a",
+    "p",
+    "l",
+    "s",
+    "T",
+    "e",
+    "d",
+    "e",
+    "c",
+    "a",
+    "o",
+    "p"
+   ],
+   [
+    "r",
+    "s",
+    "O",
+    "n",
+    "i",
+    "z",
+    "i",
+    "r",
+    "l",
+    "e",
+    "m",
+    "v",
+    "C",
+    "s",
+    "c",
+    "m",
+    "i",
+    "o",
+    "o",
+    "n",
+    "A",
+    "m",
+    "l",
+    "o",
+    "x"
+   ],
+   [
+    "i",
+    "z",
+    "i",
+    "n",
+    "r",
+    "C",
+    "z",
+    "i",
+    "a",
+    "M",
+    "h",
+    "l",
+    "h",
+    "V",
+    "a",
+    "r",
+    "s",
+    "G",
+    "d",
+    "L",
+    "b",
+    "r",
+    "i",
+    "a",
+    "p"
+   ],
+   [
+    "M",
+    "O",
+    "r",
+    "d",
+    "i",
+    "a",
+    "l",
+    "h",
+    "C",
+    "t",
+    "G",
+    "a",
+    null,
+    "o",
+    "i",
+    "P",
+    "t",
+    "e",
+    "a",
+    "a",
+    "p",
+    "D",
+    "o",
+    "c",
+    "e"
+   ],
+   [
+    "⊙",
+    "c",
+    "a",
+    "n",
+    "c",
+    "h",
+    "i",
+    "a",
+    "s",
+    "o",
+    "m",
+    "t",
+    "p",
+    "p",
+    "s",
+    "u",
+    "a",
+    "c",
+    "N",
+    "r",
+    "Z",
+    "i",
+    "r",
+    "Z",
+    "a"
+   ],
+   [
+    "A",
+    "r",
+    "b",
+    "i",
+    "z",
+    "m",
+    "i",
+    "i",
+    "l",
+    "p",
+    "i",
+    "z",
+    null,
+    "s",
+    "i",
+    "o",
+    "d",
+    "a",
+    "o",
+    "i",
+    "n",
+    "r",
+    "z",
+    "f",
+    "m"
+   ],
+   [
+    "O",
+    "p",
+    "a",
+    "n",
+    "a",
+    "l",
+    "a",
+    "m",
+    "S",
+    "m",
+    "a",
+    "P",
+    "r",
+    "d",
+    "a",
+    null,
+    "t",
+    "T",
+    "d",
+    "n",
+    "a",
+    "d",
+    "i",
+    "r",
+    "e"
+   ],
+   [
+    "d",
+    "O",
+    "l",
+    "o",
+    "P",
+    "i",
+    "n",
+    "i",
+    "a",
+    "n",
+    "b",
+    "a",
+    "a",
+    "d",
+    "i",
+    "x",
+    "o",
+    "m",
+    "o",
+    "n",
+    "s",
+    "i",
+    "o",
+    "s",
+    "p"
+   ],
+   [
+    "r",
+    "x",
+    "p",
+    "a",
+    "o",
+    "c",
+    "s",
+    "i",
+    "z",
+    "i",
+    "x",
+    "p",
+    "x",
+    "O",
+    "o",
+    "D",
+    "p",
+    "z",
+    "i",
+    "A",
+    "p",
+    "a",
+    "n",
+    "l",
+    "i"
+   ],
+   [
+    "a",
+    "x",
+    "t",
+    "i",
+    "r",
+    "V",
+    "a",
+    "s",
+    "t",
+    "r",
+    "i",
+    "m",
+    "e",
+    "r",
+    "g",
+    "o",
+    "a",
+    "n",
+    "n",
+    "ꟼ",
+    "A",
+    "C",
+    "r",
+    "a",
+    "r"
+   ]
+  ]
+ },
+ "cruz_negra": {
+  "peterson_tipografia": {
+   "vertical_superior": [
+    "e",
+    null,
+    "x",
+    "a",
+    "r",
+    "p",
+    null,
+    "h",
+    null,
+    "C",
+    "o",
+    "m",
+    "a"
+   ],
+   "vertical_inferior": [
+    "a",
+    null,
+    "m",
+    "o",
+    "C",
+    "h",
+    null,
+    "p",
+    null,
+    "r",
+    "a",
+    "x",
+    "e"
+   ],
+   "horizontal_esquerda": [
+    "m",
+    "o",
+    "t",
+    "i",
+    "b",
+    null,
+    null,
+    "a",
+    "T",
+    "n",
+    "a",
+    "n"
+   ],
+   "horizontal_direita": [
+    "n",
+    "a",
+    "n",
+    "T",
+    "a",
+    null,
+    null,
+    "b",
+    "i",
+    "t",
+    "o",
+    "m"
+   ],
+   "centro": null
+  },
+  "leitura": "braço vertical: de cima para o centro e de baixo para o centro lê-se e(x)arp h coma = EXARP HCOMA (células vazias nas linhas 2, 7 e 9 de cada metade); braço horizontal: do centro para cada ponta lê-se nanta (2 vazias) bitom = NANTA BITOM",
+  "contagem": {
+   "celulas_da_cruz": 51,
+   "letras": 40,
+   "vazias": 11
+  },
+  "tabua_da_uniao_golden_dawn": [
+   "EXARP",
+   "HCOMA",
+   "NANTA",
+   "BITOM"
+  ]
+ },
+ "disposicao_das_torres": [
+  {
+   "versao": "recensa 1587 (Sloane 3191, tipografia de Peterson e fac-símile hm30s)",
+   "posicao": {
+    "sup_esq": "ORO",
+    "sup_dir": "MPH",
+    "inf_esq": "MOR",
+    "inf_dir": "OIP"
+   }
+  },
+  {
+   "versao": "nota de Dee em Sloane 3191 (hm35.gif): 'r t / b d — so they must be placed'",
+   "posicao": {
+    "sup_esq": "r = ORO",
+    "sup_dir": "t = MPH",
+    "inf_esq": "b = MOR",
+    "inf_dir": "d = OIP"
+   }
+  },
+  {
+   "versao": "Cotton App. XLVI pt. 2 (vovina)",
+   "ordem_de_escrita": [
+    "ORO",
+    "MPH",
+    "MOR",
+    "OIP"
+   ]
+  },
+  {
+   "versao": "Golden Dawn (convenção; quadrados.json não guarda posição)",
+   "posicao": {
+    "sup_esq": "ar = ORO",
+    "sup_dir": "agua = MPH",
+    "inf_esq": "terra = MOR",
+    "inf_dir": "fogo = OIP"
+   }
+  }
+ ],
+ "conferencia": {
+  "dimensoes_e_contagens": {
+   "sloane3191_recensa_peterson_tipografia": {
+    "ORO": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 156,
+     "vazias_null": 0,
+     "maiusculas": 24,
+     "tokens_especiais": []
+    },
+    "MOR": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 156,
+     "vazias_null": 0,
+     "maiusculas": 21,
+     "tokens_especiais": [
+      "⊙"
+     ]
+    },
+    "OIP": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 156,
+     "vazias_null": 0,
+     "maiusculas": 23,
+     "tokens_especiais": [
+      "ꟼ"
+     ]
+    },
+    "MPH": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 156,
+     "vazias_null": 0,
+     "maiusculas": 23,
+     "tokens_especiais": [
+      "И",
+      "⅃"
+     ]
+    }
+   },
+   "sloane3191_recensa_peterson_comentario_html": {
+    "ORO": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 156,
+     "vazias_null": 0,
+     "maiusculas": 24,
+     "tokens_especiais": []
+    },
+    "MOR": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 156,
+     "vazias_null": 0,
+     "maiusculas": 22,
+     "tokens_especiais": []
+    },
+    "OIP": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 156,
+     "vazias_null": 0,
+     "maiusculas": 24,
+     "tokens_especiais": []
+    },
+    "MPH": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 156,
+     "vazias_null": 0,
+     "maiusculas": 24,
+     "tokens_especiais": []
+    }
+   },
+   "sloane3191_recensa_peterson_hm31_metade_direita": {
+    "OIP": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 156,
+     "vazias_null": 0,
+     "maiusculas": 24,
+     "tokens_especiais": [
+      "ꟼ"
+     ]
+    },
+    "MPH": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 156,
+     "vazias_null": 0,
+     "maiusculas": 23,
+     "tokens_especiais": [
+      "И",
+      "⅃"
+     ]
+    }
+   },
+   "sloane3191_recensa_vovina": {
+    "ORO": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 156,
+     "vazias_null": 0,
+     "maiusculas": 23,
+     "tokens_especiais": [
+      "T/t",
+      "t/T"
+     ]
+    },
+    "MOR": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 156,
+     "vazias_null": 0,
+     "maiusculas": 21,
+     "tokens_especiais": []
+    },
+    "OIP": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 156,
+     "vazias_null": 0,
+     "maiusculas": 25,
+     "tokens_especiais": []
+    },
+    "MPH": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 156,
+     "vazias_null": 0,
+     "maiusculas": 24,
+     "tokens_especiais": [
+      "x/p"
+     ]
+    }
+   },
+   "cotton_xlvi_pt2_recensa_vovina": {
+    "ORO": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 156,
+     "vazias_null": 0,
+     "maiusculas": 2,
+     "tokens_especiais": []
+    },
+    "MOR": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 156,
+     "vazias_null": 0,
+     "maiusculas": 0,
+     "tokens_especiais": []
+    },
+    "OIP": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 156,
+     "vazias_null": 0,
+     "maiusculas": 2,
+     "tokens_especiais": []
+    },
+    "MPH": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 156,
+     "vazias_null": 0,
+     "maiusculas": 1,
+     "tokens_especiais": []
+    }
+   },
+   "recensa_1587": {
+    "ORO": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 155,
+     "vazias_null": 1,
+     "maiusculas": 24,
+     "tokens_especiais": []
+    },
+    "MOR": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 156,
+     "vazias_null": 0,
+     "maiusculas": 21,
+     "tokens_especiais": [
+      "⊙"
+     ]
+    },
+    "OIP": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 155,
+     "vazias_null": 1,
+     "maiusculas": 23,
+     "tokens_especiais": [
+      "ꟼ"
+     ]
+    },
+    "MPH": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 156,
+     "vazias_null": 0,
+     "maiusculas": 23,
+     "tokens_especiais": [
+      "И",
+      "⅃"
+     ]
+    }
+   },
+   "golden_dawn": {
+    "ORO": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 156,
+     "vazias_null": 0,
+     "maiusculas": 156,
+     "tokens_especiais": []
+    },
+    "MOR": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 156,
+     "vazias_null": 0,
+     "maiusculas": 156,
+     "tokens_especiais": []
+    },
+    "OIP": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 156,
+     "vazias_null": 0,
+     "maiusculas": 156,
+     "tokens_especiais": []
+    },
+    "MPH": {
+     "linhas": 13,
+     "colunas": [
+      12
+     ],
+     "celulas": 156,
+     "preenchidas": 156,
+     "vazias_null": 0,
+     "maiusculas": 156,
+     "tokens_especiais": []
+    }
+   }
+  },
+  "linha7_nomes_de_deus": {
+   "sloane3191_recensa_peterson_tipografia": {
+    "ORO": "OROIBAHAOZPI",
+    "MOR": "MORDIALHCTGA",
+    "OIP": "OIPTEAAPDOCE",
+    "MPH": "MPHARSLGAIOL"
+   },
+   "sloane3191_recensa_peterson_comentario_html": {
+    "ORO": "OROIBAHAOZPI",
+    "MOR": "MORDIALHCTGA",
+    "OIP": "OIPTEAAPDOCE",
+    "MPH": "MPHARSLGAIOL"
+   },
+   "sloane3191_recensa_peterson_hm31_metade_direita": {
+    "OIP": "OIPTEAAPDOCE",
+    "MPH": "MPHARSLGAIOL"
+   },
+   "sloane3191_recensa_vovina": {
+    "ORO": "OROIBAHAOZPI",
+    "MOR": "MORDIALHCTGA",
+    "OIP": "OIPTEAAPDOCE",
+    "MPH": "MPHARSLGAIOL"
+   },
+   "cotton_xlvi_pt2_recensa_vovina": {
+    "ORO": "OROIBAHAOZPI",
+    "MOR": "MORDIALHCTGA",
+    "OIP": "OIPTEAAPDOCE",
+    "MPH": "MPHARSLGAIOL"
+   },
+   "recensa_1587": {
+    "ORO": "OROIBAHAOZPI",
+    "MOR": "MORDIALHCTGA",
+    "OIP": "OIPTEAAPDOCE",
+    "MPH": "MPHARSLGAIOL"
+   },
+   "golden_dawn": {
+    "ORO": "OROIBAHAOZPI",
+    "MOR": "MORDIALHCTGA",
+    "OIP": "OIPTEAAPDOCE",
+    "MPH": "MPHARSLGAIOL"
+   }
+  },
+  "nomes_do_livro_de_suplicas_por_regra": {
+   "sloane3191_recensa_peterson_tipografia": {
+    "ORO": {
+     "total": 58,
+     "conferem": 48,
+     "nao_conferem": [
+      {
+       "nome": "senior U6",
+       "dee": [
+        "AAOXAIF"
+       ],
+       "da_grade": [
+        "AAOZAIF"
+       ]
+      },
+      {
+       "nome": "UR querubico (4)",
+       "dee": [
+        "VTPA"
+       ],
+       "da_grade": [
+        "YTPA"
+       ]
+      },
+      {
+       "nome": "UR arcanjo (cruz+querubico)",
+       "dee": [
+        "EVTPA"
+       ],
+       "da_grade": [
+        "EYTPA"
+       ]
+      },
+      {
+       "nome": "LL querubico (4)",
+       "dee": [
+        "CNBR"
+       ],
+       "da_grade": [
+        "TNBR"
+       ]
+      },
+      {
+       "nome": "LL anjo menor 4",
+       "dee": [
+        "SHAL",
+        "SHIAL"
+       ],
+       "da_grade": [
+        "SBAL",
+        "SBIAL"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 4",
+       "dee": [
+        "ASH"
+       ],
+       "da_grade": [
+        "ASB"
+       ]
+      },
+      {
+       "nome": "LL arcanjo (cruz+querubico)",
+       "dee": [
+        "HCNBR"
+       ],
+       "da_grade": [
+        "HTNBR"
+       ]
+      },
+      {
+       "nome": "LR querubico (4)",
+       "dee": [
+        "XGZD"
+       ],
+       "da_grade": [
+        "XGSD"
+       ]
+      },
+      {
+       "nome": "LR anjo menor 2",
+       "dee": [
+        "NPAT",
+        "NPRAT"
+       ],
+       "da_grade": [
+        "NPNT",
+        "NPRNT"
+       ]
+      },
+      {
+       "nome": "LR arcanjo (cruz+querubico)",
+       "dee": [
+        "HXGZD"
+       ],
+       "da_grade": [
+        "HXGSD"
+       ]
+      }
+     ]
+    },
+    "MOR": {
+     "total": 58,
+     "conferem": 29,
+     "nao_conferem": [
+      {
+       "nome": "rei",
+       "dee": [
+        "ICZHHCA",
+        "ICZHHCL"
+       ],
+       "da_grade": [
+        "ICZHIHA",
+        "ICZHIHL"
+       ]
+      },
+      {
+       "nome": "senior D7",
+       "dee": [
+        "LHIANSA"
+       ],
+       "da_grade": [
+        "LIIANSA"
+       ]
+      },
+      {
+       "nome": "senior D6",
+       "dee": [
+        "ACMLICV",
+        "ACMBICV"
+       ],
+       "da_grade": [
+        "AHMLICU"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 1",
+       "dee": [
+        "XAI"
+       ],
+       "da_grade": [
+        "MAI"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 2",
+       "dee": [
+        "AOR"
+       ],
+       "da_grade": [
+        "OOR"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 3",
+       "dee": [
+        "RRS"
+       ],
+       "da_grade": [
+        "CRS"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 4",
+       "dee": [
+        "PIZ"
+       ],
+       "da_grade": [
+        "HIZ"
+       ]
+      },
+      {
+       "nome": "UL arcanjo (cruz+querubico)",
+       "dee": [
+        "EBOZA"
+       ],
+       "da_grade": [
+        "ABOZA"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 1",
+       "dee": [
+        "XOM"
+       ],
+       "da_grade": [
+        "MOM"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 2",
+       "dee": [
+        "AGB"
+       ],
+       "da_grade": [
+        "OGB"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 3",
+       "dee": [
+        "RRL"
+       ],
+       "da_grade": [
+        "CRL"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 4",
+       "dee": [
+        "PIA"
+       ],
+       "da_grade": [
+        "HIA"
+       ]
+      },
+      {
+       "nome": "UR arcanjo (cruz+querubico)",
+       "dee": [
+        "EPHRA"
+       ],
+       "da_grade": [
+        "APHRA"
+       ]
+      },
+      {
+       "nome": "LL chamar (6)",
+       "dee": [
+        "CBALPT"
+       ],
+       "da_grade": [
+        "ABALPT"
+       ]
+      },
+      {
+       "nome": "LL querubico (4)",
+       "dee": [
+        "ROAN"
+       ],
+       "da_grade": [
+        "OCNC"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 1",
+       "dee": [
+        "COP"
+       ],
+       "da_grade": [
+        "ROP"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 2",
+       "dee": [
+        "ODO"
+       ],
+       "da_grade": [
+        "ADO"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 3",
+       "dee": [
+        "MRX"
+       ],
+       "da_grade": [
+        "XRX"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 4",
+       "dee": [
+        "AAX"
+       ],
+       "da_grade": [
+        "EAX"
+       ]
+      },
+      {
+       "nome": "LL arcanjo (cruz+querubico)",
+       "dee": [
+        "HROAN"
+       ],
+       "da_grade": [
+        "POCNC"
+       ]
+      },
+      {
+       "nome": "LR chamar (6)",
+       "dee": [
+        "SPMNIR"
+       ],
+       "da_grade": [
+        "OPMNIR"
+       ]
+      },
+      {
+       "nome": "LR comandar (5)",
+       "dee": [
+        "LLPIZ"
+       ],
+       "da_grade": [
+        "ILPIZ"
+       ]
+      },
+      {
+       "nome": "LR querubico (4)",
+       "dee": [
+        "IAOM"
+       ],
+       "da_grade": [
+        "ASMT"
+       ]
+      },
+      {
+       "nome": "LR anjo menor 1",
+       "dee": [
+        "MSAL",
+        "MSMAL"
+       ],
+       "da_grade": [
+        "MSAP",
+        "MSMAP"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 1",
+       "dee": [
+        "CMS"
+       ],
+       "da_grade": [
+        "RMS"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 2",
+       "dee": [
+        "OIA"
+       ],
+       "da_grade": [
+        "AIA"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 3",
+       "dee": [
+        "MIZ"
+       ],
+       "da_grade": [
+        "XIZ"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 4",
+       "dee": [
+        "AST"
+       ],
+       "da_grade": [
+        "EST"
+       ]
+      },
+      {
+       "nome": "LR arcanjo (cruz+querubico)",
+       "dee": [
+        "HIAOM"
+       ],
+       "da_grade": [
+        "PASMT"
+       ]
+      }
+     ]
+    },
+    "OIP": {
+     "total": 58,
+     "conferem": 57,
+     "nao_conferem": [
+      {
+       "nome": "senior U7",
+       "dee": [
+        "ALNDOOD"
+       ],
+       "da_grade": [
+        "ALNDUOD"
+       ]
+      }
+     ]
+    },
+    "MPH": {
+     "total": 58,
+     "conferem": 37,
+     "nao_conferem": [
+      {
+       "nome": "senior D6",
+       "dee": [
+        "SOAIXNT"
+       ],
+       "da_grade": [
+        "SONIZNT"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 1",
+       "dee": [
+        "MTO"
+       ],
+       "da_grade": [
+        "XTO"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 2",
+       "dee": [
+        "ONH"
+       ],
+       "da_grade": [
+        "ANH"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 3",
+       "dee": [
+        "CPA"
+       ],
+       "da_grade": [
+        "RPA"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 4",
+       "dee": [
+        "HSA"
+       ],
+       "da_grade": [
+        "PSA"
+       ]
+      },
+      {
+       "nome": "UL arcanjo (cruz+querubico)",
+       "dee": [
+        "ATAAD"
+       ],
+       "da_grade": [
+        "ETAAD"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 1",
+       "dee": [
+        "MMA"
+       ],
+       "da_grade": [
+        "XMA"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 2",
+       "dee": [
+        "OLE"
+       ],
+       "da_grade": [
+        "ALE"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 3",
+       "dee": [
+        "CVS"
+       ],
+       "da_grade": [
+        "RUS"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 4",
+       "dee": [
+        "HRV"
+       ],
+       "da_grade": [
+        "PRU"
+       ]
+      },
+      {
+       "nome": "UR arcanjo (cruz+querubico)",
+       "dee": [
+        "ATDIM"
+       ],
+       "da_grade": [
+        "ETDIM"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 1",
+       "dee": [
+        "RPA"
+       ],
+       "da_grade": [
+        "CPA"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 2",
+       "dee": [
+        "AND"
+       ],
+       "da_grade": [
+        "OND"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 3",
+       "dee": [
+        "XII"
+       ],
+       "da_grade": [
+        "MII"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 4",
+       "dee": [
+        "EXR"
+       ],
+       "da_grade": [
+        "AXR"
+       ]
+      },
+      {
+       "nome": "LL arcanjo (cruz+querubico)",
+       "dee": [
+        "PMAGL"
+       ],
+       "da_grade": [
+        "HMAGL"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 1",
+       "dee": [
+        "RXP"
+       ],
+       "da_grade": [
+        "CXP"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 2",
+       "dee": [
+        "AVA"
+       ],
+       "da_grade": [
+        "OUA"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 3",
+       "dee": [
+        "XDA"
+       ],
+       "da_grade": [
+        "MDA"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 4",
+       "dee": [
+        "ERN"
+       ],
+       "da_grade": [
+        "ARN"
+       ]
+      },
+      {
+       "nome": "LR arcanjo (cruz+querubico)",
+       "dee": [
+        "PNLRX"
+       ],
+       "da_grade": [
+        "HNLRX"
+       ]
+      }
+     ]
+    }
+   },
+   "sloane3191_recensa_peterson_comentario_html": {
+    "ORO": {
+     "total": 58,
+     "conferem": 46,
+     "nao_conferem": [
+      {
+       "nome": "senior U6",
+       "dee": [
+        "AAOXAIF"
+       ],
+       "da_grade": [
+        "AAOZAIF"
+       ]
+      },
+      {
+       "nome": "UR querubico (4)",
+       "dee": [
+        "VTPA"
+       ],
+       "da_grade": [
+        "YTPA"
+       ]
+      },
+      {
+       "nome": "UR anjo menor 2",
+       "dee": [
+        "PAOC",
+        "PACOC"
+       ],
+       "da_grade": [
+        "PQOC",
+        "PQCOC"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 2",
+       "dee": [
+        "APA"
+       ],
+       "da_grade": [
+        "APQ"
+       ]
+      },
+      {
+       "nome": "UR arcanjo (cruz+querubico)",
+       "dee": [
+        "EVTPA"
+       ],
+       "da_grade": [
+        "EYTPA"
+       ]
+      },
+      {
+       "nome": "LL querubico (4)",
+       "dee": [
+        "CNBR"
+       ],
+       "da_grade": [
+        "TNBR"
+       ]
+      },
+      {
+       "nome": "LL anjo menor 4",
+       "dee": [
+        "SHAL",
+        "SHIAL"
+       ],
+       "da_grade": [
+        "SBAL",
+        "SBIAL"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 4",
+       "dee": [
+        "ASH"
+       ],
+       "da_grade": [
+        "ASB"
+       ]
+      },
+      {
+       "nome": "LL arcanjo (cruz+querubico)",
+       "dee": [
+        "HCNBR"
+       ],
+       "da_grade": [
+        "HTNBR"
+       ]
+      },
+      {
+       "nome": "LR querubico (4)",
+       "dee": [
+        "XGZD"
+       ],
+       "da_grade": [
+        "XGSD"
+       ]
+      },
+      {
+       "nome": "LR anjo menor 2",
+       "dee": [
+        "NPAT",
+        "NPRAT"
+       ],
+       "da_grade": [
+        "NPNT",
+        "NPRNT"
+       ]
+      },
+      {
+       "nome": "LR arcanjo (cruz+querubico)",
+       "dee": [
+        "HXGZD"
+       ],
+       "da_grade": [
+        "HXGSD"
+       ]
+      }
+     ]
+    },
+    "MOR": {
+     "total": 58,
+     "conferem": 29,
+     "nao_conferem": [
+      {
+       "nome": "rei",
+       "dee": [
+        "ICZHHCA",
+        "ICZHHCL"
+       ],
+       "da_grade": [
+        "ICZHIHA",
+        "ICZHIHL"
+       ]
+      },
+      {
+       "nome": "senior D7",
+       "dee": [
+        "LHIANSA"
+       ],
+       "da_grade": [
+        "LIIANSA"
+       ]
+      },
+      {
+       "nome": "senior D6",
+       "dee": [
+        "ACMLICV",
+        "ACMBICV"
+       ],
+       "da_grade": [
+        "AHMLICU"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 1",
+       "dee": [
+        "XAI"
+       ],
+       "da_grade": [
+        "MAI"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 2",
+       "dee": [
+        "AOR"
+       ],
+       "da_grade": [
+        "OOR"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 3",
+       "dee": [
+        "RRS"
+       ],
+       "da_grade": [
+        "CRS"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 4",
+       "dee": [
+        "PIZ"
+       ],
+       "da_grade": [
+        "HIZ"
+       ]
+      },
+      {
+       "nome": "UL arcanjo (cruz+querubico)",
+       "dee": [
+        "EBOZA"
+       ],
+       "da_grade": [
+        "ABOZA"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 1",
+       "dee": [
+        "XOM"
+       ],
+       "da_grade": [
+        "MOM"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 2",
+       "dee": [
+        "AGB"
+       ],
+       "da_grade": [
+        "OGB"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 3",
+       "dee": [
+        "RRL"
+       ],
+       "da_grade": [
+        "CRL"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 4",
+       "dee": [
+        "PIA"
+       ],
+       "da_grade": [
+        "HIA"
+       ]
+      },
+      {
+       "nome": "UR arcanjo (cruz+querubico)",
+       "dee": [
+        "EPHRA"
+       ],
+       "da_grade": [
+        "APHRA"
+       ]
+      },
+      {
+       "nome": "LL chamar (6)",
+       "dee": [
+        "CBALPT"
+       ],
+       "da_grade": [
+        "ABALPT"
+       ]
+      },
+      {
+       "nome": "LL querubico (4)",
+       "dee": [
+        "ROAN"
+       ],
+       "da_grade": [
+        "OCNC"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 1",
+       "dee": [
+        "COP"
+       ],
+       "da_grade": [
+        "ROP"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 2",
+       "dee": [
+        "ODO"
+       ],
+       "da_grade": [
+        "ADO"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 3",
+       "dee": [
+        "MRX"
+       ],
+       "da_grade": [
+        "XRX"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 4",
+       "dee": [
+        "AAX"
+       ],
+       "da_grade": [
+        "EAX"
+       ]
+      },
+      {
+       "nome": "LL arcanjo (cruz+querubico)",
+       "dee": [
+        "HROAN"
+       ],
+       "da_grade": [
+        "POCNC"
+       ]
+      },
+      {
+       "nome": "LR chamar (6)",
+       "dee": [
+        "SPMNIR"
+       ],
+       "da_grade": [
+        "OPMNIR"
+       ]
+      },
+      {
+       "nome": "LR comandar (5)",
+       "dee": [
+        "LLPIZ"
+       ],
+       "da_grade": [
+        "ILPIZ"
+       ]
+      },
+      {
+       "nome": "LR querubico (4)",
+       "dee": [
+        "IAOM"
+       ],
+       "da_grade": [
+        "ASMT"
+       ]
+      },
+      {
+       "nome": "LR anjo menor 1",
+       "dee": [
+        "MSAL",
+        "MSMAL"
+       ],
+       "da_grade": [
+        "MSAP",
+        "MSMAP"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 1",
+       "dee": [
+        "CMS"
+       ],
+       "da_grade": [
+        "RMS"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 2",
+       "dee": [
+        "OIA"
+       ],
+       "da_grade": [
+        "AIA"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 3",
+       "dee": [
+        "MIZ"
+       ],
+       "da_grade": [
+        "XIZ"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 4",
+       "dee": [
+        "AST"
+       ],
+       "da_grade": [
+        "EST"
+       ]
+      },
+      {
+       "nome": "LR arcanjo (cruz+querubico)",
+       "dee": [
+        "HIAOM"
+       ],
+       "da_grade": [
+        "PASMT"
+       ]
+      }
+     ]
+    },
+    "OIP": {
+     "total": 58,
+     "conferem": 57,
+     "nao_conferem": [
+      {
+       "nome": "senior U7",
+       "dee": [
+        "ALNDOOD"
+       ],
+       "da_grade": [
+        "ALNDUOD"
+       ]
+      }
+     ]
+    },
+    "MPH": {
+     "total": 58,
+     "conferem": 37,
+     "nao_conferem": [
+      {
+       "nome": "senior D6",
+       "dee": [
+        "SOAIXNT"
+       ],
+       "da_grade": [
+        "SONIZNT"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 1",
+       "dee": [
+        "MTO"
+       ],
+       "da_grade": [
+        "XTO"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 2",
+       "dee": [
+        "ONH"
+       ],
+       "da_grade": [
+        "ANH"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 3",
+       "dee": [
+        "CPA"
+       ],
+       "da_grade": [
+        "RPA"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 4",
+       "dee": [
+        "HSA"
+       ],
+       "da_grade": [
+        "PSA"
+       ]
+      },
+      {
+       "nome": "UL arcanjo (cruz+querubico)",
+       "dee": [
+        "ATAAD"
+       ],
+       "da_grade": [
+        "ETAAD"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 1",
+       "dee": [
+        "MMA"
+       ],
+       "da_grade": [
+        "XMA"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 2",
+       "dee": [
+        "OLE"
+       ],
+       "da_grade": [
+        "ALE"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 3",
+       "dee": [
+        "CVS"
+       ],
+       "da_grade": [
+        "RUS"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 4",
+       "dee": [
+        "HRV"
+       ],
+       "da_grade": [
+        "PRU"
+       ]
+      },
+      {
+       "nome": "UR arcanjo (cruz+querubico)",
+       "dee": [
+        "ATDIM"
+       ],
+       "da_grade": [
+        "ETDIM"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 1",
+       "dee": [
+        "RPA"
+       ],
+       "da_grade": [
+        "CPA"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 2",
+       "dee": [
+        "AND"
+       ],
+       "da_grade": [
+        "OND"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 3",
+       "dee": [
+        "XII"
+       ],
+       "da_grade": [
+        "MII"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 4",
+       "dee": [
+        "EXR"
+       ],
+       "da_grade": [
+        "AXR"
+       ]
+      },
+      {
+       "nome": "LL arcanjo (cruz+querubico)",
+       "dee": [
+        "PMAGL"
+       ],
+       "da_grade": [
+        "HMAGL"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 1",
+       "dee": [
+        "RXP"
+       ],
+       "da_grade": [
+        "CXP"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 2",
+       "dee": [
+        "AVA"
+       ],
+       "da_grade": [
+        "OUA"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 3",
+       "dee": [
+        "XDA"
+       ],
+       "da_grade": [
+        "MDA"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 4",
+       "dee": [
+        "ERN"
+       ],
+       "da_grade": [
+        "ARN"
+       ]
+      },
+      {
+       "nome": "LR arcanjo (cruz+querubico)",
+       "dee": [
+        "PNLRX"
+       ],
+       "da_grade": [
+        "HNLRX"
+       ]
+      }
+     ]
+    }
+   },
+   "sloane3191_recensa_peterson_hm31_metade_direita": {
+    "OIP": {
+     "total": 58,
+     "conferem": 55,
+     "nao_conferem": [
+      {
+       "nome": "senior U7",
+       "dee": [
+        "ALNDOOD"
+       ],
+       "da_grade": [
+        "ALNDUOD"
+       ]
+      },
+      {
+       "nome": "LL chamar (6)",
+       "dee": [
+        "VOLXDO"
+       ],
+       "da_grade": [
+        "UOBXDO"
+       ]
+      },
+      {
+       "nome": "LL anjo menor 1",
+       "dee": [
+        "DATT",
+        "DALTT"
+       ],
+       "da_grade": [
+        "DATT",
+        "DABTT"
+       ]
+      }
+     ]
+    },
+    "MPH": {
+     "total": 58,
+     "conferem": 37,
+     "nao_conferem": [
+      {
+       "nome": "senior D6",
+       "dee": [
+        "SOAIXNT"
+       ],
+       "da_grade": [
+        "SONIZNT"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 1",
+       "dee": [
+        "MTO"
+       ],
+       "da_grade": [
+        "XTO"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 2",
+       "dee": [
+        "ONH"
+       ],
+       "da_grade": [
+        "ANH"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 3",
+       "dee": [
+        "CPA"
+       ],
+       "da_grade": [
+        "RPA"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 4",
+       "dee": [
+        "HSA"
+       ],
+       "da_grade": [
+        "PSA"
+       ]
+      },
+      {
+       "nome": "UL arcanjo (cruz+querubico)",
+       "dee": [
+        "ATAAD"
+       ],
+       "da_grade": [
+        "ETAAD"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 1",
+       "dee": [
+        "MMA"
+       ],
+       "da_grade": [
+        "XMA"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 2",
+       "dee": [
+        "OLE"
+       ],
+       "da_grade": [
+        "ALE"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 3",
+       "dee": [
+        "CVS"
+       ],
+       "da_grade": [
+        "RUS"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 4",
+       "dee": [
+        "HRV"
+       ],
+       "da_grade": [
+        "PRU"
+       ]
+      },
+      {
+       "nome": "UR arcanjo (cruz+querubico)",
+       "dee": [
+        "ATDIM"
+       ],
+       "da_grade": [
+        "ETDIM"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 1",
+       "dee": [
+        "RPA"
+       ],
+       "da_grade": [
+        "CPA"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 2",
+       "dee": [
+        "AND"
+       ],
+       "da_grade": [
+        "OND"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 3",
+       "dee": [
+        "XII"
+       ],
+       "da_grade": [
+        "MII"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 4",
+       "dee": [
+        "EXR"
+       ],
+       "da_grade": [
+        "AXR"
+       ]
+      },
+      {
+       "nome": "LL arcanjo (cruz+querubico)",
+       "dee": [
+        "PMAGL"
+       ],
+       "da_grade": [
+        "HMAGL"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 1",
+       "dee": [
+        "RXP"
+       ],
+       "da_grade": [
+        "CXP"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 2",
+       "dee": [
+        "AVA"
+       ],
+       "da_grade": [
+        "OUA"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 3",
+       "dee": [
+        "XDA"
+       ],
+       "da_grade": [
+        "MDA"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 4",
+       "dee": [
+        "ERN"
+       ],
+       "da_grade": [
+        "ARN"
+       ]
+      },
+      {
+       "nome": "LR arcanjo (cruz+querubico)",
+       "dee": [
+        "PNLRX"
+       ],
+       "da_grade": [
+        "HNLRX"
+       ]
+      }
+     ]
+    }
+   },
+   "sloane3191_recensa_vovina": {
+    "ORO": {
+     "total": 58,
+     "conferem": 50,
+     "nao_conferem": [
+      {
+       "nome": "senior U6",
+       "dee": [
+        "AAOXAIF"
+       ],
+       "da_grade": [
+        "AAOZAIF"
+       ]
+      },
+      {
+       "nome": "UR querubico (4)",
+       "dee": [
+        "VTPA"
+       ],
+       "da_grade": [
+        "YTPA"
+       ]
+      },
+      {
+       "nome": "UR arcanjo (cruz+querubico)",
+       "dee": [
+        "EVTPA"
+       ],
+       "da_grade": [
+        "EYTPA"
+       ]
+      },
+      {
+       "nome": "LL querubico (4)",
+       "dee": [
+        "CNBR"
+       ],
+       "da_grade": [
+        "TNBR"
+       ]
+      },
+      {
+       "nome": "LL arcanjo (cruz+querubico)",
+       "dee": [
+        "HCNBR"
+       ],
+       "da_grade": [
+        "HTNBR"
+       ]
+      },
+      {
+       "nome": "LR querubico (4)",
+       "dee": [
+        "XGZD"
+       ],
+       "da_grade": [
+        "XGSD"
+       ]
+      },
+      {
+       "nome": "LR anjo menor 2",
+       "dee": [
+        "NPAT",
+        "NPRAT"
+       ],
+       "da_grade": [
+        "NPNT",
+        "NPRNT"
+       ]
+      },
+      {
+       "nome": "LR arcanjo (cruz+querubico)",
+       "dee": [
+        "HXGZD"
+       ],
+       "da_grade": [
+        "HXGSD"
+       ]
+      }
+     ]
+    },
+    "MOR": {
+     "total": 58,
+     "conferem": 29,
+     "nao_conferem": [
+      {
+       "nome": "rei",
+       "dee": [
+        "ICZHHCA",
+        "ICZHHCL"
+       ],
+       "da_grade": [
+        "ICZHIHA",
+        "ICZHIHL"
+       ]
+      },
+      {
+       "nome": "senior D7",
+       "dee": [
+        "LHIANSA"
+       ],
+       "da_grade": [
+        "LIIANSA"
+       ]
+      },
+      {
+       "nome": "senior D6",
+       "dee": [
+        "ACMLICV",
+        "ACMBICV"
+       ],
+       "da_grade": [
+        "AHMLICU"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 1",
+       "dee": [
+        "XAI"
+       ],
+       "da_grade": [
+        "MAI"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 2",
+       "dee": [
+        "AOR"
+       ],
+       "da_grade": [
+        "OOR"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 3",
+       "dee": [
+        "RRS"
+       ],
+       "da_grade": [
+        "CRS"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 4",
+       "dee": [
+        "PIZ"
+       ],
+       "da_grade": [
+        "HIZ"
+       ]
+      },
+      {
+       "nome": "UL arcanjo (cruz+querubico)",
+       "dee": [
+        "EBOZA"
+       ],
+       "da_grade": [
+        "ABOZA"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 1",
+       "dee": [
+        "XOM"
+       ],
+       "da_grade": [
+        "MOM"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 2",
+       "dee": [
+        "AGB"
+       ],
+       "da_grade": [
+        "OGB"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 3",
+       "dee": [
+        "RRL"
+       ],
+       "da_grade": [
+        "CRL"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 4",
+       "dee": [
+        "PIA"
+       ],
+       "da_grade": [
+        "HIA"
+       ]
+      },
+      {
+       "nome": "UR arcanjo (cruz+querubico)",
+       "dee": [
+        "EPHRA"
+       ],
+       "da_grade": [
+        "APHRA"
+       ]
+      },
+      {
+       "nome": "LL chamar (6)",
+       "dee": [
+        "CBALPT"
+       ],
+       "da_grade": [
+        "ABALPT"
+       ]
+      },
+      {
+       "nome": "LL querubico (4)",
+       "dee": [
+        "ROAN"
+       ],
+       "da_grade": [
+        "OCNC"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 1",
+       "dee": [
+        "COP"
+       ],
+       "da_grade": [
+        "ROP"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 2",
+       "dee": [
+        "ODO"
+       ],
+       "da_grade": [
+        "ADO"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 3",
+       "dee": [
+        "MRX"
+       ],
+       "da_grade": [
+        "XRX"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 4",
+       "dee": [
+        "AAX"
+       ],
+       "da_grade": [
+        "EAX"
+       ]
+      },
+      {
+       "nome": "LL arcanjo (cruz+querubico)",
+       "dee": [
+        "HROAN"
+       ],
+       "da_grade": [
+        "POCNC"
+       ]
+      },
+      {
+       "nome": "LR chamar (6)",
+       "dee": [
+        "SPMNIR"
+       ],
+       "da_grade": [
+        "OPMNIR"
+       ]
+      },
+      {
+       "nome": "LR comandar (5)",
+       "dee": [
+        "LLPIZ"
+       ],
+       "da_grade": [
+        "ILPIZ"
+       ]
+      },
+      {
+       "nome": "LR querubico (4)",
+       "dee": [
+        "IAOM"
+       ],
+       "da_grade": [
+        "ASMT"
+       ]
+      },
+      {
+       "nome": "LR anjo menor 1",
+       "dee": [
+        "MSAL",
+        "MSMAL"
+       ],
+       "da_grade": [
+        "MSAP",
+        "MSMAP"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 1",
+       "dee": [
+        "CMS"
+       ],
+       "da_grade": [
+        "RMS"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 2",
+       "dee": [
+        "OIA"
+       ],
+       "da_grade": [
+        "AIA"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 3",
+       "dee": [
+        "MIZ"
+       ],
+       "da_grade": [
+        "XIZ"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 4",
+       "dee": [
+        "AST"
+       ],
+       "da_grade": [
+        "EST"
+       ]
+      },
+      {
+       "nome": "LR arcanjo (cruz+querubico)",
+       "dee": [
+        "HIAOM"
+       ],
+       "da_grade": [
+        "PASMT"
+       ]
+      }
+     ]
+    },
+    "OIP": {
+     "total": 58,
+     "conferem": 55,
+     "nao_conferem": [
+      {
+       "nome": "senior U7",
+       "dee": [
+        "ALNDOOD"
+       ],
+       "da_grade": [
+        "ALNDUOD"
+       ]
+      },
+      {
+       "nome": "LL chamar (6)",
+       "dee": [
+        "VOLXDO"
+       ],
+       "da_grade": [
+        "UOBXDO"
+       ]
+      },
+      {
+       "nome": "LL anjo menor 1",
+       "dee": [
+        "DATT",
+        "DALTT"
+       ],
+       "da_grade": [
+        "DATT",
+        "DABTT"
+       ]
+      }
+     ]
+    },
+    "MPH": {
+     "total": 58,
+     "conferem": 36,
+     "nao_conferem": [
+      {
+       "nome": "senior D6",
+       "dee": [
+        "SOAIXNT"
+       ],
+       "da_grade": [
+        "SONIZNT"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 1",
+       "dee": [
+        "MTO"
+       ],
+       "da_grade": [
+        "XTO"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 2",
+       "dee": [
+        "ONH"
+       ],
+       "da_grade": [
+        "ANH"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 3",
+       "dee": [
+        "CPA"
+       ],
+       "da_grade": [
+        "RPA"
+       ]
+      },
+      {
+       "nome": "UL anjo menor 4",
+       "dee": [
+        "SAIX",
+        "SAAIX"
+       ],
+       "da_grade": [
+        "SAI[PX]",
+        "SAAI[PX]"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 4",
+       "dee": [
+        "HSA"
+       ],
+       "da_grade": [
+        "PSA"
+       ]
+      },
+      {
+       "nome": "UL arcanjo (cruz+querubico)",
+       "dee": [
+        "ATAAD"
+       ],
+       "da_grade": [
+        "ETAAD"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 1",
+       "dee": [
+        "MMA"
+       ],
+       "da_grade": [
+        "XMA"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 2",
+       "dee": [
+        "OLE"
+       ],
+       "da_grade": [
+        "ALE"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 3",
+       "dee": [
+        "CVS"
+       ],
+       "da_grade": [
+        "RUS"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 4",
+       "dee": [
+        "HRV"
+       ],
+       "da_grade": [
+        "PRU"
+       ]
+      },
+      {
+       "nome": "UR arcanjo (cruz+querubico)",
+       "dee": [
+        "ATDIM"
+       ],
+       "da_grade": [
+        "ETDIM"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 1",
+       "dee": [
+        "RPA"
+       ],
+       "da_grade": [
+        "CPA"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 2",
+       "dee": [
+        "AND"
+       ],
+       "da_grade": [
+        "OND"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 3",
+       "dee": [
+        "XII"
+       ],
+       "da_grade": [
+        "MII"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 4",
+       "dee": [
+        "EXR"
+       ],
+       "da_grade": [
+        "AXR"
+       ]
+      },
+      {
+       "nome": "LL arcanjo (cruz+querubico)",
+       "dee": [
+        "PMAGL"
+       ],
+       "da_grade": [
+        "HMAGL"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 1",
+       "dee": [
+        "RXP"
+       ],
+       "da_grade": [
+        "CXP"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 2",
+       "dee": [
+        "AVA"
+       ],
+       "da_grade": [
+        "OUA"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 3",
+       "dee": [
+        "XDA"
+       ],
+       "da_grade": [
+        "MDA"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 4",
+       "dee": [
+        "ERN"
+       ],
+       "da_grade": [
+        "ARN"
+       ]
+      },
+      {
+       "nome": "LR arcanjo (cruz+querubico)",
+       "dee": [
+        "PNLRX"
+       ],
+       "da_grade": [
+        "HNLRX"
+       ]
+      }
+     ]
+    }
+   },
+   "cotton_xlvi_pt2_recensa_vovina": {
+    "ORO": {
+     "total": 58,
+     "conferem": 50,
+     "nao_conferem": [
+      {
+       "nome": "senior U6",
+       "dee": [
+        "AAOXAIF"
+       ],
+       "da_grade": [
+        "AAOZAIF"
+       ]
+      },
+      {
+       "nome": "UR querubico (4)",
+       "dee": [
+        "VTPA"
+       ],
+       "da_grade": [
+        "YTPA"
+       ]
+      },
+      {
+       "nome": "UR arcanjo (cruz+querubico)",
+       "dee": [
+        "EVTPA"
+       ],
+       "da_grade": [
+        "EYTPA"
+       ]
+      },
+      {
+       "nome": "LL querubico (4)",
+       "dee": [
+        "CNBR"
+       ],
+       "da_grade": [
+        "TNBR"
+       ]
+      },
+      {
+       "nome": "LL arcanjo (cruz+querubico)",
+       "dee": [
+        "HCNBR"
+       ],
+       "da_grade": [
+        "HTNBR"
+       ]
+      },
+      {
+       "nome": "LR querubico (4)",
+       "dee": [
+        "XGZD"
+       ],
+       "da_grade": [
+        "XGSD"
+       ]
+      },
+      {
+       "nome": "LR anjo menor 2",
+       "dee": [
+        "NPAT",
+        "NPRAT"
+       ],
+       "da_grade": [
+        "NPNT",
+        "NPRNT"
+       ]
+      },
+      {
+       "nome": "LR arcanjo (cruz+querubico)",
+       "dee": [
+        "HXGZD"
+       ],
+       "da_grade": [
+        "HXGSD"
+       ]
+      }
+     ]
+    },
+    "MOR": {
+     "total": 58,
+     "conferem": 29,
+     "nao_conferem": [
+      {
+       "nome": "rei",
+       "dee": [
+        "ICZHHCA",
+        "ICZHHCL"
+       ],
+       "da_grade": [
+        "ICZHIHA",
+        "ICZHIHL"
+       ]
+      },
+      {
+       "nome": "senior D7",
+       "dee": [
+        "LHIANSA"
+       ],
+       "da_grade": [
+        "LIIANSA"
+       ]
+      },
+      {
+       "nome": "senior D6",
+       "dee": [
+        "ACMLICV",
+        "ACMBICV"
+       ],
+       "da_grade": [
+        "AHMLICU"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 1",
+       "dee": [
+        "XAI"
+       ],
+       "da_grade": [
+        "MAI"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 2",
+       "dee": [
+        "AOR"
+       ],
+       "da_grade": [
+        "OOR"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 3",
+       "dee": [
+        "RRS"
+       ],
+       "da_grade": [
+        "CRS"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 4",
+       "dee": [
+        "PIZ"
+       ],
+       "da_grade": [
+        "HIZ"
+       ]
+      },
+      {
+       "nome": "UL arcanjo (cruz+querubico)",
+       "dee": [
+        "EBOZA"
+       ],
+       "da_grade": [
+        "ABOZA"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 1",
+       "dee": [
+        "XOM"
+       ],
+       "da_grade": [
+        "MOM"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 2",
+       "dee": [
+        "AGB"
+       ],
+       "da_grade": [
+        "OGB"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 3",
+       "dee": [
+        "RRL"
+       ],
+       "da_grade": [
+        "CRL"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 4",
+       "dee": [
+        "PIA"
+       ],
+       "da_grade": [
+        "HIA"
+       ]
+      },
+      {
+       "nome": "UR arcanjo (cruz+querubico)",
+       "dee": [
+        "EPHRA"
+       ],
+       "da_grade": [
+        "APHRA"
+       ]
+      },
+      {
+       "nome": "LL chamar (6)",
+       "dee": [
+        "CBALPT"
+       ],
+       "da_grade": [
+        "ABALPT"
+       ]
+      },
+      {
+       "nome": "LL querubico (4)",
+       "dee": [
+        "ROAN"
+       ],
+       "da_grade": [
+        "OCNC"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 1",
+       "dee": [
+        "COP"
+       ],
+       "da_grade": [
+        "ROP"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 2",
+       "dee": [
+        "ODO"
+       ],
+       "da_grade": [
+        "ADO"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 3",
+       "dee": [
+        "MRX"
+       ],
+       "da_grade": [
+        "XRX"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 4",
+       "dee": [
+        "AAX"
+       ],
+       "da_grade": [
+        "EAX"
+       ]
+      },
+      {
+       "nome": "LL arcanjo (cruz+querubico)",
+       "dee": [
+        "HROAN"
+       ],
+       "da_grade": [
+        "POCNC"
+       ]
+      },
+      {
+       "nome": "LR chamar (6)",
+       "dee": [
+        "SPMNIR"
+       ],
+       "da_grade": [
+        "OPMNIR"
+       ]
+      },
+      {
+       "nome": "LR comandar (5)",
+       "dee": [
+        "LLPIZ"
+       ],
+       "da_grade": [
+        "ILPIZ"
+       ]
+      },
+      {
+       "nome": "LR querubico (4)",
+       "dee": [
+        "IAOM"
+       ],
+       "da_grade": [
+        "ASMT"
+       ]
+      },
+      {
+       "nome": "LR anjo menor 1",
+       "dee": [
+        "MSAL",
+        "MSMAL"
+       ],
+       "da_grade": [
+        "MSAP",
+        "MSMAP"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 1",
+       "dee": [
+        "CMS"
+       ],
+       "da_grade": [
+        "RMS"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 2",
+       "dee": [
+        "OIA"
+       ],
+       "da_grade": [
+        "AIA"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 3",
+       "dee": [
+        "MIZ"
+       ],
+       "da_grade": [
+        "XIZ"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 4",
+       "dee": [
+        "AST"
+       ],
+       "da_grade": [
+        "EST"
+       ]
+      },
+      {
+       "nome": "LR arcanjo (cruz+querubico)",
+       "dee": [
+        "HIAOM"
+       ],
+       "da_grade": [
+        "PASMT"
+       ]
+      }
+     ]
+    },
+    "OIP": {
+     "total": 58,
+     "conferem": 54,
+     "nao_conferem": [
+      {
+       "nome": "senior U7",
+       "dee": [
+        "ALNDOOD"
+       ],
+       "da_grade": [
+        "ALNDUOD"
+       ]
+      },
+      {
+       "nome": "LL querubico (4)",
+       "dee": [
+        "PSAC"
+       ],
+       "da_grade": [
+        "XSAC"
+       ]
+      },
+      {
+       "nome": "LL anjo menor 3",
+       "dee": [
+        "OOPZ",
+        "OODPZ"
+       ],
+       "da_grade": [
+        "OOXZ",
+        "OODXZ"
+       ]
+      },
+      {
+       "nome": "LL arcanjo (cruz+querubico)",
+       "dee": [
+        "PPSAC"
+       ],
+       "da_grade": [
+        "PXSAC"
+       ]
+      }
+     ]
+    },
+    "MPH": {
+     "total": 58,
+     "conferem": 37,
+     "nao_conferem": [
+      {
+       "nome": "senior D6",
+       "dee": [
+        "SOAIXNT"
+       ],
+       "da_grade": [
+        "SONIZNT"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 1",
+       "dee": [
+        "MTO"
+       ],
+       "da_grade": [
+        "XTO"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 2",
+       "dee": [
+        "ONH"
+       ],
+       "da_grade": [
+        "ANH"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 3",
+       "dee": [
+        "CPA"
+       ],
+       "da_grade": [
+        "RPA"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 4",
+       "dee": [
+        "HSA"
+       ],
+       "da_grade": [
+        "PSA"
+       ]
+      },
+      {
+       "nome": "UL arcanjo (cruz+querubico)",
+       "dee": [
+        "ATAAD"
+       ],
+       "da_grade": [
+        "ETAAD"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 1",
+       "dee": [
+        "MMA"
+       ],
+       "da_grade": [
+        "XMA"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 2",
+       "dee": [
+        "OLE"
+       ],
+       "da_grade": [
+        "ALE"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 3",
+       "dee": [
+        "CVS"
+       ],
+       "da_grade": [
+        "RUS"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 4",
+       "dee": [
+        "HRV"
+       ],
+       "da_grade": [
+        "PRU"
+       ]
+      },
+      {
+       "nome": "UR arcanjo (cruz+querubico)",
+       "dee": [
+        "ATDIM"
+       ],
+       "da_grade": [
+        "ETDIM"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 1",
+       "dee": [
+        "RPA"
+       ],
+       "da_grade": [
+        "CPA"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 2",
+       "dee": [
+        "AND"
+       ],
+       "da_grade": [
+        "OND"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 3",
+       "dee": [
+        "XII"
+       ],
+       "da_grade": [
+        "MII"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 4",
+       "dee": [
+        "EXR"
+       ],
+       "da_grade": [
+        "AXR"
+       ]
+      },
+      {
+       "nome": "LL arcanjo (cruz+querubico)",
+       "dee": [
+        "PMAGL"
+       ],
+       "da_grade": [
+        "HMAGL"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 1",
+       "dee": [
+        "RXP"
+       ],
+       "da_grade": [
+        "CXP"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 2",
+       "dee": [
+        "AVA"
+       ],
+       "da_grade": [
+        "OUA"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 3",
+       "dee": [
+        "XDA"
+       ],
+       "da_grade": [
+        "MDA"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 4",
+       "dee": [
+        "ERN"
+       ],
+       "da_grade": [
+        "ARN"
+       ]
+      },
+      {
+       "nome": "LR arcanjo (cruz+querubico)",
+       "dee": [
+        "PNLRX"
+       ],
+       "da_grade": [
+        "HNLRX"
+       ]
+      }
+     ]
+    }
+   },
+   "recensa_1587": {
+    "ORO": {
+     "total": 58,
+     "conferem": 48,
+     "nao_conferem": [
+      {
+       "nome": "senior U6",
+       "dee": [
+        "AAOXAIF"
+       ],
+       "da_grade": [
+        "AAOZAIF"
+       ]
+      },
+      {
+       "nome": "UR querubico (4)",
+       "dee": [
+        "VTPA"
+       ],
+       "da_grade": [
+        "YTPA"
+       ]
+      },
+      {
+       "nome": "UR arcanjo (cruz+querubico)",
+       "dee": [
+        "EVTPA"
+       ],
+       "da_grade": [
+        "EYTPA"
+       ]
+      },
+      {
+       "nome": "LL querubico (4)",
+       "dee": [
+        "CNBR"
+       ],
+       "da_grade": [
+        "TNBR"
+       ]
+      },
+      {
+       "nome": "LL anjo menor 4",
+       "dee": [
+        "SHAL",
+        "SHIAL"
+       ],
+       "da_grade": [
+        "S?AL",
+        "S?IAL"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 4",
+       "dee": [
+        "ASH"
+       ],
+       "da_grade": [
+        "AS?"
+       ]
+      },
+      {
+       "nome": "LL arcanjo (cruz+querubico)",
+       "dee": [
+        "HCNBR"
+       ],
+       "da_grade": [
+        "HTNBR"
+       ]
+      },
+      {
+       "nome": "LR querubico (4)",
+       "dee": [
+        "XGZD"
+       ],
+       "da_grade": [
+        "XGSD"
+       ]
+      },
+      {
+       "nome": "LR anjo menor 2",
+       "dee": [
+        "NPAT",
+        "NPRAT"
+       ],
+       "da_grade": [
+        "NPNT",
+        "NPRNT"
+       ]
+      },
+      {
+       "nome": "LR arcanjo (cruz+querubico)",
+       "dee": [
+        "HXGZD"
+       ],
+       "da_grade": [
+        "HXGSD"
+       ]
+      }
+     ]
+    },
+    "MOR": {
+     "total": 58,
+     "conferem": 29,
+     "nao_conferem": [
+      {
+       "nome": "rei",
+       "dee": [
+        "ICZHHCA",
+        "ICZHHCL"
+       ],
+       "da_grade": [
+        "ICZHIHA",
+        "ICZHIHL"
+       ]
+      },
+      {
+       "nome": "senior D7",
+       "dee": [
+        "LHIANSA"
+       ],
+       "da_grade": [
+        "LIIANSA"
+       ]
+      },
+      {
+       "nome": "senior D6",
+       "dee": [
+        "ACMLICV",
+        "ACMBICV"
+       ],
+       "da_grade": [
+        "AHMLICU"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 1",
+       "dee": [
+        "XAI"
+       ],
+       "da_grade": [
+        "MAI"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 2",
+       "dee": [
+        "AOR"
+       ],
+       "da_grade": [
+        "OOR"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 3",
+       "dee": [
+        "RRS"
+       ],
+       "da_grade": [
+        "CRS"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 4",
+       "dee": [
+        "PIZ"
+       ],
+       "da_grade": [
+        "HIZ"
+       ]
+      },
+      {
+       "nome": "UL arcanjo (cruz+querubico)",
+       "dee": [
+        "EBOZA"
+       ],
+       "da_grade": [
+        "ABOZA"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 1",
+       "dee": [
+        "XOM"
+       ],
+       "da_grade": [
+        "MOM"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 2",
+       "dee": [
+        "AGB"
+       ],
+       "da_grade": [
+        "OGB"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 3",
+       "dee": [
+        "RRL"
+       ],
+       "da_grade": [
+        "CRL"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 4",
+       "dee": [
+        "PIA"
+       ],
+       "da_grade": [
+        "HIA"
+       ]
+      },
+      {
+       "nome": "UR arcanjo (cruz+querubico)",
+       "dee": [
+        "EPHRA"
+       ],
+       "da_grade": [
+        "APHRA"
+       ]
+      },
+      {
+       "nome": "LL chamar (6)",
+       "dee": [
+        "CBALPT"
+       ],
+       "da_grade": [
+        "ABALPT"
+       ]
+      },
+      {
+       "nome": "LL querubico (4)",
+       "dee": [
+        "ROAN"
+       ],
+       "da_grade": [
+        "OCNC"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 1",
+       "dee": [
+        "COP"
+       ],
+       "da_grade": [
+        "ROP"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 2",
+       "dee": [
+        "ODO"
+       ],
+       "da_grade": [
+        "ADO"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 3",
+       "dee": [
+        "MRX"
+       ],
+       "da_grade": [
+        "XRX"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 4",
+       "dee": [
+        "AAX"
+       ],
+       "da_grade": [
+        "EAX"
+       ]
+      },
+      {
+       "nome": "LL arcanjo (cruz+querubico)",
+       "dee": [
+        "HROAN"
+       ],
+       "da_grade": [
+        "POCNC"
+       ]
+      },
+      {
+       "nome": "LR chamar (6)",
+       "dee": [
+        "SPMNIR"
+       ],
+       "da_grade": [
+        "OPMNIR"
+       ]
+      },
+      {
+       "nome": "LR comandar (5)",
+       "dee": [
+        "LLPIZ"
+       ],
+       "da_grade": [
+        "ILPIZ"
+       ]
+      },
+      {
+       "nome": "LR querubico (4)",
+       "dee": [
+        "IAOM"
+       ],
+       "da_grade": [
+        "ASMT"
+       ]
+      },
+      {
+       "nome": "LR anjo menor 1",
+       "dee": [
+        "MSAL",
+        "MSMAL"
+       ],
+       "da_grade": [
+        "MSAP",
+        "MSMAP"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 1",
+       "dee": [
+        "CMS"
+       ],
+       "da_grade": [
+        "RMS"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 2",
+       "dee": [
+        "OIA"
+       ],
+       "da_grade": [
+        "AIA"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 3",
+       "dee": [
+        "MIZ"
+       ],
+       "da_grade": [
+        "XIZ"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 4",
+       "dee": [
+        "AST"
+       ],
+       "da_grade": [
+        "EST"
+       ]
+      },
+      {
+       "nome": "LR arcanjo (cruz+querubico)",
+       "dee": [
+        "HIAOM"
+       ],
+       "da_grade": [
+        "PASMT"
+       ]
+      }
+     ]
+    },
+    "OIP": {
+     "total": 58,
+     "conferem": 55,
+     "nao_conferem": [
+      {
+       "nome": "senior U7",
+       "dee": [
+        "ALNDOOD"
+       ],
+       "da_grade": [
+        "ALNDUOD"
+       ]
+      },
+      {
+       "nome": "LL chamar (6)",
+       "dee": [
+        "VOLXDO"
+       ],
+       "da_grade": [
+        "UO?XDO"
+       ]
+      },
+      {
+       "nome": "LL anjo menor 1",
+       "dee": [
+        "DATT",
+        "DALTT"
+       ],
+       "da_grade": [
+        "DATT",
+        "DA?TT"
+       ]
+      }
+     ]
+    },
+    "MPH": {
+     "total": 58,
+     "conferem": 37,
+     "nao_conferem": [
+      {
+       "nome": "senior D6",
+       "dee": [
+        "SOAIXNT"
+       ],
+       "da_grade": [
+        "SONIZNT"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 1",
+       "dee": [
+        "MTO"
+       ],
+       "da_grade": [
+        "XTO"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 2",
+       "dee": [
+        "ONH"
+       ],
+       "da_grade": [
+        "ANH"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 3",
+       "dee": [
+        "CPA"
+       ],
+       "da_grade": [
+        "RPA"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 4",
+       "dee": [
+        "HSA"
+       ],
+       "da_grade": [
+        "PSA"
+       ]
+      },
+      {
+       "nome": "UL arcanjo (cruz+querubico)",
+       "dee": [
+        "ATAAD"
+       ],
+       "da_grade": [
+        "ETAAD"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 1",
+       "dee": [
+        "MMA"
+       ],
+       "da_grade": [
+        "XMA"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 2",
+       "dee": [
+        "OLE"
+       ],
+       "da_grade": [
+        "ALE"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 3",
+       "dee": [
+        "CVS"
+       ],
+       "da_grade": [
+        "RUS"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 4",
+       "dee": [
+        "HRV"
+       ],
+       "da_grade": [
+        "PRU"
+       ]
+      },
+      {
+       "nome": "UR arcanjo (cruz+querubico)",
+       "dee": [
+        "ATDIM"
+       ],
+       "da_grade": [
+        "ETDIM"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 1",
+       "dee": [
+        "RPA"
+       ],
+       "da_grade": [
+        "CPA"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 2",
+       "dee": [
+        "AND"
+       ],
+       "da_grade": [
+        "OND"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 3",
+       "dee": [
+        "XII"
+       ],
+       "da_grade": [
+        "MII"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 4",
+       "dee": [
+        "EXR"
+       ],
+       "da_grade": [
+        "AXR"
+       ]
+      },
+      {
+       "nome": "LL arcanjo (cruz+querubico)",
+       "dee": [
+        "PMAGL"
+       ],
+       "da_grade": [
+        "HMAGL"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 1",
+       "dee": [
+        "RXP"
+       ],
+       "da_grade": [
+        "CXP"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 2",
+       "dee": [
+        "AVA"
+       ],
+       "da_grade": [
+        "OUA"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 3",
+       "dee": [
+        "XDA"
+       ],
+       "da_grade": [
+        "MDA"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 4",
+       "dee": [
+        "ERN"
+       ],
+       "da_grade": [
+        "ARN"
+       ]
+      },
+      {
+       "nome": "LR arcanjo (cruz+querubico)",
+       "dee": [
+        "PNLRX"
+       ],
+       "da_grade": [
+        "HNLRX"
+       ]
+      }
+     ]
+    }
+   },
+   "golden_dawn": {
+    "ORO": {
+     "total": 58,
+     "conferem": 50,
+     "nao_conferem": [
+      {
+       "nome": "senior U6",
+       "dee": [
+        "AAOXAIF"
+       ],
+       "da_grade": [
+        "AAOZAIF"
+       ]
+      },
+      {
+       "nome": "UR querubico (4)",
+       "dee": [
+        "VTPA"
+       ],
+       "da_grade": [
+        "YTPA"
+       ]
+      },
+      {
+       "nome": "UR arcanjo (cruz+querubico)",
+       "dee": [
+        "EVTPA"
+       ],
+       "da_grade": [
+        "EYTPA"
+       ]
+      },
+      {
+       "nome": "LL querubico (4)",
+       "dee": [
+        "CNBR"
+       ],
+       "da_grade": [
+        "TNBR"
+       ]
+      },
+      {
+       "nome": "LL arcanjo (cruz+querubico)",
+       "dee": [
+        "HCNBR"
+       ],
+       "da_grade": [
+        "HTNBR"
+       ]
+      },
+      {
+       "nome": "LR querubico (4)",
+       "dee": [
+        "XGZD"
+       ],
+       "da_grade": [
+        "XGSD"
+       ]
+      },
+      {
+       "nome": "LR anjo menor 2",
+       "dee": [
+        "NPAT",
+        "NPRAT"
+       ],
+       "da_grade": [
+        "NPNT",
+        "NPRNT"
+       ]
+      },
+      {
+       "nome": "LR arcanjo (cruz+querubico)",
+       "dee": [
+        "HXGZD"
+       ],
+       "da_grade": [
+        "HXGSD"
+       ]
+      }
+     ]
+    },
+    "MOR": {
+     "total": 58,
+     "conferem": 29,
+     "nao_conferem": [
+      {
+       "nome": "rei",
+       "dee": [
+        "ICZHHCA",
+        "ICZHHCL"
+       ],
+       "da_grade": [
+        "ICZHIHA",
+        "ICZHIHL"
+       ]
+      },
+      {
+       "nome": "senior D7",
+       "dee": [
+        "LHIANSA"
+       ],
+       "da_grade": [
+        "LIIANSA"
+       ]
+      },
+      {
+       "nome": "senior D6",
+       "dee": [
+        "ACMLICV",
+        "ACMBICV"
+       ],
+       "da_grade": [
+        "AHMLICU"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 1",
+       "dee": [
+        "XAI"
+       ],
+       "da_grade": [
+        "MAI"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 2",
+       "dee": [
+        "AOR"
+       ],
+       "da_grade": [
+        "OOR"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 3",
+       "dee": [
+        "RRS"
+       ],
+       "da_grade": [
+        "CRS"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 4",
+       "dee": [
+        "PIZ"
+       ],
+       "da_grade": [
+        "HIZ"
+       ]
+      },
+      {
+       "nome": "UL arcanjo (cruz+querubico)",
+       "dee": [
+        "EBOZA"
+       ],
+       "da_grade": [
+        "ABOZA"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 1",
+       "dee": [
+        "XOM"
+       ],
+       "da_grade": [
+        "MOM"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 2",
+       "dee": [
+        "AGB"
+       ],
+       "da_grade": [
+        "OGB"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 3",
+       "dee": [
+        "RRL"
+       ],
+       "da_grade": [
+        "CRL"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 4",
+       "dee": [
+        "PIA"
+       ],
+       "da_grade": [
+        "HIA"
+       ]
+      },
+      {
+       "nome": "UR arcanjo (cruz+querubico)",
+       "dee": [
+        "EPHRA"
+       ],
+       "da_grade": [
+        "APHRA"
+       ]
+      },
+      {
+       "nome": "LL chamar (6)",
+       "dee": [
+        "CBALPT"
+       ],
+       "da_grade": [
+        "ABALPT"
+       ]
+      },
+      {
+       "nome": "LL querubico (4)",
+       "dee": [
+        "ROAN"
+       ],
+       "da_grade": [
+        "OCNC"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 1",
+       "dee": [
+        "COP"
+       ],
+       "da_grade": [
+        "ROP"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 2",
+       "dee": [
+        "ODO"
+       ],
+       "da_grade": [
+        "ADO"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 3",
+       "dee": [
+        "MRX"
+       ],
+       "da_grade": [
+        "XRX"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 4",
+       "dee": [
+        "AAX"
+       ],
+       "da_grade": [
+        "EAX"
+       ]
+      },
+      {
+       "nome": "LL arcanjo (cruz+querubico)",
+       "dee": [
+        "HROAN"
+       ],
+       "da_grade": [
+        "POCNC"
+       ]
+      },
+      {
+       "nome": "LR chamar (6)",
+       "dee": [
+        "SPMNIR"
+       ],
+       "da_grade": [
+        "OPMNIR"
+       ]
+      },
+      {
+       "nome": "LR comandar (5)",
+       "dee": [
+        "LLPIZ"
+       ],
+       "da_grade": [
+        "ILPIZ"
+       ]
+      },
+      {
+       "nome": "LR querubico (4)",
+       "dee": [
+        "IAOM"
+       ],
+       "da_grade": [
+        "ASMT"
+       ]
+      },
+      {
+       "nome": "LR anjo menor 1",
+       "dee": [
+        "MSAL",
+        "MSMAL"
+       ],
+       "da_grade": [
+        "MSAP",
+        "MSMAP"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 1",
+       "dee": [
+        "CMS"
+       ],
+       "da_grade": [
+        "RMS"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 2",
+       "dee": [
+        "OIA"
+       ],
+       "da_grade": [
+        "AIA"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 3",
+       "dee": [
+        "MIZ"
+       ],
+       "da_grade": [
+        "XIZ"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 4",
+       "dee": [
+        "AST"
+       ],
+       "da_grade": [
+        "EST"
+       ]
+      },
+      {
+       "nome": "LR arcanjo (cruz+querubico)",
+       "dee": [
+        "HIAOM"
+       ],
+       "da_grade": [
+        "PASMT"
+       ]
+      }
+     ]
+    },
+    "OIP": {
+     "total": 58,
+     "conferem": 57,
+     "nao_conferem": [
+      {
+       "nome": "senior U7",
+       "dee": [
+        "ALNDOOD"
+       ],
+       "da_grade": [
+        "ALNDUOD"
+       ]
+      }
+     ]
+    },
+    "MPH": {
+     "total": 58,
+     "conferem": 37,
+     "nao_conferem": [
+      {
+       "nome": "senior D6",
+       "dee": [
+        "SOAIXNT"
+       ],
+       "da_grade": [
+        "SONIZNT"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 1",
+       "dee": [
+        "MTO"
+       ],
+       "da_grade": [
+        "XTO"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 2",
+       "dee": [
+        "ONH"
+       ],
+       "da_grade": [
+        "ANH"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 3",
+       "dee": [
+        "CPA"
+       ],
+       "da_grade": [
+        "RPA"
+       ]
+      },
+      {
+       "nome": "UL cacodemonio 4",
+       "dee": [
+        "HSA"
+       ],
+       "da_grade": [
+        "PSA"
+       ]
+      },
+      {
+       "nome": "UL arcanjo (cruz+querubico)",
+       "dee": [
+        "ATAAD"
+       ],
+       "da_grade": [
+        "ETAAD"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 1",
+       "dee": [
+        "MMA"
+       ],
+       "da_grade": [
+        "XMA"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 2",
+       "dee": [
+        "OLE"
+       ],
+       "da_grade": [
+        "ALE"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 3",
+       "dee": [
+        "CVS"
+       ],
+       "da_grade": [
+        "RUS"
+       ]
+      },
+      {
+       "nome": "UR cacodemonio 4",
+       "dee": [
+        "HRV"
+       ],
+       "da_grade": [
+        "PRU"
+       ]
+      },
+      {
+       "nome": "UR arcanjo (cruz+querubico)",
+       "dee": [
+        "ATDIM"
+       ],
+       "da_grade": [
+        "ETDIM"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 1",
+       "dee": [
+        "RPA"
+       ],
+       "da_grade": [
+        "CPA"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 2",
+       "dee": [
+        "AND"
+       ],
+       "da_grade": [
+        "OND"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 3",
+       "dee": [
+        "XII"
+       ],
+       "da_grade": [
+        "MII"
+       ]
+      },
+      {
+       "nome": "LL cacodemonio 4",
+       "dee": [
+        "EXR"
+       ],
+       "da_grade": [
+        "AXR"
+       ]
+      },
+      {
+       "nome": "LL arcanjo (cruz+querubico)",
+       "dee": [
+        "PMAGL"
+       ],
+       "da_grade": [
+        "HMAGL"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 1",
+       "dee": [
+        "RXP"
+       ],
+       "da_grade": [
+        "CXP"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 2",
+       "dee": [
+        "AVA"
+       ],
+       "da_grade": [
+        "OUA"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 3",
+       "dee": [
+        "XDA"
+       ],
+       "da_grade": [
+        "MDA"
+       ]
+      },
+      {
+       "nome": "LR cacodemonio 4",
+       "dee": [
+        "ERN"
+       ],
+       "da_grade": [
+        "ARN"
+       ]
+      },
+      {
+       "nome": "LR arcanjo (cruz+querubico)",
+       "dee": [
+        "PNLRX"
+       ],
+       "da_grade": [
+        "HNLRX"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "nomes_regra_gd_derivados_da_referencia": {
+   "ORO": {
+    "nomes_de_deus": [
+     "ORO",
+     "IBAH",
+     "AOZPI"
+    ],
+    "rei_8": "BATAIVAH",
+    "seniores_7": [
+     "HABIORO",
+     "AAOZAIF",
+     "HTMORDA",
+     "AHAOZPI",
+     "HIPOTGA",
+     "AVTOTAR"
+    ],
+    "subangulos": {
+     "UL": {
+      "chamar": "IDOIGO",
+      "comandar": "ARDZA",
+      "querubico": "RZLA",
+      "menores": [
+       "CZNS",
+       "TOTT",
+       "SIAS",
+       "FMND"
+      ]
+     },
+     "UR": {
+      "chamar": "LLACZA",
+      "comandar": "PALAM",
+      "querubico": "YTPA",
+      "menores": [
+       "OYVB",
+       "PAOC",
+       "RBNH",
+       "DIRI"
+      ]
+     },
+     "LL": {
+      "chamar": "AIAOAI",
+      "comandar": "OIIIT",
+      "querubico": "TNBR",
+      "menores": [
+       "ABMO",
+       "NACO",
+       "OCNM",
+       "S?AL"
+      ]
+     },
+     "LR": {
+      "chamar": "AOURRZ",
+      "comandar": "ALOAI",
+      "querubico": "XGSD",
+      "menores": [
+       "ACCA",
+       "NPNT",
+       "OTOI",
+       "PMOX"
+      ]
+     }
+    }
+   },
+   "MOR": {
+    "nomes_de_deus": [
+     "MOR",
+     "DIAL",
+     "HCTGA"
+    ],
+    "rei_8": "ICZHIHAL",
+    "seniores_7": [
+     "LAIDROM",
+     "ACZINOR",
+     "LZINOPO",
+     "ALHCTGA",
+     "LIIANSA",
+     "AHMLICV"
+    ],
+    "subangulos": {
+     "UL": {
+      "chamar": "ANGPOI",
+      "comandar": "UNNAX",
+      "querubico": "BOZA",
+      "menores": [
+       "AIRA",
+       "ORMN",
+       "RSNI",
+       "IZNR"
+      ]
+     },
+     "UR": {
+      "chamar": "ANAEEM",
+      "comandar": "SONDN",
+      "querubico": "PHRA",
+      "menores": [
+       "OMGG",
+       "GBAL",
+       "RLMV",
+       "IAHL"
+      ]
+     },
+     "LL": {
+      "chamar": "ABALPT",
+      "comandar": "ARBIZ",
+      "querubico": "OCNC",
+      "menores": [
+       "OPNA",
+       "DOOP",
+       "RXAO",
+       "AXIR"
+      ]
+     },
+     "LR": {
+      "chamar": "OPMNIR",
+      "comandar": "ILPIZ",
+      "querubico": "ASMT",
+      "menores": [
+       "MSAP",
+       "IABA",
+       "IZXP",
+       "STIM"
+      ]
+     }
+    }
+   },
+   "OIP": {
+    "nomes_de_deus": [
+     "OIP",
+     "TEAA",
+     "PDOCE"
+    ],
+    "rei_8": "EDLPRNAA",
+    "seniores_7": [
+     "AAETPIO",
+     "ADOEOET",
+     "ALNDVOD",
+     "AAPDOCE",
+     "ARINNAP",
+     "ANODOIN"
+    ],
+    "subangulos": {
+     "UL": {
+      "chamar": "NOALMR",
+      "comandar": "OLOAG",
+      "querubico": "DOPA",
+      "menores": [
+       "OPMN",
+       "APST",
+       "SCIO",
+       "VASG"
+      ]
+     },
+     "UR": {
+      "chamar": "VADALI",
+      "comandar": "OBAUA",
+      "querubico": "ANAA",
+      "menores": [
+       "GMNM",
+       "ECOP",
+       "AMOX",
+       "BRAP"
+      ]
+     },
+     "LL": {
+      "chamar": "UO?XDO",
+      "comandar": "SIODA",
+      "querubico": "PSAC",
+      "menores": [
+       "DATT",
+       "DIOM",
+       "OOPZ",
+       "RGAN"
+      ]
+     },
+     "LR": {
+      "chamar": "RZIONR",
+      "comandar": "NRZFM",
+      "querubico": "ZIZA",
+      "menores": [
+       "ADRE",
+       "SISP",
+       "PALI",
+       "ACAR"
+      ]
+     }
+    }
+   },
+   "MPH": {
+    "nomes_de_deus": [
+     "MPH",
+     "ARSL",
+     "GAIOL"
+    ],
+    "rei_8": "RAAGIOSL",
+    "seniores_7": [
+     "LSRAHPM",
+     "SAIINOV",
+     "LAOAXRP",
+     "SLGAIOL",
+     "LIGDISA",
+     "SONIZNT"
+    ],
+    "subangulos": {
+     "UL": {
+      "chamar": "OBGOTA",
+      "comandar": "AABCO",
+      "querubico": "TAAD",
+      "menores": [
+       "TOCO",
+       "NHDD",
+       "PAAX",
+       "SAIX"
+      ]
+     },
+     "UR": {
+      "chamar": "NELAPR",
+      "comandar": "OMEBB",
+      "querubico": "TDIM",
+      "menores": [
+       "MAGM",
+       "LEOC",
+       "VSSN",
+       "RVOI"
+      ]
+     },
+     "LL": {
+      "chamar": "MALADI",
+      "comandar": "OLAAD",
+      "querubico": "MAGL",
+      "menores": [
+       "PACO",
+       "NDZN",
+       "IIPO",
+       "XRNH"
+      ]
+     },
+     "LR": {
+      "chamar": "IAAASD",
+      "comandar": "ATAPA",
+      "querubico": "NLRX",
+      "menores": [
+       "XPCN",
+       "VASA",
+       "DAPI",
+       "RNIL"
+      ]
+     }
+    }
+   }
+  },
+  "nomes_regra_gd_derivados_de_quadrados_json": {
+   "ORO": {
+    "nomes_de_deus": [
+     "ORO",
+     "IBAH",
+     "AOZPI"
+    ],
+    "rei_8": "BATAIVAH",
+    "seniores_7": [
+     "HABIORO",
+     "AAOZAIF",
+     "HTMORDA",
+     "AHAOZPI",
+     "HIPOTGA",
+     "AVTOTAR"
+    ],
+    "subangulos": {
+     "UL": {
+      "chamar": "IDOIGO",
+      "comandar": "ARDZA",
+      "querubico": "RZLA",
+      "menores": [
+       "CZNS",
+       "TOTT",
+       "SIAS",
+       "FMND"
+      ]
+     },
+     "UR": {
+      "chamar": "LLACZA",
+      "comandar": "PALAM",
+      "querubico": "YTPA",
+      "menores": [
+       "OYVB",
+       "PAOC",
+       "RBNH",
+       "DIRI"
+      ]
+     },
+     "LL": {
+      "chamar": "AIAOAI",
+      "comandar": "OIIIT",
+      "querubico": "TNBR",
+      "menores": [
+       "ABMO",
+       "NACO",
+       "OCNM",
+       "SHAL"
+      ]
+     },
+     "LR": {
+      "chamar": "AOURRZ",
+      "comandar": "ALOAI",
+      "querubico": "XGSD",
+      "menores": [
+       "ACCA",
+       "NPNT",
+       "OTOI",
+       "PMOX"
+      ]
+     }
+    }
+   },
+   "MOR": {
+    "nomes_de_deus": [
+     "MOR",
+     "DIAL",
+     "HCTGA"
+    ],
+    "rei_8": "ICZHIHAL",
+    "seniores_7": [
+     "LAIDROM",
+     "ACZINOR",
+     "LZINOPO",
+     "ALHCTGA",
+     "LIIANSA",
+     "AHMLICV"
+    ],
+    "subangulos": {
+     "UL": {
+      "chamar": "ANGPOI",
+      "comandar": "UNNAX",
+      "querubico": "BOZA",
+      "menores": [
+       "AIRA",
+       "ORMN",
+       "RSNI",
+       "IZNR"
+      ]
+     },
+     "UR": {
+      "chamar": "ANAEEM",
+      "comandar": "SONDN",
+      "querubico": "PHRA",
+      "menores": [
+       "OMGG",
+       "GBAL",
+       "RLMV",
+       "IAHL"
+      ]
+     },
+     "LL": {
+      "chamar": "ABALPT",
+      "comandar": "ARBIZ",
+      "querubico": "OCNC",
+      "menores": [
+       "OPNA",
+       "DOOP",
+       "RXAO",
+       "AXIR"
+      ]
+     },
+     "LR": {
+      "chamar": "OPMNIR",
+      "comandar": "ILPIZ",
+      "querubico": "ASMT",
+      "menores": [
+       "MSAP",
+       "IABA",
+       "IZXP",
+       "STIM"
+      ]
+     }
+    }
+   },
+   "OIP": {
+    "nomes_de_deus": [
+     "OIP",
+     "TEAA",
+     "PDOCE"
+    ],
+    "rei_8": "EDLPRNAA",
+    "seniores_7": [
+     "AAETPIO",
+     "ADOEOET",
+     "ALNDVOD",
+     "AAPDOCE",
+     "ARINNAP",
+     "ANODOIN"
+    ],
+    "subangulos": {
+     "UL": {
+      "chamar": "NOALMR",
+      "comandar": "OLOAG",
+      "querubico": "DOPA",
+      "menores": [
+       "OPMN",
+       "APST",
+       "SCIO",
+       "VASG"
+      ]
+     },
+     "UR": {
+      "chamar": "VADALI",
+      "comandar": "OBAUA",
+      "querubico": "ANAA",
+      "menores": [
+       "GMNM",
+       "ECOP",
+       "AMOX",
+       "BRAP"
+      ]
+     },
+     "LL": {
+      "chamar": "UOLXDO",
+      "comandar": "SIODA",
+      "querubico": "PSAC",
+      "menores": [
+       "DATT",
+       "DIOM",
+       "OOPZ",
+       "RGAN"
+      ]
+     },
+     "LR": {
+      "chamar": "RZIONR",
+      "comandar": "NRZFM",
+      "querubico": "ZIZA",
+      "menores": [
+       "ADRE",
+       "SISP",
+       "PALI",
+       "ACAR"
+      ]
+     }
+    }
+   },
+   "MPH": {
+    "nomes_de_deus": [
+     "MPH",
+     "ARSL",
+     "GAIOL"
+    ],
+    "rei_8": "RAAGIOSL",
+    "seniores_7": [
+     "LSRAHPM",
+     "SAIINOV",
+     "LAOAXRP",
+     "SLGAIOL",
+     "LIGDISA",
+     "SONIZNT"
+    ],
+    "subangulos": {
+     "UL": {
+      "chamar": "OBGOTA",
+      "comandar": "AABCO",
+      "querubico": "TAAD",
+      "menores": [
+       "TOCO",
+       "NHDD",
+       "PAAX",
+       "SAIX"
+      ]
+     },
+     "UR": {
+      "chamar": "NELAPR",
+      "comandar": "OMEBB",
+      "querubico": "TDIM",
+      "menores": [
+       "MAGM",
+       "LEOC",
+       "VSSN",
+       "RVOI"
+      ]
+     },
+     "LL": {
+      "chamar": "MALADI",
+      "comandar": "OLAAD",
+      "querubico": "MAGL",
+      "menores": [
+       "PACO",
+       "NDZN",
+       "IIPO",
+       "XRNH"
+      ]
+     },
+     "LR": {
+      "chamar": "IAAASD",
+      "comandar": "ATAPA",
+      "querubico": "NLRX",
+      "menores": [
+       "XPCN",
+       "VASA",
+       "DAPI",
+       "RNIL"
+      ]
+     }
+    }
+   }
+  },
+  "frequencia_de_letras_624": {
+   "sloane3191_recensa_peterson_tipografia": {
+    "a": 106,
+    "b": 15,
+    "c": 22,
+    "d": 30,
+    "e": 10,
+    "f": 3,
+    "g": 17,
+    "h": 9,
+    "i": 60,
+    "l": 27,
+    "m": 30,
+    "n": 45,
+    "o": 72,
+    "p": 37,
+    "r": 38,
+    "s": 25,
+    "t": 27,
+    "u": 15,
+    "x": 14,
+    "y": 2,
+    "z": 20
+   },
+   "sloane3191_recensa_peterson_comentario_html": {
+    "a": 105,
+    "b": 15,
+    "c": 22,
+    "d": 30,
+    "e": 10,
+    "f": 3,
+    "g": 17,
+    "h": 9,
+    "i": 60,
+    "l": 27,
+    "m": 30,
+    "n": 45,
+    "o": 72,
+    "p": 37,
+    "q": 1,
+    "r": 38,
+    "s": 25,
+    "t": 27,
+    "u": 15,
+    "x": 14,
+    "y": 2,
+    "z": 20
+   },
+   "sloane3191_recensa_vovina": {
+    "(ambigua)": 1,
+    "a": 106,
+    "b": 15,
+    "c": 22,
+    "d": 30,
+    "e": 10,
+    "f": 3,
+    "g": 17,
+    "h": 10,
+    "i": 60,
+    "l": 26,
+    "m": 30,
+    "n": 45,
+    "o": 72,
+    "p": 37,
+    "r": 38,
+    "s": 25,
+    "t": 27,
+    "u": 15,
+    "x": 13,
+    "y": 2,
+    "z": 20
+   },
+   "cotton_xlvi_pt2_recensa_vovina": {
+    "a": 106,
+    "b": 14,
+    "c": 22,
+    "d": 30,
+    "e": 10,
+    "f": 3,
+    "g": 17,
+    "h": 10,
+    "i": 60,
+    "l": 27,
+    "m": 30,
+    "n": 45,
+    "o": 72,
+    "p": 35,
+    "r": 38,
+    "s": 25,
+    "t": 27,
+    "u": 15,
+    "x": 16,
+    "y": 2,
+    "z": 20
+   },
+   "recensa_1587": {
+    "a": 106,
+    "b": 14,
+    "c": 22,
+    "d": 30,
+    "e": 10,
+    "f": 3,
+    "g": 17,
+    "h": 9,
+    "i": 60,
+    "l": 26,
+    "m": 30,
+    "n": 45,
+    "o": 72,
+    "p": 37,
+    "r": 38,
+    "s": 25,
+    "t": 27,
+    "u": 15,
+    "x": 14,
+    "y": 2,
+    "z": 20
+   },
+   "golden_dawn": {
+    "a": 106,
+    "b": 14,
+    "c": 22,
+    "d": 30,
+    "e": 10,
+    "f": 3,
+    "g": 17,
+    "h": 10,
+    "i": 60,
+    "l": 27,
+    "m": 30,
+    "n": 45,
+    "o": 72,
+    "p": 37,
+    "r": 38,
+    "s": 25,
+    "t": 27,
+    "u": 15,
+    "x": 14,
+    "y": 2,
+    "z": 20
+   }
+  },
+  "diferencas_entre_fontes_1587_celulas": {
+   "sloane3191_recensa_peterson_tipografia x sloane3191_recensa_peterson_comentario_html": 1,
+   "sloane3191_recensa_peterson_tipografia x sloane3191_recensa_peterson_hm31_metade_direita": 1,
+   "sloane3191_recensa_peterson_tipografia x sloane3191_recensa_vovina": 3,
+   "sloane3191_recensa_peterson_tipografia x cotton_xlvi_pt2_recensa_vovina": 3,
+   "sloane3191_recensa_peterson_tipografia x recensa_1587": 2,
+   "sloane3191_recensa_peterson_tipografia x golden_dawn": 1,
+   "sloane3191_recensa_peterson_comentario_html x sloane3191_recensa_peterson_hm31_metade_direita": 1,
+   "sloane3191_recensa_peterson_comentario_html x sloane3191_recensa_vovina": 4,
+   "sloane3191_recensa_peterson_comentario_html x cotton_xlvi_pt2_recensa_vovina": 4,
+   "sloane3191_recensa_peterson_comentario_html x recensa_1587": 3,
+   "sloane3191_recensa_peterson_comentario_html x golden_dawn": 2,
+   "sloane3191_recensa_peterson_hm31_metade_direita x sloane3191_recensa_vovina": 1,
+   "sloane3191_recensa_peterson_hm31_metade_direita x cotton_xlvi_pt2_recensa_vovina": 3,
+   "sloane3191_recensa_peterson_hm31_metade_direita x recensa_1587": 1,
+   "sloane3191_recensa_peterson_hm31_metade_direita x golden_dawn": 1,
+   "sloane3191_recensa_vovina x cotton_xlvi_pt2_recensa_vovina": 4,
+   "sloane3191_recensa_vovina x recensa_1587": 3,
+   "sloane3191_recensa_vovina x golden_dawn": 2,
+   "cotton_xlvi_pt2_recensa_vovina x recensa_1587": 4,
+   "cotton_xlvi_pt2_recensa_vovina x golden_dawn": 2,
+   "recensa_1587 x golden_dawn": 2
+  }
+ },
+ "diferencas_em_relacao_ao_ditado_1584": {
+  "a": "dee1584 grades_de_referencia.ditado_cotton_1584",
+  "b": "grade_de_referencia desta recensa",
+  "nota": "MOR linha 8: 12 celulas diferentes por um deslocamento de uma casa (ditado 'R O c a n c h i a s o m' x recensa '⊙ c a n c h i a s o m t')",
+  "celulas": [
+   {
+    "torre": "ORO",
+    "linha": 1,
+    "coluna": 8,
+    "a": "u",
+    "b": "y"
+   },
+   {
+    "torre": "ORO",
+    "linha": 4,
+    "coluna": 6,
+    "a": "x",
+    "b": "z"
+   },
+   {
+    "torre": "ORO",
+    "linha": 8,
+    "coluna": 1,
+    "a": "c",
+    "b": "t"
+   },
+   {
+    "torre": "ORO",
+    "linha": 8,
+    "coluna": 11,
+    "a": "z",
+    "b": "s"
+   },
+   {
+    "torre": "ORO",
+    "linha": 11,
+    "coluna": 11,
+    "a": "a",
+    "b": "n"
+   },
+   {
+    "torre": "ORO",
+    "linha": 13,
+    "coluna": 2,
+    "a": "h",
+    "b": null
+   },
+   {
+    "torre": "MOR",
+    "linha": 8,
+    "coluna": 1,
+    "a": "R",
+    "b": "⊙"
+   },
+   {
+    "torre": "MOR",
+    "linha": 8,
+    "coluna": 2,
+    "a": "O",
+    "b": "c"
+   },
+   {
+    "torre": "MOR",
+    "linha": 8,
+    "coluna": 3,
+    "a": "c",
+    "b": "a"
+   },
+   {
+    "torre": "MOR",
+    "linha": 8,
+    "coluna": 4,
+    "a": "a",
+    "b": "n"
+   },
+   {
+    "torre": "MOR",
+    "linha": 8,
+    "coluna": 5,
+    "a": "n",
+    "b": "c"
+   },
+   {
+    "torre": "MOR",
+    "linha": 8,
+    "coluna": 6,
+    "a": "c",
+    "b": "h"
+   },
+   {
+    "torre": "MOR",
+    "linha": 8,
+    "coluna": 7,
+    "a": "h",
+    "b": "i"
+   },
+   {
+    "torre": "MOR",
+    "linha": 8,
+    "coluna": 8,
+    "a": "i",
+    "b": "a"
+   },
+   {
+    "torre": "MOR",
+    "linha": 8,
+    "coluna": 9,
+    "a": "a",
+    "b": "s"
+   },
+   {
+    "torre": "MOR",
+    "linha": 8,
+    "coluna": 10,
+    "a": "s",
+    "b": "o"
+   },
+   {
+    "torre": "MOR",
+    "linha": 8,
+    "coluna": 11,
+    "a": "o",
+    "b": "m"
+   },
+   {
+    "torre": "MOR",
+    "linha": 8,
+    "coluna": 12,
+    "a": "m",
+    "b": "t"
+   },
+   {
+    "torre": "MOR",
+    "linha": 10,
+    "coluna": 12,
+    "a": "L",
+    "b": "P"
+   },
+   {
+    "torre": "OIP",
+    "linha": 1,
+    "coluna": 12,
+    "a": null,
+    "b": "a"
+   },
+   {
+    "torre": "OIP",
+    "linha": 2,
+    "coluna": 11,
+    "a": null,
+    "b": "u"
+   },
+   {
+    "torre": "OIP",
+    "linha": 2,
+    "coluna": 12,
+    "a": null,
+    "b": "a"
+   },
+   {
+    "torre": "OIP",
+    "linha": 3,
+    "coluna": 7,
+    "a": "O",
+    "b": "V"
+   },
+   {
+    "torre": "OIP",
+    "linha": 10,
+    "coluna": 3,
+    "a": "l",
+    "b": null
+   },
+   {
+    "torre": "MPH",
+    "linha": 9,
+    "coluna": 6,
+    "a": "a",
+    "b": "n"
+   },
+   {
+    "torre": "MPH",
+    "linha": 11,
+    "coluna": 6,
+    "a": "x",
+    "b": "z"
+   }
+  ]
+ },
+ "comparacao_golden_dawn": {
+  "arquivo": "D:/Astaron/arcabouco/enochiano/dados/quadrados.json",
+  "mapeamento": {
+   "ar": "ORO",
+   "agua": "MPH",
+   "terra": "MOR",
+   "fogo": "OIP"
+  },
+  "diferencas_de_letra_contra_a_referencia": [
+   {
+    "torre": "ORO",
+    "linha": 13,
+    "coluna": 2,
+    "a": null,
+    "b": "H"
+   },
+   {
+    "torre": "OIP",
+    "linha": 10,
+    "coluna": 3,
+    "a": null,
+    "b": "L"
+   }
+  ],
+  "diferencas_contra_peterson_tipografia": [
+   {
+    "torre": "ORO",
+    "linha": 13,
+    "coluna": 2,
+    "a": "b",
+    "b": "H"
+   }
+  ],
+  "diferencas_contra_vovina_sloane": [
+   {
+    "torre": "OIP",
+    "linha": 10,
+    "coluna": 3,
+    "a": "b",
+    "b": "L"
+   },
+   {
+    "torre": "MPH",
+    "linha": 6,
+    "coluna": 5,
+    "a": "x/p",
+    "b": "X"
+   }
+  ],
+  "resumo": "a grade GD coincide com a recensa em todas as celulas (inclusive na distincao U/V), exceto nas duas celulas em disputa entre transcricoes (ORO L13C2: GD H; OIP L10C3: GD L). A GD esta toda em maiusculas, entao nao preserva a caixa do manuscrito.",
+  "tabua_da_uniao": [
+   "EXARP",
+   "HCOMA",
+   "NANTA",
+   "BITOM"
+  ],
+  "direcoes": "GD: ORO=Leste/Ar, MPH=Oeste/Agua, MOR=Norte/Terra, OIP=Sul/Fogo; Dee (Livro de Suplicas): MOR=Meridies (Sul), OIP=Septentrio (Norte)"
+ },
+ "nota_conferencia_nomes": "a conferencia 'nomes_do_livro_de_suplicas_por_regra' usa os nomes que Dee tirou da tabua anterior (ditado de 1584); na recensa as falhas sao esperadas (letras mudadas e MOR/MPH em outra metade da cruz) e servem para medir a distancia entre as versoes.",
+ "marcas": [
+  {
+   "fonte": "sloane3191_recensa_peterson_tipografia",
+   "torre": "ORO",
+   "linha": 11,
+   "coluna": 6,
+   "marca": "letra dupla: 'T' grande com 't' pequeno subscrito"
+  },
+  {
+   "fonte": "sloane3191_recensa_peterson_tipografia",
+   "torre": "ORO",
+   "linha": 11,
+   "coluna": 7,
+   "marca": "letra dupla: 't' com 'T' pequeno subscrito"
+  },
+  {
+   "fonte": "sloane3191_recensa_peterson_tipografia",
+   "torre": "MOR",
+   "linha": 1,
+   "coluna": 12,
+   "marca": "'a' com pequena cruz (+) sobrescrita"
+  },
+  {
+   "fonte": "sloane3191_recensa_peterson_tipografia",
+   "torre": "MOR",
+   "linha": 8,
+   "coluna": 1,
+   "marca": "desenhado como círculo com ponto/anel duplo (⊙); o fac-símile hm30s.gif mostra o mesmo sinal; tratado como 'O' na comparação"
+  },
+  {
+   "fonte": "sloane3191_recensa_peterson_tipografia",
+   "torre": "MPH",
+   "linha": 5,
+   "coluna": 12,
+   "marca": "N invertido (И) — letra de PARAOAN"
+  },
+  {
+   "fonte": "sloane3191_recensa_peterson_tipografia",
+   "torre": "MPH",
+   "linha": 13,
+   "coluna": 12,
+   "marca": "L invertido (⅃)"
+  },
+  {
+   "fonte": "sloane3191_recensa_peterson_tipografia",
+   "torre": "OIP",
+   "linha": 13,
+   "coluna": 7,
+   "marca": "P invertido (desenhado como 'q' espelhado; aqui 'ꟼ')"
+  },
+  {
+   "fonte": "sloane3191_recensa_peterson_tipografia",
+   "torre": "OIP",
+   "linha": 13,
+   "coluna": 8,
+   "marca": "'A' em forma cursiva diferente das demais (o 'A arsward')"
+  },
+  {
+   "fonte": "sloane3191_recensa_peterson_tipografia",
+   "torre": "ORO",
+   "linha": 13,
+   "coluna": 2,
+   "marca": "Peterson lê 'b' (tipografia e comentário HTML); todas as outras fontes leem 'h'; no fac-símile de baixa resolução (hm30s.gif) o traço parece 'h'"
+  },
+  {
+   "fonte": "sloane3191_recensa_vovina",
+   "torre": "ORO",
+   "linha": 11,
+   "coluna": 6,
+   "marca": "vovina registra 'T/t' (letra dupla)"
+  },
+  {
+   "fonte": "sloane3191_recensa_vovina",
+   "torre": "ORO",
+   "linha": 11,
+   "coluna": 7,
+   "marca": "vovina registra 't/T' (letra dupla)"
+  },
+  {
+   "fonte": "sloane3191_recensa_vovina",
+   "torre": "MPH",
+   "linha": 6,
+   "coluna": 5,
+   "marca": "vovina registra 'x/p' (duas letras na célula)"
+  },
+  {
+   "fonte": "sloane3191_recensa_vovina",
+   "torre": "ORO",
+   "linha": 9,
+   "coluna": 1,
+   "marca": "letra em vermelho na transcrição vovina = letra invertida usada para formar PARAOAN"
+  },
+  {
+   "fonte": "sloane3191_recensa_vovina",
+   "torre": "ORO",
+   "linha": 10,
+   "coluna": 1,
+   "marca": "letra em vermelho na transcrição vovina = letra invertida usada para formar PARAOAN"
+  },
+  {
+   "fonte": "sloane3191_recensa_vovina",
+   "torre": "MOR",
+   "linha": 9,
+   "coluna": 1,
+   "marca": "letra em vermelho na transcrição vovina = letra invertida usada para formar PARAOAN"
+  },
+  {
+   "fonte": "sloane3191_recensa_vovina",
+   "torre": "OIP",
+   "linha": 13,
+   "coluna": 7,
+   "marca": "letra em vermelho na transcrição vovina = letra invertida usada para formar PARAOAN"
+  },
+  {
+   "fonte": "sloane3191_recensa_vovina",
+   "torre": "OIP",
+   "linha": 13,
+   "coluna": 8,
+   "marca": "letra em vermelho na transcrição vovina = letra invertida usada para formar PARAOAN"
+  },
+  {
+   "fonte": "sloane3191_recensa_vovina",
+   "torre": "MPH",
+   "linha": 5,
+   "coluna": 12,
+   "marca": "letra em vermelho na transcrição vovina = letra invertida usada para formar PARAOAN"
+  },
+  {
+   "fonte": "sloane3191_recensa_vovina",
+   "torre": "MPH",
+   "linha": 13,
+   "coluna": 12,
+   "marca": "letra em vermelho na transcrição vovina = letra invertida usada para formar PARAOAN"
+  },
+  {
+   "fonte": "cotton_xlvi_pt2_recensa_vovina",
+   "torre": "ORO",
+   "linha": 9,
+   "coluna": 1,
+   "marca": "letra em vermelho na transcrição vovina = letra invertida usada para formar PARAOAN"
+  },
+  {
+   "fonte": "cotton_xlvi_pt2_recensa_vovina",
+   "torre": "ORO",
+   "linha": 10,
+   "coluna": 1,
+   "marca": "letra em vermelho na transcrição vovina = letra invertida usada para formar PARAOAN"
+  },
+  {
+   "fonte": "cotton_xlvi_pt2_recensa_vovina",
+   "torre": "MOR",
+   "linha": 9,
+   "coluna": 1,
+   "marca": "letra em vermelho na transcrição vovina = letra invertida usada para formar PARAOAN"
+  },
+  {
+   "fonte": "cotton_xlvi_pt2_recensa_vovina",
+   "torre": "OIP",
+   "linha": 13,
+   "coluna": 7,
+   "marca": "letra em vermelho na transcrição vovina = letra invertida usada para formar PARAOAN"
+  },
+  {
+   "fonte": "cotton_xlvi_pt2_recensa_vovina",
+   "torre": "OIP",
+   "linha": 13,
+   "coluna": 8,
+   "marca": "letra em vermelho na transcrição vovina = letra invertida usada para formar PARAOAN"
+  },
+  {
+   "fonte": "cotton_xlvi_pt2_recensa_vovina",
+   "torre": "MPH",
+   "linha": 5,
+   "coluna": 12,
+   "marca": "letra em vermelho na transcrição vovina = letra invertida usada para formar PARAOAN"
+  },
+  {
+   "fonte": "cotton_xlvi_pt2_recensa_vovina",
+   "torre": "MPH",
+   "linha": 13,
+   "coluna": 12,
+   "marca": "letra em vermelho na transcrição vovina = letra invertida usada para formar PARAOAN"
+  },
+  {
+   "fonte": "sloane3191_recensa_peterson_tipografia",
+   "torre": null,
+   "linha": null,
+   "coluna": null,
+   "marca": "sinais marginais: chama/tocha sobre um 'T' acima de ORO; cruz (♰) à esquerda da 1a linha de MOR; sol (☼) abaixo da coluna 14 da última linha; nota com 'b', '6', '4', '6' em cruz à direita de 'bitom'"
+  }
+ ],
+ "lacunas_e_limites": [
+  "Sem imagem de alta resolução do manuscrito: duas células ficam em disputa entre Peterson e vovina (ver grade_de_referencia).",
+  "A data no manuscrito é 20 de abril de 1587 segundo Peterson ('Die ☽ 20 Aprilis, 1587'); uma página de vovina fala em 27 de abril — não conferido no manuscrito.",
+  "Cotton App. XLVI pt. 2: só a transcrição vovina (quase toda minúscula); não vi o manuscrito."
+ ]
+}

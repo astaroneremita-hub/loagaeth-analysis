@@ -1,0 +1,4247 @@
+{
+ "titulo": "Valores numéricos e correspondências das 21 letras enoquianas",
+ "coletado_em": "2026-10-21",
+ "revisado_em": "2026-10-22",
+ "o_que_mudou_na_revisao": [
+  "alfabeto conferido contra três imagens da mão de Dee (F14)",
+  "quatro sistemas novos: coluna 'Crowley' da enochgem (F16), primos na ordem de Dee (F16/F18), cifra 'Victor' (F16) e English Qabalah (F16/F17, não específica)",
+  "regra de construção do Aurum Solis identificada e conferida (ordem de Dee + 1-9/10-90/100-300)",
+  "tabela inferida de F09 corroborada por tabela impressa (F16)",
+  "colunas de F08 conferidas no código-fonte de 1993 (F17)",
+  "NI = 28, L = first, VIIV = second e D = third conferidos nos scans da TFR; O = 5 continua provável",
+  "segunda leitura de cada página da TFR pela transcrição EEBO-TCP (F15); MATB conferido no scan contra a leitura 'Math' de F15",
+  "nota 'Torb.' de p.192 relida no scan (T nítido) e registrada como candidata ambígua",
+  "Sigillum e Ensígnias: em vez de null, resumo e testes a partir dos arquivos irmãos (F20); teste novo com os 91 governadores"
+ ],
+ "convencoes": {
+  "letras_canonicas": [
+   "A",
+   "B",
+   "C",
+   "D",
+   "E",
+   "F",
+   "G",
+   "H",
+   "I",
+   "L",
+   "M",
+   "N",
+   "O",
+   "P",
+   "Q",
+   "R",
+   "S",
+   "T",
+   "U",
+   "X",
+   "Z"
+  ],
+  "aliases": {
+   "K": "C (Veh)",
+   "Y": "I (Gon com ponto)",
+   "V": "U (Van)",
+   "J": "F01 dá Ged = G, J; demais fontes omitem J",
+   "W": "não usado por Dee"
+  },
+  "campos_derivado": "todo campo com prefixo 'derivado_' foi calculado por mim por regra explícita (ver notas .md), não está impresso na fonte",
+  "null": "dado não obtido ou sem equivalente na fonte; ver 'lacunas'"
+ },
+ "fontes": {
+  "F01": {
+   "descricao": "Quadro do alfabeto enoquiano (Obankston, 2011, CC BY-SA 3.0), que declara seguir Dee, MS Sloane 3188 ff. 103v-104r; lê-se da direita para a esquerda",
+   "url": "https://commons.wikimedia.org/wiki/File:Enochian_alphabet.png",
+   "imagem": "https://upload.wikimedia.org/wikipedia/commons/6/61/Enochian_alphabet.png",
+   "tipo": "secundaria (reprodução de manuscrito)"
+  },
+  "F02": {
+   "descricao": "Wikipedia, verbete 'Enochian' (tabela de letras atribuída a Sloane 3189 via Magickal Review 2005; lista de números citando Laycock 2001)",
+   "url": "https://en.wikipedia.org/wiki/Enochian",
+   "tipo": "terciaria"
+  },
+  "F03": {
+   "descricao": "Crowley, Liber LXXXIV vel Chanokh (Equinox I.7-8, 1912), Plate IX (alfabeto com equivalentes latinos; transcrição ASCII do sacred-texts)",
+   "url": "https://sacred-texts.com/oto/lib84.htm",
+   "tipo": "secundaria (tradição GD/A.'.A.'.)"
+  },
+  "F04": {
+   "descricao": "Foto de página de livro com tabela Eno/Eng/Astrologia-Geomancia/Hb/AC/JAE, publicada por Jason Louv (2015) em enochian.github.io/alphabet, que cita 'V&V pp. 58-59' (= J. A. Eshelman, Visions & Voices, College of Thelema, 2011 — identificação provável, não conferida no livro)",
+   "url": "http://enochian.github.io/alphabet/",
+   "imagem": "https://i.imgur.com/Dalpi7K.jpg",
+   "tipo": "secundaria"
+  },
+  "F05": {
+   "descricao": "Post de Jim Eshelman (thelema.org, 2008-10-21) transcrevendo a tabela de Black Pearl n. 1 (letra -> astrologia/geomancia)",
+   "url": "https://thelema.org/forum/post/14414",
+   "tipo": "secundaria (fórum; texto visível sem login)",
+   "aviso": "em 2026-10-22 a página exibe também um aviso de tópico apagado e convite a login para responder; o texto dos posts continua visível sem conta. F05 só corrobora F04 e nada depende só dele."
+  },
+  "F06": {
+   "descricao": "Bill Heidrick, Magical Correspondences (1972/1990, atualizado 2002): caminhos 11-32, letras hebraicas, valores, atribuições astrológicas GD e nota sobre a troca Heh/Tzaddi de Crowley",
+   "url": "https://billheidrick.com/works/mcor.htm",
+   "tipo": "secundaria (referência de correspondências GD)"
+  },
+  "F07": {
+   "descricao": "'Enochian Numbers', excerto de Israel Regardie, The Complete Golden Dawn System of Magic (1984); autor do estudo não identificado no excerto",
+   "url": "https://hina.lysator.liu.se/pub/magick/Thelema/Regardie/enochian.txt",
+   "url_alternativa": "https://arcane-archive.org/occultism/magic/ceremonial/enochian/enochian-numbers-1.php",
+   "tipo": "secundaria"
+  },
+  "F08": {
+   "descricao": "AZOTH (1992), 'Gematria Values of the Enochian Characters': tabela com colunas Golden Dawn / Aurum Solis / Aleister Crowley, valores declarados como vindos do 'Enochian Coloring Book', iguais aos do 'Blue Book' de Schueler",
+   "url": "https://sacred-texts.com/eso/enoch/keys.txt",
+   "pagina_do_livro": "https://sacred-texts.com/book/gematria-values-of-the-enochian-characters",
+   "tipo": "secundaria (BBS)"
+  },
+  "F09": {
+   "descricao": "'The Enochian Dictionary', edited and proofed by Fra:. Michael 111 (arquivo de BBS no sacred-texts): verbete + glosa + valor numérico; nenhuma tabela de letras impressa",
+   "url": "https://sacred-texts.com/pag/enoch1.txt",
+   "tipo": "secundaria (BBS)"
+  },
+  "F10": {
+   "descricao": "Dean Hildebrandt, 'A System of Enochian Gematria' (sem data na página)",
+   "url": "http://members.efn.org/~l_rivers/gem2.htm",
+   "copia_arquivada": "https://web.archive.org/web/2015/http://members.efn.org/~l_rivers/gem2.htm",
+   "tipo": "secundaria"
+  },
+  "F11": {
+   "descricao": "Casaubon (ed.), A True & Faithful Relation (Londres, 1659) — Cotton Appendix XLVI impresso; scan do Internet Archive (domínio público)",
+   "url": "https://archive.org/details/truefaithfulrela00deej",
+   "tipo": "primaria (edição impressa de 1659 do manuscrito)"
+  },
+  "F12": {
+   "descricao": "Página 'Enochian Language - Creation, Grammar, Vocabulary and Numbers' (oocities, anônima, sem data): lista de números das Chamadas",
+   "url": "https://www.oocities.org/peripsol/Enoch/5EnochianLanguage.htm",
+   "tipo": "terciaria"
+  },
+  "F13": {
+   "descricao": "J. H. Peterson, sumário de Mysteriorum Libri Quinque (Sloane 3188) em esotericarchives.com — localiza Sigillum (Liber II) e Ensígnias (Liber III)",
+   "url": "https://esotericarchives.com/dee/sl3188.htm",
+   "tipo": "secundaria (índice)"
+  },
+  "F14": {
+   "descricao": "J. H. Peterson, esotericarchives.com, seção '[Earliest versions of Angelic or \"Enochian\" alphabet]' da página sl3188.htm: três imagens do alfabeto na mão de Dee (Sloane 3188). enoch1 = fila de glifos; enoch2 = lista vertical glifo — nome — letra latina; enoch3 = tabela em 3 grupos de 7 com a letra latina sob cada glifo, lida da direita para a esquerda. A página não indica o fólio de cada imagem.",
+   "url": "https://esotericarchives.com/dee/sl3188.htm#enoch",
+   "imagens": [
+    "https://esotericarchives.com/dee/enoch1.gif",
+    "https://esotericarchives.com/dee/enoch2.gif",
+    "https://esotericarchives.com/dee/enoch3.gif"
+   ],
+   "copia_local": "_scripts_gematria/enoch1.gif, enoch2.gif, enoch3.gif",
+   "tipo": "primaria (reprodução fotográfica da mão de Dee)"
+  },
+  "F15": {
+   "descricao": "EEBO-TCP A37412: transcrição digitada (TEI) da True & Faithful Relation de 1659, domínio público (CC0). Usada como segunda leitura do texto de F11, com a paginação impressa marcada no próprio TEI. Faltam nela as pp. 132-133.",
+   "url": "https://github.com/textcreationpartnership/A37412",
+   "tipo": "transcrição da fonte primária"
+  },
+  "F16": {
+   "descricao": "enochgem.com ('Enochian Gematria'), página anônima e sem data com tabelas de seis cifras (Aurum Solis, Golden Dawn, Aleister Crowley, Primes, Victor, English Qabalah) e uma linha sobre a origem de cada uma",
+   "url": "https://enochgem.com/",
+   "tipo": "secundaria (compilação na web)"
+  },
+  "F17": {
+   "descricao": "AZOTH, 'Enochian Tools' v1.2 (30 ago. 1993), arquivo count.c: tabelas ac_gematria, as_gematria, gd_gematria e en_gematria no código-fonte (mesmo autor de F08)",
+   "url": "https://hina.lysator.liu.se/pub/magick/Enochian/Enochian_pgm/count.c",
+   "readme": "https://hina.lysator.liu.se/pub/magick/Enochian/Enochian_pgm/README",
+   "tipo": "secundaria (programa de BBS)"
+  },
+  "F18": {
+   "descricao": "Blog Enochian Today (autor 'michael8788'), post de 25 mai. 2021 'A solution to Loagaeth, part 9': propõe gematria por números primos (ideia atribuída a Jon Ciel para o hebraico)",
+   "url": "https://enochiantoday.wordpress.com/2021/05/25/a-solution-to-loagaeth-part-9-a-grab-bag-of-clean-up-after-gebofal-numbers-and-prime-gematria/",
+   "tipo": "secundaria (blog)"
+  },
+  "F19": {
+   "descricao": "enochian.org, artigo 'Enochian language and alphabet' (sem autor nem data na página): diz que uma nota de Dee perto do fim dos Cinco Livros traz letras enoquianas com números ao lado, sem dar fólio nem os números",
+   "url": "https://enochian.org/articles/enochian-magick-article-list/enochian-language-and-alphabet/",
+   "tipo": "terciaria"
+  },
+  "F20": {
+   "descricao": "Arquivos irmãos desta pasta (sigillum.json, ensignias.json, governadores.json), montados de Sloane 3188 (reconstrução de C. Holden/John Dee Publication Project e desenhos de Peterson) e da TFR; cada um traz suas próprias URLs",
+   "url": "arquivo local: D:/Astaron/arcabouco/enochiano/fontes_externas/",
+   "tipo": "dados derivados de fontes primárias (ver cada arquivo)"
+  }
+ },
+ "a_alfabeto_dee": {
+  "fontes": [
+   "F14",
+   "F01",
+   "F02",
+   "F03"
+  ],
+  "ordem_da_tabela_de_dee": [
+   {
+    "posicao_na_tabela_de_dee": 1,
+    "forma_variante_de": null,
+    "nome": "Pa",
+    "letra_canonica": "B",
+    "equivalentes_latinos_F01": [
+     "B"
+    ],
+    "equivalentes_latinos_F02": [
+     "B"
+    ],
+    "equivalentes_latinos_F14_mao_de_Dee": {
+     "nome_grafado": "Pa",
+     "lista_enoch2": "b",
+     "tabela_enoch3": "b"
+    },
+    "nota_de_pronuncia_no_quadro_F01": null
+   },
+   {
+    "posicao_na_tabela_de_dee": 2,
+    "forma_variante_de": null,
+    "nome": "Veh",
+    "letra_canonica": "C",
+    "equivalentes_latinos_F01": [
+     "C",
+     "K"
+    ],
+    "equivalentes_latinos_F02": [
+     "C"
+    ],
+    "equivalentes_latinos_F14_mao_de_Dee": {
+     "nome_grafado": "Veh",
+     "lista_enoch2": "c",
+     "tabela_enoch3": "c"
+    },
+    "nota_de_pronuncia_no_quadro_F01": null
+   },
+   {
+    "posicao_na_tabela_de_dee": 3,
+    "forma_variante_de": null,
+    "nome": "Ged",
+    "letra_canonica": "G",
+    "equivalentes_latinos_F01": [
+     "G",
+     "J"
+    ],
+    "equivalentes_latinos_F02": [
+     "G"
+    ],
+    "equivalentes_latinos_F14_mao_de_Dee": {
+     "nome_grafado": "ged",
+     "lista_enoch2": "g",
+     "tabela_enoch3": "g"
+    },
+    "nota_de_pronuncia_no_quadro_F01": null
+   },
+   {
+    "posicao_na_tabela_de_dee": 4,
+    "forma_variante_de": null,
+    "nome": "Gal",
+    "letra_canonica": "D",
+    "equivalentes_latinos_F01": [
+     "D"
+    ],
+    "equivalentes_latinos_F02": [
+     "D"
+    ],
+    "equivalentes_latinos_F14_mao_de_Dee": {
+     "nome_grafado": "gal",
+     "lista_enoch2": "d",
+     "tabela_enoch3": "d"
+    },
+    "nota_de_pronuncia_no_quadro_F01": null
+   },
+   {
+    "posicao_na_tabela_de_dee": 5,
+    "forma_variante_de": null,
+    "nome": "Or",
+    "letra_canonica": "F",
+    "equivalentes_latinos_F01": [
+     "F"
+    ],
+    "equivalentes_latinos_F02": [
+     "F"
+    ],
+    "equivalentes_latinos_F14_mao_de_Dee": {
+     "nome_grafado": "or",
+     "lista_enoch2": "f",
+     "tabela_enoch3": "f"
+    },
+    "nota_de_pronuncia_no_quadro_F01": "Orh"
+   },
+   {
+    "posicao_na_tabela_de_dee": 6,
+    "forma_variante_de": null,
+    "nome": "Un",
+    "letra_canonica": "A",
+    "equivalentes_latinos_F01": [
+     "A"
+    ],
+    "equivalentes_latinos_F02": [
+     "A"
+    ],
+    "equivalentes_latinos_F14_mao_de_Dee": {
+     "nome_grafado": "un",
+     "lista_enoch2": "a",
+     "tabela_enoch3": "a"
+    },
+    "nota_de_pronuncia_no_quadro_F01": "Und"
+   },
+   {
+    "posicao_na_tabela_de_dee": 7,
+    "forma_variante_de": null,
+    "nome": "Graph",
+    "letra_canonica": "E",
+    "equivalentes_latinos_F01": [
+     "E"
+    ],
+    "equivalentes_latinos_F02": [
+     "E"
+    ],
+    "equivalentes_latinos_F14_mao_de_Dee": {
+     "nome_grafado": "graph",
+     "lista_enoch2": "e",
+     "tabela_enoch3": "e"
+    },
+    "nota_de_pronuncia_no_quadro_F01": "Graupha (in the throat)"
+   },
+   {
+    "posicao_na_tabela_de_dee": 8,
+    "forma_variante_de": null,
+    "nome": "Tal",
+    "letra_canonica": "M",
+    "equivalentes_latinos_F01": [
+     "M"
+    ],
+    "equivalentes_latinos_F02": [
+     "M"
+    ],
+    "equivalentes_latinos_F14_mao_de_Dee": {
+     "nome_grafado": "Tal",
+     "lista_enoch2": "m",
+     "tabela_enoch3": "m"
+    },
+    "nota_de_pronuncia_no_quadro_F01": "Stall / Xtall"
+   },
+   {
+    "posicao_na_tabela_de_dee": 9,
+    "forma_variante_de": null,
+    "nome": "Gon",
+    "letra_canonica": "I",
+    "equivalentes_latinos_F01": [
+     "I"
+    ],
+    "equivalentes_latinos_F02": [
+     "I"
+    ],
+    "equivalentes_latinos_F14_mao_de_Dee": {
+     "nome_grafado": "Gon",
+     "lista_enoch2": "i",
+     "tabela_enoch3": "i (e y, sob uma segunda forma do glifo)"
+    },
+    "nota_de_pronuncia_no_quadro_F01": null
+   },
+   {
+    "posicao_na_tabela_de_dee": null,
+    "forma_variante_de": "Gon",
+    "nome": "Gon (com ponto)",
+    "letra_canonica": "I",
+    "equivalentes_latinos_F01": [
+     "Y"
+    ],
+    "equivalentes_latinos_F02": [
+     "Y"
+    ],
+    "equivalentes_latinos_F14_mao_de_Dee": {
+     "lista_enoch2": null,
+     "tabela_enoch3": "y (sob a segunda forma do glifo de Gon)"
+    },
+    "nota_de_pronuncia_no_quadro_F01": null
+   },
+   {
+    "posicao_na_tabela_de_dee": 10,
+    "forma_variante_de": null,
+    "nome": "Na",
+    "letra_canonica": "H",
+    "equivalentes_latinos_F01": [
+     "H"
+    ],
+    "equivalentes_latinos_F02": [
+     "H"
+    ],
+    "equivalentes_latinos_F14_mao_de_Dee": {
+     "nome_grafado": "na",
+     "lista_enoch2": "hath",
+     "tabela_enoch3": "h"
+    },
+    "nota_de_pronuncia_no_quadro_F01": "Nach (in the throat)"
+   },
+   {
+    "posicao_na_tabela_de_dee": 11,
+    "forma_variante_de": null,
+    "nome": "Ur",
+    "letra_canonica": "L",
+    "equivalentes_latinos_F01": [
+     "L"
+    ],
+    "equivalentes_latinos_F02": [
+     "L"
+    ],
+    "equivalentes_latinos_F14_mao_de_Dee": {
+     "nome_grafado": "ur",
+     "lista_enoch2": "l",
+     "tabela_enoch3": "l"
+    },
+    "nota_de_pronuncia_no_quadro_F01": "Our / Ourh"
+   },
+   {
+    "posicao_na_tabela_de_dee": 12,
+    "forma_variante_de": null,
+    "nome": "Mals",
+    "letra_canonica": "P",
+    "equivalentes_latinos_F01": [
+     "P"
+    ],
+    "equivalentes_latinos_F02": [
+     "P"
+    ],
+    "equivalentes_latinos_F14_mao_de_Dee": {
+     "nome_grafado": "mals",
+     "lista_enoch2": "p",
+     "tabela_enoch3": "p"
+    },
+    "nota_de_pronuncia_no_quadro_F01": "Machls"
+   },
+   {
+    "posicao_na_tabela_de_dee": 13,
+    "forma_variante_de": null,
+    "nome": "Ger",
+    "letra_canonica": "Q",
+    "equivalentes_latinos_F01": [
+     "Q"
+    ],
+    "equivalentes_latinos_F02": [
+     "Q"
+    ],
+    "equivalentes_latinos_F14_mao_de_Dee": {
+     "nome_grafado": "ger",
+     "lista_enoch2": "q",
+     "tabela_enoch3": "q"
+    },
+    "nota_de_pronuncia_no_quadro_F01": "Gierh"
+   },
+   {
+    "posicao_na_tabela_de_dee": 14,
+    "forma_variante_de": null,
+    "nome": "Drux",
+    "letra_canonica": "N",
+    "equivalentes_latinos_F01": [
+     "N"
+    ],
+    "equivalentes_latinos_F02": [
+     "N"
+    ],
+    "equivalentes_latinos_F14_mao_de_Dee": {
+     "nome_grafado": "drux",
+     "lista_enoch2": "n",
+     "tabela_enoch3": "n"
+    },
+    "nota_de_pronuncia_no_quadro_F01": "Droux"
+   },
+   {
+    "posicao_na_tabela_de_dee": 15,
+    "forma_variante_de": null,
+    "nome": "Pal",
+    "letra_canonica": "X",
+    "equivalentes_latinos_F01": [
+     "X"
+    ],
+    "equivalentes_latinos_F02": [
+     "X"
+    ],
+    "equivalentes_latinos_F14_mao_de_Dee": {
+     "nome_grafado": "Pal",
+     "lista_enoch2": "x",
+     "tabela_enoch3": "x"
+    },
+    "nota_de_pronuncia_no_quadro_F01": "\"p\" is faint"
+   },
+   {
+    "posicao_na_tabela_de_dee": 16,
+    "forma_variante_de": null,
+    "nome": "Med",
+    "letra_canonica": "O",
+    "equivalentes_latinos_F01": [
+     "O"
+    ],
+    "equivalentes_latinos_F02": [
+     "O"
+    ],
+    "equivalentes_latinos_F14_mao_de_Dee": {
+     "nome_grafado": "med",
+     "lista_enoch2": "o",
+     "tabela_enoch3": "o"
+    },
+    "nota_de_pronuncia_no_quadro_F01": null
+   },
+   {
+    "posicao_na_tabela_de_dee": 17,
+    "forma_variante_de": null,
+    "nome": "Don",
+    "letra_canonica": "R",
+    "equivalentes_latinos_F01": [
+     "R"
+    ],
+    "equivalentes_latinos_F02": [
+     "R"
+    ],
+    "equivalentes_latinos_F14_mao_de_Dee": {
+     "nome_grafado": "don",
+     "lista_enoch2": "r",
+     "tabela_enoch3": "r"
+    },
+    "nota_de_pronuncia_no_quadro_F01": null
+   },
+   {
+    "posicao_na_tabela_de_dee": 18,
+    "forma_variante_de": null,
+    "nome": "Ceph",
+    "letra_canonica": "Z",
+    "equivalentes_latinos_F01": [
+     "Z"
+    ],
+    "equivalentes_latinos_F02": [
+     "Z"
+    ],
+    "equivalentes_latinos_F14_mao_de_Dee": {
+     "nome_grafado": "ceph",
+     "lista_enoch2": "z",
+     "tabela_enoch3": "z"
+    },
+    "nota_de_pronuncia_no_quadro_F01": "Keph"
+   },
+   {
+    "posicao_na_tabela_de_dee": 19,
+    "forma_variante_de": null,
+    "nome": "Van",
+    "letra_canonica": "U",
+    "equivalentes_latinos_F01": [
+     "U",
+     "V"
+    ],
+    "equivalentes_latinos_F02": [
+     "U",
+     "V"
+    ],
+    "equivalentes_latinos_F14_mao_de_Dee": {
+     "nome_grafado": "van",
+     "lista_enoch2": "u",
+     "tabela_enoch3": "u"
+    },
+    "nota_de_pronuncia_no_quadro_F01": null
+   },
+   {
+    "posicao_na_tabela_de_dee": 20,
+    "forma_variante_de": null,
+    "nome": "Fam",
+    "letra_canonica": "S",
+    "equivalentes_latinos_F01": [
+     "S"
+    ],
+    "equivalentes_latinos_F02": [
+     "S"
+    ],
+    "equivalentes_latinos_F14_mao_de_Dee": {
+     "nome_grafado": "fam",
+     "lista_enoch2": "s",
+     "tabela_enoch3": "s"
+    },
+    "nota_de_pronuncia_no_quadro_F01": null
+   },
+   {
+    "posicao_na_tabela_de_dee": 21,
+    "forma_variante_de": null,
+    "nome": "Gisg",
+    "letra_canonica": "T",
+    "equivalentes_latinos_F01": [
+     "T"
+    ],
+    "equivalentes_latinos_F02": [
+     "T"
+    ],
+    "equivalentes_latinos_F14_mao_de_Dee": {
+     "nome_grafado": "Gisg",
+     "lista_enoch2": "t",
+     "tabela_enoch3": "t"
+    },
+    "nota_de_pronuncia_no_quadro_F01": null
+   }
+  ],
+  "tabela_de_dee_F14_enoch3_da_direita_para_a_esquerda": [
+   [
+    "b",
+    "c",
+    "g",
+    "d",
+    "f",
+    "a",
+    "e"
+   ],
+   [
+    "m",
+    "i (e y, sob uma segunda forma do glifo)",
+    "h",
+    "l",
+    "p",
+    "q",
+    "n"
+   ],
+   [
+    "x",
+    "o",
+    "r",
+    "z",
+    "u",
+    "s",
+    "t"
+   ]
+  ],
+  "lista_de_Dee_F14_enoch2": [
+   {
+    "nome_grafado": "Pa",
+    "letra": "b"
+   },
+   {
+    "nome_grafado": "Veh",
+    "letra": "c"
+   },
+   {
+    "nome_grafado": "ged",
+    "letra": "g"
+   },
+   {
+    "nome_grafado": "gal",
+    "letra": "d"
+   },
+   {
+    "nome_grafado": "or",
+    "letra": "f"
+   },
+   {
+    "nome_grafado": "un",
+    "letra": "a"
+   },
+   {
+    "nome_grafado": "graph",
+    "letra": "e"
+   },
+   {
+    "nome_grafado": "Tal",
+    "letra": "m"
+   },
+   {
+    "nome_grafado": "Gon",
+    "letra": "i"
+   },
+   {
+    "nome_grafado": "na",
+    "letra": "hath"
+   },
+   {
+    "nome_grafado": "ur",
+    "letra": "l"
+   },
+   {
+    "nome_grafado": "mals",
+    "letra": "p"
+   },
+   {
+    "nome_grafado": "ger",
+    "letra": "q"
+   },
+   {
+    "nome_grafado": "drux",
+    "letra": "n"
+   },
+   {
+    "nome_grafado": "Pal",
+    "letra": "x"
+   },
+   {
+    "nome_grafado": "med",
+    "letra": "o"
+   },
+   {
+    "nome_grafado": "don",
+    "letra": "r"
+   },
+   {
+    "nome_grafado": "ceph",
+    "letra": "z"
+   },
+   {
+    "nome_grafado": "van",
+    "letra": "u"
+   },
+   {
+    "nome_grafado": "fam",
+    "letra": "s"
+   },
+   {
+    "nome_grafado": "Gisg",
+    "letra": "t"
+   }
+  ],
+  "plate_ix_liber_chanokh_F03": [
+   "A",
+   "B",
+   "C",
+   "D",
+   "E",
+   "F",
+   "G",
+   "H",
+   "J",
+   "L",
+   "M",
+   "N",
+   "O",
+   "P",
+   "Q",
+   "R",
+   "S",
+   "T",
+   "U",
+   "X",
+   "Z"
+  ],
+  "diferencas_F01_F02": [
+   {
+    "nome": "Veh",
+    "F01": [
+     "C",
+     "K"
+    ],
+    "F02": [
+     "C"
+    ]
+   },
+   {
+    "nome": "Ged",
+    "F01": [
+     "G",
+     "J"
+    ],
+    "F02": [
+     "G"
+    ]
+   }
+  ],
+  "numeros_junto_das_letras": "nenhum: nas três imagens de Dee (F14) não há número ao lado das letras. F19 diz que uma nota de Dee perto do fim dos Cinco Livros traz letras com números, mas não dá fólio nem números; não localizei essa nota"
+ },
+ "b_correspondencias_astrologicas": {
+  "fontes": [
+   "F04",
+   "F05",
+   "F06"
+  ],
+  "regra_derivados": "figura geomântica pelo regente+condição da geomancia GD; hebraico GD tradicional pelo signo/elemento conforme F06 (Áries=Heh 15 ... Peixes=Qoph 29; Ar=Aleph 11, Água=Mem 23, Fogo=Shin 31, Espírito=Shin 31-bis, Terra=Tav 32-bis); cabeça/cauda do dragão sem letra GD padrão -> null",
+  "por_letra": {
+   "A": {
+    "nome_dee": "Un",
+    "F04_signo_ou_elemento": "Touro",
+    "F04_condicao_planetaria": "Vênus de noite",
+    "F04_hebraico_impresso": "ו",
+    "F04_hebraico_impresso_caminho_derivado": "16",
+    "F04_valor_AC": 6,
+    "F05_signo_ou_elemento": "Touro",
+    "F05_condicao_planetaria": "Vênus de noite",
+    "variante_comentario_crowley_segundo_F04_pagina": "Touro",
+    "derivado_figura_geomantica": "Amissio",
+    "derivado_hebraico_GD_tradicional": "ו",
+    "derivado_hebraico_GD_tradicional_nome": "Vav",
+    "derivado_valor_hebraico_GD_tradicional": 6,
+    "derivado_caminho_GD_tradicional": "16"
+   },
+   "B": {
+    "nome_dee": "Pa",
+    "F04_signo_ou_elemento": "Áries",
+    "F04_condicao_planetaria": "Marte de dia",
+    "F04_hebraico_impresso": "צ",
+    "F04_hebraico_impresso_caminho_derivado": "28",
+    "F04_valor_AC": 90,
+    "F05_signo_ou_elemento": "Áries",
+    "F05_condicao_planetaria": "Marte de dia",
+    "variante_comentario_crowley_segundo_F04_pagina": "Áries",
+    "derivado_figura_geomantica": "Puer",
+    "derivado_hebraico_GD_tradicional": "ה",
+    "derivado_hebraico_GD_tradicional_nome": "Heh",
+    "derivado_valor_hebraico_GD_tradicional": 5,
+    "derivado_caminho_GD_tradicional": "15"
+   },
+   "C": {
+    "nome_dee": "Veh",
+    "F04_signo_ou_elemento": "Fogo",
+    "F04_condicao_planetaria": null,
+    "F04_hebraico_impresso": "ש",
+    "F04_hebraico_impresso_caminho_derivado": "31",
+    "F04_valor_AC": 300,
+    "F05_signo_ou_elemento": "Fogo",
+    "F05_condicao_planetaria": null,
+    "variante_comentario_crowley_segundo_F04_pagina": "Fogo",
+    "derivado_figura_geomantica": null,
+    "derivado_hebraico_GD_tradicional": "ש",
+    "derivado_hebraico_GD_tradicional_nome": "Shin",
+    "derivado_valor_hebraico_GD_tradicional": 300,
+    "derivado_caminho_GD_tradicional": "31"
+   },
+   "D": {
+    "nome_dee": "Gal",
+    "F04_signo_ou_elemento": "Espírito",
+    "F04_condicao_planetaria": null,
+    "F04_hebraico_impresso": "leitura incerta na foto (parece שת ou שט)",
+    "F04_hebraico_impresso_caminho_derivado": null,
+    "F04_valor_AC": 31,
+    "F05_signo_ou_elemento": "Espírito",
+    "F05_condicao_planetaria": null,
+    "variante_comentario_crowley_segundo_F04_pagina": "Espírito",
+    "derivado_figura_geomantica": null,
+    "derivado_hebraico_GD_tradicional": "ש",
+    "derivado_hebraico_GD_tradicional_nome": "Shin",
+    "derivado_valor_hebraico_GD_tradicional": 300,
+    "derivado_caminho_GD_tradicional": "31-bis"
+   },
+   "E": {
+    "nome_dee": "Graph",
+    "F04_signo_ou_elemento": "Virgem",
+    "F04_condicao_planetaria": "Mercúrio de noite",
+    "F04_hebraico_impresso": "י",
+    "F04_hebraico_impresso_caminho_derivado": "20",
+    "F04_valor_AC": 10,
+    "F05_signo_ou_elemento": "Virgem",
+    "F05_condicao_planetaria": "Mercúrio de noite",
+    "variante_comentario_crowley_segundo_F04_pagina": "Gêmeos",
+    "derivado_figura_geomantica": "Conjunctio",
+    "derivado_hebraico_GD_tradicional": "י",
+    "derivado_hebraico_GD_tradicional_nome": "Yod",
+    "derivado_valor_hebraico_GD_tradicional": 10,
+    "derivado_caminho_GD_tradicional": "20"
+   },
+   "F": {
+    "nome_dee": "Or",
+    "F04_signo_ou_elemento": "Cauda Draconis",
+    "F04_condicao_planetaria": null,
+    "F04_hebraico_impresso": "ג",
+    "F04_hebraico_impresso_caminho_derivado": "13",
+    "F04_valor_AC": 3,
+    "F05_signo_ou_elemento": "Cauda Draconis",
+    "F05_condicao_planetaria": null,
+    "variante_comentario_crowley_segundo_F04_pagina": "Cauda Draconis",
+    "derivado_figura_geomantica": "Cauda Draconis",
+    "derivado_hebraico_GD_tradicional": null,
+    "derivado_hebraico_GD_tradicional_nome": null,
+    "derivado_valor_hebraico_GD_tradicional": null,
+    "derivado_caminho_GD_tradicional": null
+   },
+   "G": {
+    "nome_dee": "Ged",
+    "F04_signo_ou_elemento": "Leão",
+    "F04_condicao_planetaria": "Sol em declinação norte",
+    "F04_hebraico_impresso": "ט",
+    "F04_hebraico_impresso_caminho_derivado": "19",
+    "F04_valor_AC": 9,
+    "F05_signo_ou_elemento": "Leão",
+    "F05_condicao_planetaria": "Sol em declinação norte",
+    "variante_comentario_crowley_segundo_F04_pagina": "Câncer",
+    "derivado_figura_geomantica": "Fortuna Major",
+    "derivado_hebraico_GD_tradicional": "ט",
+    "derivado_hebraico_GD_tradicional_nome": "Teth",
+    "derivado_valor_hebraico_GD_tradicional": 9,
+    "derivado_caminho_GD_tradicional": "19"
+   },
+   "H": {
+    "nome_dee": "Na",
+    "F04_signo_ou_elemento": "Ar",
+    "F04_condicao_planetaria": null,
+    "F04_hebraico_impresso": "א",
+    "F04_hebraico_impresso_caminho_derivado": "11",
+    "F04_valor_AC": 1,
+    "F05_signo_ou_elemento": "Ar",
+    "F05_condicao_planetaria": null,
+    "variante_comentario_crowley_segundo_F04_pagina": "Ar",
+    "derivado_figura_geomantica": null,
+    "derivado_hebraico_GD_tradicional": "א",
+    "derivado_hebraico_GD_tradicional_nome": "Aleph",
+    "derivado_valor_hebraico_GD_tradicional": 1,
+    "derivado_caminho_GD_tradicional": "11"
+   },
+   "I": {
+    "nome_dee": "Gon",
+    "F04_signo_ou_elemento": "Sagitário",
+    "F04_condicao_planetaria": "Júpiter de dia",
+    "F04_hebraico_impresso": "ס",
+    "F04_hebraico_impresso_caminho_derivado": "25",
+    "F04_valor_AC": 60,
+    "F05_signo_ou_elemento": "Sagitário",
+    "F05_condicao_planetaria": "Júpiter de dia",
+    "variante_comentario_crowley_segundo_F04_pagina": "Sagitário",
+    "derivado_figura_geomantica": "Acquisitio",
+    "derivado_hebraico_GD_tradicional": "ס",
+    "derivado_hebraico_GD_tradicional_nome": "Samekh",
+    "derivado_valor_hebraico_GD_tradicional": 60,
+    "derivado_caminho_GD_tradicional": "25"
+   },
+   "L": {
+    "nome_dee": "Ur",
+    "F04_signo_ou_elemento": "Câncer",
+    "F04_condicao_planetaria": "Lua minguante",
+    "F04_hebraico_impresso": "ח",
+    "F04_hebraico_impresso_caminho_derivado": "18",
+    "F04_valor_AC": 8,
+    "F05_signo_ou_elemento": "Câncer",
+    "F05_condicao_planetaria": "Lua minguante",
+    "variante_comentario_crowley_segundo_F04_pagina": "Câncer",
+    "derivado_figura_geomantica": "Via",
+    "derivado_hebraico_GD_tradicional": "ח",
+    "derivado_hebraico_GD_tradicional_nome": "Cheth",
+    "derivado_valor_hebraico_GD_tradicional": 8,
+    "derivado_caminho_GD_tradicional": "18"
+   },
+   "M": {
+    "nome_dee": "Tal",
+    "F04_signo_ou_elemento": "Aquário",
+    "F04_condicao_planetaria": "Saturno de dia",
+    "F04_hebraico_impresso": "ה",
+    "F04_hebraico_impresso_caminho_derivado": "15",
+    "F04_valor_AC": 5,
+    "F05_signo_ou_elemento": "Aquário",
+    "F05_condicao_planetaria": "Saturno de dia",
+    "variante_comentario_crowley_segundo_F04_pagina": "Aquário",
+    "derivado_figura_geomantica": "Tristitia",
+    "derivado_hebraico_GD_tradicional": "צ",
+    "derivado_hebraico_GD_tradicional_nome": "Tzaddi",
+    "derivado_valor_hebraico_GD_tradicional": 90,
+    "derivado_caminho_GD_tradicional": "28"
+   },
+   "N": {
+    "nome_dee": "Drux",
+    "F04_signo_ou_elemento": "Escorpião",
+    "F04_condicao_planetaria": "Marte de noite",
+    "F04_hebraico_impresso": "נ",
+    "F04_hebraico_impresso_caminho_derivado": "24",
+    "F04_valor_AC": 50,
+    "F05_signo_ou_elemento": "Escorpião",
+    "F05_condicao_planetaria": "Marte de noite",
+    "variante_comentario_crowley_segundo_F04_pagina": "Escorpião",
+    "derivado_figura_geomantica": "Rubeus",
+    "derivado_hebraico_GD_tradicional": "נ",
+    "derivado_hebraico_GD_tradicional_nome": "Nun",
+    "derivado_valor_hebraico_GD_tradicional": 50,
+    "derivado_caminho_GD_tradicional": "24"
+   },
+   "O": {
+    "nome_dee": "Med",
+    "F04_signo_ou_elemento": "Libra",
+    "F04_condicao_planetaria": "Vênus de dia",
+    "F04_hebraico_impresso": "ל",
+    "F04_hebraico_impresso_caminho_derivado": "22",
+    "F04_valor_AC": 30,
+    "F05_signo_ou_elemento": "Libra",
+    "F05_condicao_planetaria": "Vênus de dia",
+    "variante_comentario_crowley_segundo_F04_pagina": "Libra",
+    "derivado_figura_geomantica": "Puella",
+    "derivado_hebraico_GD_tradicional": "ל",
+    "derivado_hebraico_GD_tradicional_nome": "Lamed",
+    "derivado_valor_hebraico_GD_tradicional": 30,
+    "derivado_caminho_GD_tradicional": "22"
+   },
+   "P": {
+    "nome_dee": "Mals",
+    "F04_signo_ou_elemento": "Câncer",
+    "F04_condicao_planetaria": "Lua crescente",
+    "F04_hebraico_impresso": "ח",
+    "F04_hebraico_impresso_caminho_derivado": "18",
+    "F04_valor_AC": 8,
+    "F05_signo_ou_elemento": "Câncer",
+    "F05_condicao_planetaria": "Lua crescente",
+    "variante_comentario_crowley_segundo_F04_pagina": "Leão",
+    "derivado_figura_geomantica": "Populus",
+    "derivado_hebraico_GD_tradicional": "ח",
+    "derivado_hebraico_GD_tradicional_nome": "Cheth",
+    "derivado_valor_hebraico_GD_tradicional": 8,
+    "derivado_caminho_GD_tradicional": "18"
+   },
+   "Q": {
+    "nome_dee": "Ger",
+    "F04_signo_ou_elemento": "Água",
+    "F04_condicao_planetaria": null,
+    "F04_hebraico_impresso": "מ",
+    "F04_hebraico_impresso_caminho_derivado": "23",
+    "F04_valor_AC": 40,
+    "F05_signo_ou_elemento": "Água",
+    "F05_condicao_planetaria": null,
+    "variante_comentario_crowley_segundo_F04_pagina": "Água",
+    "derivado_figura_geomantica": null,
+    "derivado_hebraico_GD_tradicional": "מ",
+    "derivado_hebraico_GD_tradicional_nome": "Mem",
+    "derivado_valor_hebraico_GD_tradicional": 40,
+    "derivado_caminho_GD_tradicional": "23"
+   },
+   "R": {
+    "nome_dee": "Don",
+    "F04_signo_ou_elemento": "Peixes",
+    "F04_condicao_planetaria": "Júpiter de noite",
+    "F04_hebraico_impresso": "ק",
+    "F04_hebraico_impresso_caminho_derivado": "29",
+    "F04_valor_AC": 100,
+    "F05_signo_ou_elemento": "Peixes",
+    "F05_condicao_planetaria": "Júpiter de noite",
+    "variante_comentario_crowley_segundo_F04_pagina": "Peixes",
+    "derivado_figura_geomantica": "Laetitia",
+    "derivado_hebraico_GD_tradicional": "ק",
+    "derivado_hebraico_GD_tradicional_nome": "Qoph",
+    "derivado_valor_hebraico_GD_tradicional": 100,
+    "derivado_caminho_GD_tradicional": "29"
+   },
+   "S": {
+    "nome_dee": "Fam",
+    "F04_signo_ou_elemento": "Gêmeos",
+    "F04_condicao_planetaria": "Mercúrio de dia",
+    "F04_hebraico_impresso": "ז",
+    "F04_hebraico_impresso_caminho_derivado": "17",
+    "F04_valor_AC": 7,
+    "F05_signo_ou_elemento": "Gêmeos",
+    "F05_condicao_planetaria": "Mercúrio de dia",
+    "variante_comentario_crowley_segundo_F04_pagina": "Virgem",
+    "derivado_figura_geomantica": "Albus",
+    "derivado_hebraico_GD_tradicional": "ז",
+    "derivado_hebraico_GD_tradicional_nome": "Zayin",
+    "derivado_valor_hebraico_GD_tradicional": 7,
+    "derivado_caminho_GD_tradicional": "17"
+   },
+   "T": {
+    "nome_dee": "Gisg",
+    "F04_signo_ou_elemento": "Caput Draconis",
+    "F04_condicao_planetaria": null,
+    "F04_hebraico_impresso": "ג",
+    "F04_hebraico_impresso_caminho_derivado": "13",
+    "F04_valor_AC": 3,
+    "F05_signo_ou_elemento": "Cauda Draconis",
+    "F05_condicao_planetaria": null,
+    "variante_comentario_crowley_segundo_F04_pagina": "Caput Draconis",
+    "derivado_figura_geomantica": "Caput Draconis",
+    "derivado_hebraico_GD_tradicional": null,
+    "derivado_hebraico_GD_tradicional_nome": null,
+    "derivado_valor_hebraico_GD_tradicional": null,
+    "derivado_caminho_GD_tradicional": null
+   },
+   "U": {
+    "nome_dee": "Van",
+    "F04_signo_ou_elemento": "Capricórnio",
+    "F04_condicao_planetaria": "Saturno de noite",
+    "F04_hebraico_impresso": "ע",
+    "F04_hebraico_impresso_caminho_derivado": "26",
+    "F04_valor_AC": 70,
+    "F05_signo_ou_elemento": "Capricórnio",
+    "F05_condicao_planetaria": "Saturno de noite",
+    "variante_comentario_crowley_segundo_F04_pagina": "Capricórnio",
+    "derivado_figura_geomantica": "Carcer",
+    "derivado_hebraico_GD_tradicional": "ע",
+    "derivado_hebraico_GD_tradicional_nome": "Ayin",
+    "derivado_valor_hebraico_GD_tradicional": 70,
+    "derivado_caminho_GD_tradicional": "26"
+   },
+   "X": {
+    "nome_dee": "Pal",
+    "F04_signo_ou_elemento": "Terra",
+    "F04_condicao_planetaria": null,
+    "F04_hebraico_impresso": "ת",
+    "F04_hebraico_impresso_caminho_derivado": "32",
+    "F04_valor_AC": 400,
+    "F05_signo_ou_elemento": "Terra",
+    "F05_condicao_planetaria": null,
+    "variante_comentario_crowley_segundo_F04_pagina": "Terra",
+    "derivado_figura_geomantica": null,
+    "derivado_hebraico_GD_tradicional": "ת",
+    "derivado_hebraico_GD_tradicional_nome": "Tav",
+    "derivado_valor_hebraico_GD_tradicional": 400,
+    "derivado_caminho_GD_tradicional": "32-bis"
+   },
+   "Z": {
+    "nome_dee": "Ceph",
+    "F04_signo_ou_elemento": "Leão",
+    "F04_condicao_planetaria": "Sol em declinação sul",
+    "F04_hebraico_impresso": "ט",
+    "F04_hebraico_impresso_caminho_derivado": "19",
+    "F04_valor_AC": 9,
+    "F05_signo_ou_elemento": "Leão",
+    "F05_condicao_planetaria": "Sol em declinação sul",
+    "variante_comentario_crowley_segundo_F04_pagina": "Leão",
+    "derivado_figura_geomantica": "Fortuna Minor",
+    "derivado_hebraico_GD_tradicional": "ט",
+    "derivado_hebraico_GD_tradicional_nome": "Teth",
+    "derivado_valor_hebraico_GD_tradicional": 9,
+    "derivado_caminho_GD_tradicional": "19"
+   }
+  }
+ },
+ "c_sistemas_de_valores": [
+  {
+   "id": "isopsefia_latino_grega__F07",
+   "nome_descritivo": "Código 'gemátrico' por isopsefia grega aplicada às letras latinas (excerto Regardie 1984)",
+   "fontes": [
+    "F07"
+   ],
+   "autor": "não identificado no excerto (estudo publicado dentro de Regardie, The Complete Golden Dawn System of Magic, 1984)",
+   "tipo": "aditivo",
+   "base_declarada": "pistas nos diários de Dee e em 'livros manuscritos' não especificados; conferido em IBM 370 com programa LISP; o raciocínio não é apresentado",
+   "valores": {
+    "A": 1,
+    "B": 2,
+    "C": 20,
+    "D": 4,
+    "E": 5,
+    "F": 6,
+    "G": 3,
+    "H": 8,
+    "I": 10,
+    "L": 30,
+    "M": 40,
+    "N": 50,
+    "O": 70,
+    "P": 80,
+    "Q": 90,
+    "R": 100,
+    "S": 200,
+    "T": 300,
+    "U": 400,
+    "X": 60,
+    "Z": 7
+   },
+   "nota_de_mapeamento": "a fonte lista K (=Veh); gravado em C. U cobre U/V. Y não listado (=Gon, I).",
+   "grau_de_evidencia": "baixo: valores publicados sem a derivação; nenhuma passagem de Dee citada"
+  },
+  {
+   "id": "codigo_digital__F07",
+   "nome_descritivo": "Código 'digital' (redução a um dígito do código anterior) para ler as palavras numéricas das Chamadas dígito a dígito (excerto Regardie 1984)",
+   "fontes": [
+    "F07"
+   ],
+   "autor": "idem",
+   "tipo": "dígitos concatenados (não aditivo)",
+   "base_declarada": "o mesmo estudo; afirma que os números de Dee nas Chamadas estão 'incorretos' e propõe valores 'corretos' lendo cada letra como um dígito",
+   "valores": {
+    "A": 1,
+    "B": 2,
+    "C": 2,
+    "D": 4,
+    "E": 5,
+    "F": 6,
+    "G": 3,
+    "H": 8,
+    "I": 1,
+    "L": 3,
+    "M": 4,
+    "N": 5,
+    "O": 7,
+    "P": 8,
+    "Q": 9,
+    "R": 1,
+    "S": 2,
+    "T": 3,
+    "U": 4,
+    "X": 6,
+    "Z": 7
+   },
+   "grau_de_evidencia": "baixo: dos 31 itens que o próprio autor lista, só 5 ficam iguais aos de Dee (GA e P por construção; MATB, NORZ e OS mantidos sem explicação); 26 são alterados"
+  },
+  {
+   "id": "golden_dawn_coluna__F08",
+   "nome_descritivo": "Coluna 'Golden Dawn' da tabela AZOTH 1992 (via Schueler)",
+   "fontes": [
+    "F08"
+   ],
+   "autor": "compilação AZOTH (1992), valores atribuídos a Schueler",
+   "tipo": "aditivo",
+   "base_declarada": "nenhuma além do rótulo 'Golden Dawn'",
+   "valores": {
+    "A": 1,
+    "B": 2,
+    "C": 20,
+    "D": 4,
+    "E": 5,
+    "F": 6,
+    "G": 3,
+    "H": 8,
+    "I": 10,
+    "L": 30,
+    "M": 40,
+    "N": 50,
+    "O": 70,
+    "P": 80,
+    "Q": 90,
+    "R": 100,
+    "S": 200,
+    "T": 300,
+    "U": 400,
+    "X": 60,
+    "Z": 7
+   },
+   "valores_brutos_da_fonte_para_aliases": {
+    "J": 0,
+    "K": 0,
+    "U": 0,
+    "V": 400,
+    "W": 0,
+    "Y": 0
+   },
+   "nota_de_mapeamento": "a fonte põe U=0 e V=400 (mesma letra Van); gravado U=400. K e Y = 0 na fonte (tratados como C e I).",
+   "grau_de_evidencia": "baixo: rótulo sem documento GD citado"
+  },
+  {
+   "id": "astrologico_hebraico_crowley_AC__F04",
+   "nome_descritivo": "Valor da letra hebraica ligada ao signo/elemento da letra, com as atribuições de Crowley (Áries=Tzaddi, Aquário=Heh; cabeça e cauda do dragão = Gimel; Espírito = 31) — coluna AC",
+   "fontes": [
+    "F04"
+   ],
+   "autor": "atribuído a Aleister Crowley pela tabela (coluna 'AC'); publicação provável: Eshelman 2011",
+   "tipo": "aditivo",
+   "base_declarada": "cadeia letra enoquiana -> figura geomântica/signo -> letra hebraica -> valor; F04-página diz que Crowley partiu de BABALON = 156",
+   "valores": {
+    "A": 6,
+    "B": 90,
+    "C": 300,
+    "D": 31,
+    "E": 10,
+    "F": 3,
+    "G": 9,
+    "H": 1,
+    "I": 60,
+    "L": 8,
+    "M": 5,
+    "N": 50,
+    "O": 30,
+    "P": 8,
+    "Q": 40,
+    "R": 100,
+    "S": 7,
+    "T": 3,
+    "U": 70,
+    "X": 400,
+    "Z": 9
+   },
+   "grau_de_evidencia": "médio para a cadeia de atribuições (tradição GD/Crowley documentada em F04/F05); nenhuma base em Dee"
+  },
+  {
+   "id": "transliteracao_hebraica_JAE__F04",
+   "nome_descritivo": "Transliteração fonética da letra latina para a letra hebraica de som parecido e uso do valor hebraico — coluna JAE",
+   "fontes": [
+    "F04"
+   ],
+   "autor": "James A. Eshelman (coluna 'JAE')",
+   "tipo": "aditivo",
+   "base_declarada": "F04-página: Eshelman sugere transliterar diretamente para hebraico ou grego, com alguma margem de ajuste",
+   "valores": {
+    "A": 1,
+    "B": 2,
+    "C": 20,
+    "D": 4,
+    "E": 8,
+    "F": "300?",
+    "G": 3,
+    "H": 5,
+    "I": 10,
+    "L": 30,
+    "M": 40,
+    "N": 50,
+    "O": 70,
+    "P": 80,
+    "Q": 100,
+    "R": 200,
+    "S": 60,
+    "T": 9,
+    "U": 6,
+    "X": 400,
+    "Z": 7
+   },
+   "valor_incerto_na_fonte": {
+    "F": "impresso '300?'"
+   },
+   "grau_de_evidencia": "baixo: convenção de transliteração moderna"
+  },
+  {
+   "id": "astrologico_hebraico_GD__F09_inferido",
+   "nome_descritivo": "Valores usados no dicionário de Fra:. Michael 111 (letra -> signo -> hebraico GD, Áries=Heh e Aquário=Tzaddi; Ged=Câncer e Mals=Leão)",
+   "fontes": [
+    "F09",
+    "F16"
+   ],
+   "autor": "Fra:. Michael 111 (editor do dicionário; autoria do sistema não declarada)",
+   "tipo": "aditivo",
+   "base_declarada": "F09 não imprime tabela nem explicação; os valores foram INFERIDOS por mim a partir das somas impressas por verbete. A mesma tabela aparece impressa em F16 como coluna 'Aleister Crowley', que F16 diz copiar de Schueler & Schueler, The Enochian Workbook (ver o sistema crowley_coluna_enochgem__F16).",
+   "valores": {
+    "A": 6,
+    "B": 5,
+    "C": 300,
+    "D": 4,
+    "E": 10,
+    "F": 3,
+    "G": 8,
+    "H": 1,
+    "I": 60,
+    "L": 8,
+    "M": 90,
+    "N": 50,
+    "O": 30,
+    "P": 9,
+    "Q": 40,
+    "R": 100,
+    "S": 7,
+    "T": 9,
+    "U": 70,
+    "X": 400,
+    "Z": 9
+   },
+   "valores_aliases_inferidos": {
+    "Y": 60,
+    "V": 70
+   },
+   "grau_de_evidencia": "médio como registro do uso moderno: a tabela que inferi de F09 (573 de 579 verbetes) coincide nas 21 letras com a tabela impressa em F16; nenhuma base em Dee"
+  },
+  {
+   "id": "aleister_crowley_coluna__F08",
+   "nome_descritivo": "Coluna 'Aleister Crowley' da tabela AZOTH 1992 (via Schueler)",
+   "fontes": [
+    "F08"
+   ],
+   "autor": "compilação AZOTH (1992), valores atribuídos a Schueler",
+   "tipo": "aditivo",
+   "base_declarada": "nenhuma além do rótulo",
+   "valores": {
+    "A": 6,
+    "B": 5,
+    "C": 300,
+    "D": 4,
+    "E": 7,
+    "F": 300,
+    "G": 9,
+    "H": 1,
+    "I": 60,
+    "L": 40,
+    "M": 90,
+    "N": 50,
+    "O": 30,
+    "P": 8,
+    "Q": 40,
+    "R": 100,
+    "S": 10,
+    "T": 400,
+    "U": 70,
+    "X": 400,
+    "Z": 1
+   },
+   "valores_brutos_da_fonte_para_aliases": {
+    "J": 0,
+    "K": 0,
+    "U": 0,
+    "V": 70,
+    "W": 0,
+    "Y": 0
+   },
+   "grau_de_evidencia": "baixo: rótulo sem obra de Crowley citada; diverge da coluna AC de F04 em 9 letras"
+  },
+  {
+   "id": "aurum_solis_coluna__F08",
+   "nome_descritivo": "Coluna 'Aurum Solis' da tabela AZOTH 1992 (via Schueler)",
+   "fontes": [
+    "F08"
+   ],
+   "autor": "atribuído pela fonte à ordem Aurum Solis; compilação AZOTH 1992",
+   "tipo": "aditivo",
+   "base_declarada": "nenhuma na fonte",
+   "valores": {
+    "A": 6,
+    "B": 1,
+    "C": 2,
+    "D": 4,
+    "E": 7,
+    "F": 5,
+    "G": 3,
+    "H": 10,
+    "I": 9,
+    "L": 20,
+    "M": 8,
+    "N": 50,
+    "O": 70,
+    "P": 30,
+    "Q": 40,
+    "R": 80,
+    "S": 200,
+    "T": 300,
+    "U": 100,
+    "X": 60,
+    "Z": 90
+   },
+   "valores_brutos_da_fonte_para_aliases": {
+    "J": 0,
+    "K": 0,
+    "U": 0,
+    "V": 100,
+    "W": 0,
+    "Y": 0
+   },
+   "derivado_base_observada": "observação minha, conferida letra a letra: é a ordem da tabela de Dee (Pa, Veh, Ged, Gal, Or, Un, Graph, Tal, Gon, Na, Ur, Mals, Ger, Drux, Pal, Med, Don, Ceph, Van, Fam, Gisg = B C G D F A E M I H L P Q N X O R Z U S T) numerada como no hebraico: 1-9, depois 10-90, depois 100-300. F16 diz preferir esta cifra por respeitar a ordem do alfabeto, sem nomear quem a criou.",
+   "grau_de_evidencia": "baixo como dado de Dee (Dee não dá números); a regra de construção é clara e verificável (ver conferências)"
+  },
+  {
+   "id": "hildebrandt_0a7__F10",
+   "nome_descritivo": "Sistema de Dean Hildebrandt: letras em 8 classes (0-7) e cálculo direcional não aditivo",
+   "fontes": [
+    "F10"
+   ],
+   "autor": "Dean Hildebrandt (sem data)",
+   "tipo": "não aditivo (diferenças entre vizinhas distribuídas por 4 direções)",
+   "base_declarada": "relação com os 'ângulos' das Chamadas e com zonas planetárias do sistema heptárquico (interpretativa)",
+   "valores": {
+    "A": 2,
+    "B": 7,
+    "C": 5,
+    "D": 3,
+    "E": 4,
+    "F": 3,
+    "G": 0,
+    "H": 4,
+    "I": 5,
+    "L": 1,
+    "M": 3,
+    "N": 6,
+    "O": 7,
+    "P": 3,
+    "Q": 3,
+    "R": 2,
+    "S": 4,
+    "T": 6,
+    "U": 2,
+    "X": 3,
+    "Z": 4
+   },
+   "nota_de_mapeamento": "a fonte lista K na classe 5 (gravado em C); Y não listado.",
+   "grau_de_evidencia": "baixo: construção interpretativa, sem apoio em números de Dee"
+  },
+  {
+   "id": "crowley_coluna_enochgem__F16",
+   "nome_descritivo": "Coluna 'Aleister Crowley' da enochgem.com (atribuída a Schueler & Schueler, The Enochian Workbook)",
+   "fontes": [
+    "F16"
+   ],
+   "autor": "F16 atribui a tabela a Schueler & Schueler, The Enochian Workbook, e diz que ela vem, em última instância, de The Vision and the Voice; não conferi o livro",
+   "tipo": "aditivo",
+   "base_declarada": "nenhuma além da atribuição; é a cadeia letra -> signo/elemento -> letra hebraica com Áries = Heh, Aquário = Tzaddi, Ged = Câncer, Mals = Leão (observação minha)",
+   "valores": {
+    "A": 6,
+    "B": 5,
+    "C": 300,
+    "D": 4,
+    "E": 10,
+    "F": 3,
+    "G": 8,
+    "H": 1,
+    "I": 60,
+    "L": 8,
+    "M": 90,
+    "N": 50,
+    "O": 30,
+    "P": 9,
+    "Q": 40,
+    "R": 100,
+    "S": 7,
+    "T": 9,
+    "U": 70,
+    "X": 400,
+    "Z": 9
+   },
+   "valores_alternativos_impressos": {
+    "D": [
+     4,
+     31
+    ],
+    "T": [
+     9,
+     3
+    ],
+    "Z": [
+     9,
+     3
+    ]
+   },
+   "nota_de_mapeamento": "a fonte imprime 'D 4 or 31', 'T 9 or 3' e 'Z 9 or 3'; gravei o primeiro valor em 'valores' e os dois em 'valores_alternativos_impressos'",
+   "valores_brutos_da_fonte_para_aliases": {
+    "J": 60,
+    "K": 300,
+    "U": 70,
+    "V": 70,
+    "W": 70,
+    "Y": 60
+   },
+   "grau_de_evidencia": "médio como registro do uso moderno (coincide com a tabela inferida de F09); nenhuma base em Dee"
+  },
+  {
+   "id": "primos_na_ordem_de_dee__F16_F18",
+   "nome_descritivo": "Números primos em sequência, do 2 ao 73, dados às letras na ordem do alfabeto de Dee",
+   "fontes": [
+    "F16",
+    "F18"
+   ],
+   "autor": "post de 'michael8788' no blog Enochian Today (2021), que credita a técnica a Jon Ciel para o hebraico; tabela completa impressa em F16",
+   "tipo": "aditivo",
+   "base_declarada": "F18: atribuir os primos, a partir de 2, às letras na ordem em que foram recebidas (Pa = 2, Veh = 3, ...); F16 chama de consideração teórica, não de fonte",
+   "valores": {
+    "A": 13,
+    "B": 2,
+    "C": 3,
+    "D": 7,
+    "E": 17,
+    "F": 11,
+    "G": 5,
+    "H": 29,
+    "I": 23,
+    "L": 31,
+    "M": 19,
+    "N": 43,
+    "O": 53,
+    "P": 37,
+    "Q": 41,
+    "R": 59,
+    "S": 71,
+    "T": 73,
+    "U": 67,
+    "X": 47,
+    "Z": 61
+   },
+   "variante_no_texto_de_F18": {
+    "R": 73,
+    "nota": "F18 escreve que a 21ª dupla letra/primo é Don/R = 73. Na ordem de Dee, Don é a 17ª letra e a 21ª é Gisg (T); F16 dá R = 59 e T = 73. Os totais que F18 publica (Ur = 31, IAD = 43, IAIDA = 79, BABALON = 157) não distinguem as duas leituras. Os valores de R, Z, U, S e T ficam incertos entre F16 e F18; não escolhi."
+   },
+   "valores_extras_em_F18": {
+    "Ged_forma_final": 17,
+    "Drux_forma_final": 191,
+    "Na_como_palavra_Lord": 227,
+    "omega_de_Horlwn": 461,
+    "nota": "F18 dá esses valores além das 21 letras; não fazem parte da tabela de 21"
+   },
+   "valores_brutos_da_fonte_para_aliases": {
+    "J": 5,
+    "K": 3,
+    "U": 67,
+    "V": 67,
+    "W": 67,
+    "Y": 23
+   },
+   "grau_de_evidencia": "baixo: proposta especulativa declarada como tal; nenhuma base em Dee"
+  },
+  {
+   "id": "victor__F16",
+   "nome_descritivo": "Cifra 'Victor' da enochgem.com",
+   "fontes": [
+    "F16"
+   ],
+   "autor": "F16 diz apenas \"Tony Victor's Book\"; não identifiquei o livro nem o autor",
+   "tipo": "aditivo",
+   "base_declarada": "nenhuma na fonte",
+   "valores": {
+    "A": 1,
+    "B": 2,
+    "C": 20,
+    "D": 4,
+    "E": 5,
+    "F": 9,
+    "G": 3,
+    "H": 8,
+    "I": 10,
+    "L": 30,
+    "M": 40,
+    "N": 50,
+    "O": 70,
+    "P": 80,
+    "Q": 100,
+    "R": 200,
+    "S": 60,
+    "T": 300,
+    "U": 6,
+    "X": 90,
+    "Z": 7
+   },
+   "valores_brutos_da_fonte_para_aliases": {
+    "J": 10,
+    "K": 20,
+    "U": 6,
+    "V": 6,
+    "W": 6,
+    "Y": 10
+   },
+   "derivado_base_observada": "observação minha: os 21 valores são exatamente 1-9, 10-90 e 100-300, e 18 letras recebem o valor da letra hebraica de som equivalente (A=Aleph, B=Beth, G=Gimel, D=Daleth, E=He, U=Vav, Z=Zayin, H=Cheth, I=Yod, C=Kaph, L=Lamed, M=Mem, N=Nun, S=Samekh, O=Ayin, P=Pe, Q=Qoph, R=Resh); F, X e T ficam com 9, 90 e 300 (os lugares de Teth, Tzaddi e Shin)",
+   "grau_de_evidencia": "baixo: origem não identificada"
+  },
+  {
+   "id": "english_qabalah_nao_especifico__F16_F17",
+   "nome_descritivo": "'English Qabalah' (cifra inglesa de 26 letras) aplicada às letras latinas das palavras enoquianas",
+   "fontes": [
+    "F16",
+    "F17"
+   ],
+   "autor": "F17 diz 'English cabala from Equinox VII, #1'; F16 a inclui 'porque sim'",
+   "tipo": "aditivo",
+   "base_declarada": "não é proposta para o enoquiano: é uma cifra do alfabeto inglês; registrada porque as duas fontes a oferecem para palavras enoquianas",
+   "valores": {
+    "A": 1,
+    "B": 20,
+    "C": 13,
+    "D": 6,
+    "E": 25,
+    "F": 18,
+    "G": 11,
+    "H": 4,
+    "I": 23,
+    "L": 2,
+    "M": 21,
+    "N": 14,
+    "O": 7,
+    "P": 26,
+    "Q": 19,
+    "R": 12,
+    "S": 5,
+    "T": 24,
+    "U": 17,
+    "X": 22,
+    "Z": 8
+   },
+   "valores_brutos_da_fonte_para_aliases": {
+    "J": 16,
+    "K": 9,
+    "U": 17,
+    "V": 10,
+    "W": 3,
+    "Y": 15
+   },
+   "nota_de_mapeamento": "como a cifra dá valores diferentes a C/K, I/Y, U/V e G/J, o valor de uma letra enoquiana depende de como a palavra foi grafada em latim; em 'valores' está o da letra canônica",
+   "grau_de_evidencia": "nulo como gematria enoquiana; incluída só para completar o inventário"
+  }
+ ],
+ "d_evidencia_interna": {
+  "palavras_numericas_das_chamadas": [
+   {
+    "palavra": "OS",
+    "valor": 12,
+    "glosa_inglesa_resumida": "twelve / 12 Kingdoms",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "número e palavra na mesma passagem (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 97,
+      "indice_scan": 190,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n190/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n190.jpg"
+     },
+     {
+      "pagina_impressa_1659": 98,
+      "indice_scan": 191,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n191/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n191.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 97,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": true
+     },
+     {
+      "pagina": 98,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": false,
+      "nota": "página da tradução inglesa numerada: o número está lá, a palavra enoquiana não"
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.97: 'Os Londoh' com nota '[Os signifieth twelve]'"
+   },
+   {
+    "palavra": "NORZ",
+    "valor": 6,
+    "glosa_inglesa_resumida": "six",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "número e palavra na mesma passagem (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 97,
+      "indice_scan": 190,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n190/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n190.jpg"
+     },
+     {
+      "pagina_impressa_1659": 98,
+      "indice_scan": 191,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n191/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n191.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 97,
+      "numero_em_algarismos_presente": null,
+      "palavra_presente": true,
+      "nota": "o número está por extenso ('six')"
+     },
+     {
+      "pagina": 98,
+      "numero_em_algarismos_presente": null,
+      "palavra_presente": false,
+      "nota": "página da tradução inglesa numerada: o número está lá, a palavra enoquiana não"
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.97: ZRON (ditado ao contrário) = 'six' = Norz"
+   },
+   {
+    "palavra": "CLA",
+    "valor": 456,
+    "glosa_inglesa_resumida": "456 (over 456; as the first 456)",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "número e palavra na mesma passagem (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 109,
+      "indice_scan": 198,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n198/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n198.jpg"
+     },
+     {
+      "pagina_impressa_1659": 98,
+      "indice_scan": 191,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n191/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n191.jpg"
+     },
+     {
+      "pagina_impressa_1659": 111,
+      "indice_scan": 200,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n200/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n200.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 109,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": true
+     },
+     {
+      "pagina": 98,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": false,
+      "nota": "página da tradução inglesa numerada: o número está lá, a palavra enoquiana não"
+     },
+     {
+      "pagina": 111,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": false,
+      "nota": "página da tradução inglesa numerada: o número está lá, a palavra enoquiana não"
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.109: '31 ALC — 456 — Cla'"
+   },
+   {
+    "palavra": "PD",
+    "valor": 33,
+    "glosa_inglesa_resumida": "thirty three",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "número e palavra na mesma passagem (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 110,
+      "indice_scan": 199,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n199/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n199.jpg"
+     },
+     {
+      "pagina_impressa_1659": 111,
+      "indice_scan": 200,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n200/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n200.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 110,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": true
+     },
+     {
+      "pagina": 111,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": false,
+      "nota": "página da tradução inglesa numerada: o número está lá, a palavra enoquiana não"
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.110: '10 DP — 33 — PD (Pe de)'"
+   },
+   {
+    "palavra": "MAPM",
+    "valor": 9639,
+    "glosa_inglesa_resumida": "9639",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "número e palavra na mesma passagem (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 110,
+      "indice_scan": 199,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n199/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n199.jpg"
+     },
+     {
+      "pagina_impressa_1659": 111,
+      "indice_scan": 200,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n200/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n200.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 110,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": true
+     },
+     {
+      "pagina": 111,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": false,
+      "nota": "página da tradução inglesa numerada: o número está lá, a palavra enoquiana não"
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F12"
+    ],
+    "nota": "TFR p.110: '15 MPAM 9639 Mapm'. F09 imprime 9636 (diverge)."
+   },
+   {
+    "palavra": "ACAM",
+    "valor": 7699,
+    "glosa_inglesa_resumida": "7699",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "número e palavra na mesma passagem (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 190,
+      "indice_scan": 279,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n279/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n279.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 190,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": true
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.190: 'That word thou hast not, it is Acam' + nota de Dee 'Acam betokening 7699'"
+   },
+   {
+    "palavra": "EM",
+    "valor": 9,
+    "glosa_inglesa_resumida": "nine",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "número e palavra na mesma passagem (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 190,
+      "indice_scan": 279,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n279/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n279.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 190,
+      "numero_em_algarismos_presente": null,
+      "palavra_presente": false,
+      "nota": "F15 separa as letras ('E M'); o número está por extenso ('Nine')"
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.190: 'There was no word there that signified Nine, the third word should be EM'. Em também glosado 'except' em TFR p.97."
+   },
+   {
+    "palavra": "AF",
+    "valor": 19,
+    "glosa_inglesa_resumida": "nineteen",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "número e palavra na mesma passagem (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 191,
+      "indice_scan": 280,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n280/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n280.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 191,
+      "numero_em_algarismos_presente": false,
+      "palavra_presente": true,
+      "nota": "o número está por extenso ('nineteen')"
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.191: 'nineteen — That is Af'"
+   },
+   {
+    "palavra": "PEOAL",
+    "valor": 69636,
+    "glosa_inglesa_resumida": "69636",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "número e palavra na mesma passagem (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 191,
+      "indice_scan": 280,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n280/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n280.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 191,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": true
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.191: '69636' com nota de Nalvage; Dee cita 'Peoal' logo abaixo"
+   },
+   {
+    "palavra": "P",
+    "valor": 8,
+    "glosa_inglesa_resumida": "eight (the Viols eight)",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "número e palavra na mesma passagem (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 191,
+      "indice_scan": 280,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n280/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n280.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 191,
+      "numero_em_algarismos_presente": null,
+      "palavra_presente": true
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.191: 'That is P, you have not mark the mysterie'"
+   },
+   {
+    "palavra": "CIAL",
+    "valor": 9996,
+    "glosa_inglesa_resumida": "9996",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "número e palavra na mesma passagem (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 191,
+      "indice_scan": 280,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n280/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n280.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 191,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": false,
+      "nota": "F15 grafa 'C. al' (nota marginal)"
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F12"
+    ],
+    "nota": "TFR p.191: '9996 — That is C.al'. F09 imprime 29996 (diverge)."
+   },
+   {
+    "palavra": "OX",
+    "valor": 26,
+    "glosa_inglesa_resumida": "26 (Hiacinct pillars 26)",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "número e palavra na mesma passagem (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 192,
+      "indice_scan": 281,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n281/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n281.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 192,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": false,
+      "nota": "F15 não leu a nota marginal (marca de ilegível); o scan mostra 'Ox: And that you have not'"
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.192, margem: 'Ox: And that you have not'"
+   },
+   {
+    "palavra": "OP",
+    "valor": 22,
+    "glosa_inglesa_resumida": "22 (Neasts 22)",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "número e palavra na mesma passagem (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 192,
+      "indice_scan": 281,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n281/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n281.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 192,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": false,
+      "nota": "F15 não leu a nota marginal (marca de ilegível); o scan mostra 'Op..... That you have not'"
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.192, margem: 'Op... That you have not'"
+   },
+   {
+    "palavra": "DAOX",
+    "valor": 5678,
+    "glosa_inglesa_resumida": "5678",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "número e palavra na mesma passagem (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 192,
+      "indice_scan": 281,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n281/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n281.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 192,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": true
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.192: 'That is Daox that you have not'"
+   },
+   {
+    "palavra": "OL",
+    "valor": 24,
+    "glosa_inglesa_resumida": "24th parte (of a moment); 24 seats",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "número e palavra na mesma passagem (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 192,
+      "indice_scan": 281,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n281/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n281.jpg"
+     },
+     {
+      "pagina_impressa_1659": 193,
+      "indice_scan": 282,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n282/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n282.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 192,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": true
+     },
+     {
+      "pagina": 193,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": true
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.192 margem 'Ol. That you have not'; p.193 margem 'Nal.... Ol.....' junto a 'on 24 seats'"
+   },
+   {
+    "palavra": "MATB",
+    "valor": 1000,
+    "glosa_inglesa_resumida": "a Thousand",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "número e palavra na mesma passagem (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 192,
+      "indice_scan": 281,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n281/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n281.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 192,
+      "numero_em_algarismos_presente": false,
+      "palavra_presente": false,
+      "nota": "F15 digitou 'Math'; o scan mostra 'Matb'; o número está por extenso ('a Thousand')"
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.192: 'a Thousand —— Matb.' e, na margem, 'Nal..... Matb. you have it not'. F15 (TCP) digitou 'Math' nas duas vezes; no scan a 2ª ocorrência é nitidamente 'Matb' (conferido em 2026-10-22)"
+   },
+   {
+    "palavra": "OB",
+    "valor": 28,
+    "glosa_inglesa_resumida": "28 (the Lanterns)",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "número e palavra na mesma passagem (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 193,
+      "indice_scan": 282,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n282/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n282.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 193,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": true
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.193 margem: 'Ob...... That you have not'"
+   },
+   {
+    "palavra": "MIAN",
+    "valor": 3663,
+    "glosa_inglesa_resumida": "3663",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "número e palavra na mesma passagem (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 193,
+      "indice_scan": 282,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n282/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n282.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 193,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": true
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.193: '3663' com 'Mian' na margem"
+   },
+   {
+    "palavra": "GA",
+    "valor": 31,
+    "glosa_inglesa_resumida": "whose Number is 31",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "número e palavra na mesma passagem (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 193,
+      "indice_scan": 282,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n282/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n282.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 193,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": true
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.193: '31 —— Ga.'"
+   },
+   {
+    "palavra": "DARG",
+    "valor": 6739,
+    "glosa_inglesa_resumida": "6739",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "número e palavra na mesma passagem (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 193,
+      "indice_scan": 282,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n282/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n282.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 193,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": true
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.193: '6739' com margem 'At large. Darg....'"
+   },
+   {
+    "palavra": "QUAR",
+    "valor": 1636,
+    "glosa_inglesa_resumida": "1636",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "número e palavra na mesma passagem (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 193,
+      "indice_scan": 282,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n282/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n282.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 193,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": true
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.193: '1636' com margem 'Nal....: Quar.'"
+   },
+   {
+    "palavra": "VX",
+    "valor": 42,
+    "glosa_inglesa_resumida": "42",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "número e palavra na mesma passagem (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 193,
+      "indice_scan": 282,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n282/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n282.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 193,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": true
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.193: '42 —— Ux.' (grafado com U)"
+   },
+   {
+    "palavra": "ERAN",
+    "valor": 6332,
+    "glosa_inglesa_resumida": "6332",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "número e palavra na mesma passagem (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 194,
+      "indice_scan": 283,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n283/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n283.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 194,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": true
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.194 margem: 'Eran --'"
+   },
+   {
+    "palavra": "EMOD",
+    "valor": 8763,
+    "glosa_inglesa_resumida": "8763",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "número e palavra na mesma passagem (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 194,
+      "indice_scan": 283,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n283/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n283.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 194,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": true
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.194: '8763 —— Emod.'"
+   },
+   {
+    "palavra": "TAXS",
+    "valor": 7336,
+    "glosa_inglesa_resumida": "7336",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "número e palavra na mesma passagem (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 194,
+      "indice_scan": 283,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n283/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n283.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 194,
+      "numero_em_algarismos_presente": true,
+      "palavra_presente": true
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.194 margem: 'Faxs or Faxis to be found... I find in the Call Taxs. I finde also in some words T or F indifferently used'"
+   },
+   {
+    "palavra": "NI",
+    "valor": 28,
+    "glosa_inglesa_resumida": "Twenty eight (living dwellings)",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "nota marginal ao lado do número (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 124,
+      "indice_scan": 213,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n213/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n213.jpg"
+     },
+     {
+      "pagina_impressa_1659": 199,
+      "indice_scan": 288,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n288/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n288.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 124,
+      "numero_em_algarismos_presente": false,
+      "palavra_presente": true,
+      "nota": "página do ditado enoquiano: não há número nela"
+     },
+     {
+      "pagina": 199,
+      "numero_em_algarismos_presente": false,
+      "palavra_presente": true,
+      "nota": "o número está por extenso ('Twenty eight'); a nota 'Ni, That you have not' está em F15 e no scan"
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F12"
+    ],
+    "nota": "TFR p.124: ditado enoquiano 'INOAS / NI / PARADIAL'; TFR p.199 (11 jul. 1584, tradução da Chamada por Ilemese): 'they are become / Twenty eight / living dwellings' com a nota marginal 'Ile..... Ni, That you have not.' ao lado de 'Twenty eight' (conferido no scan em 2026-10-22). F09 imprime 'NI 8' (provável perda do dígito 2)"
+   },
+   {
+    "palavra": "O",
+    "valor": 5,
+    "glosa_inglesa_resumida": "five (Thunders 5)",
+    "valor_e_ordinal_em_Dee": false,
+    "forca_da_atestacao": "provável (posição, sem traço de ligação)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 193,
+      "indice_scan": 282,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n282/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n282.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 193,
+      "numero_em_algarismos_presente": null,
+      "palavra_presente": true
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.193: 'there were / Thunders / 5.' na 1ª coluna; na 2ª coluna, na mesma altura, 'O......' antes de 'selves together'. F15 (TCP) também lê '5. | O.....'. A posição sugere que 'O' é a palavra do 5, mas a nota não tem traço de ligação: leitura provável, não segura (conferido no scan)"
+   },
+   {
+    "palavra": "L",
+    "valor": 1,
+    "glosa_inglesa_resumida": "of the first (ordinal)",
+    "valor_e_ordinal_em_Dee": true,
+    "forca_da_atestacao": "glosa direta (ordinal)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 100,
+      "indice_scan": 193,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n193/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n193.jpg"
+     },
+     {
+      "pagina_impressa_1659": 109,
+      "indice_scan": 198,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n198/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n198.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 100,
+      "numero_em_algarismos_presente": null,
+      "palavra_presente": true
+     },
+     {
+      "pagina": 109,
+      "numero_em_algarismos_presente": null,
+      "palavra_presente": false,
+      "nota": "F15 grafa a pronúncia 'Talo'; a coleta de 2026-10-21 leu 'Ta L o' no scan (não reconferido nesta revisão)"
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.100 (Chamada 2, ditada ao contrário): '8 — L — of the first — A word.' (glosa direta, conferida no scan); TFR p.109: 'OLAT — as the first — Ta L o'. Dee escreve 'first' (ordinal); o valor 1 é a leitura cardinal das listas modernas"
+   },
+   {
+    "palavra": "S",
+    "valor": 4,
+    "glosa_inglesa_resumida": "fourth (ordinal)",
+    "valor_e_ordinal_em_Dee": true,
+    "forca_da_atestacao": "nota marginal ao lado do ordinal (forte)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 121,
+      "indice_scan": 210,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n210/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n210.jpg"
+     },
+     {
+      "pagina_impressa_1659": 190,
+      "indice_scan": 279,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n279/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n279.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 121,
+      "numero_em_algarismos_presente": null,
+      "palavra_presente": true
+     },
+     {
+      "pagina": 190,
+      "numero_em_algarismos_presente": null,
+      "palavra_presente": true
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.121 (F15): ditado 'SDIU — S di u'; TFR p.190: nota marginal 'Gah S diu.' ao lado de 'The Spirits of the fourth Angle are' (conferido no scan). Ordinal 'fourth'; o índice de scan de p.121 (n210) foi deduzido e não visto"
+   },
+   {
+    "palavra": "V",
+    "valor": 2,
+    "glosa_inglesa_resumida": "O you the second (VIIV); in the second (VIV)",
+    "valor_e_ordinal_em_Dee": true,
+    "forca_da_atestacao": "glosa direta de VIIV/VIV (ordinal)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 100,
+      "indice_scan": 193,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n193/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n193.jpg"
+     },
+     {
+      "pagina_impressa_1659": 110,
+      "indice_scan": 199,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n199/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n199.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 100,
+      "numero_em_algarismos_presente": null,
+      "palavra_presente": true
+     },
+     {
+      "pagina": 110,
+      "numero_em_algarismos_presente": null,
+      "palavra_presente": true
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F12"
+    ],
+    "nota": "TFR p.100: '7 — VIIV — O you the second — Viiv.' (glosa direta, conferida no scan); TFR p.110: 'VIDVIV — in the second angle — Viv di'. A letra V sozinha não aparece glosada; o que Dee registra é VIIV/VIV = 'second'"
+   },
+   {
+    "palavra": "D",
+    "valor": 3,
+    "glosa_inglesa_resumida": "the third (ordinal)",
+    "valor_e_ordinal_em_Dee": true,
+    "forca_da_atestacao": "alinhamento palavra a palavra (médio)",
+    "confirmacao_primaria_TFR_1659": [
+     {
+      "pagina_impressa_1659": 122,
+      "indice_scan": 211,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n211/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n211.jpg"
+     },
+     {
+      "pagina_impressa_1659": 190,
+      "indice_scan": 279,
+      "url": "https://archive.org/details/truefaithfulrela00deej/page/n279/mode/1up",
+      "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n279.jpg"
+     }
+    ],
+    "segunda_leitura_F15_TCP": [
+     {
+      "pagina": 122,
+      "numero_em_algarismos_presente": null,
+      "palavra_presente": false,
+      "nota": "D só aparece dentro de 'ODD' (= od d)"
+     },
+     {
+      "pagina": 190,
+      "numero_em_algarismos_presente": null,
+      "palavra_presente": false,
+      "nota": "página da tradução inglesa: 'and the third', sem a palavra enoquiana"
+     }
+    ],
+    "outras_fontes": [
+     "F02",
+     "F07",
+     "F09",
+     "F12"
+    ],
+    "nota": "TFR p.122: ditado 'TAVIV / ODD' (= ta viv od d); TFR p.190, tradução da mesma Chamada: 'as the second / and the third:' (os dois conferidos no scan). D = 'third' sai do alinhamento palavra a palavra (ta = as, viv = second, od = and, d = third); Dee não escreve 'D = third' por extenso"
+   }
+  ],
+  "letras_digito_lista_secundaria": {
+   "fontes": [
+    "F02",
+    "F12",
+    "F07"
+   ],
+   "valores": {
+    "T": 0,
+    "L": 1,
+    "U": 2,
+    "D": 3,
+    "R": 3,
+    "S": 4,
+    "O": 5,
+    "N": 6,
+    "Q": 7,
+    "P": 8,
+    "M": 9,
+    "X": 10
+   },
+   "formas_longas_em_F02": {
+    "0": [
+     "T"
+    ],
+    "1": [
+     "L",
+     "EL",
+     "L-O",
+     "ELO",
+     "LA",
+     "LI",
+     "LIL"
+    ],
+    "2": [
+     "V",
+     "VI-I-V",
+     "VI-VI"
+    ],
+    "3": [
+     "D",
+     "R"
+    ],
+    "4": [
+     "S",
+     "ES"
+    ],
+    "5": [
+     "O"
+    ],
+    "6": [
+     "N",
+     "NORZ"
+    ],
+    "7": [
+     "Q"
+    ],
+    "8": [
+     "P"
+    ],
+    "9": [
+     "M",
+     "EM"
+    ],
+    "10": [
+     "X"
+    ]
+   },
+   "situacao_na_TFR": {
+    "L": "ordinal 'first' (p.100, p.109)",
+    "V": "VIIV/VIV = 'second' (p.100, p.110)",
+    "D": "'third' por alinhamento (p.122 + p.190)",
+    "S": "'fourth' (p.190)",
+    "O": "5, provável (p.193)",
+    "P": "8 (p.191)",
+    "M/EM": "EM = nine (p.190)",
+    "N/NORZ": "NORZ = six (p.97)",
+    "T": "não localizado",
+    "R": "não localizado",
+    "Q": "não localizado",
+    "X": "não localizado"
+   },
+   "nota": "lista moderna compilada (F02 cita Laycock 2001). Os dígitos D 3, L 1, M 9, N 6, O 5, S 4, V 2 já aparecem como 'valores de Dee' na lista de F07 (1984)."
+  },
+  "observacoes_de_dee_na_TFR": [
+   {
+    "pagina": {
+     "pagina_impressa_1659": 194,
+     "indice_scan": 283,
+     "url": "https://archive.org/details/truefaithfulrela00deej/page/n283/mode/1up",
+     "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n283.jpg"
+    },
+    "resumo": "Dee nota que em algumas palavras T e F são usadas indiferentemente (Faxs/Taxs = 7336)"
+   },
+   {
+    "pagina": {
+     "pagina_impressa_1659": 191,
+     "indice_scan": 280,
+     "url": "https://archive.org/details/truefaithfulrela00deej/page/n280/mode/1up",
+     "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n280.jpg"
+    },
+    "resumo": "Dee registra que E, M, Af e Peoal, ditas ausentes, estão nas Chamadas"
+   },
+   {
+    "pagina": {
+     "pagina_impressa_1659": 190,
+     "indice_scan": 279,
+     "url": "https://archive.org/details/truefaithfulrela00deej/page/n279/mode/1up",
+     "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n279.jpg"
+    },
+    "resumo": "o anjo diz que não havia palavra para 'nove' e que a terceira palavra deveria ser EM"
+   },
+   {
+    "pagina": {
+     "pagina_impressa_1659": 192,
+     "indice_scan": 281,
+     "url": "https://archive.org/details/truefaithfulrela00deej/page/n281/mode/1up",
+     "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n281.jpg"
+    },
+    "resumo": "nota marginal 'Torb.' ligada por traço a 'with an hundred' (relida no scan em 2026-10-22: a 1ª letra é T); ver 'candidata_ambigua'"
+   },
+   {
+    "pagina": {
+     "pagina_impressa_1659": 122,
+     "indice_scan": 211,
+     "url": "https://archive.org/details/truefaithfulrela00deej/page/n211/mode/1up",
+     "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n211.jpg"
+    },
+    "resumo": "o anjo diz que é melhor TBLIARD com F (Fbliard): outra troca T/F registrada no ditado"
+   },
+   {
+    "pagina": {
+     "pagina_impressa_1659": 192,
+     "indice_scan": 281,
+     "url": "https://archive.org/details/truefaithfulrela00deej/page/n281/mode/1up",
+     "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n281.jpg"
+    },
+    "resumo": "a voz diz que, das palavras que Dee 'não tem', algumas ele tem e outras não, e que isso é um mistério"
+   }
+  ],
+  "candidata_ambigua": {
+   "palavra_impressa": "Torb.",
+   "pagina": {
+    "pagina_impressa_1659": 192,
+    "indice_scan": 281,
+    "url": "https://archive.org/details/truefaithfulrela00deej/page/n281/mode/1up",
+    "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n281.jpg"
+   },
+   "contexto": "Chamada 10 em inglês: 'roar / with an hundred ——— Torb. / mighty Earth-quakes'; o traço liga 'with an hundred' a 'Torb.' no mesmo formato de 'a Thousand ——— Matb.' (conferido no scan: a primeira letra é T)",
+   "ditado_enoquiano_correspondente": {
+    "pagina": {
+     "pagina_impressa_1659": 132,
+     "indice_scan": 221,
+     "url": "https://archive.org/details/truefaithfulrela00deej/page/n221/mode/1up",
+     "imagem": "https://archive.org/download/truefaithfulrela00deej/page/n221.jpg"
+    },
+    "palavras": "OL / OANIO / YOR / VOHIM / OL / GIZYAX / OD / EORS / COC...... (Co casg) / ... / MATORB",
+    "nota": "no ditado de p.132 não aparece TORB; aparecem YOR e VOHIM. F09 registra YORB = roar"
+   },
+   "decisao": "não incluída como palavra numérica: a nota pode dar a palavra para 'hundred' ou ser uma variante de YOR(B) = roar. Registrada só para análise; nenhum valor atribuído"
+  },
+  "declaracao_GD_sobre_os_numeros": {
+   "fonte": "F07, que cita Mathers na parte 3 de 'The Concourse of the Forces' (documento da Golden Dawn)",
+   "resumo": "Mathers diz que os números das Chamadas, como 456 e 6739, guardam mistérios que ele não explica ali",
+   "conferido_no_documento_GD": false
+  },
+  "sigillum_dei_aemeth": {
+   "fonte": "F20 (sigillum.json, desta pasta), montado de Sloane 3188, Liber II (19-21 mar. 1582) pela reconstrução de C. Holden (http://www.john-dee.org/Secundus.pdf) e pelo desenho de Peterson (http://www.esotericarchives.com/dee/aemethd.jpg)",
+   "anel_externo": [
+    {
+     "casa": 0,
+     "letra": "T",
+     "numero": 4,
+     "posicao_numero": "acima"
+    },
+    {
+     "casa": 1,
+     "letra": "G",
+     "numero": 9,
+     "posicao_numero": "acima"
+    },
+    {
+     "casa": 2,
+     "letra": "n",
+     "numero": 7,
+     "posicao_numero": "acima"
+    },
+    {
+     "casa": 3,
+     "letra": "t",
+     "numero": 9,
+     "posicao_numero": "abaixo"
+    },
+    {
+     "casa": 4,
+     "letra": "h",
+     "numero": 22,
+     "posicao_numero": "acima"
+    },
+    {
+     "casa": 5,
+     "letra": "n",
+     "numero": null,
+     "posicao_numero": null
+    },
+    {
+     "casa": 6,
+     "letra": "m",
+     "numero": 6,
+     "posicao_numero": "acima"
+    },
+    {
+     "casa": 7,
+     "letra": "o",
+     "numero": 22,
+     "posicao_numero": "acima"
+    },
+    {
+     "casa": 8,
+     "letra": "a",
+     "numero": 20,
+     "posicao_numero": "acima"
+    },
+    {
+     "casa": 9,
+     "letra": "n",
+     "numero": 14,
+     "posicao_numero": "acima"
+    },
+    {
+     "casa": 10,
+     "letra": "a",
+     "numero": 6,
+     "posicao_numero": "acima"
+    },
+    {
+     "casa": 11,
+     "letra": "h",
+     "numero": null,
+     "posicao_numero": null
+    },
+    {
+     "casa": 12,
+     "letra": "o",
+     "numero": 18,
+     "posicao_numero": "acima"
+    },
+    {
+     "casa": 13,
+     "letra": "l",
+     "numero": 26,
+     "posicao_numero": "acima"
+    },
+    {
+     "casa": 14,
+     "letra": "l",
+     "numero": 30,
+     "posicao_numero": "abaixo"
+    },
+    {
+     "casa": 15,
+     "letra": "n",
+     "numero": null,
+     "posicao_numero": null
+    },
+    {
+     "casa": 16,
+     "letra": "l",
+     "numero": 8,
+     "posicao_numero": "abaixo"
+    },
+    {
+     "casa": 17,
+     "letra": "G",
+     "numero": 7,
+     "posicao_numero": "acima"
+    },
+    {
+     "casa": 18,
+     "letra": "r",
+     "numero": 13,
+     "posicao_numero": "acima"
+    },
+    {
+     "casa": 19,
+     "letra": "H",
+     "numero": 12,
+     "posicao_numero": "abaixo"
+    },
+    {
+     "casa": 20,
+     "letra": "og",
+     "numero": null,
+     "posicao_numero": null
+    },
+    {
+     "casa": 21,
+     "letra": "y",
+     "numero": 15,
+     "posicao_numero": "abaixo"
+    },
+    {
+     "casa": 22,
+     "letra": "t",
+     "numero": 11,
+     "posicao_numero": "abaixo"
+    },
+    {
+     "casa": 23,
+     "letra": "o",
+     "numero": 8,
+     "posicao_numero": "abaixo"
+    },
+    {
+     "casa": 24,
+     "letra": "e",
+     "numero": 21,
+     "posicao_numero": "abaixo"
+    },
+    {
+     "casa": 25,
+     "letra": "b",
+     "numero": 10,
+     "posicao_numero": "acima"
+    },
+    {
+     "casa": 26,
+     "letra": "A",
+     "numero": 11,
+     "posicao_numero": "acima"
+    },
+    {
+     "casa": 27,
+     "letra": "I",
+     "numero": 15,
+     "posicao_numero": "acima"
+    },
+    {
+     "casa": 28,
+     "letra": "a",
+     "numero": 8,
+     "posicao_numero": "acima"
+    },
+    {
+     "casa": 29,
+     "letra": "r",
+     "numero": 16,
+     "posicao_numero": "abaixo"
+    },
+    {
+     "casa": 30,
+     "letra": "n",
+     "numero": null,
+     "posicao_numero": null
+    },
+    {
+     "casa": 31,
+     "letra": "A",
+     "numero": 6,
+     "posicao_numero": "acima"
+    },
+    {
+     "casa": 32,
+     "letra": "o",
+     "numero": 10,
+     "posicao_numero": "abaixo"
+    },
+    {
+     "casa": 33,
+     "letra": "G",
+     "numero": 5,
+     "posicao_numero": "acima"
+    },
+    {
+     "casa": 34,
+     "letra": "h",
+     "numero": 14,
+     "posicao_numero": "abaixo"
+    },
+    {
+     "casa": 35,
+     "letra": "o",
+     "numero": 17,
+     "posicao_numero": "abaixo"
+    },
+    {
+     "casa": 36,
+     "letra": "s",
+     "numero": null,
+     "posicao_numero": null
+    },
+    {
+     "casa": 37,
+     "letra": "a",
+     "numero": 5,
+     "posicao_numero": "abaixo"
+    },
+    {
+     "casa": 38,
+     "letra": "a",
+     "numero": 24,
+     "posicao_numero": "abaixo"
+    },
+    {
+     "casa": 39,
+     "letra": "ω",
+     "numero": 6,
+     "posicao_numero": "acima"
+    }
+   ],
+   "angulos_7": [
+    {
+     "letra": "G",
+     "numero": 5
+    },
+    {
+     "letra": "A",
+     "numero": 24
+    },
+    {
+     "letra": "L",
+     "numero": 30
+    },
+    {
+     "letra": "E",
+     "numero": 21
+    },
+    {
+     "letra": "T",
+     "numero": 9
+    },
+    {
+     "letra": "H",
+     "numero": 14
+    },
+    {
+     "letra": "OG",
+     "numero": null
+    }
+   ],
+   "regra_declarada_no_manuscrito": "resumo de sigillum.json: o número indica quantas casas andar (acima = para a direita, abaixo = para a esquerda) até a letra seguinte de um nome; uma letra sem número fecha o nome. Os sete nomes obtidos são Galas, Gethog, Thaoth, Horlwn, Innon, Aaoth e Galethog",
+   "letras_latinas": "as letras do Sigillum são latinas (1582), anteriores ao alfabeto enoquiano (1583)",
+   "uso_para_valores_de_letras": "não encontrei proposta publicada que tire valores de letras destes números; os testes em 'conferencias' mostram que o número não é fixo por letra"
+  },
+  "ensignias_da_criacao": {
+   "fonte": "F20 (ensignias.json, desta pasta), transcrição visual da reconstrução de C. Holden de Sloane 3188, Liber III (28 abr. 1582): http://www.john-dee.org/Tertius.pdf",
+   "resumo": "sete tábuas com letras latinas (sobretudo b/B), números, pontos e sinais; transcrição completa em ensignias.json, com leituras incertas marcadas lá",
+   "uso_para_valores_de_letras": "não encontrei proposta publicada que tire valores de letras das Ensígnias; ver o teste em 'conferencias'"
+  },
+  "numeros_dos_governadores": {
+   "fonte": "F20 (governadores.json, desta pasta): números de servos dos 91 governadores, ditados em Cracóvia em maio de 1584 (TFR pp. 140-143 e seguintes)",
+   "uso_para_valores_de_letras": "não encontrei proposta publicada; teste de soma em 'conferencias'"
+  }
+ },
+ "conferencias": [
+  {
+   "conferencia": "alfabeto: 21 letras, nomes únicos, cobre as 21 letras canônicas",
+   "resultado": "ok",
+   "detalhe": "21 nomes; forma extra 'Gon com ponto' (Y); letras canônicas: ABCDEFGHILMNOPQRSTUXZ"
+  },
+  {
+   "conferencia": "alfabeto: diferenças F01 x F02 (equivalentes latinos)",
+   "resultado": "informativo",
+   "detalhe": [
+    {
+     "nome": "Veh",
+     "F01": [
+      "C",
+      "K"
+     ],
+     "F02": [
+      "C"
+     ]
+    },
+    {
+     "nome": "Ged",
+     "F01": [
+      "G",
+      "J"
+     ],
+     "F02": [
+      "G"
+     ]
+    }
+   ]
+  },
+  {
+   "conferencia": "alfabeto: Plate IX de Liber Chanokh (F03) x canônicas",
+   "resultado": "informativo",
+   "detalhe": {
+    "so_em_F03": [
+     "J"
+    ],
+    "so_nas_canonicas": [
+     "I"
+    ],
+    "nota": "a transcrição ASCII mostra J na posição em que se esperaria I; imagem da prancha não conferida"
+   }
+  },
+  {
+   "conferencia": "astrologia F04: 16 figuras geomânticas distintas + 5 elementos (Fogo, Água, Ar, Terra, Espírito), cada um uma vez",
+   "resultado": "ok",
+   "detalhe": {
+    "figuras": [
+     "Acquisitio",
+     "Albus",
+     "Amissio",
+     "Caput Draconis",
+     "Carcer",
+     "Cauda Draconis",
+     "Conjunctio",
+     "Fortuna Major",
+     "Fortuna Minor",
+     "Laetitia",
+     "Populus",
+     "Puella",
+     "Puer",
+     "Rubeus",
+     "Tristitia",
+     "Via"
+    ],
+    "elementos": [
+     "Ar",
+     "Espírito",
+     "Fogo",
+     "Terra",
+     "Água"
+    ]
+   }
+  },
+  {
+   "conferencia": "astrologia F05 (fórum): mesma partição?",
+   "resultado": "falha",
+   "detalhe": "F05 dá T = Cauda Draconis, repetindo F; Caput Draconis fica sem letra -> provável erro de transcrição no post; F04 (foto) dá T = Caput Draconis"
+  },
+  {
+   "conferencia": "astrologia F04: 'de dia/de noite' coincide com os domicílios diurno/noturno ptolomaicos",
+   "resultado": "ok",
+   "detalhe": "10 de 10 coerentes"
+  },
+  {
+   "conferencia": "astrologia: diferenças célula a célula F04 x F05",
+   "resultado": "informativo",
+   "detalhe": [
+    {
+     "letra": "T",
+     "F04": "Caput Draconis",
+     "F05": "Cauda Draconis"
+    }
+   ]
+  },
+  {
+   "conferencia": "astrologia: diferenças F04 x variante do comentário de Crowley (segundo F04-página)",
+   "resultado": "informativo",
+   "detalhe": [
+    {
+     "letra": "E",
+     "F04": "Virgem",
+     "comentario_crowley": "Gêmeos"
+    },
+    {
+     "letra": "G",
+     "F04": "Leão",
+     "comentario_crowley": "Câncer"
+    },
+    {
+     "letra": "P",
+     "F04": "Câncer",
+     "comentario_crowley": "Leão"
+    },
+    {
+     "letra": "S",
+     "F04": "Gêmeos",
+     "comentario_crowley": "Virgem"
+    }
+   ]
+  },
+  {
+   "conferencia": "F04: valor AC = valor padrão da letra hebraica impressa (20 letras; D excluída por leitura incerta)",
+   "resultado": "ok",
+   "detalhe": "20/20 coerentes"
+  },
+  {
+   "conferencia": "hebraico: impresso em F04 (Crowley) x GD tradicional derivado (F06)",
+   "resultado": "informativo",
+   "detalhe": [
+    {
+     "letra": "B",
+     "hebraico_crowley_F04": "צ",
+     "hebraico_GD_tradicional_derivado": "ה"
+    },
+    {
+     "letra": "D",
+     "hebraico_crowley_F04": "leitura incerta na foto (parece שת ou שט)",
+     "hebraico_GD_tradicional_derivado": "ש"
+    },
+    {
+     "letra": "F",
+     "hebraico_crowley_F04": "ג",
+     "hebraico_GD_tradicional_derivado": null
+    },
+    {
+     "letra": "M",
+     "hebraico_crowley_F04": "ה",
+     "hebraico_GD_tradicional_derivado": "צ"
+    },
+    {
+     "letra": "T",
+     "hebraico_crowley_F04": "ג",
+     "hebraico_GD_tradicional_derivado": null
+    }
+   ]
+  },
+  {
+   "conferencia": "F07: código digital = redução a um dígito do código gemátrico",
+   "resultado": "ok",
+   "detalhe": "21/21"
+  },
+  {
+   "conferencia": "F07: 'valores corretos' = concatenação do código digital",
+   "resultado": "informativo",
+   "detalhe": {
+    "coerentes": 28,
+    "total": 31,
+    "excecoes": [
+     {
+      "palavra": "MATB",
+      "concatenacao": 4132,
+      "valor_'correto'_impresso": 1000
+     },
+     {
+      "palavra": "NORZ",
+      "concatenacao": 5717,
+      "valor_'correto'_impresso": 6
+     },
+     {
+      "palavra": "OS",
+      "concatenacao": 72,
+      "valor_'correto'_impresso": 12
+     }
+    ],
+    "nota": "as exceções são palavras mantidas com o valor de Dee pelo autor (MATB, NORZ, OS) sem explicação"
+   }
+  },
+  {
+   "conferencia": "F07: quantos 'valores corretos' coincidem com os números escritos por Dee",
+   "resultado": "informativo",
+   "detalhe": {
+    "coincidem": [
+     "GA",
+     "MATB",
+     "NORZ",
+     "OS",
+     "P"
+    ],
+    "n": 5,
+    "de": 31
+   }
+  },
+  {
+   "conferencia": "F08 coluna Golden Dawn = F07 código gemátrico (célula a célula)",
+   "resultado": "ok",
+   "detalhe": "idênticas nas 21 letras"
+  },
+  {
+   "conferencia": "F08 Aurum Solis: 21 valores distintos = {1..9, 10..90, 100..300}",
+   "resultado": "ok",
+   "detalhe": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    100,
+    200,
+    300
+   ]
+  },
+  {
+   "conferencia": "F04 JAE: valores distintos (F conta como '300?')",
+   "resultado": "ok",
+   "detalhe": [
+    "1",
+    "10",
+    "100",
+    "2",
+    "20",
+    "200",
+    "3",
+    "30",
+    "300?",
+    "4",
+    "40",
+    "400",
+    "5",
+    "50",
+    "6",
+    "60",
+    "7",
+    "70",
+    "8",
+    "80",
+    "9"
+   ]
+  },
+  {
+   "conferencia": "F09: a tabela inferida reproduz as somas impressas",
+   "resultado": "informativo",
+   "detalhe": {
+    "verbetes_analisados": 579,
+    "coincidem": 573,
+    "nao_coincidem": [
+     {
+      "verbete_lido": "CASARM",
+      "valor_impresso": 306,
+      "soma_com_tabela_inferida": 509,
+      "glosa_lida": "made 509 (e)CA therefore"
+     },
+     {
+      "verbete_lido": "CORMP",
+      "valor_impresso": 559,
+      "soma_com_tabela_inferida": 529,
+      "glosa_lida": "numbered"
+     },
+     {
+      "verbete_lido": "GAH",
+      "valor_impresso": 14,
+      "soma_com_tabela_inferida": 15,
+      "glosa_lida": "spirits GAH glory GA 31"
+     },
+     {
+      "verbete_lido": "GOHUS",
+      "valor_impresso": 176,
+      "soma_com_tabela_inferida": 116,
+      "glosa_lida": "(I) say"
+     },
+     {
+      "verbete_lido": "SAID",
+      "valor_impresso": 556,
+      "soma_com_tabela_inferida": 77,
+      "glosa_lida": "wonder SAISCH brothers SALBROX sulphur"
+     },
+     {
+      "verbete_lido": "ZNRZA",
+      "valor_impresso": 39,
+      "soma_com_tabela_inferida": 174,
+      "glosa_lida": "sware 174 Z-Ol hands"
+     }
+    ],
+    "diagnostico": "CASARM, GAH, SAID e ZNRZA são falhas do meu parser (verbetes colados; conferidos à mão: CASARM=509, GA=14, SALBROX=556, ZNRZA=174 batem). Divergências reais na fonte: CORMP impresso 559 (tabela dá 529), GOHUS 176 (dá 116), Z-OL 39 (dá 47)"
+   }
+  },
+  {
+   "conferencia": "astrologico_hebraico_crowley_AC__F04 x valor hebraico GD tradicional derivado da astrologia de F04",
+   "resultado": "informativo",
+   "detalhe": [
+    {
+     "letra": "B",
+     "sistema": 90,
+     "derivado_GD_tradicional": 5
+    },
+    {
+     "letra": "D",
+     "sistema": 31,
+     "derivado_GD_tradicional": 300
+    },
+    {
+     "letra": "F",
+     "sistema": 3,
+     "derivado_GD_tradicional": null
+    },
+    {
+     "letra": "M",
+     "sistema": 5,
+     "derivado_GD_tradicional": 90
+    },
+    {
+     "letra": "T",
+     "sistema": 3,
+     "derivado_GD_tradicional": null
+    }
+   ]
+  },
+  {
+   "conferencia": "astrologico_hebraico_GD__F09_inferido x valor hebraico GD tradicional derivado da astrologia de F04",
+   "resultado": "informativo",
+   "detalhe": [
+    {
+     "letra": "D",
+     "sistema": 4,
+     "derivado_GD_tradicional": 300
+    },
+    {
+     "letra": "F",
+     "sistema": 3,
+     "derivado_GD_tradicional": null
+    },
+    {
+     "letra": "G",
+     "sistema": 8,
+     "derivado_GD_tradicional": 9
+    },
+    {
+     "letra": "P",
+     "sistema": 9,
+     "derivado_GD_tradicional": 8
+    },
+    {
+     "letra": "T",
+     "sistema": 9,
+     "derivado_GD_tradicional": null
+    }
+   ]
+  },
+  {
+   "conferencia": "aleister_crowley_coluna__F08 x valor hebraico GD tradicional derivado da astrologia de F04",
+   "resultado": "informativo",
+   "detalhe": [
+    {
+     "letra": "D",
+     "sistema": 4,
+     "derivado_GD_tradicional": 300
+    },
+    {
+     "letra": "E",
+     "sistema": 7,
+     "derivado_GD_tradicional": 10
+    },
+    {
+     "letra": "F",
+     "sistema": 300,
+     "derivado_GD_tradicional": null
+    },
+    {
+     "letra": "L",
+     "sistema": 40,
+     "derivado_GD_tradicional": 8
+    },
+    {
+     "letra": "S",
+     "sistema": 10,
+     "derivado_GD_tradicional": 7
+    },
+    {
+     "letra": "T",
+     "sistema": 400,
+     "derivado_GD_tradicional": null
+    },
+    {
+     "letra": "Z",
+     "sistema": 1,
+     "derivado_GD_tradicional": 9
+    }
+   ]
+  },
+  {
+   "conferencia": "variantes 'Crowley/GD astrológico': diferenças célula a célula (AC_F04 x FM111_F09 x Crowley_coluna_F08)",
+   "resultado": "informativo",
+   "detalhe": [
+    {
+     "letra": "B",
+     "AC_F04": 90,
+     "FM111_F09": 5,
+     "Crowley_coluna_F08": 5
+    },
+    {
+     "letra": "D",
+     "AC_F04": 31,
+     "FM111_F09": 4,
+     "Crowley_coluna_F08": 4
+    },
+    {
+     "letra": "E",
+     "AC_F04": 10,
+     "FM111_F09": 10,
+     "Crowley_coluna_F08": 7
+    },
+    {
+     "letra": "F",
+     "AC_F04": 3,
+     "FM111_F09": 3,
+     "Crowley_coluna_F08": 300
+    },
+    {
+     "letra": "G",
+     "AC_F04": 9,
+     "FM111_F09": 8,
+     "Crowley_coluna_F08": 9
+    },
+    {
+     "letra": "L",
+     "AC_F04": 8,
+     "FM111_F09": 8,
+     "Crowley_coluna_F08": 40
+    },
+    {
+     "letra": "M",
+     "AC_F04": 5,
+     "FM111_F09": 90,
+     "Crowley_coluna_F08": 90
+    },
+    {
+     "letra": "P",
+     "AC_F04": 8,
+     "FM111_F09": 9,
+     "Crowley_coluna_F08": 8
+    },
+    {
+     "letra": "S",
+     "AC_F04": 7,
+     "FM111_F09": 7,
+     "Crowley_coluna_F08": 10
+    },
+    {
+     "letra": "T",
+     "AC_F04": 3,
+     "FM111_F09": 9,
+     "Crowley_coluna_F08": 400
+    },
+    {
+     "letra": "Z",
+     "AC_F04": 9,
+     "FM111_F09": 9,
+     "Crowley_coluna_F08": 1
+    }
+   ]
+  },
+  {
+   "conferencia": "BABALON por sistema aditivo (F04-página afirma 280 em 'gematria enoquiana' e que Crowley queria 156)",
+   "resultado": "informativo",
+   "detalhe": {
+    "isopsefia_latino_grega__F07": 156,
+    "golden_dawn_coluna__F08": 156,
+    "astrologico_hebraico_crowley_AC__F04": 280,
+    "transliteracao_hebraica_JAE__F04": 156,
+    "astrologico_hebraico_GD__F09_inferido": 110,
+    "aleister_crowley_coluna__F08": 142,
+    "aurum_solis_coluna__F08": 154,
+    "crowley_coluna_enochgem__F16": 110,
+    "primos_na_ordem_de_dee__F16_F18": 157,
+    "victor__F16": 156,
+    "english_qabalah_nao_especifico__F16_F17": 65
+   }
+  },
+  {
+   "conferencia": "teste: algum sistema aditivo reproduz os números escritos por Dee nas Chamadas (soma das letras)?",
+   "resultado": "informativo",
+   "detalhe": {
+    "isopsefia_latino_grega__F07": {
+     "acertos": [],
+     "n": 0,
+     "de": 25
+    },
+    "golden_dawn_coluna__F08": {
+     "acertos": [],
+     "n": 0,
+     "de": 25
+    },
+    "astrologico_hebraico_crowley_AC__F04": {
+     "acertos": [],
+     "n": 0,
+     "de": 25
+    },
+    "transliteracao_hebraica_JAE__F04": {
+     "acertos": [],
+     "n": 0,
+     "de": 25
+    },
+    "astrologico_hebraico_GD__F09_inferido": {
+     "acertos": [],
+     "n": 0,
+     "de": 25
+    },
+    "aleister_crowley_coluna__F08": {
+     "acertos": [],
+     "n": 0,
+     "de": 25
+    },
+    "aurum_solis_coluna__F08": {
+     "acertos": [],
+     "n": 0,
+     "de": 25
+    },
+    "crowley_coluna_enochgem__F16": {
+     "acertos": [],
+     "n": 0,
+     "de": 25
+    },
+    "primos_na_ordem_de_dee__F16_F18": {
+     "acertos": [],
+     "n": 0,
+     "de": 25
+    },
+    "victor__F16": {
+     "acertos": [],
+     "n": 0,
+     "de": 25
+    },
+    "english_qabalah_nao_especifico__F16_F17": {
+     "acertos": [
+      "OS",
+      "AF"
+     ],
+     "n": 2,
+     "de": 25
+    }
+   }
+  },
+  {
+   "conferencia": "teste: as 'letras-dígito' (T0 L1 V2 D3 R3 S4 O5 N6 Q7 P8 M9 X10) lidas em sequência reproduzem as palavras numéricas?",
+   "resultado": "informativo",
+   "detalhe": {
+    "acertos": [],
+    "nota": "palavras com letras fora da lista não testáveis"
+   }
+  },
+  {
+   "conferencia": "alfabeto: a ordem da lista de Dee (F14, enoch2) é a mesma do quadro F01",
+   "resultado": "ok",
+   "detalhe": {
+    "F14": [
+     "Pa",
+     "Veh",
+     "Ged",
+     "Gal",
+     "Or",
+     "Un",
+     "Graph",
+     "Tal",
+     "Gon",
+     "Na",
+     "Ur",
+     "Mals",
+     "Ger",
+     "Drux",
+     "Pal",
+     "Med",
+     "Don",
+     "Ceph",
+     "Van",
+     "Fam",
+     "Gisg"
+    ]
+   }
+  },
+  {
+   "conferencia": "alfabeto: a tabela de Dee (F14, enoch3) e a lista (F14, enoch2) dão a mesma letra latina para as 21 letras",
+   "resultado": "ok",
+   "detalhe": {
+    "unica_diferenca_de_grafia": "Na: a lista escreve 'hath', a tabela escreve 'h'"
+   }
+  },
+  {
+   "conferencia": "alfabeto: letras latinas de Dee (F14) x F01 x F02, célula a célula",
+   "resultado": "informativo",
+   "detalhe": {
+    "diferencas": [
+     {
+      "nome": "Veh",
+      "F14_Dee": "C",
+      "F01": [
+       "C",
+       "K"
+      ],
+      "F02": [
+       "C"
+      ]
+     },
+     {
+      "nome": "Ged",
+      "F14_Dee": "G",
+      "F01": [
+       "G",
+       "J"
+      ],
+      "F02": [
+       "G"
+      ]
+     },
+     {
+      "nome": "Van",
+      "F14_Dee": "U",
+      "F01": [
+       "U",
+       "V"
+      ],
+      "F02": [
+       "U",
+       "V"
+      ]
+     }
+    ],
+    "nota": "Dee escreve só c para Veh, g para Ged e u para Van; K, J e V de F01/F02 não estão nas imagens de Dee. Y aparece em F14 só como segunda forma de Gon."
+   }
+  },
+  {
+   "conferencia": "Aurum Solis (F08/F17/F16) = ordem da tabela de Dee numerada 1-9, 10-90, 100-300",
+   "resultado": "ok",
+   "detalhe": {
+    "ordem_de_dee": "BCGDFAEMIHLPQNXORZUST",
+    "valores_na_ordem": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     20,
+     30,
+     40,
+     50,
+     60,
+     70,
+     80,
+     90,
+     100,
+     200,
+     300
+    ]
+   }
+  },
+  {
+   "conferencia": "primos (F16) = os 21 primeiros primos na ordem da tabela de Dee",
+   "resultado": "ok",
+   "detalhe": {
+    "variante_F18": "F18 diz R = 73 (21ª dupla); na ordem de Dee R é a 17ª letra (59) e T a 21ª (73)"
+   }
+  },
+  {
+   "conferencia": "primos: os totais publicados em F18 conferem com a tabela de F16",
+   "resultado": "ok",
+   "detalhe": {
+    "BABALON": 157,
+    "IAD": 43,
+    "IAIDA": 79,
+    "L": 31
+   }
+  },
+  {
+   "conferencia": "Victor (F16): 21 valores distintos = {1..9, 10..90, 100..300}",
+   "resultado": "ok",
+   "detalhe": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    100,
+    200,
+    300
+   ]
+  },
+  {
+   "conferencia": "F16 coluna Golden Dawn = F08 coluna Golden Dawn (21 letras)",
+   "resultado": "ok",
+   "detalhe": {
+    "aliases_F16": {
+     "J": 10,
+     "K": 20,
+     "U": 400,
+     "V": 400,
+     "W": 400,
+     "Y": 10
+    },
+    "aliases_F08": {
+     "J": 0,
+     "K": 0,
+     "U": 0,
+     "V": 400,
+     "W": 0,
+     "Y": 0
+    },
+    "nota": "F08 zera J, K, U, W e Y; F16 os preenche (J e Y como I, K como C, U/V/W como Van)"
+   }
+  },
+  {
+   "conferencia": "F16 coluna Aurum Solis = F08 coluna Aurum Solis (21 letras)",
+   "resultado": "ok",
+   "detalhe": {
+    "aliases_F16": {
+     "J": 3,
+     "K": 2,
+     "U": 100,
+     "V": 100,
+     "W": 100,
+     "Y": 9
+    },
+    "nota": "em F16, J = 3 (J tratado como G) nesta coluna e J = 10 (como I) na coluna GD"
+   }
+  },
+  {
+   "conferencia": "F16 coluna 'Aleister Crowley' = tabela inferida de F09 (21 letras, primeiro valor impresso)",
+   "resultado": "ok",
+   "detalhe": {
+    "diferencas_F16_x_F08_x_F09": [
+     {
+      "letra": "E",
+      "F16_Crowley": 10,
+      "F08_Crowley": 7,
+      "F09_inferido": 10
+     },
+     {
+      "letra": "F",
+      "F16_Crowley": 3,
+      "F08_Crowley": 300,
+      "F09_inferido": 3
+     },
+     {
+      "letra": "G",
+      "F16_Crowley": 8,
+      "F08_Crowley": 9,
+      "F09_inferido": 8
+     },
+     {
+      "letra": "L",
+      "F16_Crowley": 8,
+      "F08_Crowley": 40,
+      "F09_inferido": 8
+     },
+     {
+      "letra": "P",
+      "F16_Crowley": 9,
+      "F08_Crowley": 8,
+      "F09_inferido": 9
+     },
+     {
+      "letra": "S",
+      "F16_Crowley": 7,
+      "F08_Crowley": 10,
+      "F09_inferido": 7
+     },
+     {
+      "letra": "T",
+      "F16_Crowley": 9,
+      "F08_Crowley": 400,
+      "F09_inferido": 9
+     },
+     {
+      "letra": "Z",
+      "F16_Crowley": 9,
+      "F08_Crowley": 1,
+      "F09_inferido": 9
+     }
+    ],
+    "nota": "as duas tabelas chamadas 'Crowley' que citam Schueler (F08 via 'Blue Book'/'Enochian Coloring Book'; F16 via 'The Enochian Workbook') diferem em 8 letras"
+   }
+  },
+  {
+   "conferencia": "F17 (count.c de 1993) reproduz as três colunas de F08 (1992) letra a letra",
+   "resultado": "ok",
+   "detalhe": {
+    "nota": "no código, U = 0 e o valor de Van fica em V (gravado aqui em U), como em F08; mesma autoria (AZOTH), portanto não é confirmação independente, só da transcrição"
+   }
+  },
+  {
+   "conferencia": "F17 tabela inglesa = coluna English Qabalah de F16 (26 letras)",
+   "resultado": "ok",
+   "detalhe": {
+    "letras_conferidas": "A-Z, incluindo J K V W Y"
+   }
+  },
+  {
+   "conferencia": "teste de acaso: com os valores de cada sistema embaralhados ao acaso entre as 21 letras (20000 sorteios, semente 20261022), com que frequência se obtêm pelo menos tantos acertos nas 25 palavras numéricas?",
+   "resultado": "informativo",
+   "detalhe": {
+    "por_sistema": {
+     "isopsefia_latino_grega__F07": {
+      "acertos_reais": 0,
+      "fracao_de_embaralhamentos_com_pelo_menos_esse_numero_(min_1)": 0.0727
+     },
+     "golden_dawn_coluna__F08": {
+      "acertos_reais": 0,
+      "fracao_de_embaralhamentos_com_pelo_menos_esse_numero_(min_1)": 0.0719
+     },
+     "astrologico_hebraico_crowley_AC__F04": {
+      "acertos_reais": 0,
+      "fracao_de_embaralhamentos_com_pelo_menos_esse_numero_(min_1)": 0.0644
+     },
+     "astrologico_hebraico_GD__F09_inferido": {
+      "acertos_reais": 0,
+      "fracao_de_embaralhamentos_com_pelo_menos_esse_numero_(min_1)": 0.0717
+     },
+     "aleister_crowley_coluna__F08": {
+      "acertos_reais": 0,
+      "fracao_de_embaralhamentos_com_pelo_menos_esse_numero_(min_1)": 0.0418
+     },
+     "aurum_solis_coluna__F08": {
+      "acertos_reais": 0,
+      "fracao_de_embaralhamentos_com_pelo_menos_esse_numero_(min_1)": 0.0766
+     },
+     "crowley_coluna_enochgem__F16": {
+      "acertos_reais": 0,
+      "fracao_de_embaralhamentos_com_pelo_menos_esse_numero_(min_1)": 0.0744
+     },
+     "primos_na_ordem_de_dee__F16_F18": {
+      "acertos_reais": 0,
+      "fracao_de_embaralhamentos_com_pelo_menos_esse_numero_(min_1)": 0.0935
+     },
+     "victor__F16": {
+      "acertos_reais": 0,
+      "fracao_de_embaralhamentos_com_pelo_menos_esse_numero_(min_1)": 0.0799
+     },
+     "english_qabalah_nao_especifico__F16_F17": {
+      "acertos_reais": 2,
+      "fracao_de_embaralhamentos_com_pelo_menos_esse_numero_(min_1)": 0.0362
+     }
+    },
+    "nota": "mede só se um número de acertos é fácil de obter por acaso; não diz nada sobre a origem dos sistemas. Os acertos de S13 são OS = 12 e AF = 19"
+   }
+  },
+  {
+   "conferencia": "teste: a soma das letras do nome de cada governador (F20, governadores.json) dá o número de servos que Dee registra?",
+   "resultado": "informativo",
+   "detalhe": {
+    "isopsefia_latino_grega__F07": {
+     "acertos": [],
+     "n": 0,
+     "de": 91
+    },
+    "golden_dawn_coluna__F08": {
+     "acertos": [],
+     "n": 0,
+     "de": 91
+    },
+    "astrologico_hebraico_crowley_AC__F04": {
+     "acertos": [],
+     "n": 0,
+     "de": 91
+    },
+    "transliteracao_hebraica_JAE__F04": {
+     "acertos": [],
+     "n": 0,
+     "de": 91
+    },
+    "astrologico_hebraico_GD__F09_inferido": {
+     "acertos": [],
+     "n": 0,
+     "de": 91
+    },
+    "aleister_crowley_coluna__F08": {
+     "acertos": [],
+     "n": 0,
+     "de": 91
+    },
+    "aurum_solis_coluna__F08": {
+     "acertos": [],
+     "n": 0,
+     "de": 91
+    },
+    "crowley_coluna_enochgem__F16": {
+     "acertos": [],
+     "n": 0,
+     "de": 91
+    },
+    "primos_na_ordem_de_dee__F16_F18": {
+     "acertos": [],
+     "n": 0,
+     "de": 91
+    },
+    "victor__F16": {
+     "acertos": [],
+     "n": 0,
+     "de": 91
+    },
+    "english_qabalah_nao_especifico__F16_F17": {
+     "acertos": [],
+     "n": 0,
+     "de": 91
+    }
+   }
+  },
+  {
+   "conferencia": "Sigillum (F20): a mesma letra do anel externo recebe números diferentes?",
+   "resultado": "informativo",
+   "detalhe": {
+    "letras_com_mais_de_um_numero": {
+     "a": [
+      20,
+      6,
+      11,
+      8,
+      6,
+      5,
+      24
+     ],
+     "g": [
+      9,
+      7,
+      5
+     ],
+     "h": [
+      22,
+      12,
+      14
+     ],
+     "l": [
+      26,
+      30,
+      8
+     ],
+     "n": [
+      7,
+      14
+     ],
+     "o": [
+      22,
+      18,
+      8,
+      10,
+      17
+     ],
+     "r": [
+      13,
+      16
+     ],
+     "t": [
+      4,
+      9,
+      11
+     ]
+    },
+    "conclusao_factual": "sim: o número de uma casa não é um valor fixo da letra; a regra declarada no manuscrito (Michael, 20 mar. 1582) usa o número como passo de contagem para achar a próxima letra"
+   }
+  },
+  {
+   "conferencia": "Sigillum (F20): cada par letra+número dos 7 ângulos repete um par do anel externo",
+   "resultado": "ok",
+   "detalhe": [
+    {
+     "letra": "G",
+     "numero": 5,
+     "existe_no_anel": true
+    },
+    {
+     "letra": "A",
+     "numero": 24,
+     "existe_no_anel": true
+    },
+    {
+     "letra": "L",
+     "numero": 30,
+     "existe_no_anel": true
+    },
+    {
+     "letra": "E",
+     "numero": 21,
+     "existe_no_anel": true
+    },
+    {
+     "letra": "T",
+     "numero": 9,
+     "existe_no_anel": true
+    },
+    {
+     "letra": "H",
+     "numero": 14,
+     "existe_no_anel": true
+    }
+   ]
+  },
+  {
+   "conferencia": "Ensígnias (F20): números que dividem a casa com b/B",
+   "resultado": "informativo",
+   "detalhe": {
+    "tokens_numericos_nas_grades_transcritas": 91,
+    "numeros_distintos_junto_de_b": [
+     "1",
+     "1.",
+     "11",
+     "123",
+     "14",
+     "15",
+     "152",
+     "1556",
+     "166",
+     "17",
+     "2",
+     "2.",
+     "2.4.6",
+     "20",
+     "216?",
+     "22",
+     "23",
+     "25",
+     "3",
+     "30",
+     "33.",
+     "38",
+     "4",
+     "5",
+     "52",
+     "6",
+     "7",
+     "72",
+     "8",
+     "9",
+     "98",
+     "99"
+    ],
+    "letras_contadas": {
+     "b": 120,
+     "B": 49,
+     "o": 11,
+     "G": 9,
+     "g": 9,
+     "q": 8,
+     "d": 7,
+     "L": 6,
+     "M": 6,
+     "A": 6,
+     "p": 4,
+     "T": 3,
+     "F": 3,
+     "Q": 3,
+     "i": 3,
+     "O": 2,
+     "e": 2,
+     "H": 2,
+     "a": 2,
+     "l": 2,
+     "r": 1,
+     "m": 1,
+     "t": 1,
+     "h": 1,
+     "V": 1,
+     "P": 1,
+     "I": 1,
+     "N": 1
+    },
+    "conclusao_factual": "a mesma letra (b/B) divide casa com muitos números diferentes; não há par fixo letra-número. As letras das Ensígnias (1582) são latinas, anteriores ao alfabeto enoquiano (1583)"
+   }
+  }
+ ],
+ "lacunas": [
+  "Patricia Shaffer, Leo Vinci (Gmicalzoma, 1976), Aaron Leitch, Laycock e Schueler: não achei tabela deles acessível sem login ou pagamento. Só registrei o que outras páginas abertas dizem copiar de Schueler (F08, F16), sem conferir nos livros.",
+  "Black Pearl n. 1 (College of Thelema): original não localizado. A tabela vem de transcrição em fórum (F05) e de foto de livro (F04).",
+  "Autoria do estudo 'Enochian Numbers' (F07) não identificada; Regardie apenas o publica.",
+  "Origem documental das atribuições astrológicas (documento da GD ou Crowley; Harley 6482 de Rudd, citado na página de F04) não conferida. Uma busca achou menção a um rascunho de David Jones (academia.edu) e à Enochian Magick Reference de B. Rowe (hermetic.com), mas a primeira pede login e a segunda recusou o acesso (403); nada foi usado.",
+  "Hebraico impresso para D (Espírito) em F04 ilegível na foto; valor AC 31 registrado como impresso.",
+  "Cifra 'Victor' (F16): livro e autor não identificados.",
+  "Primos (F16 x F18): os valores de R, Z, U, S e T divergem entre a tabela de F16 e a frase de F18; não resolvido.",
+  "Nota de Dee com letras e números citada por F19: não localizada; F19 não dá fólio.",
+  "O = 5 continua provável (posição na página, sem traço de ligação). T = 0, R = 3, Q = 7 e X = 10 não foram localizados na TFR: estão só na lista secundária.",
+  "Índices de scan de p.121 (n210) deduzidos pelo deslocamento das páginas vizinhas e não vistos.",
+  "Comparação TFR (1659) x Sloane 3191 (48 Claves) não feita: não achei transcrição aberta de Sloane 3191 com os números; usei só a TFR (scan F11 e transcrição F15).",
+  "Fólios de Sloane 3188 das três imagens de F14 não indicados pela fonte; o fólio 103v-104r de F01 não foi conferido no manuscrito.",
+  "Disco C: desta máquina ficou sem espaço durante a revisão; os scripts e cópias de trabalho foram para _scripts_gematria/ nesta pasta."
+ ]
+}

@@ -1,0 +1,14 @@
+# generated analysis outputs (regenerate with python src/run_all.py)
+results/*.json
+
+# engine run outputs (regenerate with: cd engine && python loop.py)
+engine/results/*.jsonl
+engine/results/*.json
+engine/results/*.md
+
+# optional private evidence corpus (not redistributable)
+engine/corpus/
+
+__pycache__/
+*.pyc
+.DS_Store

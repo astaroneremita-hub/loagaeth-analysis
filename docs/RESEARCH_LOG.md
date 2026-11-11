@@ -212,6 +212,11 @@ text's own texture.
 | 150 | What decides the variant of a formula? | part z 8.5; table z 3.7; vowel 4–9 letters before z 3.1; side, row, column, previous choice: nothing | REFUTED as a positional channel | a45 |
 | 151 | Can a machine write the book? | order 5 per side + neighbours reproduces repeats of 12, names, GETHACLAX, the gradient between sides | REAL (sufficiency) | a46 |
 | 152 | What no machine reproduces | echo over 4 lines (1.08 vs 1.0); one-letter variants 110 vs 74–85; repeats of 14: 70 vs 53–55 | RESIDUE — templates with a slot | a46 |
+| 153 | Templates with one free slot beyond the machine? | 9 letters: 566 vs 582 (G5L); 11: 59 vs 52 (max 70); 13: 5 vs 1 | EXPLAINED by the machine | a47 |
+| 154 | Any memory beyond five letters of context, inside a side? | letter 6–14 back given the 5 before: z 1.3, 1.3, −0.8, 0.4, 0.7; Bible z 7.3–21.6; false book ≈ 0 | REAL — none detectable | a47 |
+| 155 | Memory beyond five letters on chessboard leaves and diamonds? (Bible cut to the same shape as control) | z between −1.2 and 1.1 in every group; Bible 2.6–10.2 | REAL — none in any format (diamonds: few contexts) | a48 |
+| 156 | Echo over four lines by format, corrected for line length | rows 1.085 vs 1.01 (z 7.0); chessboard 1.73 vs 1.41 (z 3.9); diamonds z 1.1, 1.4 | REAL in rows and chessboard; NOT SHOWN in diamonds | a48 |
+| 157 | Method: shuffling lines of unequal length fakes an echo (ratio 1.4 in memoryless text) | compare with same-shape surrogates | ARTEFACT REMOVED | a48 |
 
 Note: from #127 on, tables 25b–28b are read with the refined decoding of a37; counts quoted in entries
 79–122 moved by a few units (current values are in the README and in results/*.json).

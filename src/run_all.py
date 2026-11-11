@@ -56,6 +56,8 @@ import a43_recency
 import a44_positive_control
 import a45_variation_channel
 import a46_generator
+import a47_templates
+import a48_beyond_five_elsewhere
 import make_figures
 import make_viz_data
 
@@ -108,6 +110,8 @@ MODULES = [
     ("44_positive_control", a44_positive_control),
     ("45_variation_channel", a45_variation_channel),
     ("46_generator", a46_generator),
+    ("47_templates", a47_templates),
+    ("48_beyond_five_elsewhere", a48_beyond_five_elsewhere),
 ]
 
 
@@ -126,6 +130,8 @@ def main():
         print("  " + f)
     print("\n[3D viewer data]")
     make_viz_data.main()
+    import make_catalog
+    make_catalog.run()
 
 
 if __name__ == "__main__":

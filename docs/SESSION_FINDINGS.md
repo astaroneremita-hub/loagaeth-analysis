@@ -577,3 +577,22 @@ G5L (five letters of context, model per side with three neighbours each way) rep
 12 (378 vs 365), master names (1866 vs 1861), GETHACLAX (9 vs 10), the gradient between sides.
 Residue: echo over four lines; one-letter variants of long passages (110 vs 74); repeats of 14
 (70 vs 53).
+
+## 51. Templates and the limit of five letters (module a47)
+
+- Templates with one free slot: 566 of 9 letters (G5L 582), 59 of 11 (G5L 52, up to 70), 5 of 13
+  (G5L 1). The machine produces them. Examples: AHN_CHASTOR (O 10, E 5), DNO_HANZACH (C 7, T 2).
+- Memory beyond five letters, permuting inside (context, side): tables z 1.3 / 1.3 / -0.8 / 0.4 /
+  0.7 at 6, 7, 8, 10, 14 letters back; false book about 0; Bible 16.6 / 17.5 / 21.6 / 13.0 / 7.3.
+- Two-slot templates six letters apart: only 2 with enough occurrences; no test possible.
+- Reading: inside a side the row-written tables behave as a five-letter process with the leaf's
+  vocabulary. No word order, no long-range agreement.
+
+## 52. The limit of five letters in the other formats (module a48)
+
+- Beyond five letters: chessboard 25b-28b z -0.8 / 0.3 / 1.1 / -0.4 (Bible same shape 7.8 / 8.2 /
+  9.0 / 5.5); diamonds 29-40 about 0 (Bible 4.7-10.2); diamonds 41-48 about 0 (Bible 2.6-8.9).
+  Few testable contexts in the diamonds (236 and 46).
+- Echo over four lines, against same-shape surrogates: rows z 7.0; chessboard z 3.9; diamonds z 1.1
+  and 1.4. Naive shuffling fakes an echo of 1.4 where lines differ in length.
+- Leaf 1 is not in the decoded book used here; not tested.

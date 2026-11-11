@@ -137,6 +137,9 @@ src/                          LAYER A - the Loagaeth analysis
   a44_positive_control.py         the same blind tests on a text with sentences (King James Bible) and on controls
   a45_variation_channel.py        what decides which variant of a formula is written
   a46_generator.py                three machines write a false book; what they fail to reproduce
+  a47_templates.py                templates with a free slot; is there anything beyond five letters of context?
+  a48_beyond_five_elsewhere.py    the same limit on the chessboard leaves and the diamonds, with a shape-matched control
+  make_catalog.py                 builds viz/names_catalog.html (template: catalog_template.html)
   make_figures.py             draws every figure in figures/ from the results
   make_viz_data.py            builds viz/loagaeth_viz_data.js for the 3D viewer
 viz/                          loagaeth_3d.html - interactive three.js viewer
@@ -552,6 +555,19 @@ diagonal zones keep their arrows, and the unclear corner of 26a is dimmed.
   behave as free scrambles; T5 and T7 carry the known damaged cells (duplicates 3, 7, 15, 18 / 17;
   missing 17, 28, 32, 35 / 27). **REFUTED.**
 
+### The names, as a catalogue to consult
+
+`viz/names_catalog.html` (built by `src/make_catalog.py`; Portuguese and English) lists the 67
+recurring names — the master names, the 49 discovered by a23, the ones found under them by a28 —
+one row each, under a shared band that is the whole book from table 2 to 48: the mark on each of
+the 94 sides is as strong as the name is frequent there. Rows are grouped by family and coloured by
+house. Opening a name shows its letters with Dee's letter names (and, labelled as such, the
+practitioner's sense of each letter), the sides where it is heaviest, its count by part of the
+book, its longer forms and one-letter variants, the letters that touch it, and passages.
+
+Serve the repository (`python -m http.server 8860`) and open
+`http://127.0.0.1:8860/viz/names_catalog.html`; the file also opens directly from disk.
+
 ### Long repeats, formulas and controlled variation `[a39, a40]`
 
 A reader of this study pointed out that strings longer than ten letters repeat in the book, and asked
@@ -679,8 +695,60 @@ model per side trained on the side and its three neighbours each way).
   names, words or sentences in it. **REAL (sufficiency).**
 - **The residue**, what no machine gives: the faint echo over four lines; more one-letter variants
   of long passages (110 against 74–85) and more repeats of 14 letters (70 against 53–55). Three
-  runs per machine; the gaps are steady but not large. They point to units a little longer than six
-  letters with one free slot — templates — as the next thing to mine.
+  runs per machine; the gaps are steady but not large. Templates with a free slot were the natural
+  suspect; mined below, they turn out to be explained too.
+
+### Templates, and the limit of five letters `[a47]`
+
+- **Templates with one free slot** (a passage written at least four times with two or more fillers:
+  AHN_CHASTOR takes O 10 times and E 5; DNO_HANZACH takes C 7 and T 2; DNOC_ANTANT takes L 5 and
+  H 3). Of 9 letters: 566 in the book, 582 in the false books of G5L (up to 637). Of 11 letters: 59
+  against 52 (up to 70). Of 13: 5 against 1 (up to 2). The machine makes them as well; only the
+  handful of the longest is beyond it. **Explained — not a residue.**
+- **Is there anything beyond five letters?** The direct test: knowing the five letters before, does
+  the letter 6, 7, 8, 10 or 14 places back still help to tell the next one? (Next letters permuted
+  inside each context and side, so neither the letter model nor the leaf's vocabulary counts.)
+
+  | letters back | tables 2–24 (z) | false book G5L (z) | Bible cut like the tables (z) |
+  |---|---|---|---|
+  | 6 | 1.3 | 0.3 | 16.6 |
+  | 7 | 1.3 | −0.4 | 17.5 |
+  | 8 | −0.8 | −0.2 | 21.6 |
+  | 10 | 0.4 | 0.7 | 13.0 |
+  | 14 | 0.7 | 1.0 | 7.3 |
+
+  In English the past beyond five letters speaks loudly at every distance. In the tables it is
+  silent, exactly as in a book written by the machine. **REAL: inside a side, the row-written
+  tables carry no detectable memory beyond five letters of context.** Whatever the book encodes
+  along its rows, it is not carried by word order or by anything a longer window could catch.
+
+### The limit of five letters in the other formats `[a48]`
+
+The same test on the chessboard leaves (25b–28b) and the diamonds (29–40, 41–48), each read along
+its own road. For each group the Bible is cut into lines of exactly the same lengths, so the
+positive control has the same size and shape.
+
+| group | letters | letter 6 / 7 / 8 / 10 back (z) | Bible, same shape (z) |
+|---|---|---|---|
+| tables 2–24 (rows) | 110,029 | 1.3 / 1.5 / −0.9 / 0.3 | 17.7 / 20.6 / 16.7 / 12.4 |
+| leaves 25b–28b (chessboard) | 16,806 | −0.8 / 0.3 / 1.1 / −0.4 | 7.8 / 8.2 / 9.0 / 5.5 |
+| diamonds 29–40 | 28,787 | −0.2 / −0.6 / −0.8 / 0.3 | 9.6 / 10.2 / 7.6 / 4.7 |
+| diamonds 41–48 (U register) | 19,203 | 0.8 / −1.2 / −1.1 / −0.4 | 8.9 / 7.8 / 8.0 / 2.6 |
+
+- **No format carries memory beyond five letters** along its road, where English of the same size
+  and shape shows it every time. In the diamonds the book offers few repeated contexts to test (236
+  and 46 occurrences), so the statement there is weaker than for rows and chessboard. **REAL.**
+- **A trap, found and removed.** On a diagonal layout neighbouring lines have similar lengths;
+  shuffling the lines pairs long with short and lowers the shuffled count by itself. A text with
+  no memory at all then shows an "echo" of 1.4. The echo is therefore compared with surrogates of
+  the same shape.
+- **The echo over four lines, corrected:** rows 1.085 against 1.01 (z 7.0); chessboard leaves 1.73
+  against 1.41 (z 3.9); diamonds 29–40 1.41 against 1.33 (z 1.1); diamonds 41–48 1.65 against 1.44
+  (z 1.4). The echo is real in the rows and in the chessboard leaves, and **not shown in the
+  diamonds**.
+- **Order of lines:** chessboard leaves lose 0.0085 bits per letter when their lines are shuffled
+  (z 2.3); the diamonds lose nothing — but at that shape the test barely sees the Bible either
+  (z 1.1–1.6), so for the diamonds it decides nothing.
 
 ### A ruler for the scribe: the Soyga tables at the back of the manuscript `[a36]`
 

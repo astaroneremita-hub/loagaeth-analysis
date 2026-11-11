@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Catálogo dos nomes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Alegreya+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E8ECE7; --sheet:#F3F5F1; --ink:#1B2430; --soft:#56616B; --rule:#C3CAC3;
+  --geth:#A3352A; --nocha:#2B5C8C; --other:#4A4037; --mark:#E2C766;
+  --serif:"Alegreya","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --sans:"Alegreya Sans","Segoe UI",system-ui,sans-serif;
+  --namecol:13.5rem; --countcol:3.6rem;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#14181D; --sheet:#1B2127; --ink:#E4E7E2; --soft:#98A3AB; --rule:#333C45;
+  --geth:#E0705F; --nocha:#6FA6DB; --other:#B9AC9C; --mark:#6B5A1E;
+}}
+:root[data-theme="dark"]{
+  --paper:#14181D; --sheet:#1B2127; --ink:#E4E7E2; --soft:#98A3AB; --rule:#333C45;
+  --geth:#E0705F; --nocha:#6FA6DB; --other:#B9AC9C; --mark:#6B5A1E;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px 96px}
+header.top{padding:40px 0 20px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start}
+h1{font-family:var(--serif);font-weight:500;font-size:clamp(2rem,5vw,3.1rem);line-height:1.05;margin:0 0 14px;letter-spacing:-.01em}
+.lede{max-width:62ch;margin:0;color:var(--soft);font-size:1.06rem}
+.lede b{color:var(--ink);font-weight:500}
+.lang{display:flex;border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.lang button{font:inherit;font-size:.9rem;background:none;color:var(--soft);border:0;padding:6px 12px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.facts{display:flex;flex-wrap:wrap;gap:8px 28px;margin:22px 0 0;padding:0;list-style:none;color:var(--soft);font-size:.98rem}
+.facts b{font-family:var(--serif);font-size:1.5rem;font-weight:500;color:var(--ink);margin-right:6px}
+
+.tools{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin:26px 0 10px}
+.tools input,.tools select{font:inherit;font-size:.98rem;color:var(--ink);background:var(--sheet);border:1px solid var(--rule);border-radius:3px;padding:7px 10px}
+.tools input{flex:1 1 220px;min-width:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:.92rem;border:1px solid var(--rule);background:none;color:var(--soft);border-radius:999px;padding:4px 12px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.chip i{display:inline-block;width:.6em;height:.6em;border-radius:50%;margin-right:6px;background:var(--c)}
+:focus-visible{outline:2px solid var(--nocha);outline-offset:2px}
+
+/* the spine: the book laid out left to right, shared by every row */
+.spine{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid var(--ink);padding:10px 0 6px;
+  display:grid;grid-template-columns:var(--namecol) var(--countcol) 1fr;align-items:end}
+.spine .cap{font-size:.86rem;color:var(--soft);line-height:1.2}
+.spine .cap.r{text-align:right;padding-right:12px}
+.parts{display:flex;gap:3px}
+.parts div{font-size:.8rem;color:var(--soft);border-top:3px solid var(--rule);padding-top:3px;line-height:1.15;white-space:nowrap;overflow:hidden}
+.parts div b{display:block;font-family:var(--serif);font-size:1rem;color:var(--ink);font-weight:500}
+
+.fam{margin:26px 0 4px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.fam h2{font-family:var(--serif);font-weight:500;font-size:1.35rem;margin:0}
+.fam span{color:var(--soft);font-size:.95rem}
+.fam .dot{width:.7em;height:.7em;border-radius:50%;background:var(--c);align-self:center}
+
+.row{display:grid;grid-template-columns:var(--namecol) var(--countcol) 1fr;align-items:center;width:100%;
+  font:inherit;color:inherit;background:none;border:0;border-bottom:1px solid var(--rule);padding:5px 0;text-align:left;cursor:pointer}
+.row:hover{background:var(--sheet)}
+.row .nm{font-family:var(--serif);font-size:1.16rem;letter-spacing:.06em;overflow-wrap:anywhere;padding-right:8px}
+.row .nm small{font-family:var(--sans);font-size:.78rem;letter-spacing:0;color:var(--soft);margin-left:6px}
+.row .ct{text-align:right;padding-right:12px;font-variant-numeric:tabular-nums;color:var(--soft)}
+.row[aria-expanded="true"]{background:var(--sheet);border-bottom-color:transparent}
+.row[aria-expanded="true"] .nm{font-weight:700}
+svg.strip{display:block;width:100%;height:20px}
+svg.strip rect.bg{fill:var(--rule);opacity:.35}
+
+.detail{background:var(--sheet);border-bottom:1px solid var(--ink);padding:14px 16px 22px;display:grid;grid-template-columns:repeat(12,1fr);gap:20px 28px}
+.detail h3{font-family:var(--serif);font-weight:500;font-size:1.05rem;margin:0 0 6px}
+.detail p{margin:0 0 6px}
+.detail .note{color:var(--soft);font-size:.9rem}
+.d-letters{grid-column:1/-1}
+.d-where{grid-column:span 5}.d-forms{grid-column:span 4}.d-near{grid-column:span 3}.d-pass{grid-column:1/-1}
+.tiles{display:flex;flex-wrap:wrap;gap:6px}
+.tile{border:1px solid var(--rule);border-radius:3px;padding:6px 9px;min-width:5.2rem;max-width:11rem;background:var(--paper)}
+.tile b{font-family:var(--serif);font-size:1.6rem;font-weight:500;line-height:1;display:block}
+.tile em{font-style:normal;color:var(--soft);font-size:.86rem;display:block}
+.tile span{font-size:.9rem;display:block;line-height:1.25;margin-top:2px}
+.bars{display:grid;grid-template-columns:auto 1fr auto;gap:3px 10px;align-items:center;font-size:.93rem}
+.bars i{display:block;height:9px;background:var(--c);border-radius:1px;min-width:1px}
+.bars span:last-child{font-variant-numeric:tabular-nums;color:var(--soft)}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font:inherit;font-family:var(--serif);letter-spacing:.04em;font-size:.98rem;border:1px solid var(--rule);background:var(--paper);color:var(--ink);border-radius:3px;padding:2px 8px}
+button.tag{cursor:pointer}button.tag:hover{border-color:var(--ink)}
+.tag small{font-family:var(--sans);letter-spacing:0;color:var(--soft);margin-left:5px;font-size:.8rem}
+.pass{font-family:var(--serif);font-size:1.08rem;letter-spacing:.07em;overflow-wrap:anywhere;margin:0 0 3px}
+.pass mark{background:var(--mark);color:inherit;padding:0 2px;border-radius:2px}
+.pass small{font-family:var(--sans);letter-spacing:0;color:var(--soft);font-size:.82rem;margin-right:10px;display:inline-block;min-width:2.6rem}
+.empty{padding:40px 0;color:var(--soft)}
+footer{margin-top:56px;color:var(--soft);font-size:.92rem;max-width:70ch}
+
+@media (max-width:760px){
+  :root{--namecol:1fr;--countcol:3.2rem}
+  header.top{grid-template-columns:1fr}
+  .spine{grid-template-columns:1fr}.spine .cap{display:none}
+  .row{grid-template-columns:1fr auto;row-gap:2px}.row .st{grid-column:1/-1}
+  .detail{display:block}.detail>div{margin-bottom:18px}
+  .parts div{font-size:.7rem}
+}
+@media (prefers-reduced-motion:no-preference){.detail{animation:open .18s ease-out}@keyframes open{from{opacity:0}to{opacity:1}}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1 data-t="title"></h1>
+      <p class="lede" data-t="lede"></p>
+      <ul class="facts" id="facts"></ul>
+    </div>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="pt">Português</button><button type="button" data-lang="en">English</button>
+    </div>
+  </header>
+
+  <div class="tools">
+    <input id="q" type="search" autocomplete="off">
+    <div class="chips" id="houses"></div>
+    <select id="sort"></select>
+  </div>
+
+  <div class="spine">
+    <div class="cap" data-t="capName"></div>
+    <div class="cap r" data-t="capCount"></div>
+    <div class="parts" id="parts"></div>
+  </div>
+  <main id="list"></main>
+  <footer data-t="foot"></footer>
+</div>
+
+<script>
+const D = /*DATA*/null;
+const T = {
+ pt:{title:"Os nomes do Liber Loagaeth",
+  lede:"O livro não corre como prosa: repete <b>nomes</b>, com variações, ao longo das suas 94 faces. Cada linha abaixo é um nome. A faixa à direita é o livro inteiro, da tabela 2 à 48: quanto mais forte a marca, mais vezes o nome está escrito naquela face. Toque num nome para abrir.",
+  fNames:"nomes",fOcc:"ocorrências",fSides:"faces do livro",fLetters:"letras",
+  search:"Buscar um nome ou trecho (ex.: CHAS, NOCH)",all:"Todos",none:"Sem casa",
+  sFam:"Ordenar por família",sCount:"Ordenar por frequência",sAlpha:"Ordem alfabética",sFirst:"Por onde aparece primeiro",
+  capName:"Nome",capCount:"Vezes",leaf1:"Folha 1",
+  parts:["Folha 1","Parte I<br>tabelas 2–12","Parte II<br>13–25a","Parte III<br>25b–33a","Parte IV<br>33b–40","Parte V<br>41–48"],
+  famOf:"Família de",alone:"Nomes sem família",house:"casa",members:n=>n+(n==1?" nome":" nomes"),
+  kind:{master:"",discovered:"descoberto",hidden:"sob outro nome"},
+  letters:"Letra por letra",lettersNote:"Nome da letra segundo a tabela de Dee. O sentido de cada letra é a sua camada de leitura, não vem do manuscrito.",
+  where:"Onde mora",whereNote:(s)=>"Escrito em "+s+" das 94 faces. Faces mais carregadas:",byPart:"Por parte do livro",
+  forms:"Formas maiores",inside:"Contém",variants:"Com uma letra trocada",noForms:"Nenhuma forma maior no catálogo.",
+  near:"O que vem colado",before:"Antes",after:"Depois",
+  pass:"No livro",times:"×",expected:(z,e)=>"Esperado por acaso: "+e+" (z "+z+")",
+  empty:"Nenhum nome com esse trecho. Apague a busca para ver todos.",
+  foot:"Contagens feitas sobre a transcrição de Peterson, com as folhas 25b–28b e os losangos lidos pelo caminho medido neste estudo. Famílias e casas vêm da estatística do livro; os sentidos das letras são atribuição do praticante. Nenhum nome das tabelas tem tradução em fonte histórica."},
+ en:{title:"The names of Liber Loagaeth",
+  lede:"The book does not run as prose: it repeats <b>names</b>, with variation, across its 94 sides. Each row below is a name. The band on the right is the whole book, table 2 to 48: the stronger the mark, the more often the name is written on that side. Select a name to open it.",
+  fNames:"names",fOcc:"occurrences",fSides:"sides of the book",fLetters:"letters",
+  search:"Find a name or a piece of one (e.g. CHAS, NOCH)",all:"All",none:"No house",
+  sFam:"Sort by family",sCount:"Sort by frequency",sAlpha:"Alphabetical",sFirst:"By first appearance",
+  capName:"Name",capCount:"Times",leaf1:"Leaf 1",
+  parts:["Leaf 1","Part I<br>tables 2–12","Part II<br>13–25a","Part III<br>25b–33a","Part IV<br>33b–40","Part V<br>41–48"],
+  famOf:"Family of",alone:"Names without a family",house:"house",members:n=>n+(n==1?" name":" names"),
+  kind:{master:"",discovered:"discovered",hidden:"under another name"},
+  letters:"Letter by letter",lettersNote:"Letter names from Dee's table. The sense given to each letter is the practitioner's reading layer, not the manuscript's.",
+  where:"Where it lives",whereNote:(s)=>"Written on "+s+" of the 94 sides. Heaviest sides:",byPart:"By part of the book",
+  forms:"Longer forms",inside:"Contains",variants:"With one letter changed",noForms:"No longer form in the catalogue.",
+  near:"What touches it",before:"Before",after:"After",
+  pass:"In the book",times:"×",expected:(z,e)=>"Expected by chance: "+e+" (z "+z+")",
+  empty:"No name holds that piece. Clear the search to see them all.",
+  foot:"Counts made on Peterson's transcription, with leaves 25b–28b and the diamonds read along the roads measured in this study. Families and houses come from the statistics of the book; the senses of the letters are the practitioner's attribution. No name of the tables has a translation in a historical source."}
+};
+let lang = "pt", house = "all", sort = "fam", query = "", open = null;
+try{ lang = localStorage.getItem("cat-lang") || lang }catch(e){}
+const $ = s => document.querySelector(s), el = (t,c,h) => { const e = document.createElement(t); if(c) e.className = c; if(h!=null) e.innerHTML = h; return e };
+const color = n => n.house.startsWith("GETH") ? "var(--geth)" : n.house==="NOCHA" ? "var(--nocha)" : "var(--other)";
+const byName = Object.fromEntries(D.names.map(n => [n.n, n]));
+const partN = [0,0,0,0,0,0]; D.part.forEach(p => partN[p]++);
+
+function strip(n, h){
+  const max = Math.max(...n.per), W = 940, gap = 6, cw = (W - gap*5) / D.keys.length;
+  let x = 0, prev = D.part[0], s = `<svg class="strip" viewBox="0 0 ${W} ${h}" preserveAspectRatio="none" style="height:${h}px" aria-hidden="true">`;
+  s += bgRects(cw, gap, h);
+  D.keys.forEach((k,i) => { if(D.part[i] !== prev){ x += gap; prev = D.part[i] }
+    const c = n.per[i]; if(c) s += `<rect x="${x.toFixed(1)}" y="0" width="${(cw+.4).toFixed(1)}" height="${h}" fill="${color(n)}" opacity="${(0.22+0.78*Math.sqrt(c/max)).toFixed(2)}"><title>${k}: ${c}</title></rect>`;
+    x += cw });
+  return s + "</svg>";
+}
+function bgRects(cw, gap, h){ let x = 0, s = ""; partN.forEach(k => { if(!k) return; s += `<rect class="bg" x="${x.toFixed(1)}" y="0" width="${(k*cw).toFixed(1)}" height="${h}"/>`; x += k*cw + gap }); return s }
+
+function detail(n){
+  const t = T[lang], d = el("div","detail"); d.style.setProperty("--c", color(n));
+  const tiles = n.letters.map(l => `<div class="tile"><b>${l[0]}</b><em>${l[1]}</em><span>${lang==="pt"?l[2]:l[3]}</span></div>`).join("");
+  const pmax = Math.max(...n.parts, 1);
+  const bars = n.parts.map((c,i) => `<span>${t.parts[i+1].replace("<br>"," · ")}</span><i style="width:${(100*c/pmax).toFixed(1)}%"></i><span>${c}</span>`).join("");
+  const tag = ([m,c]) => byName[m] ? `<button type="button" class="tag" data-go="${m}">${m}<small>${c}</small></button>` : `<span class="tag">${m}<small>${c}</small></span>`;
+  const pct = (a,tot) => a.map(([l,c]) => `<span class="tag">${l}<small>${Math.round(100*c/Math.max(1,tot))}%</small></span>`).join("");
+  d.innerHTML =
+   `<div class="d-letters"><h3>${t.letters}</h3><div class="tiles">${tiles}</div><p class="note" style="margin-top:8px">${t.lettersNote}</p></div>
+    <div class="d-where"><h3>${t.where}</h3><p class="note">${t.whereNote(n.sides)}</p><div class="tags" style="margin-bottom:12px">${n.top.map(([k,c])=>`<span class="tag">${k}<small>${c}${t.times}</small></span>`).join("")}</div>
+      <h3>${t.byPart}</h3><div class="bars">${bars}</div>${n.z!=null?`<p class="note" style="margin-top:8px">${t.expected(n.z,n.exp)}</p>`:""}</div>
+    <div class="d-forms"><h3>${t.forms}</h3>${n.longer.length?`<div class="tags">${n.longer.map(tag).join("")}</div>`:`<p class="note">${t.noForms}</p>`}
+      ${n.inside.length?`<h3 style="margin-top:14px">${t.inside}</h3><div class="tags">${n.inside.map(tag).join("")}</div>`:""}
+      ${n.var.length?`<h3 style="margin-top:14px">${t.variants}</h3><div class="tags">${n.var.map(tag).join("")}</div>`:""}</div>
+    <div class="d-near"><h3>${t.near}</h3><p class="note">${t.before}</p><div class="tags" style="margin-bottom:10px">${pct(n.before,n.nb)}</div><p class="note">${t.after}</p><div class="tags">${pct(n.after,n.na)}</div></div>
+    <div class="d-pass"><h3>${t.pass}</h3>${n.ex.map(e=>`<p class="pass"><small>${e[0]}</small>${e[1]}<mark>${n.n}</mark>${e[2]}</p>`).join("")}</div>`;
+  d.querySelectorAll("[data-go]").forEach(b => b.onclick = () => { query = ""; $("#q").value = ""; house = "all"; open = b.dataset.go; render(); requestAnimationFrame(() => document.getElementById("r-"+open)?.scrollIntoView({block:"center"})) });
+  return d;
+}
+
+function render(){
+  const t = T[lang]; document.documentElement.lang = lang === "pt" ? "pt-BR" : "en";
+  document.title = lang === "pt" ? "Catálogo dos nomes" : "Names catalogue";
+  document.querySelectorAll("[data-t]").forEach(e => e.innerHTML = t[e.dataset.t]);
+  document.querySelectorAll("[data-lang]").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === lang));
+  $("#q").placeholder = t.search; $("#q").setAttribute("aria-label", t.search);
+  $("#facts").innerHTML = `<li><b>${D.names.length}</b>${t.fNames}</li><li><b>${D.names.reduce((a,n)=>a+n.c,0).toLocaleString(lang)}</b>${t.fOcc}</li><li><b>${D.keys.length}</b>${t.fSides}</li><li><b>${D.letters_in_book.toLocaleString(lang)}</b>${t.fLetters}</li>`;
+  $("#sort").innerHTML = [["fam",t.sFam],["count",t.sCount],["alpha",t.sAlpha],["first",t.sFirst]].map(([v,l]) => `<option value="${v}"${v===sort?" selected":""}>${l}</option>`).join("");
+  $("#houses").innerHTML = [["all",t.all,""],["GETH · ACLAX","GETH · ACLAX","var(--geth)"],["NOCHA","NOCHA","var(--nocha)"],["",t.none,"var(--other)"]]
+    .map(([v,l,c]) => `<button type="button" class="chip" data-h="${v}" aria-pressed="${v===house}" style="--c:${c}">${c?"<i></i>":""}${l}</button>`).join("");
+  $("#houses").querySelectorAll("button").forEach(b => b.onclick = () => { house = b.dataset.h; render() });
+  $("#parts").innerHTML = partN.map((k,i) => k ? `<div style="flex:${k}">${i?t.parts[i].replace(/^(.*?)<br>/,"<b>$1</b>"):`<b>1</b>`}</div>` : "").join("");
+
+  const q = query.trim().toUpperCase();
+  let ns = D.names.filter(n => (house === "all" || n.house === house) && (!q || n.n.includes(q)));
+  const first = n => n.per.findIndex(c => c > 0);
+  const list = $("#list"); list.innerHTML = "";
+  if(!ns.length){ list.append(el("p","empty",t.empty)); return }
+  const groups = [];
+  if(sort === "fam"){
+    const m = new Map(); ns.forEach(n => { if(!m.has(n.fam)) m.set(n.fam, []); m.get(n.fam).push(n) });
+    [...m.entries()].sort((a,b) => (a[0]==="—") - (b[0]==="—") || b[1].reduce((s,n)=>s+n.c,0) - a[1].reduce((s,n)=>s+n.c,0))
+      .forEach(([f,v]) => groups.push([f, v.sort((a,b) => b.c - a.c)]));
+  } else {
+    ns.sort(sort==="count" ? (a,b)=>b.c-a.c : sort==="alpha" ? (a,b)=>a.n.localeCompare(b.n) : (a,b)=>first(a)-first(b)||b.c-a.c);
+    groups.push([null, ns]);
+  }
+  groups.forEach(([f, v]) => {
+    if(f !== null){
+      const h = el("div","fam"); h.style.setProperty("--c", color(v[0]));
+      h.innerHTML = `<i class="dot"></i><h2>${f==="—" ? t.alone : t.famOf+" "+f}</h2><span>${t.members(v.length)}${v[0].house ? " · "+t.house+" "+v[0].house : ""}</span>`;
+      list.append(h);
+    }
+    v.forEach(n => {
+      const r = el("button","row"); r.type = "button"; r.id = "r-"+n.n; r.setAttribute("aria-expanded", open === n.n);
+      r.innerHTML = `<span class="nm">${n.n}${t.kind[n.kind]?`<small>${t.kind[n.kind]}</small>`:""}</span><span class="ct">${n.c}</span><span class="st">${strip(n,20)}</span>`;
+      r.onclick = () => { open = open === n.n ? null : n.n; render(); if(open) requestAnimationFrame(() => document.getElementById("r-"+open)?.scrollIntoView({block:"nearest"})) };
+      list.append(r);
+      if(open === n.n) list.append(detail(n));
+    });
+  });
+}
+$("#q").oninput = e => { query = e.target.value; open = null; render(); $("#q").focus() };
+$("#sort").onchange = e => { sort = e.target.value; render() };
+document.querySelectorAll("[data-lang]").forEach(b => b.onclick = () => { lang = b.dataset.lang; try{ localStorage.setItem("cat-lang", lang) }catch(e){} render() });
+render();
+</script>
+</body>
+</html>

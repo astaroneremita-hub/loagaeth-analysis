@@ -10,6 +10,11 @@
      (xx_xxxxx_xx): does the filler of the first slot tell the filler of the second? A machine with
      five letters of context cannot link them. Fillers are permuted inside each template and part
      of the book, so the dialect of the parts is not counted.
+  E) Anything beyond five letters? Given the five letters before, does the letter k places back
+     (k = 6, 7, 8, 10, 14) still help to tell the next letter? Next letters are permuted inside each
+     (context, side), so neither the letter model nor the vocabulary of the side is counted. The
+     same on a false book (G5L, which has no such memory by construction) and on the Bible cut like
+     the tables (which has).
 """
 import json
 import math
@@ -77,6 +82,33 @@ def two_slot(sides_parts, rng, reps=300):
             "strongest": [{"template": k[:2] + "_" + k[2:7] + "_" + k[7:], "pairs": dict(Counter(a + b for a, b, _ in v).most_common(5))} for k, v in top]}
 
 
+def beyond_five(sides, k, rng, reps=60):
+    def nmi(pairs):
+        n = len(pairs)
+        ab, a, b = Counter(pairs), Counter(x for x, _ in pairs), Counter(y for _, y in pairs)
+        return sum(v * math.log2(v * n / (a[x] * b[y])) for (x, y), v in ab.items())
+    g = defaultdict(list)
+    for si, ls in enumerate(sides):
+        for r in ls:
+            for i in range(k, len(r)):
+                g[(r[i - 5:i], si)].append((r[i - k], r[i]))
+    g = {c: v for c, v in g.items() if len(v) >= 4 and len({a for a, _ in v}) > 1 and len({b for _, b in v}) > 1}
+    obs = sum(nmi(v) for v in g.values())
+    nul = []
+    for _ in range(reps):
+        t = 0.0
+        for v in g.values():
+            b = [y for _, y in v]
+            rng.shuffle(b)
+            t += nmi([(a, y) for (a, _), y in zip(v, b)])
+        nul.append(t)
+    n = sum(len(v) for v in g.values())
+    if not n:
+        return {"occurrences": 0, "bits": 0.0, "permuted": 0.0, "z": 0.0}
+    return {"occurrences": n, "bits": round(obs / n, 4), "permuted": round(statistics.mean(nul) / n, 4),
+            "z": round((obs - statistics.mean(nul)) / (statistics.pstdev(nul) or 1e-9), 1)}
+
+
 def run():
     rng = random.Random(47)
     book = base_book()
@@ -115,7 +147,11 @@ def run():
         r = [two_slot(list(zip(parts, b)), rng, 100) for b in fake[n][:3]]
         D[n] = {"z_of_each_false_book": [x["z"] for x in r], "bits_per_occurrence": [x["bits_per_occurrence"] for x in r],
                 "permuted": [x["permuted"] for x in r]}
-    res = {"A_templates_with_one_slot": A, "B_largest_templates_of_11": B, "C_kind_of_slot_11": C, "D_two_slots_six_apart": D}
+    from a44_positive_control import cut, kjv_words
+    bible = cut("".join(kjv_words(sum(len(r) for r in flat))), 49)
+    E = {k: {"tables_2_24": beyond_five(sides, k, rng), "false_book_G5L": beyond_five(fake["G5L"][0], k, rng),
+             "bible_english": beyond_five(bible, k, rng)} for k in (6, 7, 8, 10, 14)}
+    res = {"E_beyond_five_letters": E, "A_templates_with_one_slot": A, "B_largest_templates_of_11": B, "C_kind_of_slot_11": C, "D_two_slots_six_apart": D}
     load.save_result("47_templates", res)
     return res
 

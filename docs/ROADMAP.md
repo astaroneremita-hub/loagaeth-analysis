@@ -142,8 +142,8 @@ letters; no syntax between names; fixed-order compounds (OXAD+NOCHA, GETH+ACLAX)
 recur with one letter changed and the changes are not the copyist's. Positive control done (a44): the tests see English
 prose at this size and do not see it in the tables. Variant choice is dialect, not a channel (a45).
 A per-leaf six-letter machine writes the book (a46); the residue is the echo over four lines and an
-excess of one-letter variants of long passages: mine templates with one free slot (units of 8–14
-letters), and test whether the echo over four lines survives in the diagonal and diamond tables.
+excess of one-letter variants of long passages. Templates mined (a47): the machine makes them too, and
+a direct test finds no memory beyond five letters inside a side (English: z 7–22). Done for the other formats too (a48): no memory beyond five letters anywhere; echo real in rows and chessboard leaves only. Was left: test whether the echo over four lines survives in the diagonal and diamond tables.
 Sound classes checked (a41): no rule
 beyond the slot grammar; interchangeable consonants share manner, not place. Left from this lead: the variation by part of the book and by house;
 the same counts on another transcription of the tables when one is available.

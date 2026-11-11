@@ -360,6 +360,11 @@ across the 91 numbers, keeping lengths** — so the global 2/3/6 excess is alrea
 - Refuted: mirror pairs, plan columns, acrostics, centre string, names on the pyramid cross, other
   systems' names (all at chance), constellation of names.
 
+### 32. Letter names as a lens — `a26` (construction)
+- Dee's letter names (Un, Pa, Veh… Gisg, Van) + practitioner meanings; every name read through them.
+- Rows open with Van/Mals/Ceph/Ged/Veh, close with Fam/Ger/Na/Med/Pal; realm signatures: opening
+  Tal/Fam/Or, end Van/Don/Mals. Roadmap of open questions in docs/ROADMAP.md.
+
 ### Provenance warning: the grimoire's "powers"
 The wider project generated a grimoire that assigns each Lord a sefira, planet, talisman,
 how-to-call and danger grade. Its own generator states these layers were *"constructed

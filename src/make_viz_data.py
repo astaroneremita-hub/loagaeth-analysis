@@ -103,6 +103,61 @@ def decoded_parity(rows, key):
     return None if votes[0] == votes[1] else max(votes, key=votes.get)
 
 
+def decoded_lines(rows, key):
+    """Map the decoded current lines of data/loagaeth_diagonal_decoded.json onto grid cells.
+
+    Each current (down_right, leftward) is matched against the line families of the grid:
+    r-c diagonals or r+c anti-diagonals, of one chessboard parity, read forwards or backwards,
+    taken in ascending or descending order. The family with most exact string matches wins
+    (for 26b and 27a the leftward current runs along r+c anti-diagonals, down-left).
+    Returns [(current, [(r, c), ...]), ...] or None."""
+    p = os.path.join(ROOT, "data", "loagaeth_diagonal_decoded.json")
+    try:
+        face = json.load(open(p, encoding="utf-8"))["faces"][key]
+    except (OSError, KeyError, ValueError):
+        return None
+    ok = lambda r, c: 0 <= r < len(rows) and 0 <= c < len(rows[r])
+    fam = {}
+    for par in (0, 1):
+        fam[("rc", par)] = [[(r, r - d) for r in range(N) if ok(r, r - d)] for d in range(-(N - 1), N) if d % 2 == par]
+        fam[("anti", par)] = [[(r, s - r) for r in range(N) if ok(r, s - r)] for s in range(2 * N - 1) if s % 2 == par]
+    out = []
+    for cur, group in ((0, "down_right"), (1, "leftward")):
+        lines = face.get(group, [])
+        best = None
+        for (typ, par), cand in fam.items():
+            cand = [c for c in cand if c]
+            for rev in (False, True):
+                for desc in (False, True):
+                    cl = [c[::-1] if rev else c for c in (cand[::-1] if desc else cand)]
+                    if len(cl) != len(lines):
+                        continue
+                    score = sum("".join(rows[r][c] for r, c in cells) == ln for cells, ln in zip(cl, lines))
+                    if best is None or score > best[0]:
+                        best = (score, cl, f"{typ} parity {par}{' reversed' if rev else ''}")
+        if not best:
+            return None
+        if best[0] < 0.9 * len(lines):
+            print(f"  {key} {group}: only {best[0]}/{len(lines)} lines matched ({best[2]})")
+        out += [(cur, cells) for cells in best[1]]
+    return out
+
+
+def line_occurrences(lines, rows, names):
+    """Names along decoded lines -> [k, r0, c0, len, dr, dc, current]."""
+    occ = []
+    for cur, cells in lines:
+        if len(cells) < 2:
+            continue
+        s = "".join(rows[r][c] for r, c in cells)
+        dr, dc = cells[1][0] - cells[0][0], cells[1][1] - cells[0][1]
+        for k, name in enumerate(names):
+            for i in find_all(s, name):
+                r0, c0 = cells[i]
+                occ.append([k, r0, c0, len(name), dr, dc, cur])
+    return occ
+
+
 def load_result(name):
     p = os.path.join(ROOT, "results", name)
     try:
@@ -375,9 +430,13 @@ def discovered_names(tables):
     total, per_cur = 0, [0, 0]
     for key, e in tables.items():
         if e["f"] == "square-diagonal":
-            _, occ = diagonal_occurrences(e["rows"], names, e["drp"])
+            if e.get("_lines"):
+                occ = line_occurrences(e["_lines"], e["rows"], names)
+            else:
+                _, occ = diagonal_occurrences(e["rows"], names, e["drp"])
+                occ = [o + [0 if o[4] > 0 else 1] for o in occ]
             for o in occ:
-                per_cur[0 if o[4] > 0 else 1] += 1
+                per_cur[o[6]] += 1
         else:
             occ = row_occurrences(e["rows"], names)
         e["docc"] = occ
@@ -437,6 +496,30 @@ def book_order():
             "dialects": res.get("C_dialects"), "currents": res.get("E_two_currents")}
 
 
+def letter_names():
+    """Dee's letter names, the practitioner's meanings and per-side letter profiles (results/26_letter_names.json)."""
+    res = load_result("26_letter_names.json")
+    if not res:
+        return None
+    meaning = {}
+    for it in res.get("D_letters_of_names_vs_random", []):
+        meaning[it["letter"]] = it.get("meaning", "")
+    for lst in list(res.get("B_positions", {}).values()) + list(res.get("C_segment_signature", {}).values()):
+        for it in lst if isinstance(lst, list) else []:
+            if isinstance(it, dict) and "letter" in it:
+                meaning.setdefault(it["letter"], it.get("meaning", ""))
+    names = res["letter_names"]
+    letters = sorted(names)
+    missing = [L for L in letters if L not in meaning]
+    print(f"letter names: {len(letters)} letters, meanings for {len(letters) - len(missing)}"
+          f"{' (missing ' + ''.join(missing) + ')' if missing else ''}; {len(res.get('A_readings', []))} name readings, "
+          f"{len(res.get('C_side_profiles', {}))} side profiles")
+    return {"letters": letters, "dee": names, "meaning": meaning, "provenance": res.get("provenance", ""),
+            "readings": {r["name"]: [r["letters"], r["meanings"]] for r in res.get("A_readings", [])},
+            "profiles": res.get("C_side_profiles", {}), "segsig": res.get("C_segment_signature", {}),
+            "positions": res.get("B_positions", {})}
+
+
 def main():
     with open(SRC, encoding="utf-8") as fh:
         leaves = json.load(fh)["leaves"]
@@ -461,9 +544,20 @@ def main():
         f = table_format(t, side)
         entry = {"t": t, "s": side, "f": f, "rows": rows}
         if f == "square-diagonal":
-            drp, occ = diagonal_occurrences(rows, NAMES, decoded_parity(rows, key))
-            entry["drp"] = drp
-            entry["occ"] = row_occurrences(rows) + occ
+            lines = decoded_lines(rows, key)
+            if lines:   # decoded reading (module a18): both currents mapped onto cells
+                dr_line = next(cells for cur, cells in lines if cur == 0 and cells)
+                entry["drp"] = (dr_line[0][0] + dr_line[0][1]) % 2
+                entry["lines"] = [[cur, cells[0][0], cells[0][1],
+                                   (cells[1][0] - cells[0][0]) if len(cells) > 1 else 0,
+                                   (cells[1][1] - cells[0][1]) if len(cells) > 1 else 0, len(cells)]
+                                  for cur, cells in lines if cells]
+                entry["_lines"] = lines
+                entry["occ"] = row_occurrences(rows) + line_occurrences(lines, rows, NAMES)
+            else:       # fallback: both currents along r-c diagonals
+                drp, occ = diagonal_occurrences(rows, NAMES, decoded_parity(rows, key))
+                entry["drp"] = drp
+                entry["occ"] = row_occurrences(rows) + occ
         else:
             entry["occ"] = row_occurrences(rows)
         tables[key] = entry
@@ -476,6 +570,14 @@ def main():
     const = constellation(tables, stack["sides"], disc["names"] if disc else [])
     order = book_order()
 
+    cur_counts = {}
+    for e in tables.values():
+        e.pop("_lines", None)
+        for o in e["occ"]:
+            if len(o) > 6:
+                cur_counts.setdefault(NAMES[o[0]], [0, 0])[o[6]] += 1
+    print("master names per current (down-right / leftward):", cur_counts)
+
     data = {
         "stack": stack,
         "rev": rev,
@@ -483,6 +585,7 @@ def main():
         "disc": disc,
         "const": const,
         "order": order,
+        "letters": letter_names(),
         "meta": {
             "source": "John Dee, Liber Loagaeth (Sloane MS 3189); transcription in data/loagaeth_tables.json",
             "note": "Non A-Z characters stripped; table 49 missing; leaf 1 is prose.",

@@ -151,6 +151,7 @@ text's own texture.
 | 89 | Names gather on the pyramid's diagonals or centre | z 1.9 / 1.8 away | REFUTED | a24 |
 | 90 | Other systems' names inside the Loagaeth | all at Markov-3 expectation; BORNOGO once | REFUTED | a25 |
 | 91 | Constellation of names across stacked squares | within both nulls | REFUTED | a25 |
+| 92 | Dee's letter names + practitioner meanings as a reading layer | readings of all names; grammar and realm signatures re-expressed | CONSTRUCTION (lens) | a26 |
 
 ## Side tracks (recorded, not findings)
 

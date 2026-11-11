@@ -88,6 +88,7 @@
     <button data-view="sigmap">Signatures</button>
     <button data-view="const">Constellation</button>
     <button data-view="order">Order</button>
+    <button data-view="letters">Letters</button>
   </div>
 
   <section data-show="square diamond">
@@ -95,9 +96,18 @@
     <div class="row"><span>Side</span><select id="side"><option value="a">a</option><option value="b">b</option></select></div>
   </section>
 
-  <section data-show="square heat closed">
+  <section data-show="letters">
+    <div class="row"><span>Mode</span><select id="lMode"><option value="book">Book: every side</option><option value="single">Single side</option></select></div>
+    <div class="row"><span>Bars</span><select id="lMetric"><option value="share">share of the side</option><option value="enrich">enrichment vs book average</option></select></div>
+    <div class="row"><span>Letter</span><select id="lLetter"></select></div>
+    <div class="row" id="lSideRow"><span>Side</span><select id="lSide"></select></div>
+    <small id="lNote"></small>
+  </section>
+
+  <section data-show="square heat closed letters">
     <div class="row"><span>Name set</span><select id="nSet"><option value="master">master names</option><option value="disc">discovered names</option></select></div>
     <div class="row"><span>Single name</span><select id="nPick"></select></div>
+    <div id="reading" style="font-size:12px;line-height:1.5;margin-top:4px"></div>
   </section>
 
   <section data-show="const">
@@ -194,7 +204,7 @@
   </section>
 
   <section data-show="square diamond pyramid tess ico">
-    <label class="chk"><input type="checkbox" id="hiNames" checked> Highlight master names</label>
+    <label class="chk"><input type="checkbox" id="hiNames" checked> Highlight names</label>
   </section>
 
   <div id="legend"></div>
@@ -373,7 +383,7 @@ function clearView() {
     });
   });
   scene.remove(root); root = new THREE.Group(); scene.add(root);
-  tickers = []; pickables = []; hoverLayer = null; onSlider = null; heatPick = null;
+  tickers = []; pickables = []; hoverLayer = null; onSlider = null; heatPick = null; orderPick = null; letterPick = null;
   $('hover').textContent = '';
 }
 let fly = null;
@@ -394,17 +404,19 @@ function buildSquare() {
   if (vocab) {
     hm.clear();
     const pick = $('nPick').value;
-    (useDisc() ? e.docc || [] : e.occ).forEach(([k, r0, c0, len, dr, dc]) => {
-      if (dr === 0 || (pick !== 'all' && names[k] !== pick)) return;   // diagonal readings only
-      for (let i = 0; i < len; i++) { const key2 = (r0 + dr * i) * 100 + (c0 + dc * i); hm.set(key2, k); curOf.set(key2, dr > 0 ? 0 : 1); }
+    (useDisc() ? e.docc || [] : e.occ).forEach(([k, r0, c0, len, dr, dc, cu]) => {
+      if (cu === undefined || (pick !== 'all' && names[k] !== pick)) return;   // current (decoded) readings only
+      for (let i = 0; i < len; i++) { const key2 = (r0 + dr * i) * 100 + (c0 + dc * i); hm.set(key2, k); curOf.set(key2, cu); }
     });
   }
+  const cellCur = new Map();          // cell -> current from the decoded lines (falls back to chessboard parity)
+  (e.lines || []).forEach(([cu, r0, c0, dr, dc, n]) => { for (let i = 0; i < n; i++) cellCur.set((r0 + dr * i) * 100 + c0 + dc * i, cu); });
   const layer = new CellLayer(totalCells(e));
   e.rows.forEach((row, r) => [...row].forEach((ch, c) => {
     const k = hm.get(r * 100 + c);
     const par = (r + c) % 2;
     let bg = par ? C.tileB : C.tileA;
-    if (cur || vocab) bg = par === e.drp ? C.curTileA : C.curTileB;
+    if (cur || vocab) { const cu = cellCur.has(r * 100 + c) ? cellCur.get(r * 100 + c) : par === e.drp ? 0 : 1; bg = cu === 0 ? C.curTileA : C.curTileB; }
     const hi = k !== undefined;
     const hiCol = vocab ? (curOf.get(r * 100 + c) === 0 ? C.curA : C.curB) : setColor(k);
     M4.makeTranslation(c - 24, 24 - r, hi ? 0.35 : 0);
@@ -413,7 +425,11 @@ function buildSquare() {
   layer.done(); root.add(layer.mesh); hoverLayer = layer;
   if (cur) buildCurrents(e);
   const fmt = diag
-    ? `${e.rows.length}x49 square whose text runs along r-c diagonals: (r+c) ${e.drp ? 'odd' : 'even'} cells read down-right, the other colour up-left`
+    ? (() => {
+      const lw = (e.lines || []).find(l => l[0] === 1 && l[5] > 1);
+      const lwTxt = !lw ? 'up-left along r-c diagonals' : lw[3] > 0 ? 'down-left along r+c anti-diagonals' : 'up-left along r-c diagonals';
+      return `${e.rows.length}x49 square read in two currents (decoded lines): (r+c) ${e.drp ? 'odd' : 'even'} cells down-right along r-c diagonals, the other colour ${lwTxt}`;
+    })()
     : `49x49 square read in rows (${totalCells(e).toLocaleString('en')} letters)`;
   const occList = useDisc() ? e.docc || [] : e.occ, cnt = {};
   occList.forEach(o => { if ($('nPick').value === 'all' || names[o[0]] === $('nPick').value) cnt[names[o[0]]] = (cnt[names[o[0]]] || 0) + 1; });
@@ -438,8 +454,10 @@ const lineVS = `attribute float aS; varying float vS; void main(){ vS = aS; gl_P
 const lineFS = `uniform float uTime; uniform vec3 uColor; varying float vS;
   void main(){ float q = fract((uTime * 5.0 - vS) / 9.0); float a = 0.12 + 0.88 * pow(1.0 - q, 5.0); gl_FragColor = vec4(uColor * a, 1.0); }`;
 function buildCurrents(e) {
-  const groups = [[], []]; // 0: down-right, 1: up-left
-  for (let d = -48; d <= 48; d++) {
+  const groups = [[], []]; // 0: down-right, 1: leftward
+  if (e.lines) {           // decoded lines (data/loagaeth_diagonal_decoded.json): exact cells and directions
+    e.lines.forEach(([cu, r0, c0, dr, dc, n]) => { if (n >= 2) groups[cu].push(Array.from({ length: n }, (_, i) => [r0 + dr * i, c0 + dc * i])); });
+  } else for (let d = -48; d <= 48; d++) {
     const cells = [];
     for (let r = 0; r < 49; r++) { const c = r - d; if (c >= 0 && c < 49 && r < e.rows.length && c < e.rows[r].length) cells.push([r, c]); }
     if (cells.length < 2) continue;
@@ -1168,6 +1186,104 @@ function buildSigmap() {
   legend(Object.entries(DOM_COLORS).map(([l, h]) => [`dominant ${l}`, h]), false);
 }
 
+// ---------------------------------------------------------------- CONSTELLATION
+function mulberry32(a) { return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function busiest3x3(pts) {             // pts: [[r, c], ...] -> max number of starts in any 3x3 window
+  const g = new Int16Array(2401); pts.forEach(([r, c]) => g[r * 49 + c]++);
+  let best = 0;
+  for (let r = 0; r < 47; r++) for (let c = 0; c < 47; c++) {
+    let s = 0; for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) s += g[(r + i) * 49 + c + j];
+    if (s > best) best = s;
+  }
+  return best;
+}
+function buildConst() {
+  const C0 = D.const || { pts: {}, B: {} }, name = $('cnName').value, flat = $('cnFlat').checked;
+  const a = C0.pts[name] || [], occ = [];
+  for (let i = 0; i < a.length; i += 3) occ.push([a[i], a[i + 1], a[i + 2]]);
+  const rng = mulberry32(25), span = 49 - name.length + 1;
+  const nullOcc = occ.map(([s, r]) => [s, r, Math.floor(rng() * span)]);  // keeps row, random column that fits
+  addLights();
+  const panels = [[occ, -15, 0xe8b84a, 'OBSERVED'], [nullOcc, 15, 0x6fd3ff, 'NULL']];
+  const lab = new CellLayer(60);
+  panels.forEach(([pts, dx, color, title]) => {
+    const floor = new CellLayer(2401);
+    for (let r = 0; r < 49; r++) for (let c = 0; c < 49; c++) {
+      M4.copy(upRot).scale(new THREE.Vector3(0.5, 0.5, 1)).setPosition((c - 24) * 0.5 + dx, 0, (r - 24) * 0.5);
+      floor.add(M4, '', (r + c) % 2 ? C.tileB : C.tileA, C.ink, 1);
+    }
+    floor.done(); root.add(floor.mesh);
+    const pos = [], col = [], c3 = rgb(color);
+    pts.forEach(([s, r, c]) => { pos.push((c - 24) * 0.5 + dx, flat ? 0.3 : 0.3 + s * 0.55, (r - 24) * 0.5); col.push(...c3.map(v => v * 0.8)); });
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); g.setAttribute('color', new THREE.Float32BufferAttribute(col, 3));
+    root.add(new THREE.Points(g, new THREE.PointsMaterial({ size: 1.1, vertexColors: true, map: dotTexture(), transparent: true, depthWrite: false, blending: THREE.AdditiveBlending })));
+    groundText(lab, title, dx - title.length * 0.6, -14.5, 1.5, color);
+  });
+  lab.done(); root.add(lab.mesh);
+  // statistics: observed busiest 3x3 vs a random-column null (200 draws) computed here, plus results/25 if stored
+  const obsB = busiest3x3(occ.map(([, r, c]) => [r, c])), nb = [];
+  for (let k = 0; k < 200; k++) nb.push(busiest3x3(occ.map(([, r]) => [r, Math.floor(rng() * span)])));
+  nb.sort((x, y) => x - y);
+  const mean = nb.reduce((s, v) => s + v, 0) / nb.length, p95 = nb[189];
+  const B = C0.B[name];
+  const beyond = B ? obsB > Math.max(B.null_random_row_95, B.null_random_column_95) : obsB > p95;
+  $('cnNote').innerHTML = `${occ.length} starts on ${S.sides.length} sides. Busiest 3x3 window: ${obsB}. Random-column null (200 draws, here): mean ${mean.toFixed(1)}, 95th ${p95}.`
+    + (B ? `<br>results/25: busiest ${B.busiest_3x3}; random-row null mean ${B.null_random_row_mean} (95th ${B.null_random_row_95}), random-column null mean ${B.null_random_column_mean} (95th ${B.null_random_column_95}).` : '');
+  caption.textContent = `Construction, not a finding. Constellation of ${name}: start cells of its ${occ.length} occurrences on the ${S.sides.length} exact 49x49 sides, stacked (${flat ? 'flat' : 'height = side index'}); right: null where each occurrence keeps its row and gets a random column. Busiest 3x3 window ${obsB} vs null 95th percentile ${B ? Math.max(B.null_random_row_95, B.null_random_column_95) : p95}: ${beyond ? 'above the null' : 'no constellation beyond chance'}.`;
+  legend([['Observed starts', 0xe8b84a], ['Null starts (random column)', 0x6fd3ff]], false);
+}
+
+// ---------------------------------------------------------------- ORDER (similarity matrix) + DIALECTS
+const tnumOf = (k) => parseInt(k);
+function segOf(k) { const t = tnumOf(k); return t <= 5 ? 0 : t <= 25 ? 1 : t <= 28 ? 2 : t <= 43 ? 3 : 4; }
+const SEG_COLORS = [0xb48cf0, 0xe8b84a, 0x3cc7b4, 0xff7a66, 0x5b9cff], SEG_NAMES = ['opening 2-5', 'heartland 6-25', 'decoded 26-28', 'diamonds 29-43', 'end 44-48'];
+function buildOrder() {
+  const O = D.order;
+  if (!O) { caption.textContent = 'results/24_book_architecture.json was not found when the data file was built.'; legend([]); return; }
+  addLights();
+  const greedy = $('orGreedy').checked, flat = $('orFlat').checked;
+  const keys = greedy ? O.greedy : O.keys, idx = keys.map(k => O.keys.indexOf(k)), n = keys.length;
+  let mn = 1000; O.sim.forEach(row => row.forEach(v => { if (v < mn) mn = v; }));
+  const geo = new THREE.BoxGeometry(0.92, 1, 0.92); geo.translate(0, 0.5, 0);
+  const bars = new THREE.InstancedMesh(geo, new THREE.MeshStandardMaterial({ roughness: 0.55 }), n * n);
+  const col = new THREE.Color(), SC = 0.5, H = 9;
+  for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) {
+    const v = O.sim[idx[i]][idx[j]], t = (v - mn) / (1000 - mn);
+    M4.makeScale(SC, flat ? 0.05 : Math.max(0.05, t * H), SC).setPosition((j - n / 2) * SC, 0, (i - n / 2) * SC);
+    bars.setMatrixAt(i * n + j, M4); bars.setColorAt(i * n + j, col.setHex(heatHex(t)));
+  }
+  bars.instanceColor.needsUpdate = true; bars.computeBoundingSphere(); root.add(bars);
+  // segment strips along both axes, boundary lines where the segment changes (book order: contiguous)
+  const strip = new CellLayer(2 * n), pts = [];
+  keys.forEach((k, i) => {
+    const s = segOf(k);
+    M4.copy(upRot).scale(new THREE.Vector3(SC, SC * 2, 1)).setPosition((i - n / 2) * SC, 0.02, (-n / 2 - 2) * SC); strip.add(M4, '', SEG_COLORS[s], C.ink, 1);
+    M4.copy(upRot).scale(new THREE.Vector3(SC * 2, SC, 1)).setPosition((-n / 2 - 2) * SC, 0.02, (i - n / 2) * SC); strip.add(M4, '', SEG_COLORS[s], C.ink, 1);
+    if (!greedy && i > 0 && segOf(keys[i - 1]) !== s) {
+      const p = (i - n / 2 - 0.5) * SC, a0 = (-n / 2 - 0.5) * SC, a1 = (n / 2 - 0.5) * SC, y = flat ? 0.1 : H + 0.3;
+      pts.push(p, y, a0, p, y, a1, a0, y, p, a1, y, p);
+    }
+  });
+  strip.done(); root.add(strip.mesh);
+  if (pts.length) { const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3)); root.add(new THREE.LineSegments(g, new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.7 }))); }
+  orderPick = { bars, keys, idx, n };
+  const st = O.stats;
+  $('orNote').innerHTML = `Path similarity in Dee's order ${st.path_similarity_dee_order} vs random orders mean ${st.random_orders_mean} (max ${st.random_orders_max}); greedy seriation ${st.greedy_seriation}.<br>a vs b of the same table ${st.a_vs_b_same_table_mean}; b vs next a ${st.b_vs_next_a_mean}; table t vs 49-t ${st.mirror_t_vs_49_minus_t_mean} vs random distant pairs ${st.random_distant_pairs_mean}; same column of the 7x7 plan ${st.same_plan_column_mean}.`
+    + (greedy ? `<br>Greedy order: stored first 30 (results/24) + continuation recomputed from the 3-decimal matrix.` : '');
+  // dialect 5x5 panel
+  const Dl = O.dialects && O.dialects.rows_trained_on_cols_read;
+  if (Dl) {
+    const segs = Object.keys(Dl), vals = segs.flatMap(a => segs.map(b => Dl[a][b])), lo = Math.min(...vals), hi = Math.max(...vals);
+    $('dialects').innerHTML = `<div class="h" style="color:var(--mute);font-size:11px;margin-top:6px">DIALECTS - bits per letter (row: model trained on, column: segment read; lower = reads it more easily)</div>
+      <table style="border-collapse:collapse;font-size:10.5px;margin-top:3px"><tr><td></td>${segs.map(s => `<td style="padding:2px;color:var(--mute)">${s.split(' ')[0].slice(0, 5)}</td>`).join('')}</tr>` +
+      segs.map(a => `<tr><td style="padding:2px;color:var(--mute)">${a.split(' ')[0].slice(0, 5)}</td>${segs.map(b => { const t = (Dl[a][b] - lo) / (hi - lo); return `<td style="padding:2px 3px;background:${css(heatHex(1 - t))};color:${t > 0.5 ? '#e9dfc6' : '#10131a'};text-align:center">${Dl[a][b].toFixed(2)}</td>`; }).join('')}</tr>`).join('') + '</table>';
+  } else $('dialects').innerHTML = '';
+  caption.textContent = `Similarity of all ${n} sides (cosine of letter + trigram profiles, results/24): ${n}x${n} ${flat ? 'flat map' : 'terrain, height = similarity'} (range ${(mn / 1000).toFixed(3)}-1.000), ${greedy ? 'reordered by the greedy similarity order' : "in Dee's order, white lines = segment boundaries"}; axis strips show the segment of each side.`;
+  legend([...SEG_COLORS.map((c, i) => [SEG_NAMES[i], c]), ['similarity low', heatHex(0.05)], ['similarity high', heatHex(1)]], false);
+}
+let orderPick = null;
+
 // ---------------------------------------------------------------- ICOSAHEDRON
 function buildIco() {
   const phi = (1 + Math.sqrt(5)) / 2, SCL = 16;
@@ -1213,6 +1329,121 @@ function buildIco() {
   legend([['Upper triangle', C.warm], ['Lower triangle', C.cool]]);
 }
 
+// ---------------------------------------------------------------- LETTERS (Dee's letter names; meanings = modern attribution)
+const LET = D.letters || { letters: [], dee: {}, meaning: {}, readings: {}, profiles: {}, provenance: '' };
+const LCOL = {};
+LET.letters.forEach((L, i) => { LCOL[L] = new THREE.Color().setHSL(i / LET.letters.length, 0.62, i % 2 ? 0.66 : 0.52).getHex(); });
+const PROV = 'Letter names: Dee. Meanings: modern attribution (practitioner).';
+const letterInfo = (L) => `${L} = ${LET.dee[L] || '?'}${LET.meaning[L] ? ' (' + LET.meaning[L] + ')' : ''}`;
+function readingOf(name) {
+  if (LET.readings[name]) return { letters: LET.readings[name][0], meanings: LET.readings[name][1] };
+  const ls = [...name];
+  return { letters: ls.map(L => LET.dee[L] || L).join(' · '), meanings: ls.map(L => LET.meaning[L] || '?').join(' → ') };
+}
+function updateReading() {
+  const el = $('reading'); if (!el) return;
+  const n = $('nPick').value;
+  if (!LET.letters.length || n === 'all' || !['square', 'heat', 'closed', 'letters'].includes(state.view)) { el.innerHTML = ''; return; }
+  const r = readingOf(n);
+  el.innerHTML = `<b style="color:var(--accent)">${n}</b><br>${r.letters}<br><span style="color:var(--mute)">${r.meanings}</span><br><small>${PROV}</small>`;
+}
+function sideProfile(k) {          // [{L, n, share, enr}] in alphabetical letter order
+  const p = LET.profiles[k]; if (!p) return null;
+  const tot = Object.values(p).reduce((s, v) => s + v[0], 0) || 1;
+  return LET.letters.map(L => ({ L, n: (p[L] || [0, 0])[0], share: (p[L] || [0, 0])[0] / tot, enr: (p[L] || [0, 1])[1] }));
+}
+function enrHex(e) {               // above book average warm, below cool
+  const t = Math.min(1, Math.abs(Math.log2(Math.max(e, 0.01))) / 2);
+  const a = new THREE.Color(0x3a3f4f), b = new THREE.Color(e >= 1 ? 0xe8703a : 0x3f8fe0);
+  return a.lerp(b, 0.25 + 0.75 * t).getHex();
+}
+function segShares(L) {            // share of letter L per book segment (from the side profiles)
+  const segs = [['opening', 2, 5], ['heartland', 6, 25], ['decoded', 26, 28], ['diamonds', 29, 43], ['end', 44, 48]];
+  return segs.map(([s, a, b]) => {
+    let n = 0, t = 0;
+    Object.entries(LET.profiles).forEach(([k, p]) => { const tn = parseInt(k); if (tn >= a && tn <= b) { n += (p[L] || [0])[0]; t += Object.values(p).reduce((x, v) => x + v[0], 0); } });
+    return `${s} ${(100 * n / (t || 1)).toFixed(1)}%`;
+  }).join(' · ');
+}
+let letterPick = null;
+function buildLetters() {
+  if (!LET.letters.length) { caption.textContent = 'results/26_letter_names.json was not found when the data file was built.'; legend([]); return; }
+  addLights();
+  const single = $('lMode').value === 'single', enrich = $('lMetric').value === 'enrich', pickL = $('lLetter').value;
+  $('lSideRow').hidden = !single;
+  const geo = new THREE.BoxGeometry(1, 1, 1); geo.translate(0, 0.5, 0);
+  const col = new THREE.Color(), info = [];
+  const barHex = (b) => {
+    let h = enrich ? enrHex(b.enr) : LCOL[b.L];
+    if (pickL !== 'all' && b.L !== pickL) h = new THREE.Color(h).multiplyScalar(0.22).getHex();
+    return h;
+  };
+  const height = (b, H) => enrich ? Math.min(b.enr, 3) / 3 * H : b.share / 0.3 * H;
+  if (!single) {
+    const keys = Object.keys(LET.profiles);
+    const bars = new THREE.InstancedMesh(geo, new THREE.MeshStandardMaterial({ roughness: 0.5 }), keys.length * 21);
+    const lab = new CellLayer(400), plates = new CellLayer(220);
+    let i = 0;
+    const W = 0.3, G = 0.04, H = 6;
+    for (let t = 1; t <= 49; t++) {
+      const pc = (t - 1) % 7, pr = Math.floor((t - 1) / 7);
+      ['a', 'b'].forEach((s, si) => {
+        const k = `${t}${s}`, x0 = (pc - 3) * 16 + (si ? 3.9 : -3.9), y0 = (3 - pr) * 10 - 4;
+        const prof = sideProfile(k);
+        M4.makeScale(7.4, 7.6, 1).setPosition(x0, y0 + 3.4, -0.6); plates.add(M4, '', prof ? 0x141a28 : 0x0d1018, C.ink, 1);
+        [...k].forEach((ch, j) => { M4.makeScale(1.1, 1.1, 1).setPosition(x0 + (j - (k.length - 1) / 2) * 0.9, y0 - 0.9, 0); lab.add(M4, ch, 0, 0x9aa0b4, 0); });
+        if (!prof) return;
+        prof.forEach((b, li) => {
+          const wd = pickL !== 'all' && b.L === pickL ? 1.1 : W;   // the picked letter drawn wide
+          M4.makeScale(wd, Math.max(0.03, height(b, H)), wd).setPosition(x0 + (li - 10) * (W + G), y0, pickL === b.L ? 0.4 : 0);
+          bars.setMatrixAt(i, M4); bars.setColorAt(i, col.setHex(barHex(b)));
+          info[i++] = `side ${k}: ${letterInfo(b.L)} - ${b.n} letters, ${(b.share * 100).toFixed(1)}%, x${b.enr} vs book`;
+        });
+        if (enrich) { M4.makeScale(7.2, 0.04, 1).setPosition(x0, y0 + H / 3, 0.3); plates.add(M4, '', 0x8a90a0, C.ink, 1); }
+      });
+    }
+    bars.count = i; bars.instanceColor.needsUpdate = true; bars.computeBoundingSphere();
+    plates.done(); lab.done(); root.add(plates.mesh, bars, lab.mesh);
+    letterPick = { bars, info };
+    caption.textContent = `Construction, not a finding. Letter chart of every side on the 7x7 plan (side a left, b right; table 1 = prose, 49 missing): 21 bars per side in alphabetical order, height = ${enrich ? 'enrichment vs the book average (capped at 3; grey line = 1)' : 'share of the side'}${pickL !== 'all' ? `; ${letterInfo(pickL)} highlighted` : ''}. Counts from results/26.`;
+  } else {
+    const k = $('lSide').value, e = T[k], prof = sideProfile(k);
+    const bars = new THREE.InstancedMesh(geo, new THREE.MeshStandardMaterial({ roughness: 0.5 }), 21);
+    prof.forEach((b, li) => {
+      M4.makeScale(1.6, Math.max(0.05, height(b, 22)), 1.6).setPosition((li - 10) * 2.3, 0, -32);
+      bars.setMatrixAt(li, M4); bars.setColorAt(li, col.setHex(barHex(b)));
+      info[li] = `${letterInfo(b.L)} - ${b.n} letters, ${(b.share * 100).toFixed(1)}%, x${b.enr} vs book`;
+    });
+    bars.instanceColor.needsUpdate = true; bars.computeBoundingSphere(); root.add(bars);
+    const lab = new CellLayer(60);
+    prof.forEach((b, li) => { M4.makeScale(1.6, 1.6, 1).setPosition((li - 10) * 2.3, -1.2, -30.5); lab.add(M4, b.L, LCOL[b.L], C.inkDark, 1); });
+    lab.done(); root.add(lab.mesh);
+    const grid = new CellLayer(totalCells(e)), cellL = [];
+    const top = Math.floor((49 - e.rows.length) / 2);
+    e.rows.forEach((row, r) => [...row].forEach((ch, c) => {
+      const x = c + (49 - row.length) / 2 - 24, z = r + top - 24;
+      M4.copy(upRot).setPosition(x, 0.02, z);
+      grid.add(M4, ch, LCOL[ch] || 0x555555, C.inkDark, 1, { r, c, ch, side: `${k} ${letterInfo(ch)}` });
+      cellL.push(ch);
+    }));
+    grid.done(); root.add(grid.mesh); hoverLayer = grid;
+    const paint = (L) => {
+      cellL.forEach((ch, i) => {
+        let h = LCOL[ch] || 0x555555; if (L && ch !== L) h = new THREE.Color(h).multiplyScalar(0.18).getHex();
+        const c3 = rgb(h); grid.bg.set([c3[0], c3[1], c3[2], 1], i * 4);
+      });
+      grid.geo.attributes.aBg.needsUpdate = true;
+    };
+    paint(pickL !== 'all' ? pickL : null);
+    letterPick = { bars, info, single: true, paint, base: pickL !== 'all' ? pickL : null, letters: prof.map(b => b.L), cur: undefined };
+    caption.textContent = `Side ${k}: 21-bar letter chart (${enrich ? 'enrichment vs book average, capped at 3' : 'share of the side'}) above its letters, tiles coloured by letter. Hover a bar to light up that letter's cells.`;
+  }
+  const lp = pickL !== 'all' ? `<br><b>${letterInfo(pickL)}</b> share by segment: ${segShares(pickL)}` : '';
+  $('lNote').innerHTML = `${LET.provenance ? PROV : ''}${lp}`;
+  legend([...(enrich ? [['above book average', enrHex(2.5)], ['near average', enrHex(1)], ['below book average', enrHex(0.3)]] : []),
+    ...LET.letters.map(L => [`${L} ${LET.dee[L]} - ${LET.meaning[L] || ''}`, LCOL[L]])], false);
+}
+
 // ---------------------------------------------------------------- legend / UI
 function legend(extra, names = true) {
   let h = '';
@@ -1229,6 +1460,10 @@ fill($('tbl'), Array.from({ length: 47 }, (_, i) => [i + 2, `${i + 2} - ${T[keyO
 const baseKeys = Object.keys(T).filter(k => T[k].f === 'square-rows').sort((a, b) => parseInt(a) - parseInt(b) || a.localeCompare(b));
 fill($('pBase'), baseKeys.map(k => [k, k]));
 fill($('tsStart'), baseKeys.map(k => [k, k]));
+const fillPick = () => fill($('nPick'), [['all', 'all names of the set'], ...setNames().map(n => [n, n])]);
+fillPick();
+fill($('cnName'), Object.keys((D.const || { pts: {} }).pts).map(n => [n, `${n} (${D.const.pts[n].length / 3})`]));
+if (D.const && D.const.pts.NOCHA) $('cnName').value = 'NOCHA';
 fill($('hSide'), [['stack', 'stack: most frequent letter per cell'], ...S.sides.map(k => [k, `side ${k}`])]);
 fill($('tsSig'), sigGroups().map(([s, ks]) => [s, `${s} (${ks.length}: ${ks.length > 4 ? ks.slice(0, 3).join(' ') + ' ...' : ks.join(' ')})`]));
 const dTables = Array.from({ length: 20 }, (_, i) => [i + 29, String(i + 29)]);
@@ -1239,6 +1474,8 @@ const CAMS = {
   square: [[0, -8, 88], [0, 0, 0]], diamond: [[0, -6, 104], [0, 0, 0]],
   pyramid: [[62, 58, 92], [0, 8, 0]], book: [[0, -6, 92], [0, 0, 0]],
   heat: [[0, 78, 40], [0, 2, 4]], trail: [[0, 70, 46], [0, 0, 2]], closed: [[58, 46, 84], [0, 10, 0]],
+  letters: [[-16, -4, 128], [-16, -1, 0]],
+  const: [[-6, 44, 60], [-6, 8, 0]], order: [[-14, 58, 58], [-8, 0, 0]],
   tess: [[42, 30, 80], [0, 0, 0]], sigmap: [[-17, 1, 84], [-17, 1, 0]], ico: [[30, 24, 88], [0, 0, 0]],
 };
 let firstRender = true;
@@ -1252,12 +1489,14 @@ function render(keepCam = false) {
   $('tbl').value = state.table; $('side').value = state.side;
   const e = T[keyOf(state.table, state.side)];
   $('currents').disabled = !(e && e.f === 'square-diagonal');
-  $('curNote').textContent = $('currents').disabled ? 'Available for the diagonal squares 25b-28b.' : 'Down-right and up-left flows along r-c diagonals.';
+  $('curNote').textContent = $('currents').disabled ? 'Available for the diagonal squares 25b-28b.' : 'Flows of the two currents along the decoded lines.';
   ({ square: buildSquare, diamond: buildDiamond, pyramid: buildPyramid, book: buildBook, heat: buildHeat, trail: buildTrail,
-    closed: buildClosed, tess: buildTess, ico: buildIco, sigmap: buildSigmap })[state.view]();
+    closed: buildClosed, tess: buildTess, ico: buildIco, sigmap: buildSigmap, const: buildConst, order: buildOrder, letters: buildLetters })[state.view]();
+  updateReading();
   if (!keepCam) {
     const two = ['pyramid', 'closed'].includes(state.view) && pyramidCopies().length > 1;
-    const c = two ? [[-14, 85, 150], [-14, 6, 0]] : state.view === 'pyramid' && $('octa').checked ? [[70, 30, 110], [0, 0, 0]] : CAMS[state.view];
+    const c = two ? [[-14, 85, 150], [-14, 6, 0]] : state.view === 'pyramid' && $('octa').checked ? [[70, 30, 110], [0, 0, 0]]
+      : state.view === 'letters' && $('lMode').value === 'single' ? [[-6, 48, 58], [-6, 2, -8]] : CAMS[state.view];
     if (firstRender) { camera.position.set(...c[0]); controls.target.set(...c[1]); controls.update(); } else flyTo(...c);
   }
   firstRender = false;
@@ -1278,9 +1517,14 @@ $('tbl').onchange = () => {
 };
 $('side').onchange = () => { state.side = $('side').value; render(true); };
 ['currents', 'dlayout', 'hiNames', 'pBase', 'pFace', 'pFace2', 'showBase', 'hMode', 'hName', 'hLetter', 'hNull',
-  'trSrc', 'trOrder', 'trObs', 'trNull', 'clName', 'clBase', 'tsStart', 'icSide', 'pRev', 'hColor', 'tsGroup', 'tsSig', 'hMaj', 'hDiv', 'hDisp', 'hSide']
+  'trSrc', 'trOrder', 'trObs', 'trNull', 'clName', 'clBase', 'tsStart', 'icSide', 'pRev', 'hColor', 'tsGroup', 'tsSig', 'hMaj', 'hDiv', 'hDisp', 'hSide', 'nPick', 'cnName', 'cnFlat', 'orGreedy', 'orFlat', 'curVocab']
   .forEach(id => $(id).onchange = () => render(true));
 ['pOrig', 'pInv'].forEach(id => $(id).onchange = () => render());
+$('nSet').onchange = () => { fillPick(); render(true); };
+fill($('lLetter'), [['all', 'all letters'], ...LET.letters.map(L => [L, `${L} - ${LET.dee[L]}`])]);
+fill($('lSide'), sortedKeys().map(k => [k, k])); $('lSide').value = '12a';
+['lMetric', 'lLetter', 'lSide'].forEach(id => $(id).onchange = () => render(true));
+$('lMode').onchange = () => render();
 $('hCam').onchange = () => {
   const v = $('hCam').value; $('hCam').value = '';
   const wide = state.view === 'closed' && pyramidCopies().length > 1;
@@ -1329,6 +1573,23 @@ function pick() {
     } else { $('hover').textContent = ''; renderer.domElement.style.cursor = ''; }
     return;
   }
+  if (letterPick) {
+    const hit = ray.intersectObject(letterPick.bars)[0];
+    if (hit) {
+      $('hover').textContent = letterPick.info[hit.instanceId] || '';
+      if (letterPick.single && letterPick.cur !== hit.instanceId) { letterPick.cur = hit.instanceId; letterPick.paint(letterPick.letters[hit.instanceId]); }
+      return;
+    }
+    if (letterPick.single && letterPick.cur !== undefined) { letterPick.cur = undefined; letterPick.paint(letterPick.base); }
+    if (!letterPick.single) { $('hover').textContent = ''; return; }
+  }
+  if (orderPick) {
+    const hit = ray.intersectObject(orderPick.bars)[0];
+    if (!hit) { $('hover').textContent = ''; return; }
+    const i = Math.floor(hit.instanceId / orderPick.n), j = hit.instanceId % orderPick.n;
+    $('hover').textContent = `${orderPick.keys[i]} vs ${orderPick.keys[j]}: similarity ${(D.order.sim[orderPick.idx[i]][orderPick.idx[j]] / 1000).toFixed(3)}`;
+    return;
+  }
   if (heatPick) {
     const hit = ray.intersectObject(heatPick.bars)[0];
     if (!hit) { $('hover').textContent = ''; return; }
@@ -1340,7 +1601,7 @@ function pick() {
   const hit = ray.intersectObject(hoverLayer.mesh)[0];
   const inf = hit && hoverLayer.info[hit.instanceId];
   if (state.view === 'sigmap') { $('hover').textContent = inf ? `${inf.side}: signature ${inf.ch}` : ''; return; }
-  $('hover').textContent = inf ? `${inf.side ? inf.side + ' - ' : ''}row ${inf.r + 1}, col ${inf.c + 1}: ${inf.ch}${inf.nm ? '  [' + inf.nm + ']' : inf.k !== undefined && inf.nm === undefined && NAMES[inf.k] ? '  [' + NAMES[inf.k] + ']' : ''}` : '';
+  $('hover').textContent = inf ? `${inf.side ? inf.side + ' - ' : ''}row ${inf.r + 1}, col ${inf.c + 1}: ${inf.ch}${inf.nm ? '  [' + inf.nm + (LET.letters.length ? ' = ' + readingOf(inf.nm).letters : '') + ']' : inf.k !== undefined && inf.nm === undefined && NAMES[inf.k] ? '  [' + NAMES[inf.k] + ']' : ''}` : '';
 }
 
 // ---------------------------------------------------------------- loop
@@ -1370,6 +1631,7 @@ for (const [k, v] of hp) {           // any control by id, e.g. #view=heat&hMode
   const el = document.getElementById(k);
   if (el && el.type === 'checkbox') el.checked = v === '1'; else if (el && 'value' in el) el.value = v;
 }
+if (hp.get('nSet')) { fillPick(); if (hp.get('nPick')) $('nPick').value = hp.get('nPick'); }
 state.view = hp.get('view') || 'square';
 render();
 if (hp.get('top')) {                 // #...&top=1 opens with the view from above

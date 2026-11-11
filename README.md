@@ -116,6 +116,7 @@ src/                          LAYER A - the Loagaeth analysis
   a23_name_discovery.py           unsupervised name discovery, families, grammar
   a24_book_architecture.py        acrostics, pyramid cross, dialects, book order, two currents, verses
   a25_bridges.py                  other systems inside the Loagaeth, name constellation
+  a26_letter_names.py             Dee's letter names as a reading layer (construction), letter profiles per side
   make_figures.py             draws every figure in figures/ from the results
   make_viz_data.py            builds viz/loagaeth_viz_data.js for the 3D viewer
 viz/                          loagaeth_3d.html - interactive three.js viewer
@@ -602,6 +603,48 @@ over 3,562 candidates).
   GETH 6, NOCHA 8 …) is inside both nulls (random row; random column). Names have no favourite cell.
   **REFUTED.**
 
+**In the 3D viewer:** "Name set → discovered" overlays these names by family; **Constellation**
+shows a name's start cells across the stacked squares beside its null; the **two-currents
+vocabulary** toggle colours names on each current of 25b–28b; **Order** shows the 94×94 similarity
+terrain with the dialect table.
+
+| Discovered names on 12a | Constellation (NOCHA) vs null | Currents on 26a | Similarity terrain |
+|---|---|---|---|
+| ![disc](figures/viz_discovered_names_12a.jpg) | ![const](figures/viz_constellation_nocha.jpg) | ![cur](figures/viz_currents_vocab_26a.jpg) | ![order](figures/viz_order_terrain.jpg) |
+
+### Dee's letter names as a reading layer `[a26]` — construction
+
+Every letter of the Angelic alphabet has a name in Dee's table (A Un, B Pa, C Veh, D Gal, E Graph,
+F Or, G Ged, H Na, I Gon, L Ur, M Tal, N Drux, O Med, P Mals, Q Ger, R Don, S Fam, T Gisg, U Van,
+X Pal, Z Ceph). The meanings used here (A "indomitable, pulsing force", H "life", O "insight"…) are a
+modern attribution supplied by the practitioner — a lens for reading, not evidence about the text.
+
+- **Readings:** CHASTOR = Veh · Na · Un · Fam · Gisg · Med · Don — *crowned conquest → life →
+  pulsing force → cosmic vessel → cosmic nourishment → insight → growth*. CHUSTOR differs only in
+  the third letter: Van, *true law*, instead of Un. Every master and discovered name is spelled out
+  in `results/26_letter_names.json`.
+- **The measured grammar in this lens:** rows open with Van (U, ×4.2), Mals (P, ×3.0), Ceph (Z),
+  Ged (G), Veh (C); they close with Fam (S, ×3.6), Ger (Q), Na (H), Med (O), Pal (X). Graph, Na,
+  Don and Pal (E, H, R, X) almost never open a row.
+- **Each realm's signature letters** (share vs the whole book): opening Tal, Fam, Or (M, S, F ×2);
+  heartland Gal, Drux, Un; 26–28 Gisg, Pal; diamonds and end Van, Don, Mals (U ×2.7 at the end).
+- **Names vs random strings of the book:** the recurring names are rich in Fam, Veh, Na, Un (S, C, H,
+  A — the CHASTOR letters) and poor in Van, Pa, Or, Tal, Ger (U, B, F, M, Q). This restates letter
+  frequencies, read through the names.
+
+In the 3D viewer the **Letters** view draws a 21-letter chart for every square (share or
+enrichment), with a picker to follow one letter through the book, and the name panel shows each
+name's reading.
+
+| Letters, book mode (Van/U picked) | One square (12a) | Reading of CHASTOR |
+|---|---|---|
+| ![letters](figures/viz_letters_book_U.jpg) | ![single](figures/viz_letters_single_12a.jpg) | ![reading](figures/viz_name_reading_chastor.jpg) |
+
+Followed through the book: **Van (U)** rises from 3–5% to 14.2% at the end while **Un (A)** falls from
+~20% to 5.8% (the U register); **Don (R)** rises toward the end; **Gisg (T)** and **Pal (X)** peak in
+26–28; **Tal (M)** and **Fam (S)** are highest in the opening and Fam fades after it; **Na (H)** and
+**Med (O)** stay flat (≈ 7% and 9%) in every realm.
+
 ### The machine question: can an algorithm turn the data into code?
 
 What the machine side has given, honestly:
@@ -733,6 +776,12 @@ we have mapped its skeleton, proved it is a real name-language, and ruled out a 
 popular keys, further than any published treatment we could find.
 
 ---
+
+## What is left — the roadmap
+
+See [docs/ROADMAP.md](docs/ROADMAP.md): the ledger in one screen and every open question with its
+test, null and stop rule (closing doubts, names, architecture, anchors for meaning, the machine
+side, practitioner constructions, publication).
 
 ## Self-improving loop
 

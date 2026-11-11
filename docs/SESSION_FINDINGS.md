@@ -340,6 +340,26 @@ across the 91 numbers, keeping lengths** — so the global 2/3/6 excess is alrea
 - Pyramid from above: triangles top 2.41, bottom 2.44, right 2.05, left 1.77 name-heat; difference
   = row-edge effect. Elements (quartiles): edges 87% Water; letter maps within ±4 pts of null except X.
 
+### 30. Robustness and deeper mathematics — module `a22`
+- Under Z=X, U=V, U→A, clean 49×49 sides only, and 2% look-alike noise: doubled-letter rule,
+  row edges (z ≈ 40), segment χ² and name counts all hold.
+- Territory revised: count lag-1 0.49 (p<0.001), per-1000 0.26 (z≈2), U→A z 1.1 — moderate, partly
+  the U-register boundary.
+- Segmentation tuned leave-one-line-out on Peterson: F1 0.36 (default 0.33, random 0.16).
+- Diamonds: only the stored anti-diagonals read (3.71 bits, 9.9 names/1000); nine other paths ≈7.8, 0.
+- Mutual information: excess over Markov-3 only at 4–12 letters; beyond = within-side letter mix.
+- No block copying (16 vs 18 surrogate); LZMA 3.22 vs 3.26; leaf 1 Zipf/Heaps ≈ Calls; no 2-D structure.
+- Viewer: majority-by-sub-quadrant shows only the edge columns (row edges).
+
+### 31. Names, architecture, bridges — modules `a23`, `a24`, `a25`
+- Unsupervised discovery: 47 word-like recurring strings beyond Markov-3 (surrogate 0). New: NACHO
+  (157×, vowel mirror of NOCHA), AXALGRA, GRADAX, PHANGE, ANTANTOX, VOXAR, TAXALGRA, ONDANVAGE, UCHER.
+  Five families (core + affixes), none in the surrogate.
+- The two currents of 25b–28b carry different vocabularies (Jaccard 0.221 vs 0.315 random).
+- Dialect chain along the book; Dee's order nearly maximally smooth (91.2 vs ≤ 85.9 random).
+- Refuted: mirror pairs, plan columns, acrostics, centre string, names on the pyramid cross, other
+  systems' names (all at chance), constellation of names.
+
 ### Provenance warning: the grimoire's "powers"
 The wider project generated a grimoire that assigns each Lord a sefira, planet, talisman,
 how-to-call and danger grade. Its own generator states these layers were *"constructed

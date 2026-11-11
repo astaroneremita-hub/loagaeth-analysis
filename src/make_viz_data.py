@@ -49,10 +49,10 @@ def find_all(s, name):
     return out
 
 
-def row_occurrences(rows):
+def row_occurrences(rows, names=NAMES):
     occ = []
     for r, s in enumerate(rows):
-        for k, name in enumerate(NAMES):
+        for k, name in enumerate(names):
             for c in find_all(s, name):
                 occ.append([k, r, c, len(name), 0, 1])
     return occ
@@ -63,9 +63,11 @@ def diagonal_cells(rows, d):
     return [(r, r - d) for r in range(N) if 0 <= r - d < N and r < len(rows) and r - d < len(rows[r])]
 
 
-def diagonal_occurrences(rows):
+def diagonal_occurrences(rows, names=NAMES, drp_fixed=None):
+    """Names along the r-c diagonals read as two currents. drp = parity of the down-right current;
+    if not given (no decoded file), the parity with more master-name hits is used."""
     best = None
-    for drp in (0, 1):
+    for drp in ((drp_fixed,) if drp_fixed is not None else (0, 1)):
         occ = []
         for d in range(-(N - 1), N):
             cells = diagonal_cells(rows, d)
@@ -76,13 +78,38 @@ def diagonal_occurrences(rows):
                 cells = cells[::-1]
             s = "".join(rows[r][c] for r, c in cells)
             step = 1 if down_right else -1
-            for k, name in enumerate(NAMES):
+            for k, name in enumerate(names):
                 for i in find_all(s, name):
                     r0, c0 = cells[i]
                     occ.append([k, r0, c0, len(name), step, step])
         if best is None or len(occ) > len(best[1]):
             best = (drp, occ)
     return best
+
+
+def decoded_parity(rows, key):
+    """Down-right parity taken from data/loagaeth_diagonal_decoded.json (module a18), if present."""
+    p = os.path.join(ROOT, "data", "loagaeth_diagonal_decoded.json")
+    try:
+        face = json.load(open(p, encoding="utf-8"))["faces"][key]
+    except (OSError, KeyError, ValueError):
+        return None
+    diags = {d: "".join(rows[r][c] for r, c in diagonal_cells(rows, d)) for d in range(-(N - 1), N)}
+    votes = {0: 0, 1: 0}
+    for line in face.get("down_right", []):
+        for d, s in diags.items():
+            if len(line) > 2 and s == line:
+                votes[d % 2] += 1
+    return None if votes[0] == votes[1] else max(votes, key=votes.get)
+
+
+def load_result(name):
+    p = os.path.join(ROOT, "results", name)
+    try:
+        return json.load(open(p, encoding="utf-8"))
+    except (OSError, ValueError):
+        print(f"  (results/{name} not found - related views will be empty)")
+        return None
 
 
 NULL_SEED = 1583  # fixed seed for the shuffled ("null") stack
@@ -210,7 +237,46 @@ def region_masks():
     return reg
 
 
+def make_blocks(div):
+    """Same blocks as the viewer: 2 -> four 24x24 quadrants + central cross (row/col 25);
+    4 -> sixteen 12x12 + central cross; 7 -> 49 blocks of 7x7."""
+    rect = lambda r0, r1, c0, c1: [r * N + c for r in range(r0, r1 + 1) for c in range(c0, c1 + 1)]
+    if div == 7:
+        return [rect(br * 7, br * 7 + 6, bc * 7, bc * 7 + 6) for br in range(7) for bc in range(7)]
+    parts = [(0, 23), (25, 48)] if div == 2 else [(0, 11), (12, 23), (25, 36), (37, 48)]
+    blocks = [rect(r0, r1, c0, c1) for r0, r1 in parts for c0, c1 in parts]
+    blocks.append([24 * N + k for k in range(N)] + [k * N + 24 for k in range(N) if k != 24])
+    return blocks
+
+
+def block_majority(vals, th, cells):
+    cnt = [0, 0, 0, 0]
+    for i in cells:
+        cnt[element_of(vals[i], th)] += 1
+    mx = max(cnt)
+    tied = [k for k in range(4) if cnt[k] == mx]
+    mean_el = element_of(sum(vals[i] for i in cells) / len(cells), th)
+    tied.sort(key=lambda k: (abs(k - mean_el), -k))  # nearest to the block-mean element, then hotter
+    return tied[0], mx / len(cells), len(tied) > 1
+
+
+def majority_report(label, obs, nul):
+    th = quartiles(obs)
+    for div in (2, 7):
+        blocks = make_blocks(div)
+        print(f"majority by block ({'2x2 + cross' if div == 2 else '7x7'}) on {label}  [W/E/A/F, * = tie]")
+        for name, vals in (("observed", obs), ("null", nul)):
+            res = [block_majority(vals, th, b) for b in blocks]
+            cell = lambda m: "WEAF"[m[0]] + ("*" if m[2] else " ") + f"{round(m[1] * 100):3d}%"
+            n = 2 if div == 2 else 7
+            for r in range(n):
+                print(f"  {name if r == 0 else '':8s} " + "  ".join(cell(m) for m in res[r * n:(r + 1) * n]))
+            if div == 2:
+                print(f"  {'':8s} cross: {cell(res[-1])}")
+
+
 def element_report(label, obs, nul):
+    majority_report(label, obs, nul)
     th = quartiles(obs)
     reg = region_masks()
     print(f"elements on {label}: observed quartile thresholds {tuple(round(t, 3) for t in th)}")
@@ -276,7 +342,7 @@ def build_stack(tables):
     print("stack sides:", len(keys), " excluded (not 49x49 after cleaning):", " ".join(excluded))
     print("letter frequency order in stack:", "".join(freq[:14]))
     element_report("stack, any master name (sides per cell)", no[len(NAMES)], nn[len(NAMES)])
-    for L in ("A", "X"):
+    for L in ("A", "H", "X"):
         e = sum(lo[L]) / (N * N)
         element_report(f"stack, letter {L} obs/exp", [v / e for v in lo[L]], [v / e for v in ln_[L]])
     return {
@@ -288,6 +354,87 @@ def build_stack(tables):
         "nul": {"letters": {ch: enc(v) for ch, v in ln_.items()}, "names": [enc(v) for v in nn],
                 "rows": {k: r for k, r in zip(keys, null_rows)}},
     }
+
+
+CONST_MASTER = ["CHASTOR", "ANZACH", "GETH", "NOCHA", "ADNOCHA", "ALGETH", "ACLAX", "CHUSTOR", "OXAD", "CHADAX"]
+
+
+def discovered_names(tables):
+    """Discovered names (results/23_name_discovery.json, A_candidates.top) searched on the same reading:
+    rows for 2a-25a, the two decoded diagonal currents for 25b-28b, the stored lines (rows) for 29-48."""
+    res = load_result("23_name_discovery.json")
+    if not res:
+        return None
+    names = [c["name"] for c in res["A_candidates"]["top"]]
+    fams = res.get("C_families", {}).get("largest", [])
+    fam = {n: -1 for n in names}
+    for i, f in enumerate(fams):
+        for n in f:
+            if n in fam:
+                fam[n] = i
+    total, per_cur = 0, [0, 0]
+    for key, e in tables.items():
+        if e["f"] == "square-diagonal":
+            _, occ = diagonal_occurrences(e["rows"], names, e["drp"])
+            for o in occ:
+                per_cur[0 if o[4] > 0 else 1] += 1
+        else:
+            occ = row_occurrences(e["rows"], names)
+        e["docc"] = occ
+        total += len(occ)
+    meta = {k: v for k, v in res["A_candidates"].items() if k != "top"}
+    print(f"discovered names: {len(names)}, occurrences {total} (25b-28b currents: down-right {per_cur[0]}, leftward {per_cur[1]})")
+    return {"names": names, "family": [fam[n] for n in names], "families": fams,
+            "info": [{k: c.get(k) for k in ("count", "tables", "z", "markov3_expected")} for c in res["A_candidates"]["top"]],
+            "meta": meta}
+
+
+def constellation(tables, stack_sides, disc_names):
+    """Start cells of each name on the 36 exact 49x49 sides: flat list [side_index, row, col, ...]."""
+    bridges = load_result("25_bridges.json")
+    pts = {}
+    for n in dict.fromkeys(CONST_MASTER + list(disc_names)):
+        a = []
+        for si, k in enumerate(stack_sides):
+            for r, row in enumerate(tables[k]["rows"]):
+                for c in find_all(row, n):
+                    a += [si, r, c]
+        if a:
+            pts[n] = a
+    nocha = len(pts.get("NOCHA", [])) // 3
+    print(f"constellation: {len(pts)} names with starts on the stack (NOCHA {nocha})")
+    return {"pts": pts, "B": (bridges or {}).get("B_constellation", {})}
+
+
+def book_order():
+    """Similarity matrix, segment boundaries, dialects and the two-current figures (results/24_book_architecture.json).
+    The full greedy order is recomputed like a24: start at 2a, repeatedly take the most similar unused side
+    (ties -> earliest in book order)."""
+    res = load_result("24_book_architecture.json")
+    if not res:
+        return None
+    D = res["D_book_order"]
+    keys, M = D["similarity_matrix_keys"], D["similarity_matrix"]
+    # The stored matrix is rounded to 3 decimals, which creates ties that a24 (full precision) did not have,
+    # so the stored first 30 are kept as the prefix and the rest is continued greedily from the 30th side.
+    stored = [keys.index(k) for k in D.get("greedy_order_first_30", []) if k in keys] or [0]
+    ser, cur = stored[:], stored[-1]
+    left = [j for j in range(len(keys)) if j not in ser]
+    while left:
+        nxt = max(left, key=lambda j: (M[cur][j], -j))
+        ser.append(nxt)
+        left.remove(nxt)
+        cur = nxt
+    greedy = [keys[i] for i in ser]
+    same30 = greedy[:30] == D.get("greedy_order_first_30")
+    print(f"order: greedy = stored first {len(stored)} + continuation; prefix {'matches' if same30 else 'DIFFERS'}")
+    segs = [("opening", 2, 5), ("heartland", 6, 25), ("decoded 26-28", 26, 28), ("diamonds", 29, 43), ("end", 44, 48)]
+    return {"keys": keys, "sim": [[int(round(v * 1000)) for v in row] for row in M], "greedy": greedy,
+            "greedy_matches_stored30": same30, "segs": segs,
+            "stats": {k: D.get(k) for k in ("path_similarity_dee_order", "random_orders_mean", "random_orders_max",
+                                             "greedy_seriation", "a_vs_b_same_table_mean", "b_vs_next_a_mean",
+                                             "mirror_t_vs_49_minus_t_mean", "random_distant_pairs_mean", "same_plan_column_mean")},
+            "dialects": res.get("C_dialects"), "currents": res.get("E_two_currents")}
 
 
 def main():
@@ -314,7 +461,7 @@ def main():
         f = table_format(t, side)
         entry = {"t": t, "s": side, "f": f, "rows": rows}
         if f == "square-diagonal":
-            drp, occ = diagonal_occurrences(rows)
+            drp, occ = diagonal_occurrences(rows, NAMES, decoded_parity(rows, key))
             entry["drp"] = drp
             entry["occ"] = row_occurrences(rows) + occ
         else:
@@ -325,11 +472,17 @@ def main():
     stack = build_stack(tables)
     rev = reversed_names(tables)
     sig = signatures(tables)
+    disc = discovered_names(tables)
+    const = constellation(tables, stack["sides"], disc["names"] if disc else [])
+    order = book_order()
 
     data = {
         "stack": stack,
         "rev": rev,
         "sig": sig,
+        "disc": disc,
+        "const": const,
+        "order": order,
         "meta": {
             "source": "John Dee, Liber Loagaeth (Sloane MS 3189); transcription in data/loagaeth_tables.json",
             "note": "Non A-Z characters stripped; table 49 missing; leaf 1 is prose.",

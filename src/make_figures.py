@@ -8,6 +8,7 @@ Each figure is drawn from the JSON results (or the bundled data), so the picture
 reproducible and update when the data or the analyses change. Pure standard library.
 """
 import json
+import math
 import os
 from collections import Counter
 
@@ -690,10 +691,205 @@ def fig_dense_division():
                "Peterson's index divides the unspaced lines into words — an independent check on word segmentation.", body)
 
 
+# ---------------------------------------------------------------- 22. robustness to the transcription
+def fig_robustness():
+    A = res("22_robustness_and_depth")["A_robustness"]
+    vs = [("as transcribed", "as_transcribed"), ("Z = X", "Z_equals_X"), ("U = V", "U_equals_V"),
+          ("U read as A", "U_read_as_A"), ("only exact 49×49 sides", "only_clean_49_sides")]
+    cols = [("doubled letters\n(obs/exp, <1 = rule)", "doubled_obs_over_exp", lambda v: f"{v:.2f}", lambda v: v < 0.5),
+            ("row edges z", "row_edge_z", lambda v: f"{v:.0f}", lambda v: v > 3),
+            ("segments χ² / null max", None, None, None),
+            ("CHASTOR territory z", "territory_z", lambda v: f"{v:.1f}", lambda v: v > 1.96),
+            ("CHASTOR", None, None, None)]
+    body, x0, y0 = [], 24, 96
+    heads = ["doubled (obs/exp)", "row edges z", "segments χ² / null", "territory z", "CHASTOR"]
+    for j, h in enumerate(heads):
+        body.append(text(220 + j * 96, 82, h, 11, INK, "middle", 600))
+    for i, (lab, k) in enumerate(vs + [("2% look-alike noise ×10", "noise")]):
+        y = y0 + i * 30
+        body.append(text(x0, y + 16, lab, 12, INK))
+        if k == "noise":
+            m = A["noise_2pct_x10"]
+            cells = [(f"{m['doubled_obs_over_exp'][0]:.2f}–{m['doubled_obs_over_exp'][1]:.2f}", True),
+                     (f"{m['row_edge_z'][0]:.0f}–{m['row_edge_z'][1]:.0f}", True),
+                     (f"{m['segments_chi2'][0]}–{m['segments_chi2'][1]}", True),
+                     (f"{m['territory_z'][0]}–{m['territory_z'][1]}", m["territory_z"][0] > 1.96),
+                     (f"{m['CHASTOR'][0]}–{m['CHASTOR'][1]}", True)]
+        else:
+            m = A[k]
+            cells = [(f"{m['doubled_obs_over_exp']:.2f}", m["doubled_obs_over_exp"] < 0.5),
+                     (f"{m['row_edge_z']:.0f}", m["row_edge_z"] > 3),
+                     (f"{m['segments_chi2']} / {m['segments_null_max']}", m["segments_chi2"] > m["segments_null_max"]),
+                     (f"{m['territory_z']}", m["territory_z"] > 1.96),
+                     (f"{m['names']['CHASTOR']}", True)]
+        for j, (s, ok) in enumerate(cells):
+            body.append(rect(220 + j * 96 - 44, y + 2, 88, 22, "#E1F5EE" if ok else "#FAECE7", 3))
+            body.append(text(220 + j * 96, y + 17, s, 11, INK, "middle"))
+    yy = y0 + 6 * 30 + 16
+    body.append(text(x0, yy, "Green = the finding holds under that reading; red = it weakens below the usual threshold.", 11, MUTED))
+    body.append(text(x0, yy + 16, "The grammar (no doubled letters, row edges) and the segment differences hold everywhere. The CHASTOR", 11, MUTED))
+    body.append(text(x0, yy + 32, "territory is moderate (density z ≈ 2) and fades if U is read as A: part of it is the U register at the end.", 11, MUTED))
+    return svg("fig_robustness", 720, yy + 50, "Are we looking wrong? The findings under other readings",
+               "Each core result recomputed on altered transcriptions.", body)
+
+
+# ---------------------------------------------------------------- 23. roads through the diamonds
+def fig_diamond_roads():
+    C = res("22_robustness_and_depth")["C_diamond_roads"]
+    body, x0 = [], 230
+    body.append(text(24, 78, "Diamond pairs 29–43 rebuilt as squares, read every way (letter model of the heartland)", 12, INK, weight=600))
+    for i, (k, v) in enumerate(C.items()):
+        y = 90 + i * 24
+        b = v["bits_per_letter"]
+        body.append(text(24, y + 14, k, 12, INK))
+        body.append(rect(x0, y + 2, b / 8 * 330, 16, AMBER if i == 0 else GRAY, 3))
+        body.append(text(x0 + b / 8 * 330 + 6, y + 15, f"{b:.2f} bits · names {v['names_per_1000']}/1000", 11, INK))
+    yy = 90 + len(C) * 24 + 16
+    body.append(text(24, yy, "Only one road reads: the anti-diagonals, in the direction they are stored. Every other path is noise", 11, MUTED))
+    body.append(text(24, yy + 16, "(≈ 7.8 bits, no names); the same road backwards keeps the information but loses every name.", 11, MUTED))
+    return svg("fig_diamond_roads", 660, yy + 34, "Is there another way to read the diamonds?",
+               "Lower bits = the model recognises the language.", body)
+
+
+# ---------------------------------------------------------------- 24. memory of the text
+def fig_mi_decay():
+    D = res("22_robustness_and_depth")["D1_mutual_information"]
+    ds = D["distance"][:17]
+    series = [("Loagaeth (tables 2–25a)", D["loagaeth"], P6), ("Markov-3 surrogate", D["markov3_surrogate"], CORAL),
+              ("letters shuffled inside each side", D["shuffled_within_each_side"], GRAY)]
+    x0, y0, W, H = 70, 80, 540, 220
+
+    def X(d):
+        return x0 + math.log(d) / math.log(64) * W
+
+    def Y(v):
+        v = max(v, 0.003)
+        return y0 + H - (math.log10(v) - math.log10(0.003)) / (math.log10(1) - math.log10(0.003)) * H
+    body = [f'<line x1="{x0}" y1="{y0+H}" x2="{x0+W}" y2="{y0+H}" stroke="{LINE}"/>',
+            f'<line x1="{x0}" y1="{y0}" x2="{x0}" y2="{y0+H}" stroke="{LINE}"/>']
+    for d in (1, 2, 4, 8, 16, 32, 64):
+        body.append(text(X(d), y0 + H + 16, str(d), 10, MUTED, "middle"))
+    for v in (0.01, 0.1, 1):
+        body.append(text(x0 - 6, Y(v) + 4, str(v), 10, MUTED, "end"))
+    for lab, ys, c in series:
+        pts = " ".join(f"{X(d):.1f},{Y(v):.1f}" for d, v in zip(ds, ys))
+        body.append(f'<polyline points="{pts}" fill="none" stroke="{c}" stroke-width="2"/>')
+    body += legend(x0, y0 + H + 42, [(c, l) for l, _, c in series])
+    body.append(text(x0, y0 + H + 66, "Distance in letters (log). From 4 to ~12 letters the text remembers more than a 3-letter model: the length of", 11, MUTED))
+    body.append(text(x0, y0 + H + 82, "its words and names. Beyond that, all memory is the change of letter mix from side to side — no long-range code.", 11, MUTED))
+    return svg("fig_mi_decay", 660, y0 + H + 100, "How far does a letter 'know' its neighbours?",
+               "Mutual information between letters d apart (bits, log scale).", body)
+
+
+# ---------------------------------------------------------------- 25. names found without supervision
+def fig_new_names():
+    d = res("23_name_discovery")
+    new = d["A_new_names_outside_known_families"][:18]
+    a = d["A_candidates"]
+    mx = max(c["count"] for c in new)
+    body, x0 = [], 150
+    body.append(text(24, 78, f"{a['survivors']} strings behave like recurring words beyond chance (Markov-3 surrogate of the same book: {a['surrogate_survivors']})", 12, INK, weight=600))
+    for i, c in enumerate(new):
+        y = 90 + i * 22
+        body.append(text(24, y + 13, c["name"], 12, INK, weight=600))
+        body.append(rect(x0, y + 2, c["count"] / mx * 260, 14, P6, 3))
+        body.append(text(x0 + c["count"] / mx * 260 + 6, y + 13,
+                         f"{c['count']}× · {c['tables']} tables · z {c['z']} · tables {c['first_last_table'][0]}–{c['first_last_table'][1]}", 10, MUTED))
+    y = 90 + len(new) * 22 + 14
+    body.append(text(24, y, "Families found (one name = another ± 1–2 letters at an end, or a vowel swapped):", 12, INK, weight=600))
+    for i, f in enumerate(d["C_families"]["largest"][:6]):
+        body.append(text(24, y + 18 + i * 17, "  ·  ".join(f), 11, P6 if i % 2 == 0 else TEAL))
+    yy = y + 18 + 6 * 17 + 10
+    body.append(text(24, yy, f"Families of 3+: {d['C_families']['families_size_ge3']} in the book, {d['C_families']['surrogate_families_size_ge3']} in the surrogate. "
+                             "NACHO is the vowel mirror of NOCHA (N·A·CH·O vs N·O·CH·A).", 11, MUTED))
+    return svg("fig_new_names", 720, yy + 20, "New recurring names, found by the text itself",
+               "Strings with varied letters on both sides (word-like) that recur far beyond a Markov-3 model.", body)
+
+
+# ---------------------------------------------------------------- 26. dialect map
+def fig_dialects():
+    m = res("24_book_architecture")["C_dialects"]["rows_trained_on_cols_read"]
+    segs = list(m)
+    vals = [m[a][b] for a in segs for b in segs]
+    lo, hi = min(vals), max(vals)
+    body, x0, y0, cw = [], 170, 100, 86
+    for j, b in enumerate(segs):
+        body.append(text(x0 + j * cw + cw / 2, y0 - 8, b, 11, INK, "middle", 600))
+    for i, a in enumerate(segs):
+        body.append(text(x0 - 8, y0 + i * 34 + 21, f"model of {a}", 11, INK, "end"))
+        for j, b in enumerate(segs):
+            v = m[a][b]
+            t = (v - lo) / (hi - lo)
+            col = f"rgb({int(83 + t * 160)},{int(74 + t * 160)},{int(183 + t * 60)})"
+            body.append(rect(x0 + j * cw + 2, y0 + i * 34, cw - 4, 30, col, 3))
+            body.append(text(x0 + j * cw + cw / 2, y0 + i * 34 + 20, f"{v:.2f}", 11, "#FFFFFF" if t < 0.5 else INK, "middle"))
+    yy = y0 + len(segs) * 34 + 22
+    body.append(text(24, yy, "Bits per letter when the model of one realm (row) reads another (column); darker = closer speech.", 11, MUTED))
+    body.append(text(24, yy + 16, "Each realm reads its neighbours best: opening → heartland → 26–28 → diamonds → end is a chain, and the", 11, MUTED))
+    body.append(text(24, yy + 32, "end is closest to the diamonds and farthest from the opening — the language drifts along the book.", 11, MUTED))
+    return svg("fig_dialects", 660, yy + 50, "A dialect map of the book", "Cross-reading letter models trained on each realm.", body)
+
+
+# ---------------------------------------------------------------- 27. two currents, two vocabularies
+def fig_currents_vocab():
+    e = res("24_book_architecture")["E_two_currents"]
+    body = []
+    body.append(text(24, 78, "Shared recurring 5-grams between the two currents of 25b–28b (Jaccard)", 12, INK, weight=600))
+    for i, (lab, v, c) in enumerate([("the two currents", e["jaccard_5grams_between_currents"], AMBER),
+                                     ("random halves of the same lines (mean)", e["random_line_split_mean"], GRAY),
+                                     ("random halves (lowest of 100)", e["random_min"], GRAY2)]):
+        y = 90 + i * 26
+        body.append(text(24, y + 14, lab, 12, INK))
+        body.append(rect(290, y + 2, v * 800, 16, c, 3))
+        body.append(text(296 + v * 800, y + 15, f"{v:.3f}", 11, INK))
+    y = 180
+    body.append(text(24, y, "Names on each current (↘ down-right | ← leftward)", 12, INK, weight=600))
+    per = e["names_down_right_vs_leftward"]
+    for i, (n, (a, b)) in enumerate([kv for kv in per.items() if sum(kv[1]) >= 10]):
+        yy = y + 12 + i * 22
+        body.append(text(24, yy + 13, n, 11, INK))
+        body.append(rect(260 - a * 2.5, yy + 2, a * 2.5, 14, P6, 2))
+        body.append(rect(264, yy + 2, b * 2.5, 14, TEAL, 2))
+        body.append(text(254 - a * 2.5, yy + 13, str(a), 10, MUTED, "end"))
+        body.append(text(270 + b * 2.5, yy + 13, str(b), 10, MUTED))
+    yy = y + 12 + 10 * 22 + 6
+    body.append(text(24, yy, "The two currents share fewer formulas than any random split of the same lines: two vocabularies,", 11, MUTED))
+    body.append(text(24, yy + 16, "with ANZACH, ACLAX, OXAD leaning ↘ and NOCHAP, CHASTOR leaning ← — like the two houses.", 11, MUTED))
+    return svg("fig_currents_vocab", 660, yy + 34, "Two currents, two vocabularies",
+               "Tables 25b–28b are written as two interleaved texts that do not share the same words.", body)
+
+
+# ---------------------------------------------------------------- 28. similarity of sides in book order
+def fig_book_order():
+    d = res("24_book_architecture")["D_book_order"]
+    M, keys = d["similarity_matrix"], d["similarity_matrix_keys"]
+    n = len(keys)
+    flat = [v for i, r in enumerate(M) for j, v in enumerate(r) if i != j]
+    lo, hi = min(flat), max(flat)
+    cs, x0, y0 = 5, 60, 80
+    body = []
+    for i in range(n):
+        for j in range(n):
+            t = 1 if i == j else (M[i][j] - lo) / (hi - lo)
+            col = f"rgb({int(250 - t * 170)},{int(248 - t * 175)},{int(240 - t * 60)})"
+            body.append(f'<rect x="{x0 + j * cs}" y="{y0 + i * cs}" width="{cs}" height="{cs}" fill="{col}"/>')
+    for i, k in enumerate(keys):
+        if k.endswith("a") and int(k[:-1]) % 5 == 0:
+            body.append(text(x0 - 4, y0 + i * cs + 5, k[:-1], 9, MUTED, "end"))
+            body.append(text(x0 + i * cs + 2, y0 - 4, k[:-1], 9, MUTED, "middle"))
+    yy = y0 + n * cs + 20
+    body.append(text(24, yy, f"Neighbour similarity along Dee's order {d['path_similarity_dee_order']} vs random orders {d['random_orders_mean']} (best of 500: {d['random_orders_max']});", 11, MUTED))
+    body.append(text(24, yy + 16, f"a greedy 'smoothest' ordering reaches {d['greedy_seriation']} — Dee's order is almost as smooth as it can be. Blocks = the segments.", 11, MUTED))
+    body.append(text(24, yy + 32, f"Mirror pairs t ↔ 49−t ({d['mirror_t_vs_49_minus_t_mean']}) and same 7×7 plan column ({d['same_plan_column_mean']}) are no closer than random pairs ({d['random_distant_pairs_mean']}).", 11, MUTED))
+    return svg("fig_book_order", 640, yy + 50, "The book drifts smoothly from side to side",
+               "Similarity of every side with every other (letters + trigrams), in book order 2a → 48b.", body)
+
+
 FIGURES = [fig_territory, fig_digits, fig_head_regime, fig_nesting, fig_hive, fig_series, fig_letter_grammar,
            fig_book_formats, fig_diamond, fig_doubled, fig_letter_counts, fig_letters_segments, fig_u_register,
            fig_row_edges, fig_plan_7x7, fig_houses, fig_two_currents, fig_machine, fig_energy,
-           fig_index_check, fig_dense_division]
+           fig_index_check, fig_dense_division, fig_robustness, fig_diamond_roads, fig_mi_decay,
+           fig_new_names, fig_dialects, fig_currents_vocab, fig_book_order]
 
 
 def run():

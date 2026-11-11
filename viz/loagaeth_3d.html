@@ -86,6 +86,8 @@
     <button data-view="tess">Tesseract</button>
     <button data-view="ico">Icosahedron</button>
     <button data-view="sigmap">Signatures</button>
+    <button data-view="const">Constellation</button>
+    <button data-view="order">Order</button>
   </div>
 
   <section data-show="square diamond">
@@ -93,7 +95,27 @@
     <div class="row"><span>Side</span><select id="side"><option value="a">a</option><option value="b">b</option></select></div>
   </section>
 
+  <section data-show="square heat closed">
+    <div class="row"><span>Name set</span><select id="nSet"><option value="master">master names</option><option value="disc">discovered names</option></select></div>
+    <div class="row"><span>Single name</span><select id="nPick"></select></div>
+  </section>
+
+  <section data-show="const">
+    <div class="row"><span>Name</span><select id="cnName"></select></div>
+    <label class="chk"><input type="checkbox" id="cnFlat"> Flat (no height by side)</label>
+    <small id="cnNote"></small>
+  </section>
+
+  <section data-show="order">
+    <label class="chk"><input type="checkbox" id="orGreedy"> Reorder by greedy similarity order</label>
+    <label class="chk"><input type="checkbox" id="orFlat"> Flat (no terrain)</label>
+    <small id="orNote"></small>
+    <div id="dialects"></div>
+  </section>
+
   <section data-show="square">
+    <label class="chk"><input type="checkbox" id="curVocab"> Currents vocabulary (25b-28b)</label>
+    <small id="curVocabNote"></small>
     <label class="chk"><input type="checkbox" id="currents"> Show the two currents</label>
     <small id="curNote">Available for the diagonal squares 25b-28b.</small>
   </section>
@@ -135,6 +157,12 @@
   <section data-show="heat closed">
     <div class="row"><span>Colour</span><select id="hColor"><option value="ramp">heat ramp</option><option value="elements">Elements (quartiles)</option></select></div>
     <div class="row"><span>Camera</span><select id="hCam"><option value="">-</option><option value="top">view from above</option><option value="oblique">oblique</option></select></div>
+    <label class="chk"><input type="checkbox" id="hMaj"> Majority by sub-quadrant</label>
+    <div class="row"><span>Division</span><select id="hDiv">
+      <option value="2">halves 2x2 (+ central cross)</option><option value="4">4x4 (+ central cross)</option><option value="7">7x7 blocks of 7x7</option></select></div>
+    <div class="row" id="hDispRow"><span>Display</span><select id="hDisp"><option value="bars">Heat bars (columns)</option><option value="letters">Flat letters</option></select></div>
+    <div class="row" id="hSideRow"><span>Letters from</span><select id="hSide"></select></div>
+    <small id="majList"></small>
   </section>
 
   <section data-show="trail">
@@ -296,6 +324,31 @@ function nameMap(entry) {           // (row*100+col) -> name index; longer names
   for (const [k, r0, c0, len, dr, dc] of occ) for (let i = 0; i < len; i++) m.set((r0 + dr * i) * 100 + (c0 + dc * i), k);
   return m;
 }
+// ---- name sets: master names (occ) or discovered names (docc, results/23_name_discovery.json)
+const DISC = D.disc || { names: [], family: [], families: [] };
+const FAMILY_COLORS = [0xff9f43, 0x48dbfb, 0xff6bcb, 0x1dd1a1, 0xf368e0, 0xfeca57, 0x54a0ff];
+const OTHER_COLOR = 0xd0d4dc;
+const useDisc = () => $('nSet').value === 'disc' && DISC.names.length > 0;
+const setNames = () => useDisc() ? DISC.names : NAMES;
+function setColor(k) {
+  if (!useDisc()) return NAME_COLORS[k];
+  const f = DISC.family[k]; return f >= 0 ? FAMILY_COLORS[f % FAMILY_COLORS.length] : OTHER_COLOR;
+}
+function setMap(entry) {            // like nameMap, for the selected set and single-name pick
+  const m = new Map();
+  if (!$('hiNames').checked || !entry) return m;
+  const occ = (useDisc() ? entry.docc || [] : entry.occ).slice().sort((a, b) => a[3] - b[3]);
+  const pick = $('nPick').value, names = setNames();
+  for (const [k, r0, c0, len, dr, dc] of occ) {
+    if (pick !== 'all' && names[k] !== pick) continue;
+    for (let i = 0; i < len; i++) m.set((r0 + dr * i) * 100 + (c0 + dc * i), k);
+  }
+  return m;
+}
+function setLegend() {
+  if (!useDisc()) return null;
+  return [...DISC.families.map((f, i) => [`family ${f[0]} (${f.length})`, FAMILY_COLORS[i % FAMILY_COLORS.length]]), ['other discovered names', OTHER_COLOR]];
+}
 const totalCells = (e) => e.rows.reduce((s, r) => s + r.length, 0);
 const occCount = (e) => { const c = {}; e.occ.forEach(o => c[NAMES[o[0]]] = (c[NAMES[o[0]]] || 0) + 1); return c; };
 const occSummary = (e) => { const c = occCount(e); const s = Object.entries(c).map(([k, v]) => `${k} ${v}`).join(', '); return s || 'no master names'; };
@@ -334,25 +387,51 @@ const M4 = new THREE.Matrix4();
 // ---------------------------------------------------------------- SQUARE
 function buildSquare() {
   const key = keyOf(state.table, state.side), e = T[key];
-  const diag = e.f === 'square-diagonal', cur = diag && $('currents').checked;
-  const hm = nameMap(e);
+  const diag = e.f === 'square-diagonal', cur = diag && $('currents').checked, vocab = diag && $('curVocab').checked;
+  const names = setNames();
+  // cell -> name index; in vocabulary mode also which current the name lies on (0 = down-right, 1 = leftward)
+  const hm = setMap(e), curOf = new Map();
+  if (vocab) {
+    hm.clear();
+    const pick = $('nPick').value;
+    (useDisc() ? e.docc || [] : e.occ).forEach(([k, r0, c0, len, dr, dc]) => {
+      if (dr === 0 || (pick !== 'all' && names[k] !== pick)) return;   // diagonal readings only
+      for (let i = 0; i < len; i++) { const key2 = (r0 + dr * i) * 100 + (c0 + dc * i); hm.set(key2, k); curOf.set(key2, dr > 0 ? 0 : 1); }
+    });
+  }
   const layer = new CellLayer(totalCells(e));
   e.rows.forEach((row, r) => [...row].forEach((ch, c) => {
     const k = hm.get(r * 100 + c);
     const par = (r + c) % 2;
     let bg = par ? C.tileB : C.tileA;
-    if (cur) bg = par === e.drp ? C.curTileA : C.curTileB;
+    if (cur || vocab) bg = par === e.drp ? C.curTileA : C.curTileB;
     const hi = k !== undefined;
+    const hiCol = vocab ? (curOf.get(r * 100 + c) === 0 ? C.curA : C.curB) : setColor(k);
     M4.makeTranslation(c - 24, 24 - r, hi ? 0.35 : 0);
-    layer.add(M4, ch, hi ? NAME_COLORS[k] : bg, hi ? C.inkDark : C.ink, 1, { r, c, ch, k });
+    layer.add(M4, ch, hi ? hiCol : bg, hi ? C.inkDark : C.ink, 1, { r, c, ch, k, nm: hi ? names[k] : undefined });
   }));
   layer.done(); root.add(layer.mesh); hoverLayer = layer;
   if (cur) buildCurrents(e);
   const fmt = diag
     ? `${e.rows.length}x49 square whose text runs along r-c diagonals: (r+c) ${e.drp ? 'odd' : 'even'} cells read down-right, the other colour up-left`
     : `49x49 square read in rows (${totalCells(e).toLocaleString('en')} letters)`;
-  caption.textContent = `Table ${key} - ${fmt}. Highlights: ${occSummary(e)}.`;
-  legend(diag ? [['Down-right current', cur ? C.curA : null], ['Up-left current', cur ? C.curB : null]].filter(x => x[1]) : []);
+  const occList = useDisc() ? e.docc || [] : e.occ, cnt = {};
+  occList.forEach(o => { if ($('nPick').value === 'all' || names[o[0]] === $('nPick').value) cnt[names[o[0]]] = (cnt[names[o[0]]] || 0) + 1; });
+  const summ = Object.entries(cnt).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${k} ${v}`).join(', ') || 'none';
+  caption.textContent = `Table ${key} - ${fmt}. ${useDisc() ? 'Discovered names (results/23, z >= 4.5)' : 'Master names'}: ${summ}.`;
+  $('curVocabNote').textContent = '';
+  if (vocab) {
+    const E = D.order && D.order.currents;
+    const here = [0, 0]; curOf.forEach(v => here[v]++);
+    if (E) {
+      const per = E.names_down_right_vs_leftward || {};
+      $('curVocabNote').innerHTML = `5-gram Jaccard between currents ${E.jaccard_5grams_between_currents} vs random line split ${E.random_line_split_mean} (min ${E.random_min}): the two currents use different vocabularies (tables 25b-28b, results/24).<br>Names down-right / leftward: ` +
+        Object.entries(per).map(([n, [a, b]]) => `${n} ${a}/${b}`).join(', ');
+    }
+    caption.textContent += ` Currents vocabulary: name cells on the down-right current gold, on the leftward current cyan (${here[0]} / ${here[1]} cells on this side).`;
+  }
+  legend([...(vocab ? [['Name on down-right current', C.curA], ['Name on leftward current', C.curB], ['Down-right cells', C.curTileA], ['Leftward cells', C.curTileB]]
+    : diag && cur ? [['Down-right current', C.curA], ['Up-left current', C.curB]] : []), ...(setLegend() || [])], !useDisc() && !vocab);
 }
 
 const lineVS = `attribute float aS; varying float vS; void main(){ vS = aS; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`;
@@ -683,10 +762,92 @@ function edgeStats(a) {      // column means relative to overall mean (row-start
   return { c1: col(0) / m, c49: col(48) / m, max: Math.max(...a) };
 }
 
+// ---------------------------------------------------------------- MAJORITY BY SUB-QUADRANT
+// Blocks: 2x2 = four 24x24 quadrants + the central cross (row 25 and column 25) as its own strip;
+// 4x4 = sixteen 12x12 blocks + the same central cross; 7x7 = 49 blocks of 7x7 (the book's plan).
+function makeBlocks(div) {
+  const blocks = [], of = new Int16Array(2401).fill(-1);
+  const add = (name, cells, rect) => { const b = blocks.length; blocks.push({ name, cells, rect }); cells.forEach(i => of[i] = b); };
+  const rectCells = (r0, r1, c0, c1) => { const a = []; for (let r = r0; r <= r1; r++) for (let c = c0; c <= c1; c++) a.push(r * 49 + c); return a; };
+  if (div === 7) {
+    for (let br = 0; br < 7; br++) for (let bc = 0; bc < 7; bc++)
+      add(`R${br + 1}C${bc + 1}`, rectCells(br * 7, br * 7 + 6, bc * 7, bc * 7 + 6), [br * 7, br * 7 + 6, bc * 7, bc * 7 + 6]);
+  } else {
+    const halves = [[0, 23], [25, 48]];
+    const parts = div === 2 ? halves : [[0, 11], [12, 23], [25, 36], [37, 48]];
+    const lab2 = ['top', 'bottom'], lab2c = ['left', 'right'];
+    parts.forEach(([r0, r1], bi) => parts.forEach(([c0, c1], bj) =>
+      add(div === 2 ? `${lab2[bi]}-${lab2c[bj]}` : `R${bi + 1}C${bj + 1}`, rectCells(r0, r1, c0, c1), [r0, r1, c0, c1])));
+    const cross = []; for (let k = 0; k < 49; k++) { cross.push(24 * 49 + k); if (k !== 24) cross.push(k * 49 + 24); }
+    add('central cross (row 25 + col 25)', cross, null);
+  }
+  return { blocks, of };
+}
+function majority(vals, th, div) {
+  const { blocks, of } = makeBlocks(div);
+  blocks.forEach(b => {
+    const cnt = [0, 0, 0, 0]; let s = 0;
+    b.cells.forEach(i => { cnt[elOf(vals[i], th)]++; s += vals[i]; });
+    const mx = Math.max(...cnt), tied = [0, 1, 2, 3].filter(k => cnt[k] === mx);
+    const meanEl = elOf(s / b.cells.length, th);          // tie rule: tied element nearest to the element of the block's mean heat, then the hotter
+    tied.sort((a, c) => Math.abs(a - meanEl) - Math.abs(c - meanEl) || c - a);
+    b.el = tied[0]; b.share = mx / b.cells.length; b.tie = tied.length > 1; b.mean = s / b.cells.length;
+  });
+  return { blocks, of };
+}
+const majTxt = (b) => `${EL_NAMES[b.el]} ${Math.round(b.share * 100)}%${b.tie ? ' (tie)' : ''}`;
+function majGrid(maj, div) {        // compact text grid of block majorities
+  const ab = (k) => 'WEAF'[k];
+  const abb = (b) => `${ab(b.el)}${Math.round(b.share * 100)}${b.tie ? '*' : ''}`;
+  if (div === 7) { let s = ''; for (let r = 0; r < 7; r++) s += maj.blocks.slice(r * 7, r * 7 + 7).map(abb).join(' ') + '<br>'; return s; }
+  if (div === 2 || div === 4) {
+    const n = div; let s = '';
+    for (let r = 0; r < n; r++) s += maj.blocks.slice(r * n, r * n + n).map(abb).join(' ') + '<br>';
+    return s + `cross: ${majTxt(maj.blocks[maj.blocks.length - 1])}`;
+  }
+  if (div === 7) {
+    let s = ''; for (let r = 0; r < 7; r++) s += maj.blocks.slice(r * 7, r * 7 + 7).map(b => ab(b.el)).join(' ') + '<br>'; return s;
+  }
+  const n = div === 2 ? 2 : 4; let s = '';
+  for (let r = 0; r < n; r++) s += maj.blocks.slice(r * n, r * n + n).map(b => ab(b.el)).join(' ') + '<br>';
+  return s + `cross: ${majTxt(maj.blocks[maj.blocks.length - 1])}`;
+}
+function blockOutlines(maj, y) {
+  const pts = [];
+  maj.blocks.forEach(b => {
+    if (!b.rect) return;
+    const [r0, r1, c0, c1] = b.rect, x0 = c0 - 24.5, x1 = c1 - 23.5, z0 = r0 - 24.5, z1 = r1 - 23.5;
+    pts.push(x0, y, z0, x1, y, z0, x1, y, z0, x1, y, z1, x1, y, z1, x0, y, z1, x0, y, z1, x0, y, z0);
+  });
+  const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3));
+  return new THREE.LineSegments(g, new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.55 }));
+}
+function flatLetters(nullOn) {      // letter per cell: a chosen side, or the most frequent letter per cell of the stack
+  const src = $('hSide').value;
+  if (src !== 'stack') { const rows = nullOn ? S.nul.rows[src] : T[src].rows; return rows.join(''); }
+  const L = nullOn ? S.nul.letters : S.obs.letters, arrs = Object.entries(L).map(([ch, s]) => [ch, dec(s)]);
+  let out = ''; for (let i = 0; i < 2401; i++) { let best = '', bv = -1; for (const [ch, a] of arrs) if (a[i] > bv) { bv = a[i]; best = ch; } out += best; }
+  return out;
+}
+
 // ---------------------------------------------------------------- HEATMAP
+const stackCache = new Map();
+function stackNameCounts(names, nullOn) {   // per cell: number of stack sides where the cell is inside one of these names (rows)
+  const key = names.join(',') + (nullOn ? '|n' : '');
+  if (stackCache.has(key)) return stackCache.get(key);
+  const out = new Float32Array(2401);
+  S.sides.forEach(k => {
+    const rows = nullOn ? S.nul.rows[k] : T[k].rows, cells = new Set();
+    rows.forEach((row, r) => names.forEach(n => { let i = row.indexOf(n); while (i >= 0) { for (let j = 0; j < n.length; j++) cells.add(r * 49 + i + j); i = row.indexOf(n, i + 1); } }));
+    cells.forEach(i => out[i]++);
+  });
+  stackCache.set(key, out); return out;
+}
+const discPicked = () => $('nPick').value === 'all' ? DISC.names : [$('nPick').value];
 function heatArrays(nullOn) {
   const mode = $('hMode').value;
   const pick = (src) => {
+    if (mode === 'names' && useDisc()) return stackNameCounts(discPicked(), src === S.nul);
     if (mode === 'names') return dec(src.names[+$('hName').value]);
     const L = $('hLetter').value, a = dec(src.letters[L]), e = sum(dec(S.obs.letters[L])) / 2401;
     return a.map(v => v / e);
@@ -697,20 +858,38 @@ function heatArrays(nullOn) {
 function buildHeat() {
   const nullOn = $('hNull').checked;
   const { cur, obs, nul, mode } = heatArrays(nullOn);
-  $('hNameRow').hidden = mode !== 'names'; $('hLetterRow').hidden = mode !== 'letter';
+  $('hNameRow').hidden = mode !== 'names' || useDisc(); $('hLetterRow').hidden = mode !== 'letter';
   const mx = Math.max(...obs, ...nul) || 1, HMAX = 16;
   addLights();
-  const geo = new THREE.BoxGeometry(0.86, 1, 0.86); geo.translate(0, 0.5, 0);
-  const bars = new THREE.InstancedMesh(geo, new THREE.MeshStandardMaterial({ roughness: 0.5, metalness: 0.1 }), 2401);
-  const col = new THREE.Color();
-  const elements = $('hColor').value === 'elements', th = elements ? quart(obs) : null;
-  for (let r = 0; r < 49; r++) for (let c = 0; c < 49; c++) {
-    const i = r * 49 + c, v = cur[i];
-    M4.makeScale(1, Math.max(0.03, v / mx * HMAX), 1).setPosition(c - 24, 0, r - 24);
-    bars.setMatrixAt(i, M4); bars.setColorAt(i, col.setHex(elements ? EL_COLORS[elOf(v, th)] : heatHex(v / mx)));
+  const useMaj = $('hMaj').checked, div = +$('hDiv').value, flat = $('hDisp').value === 'letters';
+  $('hSideRow').hidden = !flat; $('hDispRow').hidden = false;
+  const elements = $('hColor').value === 'elements' || useMaj, th = elements ? quart(obs) : null;
+  const maj = useMaj ? majority(cur, th, div) : null;
+  const cellHex = (i) => maj ? EL_COLORS[maj.blocks[maj.of[i]].el] : elements ? EL_COLORS[elOf(cur[i], th)] : heatHex(cur[i] / mx);
+  const blockInfo = (i) => maj ? ` | block ${maj.blocks[maj.of[i]].name}: ${majTxt(maj.blocks[maj.of[i]])}` : '';
+  let bars = null;
+  if (flat) {
+    const letters = flatLetters(nullOn), layer = new CellLayer(2401);
+    for (let r = 0; r < 49; r++) for (let c = 0; c < 49; c++) {
+      const i = r * 49 + c;
+      M4.copy(upRot).setPosition(c - 24, 0.02, r - 24);
+      layer.add(M4, letters[i], cellHex(i), C.inkDark, 1,
+        { r, c, ch: letters[i], side: `${th ? EL_NAMES[elOf(cur[i], th)] + ' ' : ''}value ${cur[i].toFixed(2)}${blockInfo(i)}` });
+    }
+    layer.done(); root.add(layer.mesh); hoverLayer = layer;
+  } else {
+    const geo = new THREE.BoxGeometry(0.86, 1, 0.86); geo.translate(0, 0.5, 0);
+    bars = new THREE.InstancedMesh(geo, new THREE.MeshStandardMaterial({ roughness: 0.5, metalness: 0.1 }), 2401);
+    const col = new THREE.Color();
+    for (let r = 0; r < 49; r++) for (let c = 0; c < 49; c++) {
+      const i = r * 49 + c, v = cur[i];
+      M4.makeScale(1, Math.max(0.03, v / mx * HMAX), 1).setPosition(c - 24, 0, r - 24);
+      bars.setMatrixAt(i, M4); bars.setColorAt(i, col.setHex(cellHex(i)));
+    }
+    bars.instanceColor.needsUpdate = true; bars.computeBoundingSphere(); root.add(bars);
   }
-  bars.instanceColor.needsUpdate = true; bars.computeBoundingSphere(); root.add(bars);
-  if (mode === 'letter') {
+  if (maj) root.add(blockOutlines(maj, flat ? 0.1 : 0.05));
+  if (mode === 'letter' && !flat) {
     const p = new THREE.Mesh(new THREE.PlaneGeometry(50, 50), new THREE.MeshBasicMaterial({ color: 0x9ad0ff, transparent: true, opacity: 0.12, side: THREE.DoubleSide, depthWrite: false }));
     p.rotation.x = -Math.PI / 2; p.position.y = HMAX / mx; root.add(p);
   }
@@ -718,15 +897,22 @@ function buildHeat() {
   groundText(lab, 'COL1', -25.5, -27.5, 1.4, 0x9aa0b4); groundText(lab, 'COL49', 20.5, -27.5, 1.4, 0x9aa0b4);
   groundText(lab, 'ROW1', -32, -24, 1.4, 0x9aa0b4); groundText(lab, 'ROW49', -33, 24, 1.4, 0x9aa0b4);
   lab.done(); root.add(lab.mesh);
-  heatPick = { bars, cur, other: nullOn ? obs : nul, nullOn, mode };
+  heatPick = bars ? { bars, cur, other: nullOn ? obs : nul, nullOn, mode, blockInfo } : null;
+  if (maj) {
+    const majO = majority(obs, th, div), majN = majority(nul, th, div);
+    $('majList').innerHTML = `<b>Block majority</b> (W/E/A/F = Water/Earth/Air/Fire; same observed thresholds for null)<br>Observed:<br>${majGrid(majO, div)}<br>Null:<br>${majGrid(majN, div)}`
+      + (div !== 7 ? '' : '') + `<br>Showing: ${nullOn ? 'null' : 'observed'}. Ties: the tied element nearest the element of the block mean, then the hotter.`;
+  } else $('majList').textContent = '';
   const so = edgeStats(obs), sn = edgeStats(nul), f = (x) => x.toFixed(2);
   $('hNote').innerHTML = `Observed: max ${f(so.max)}, col 1 mean x${f(so.c1)}, col 49 mean x${f(so.c49)} of overall.<br>Null: max ${f(sn.max)}, col 1 x${f(sn.c1)}, col 49 x${f(sn.c49)}.`
     + `<br><b>Mean per region</b> (edge = cols 1-2, 48-49; triangles around the diagonals)${th ? ', element shares' : ''}:<br>${regionText(obs, nul, th)}`;
   const what = mode === 'names'
-    ? `per cell, number of sides in which that cell is part of ${$('hName').selectedOptions[0].text}`
+    ? `per cell, number of sides in which that cell is part of ${useDisc() ? ($('nPick').value === 'all' ? `any of the ${DISC.names.length} discovered names` : $('nPick').value) : $('hName').selectedOptions[0].text}`
     : `observed/expected count of letter ${$('hLetter').value} per cell (expected = its total / 2401; plane = ratio 1)`;
   caption.textContent = `Construction, not a finding. Stack of ${S.sides.length} clean row-written sides (2a-25a): ${what}. ${nullOn ? `NULL: letters shuffled inside each side (seed ${S.seed}).` : 'Observed.'} Bar height and colour share one scale with the ${nullOn ? 'observed' : 'null'} map (max ${f(mx)}).`
-    + (th ? ` Elements: bands at the quartiles of the OBSERVED values (${th.map(f).join(', ')}), used for the null too; quartiles give 25% each by construction, except where tied values sit on a threshold.` : '');
+    + (th ? ` Elements: bands at the quartiles of the OBSERVED values (${th.map(f).join(', ')}), used for the null too; quartiles give 25% each by construction, except where tied values sit on a threshold.` : '')
+    + (maj ? ` Majority mode: each ${div === 7 ? '7x7 block (7x7 plan)' : div === 2 ? 'quadrant (24x24)' : '12x12 block'} painted with its most frequent element${div === 7 ? '' : '; the central row 25 and column 25 form their own strip with its own majority'}.` : '')
+    + (flat ? ` Flat letters from ${$('hSide').value === 'stack' ? 'the stack (most frequent letter per cell)' : 'side ' + $('hSide').value}${nullOn ? ' (shuffled)' : ''}.` : '');
   legend(th ? [3, 2, 1, 0].map(k => [`${EL_NAMES[k]}${k === 3 ? ' (hottest)' : k === 0 ? ' (coldest)' : ''}`, EL_COLORS[k]])
     : [['low', heatHex(0.1)], ['mid', heatHex(0.5)], ['high', heatHex(1)]], false);
 }
@@ -813,8 +999,12 @@ function facePoint(edge, i, nr, j, len, lift, mirror = false) {
 function buildClosed() {
   addLights();
   const filt = $('clName').value, copies = pyramidCopies();
-  const a = dec(S.obs.names[8]), mx = Math.max(...a);
-  const elements = $('hColor').value === 'elements', th = elements ? quart(a) : null;
+  const disc = useDisc(), a = disc ? stackNameCounts(discPicked(), false) : dec(S.obs.names[8]), mx = Math.max(...a) || 1;
+  $('hDispRow').hidden = true; $('hSideRow').hidden = true;
+  const useMaj = $('hMaj').checked, div = +$('hDiv').value;
+  const elements = $('hColor').value === 'elements' || useMaj, th = elements ? quart(a) : null;
+  const maj = useMaj ? majority(a, th, div) : null;
+  $('majList').innerHTML = maj ? `<b>Base block majority</b> (W/E/A/F):<br>${majGrid(maj, div)}` : '';
   const pos = [], col = []; let n = 0, nRev = 0;
   copies.forEach(cp => {
     if ($('clBase').checked) {
@@ -822,10 +1012,12 @@ function buildClosed() {
       for (let r = 0; r < 49; r++) for (let c = 0; c < 49; c++) {
         const v = a[r * 49 + c];
         M4.copy(upRot).setPosition(c - 24 + cp.dx, 0.01, r - 24);
-        base.add(M4, '', elements ? EL_COLORS[elOf(v, th)] : heatHex(v / mx), C.ink, 1,
-          { r, c, ch: `${v} sides${elements ? ' (' + EL_NAMES[elOf(v, th)] + ')' : ''}`, side: 'base stack' });
+        const bi = maj ? maj.blocks[maj.of[r * 49 + c]] : null;
+        base.add(M4, '', bi ? EL_COLORS[bi.el] : elements ? EL_COLORS[elOf(v, th)] : heatHex(v / mx), C.ink, 1,
+          { r, c, ch: `${v} sides${elements ? ' (' + EL_NAMES[elOf(v, th)] + ')' : ''}${bi ? ' | block ' + bi.name + ': ' + majTxt(bi) : ''}`, side: 'base stack' });
       }
       base.done(); root.add(base.mesh); hoverLayer = base;
+      if (maj) { const o = blockOutlines(maj, 0.06); o.position.x = cp.dx; root.add(o); }
     }
     const apex = new THREE.Vector3(cp.dx, PH, 0);
     const cs = [[-HALF, HALF], [HALF, HALF], [HALF, -HALF], [-HALF, -HALF]].map(([x, z]) => new THREE.Vector3(x + cp.dx, 0, z));
@@ -837,13 +1029,15 @@ function buildClosed() {
     for (let t = 29; t <= 48; t++) ['a', 'b'].forEach((s, si) => {
       const e = T[keyOf(t, s)]; if (!e) return;
       const tr = triangles(e), rm = revMap(e);
-      const hm = new Map(); e.occ.slice().sort((x, y) => x[3] - y[3]).forEach(([k, r0, c0, len]) => { for (let i = 0; i < len; i++) hm.set(r0 * 100 + c0 + i, k); });
+      const hm = disc ? setMap(e) : new Map();
+      if (!disc) e.occ.slice().sort((x, y) => x[3] - y[3]).forEach(([k, r0, c0, len]) => { for (let i = 0; i < len; i++) hm.set(r0 * 100 + c0 + i, k); });
       [[tr.up, 2 * si], [tr.lo, 2 * si + 1]].forEach(([rows, edge]) => rows.forEach((u, i) => {
         const row = e.rows[u];
         for (let j = 0; j < row.length; j++) {
           const k = hm.get(u * 100 + j), rv = rm.get(u * 100 + j);
           let hex = null;
           if (rv !== undefined) { hex = REV_COLOR; nRev++; }
+          else if (k !== undefined && disc) { hex = setColor(k); n++; }
           else if (k !== undefined && (filt === 'all' || NAMES[k] === filt || (filt === 'GETH' && NAMES[k] === 'ALGETH') || (filt === 'NOCHA' && NAMES[k] === 'ADNOCHA'))) { hex = NAME_COLORS[k]; n++; }
           if (hex === null) continue;
           const p = facePoint(edge, i, rows.length, j, row.length, 0.4, cp.mirror); pos.push(p.x + cp.dx, p.y, p.z);
@@ -857,9 +1051,10 @@ function buildClosed() {
   const pm = new THREE.PointsMaterial({ size: +$('clGlow').value, vertexColors: true, map: dotTexture(), transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true });
   root.add(new THREE.Points(pg, pm));
   onSlider = () => { pm.size = +$('clGlow').value; };
-  caption.textContent = `Construction, not a finding. Closed pyramid: ${n / copies.length} master-name letter cells from all diamond sides 29-48 (side a upper/lower triangle on faces 1-2, side b on faces 3-4, as in Pyramid view) drawn as additive glowing points; overlaps add up. Base: per-cell count of sides with a master-name letter (stack of ${S.sides.length} sides 2a-25a)`
+  const setLbl = disc ? `discovered-name${$('nPick').value === 'all' ? '' : ' (' + $('nPick').value + ')'}` : 'master-name';
+  caption.textContent = `Construction, not a finding. Closed pyramid: ${n / copies.length} ${setLbl} letter cells from all diamond sides 29-48 (side a upper/lower triangle on faces 1-2, side b on faces 3-4, as in Pyramid view) drawn as additive glowing points; overlaps add up. Base: per-cell count of sides with a ${setLbl} letter (stack of ${S.sides.length} sides 2a-25a)`
     + (th ? `, coloured as Elements by quartiles of these values (${th.join(', ')}; ties on thresholds make shares unequal).` : '.') + invNote();
-  legend([...(th ? [3, 2, 1, 0].map(k => [`Base: ${EL_NAMES[k]}`, EL_COLORS[k]]) : [['Base heat: low', heatHex(0.1)], ['Base heat: high', heatHex(1)]]), ['Reversed name', REV_COLOR]]);
+  legend([...(th ? [3, 2, 1, 0].map(k => [`Base: ${EL_NAMES[k]}`, EL_COLORS[k]]) : [['Base heat: low', heatHex(0.1)], ['Base heat: high', heatHex(1)]]), ['Reversed name', REV_COLOR], ...(setLegend() || [])], !disc);
 }
 
 // ---------------------------------------------------------------- TESSERACT
@@ -1034,6 +1229,7 @@ fill($('tbl'), Array.from({ length: 47 }, (_, i) => [i + 2, `${i + 2} - ${T[keyO
 const baseKeys = Object.keys(T).filter(k => T[k].f === 'square-rows').sort((a, b) => parseInt(a) - parseInt(b) || a.localeCompare(b));
 fill($('pBase'), baseKeys.map(k => [k, k]));
 fill($('tsStart'), baseKeys.map(k => [k, k]));
+fill($('hSide'), [['stack', 'stack: most frequent letter per cell'], ...S.sides.map(k => [k, `side ${k}`])]);
 fill($('tsSig'), sigGroups().map(([s, ks]) => [s, `${s} (${ks.length}: ${ks.length > 4 ? ks.slice(0, 3).join(' ') + ' ...' : ks.join(' ')})`]));
 const dTables = Array.from({ length: 20 }, (_, i) => [i + 29, String(i + 29)]);
 fill($('pFace'), dTables); fill($('pFace2'), dTables);
@@ -1082,7 +1278,7 @@ $('tbl').onchange = () => {
 };
 $('side').onchange = () => { state.side = $('side').value; render(true); };
 ['currents', 'dlayout', 'hiNames', 'pBase', 'pFace', 'pFace2', 'showBase', 'hMode', 'hName', 'hLetter', 'hNull',
-  'trSrc', 'trOrder', 'trObs', 'trNull', 'clName', 'clBase', 'tsStart', 'icSide', 'pRev', 'hColor', 'tsGroup', 'tsSig']
+  'trSrc', 'trOrder', 'trObs', 'trNull', 'clName', 'clBase', 'tsStart', 'icSide', 'pRev', 'hColor', 'tsGroup', 'tsSig', 'hMaj', 'hDiv', 'hDisp', 'hSide']
   .forEach(id => $(id).onchange = () => render(true));
 ['pOrig', 'pInv'].forEach(id => $(id).onchange = () => render());
 $('hCam').onchange = () => {
@@ -1137,14 +1333,14 @@ function pick() {
     const hit = ray.intersectObject(heatPick.bars)[0];
     if (!hit) { $('hover').textContent = ''; return; }
     const i = hit.instanceId, f = (x) => (Math.round(x * 100) / 100);
-    $('hover').textContent = `row ${Math.floor(i / 49) + 1}, col ${i % 49 + 1}: ${f(heatPick.cur[i])} (${heatPick.nullOn ? 'observed' : 'null'} ${f(heatPick.other[i])})`;
+    $('hover').textContent = `row ${Math.floor(i / 49) + 1}, col ${i % 49 + 1}: ${f(heatPick.cur[i])} (${heatPick.nullOn ? 'observed' : 'null'} ${f(heatPick.other[i])})${heatPick.blockInfo(i)}`;
     return;
   }
   if (!hoverLayer) return;
   const hit = ray.intersectObject(hoverLayer.mesh)[0];
   const inf = hit && hoverLayer.info[hit.instanceId];
   if (state.view === 'sigmap') { $('hover').textContent = inf ? `${inf.side}: signature ${inf.ch}` : ''; return; }
-  $('hover').textContent = inf ? `${inf.side ? inf.side + ' - ' : ''}row ${inf.r + 1}, col ${inf.c + 1}: ${inf.ch}${inf.k !== undefined ? '  [' + NAMES[inf.k] + ']' : ''}` : '';
+  $('hover').textContent = inf ? `${inf.side ? inf.side + ' - ' : ''}row ${inf.r + 1}, col ${inf.c + 1}: ${inf.ch}${inf.nm ? '  [' + inf.nm + ']' : inf.k !== undefined && inf.nm === undefined && NAMES[inf.k] ? '  [' + NAMES[inf.k] + ']' : ''}` : '';
 }
 
 // ---------------------------------------------------------------- loop

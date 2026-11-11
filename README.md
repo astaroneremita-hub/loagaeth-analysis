@@ -112,6 +112,10 @@ src/                          LAYER A - the Loagaeth analysis
   a19_machine.py              Soyga vs Loagaeth, 2-D rule, compression, language model, generator
   a20_energy_fibonacci_gd.py  letter energy by realm, Fibonacci, 7x7 division, GD rearrangement
   a21_index_heptarchy_numbers.py  Peterson's index checked, dense-line gold standard, Heptarchy numbers, gematria
+  a22_robustness_and_depth.py     findings under other readings, diamond roads, memory, repeats, Zipf
+  a23_name_discovery.py           unsupervised name discovery, families, grammar
+  a24_book_architecture.py        acrostics, pyramid cross, dialects, book order, two currents, verses
+  a25_bridges.py                  other systems inside the Loagaeth, name constellation
   make_figures.py             draws every figure in figures/ from the results
   make_viz_data.py            builds viz/loagaeth_viz_data.js for the 3D viewer
 viz/                          loagaeth_3d.html - interactive three.js viewer
@@ -481,6 +485,138 @@ As contiguous strings: AON 66× (97 expected from letter pairs), AONH 1×, ONHL 
 frequency. "A = 6, B = 5" is real — it is Crowley's column (and two GD-derived columns) in our
 bundled tables. Digit roots of large counts fall on each of 1–9 about 1/9 of the time.
 
+### Are we looking wrong? Every core result under other readings `[a22]`
+
+We were wrong once (tables 26–28 read by rows instead of diagonals). So the main results were
+recomputed on altered versions of the book: Z = X, U = V, U read as A, only sides whose rows are
+exactly 49 letters, and ten copies with 2% of letters swapped for their look-alikes in Dee's hand.
+
+![Robustness](figures/fig_robustness.svg)
+
+- **Holds everywhere:** the no-doubled-letter rule (0.08–0.22 of chance), the row edges (z ≈ 40),
+  the different letter mix of the four segments (χ² far above its null in every version), and the
+  names themselves (2% noise loses only ~5% of CHASTORs).
+- **Weaker than we said:** the CHASTOR **territory**. Counted per table it is strong (lag-1 0.49,
+  p < 0.001); measured per 1,000 letters it is moderate (0.26, z ≈ 2, p ≈ 0.02), and if U is read as
+  A it fades (z 1.1), because CHUSTOR at the end merges into it. The realm is real but partly the
+  boundary of the U register. **REVISED.**
+- **Segmentation, calibrated:** tuned on Peterson's division of eight dense lines and scored on the
+  ninth, our segmenter rises from F1 0.33 to **0.36** (random 0.16). It still over-cuts; results that
+  rest on substring counts (most of ours) do not depend on it.
+- **Table 49 is missing:** no test assumes 49 present tables; the 7×7 plan results use 48.
+
+![Diamond roads](figures/fig_diamond_roads.svg)
+
+**Another road through the diamonds?** Each diamond pair rebuilt as its square and read ten ways:
+only the stored anti-diagonals read as language (3.71 bits, 9.9 names per 1,000 letters); rows,
+columns, main diagonals, boustrophedon and spiral are all noise (≈ 7.8 bits, 0 names). Backwards the
+same road keeps the information (6.1 bits for a forward model) but loses every name. **REAL — there
+is exactly one way to read them.**
+
+### Deeper mathematics `[a22]`
+
+![Memory](figures/fig_mi_decay.svg)
+
+- **Memory of the text (mutual information by distance).** From 4 to about 12 letters the Loagaeth
+  remembers more than a 3-letter Markov model (d = 8: 0.012 vs 0.006 bits) — the span of its words
+  and names. Beyond ~12 letters every bit of memory equals that of letters shuffled inside each side:
+  it is the change of letter mix from side to side, not a long-range code. **REAL (short range) /
+  REFUTED (long-range code).**
+- **Copying between tables:** the longest string shared by two tables is 16 letters
+  (ADNOCHANTANTOXAL), shorter than in a Markov surrogate (18). No block was copied; 12-letter
+  formulas shared between tables are 358 vs 206 (the names). **REFUTED (copying).**
+- **Compression:** LZMA 3.22 bits/letter vs 3.26 for the Markov-3 surrogate — almost nothing beyond
+  local letter habits for an algorithm to exploit.
+- **Zipf and Heaps on Dee's own word divisions (leaf 1):** slope −0.61, Heaps β 0.91, 85% hapax at
+  the size of the Calls — the same profile as the Calls themselves (−0.69, 0.87, 85%). By its word
+  statistics leaf 1 behaves like the Calls. **DESCRIPTIVE.**
+- **Vertical structure in the squares:** letters above/below each other share 0.0085 bits vs 0.0079
+  with rows shuffled (z 1.7): the squares are written row by row, not as a 2-D design.
+
+### New names, found by the text itself `[a23]`
+
+![New names](figures/fig_new_names.svg)
+
+Without telling the program any name, we kept every string of 4–14 letters that recurs (≥ 6×, in
+≥ 3 tables), is followed and preceded by varied letters (a word boundary on both sides — Harris's
+criterion), and occurs far more than a Markov-3 model of the same book predicts (z ≥ 4.5, Bonferroni
+over 3,562 candidates).
+
+- **47 strings survive. The same procedure on a Markov-3 copy of the book finds 0.** **REAL.**
+- **Positive control:** it rediscovers NOCHASTOR/ICHASTOR/NECHASTOR, NOCHA/ADNOCHAP, ACLAX, CHADAX
+  by itself. It misses the most frequent ones (CHASTOR alone, GETH, ANZACH) because a 3-letter model
+  fitted on this book already "knows" them — the test is conservative.
+- **New recurring names outside the known families** (count, tables): **NACHO** 157×/31 (and NACHOA,
+  NACHOAD, NACHOAL), **AXALGRA** 39/19, **GRADAX** 38/13, **PHANGE** 32/20, **ANTANTOX** 27/16,
+  **VOXAR** 25/15, **TAXALGRA** 19/11 (z 9.3), **DRAGRA**, **RONZIN**, **ANCHANO**, **NADAB**,
+  **CHARDAX**, **AXACHAR**, **ZIDNOPHA** (mostly in the diamonds), **PHADOL** (tables 2–47),
+  **ONDANVAGE** (z 12.2, only tables 3–10), **UCHER** (tables 23–48, the U register).
+- **NACHO is the vowel mirror of NOCHA** (N·A·CH·O / N·O·CH·A), both strong, both widespread.
+- **Families:** 5 families of three or more members (0 in the surrogate) — NACHO·A·AD·AL;
+  NOCHAP·H·ADNOCHAP·ADNOCHAPHA; ACLAXTO·ACLAXTOR·AXACLAXTO; ICHASTOR·ICHASTORA·ZICHASTOR;
+  NECHASTOR·NOCHASTOR·NOCHASTORA. Each family is a **core with a few prefixes and suffixes**: written
+  as a grammar it takes ~40% of the letters of the list (e.g. core NACHO + endings {–, A, AD, AL}).
+- **Limits:** these names barely help segment Peterson's dense lines (F1 unchanged, 0.33), and only
+  4% occur inside Dee's spaced words of leaf 1 (2% for random strings) — they belong to the tables'
+  own vocabulary.
+
+### The architecture of the book `[a24]`
+
+![Two currents](figures/fig_currents_vocab.svg)
+
+- **The two currents of 25b–28b have two vocabularies.** Their recurring 5-letter formulas overlap
+  (Jaccard) 0.221, while every random split of the same lines gives 0.29–0.34 (mean 0.315). ANZACH
+  (10 vs 2), ACLAX (25 vs 11) and OXAD (37 vs 14) lean to the ↘ current; NOCHAP (5 vs 13) and
+  CHASTOR (6 vs 10) to the ← current. The interleaved currents are **two texts, not one cut in two** —
+  echoing the two houses. **REAL (new).**
+
+![Dialects](figures/fig_dialects.svg)
+
+- **A dialect chain.** A letter model of each realm reads its neighbours best: opening → heartland →
+  26–28 → diamonds → end. The end is closest to the diamonds (4.00 bits) and farthest from the
+  opening (6.36). The language drifts gradually along the book. **REAL.**
+
+![Book order](figures/fig_book_order.svg)
+
+- **Dee's order is nearly the smoothest possible.** Summed similarity of neighbouring sides: 91.2,
+  against 84.3 for random orders (best of 500: 85.9) and 91.5 for a greedy "smoothest" ordering.
+  Sides a and b of one table are about as alike as b and the next table's a (0.982 vs 0.979): the
+  drift is continuous across leaves. **REAL.** Mirror pairs (t ↔ 49 − t) and tables in the same
+  column of the 7×7 plan are no closer than random pairs. **REFUTED.**
+- **Rows as verses:** a segmenter that never sees row breaks puts a word break at 34% of row breaks
+  vs 19% of random positions (≈ 11 standard errors): rows end on word boundaries. **REAL** (the row
+  edges again, measured a new way).
+- **Acrostics and centres:** no name in the first- or last-letter columns of 36 squares, nor in the
+  string of their centre cells (AHAROTNLDOVCHCOA…). **REFUTED.**
+- **The pyramid's cross:** in the rebuilt diamonds, name cells are not drawn to the diagonals or the
+  centre (z 1.9, 1.8 — slightly away, not toward). **REFUTED.**
+
+### Bridges to the other systems, and the constellation `[a25]`
+
+- **No other system "lives" in the Loagaeth.** Watchtower names occur 749× (Markov-3 expects 814),
+  words of the Calls 1,008× (1,087), Aethyr names 1,999× (2,117) — all at chance; the 91 governors 0×
+  (1.2 expected); the 49 Heptarchic angels once (BORNOGO, in the heartland; 0.2 expected — not
+  significant alone). The frequent shared strings are short (ADNA 501×, RAPH 134×, TOR, TAN, ARN).
+  Watchtower strings are rarer in the end (0.26× its share) — the U register again. **REFUTED.**
+- **Constellation:** stacking the 36 squares, the busiest 3×3 window of each master name (CHASTOR 5,
+  GETH 6, NOCHA 8 …) is inside both nulls (random row; random column). Names have no favourite cell.
+  **REFUTED.**
+
+### The machine question: can an algorithm turn the data into code?
+
+What the machine side has given, honestly:
+
+- **It recognises the language** (a character model): it confirmed the diagonal decoding of 25b–28b,
+  the one road through the diamonds, the U register, and that the text has a single direction.
+- **It can write more of it** (an order-5 generator produces convincing pseudo-Loagaeth), and it
+  can **segment** the dense lines twice as well as chance against an independent editor.
+- **It finds no generating program.** No periodicity (unlike the Soyga), no 2-D rule, no copying, no
+  long-range memory, and compression gains almost nothing over a 3-letter model. The text is not
+  the output of a short algorithm that could be reversed.
+- **It cannot translate.** Translation needs anchors — words with known meanings. The Loagaeth has
+  23 shared with the Calls, and no gloss for CHASTOR or its family (Peterson's index has none). A
+  model can map structure; it cannot invent meaning without such anchors.
+
 ### 3D viewer — the tables as squares, diamonds and pyramids
 
 ![3D pyramid view](figures/viz_pyramid.jpg)
@@ -561,6 +697,21 @@ What they show `[a21 F]`:
   inside). With Elements, the edge columns are 87% Water; the interior splits evenly. For letters
   (where the null is usable) every triangle sits within ±4 points of the null, except X, whose
   absence from row starts makes the left side "Water".
+
+**Majority by sub-quadrant.** A button paints each block in the element that holds most of its
+cells: halves (four 24×24 quadrants plus the central cross as its own strip), 4×4, or the 7×7 blocks
+of the book's plan. A "Display" select swaps the heat bars for the flat 49×49 letters in their
+element colours.
+
+| Letter H, halves, from above | Name heat, 7×7 | Side 12a as flat letters |
+|---|---|---|
+| ![2x2](figures/viz_majority_2x2.jpg) | ![7x7](figures/viz_majority_7x7.jpg) | ![flat](figures/viz_majority_flat_letters.jpg) |
+
+What it shows: the first and last block columns are Water (cold) — up to 73% for the name heat —
+and for H the last column turns Fire/Earth while the first stays Water; the null shows no such
+columns. That is again the row edges (H closes rows, X never opens one). The interior blocks mix
+Earth, Fire and Air with no figure. Note: quartile cut-offs fall on tied values, so Water's band
+often holds the most cells and wins blocks for that reason alone.
 
 ### What we tested and threw out (the discipline)
 Mirror/reversal (syllable-pool artifact), decimation-by-2 (names are contiguous), Semitic

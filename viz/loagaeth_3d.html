@@ -395,6 +395,14 @@ const state = { view: 'square', table: 12, side: 'a' };
 const M4 = new THREE.Matrix4();
 
 // ---------------------------------------------------------------- SQUARE
+const ROW_TILE = 0x1f4a34, UNCLEAR_TILE = 0x101216, ROW_LINE = 0x7bd36b, UNCLEAR_LINE = 0x6a7080;
+function mixedNote(key) {             // numbers from results/37 for this face
+  const Mx = D.mixed; if (!Mx || !Mx.faces || !Mx.faces[key]) return '';
+  const parts = Mx.faces[key].filter(c => c.bits_now !== c.bits_single_diagonal).map(c =>
+    `colour ${c.colour}: ${c.bits_single_diagonal} -> ${c.bits_now} bits/letter (` + c.zones.map(z => `${z.zone} ${z.reading} ${z.bits}`).join('; ') + ')');
+  if (!parts.length) return '';
+  return ` Refined decoding (results/37): ${parts.join(' | ')}. Names on 25b-28b ${Mx.names_total ? Mx.names_total.join(' -> ') : ''}.`;
+}
 function buildSquare() {
   const key = keyOf(state.table, state.side), e = T[key];
   const diag = e.f === 'square-diagonal', cur = diag && $('currents').checked, vocab = diag && $('curVocab').checked;
@@ -410,17 +418,21 @@ function buildSquare() {
     });
   }
   const cellCur = new Map();          // cell -> current from the decoded lines (falls back to chessboard parity)
-  (e.lines || []).forEach(([cu, r0, c0, dr, dc, n]) => { for (let i = 0; i < n; i++) cellCur.set((r0 + dr * i) * 100 + c0 + dc * i, cu); });
+  const cellKind = new Map();         // 1 = written by rows, 2 = unclear zone (refined decoding, module a37)
+  (e.lines || []).forEach(([cu, r0, c0, dr, dc, n, kind]) => { for (let i = 0; i < n; i++) { const q = (r0 + dr * i) * 100 + c0 + dc * i; cellCur.set(q, cu); if (kind) cellKind.set(q, kind); } });
+  const hasRows = [...cellKind.values()].includes(1), hasUnclear = [...cellKind.values()].includes(2);
   const layer = new CellLayer(totalCells(e));
   e.rows.forEach((row, r) => [...row].forEach((ch, c) => {
     const k = hm.get(r * 100 + c);
     const par = (r + c) % 2;
     let bg = par ? C.tileB : C.tileA;
-    if (cur || vocab) { const cu = cellCur.has(r * 100 + c) ? cellCur.get(r * 100 + c) : par === e.drp ? 0 : 1; bg = cu === 0 ? C.curTileA : C.curTileB; }
+    if (cur || vocab) { const cu = cellCur.has(r * 100 + c) ? cellCur.get(r * 100 + c) : par === e.drp ? 0 : 1; bg = cu === 0 ? C.curTileA : C.curTileB;
+      const kd = cellKind.get(r * 100 + c); if (kd === 1) bg = ROW_TILE; else if (kd === 2) bg = UNCLEAR_TILE; }
+    const dimInk = (cur || vocab) && cellKind.get(r * 100 + c) === 2;
     const hi = k !== undefined;
     const hiCol = vocab ? (curOf.get(r * 100 + c) === 0 ? C.curA : C.curB) : setColor(k);
     M4.makeTranslation(c - 24, 24 - r, hi ? 0.35 : 0);
-    layer.add(M4, ch, hi ? hiCol : bg, hi ? C.inkDark : C.ink, 1, { r, c, ch, k, nm: hi ? names[k] : undefined });
+    layer.add(M4, ch, hi ? hiCol : bg, hi ? C.inkDark : dimInk ? 0x5c6170 : C.ink, 1, { r, c, ch, k, nm: hi ? names[k] : undefined });
   }));
   layer.done(); root.add(layer.mesh); hoverLayer = layer;
   if (cur) buildCurrents(e);
@@ -428,13 +440,15 @@ function buildSquare() {
     ? (() => {
       const lw = (e.lines || []).find(l => l[0] === 1 && l[5] > 1);
       const lwTxt = !lw ? 'up-left along r-c diagonals' : lw[3] > 0 ? 'down-left along r+c anti-diagonals' : 'up-left along r-c diagonals';
-      return `${e.rows.length}x49 square read in two currents (decoded lines): (r+c) ${e.drp ? 'odd' : 'even'} cells down-right along r-c diagonals, the other colour ${lwTxt}`;
+      const mix = (e.lines || []).some(l => l[6]);
+      return `${e.rows.length}x49 square read in two currents (decoded lines): (r+c) ${e.drp ? 'odd' : 'even'} cells ${mix ? 'partly by rows, partly down-right (zones)' : 'down-right along r-c diagonals'}, the other colour ${lwTxt}`;
     })()
     : `49x49 square read in rows (${totalCells(e).toLocaleString('en')} letters)`;
   const occList = useDisc() ? e.docc || [] : e.occ, cnt = {};
   occList.forEach(o => { if ($('nPick').value === 'all' || names[o[0]] === $('nPick').value) cnt[names[o[0]]] = (cnt[names[o[0]]] || 0) + 1; });
   const summ = Object.entries(cnt).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${k} ${v}`).join(', ') || 'none';
   caption.textContent = `Table ${key} - ${fmt}. ${useDisc() ? 'Discovered names (results/23, z >= 4.5)' : 'Master names'}: ${summ}.`;
+  if (diag) caption.textContent += mixedNote(key);
   $('curVocabNote').textContent = '';
   if (vocab) {
     const E = D.order && D.order.currents;
@@ -447,7 +461,9 @@ function buildSquare() {
     caption.textContent += ` Currents vocabulary: name cells on the down-right current gold, on the leftward current cyan (${here[0]} / ${here[1]} cells on this side).`;
   }
   legend([...(vocab ? [['Name on down-right current', C.curA], ['Name on leftward current', C.curB], ['Down-right cells', C.curTileA], ['Leftward cells', C.curTileB]]
-    : diag && cur ? [['Down-right current', C.curA], ['Up-left current', C.curB]] : []), ...(setLegend() || [])], !useDisc() && !vocab);
+    : diag && cur ? [['Down-right current', C.curA], ['Other current', C.curB]] : []),
+    ...((cur || vocab) && hasRows ? [['Written by rows (left to right)', ROW_LINE]] : []),
+    ...((cur || vocab) && hasUnclear ? [['Unclear zone (reads badly)', UNCLEAR_LINE]] : []), ...(setLegend() || [])], !useDisc() && !vocab);
 }
 
 const lineVS = `attribute float aS; varying float vS; void main(){ vS = aS; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`;
@@ -456,7 +472,8 @@ const lineFS = `uniform float uTime; uniform vec3 uColor; varying float vS;
 function buildCurrents(e) {
   const groups = [[], []]; // 0: down-right, 1: leftward
   if (e.lines) {           // decoded lines (data/loagaeth_diagonal_decoded.json): exact cells and directions
-    e.lines.forEach(([cu, r0, c0, dr, dc, n]) => { if (n >= 2) groups[cu].push(Array.from({ length: n }, (_, i) => [r0 + dr * i, c0 + dc * i])); });
+    groups.push([], []);   // 2: written by rows, 3: unclear zone
+    e.lines.forEach(([cu, r0, c0, dr, dc, n, kind]) => { if (n >= 2) groups[kind === 1 ? 2 : kind === 2 ? 3 : cu].push(Array.from({ length: n }, (_, i) => [r0 + dr * i, c0 + dc * i])); });
   } else for (let d = -48; d <= 48; d++) {
     const cells = [];
     for (let r = 0; r < 49; r++) { const c = r - d; if (c >= 0 && c < 49 && r < e.rows.length && c < e.rows[r].length) cells.push([r, c]); }
@@ -468,12 +485,13 @@ function buildCurrents(e) {
   const cone = new THREE.ConeGeometry(0.32, 0.9, 10);
   groups.forEach((list, gi) => {
     const pos = [], s = [];
-    const col = gi === 0 ? C.curA : C.curB;
+    if (!list.length) return;
+    const col = [C.curA, C.curB, ROW_LINE, UNCLEAR_LINE][gi];
     const heads = new THREE.InstancedMesh(cone, new THREE.MeshBasicMaterial({ color: col }), list.length);
     const up = new THREE.Vector3(0, 1, 0), q = new THREE.Quaternion();
     list.forEach((cells, li) => {
       const [r0, c0] = cells[0], [r1, c1] = cells[cells.length - 1];
-      const L = (cells.length - 1) * Math.SQRT2;
+      const L = Math.hypot(r1 - r0, c1 - c0);
       pos.push(c0 - 24, 24 - r0, 0.6, c1 - 24, 24 - r1, 0.6); s.push(0, L);
       const dir = new THREE.Vector3(c1 - c0, -(r1 - r0), 0).normalize();
       q.setFromUnitVectors(up, dir);

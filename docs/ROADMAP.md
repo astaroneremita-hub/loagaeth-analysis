@@ -79,6 +79,10 @@ refuted as a rule, B5 seven hidden names, B6 refuted.
 | C4 | Is there a grammar beyond names (particles, function strings)? | short high-frequency strings between names (2–3 letters) and their positions relative to names | shuffle within rows | candidate "particles" list |
 
 ### Track D — Anchors for meaning
+
+**Status (a30):** D1 refuted (Call words at letter-habit rates), D2 open (needs the printed Five
+Books of Mystery or the BL photos of Sloane 3188), D3 refuted.
+
 | # | Question | Test | Null | Stop rule |
 |---|---|---|---|---|
 | D1 | Words shared with the Calls (ADNA 501×, TAGE, EMNA, HARG…) | where they occur, what precedes/follows them; do they keep Call morphology? | Markov-3 | a short list of probable shared words with contexts |
@@ -86,6 +90,10 @@ refuted as a rule, B5 seven hidden names, B6 refuted.
 | D3 | Leaf titles | titles decoded by the dialect models; are titles in the same dialect as their leaf? | other leaves' titles | REAL if own-leaf fit beats others |
 
 ### Track E — The machine side
+
+**Status (a31):** done. E1 refuted (no code shorter than a 3-letter memory), E2 real (only the end
+needs its own grammar). Remaining tracks: F (constructions, on request) and G (publication).
+
 | # | Question | Test | Null | Stop rule |
 |---|---|---|---|---|
 | E1 | Small generative grammar of the whole book | probabilistic grammar = names (a23 families) + particles (C4) + letter model for the rest; compare its compression with Markov-3 | Markov-3 | if it compresses better, the grammar is the best "code" of the text |
@@ -110,3 +118,21 @@ Labelled "construction" in the repo, no claims of discovery:
 
 Each finished item: module + figure + README section + log entry + SESSION_FINDINGS line, and a
 3D view where a picture helps.
+
+## 4. After the web research (a32–a36)
+
+Done: one phonology across the systems (a32); Dee's diaries read and tested (a33); vowel paradigms
+(a34); Nalvage's coordinates (a35); scribe calibrated on the Soyga tables — A1 closed (a36).
+
+Still open, from the literature survey (`data/raw/research_hypotheses.md`, git-ignored):
+- Leaf 25b has a third series (Peterson) — re-decode 25b with three currents.
+- Note on leaf 43a: tables 43–48 are a pattern "to be filled" — test repetition structure of 43–48.
+- Table 49: the 21 words as five tables of 21 letters (112 vs 105 letters).
+- Laycock's "every tenth letter": do decimated tables look like Calls?
+- Heptarchy: structure of the six number layouts of the seven 7×7 tables (restores 8 lost cells if a rule exists).
+- Images of Sloane 3189 (phergoph mirror, fols 02r–57v) for spot checks of Z/X and N/U.
+- Robustness set of a22 extended with the measured confusions (z→x 8.5%, n→u 6.5%).
+
+**Update (a37, a38):** 25b third series done and extended (27a, 26a re-decoded); 43–48 replication,
+every k-th letter and Heptarchic layouts refuted. Left: the unclear corner of 26a (90 letters); table 49's 21 words; spot checks on the manuscript images; a22 with the measured confusions;
+update the 3D viewer's currents for 26a/27a to the mixed layout.

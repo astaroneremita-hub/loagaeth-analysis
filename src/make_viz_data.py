@@ -143,10 +143,78 @@ def decoded_lines(rows, key):
     return out
 
 
+ARROWS = {"↘": ("diag", 0), "↖": ("diag", 1), "↙": ("anti", 0), "↗": ("anti", 1),
+          "→ rows": ("row", 0), "← rows": ("row", 1), "↓ columns": ("col", 0), "↑ columns": ("col", 1)}
+UNCLEAR_BITS = 3.6  # a zone reading worse than this (results/37) is marked "unclear"
+
+
+def read_cells(G, par, pred, fam, rev):
+    """Cell-returning twin of a37.read: the same lines, as lists of (r, c)."""
+    d = {}
+    for r in range(len(G)):
+        for c in range(len(G[r])):
+            if (r + c) % 2 == par and pred(r, c):
+                d.setdefault({"diag": r - c, "anti": r + c, "row": r, "col": c}[fam], []).append((r, c))
+    return [(v[::-1] if rev else v) for _, v in sorted(d.items())]
+
+
+def mixed_lines(rows, key):
+    """Lines of the refined decoding (module a37, data/loagaeth_mixed_decoded.json) as cell lists.
+
+    Returns [(current, cells, kind), ...] with kind 0 = diagonal zone, 1 = written by rows,
+    2 = unclear zone; current 0 = the colour that has a down-right zone, 1 = the other colour.
+    None if the file or the face is missing, or the rebuilt lines do not reproduce the stored ones."""
+    try:
+        mixed = json.load(open(os.path.join(ROOT, "data", "loagaeth_mixed_decoded.json"), encoding="utf-8"))
+        layout, stored = mixed["layout"][key], mixed["by_colour"][key]
+    except (OSError, KeyError, ValueError):
+        return None
+    res37 = load_result("37_mixed_decoding.json") or {}
+    zbits = {(c["colour"], z["zone"]): z["bits"] for c in res37.get("faces", {}).get(key, []) for z in c["zones"]}
+    per_colour = []
+    for col in layout:
+        par, R, out = col["colour"], col["rows_by_row"], []
+        ints = lambda s: [int(x) for x in re.findall(r"-?\d+", s)]
+        T1 = next((ints(l)[-1] for l, _ in col["zones"] if l.startswith("upper-right")), None)
+        T2 = next((ints(l)[-1] for l, _ in col["zones"] if l.startswith("lower-left")), None)
+        for label, arrow in col["zones"]:
+            if arrow not in ARROWS:
+                return None
+            fam, rev = ARROWS[arrow]
+            nums = [int(x) for x in re.findall(r"-?\d+", label)]
+            if label.startswith("rows"):
+                pred = lambda r, c, R=R: r < R
+            elif label.startswith("upper-right"):
+                pred = lambda r, c, R=R, t=nums[-1]: r >= R and r - c < t
+            elif label.startswith("band, columns"):   # band split at a column: "columns >= S+1" / "columns 1-S"
+                if T1 is None or T2 is None:
+                    return None
+                if "1–" in label or "1-" in label:
+                    pred = lambda r, c, R=R, a=T1, b=T2, S=nums[1]: r >= R and a <= r - c < b and c < S
+                else:
+                    pred = lambda r, c, R=R, a=T1, b=T2, S=nums[0] - 1: r >= R and a <= r - c < b and c >= S
+            elif label.startswith("band"):
+                pred = lambda r, c, R=R, a=nums[0], b=nums[-1]: r >= R and a <= r - c < b
+            elif label.startswith("lower-left"):
+                pred = lambda r, c, R=R, t=nums[-1]: r >= R and r - c >= t
+            else:
+                pred = lambda r, c, R=R: r >= R
+            unclear = "unclear" in label or (zbits.get((par, label), 0) > UNCLEAR_BITS and not label.startswith("rest"))
+            kind = 2 if unclear else 1 if fam == "row" else 0
+            out += [(cells, kind) for cells in read_cells(rows, par, pred, fam, rev) if cells]
+        got = ["".join(rows[r][c] for r, c in cells) for cells, _ in out]
+        if got != stored[len(per_colour)]:
+            print(f"  {key} colour {par}: rebuilt lines differ from the stored ones - falling back")
+            return None
+        per_colour.append((par, out, any(a == "↘" for _, a in col["zones"])))
+    dr = next((i for i, p in enumerate(per_colour) if p[2]), 0)
+    return [(0 if i == dr else 1, cells, kind) for i, (par, out, _) in enumerate(per_colour) for cells, kind in out]
+
+
 def line_occurrences(lines, rows, names):
     """Names along decoded lines -> [k, r0, c0, len, dr, dc, current]."""
     occ = []
-    for cur, cells in lines:
+    for cur, cells in ((ln[0], ln[1]) for ln in lines):
         if len(cells) < 2:
             continue
         s = "".join(rows[r][c] for r, c in cells)
@@ -544,15 +612,18 @@ def main():
         f = table_format(t, side)
         entry = {"t": t, "s": side, "f": f, "rows": rows}
         if f == "square-diagonal":
-            lines = decoded_lines(rows, key)
-            if lines:   # decoded reading (module a18): both currents mapped onto cells
-                dr_line = next(cells for cur, cells in lines if cur == 0 and cells)
+            old = decoded_lines(rows, key)           # a18: one diagonal per colour
+            old = [(cur, cells, 0) for cur, cells in old] if old else None
+            lines = mixed_lines(rows, key) or old    # a37: row blocks and zones, if available
+            if lines:
+                dr_line = next(ln[1] for ln in lines if ln[0] == 0 and ln[1])
                 entry["drp"] = (dr_line[0][0] + dr_line[0][1]) % 2
                 entry["lines"] = [[cur, cells[0][0], cells[0][1],
                                    (cells[1][0] - cells[0][0]) if len(cells) > 1 else 0,
-                                   (cells[1][1] - cells[0][1]) if len(cells) > 1 else 0, len(cells)]
-                                  for cur, cells in lines if cells]
+                                   (cells[1][1] - cells[0][1]) if len(cells) > 1 else 0, len(cells), kind]
+                                  for cur, cells, kind in lines if cells]
                 entry["_lines"] = lines
+                entry["_old"] = old
                 entry["occ"] = row_occurrences(rows) + line_occurrences(lines, rows, NAMES)
             else:       # fallback: both currents along r-c diagonals
                 drp, occ = diagonal_occurrences(rows, NAMES, decoded_parity(rows, key))
@@ -570,9 +641,27 @@ def main():
     const = constellation(tables, stack["sides"], disc["names"] if disc else [])
     order = book_order()
 
+    # name occurrences on 25b-28b: single-diagonal reading (a18) vs refined reading (a37)
+    dn = disc["names"] if disc else []
+    ba = {"master": [0, 0], "discovered": [0, 0]}
+    per_face = {}
+    for k, e in tables.items():
+        if e.get("_lines") and e.get("_old"):
+            b, a = len(line_occurrences(e["_old"], e["rows"], NAMES)), len(line_occurrences(e["_lines"], e["rows"], NAMES))
+            db, da = len(line_occurrences(e["_old"], e["rows"], dn)), len(line_occurrences(e["_lines"], e["rows"], dn))
+            ba["master"][0] += b; ba["master"][1] += a; ba["discovered"][0] += db; ba["discovered"][1] += da
+            per_face[k] = [b, a, db, da]
+    print("names on 25b-28b before -> after the refined decoding:", ba, "per face [master b, a, discovered b, a]:", per_face)
+    r37 = load_result("37_mixed_decoding.json")
+    mixed = None
+    if r37:
+        mixed = {"faces": r37.get("faces"), "names_total": r37.get("names_total_before_after"),
+                 "bits": [r37.get("bits_per_letter_before"), r37.get("bits_per_letter_after")], "viz_counts": ba}
+
     cur_counts = {}
     for e in tables.values():
         e.pop("_lines", None)
+        e.pop("_old", None)
         for o in e["occ"]:
             if len(o) > 6:
                 cur_counts.setdefault(NAMES[o[0]], [0, 0])[o[6]] += 1
@@ -586,6 +675,7 @@ def main():
         "const": const,
         "order": order,
         "letters": letter_names(),
+        "mixed": mixed,
         "meta": {
             "source": "John Dee, Liber Loagaeth (Sloane MS 3189); transcription in data/loagaeth_tables.json",
             "note": "Non A-Z characters stripped; table 49 missing; leaf 1 is prose.",

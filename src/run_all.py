@@ -39,6 +39,15 @@ import a26_letter_names
 import a27_doubts
 import a28_names_deep
 import a29_architecture_deep
+import a30_anchors
+import a31_grammar
+import a32_one_language
+import a33_diary_anchors
+import a34_vowel_paradigms
+import a35_nalvage_coordinates
+import a36_soyga_calibration
+import a37_mixed_decoding
+import a38_open_leads
 import make_figures
 import make_viz_data
 
@@ -46,6 +55,8 @@ MODULES = [
     # a18 runs first: it downloads Peterson's page (if missing) and writes the diagonal-decoded
     # text of tables 25b-28b, which later modules (territory, geometry) read.
     ("18_markup_decoding", a18_markup_decoding),
+    # a37 refines that decoding (row blocks and zones); later modules read it through a22.base_book
+    ("37_mixed_decoding", a37_mixed_decoding),
     ("01_basic_stats", a01_basic_stats),
     ("02_network", a02_network),
     ("03_master_name", a03_master_name),
@@ -73,6 +84,14 @@ MODULES = [
     ("27_doubts", a27_doubts),
     ("28_names_deep", a28_names_deep),
     ("29_architecture_deep", a29_architecture_deep),
+    ("30_anchors", a30_anchors),
+    ("31_grammar", a31_grammar),
+    ("32_one_language", a32_one_language),
+    ("33_diary_anchors", a33_diary_anchors),
+    ("34_vowel_paradigms", a34_vowel_paradigms),
+    ("35_nalvage_coordinates", a35_nalvage_coordinates),
+    ("36_soyga_calibration", a36_soyga_calibration),
+    ("38_open_leads", a38_open_leads),
 ]
 
 

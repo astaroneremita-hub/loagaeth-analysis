@@ -993,11 +993,66 @@ def fig_change_rate():
                "Amber dashes = the data-driven borders of a27.", body)
 
 
+# ---------------------------------------------------------------- 32. glossed Call words inside the Loagaeth
+def fig_call_words():
+    d = res("30_anchors")
+    rows = d["D1_call_words"]["all"][:14]
+    t = d["D3_titles"]
+    mx = max(max(r["count"], r["markov3_expected"]) for r in rows)
+    body, x0 = [], 250
+    body.append(text(24, 78, "Words of the Calls (with Dee's English) inside the Loagaeth: found vs expected from letter habits", 12, INK, weight=600))
+    for i, r in enumerate(rows):
+        y = 90 + i * 24
+        body.append(text(24, y + 13, f"{r['word']} — “{r['gloss'][:24]}”", 11, INK))
+        body.append(rect(x0, y + 1, r["count"] / mx * 330, 9, P6, 2))
+        body.append(rect(x0, y + 11, r["markov3_expected"] / mx * 330, 6, GRAY, 2))
+        body.append(text(x0 + max(r["count"], r["markov3_expected"]) / mx * 330 + 6, y + 13, f"{r['count']} vs {r['markov3_expected']} (z {r['z']})", 10, MUTED))
+    yy = 90 + len(rows) * 24 + 12
+    body += legend(24, yy, [(P6, "found"), (GRAY, "Markov-3 expectation")])
+    body.append(text(24, yy + 24, "Every glossed Call word occurs about as often as the Loagaeth's own letter habits predict — none is a", 11, MUTED))
+    body.append(text(24, yy + 40, "shared word that could carry its meaning across. Leaf titles are not in their leaf's dialect either", 11, MUTED))
+    body.append(text(24, yy + 56, f"(mean rank {t['mean_own_rank']} of the own side vs 0.5 by chance, {t['titles_tested']} titles).", 11, MUTED))
+    return svg("fig_call_words", 700, yy + 74, "Can the Calls lend their meanings?",
+               "Bars: occurrences in the whole book; thin grey bars: what a 3-letter model of the book expects.", body)
+
+
+# ---------------------------------------------------------------- 33. the shortest code of the text
+def fig_grammar():
+    d = res("31_grammar")
+    e1, e2 = d["E1_grammar_vs_letters"], d["E2_one_or_five_grammars"]["by_part"]
+    items = [("letters, 3-letter memory", e1["letter_model_order3"], P6),
+             ("letters, 4-letter memory", e1["letter_model_order4"], P4),
+             ("names + letters (grammar)", e1["grammar_bits_per_letter"], TEAL),
+             ("grammar + cost of its lexicon", e1["grammar_incl_lexicon_per_letter"], GREEN)]
+    body, x0 = [], 240
+    body.append(text(24, 78, "Bits per letter on the odd tables, models trained on the even tables (lower = better code)", 12, INK, weight=600))
+    for i, (lab, v, c) in enumerate(items):
+        y = 90 + i * 26
+        body.append(text(24, y + 14, lab, 12, INK))
+        body.append(rect(x0, y + 2, (v - 2.5) / 1.0 * 300, 16, c, 3))
+        body.append(text(x0 + (v - 2.5) * 300 + 6, y + 15, f"{v:.3f}", 11, INK))
+    y = 90 + 4 * 26 + 24
+    body.append(text(24, y, "One grammar for the book vs one per part (a27), on each part's test tables", 12, INK, weight=600))
+    for i, (p, r) in enumerate(e2.items()):
+        yy = y + 12 + i * 24
+        body.append(text(24, yy + 13, f"part {p}", 11, INK))
+        body.append(rect(x0, yy + 1, (r["book_grammar"] - 2.5) * 300, 9, GRAY, 2))
+        body.append(rect(x0, yy + 11, (r["own_part_grammar"] - 2.5) * 300, 9, AMBER, 2))
+        body.append(text(x0 + (max(r["book_grammar"], r["own_part_grammar"]) - 2.5) * 300 + 6, yy + 14,
+                         f"book {r['book_grammar']} · own part {r['own_part_grammar']}", 10, MUTED))
+    yy = y + 12 + len(e2) * 24 + 16
+    body.append(text(24, yy, f"Names make up {e1['share_of_tokens_that_are_names']*100:.1f}% of tokens and do not shorten the code: a 3-letter memory already", 11, MUTED))
+    body.append(text(24, yy + 16, "captures them. Only the last part (41–48, the U register) is better coded by its own grammar.", 11, MUTED))
+    return svg("fig_grammar", 680, yy + 34, "What is the shortest 'program' of the text?",
+               "Bars start at 2.5 bits.", body)
+
+
 FIGURES = [fig_territory, fig_digits, fig_head_regime, fig_nesting, fig_hive, fig_series, fig_letter_grammar,
            fig_book_formats, fig_diamond, fig_doubled, fig_letter_counts, fig_letters_segments, fig_u_register,
            fig_row_edges, fig_plan_7x7, fig_houses, fig_two_currents, fig_machine, fig_energy,
            fig_index_check, fig_dense_division, fig_robustness, fig_diamond_roads, fig_mi_decay,
-           fig_new_names, fig_dialects, fig_currents_vocab, fig_book_order, fig_borders, fig_name_territories, fig_change_rate]
+           fig_new_names, fig_dialects, fig_currents_vocab, fig_book_order, fig_borders, fig_name_territories, fig_change_rate, fig_call_words,
+           fig_grammar]
 
 
 def run():

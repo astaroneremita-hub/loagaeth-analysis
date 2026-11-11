@@ -35,6 +35,11 @@ manuscript; we ship the extracted JSON, not the facsimile images.
   aggregate checks to `results/21_index_heptarchy_numbers.json` (verification counts, the line map,
   and the cut positions of the nine dense lines of leaf 1b used as a segmentation gold standard).
 
+- **Dee's diaries:** Sloane MS 3188 in J. H. Peterson's edition (*John Dee's Five Books of Mystery*),
+  read as text from archive.org, and *A True & Faithful Relation* (1659) from EEBO-TCP A37412. Module
+  `a33` carries only Dee's short marginal glosses and paraphrased statements; research notes stay in
+  `data/raw/` (git-ignored).
+
 ## Derived Loagaeth datasets (produced by this project)
 
 - `data/loagaeth_vocabulary.json` - word list obtained by segmenting the dense tables;

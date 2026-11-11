@@ -190,6 +190,17 @@ def E_currents(names, rng):
     faces = json.load(open(os.path.join(load.DATA, "loagaeth_diagonal_decoded.json"), encoding="utf-8"))["faces"]
     dr = [r for f in faces.values() for r in f["down_right"]]
     lw = [r for f in faces.values() for r in f["leftward"]]
+    mp = os.path.join(load.DATA, "loagaeth_mixed_decoded.json")  # a37: refined reading, same two colours
+    if os.path.exists(mp):
+        bc = json.load(open(mp, encoding="utf-8")).get("by_colour", {})
+        if bc:
+            # colour 0 / colour 1 of each face; which colour is the "down-right" one follows a18's marks
+            dr, lw = [], []
+            for k, (c0, c1) in bc.items():
+                a = set(faces[k]["down_right"]) if k in faces else set()
+                first_is_dr = len(a & set(c0)) >= len(a & set(c1))
+                dr += c0 if first_is_dr else c1
+                lw += c1 if first_is_dr else c0
 
     def grams(L):
         return Counter(g for r in L for g in (r[i:i + 5] for i in range(len(r) - 4)))

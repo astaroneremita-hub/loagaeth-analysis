@@ -120,6 +120,15 @@ src/                          LAYER A - the Loagaeth analysis
   a27_doubts.py                   data-driven segment borders, irregular rows, open manuscript checks
   a28_names_deep.py               name territories, houses, genealogy, vowel mirrors, hidden names, currents
   a29_architecture_deep.py        change rate, diamond halves, leaf 1 in the tables, particles
+  a30_anchors.py                  glossed Call words in the tables, diaries, leaf titles
+  a31_grammar.py                  two-level grammar (names + letters) vs letter models; one vs five grammars
+  a32_one_language.py             Loagaeth/Calls models reading the Great Table, governors, Heptarchy
+  a33_diary_anchors.py            Dee's glosses and the angels' statements about the book, tested
+  a34_vowel_paradigms.py          words one vowel apart, vowel series, grades of the master stems
+  a35_nalvage_coordinates.py      Nalvage's table/number references for the first Call, looked up
+  a36_soyga_calibration.py        Soyga tables regenerated (Reeds) -> error rate and confusions of the scribe
+  a37_mixed_decoding.py           25b-28b re-decoded: row blocks and zones (writes data/loagaeth_mixed_decoded.json)
+  a38_open_leads.py               every k-th letter, tables 43-48 as a pattern, Heptarchic number layouts
   make_figures.py             draws every figure in figures/ from the results
   make_viz_data.py            builds viz/loagaeth_viz_data.js for the 3D viewer
 viz/                          loagaeth_3d.html - interactive three.js viewer
@@ -489,12 +498,221 @@ As contiguous strings: AON 66× (97 expected from letter pairs), AONH 1×, ONHL 
 frequency. "A = 6, B = 5" is real — it is Crowley's column (and two GD-derived columns) in our
 bundled tables. Digit roots of large counts fall on each of 1–9 about 1/9 of the time.
 
+### Tables 25b–28b re-decoded: where rows end and diagonals begin `[a37]`
+
+Module a18 read each chessboard colour of these faces along one diagonal. Two of the fourteen
+colours still read badly (26a and 27a, 5.0 and 5.5 bits per letter against ≈ 2.5–3 for the others).
+Letting the letter model choose, for each colour, a block of top rows written **by rows** and zones
+for the rest:
+
+| Face, colour | before | now | layout found |
+|---|---|---|---|
+| 27a, first colour | 5.52 | **2.74** | rows 1–28 written by rows (on that colour), then ↘ diagonals |
+| 26a, first colour | 5.01 | **2.92** | rows 1–8 by rows; upper-right triangle and the band ↘; lower-left triangle by rows; a corner of 90 letters (band, columns 1–12) still unclear |
+| 25b, second colour | 3.72 | **3.18** | rows 1–5 by rows, then ↖ diagonals |
+| the other 11 colours | 2.4–3.6 | same | one diagonal direction, as in a18 |
+
+- **About 1,500 letters that were noise are now text**: `ANTOXADNACLANZIDUOCHATHA`,
+  `ALZIDUACHOTHALZIDUATHALZA`, `NOZACLOXADNATOXELGRADAXO`, `PANTAXALODNADONTAXALGRAAX`… The seven
+  faces read at 2.86 bits per letter overall (3.25 before); master names found rise from 349 to 384.
+- **Checks.** The ten colours that already read well are given no row block by the same search (0 of
+  10). And the search finds **5 rows** on 25b knowing nothing of Peterson's note that this leaf has a
+  third series in its first five rows.
+- **What it means.** The turn from rows to diagonals at the middle of the book is not a clean cut:
+  on 25b, 26a and 27a the scribe still starts one colour by rows and goes over to the diagonals part
+  way down the page — 5 rows, then 8, then 28 — before the pure two-current pages 27b–28b.
+  **REAL (new; corrects a18 for 26a and 27a).** Later modules now use this reading.
+
+In the 3D viewer (Square view, "Show the two currents") the row-written blocks are tinted green, the
+diagonal zones keep their arrows, and the unclear corner of 26a is dimmed.
+
+| 27a: rows 1–28 by rows, then diagonals | 26a: five zones |
+|---|---|
+| ![27a](figures/viz_mixed_27a.jpg) | ![26a](figures/viz_mixed_26a.jpg) |
+
+### Three leads from the literature, tested `[a38]`
+
+- **Laycock's "every k-th letter":** taking every 2nd … 12th letter of the tables gives text that the
+  Calls' model reads no better than shuffled letters (6.3–6.8 vs 6.46 bits; the plain text 5.40).
+  **REFUTED.**
+- **Leaf 43a's note that tables 43–48 are a pattern "to be filled":** their sides are not copies of
+  one another (same-cell identity 6.9%, vs 8.2% among diamonds 29–42) and repeat *less* inside
+  (2.4% of 6-letter strings recur, vs 5.6%). In the transcription they are full, distinct text.
+  **REFUTED (as replication).**
+- **Heptarchy — a rule in the six numbered 7×7 tables?** No affine placement (5–7 cells of 49, as in
+  shuffles), no drift of numbers down the rows that survives six tests (best p 0.012). The layouts
+  behave as free scrambles; T5 and T7 carry the known damaged cells (duplicates 3, 7, 15, 18 / 17;
+  missing 17, 28, 32, 35 / 27). **REFUTED.**
+
+### A ruler for the scribe: the Soyga tables at the back of the manuscript `[a36]`
+
+Eight tables of the Book of Soyga are copied in the same manuscript (fols 58–65) and transcribed on
+the same page as the Loagaeth. Jim Reeds found their exact generator in 1998 (code word down the left
+column; each cell = the cell above + f(the cell to the left), mod 23). So here we **know what every
+cell should be**, and can measure this hand as read by this transcriber — the same chain that gives
+us the Loagaeth — without seeing the manuscript.
+
+- Six of the eight tables regenerate at 92–98% agreement (the other two carry an error of the original
+  computation, which propagates; Reeds noted it). On those six: **248 errors in 7,560 cells = 3.3%.**
+- **What gets confused:** z read as x (31 of 363 = 8.5% — Reeds counted 34 of 477 on the manuscript
+  itself), n read as u (6.5%), i/l, c/e, t/l, r/t, y/i.
+- **What does not: a → u once in 329, u → a never in 332, a ↔ o never.** The U register of tables
+  41–48 (U is 14% of the letters there, A 6%) would need about half of all A's misread; the measured
+  rate is 0.3%. And it is not N misread as U either: turning U back into N recovers no heartland
+  formulas (233, vs 244 as written and 438 for U → A). **The U register is in the manuscript. REAL —
+  closes the open doubt A1.** The A / O vowel series of a34 are safe for the same reason.
+- Practical consequence: Z/X and N/U are the letters to distrust in any single reading (ANZACH may
+  hide as ANXACH; a U may be an N about once in fifteen).
+
+### Nalvage's coordinates: are the Call's letters located in the tables? `[a35]`
+
+On 13–14 April 1584 the first Call was dictated backwards, and for 61 letters the angel gave a table
+and a number: "in the thirteenth Table, 7003, is I"; "the 30th Table, 13025… ascending". Laycock
+called the numbers inexplicable; no fit has been published. We looked each one up in our tables under
+48 plain indexings fixed in advance (rows or columns, from top or bottom, left or right, count modulo
+the table, side a / b / both, tables counted from the start or the end).
+
+- **No indexing finds the letters:** best scheme 9 hits of 61; permuting the letters gives a best of
+  9.6 on average (95th percentile 12); family-wise p = 0.79. **REFUTED** for these plain readings.
+- **But the numbers are built, not random:** they rise with the table number (Spearman 0.79), and 33
+  of the 38 above 1,000 are a round thousand plus a small tail (11004, 27004, 34006, 40006, 312004…) —
+  the same "head + tail" habit as the governors' numbers of a13. 29 exceed one table; one exceeds the
+  whole book. **DESCRIPTIVE** — they look like composed numbers, not cell addresses.
+
+### Vowel paradigms: the words come in series `[a34]`
+
+Lead from Dee's glosses: POLA "two together" and PALA "two separated" differ by one vowel — and carry
+different meanings. Tested on leaf 1, where the word division is Dee's own (2,331 distinct words of
+4+ letters), against a null that shuffles all vowels among the vowel slots and all consonants among
+the consonant slots (every word keeps its shape):
+
+- **Words one vowel apart: 222 pairs vs 33 expected (max 48 in 300 shuffles; z 33).**
+- **Full series — one frame attested with three or more vowels: 17 vs 0.8 expected (max 4; z 18.6):**
+  DATH / DETH / DOTH / DUTH · GANS / GENS / GONS / GUNS · **GATH / GETH / GOTH / GUTH** · LATH / LETH /
+  LOTH · ANZA / ONZA / UNZA · AXAR / OXAR / UXAR · ARNAH / ORNAH / URNAH · ALDAH / ALDEH / ALDOH ·
+  ARGA / ARGE / ARGO · AGES / OGES / UGES · GAST / GEST / GOST · ADEN / ADIN / ADON …
+- Words one consonant apart are also far above chance (804 vs 200), so the vocabulary is built in
+  families; but vowel change is over-represented even relative to that (ratio 0.276 vs 0.167, z 3.6).
+  A↔O and A↔E carry most of it (67 and 63 pairs), then E↔O, A↔U.
+- **In the tables every master stem is the dominant grade of such a series:** GETH 600 · GATH 130 ·
+  GOTH 45 · GUTH 11; NOCHA 600 · NACHA 250 · NECHA 40; ANZACH 162 · ONZACH 87 · UNZACH 20 · ENZACH 18;
+  ACLAX 186 · ACLOX 53; CHASTOR 195 · CHUSTOR 19. (In the tables these counts match letter habits —
+  the series are part of the text's fabric, not an extra layer.)
+
+**REAL (new): the language builds its words on consonant frames whose vowel varies.** Two readings
+fit, and the data cannot yet choose: (1) a grammar by vowel grade, as in POLA / PALA, where the vowel
+changes the sense; (2) the way the text was produced — a speaker varying vowels on favourite frames
+(Laycock's view of the Loagaeth as patterned utterance). The U register of the end (A → U) is the same
+mechanism applied to a whole section.
+
+### Dee's own record, put to the test `[a33]`
+
+The full text of Dee's diaries for the weeks the book was received (Sloane 3188, Liber Quintus and
+its Appendix, in Peterson's edition) and of *A True & Faithful Relation* (EEBO-TCP) was read for every
+meaning and every instruction about the book. Dee's margins gloss about 30 words of **leaf 1**
+(GOHED "one everlasting…", CANSE "mighty", POLA / PALA "two together / two separated", IUSMACH
+"begotten", PHAMAH "I will give", NOSTOAH "it was in the beginning", AMGEDPHA "I will begin anew"…)
+and nothing in leaves 2–48. No table name (CHASTOR, NOCHA, ANZACH, GETH, ACLAX, NACHO) is glossed
+anywhere; GETH (8×) and ANZACH (1×) do occur as words of leaf 1, without a note.
+
+- **The glossed words do not enter the tables.** Of 25 glossed words of 4+ letters, 21 never occur in
+  tables 2–48; PALA, POLA, ADGMACH occur at letter-habit rates (52 found, 56 expected in all).
+  Leaf 1 and the tables are two vocabularies of one sound-system. **REFUTED as anchors.**
+- **"Read from the right hand to the left" (26 Mar 1583).** In Dee's Angelic script, yes; our Latin
+  transcription is already in reading order: a model of leaf 1's own words reads the rows as
+  transcribed at 3.57 bits and reversed at 4.97 (diamonds 3.93 vs 5.36; the Calls' model agrees).
+  **REAL — direction settled by an independent text.**
+- **"The first leaf is the last of the book" (18 Jun 1583).** By its language leaf 1 is nearest to the
+  *opening* tables (3.45 bits under the model of tables 2–12, rising steadily to 4.55 for 41–48) — it
+  stands at the head of the dialect chain. The 21 words dictated that day for the 49th table are
+  equally near the opening and the end (4.06, 4.04) — too short to decide. **DESCRIPTIVE.**
+- **"Call 1 belongs to table 2" (11 Jul 1584), so Call n ↔ table n+1.** The Calls do not share more
+  letter sequences with their own table than with any other (p 0.63; mean rank 8.8 of 18, chance 8.5).
+  The pairing is liturgical, not textual. **REFUTED (as a textual link).**
+- **"The eighteenth leaf was of the spirits of the earth" (15 Apr 1583).** Table 18 is the home of
+  NECHASTOR (its peak) with DANTAX, NACLOX, TAXNAC; Y is ×2.9 and U nearly absent. **DESCRIPTIVE.**
+- **Other statements in the record** (kept in the log): 48 leaves and one never known; each leaf 49 × 49;
+  "49 voices… every element hath 49 manner of understandings"; rows 22–23 of leaf 1 are "invitations
+  pleasant to good angels" after a "preface of the creation"; three kinds of knowledge (of God, of the
+  angels, of nature); "interpret not, till your understanding be furnished"; Kelley understood the
+  text while writing and then forgot.
+
+### One language? Loagaeth, Calls, Great Table, Heptarchy `[a32]`
+
+A letter model trained on the Loagaeth (and another on the Calls) reads the names of the other
+systems. The score is how much better it reads a string than the same letters shuffled — so it
+measures the *order* of letters, not the letter mix.
+
+| Read by the Loagaeth model | gain (bits/letter) | z |
+|---|---|---|
+| Words of the Calls | 1.14 | 23.6 |
+| The 91 governors (Parts of the Earth) | 1.56 | 13.8 |
+| The 49 Heptarchic angels | 1.32 | 8.5 |
+| Great Table, rows | 0.52 | 3.8 |
+| Great Table, columns | 0.41 | 3.6 |
+| Watchtower names read by rule (kings, seniors, angels…) | 0.11 | 2.1 |
+
+- **The Calls, the governors and the Heptarchic names share the Loagaeth's sound-pattern** (and the
+  Calls model reads Loagaeth pieces at z 18). One phonology runs through 1582–1584. **REAL.**
+- **The governors' names are the language-like layer of the Great Table.** They read as words
+  (z 14); the names taken from the same table by the geometric rules (kings, seniors, kerubic and
+  lesser angels) do **not** read as words beyond their letter mix (z 2.1; lower still for the Calls model).
+  The table's rows and columns are only weakly word-like (z ≈ 4). This fits the record: the 91 names
+  were delivered first (May 1584) and the table (June 1584) contains them as paths — the rule-read
+  names are by-products of the grid, not words of the tongue. **REAL (new).**
+- **The Great Table is not rule-generated.** A cell is not predictable from its left or upper
+  neighbour (z −0.9, −0.5), unlike a Soyga-type table; doubled letters along rows are fewer than
+  chance (4.9% vs 7.7%, z −2.7) but far from the Loagaeth's near-ban.
+- **Letter mix:** Calls, Great Table and governors are one alphabet profile (cosine 0.98–1.00); the
+  Loagaeth stands a little apart (0.89–0.91) and the Heptarchy further (0.74–0.84, the B-names).
+
+### The shortest "program" of the text `[a31]`
+
+![Grammar](figures/fig_grammar.svg)
+
+The machine question in its strictest form: is there a description of the book shorter than its
+letter habits? A two-level grammar — names from our lexicon (68, from a23/a28) plus single letters
+from a 3-letter-memory model — was trained on the even tables and scored on the odd ones.
+
+- **Names do not shorten the code:** grammar 2.963 bits/letter vs 2.949 for letters alone (3-letter
+  memory); 2.992 once the lexicon itself is paid for. A 4-letter memory overfits (3.114). Names are
+  real (a23), but they are 1.7% of the tokens, and a 3-letter memory already "knows" them.
+  **REFUTED** as a hidden code beyond letter habits.
+- **One grammar or five?** One grammar for the whole book codes four of the five parts as well or
+  better than a grammar of their own (more training text helps); only **part V (41–48, the U
+  register)** is better coded by its own grammar (3.55 vs 3.68). The end speaks differently enough
+  to need its own model. **REAL.**
+
+So the best "program" we can write for the Loagaeth is short: an alphabet with a 3-letter memory,
+a positional grammar at the row edges, a small set of recurring names in two houses, and a shift of
+register at the end. It reproduces the surface; it does not open the meaning.
+
+### Anchors for meaning: the Calls, the diaries, the titles `[a30]`
+
+![Call words](figures/fig_call_words.svg)
+
+Meaning needs anchors — words whose sense is known. The only glossed Angelic words are those of the
+Calls (Dee's English in Sloane 3191).
+
+- **No Call word carries over.** Of 600 glossed Call words (4+ letters), 26 occur 3+ times in the
+  Loagaeth, and every one at the rate the book's own letter habits predict: TAGE "as is not" 139 vs
+  147 expected, EMNA "here" 94 vs 100, HARG "hath planted" 47 vs 53, CALZ "above the firmaments" 12 vs
+  13… ZIROP "was" (6 vs 1.6) is the only excess and does not behave as a word. Nothing passes both
+  tests (beyond chance and word-like). **REFUTED** — the Calls cannot lend their meanings to the
+  tables; the earlier "23 shared words" of leaf 1 (a06) are letter-habit coincidences at book scale.
+- **Dee's diaries (Sloane 3188):** the online page is a table of contents; the text is in print, and the
+  manuscript photos are not reachable from here. **OPEN.**
+- **Leaf titles are not in their leaf's dialect:** across 33 titles, a model of the own side ranks the
+  title at 0.49 on average (0 = best, 0.5 = chance). **REFUTED.**
+
+The meaning of the Loagaeth stays sealed by every anchor we can reach.
+
 ### Architecture, deeper: change rate, diamond halves, leaf 1, particles `[a29]`
 
 ![Change rate](figures/fig_change_rate.svg)
 
-- **The language changes in small steps.** A letter model of each side reads the next one at 1.07
-  extra bits on average, against 1.72 for random pairs of sides. The largest jumps crowd into tables
+- **The language changes in small steps.** A letter model of each side reads the next one at 1.06
+  extra bits on average, against 1.71 for random pairs of sides. The largest jumps crowd into tables
   40–48 (41a→41b, 46a→46b, 47b→48a, 40b→41a…) — where the U register begins — with isolated jumps at
   21a→21b and 36b→37a. **REAL.**
 - **The two colours of a diamond are one text.** The a- and b-sides of tables 29–43 share recurring
@@ -502,7 +720,7 @@ bundled tables. Digit roots of large counts fall on each of 1–9 about 1/9 of t
   25b–28b are special to the currents, not a property of any interleaving. **REFUTED (for the
   diamonds) — sharpens #83.**
 - **Leaf 1's words are not a key to the tables.** Of 1,941 spaced words of 5+ letters, 380 occur in the
-  grids, 2,780 times — below the Markov-3 expectation (3,081). Only ALNOTH and MACHES are clearly
+  grids, 2,798 times — below the Markov-3 expectation (3,105). Only ALNOTH and MACHES are clearly
   favoured. **REFUTED.**
 - **No particle system between names.** Consecutive names on a line are separated by 0–11 letters
   with a flat distribution (68 abut directly — compounds); the few short gaps (NOX, ZID, VAR, OL, AR)
@@ -522,8 +740,8 @@ bundled tables. Digit roots of large counts fall on each of 1–9 about 1/9 of t
 - **CHASTOR itself is a weak territory** once measured per letter (p 0.027, not past Bonferroni) — in
   line with the revision of a22: the empire is held by its titled forms and by the two houses, not by
   the bare stem.
-- **Genealogy — refuted.** A core appears before its longer forms in 23 of 27 pairs, but 22.7 were
-  expected from their counts alone (z 0.19). Titles are not "born" after their core.
+- **Genealogy — refuted.** A core appears before its longer forms in 26 of 30 pairs, but 25.5 were
+  expected from their counts alone (z 0.29). Titles are not "born" after their core.
 - **Vowel mirrors — refuted as a rule.** Among 4,689 frequent strings, 304 pairs differ by swapping two
   vowels and 342 by swapping two consonants; a Markov-3 copy gives 256 and 280 — the same proportion.
   NACHO ~ NOCHA is a strong pair, not an instance of a mirroring law.
@@ -618,15 +836,15 @@ is exactly one way to read them.**
 Without telling the program any name, we kept every string of 4–14 letters that recurs (≥ 6×, in
 ≥ 3 tables), is followed and preceded by varied letters (a word boundary on both sides — Harris's
 criterion), and occurs far more than a Markov-3 model of the same book predicts (z ≥ 4.5, Bonferroni
-over 3,562 candidates).
+over 3,552 candidates).
 
-- **47 strings survive. The same procedure on a Markov-3 copy of the book finds 0.** **REAL.**
+- **49 strings survive. The same procedure on a Markov-3 copy of the book finds 0.** **REAL.**
 - **Positive control:** it rediscovers NOCHASTOR/ICHASTOR/NECHASTOR, NOCHA/ADNOCHAP, ACLAX, CHADAX
   by itself. It misses the most frequent ones (CHASTOR alone, GETH, ANZACH) because a 3-letter model
   fitted on this book already "knows" them — the test is conservative.
-- **New recurring names outside the known families** (count, tables): **NACHO** 157×/31 (and NACHOA,
-  NACHOAD, NACHOAL), **AXALGRA** 39/19, **GRADAX** 38/13, **PHANGE** 32/20, **ANTANTOX** 27/16,
-  **VOXAR** 25/15, **TAXALGRA** 19/11 (z 9.3), **DRAGRA**, **RONZIN**, **ANCHANO**, **NADAB**,
+- **New recurring names outside the known families** (count, tables): **NACHO** 158×/31 (and NACHOA,
+  NACHOAD, NACHOAL), **AXALGRA** 41/19, **GRADAX** 41/15, **PHANGE** 32/20, **ANTANTOX** 27/16,
+  **VOXAR** 25/15, **TAXALGRA** 21/11 (z 9.7), **DRAGRA**, **RONZIN**, **ANCHANO**, **NADAB**,
   **CHARDAX**, **AXACHAR**, **ZIDNOPHA** (mostly in the diamonds), **PHADOL** (tables 2–47),
   **ONDANVAGE** (z 12.2, only tables 3–10), **UCHER** (tables 23–48, the U register).
 - **NACHO is the vowel mirror of NOCHA** (N·A·CH·O / N·O·CH·A), both strong, both widespread.
@@ -635,7 +853,7 @@ over 3,562 candidates).
   NECHASTOR·NOCHASTOR·NOCHASTORA. Each family is a **core with a few prefixes and suffixes**: written
   as a grammar it takes ~40% of the letters of the list (e.g. core NACHO + endings {–, A, AD, AL}).
 - **Limits:** these names barely help segment Peterson's dense lines (F1 unchanged, 0.33), and only
-  4% occur inside Dee's spaced words of leaf 1 (2% for random strings) — they belong to the tables'
+  4% occur inside Dee's spaced words of leaf 1 (0% for random strings) — they belong to the tables'
   own vocabulary.
 
 ### The architecture of the book `[a24]`
@@ -643,16 +861,16 @@ over 3,562 candidates).
 ![Two currents](figures/fig_currents_vocab.svg)
 
 - **The two currents of 25b–28b have two vocabularies.** Their recurring 5-letter formulas overlap
-  (Jaccard) 0.221, while every random split of the same lines gives 0.29–0.34 (mean 0.315). ANZACH
-  (10 vs 2), ACLAX (25 vs 11) and OXAD (37 vs 14) lean to the ↘ current; NOCHAP (5 vs 13) and
+  (Jaccard) 0.231, while every random split of the same lines gives at least 0.31 (mean 0.33). ANZACH
+  (12 vs 3), ACLAX (25 vs 11) and OXAD (43 vs 15) lean to the ↘ current; NOCHAP (8 vs 13) and
   CHASTOR (6 vs 10) to the ← current. The interleaved currents are **two texts, not one cut in two** —
   echoing the two houses. **REAL (new).**
 
 ![Dialects](figures/fig_dialects.svg)
 
 - **A dialect chain.** A letter model of each realm reads its neighbours best: opening → heartland →
-  26–28 → diamonds → end. The end is closest to the diamonds (4.00 bits) and farthest from the
-  opening (6.36). The language drifts gradually along the book. **REAL.**
+  26–28 → diamonds → end. The end is closest to the diamonds (4.06 bits) and farthest from the
+  opening (6.40). The language drifts gradually along the book. **REAL.**
 
 ![Book order](figures/fig_book_order.svg)
 
@@ -662,17 +880,17 @@ over 3,562 candidates).
   drift is continuous across leaves. **REAL.** Mirror pairs (t ↔ 49 − t) and tables in the same
   column of the 7×7 plan are no closer than random pairs. **REFUTED.**
 - **Rows as verses:** a segmenter that never sees row breaks puts a word break at 34% of row breaks
-  vs 19% of random positions (≈ 11 standard errors): rows end on word boundaries. **REAL** (the row
+  vs 20% of random positions (≈ 11 standard errors): rows end on word boundaries. **REAL** (the row
   edges again, measured a new way).
 - **Acrostics and centres:** no name in the first- or last-letter columns of 36 squares, nor in the
   string of their centre cells (AHAROTNLDOVCHCOA…). **REFUTED.**
 - **The pyramid's cross:** in the rebuilt diamonds, name cells are not drawn to the diagonals or the
-  centre (z 1.9, 1.8 — slightly away, not toward). **REFUTED.**
+  centre (z 1.5, 1.5 — slightly away, not toward). **REFUTED.**
 
 ### Bridges to the other systems, and the constellation `[a25]`
 
-- **No other system "lives" in the Loagaeth.** Watchtower names occur 749× (Markov-3 expects 814),
-  words of the Calls 1,008× (1,087), Aethyr names 1,999× (2,117) — all at chance; the 91 governors 0×
+- **No other system "lives" in the Loagaeth.** Watchtower names occur 735× (Markov-3 expects 798),
+  words of the Calls 1,014× (1,093), Aethyr names 2,002× (2,121) — all at chance; the 91 governors 0×
   (1.2 expected); the 49 Heptarchic angels once (BORNOGO, in the heartland; 0.2 expected — not
   significant alone). The frequent shared strings are short (ADNA 501×, RAPH 134×, TOR, TAN, ARN).
   Watchtower strings are rarer in the end (0.26× its share) — the U register again. **REFUTED.**

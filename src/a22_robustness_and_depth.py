@@ -40,11 +40,15 @@ SEGMENTS = {"opening": range(2, 6), "heartland": range(6, 26), "diamonds": range
 def base_book():
     lv = load.leaves()
     faces = json.load(open(os.path.join(load.DATA, "loagaeth_diagonal_decoded.json"), encoding="utf-8"))["faces"]
+    mixed_path = os.path.join(load.DATA, "loagaeth_mixed_decoded.json")  # a37: row blocks + zones
+    mixed = json.load(open(mixed_path, encoding="utf-8"))["faces"] if os.path.exists(mixed_path) else {}
     book = {}
     for t in range(2, 49):
         for s in "ab":
             k = f"{t}{s}"
-            if k in faces:
+            if k in mixed:
+                book[k] = mixed[k]
+            elif k in faces:
                 book[k] = faces[k]["down_right"] + faces[k]["leftward"]
             elif k in lv:
                 book[k] = [load.letters(r) for r in lv[k] if load.letters(r)]

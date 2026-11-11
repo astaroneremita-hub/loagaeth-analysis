@@ -372,6 +372,16 @@ across the 91 numbers, keeping lengths** — so the global 2/3/6 excess is alrea
 - Irregular rows: 7 isolated ±1; 8b a dropped column (−37); 9a −376 in rows 1–7; 12b −4. U/A check
   of the manuscript open (no table images).
 
+### 34. Track B — names deeper — `a28`
+- 12 names with Bonferroni-surviving territories; NOCHA house peaks ~11–21, GETH/ACLAX ~25–31.
+- Refuted: genealogy (core first z 0.19), vowel-mirror law (same ratio as surrogate), variants by current.
+- Hidden names after masking: MACHO 51×, DNACHAP, NOPHAR, ANZANO, NACHAPA, DRAXVL, RONTANTOXA.
+
+### 35. Track C — architecture deeper — `a29`
+- Language drifts in small steps (1.07 vs 1.72 bits); biggest jumps in tables 40–48.
+- Diamond a/b halves are one text (Jaccard = random split); the currents of 25b–28b are the special case.
+- Leaf-1 words at chance in the tables; no particle system between names.
+
 ### Provenance warning: the grimoire's "powers"
 The wider project generated a grimoire that assigns each Lord a sefira, planet, talisman,
 how-to-call and danger grade. Its own generator states these layers were *"constructed

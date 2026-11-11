@@ -37,6 +37,8 @@ import a24_book_architecture
 import a25_bridges
 import a26_letter_names
 import a27_doubts
+import a28_names_deep
+import a29_architecture_deep
 import make_figures
 import make_viz_data
 
@@ -69,6 +71,8 @@ MODULES = [
     ("25_bridges", a25_bridges),
     ("26_letter_names", a26_letter_names),
     ("27_doubts", a27_doubts),
+    ("28_names_deep", a28_names_deep),
+    ("29_architecture_deep", a29_architecture_deep),
 ]
 
 

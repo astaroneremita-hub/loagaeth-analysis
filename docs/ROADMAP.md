@@ -53,6 +53,10 @@ Sloane 3189 images (British Library) when accessible.
 | A3 | Are the segment borders where we put them? | Change-point detection on the per-side profile (letters + trigrams), no prior borders | permutations of side order | If borders differ from 5/25/28/43, update SEGMENTS everywhere |
 
 ### Track B — Names (largest chance of new real findings)
+
+**Status (a28):** done. B1 real (12 territories), B2 real (houses territorial), B3 refuted, B4
+refuted as a rule, B5 seven hidden names, B6 refuted.
+
 | # | Question | Test | Null | Stop rule |
 |---|---|---|---|---|
 | B1 | Do the new names have territories? | a10-style zonation for NACHO, AXALGRA, GRADAX, PHANGE, ZIDNOPHA, ONDANVAGE, UCHER | shuffled table order | report z per name, Bonferroni |
@@ -63,6 +67,10 @@ Sloane 3189 images (British Library) when accessible.
 | B6 | Do the names of the two currents form complete pairs? | for every name on ↘, look for its counterpart on ← in the same face (same core, different affix or vowel) | random line split | REAL if pairing beats split |
 
 ### Track C — Architecture
+
+**Status (a29):** done. C1 refuted (diamond halves are one text), C2 real (small steps; jumps at
+40–48), C3 refuted, C4 descriptive (no particles).
+
 | # | Question | Test | Null | Stop rule |
 |---|---|---|---|---|
 | C1 | Are the a/b diamond sides (the two chessboard colours of one square) also two vocabularies, like the currents? | 5-gram Jaccard a vs b per table 29–43 | random split of the table's lines | REAL if below split range |

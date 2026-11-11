@@ -923,11 +923,81 @@ def fig_borders():
                "Optimal cuts of the 94 sides into contiguous blocks, with no borders assumed.", body)
 
 
+# ---------------------------------------------------------------- 30. the houses have territories
+def fig_name_territories():
+    d = res("28_names_deep")
+    house = {h["name"]: h["house"] for h in d["B2_houses"]}
+    house.update({"NOCHA": "NOCHA", "GETH": "GETH/ACLAX", "ACLAX": "GETH/ACLAX"})
+    rows = [r for r in d["B1_territories"] if r["survives_bonferroni"]]
+    rows.sort(key=lambda r: (house.get(r["name"], "neither") != "NOCHA", house.get(r["name"], "neither") == "neither", r["peak_table"]))
+    body, x0, w = [], 150, 470
+    tabs = rows[0]["tables"]
+    body.append(text(24, 78, "Density along the book (tables 2 → 48) of every name whose territory survives Bonferroni", 12, INK, weight=600))
+    for i, r in enumerate(rows):
+        y = 92 + i * 30
+        c = P6 if house.get(r["name"]) == "NOCHA" else TEAL if house.get(r["name"]) == "GETH/ACLAX" else AMBER
+        mx = max(r["density_by_table"]) or 1
+        pts = " ".join(f"{x0 + j / (len(tabs) - 1) * w:.1f},{y + 24 - v / mx * 22:.1f}" for j, v in enumerate(r["density_by_table"]))
+        body.append(f'<polyline points="{x0},{y+24} {pts} {x0+w},{y+24}" fill="{c}" fill-opacity="0.35" stroke="{c}" stroke-width="1.2"/>')
+        body.append(text(24, y + 18, r["name"], 11, INK, weight=600))
+        body.append(text(x0 + w + 8, y + 18, f"peak {r['peak_table']} · lag-1 {r['lag1']}", 10, MUTED))
+    yy = 92 + len(rows) * 30 + 6
+    for t in (2, 13, 26, 34, 41, 48):
+        x = x0 + (t - 2) / (len(tabs) - 1) * w
+        body.append(f'<line x1="{x}" y1="88" x2="{x}" y2="{yy-6}" stroke="{LINE}" stroke-dasharray="2,3"/>')
+        body.append(text(x, yy + 6, str(t), 9, MUTED, "middle"))
+    body += legend(24, yy + 28, [(P6, "NOCHA house"), (TEAL, "GETH/ACLAX house"), (AMBER, "neither")])
+    body.append(text(24, yy + 50, "The NOCHA house (NOCHA, ADNOCHA, NOCHAP, NACHO…) rules the first half; the GETH/ACLAX house (GETH, ALGETH,", 11, MUTED))
+    body.append(text(24, yy + 66, "ACLAX, ACLAXTO, GRADAX) peaks around tables 25–31. Houses are assigned within the a27 parts, beyond part effects.", 11, MUTED))
+    return svg("fig_name_territories", 720, yy + 84, "Each house has its own territory",
+               "Dashed lines = the data-driven parts (a27).", body)
+
+
+# ---------------------------------------------------------------- 31. how fast the language changes
+def fig_change_rate():
+    d = res("29_architecture_deep")
+    st = d["C2_change_rate"]["steps"]
+    c1 = d["C1_diamond_sides"]
+    e = res("24_book_architecture")["E_two_currents"]
+    x0, y0, W, H = 50, 90, 600, 140
+    mx = max(s["distance"] for s in st)
+    body = [f'<line x1="{x0}" y1="{y0+H}" x2="{x0+W}" y2="{y0+H}" stroke="{LINE}"/>']
+    body.append(text(24, 78, "Distance between each side and the next (letter models reading each other, bits)", 12, INK, weight=600))
+    pts = " ".join(f"{x0 + i / (len(st) - 1) * W:.1f},{y0 + H - s['distance'] / mx * H:.1f}" for i, s in enumerate(st))
+    body.append(f'<polyline points="{pts}" fill="none" stroke="{P6}" stroke-width="1.6"/>')
+    rp = d["C2_change_rate"]["random_pair_mean"]
+    yr = y0 + H - rp / mx * H if rp <= mx else y0
+    body.append(f'<line x1="{x0}" y1="{yr}" x2="{x0+W}" y2="{yr}" stroke="{CORAL}" stroke-dasharray="4,3"/>')
+    body.append(text(x0 + W - 4, yr - 4, f"random pair of sides: {rp}", 10, CORAL, "end"))
+    keys = [s["step"].split("→")[0] for s in st]
+    for i, k in enumerate(keys):
+        if k in ("12b", "25a", "33a", "40b"):
+            x = x0 + (i + 0.5) / (len(st) - 1) * W
+            body.append(f'<line x1="{x}" y1="{y0}" x2="{x}" y2="{y0+H}" stroke="{AMBER}" stroke-dasharray="2,3"/>')
+            body.append(text(x, y0 + H + 14, k + "|", 9, AMBER, "middle"))
+    y = y0 + H + 40
+    body.append(text(24, y, "Two interleaved halves: separate vocabularies? (shared recurring 5-grams, Jaccard)", 12, INK, weight=600))
+    items = [("currents of 25b–28b", e["jaccard_5grams_between_currents"], e["random_line_split_mean"], AMBER),
+             ("a/b sides of diamonds 29–43", c1["jaccard_a_vs_b"], c1["random_split_mean"], TEAL)]
+    for i, (lab, v, r, c) in enumerate(items):
+        yy = y + 12 + i * 26
+        body.append(text(24, yy + 14, lab, 12, INK))
+        body.append(rect(230, yy + 2, v * 900, 16, c, 3))
+        body.append(rect(230, yy + 18, r * 900, 4, GRAY, 1))
+        body.append(text(236 + max(v, r) * 900, yy + 15, f"{v:.3f} (random split {r:.3f})", 11, INK))
+    yy = y + 12 + 2 * 26 + 18
+    body.append(text(24, yy, "The language drifts in small steps (1.07 bits between neighbours vs 1.72 for random pairs); the largest", 11, MUTED))
+    body.append(text(24, yy + 16, "jumps crowd into tables 40–48, where the U register begins. The currents are two vocabularies; the two", 11, MUTED))
+    body.append(text(24, yy + 32, "colours of a diamond are one text split in two.", 11, MUTED))
+    return svg("fig_change_rate", 720, yy + 50, "How fast does the language change?",
+               "Amber dashes = the data-driven borders of a27.", body)
+
+
 FIGURES = [fig_territory, fig_digits, fig_head_regime, fig_nesting, fig_hive, fig_series, fig_letter_grammar,
            fig_book_formats, fig_diamond, fig_doubled, fig_letter_counts, fig_letters_segments, fig_u_register,
            fig_row_edges, fig_plan_7x7, fig_houses, fig_two_currents, fig_machine, fig_energy,
            fig_index_check, fig_dense_division, fig_robustness, fig_diamond_roads, fig_mi_decay,
-           fig_new_names, fig_dialects, fig_currents_vocab, fig_book_order, fig_borders]
+           fig_new_names, fig_dialects, fig_currents_vocab, fig_book_order, fig_borders, fig_name_territories, fig_change_rate]
 
 
 def run():

@@ -118,6 +118,8 @@ src/                          LAYER A - the Loagaeth analysis
   a25_bridges.py                  other systems inside the Loagaeth, name constellation
   a26_letter_names.py             Dee's letter names as a reading layer (construction), letter profiles per side
   a27_doubts.py                   data-driven segment borders, irregular rows, open manuscript checks
+  a28_names_deep.py               name territories, houses, genealogy, vowel mirrors, hidden names, currents
+  a29_architecture_deep.py        change rate, diamond halves, leaf 1 in the tables, particles
   make_figures.py             draws every figure in figures/ from the results
   make_viz_data.py            builds viz/loagaeth_viz_data.js for the 3D viewer
 viz/                          loagaeth_3d.html - interactive three.js viewer
@@ -486,6 +488,50 @@ As contiguous strings: AON 66× (97 expected from letter pairs), AONH 1×, ONHL 
 1,446 gave Q = 50 instead of 90), and that sum is the same in every order, so it says nothing about
 frequency. "A = 6, B = 5" is real — it is Crowley's column (and two GD-derived columns) in our
 bundled tables. Digit roots of large counts fall on each of 1–9 about 1/9 of the time.
+
+### Architecture, deeper: change rate, diamond halves, leaf 1, particles `[a29]`
+
+![Change rate](figures/fig_change_rate.svg)
+
+- **The language changes in small steps.** A letter model of each side reads the next one at 1.07
+  extra bits on average, against 1.72 for random pairs of sides. The largest jumps crowd into tables
+  40–48 (41a→41b, 46a→46b, 47b→48a, 40b→41a…) — where the U register begins — with isolated jumps at
+  21a→21b and 36b→37a. **REAL.**
+- **The two colours of a diamond are one text.** The a- and b-sides of tables 29–43 share recurring
+  5-grams exactly as much as random splits of their lines (0.279 vs 0.277). So the two vocabularies of
+  25b–28b are special to the currents, not a property of any interleaving. **REFUTED (for the
+  diamonds) — sharpens #83.**
+- **Leaf 1's words are not a key to the tables.** Of 1,941 spaced words of 5+ letters, 380 occur in the
+  grids, 2,780 times — below the Markov-3 expectation (3,081). Only ALNOTH and MACHES are clearly
+  favoured. **REFUTED.**
+- **No particle system between names.** Consecutive names on a line are separated by 0–11 letters
+  with a flat distribution (68 abut directly — compounds); the few short gaps (NOX, ZID, VAR, OL, AR)
+  are too rare to call particles. **DESCRIPTIVE.**
+
+### The names, deeper: territories, houses, hidden names `[a28]`
+
+![Name territories](figures/fig_name_territories.svg)
+
+- **Twelve names hold a territory** that survives Bonferroni (lag-1 autocorrelation of their density
+  along the book vs shuffled order, p ≤ 0.001): NOCHA, ADNOCHA, NOCHAP, NOCHAPH, ADNOCHAP, NACHO on one
+  side; GETH, ALGETH, ACLAX, ACLAXTO, GRADAX, OXAD on the other. **REAL.**
+- **The houses are territorial.** Assigned by correlation inside the a27 parts (beyond the parts'
+  own differences), the **NOCHA house** (ADNOCHA r 0.83, NOCHAP, NOCHAPH, ADNOCHAP, ADNOCHAPHA, CHADAX)
+  peaks in tables ~11–21, and the **GETH/ACLAX house** (ALGETH r 0.66, ACLAXTO, DRAGRA) at ~25–31.
+  Most discovered names belong to neither. **REAL.**
+- **CHASTOR itself is a weak territory** once measured per letter (p 0.027, not past Bonferroni) — in
+  line with the revision of a22: the empire is held by its titled forms and by the two houses, not by
+  the bare stem.
+- **Genealogy — refuted.** A core appears before its longer forms in 23 of 27 pairs, but 22.7 were
+  expected from their counts alone (z 0.19). Titles are not "born" after their core.
+- **Vowel mirrors — refuted as a rule.** Among 4,689 frequent strings, 304 pairs differ by swapping two
+  vowels and 342 by swapping two consonants; a Markov-3 copy gives 256 and 280 — the same proportion.
+  NACHO ~ NOCHA is a strong pair, not an instance of a mirroring law.
+- **Hidden names.** Masking the dominant names and rerunning the detector brings up names that were
+  in their shadow: **MACHO** (51×, 21 tables), **DNACHAP**, **NOPHAR**, **ANZANO**, **NACHAPA**,
+  **DRAXVL**, **RONTANTOXA** (z 10, kin to ANTANTOX).
+- **Variants on the two currents** (25b–28b): χ² 14.5 vs 9.5 for random splits (p 0.09) — the currents
+  differ in vocabulary (a24) but not, measurably, in which variant of a family they use. **REFUTED.**
 
 ### Where does the book really change? Borders without assumptions `[a27]`
 

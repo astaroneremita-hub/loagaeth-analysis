@@ -483,3 +483,97 @@ by a documented algorithm. Do the Loagaeth "rulers" work the same way? Three hon
 Watchtower system (we already reproduce it). If the goal is to *explore* whether the
 Loagaeth grids hide an extractable name-system, that is a buildable, honest experiment —
 candidates in, null model as judge, no claims until something survives.
+
+## 43. Long repeats and phrases (module a39)
+
+Raised by a reader: repeats longer than 10 letters suggest phrases.
+
+- **Long repeats are real against Markov-3.** Distinct strings occurring twice or more inside a line:
+  length 12: 549 (surrogate 116); length 14: 94 (surrogate 11); length 16: 5 (surrogate 1). REAL.
+- **An order-5 letter model reproduces them** (521, 66 and 7). The repeats need no unit longer than
+  about six letters of context: chained formulas are enough.
+- **Longest:** ADNACHEPHALZEDNOC (17, twice on 19b); ADNOCHANTANTOXAL (19a, 22a), ACHEDNOCHALZINTO
+  (21b, 23b), CHASTORANTANTOXA (21b, 24b), all 16. One repeat of 16 is expected by chance under
+  Markov-3, so a single one is not proof by itself; the count at 12-14 is.
+- **Phrases, tested directly:** where one name is followed at once by another (91 cases), the second
+  is not tied to the first more than in shuffles (1.84 bits vs 1.99, p 0.81). NOT SHOWN.
+- **Descriptive:** GETH+ACLAX written together, never reversed (tested in section 46; OXAD+NOCHA, first listed here, did not survive).
+
+## 44. Formulas: memory, compounds and controlled variation (module a40)
+
+- **Memory of the text (held-out).** Half the sides against the other half: strings of 12 letters
+  shared, 259; a letter model trained on the first half only gives 120 at order 3 and 521 at order 5.
+  The book repeats more than three letters of context explain and no more than five do. No unit
+  longer than about six letters is needed. BOUNDED.
+- **Names in sequence.** 693 successive names inside lines: the next name is not tied to the
+  previous one (1.007 bits vs 1.051 shuffled, p 0.86). No syntax between names. NOT SHOWN.
+- **Compounds with a fixed order.** First result (shuffle of names): OXAD+NOCHA and GETH+ACLAX.
+  Corrected in section 46: only GETH+ACLAX is real.
+- **Long repeats are not copied in place.** Start columns of the two occurrences agree no more than
+  in shuffles (10% within two columns vs 14%).
+- **Controlled variation.** 179 passages of 14 letters recur with exactly one letter changed
+  (Markov-3: 21-30). REAL. The changes: A/O 31 (ADNOCHA / ADNACHA), A/E 10, A/I 8, E/O 8, H/L 7
+  (NOCHANT / NOCLANT), P/T 7 (CHAPHAL / CHATHAL), L/R 7, L/N 7, M/N 6, G/Z 5, S/Z 4.
+- **Not the copyist.** The confusions measured on the Soyga tables (Z/X, N/U, I/Y, I/L, C/E) account
+  for 2 of the 179 changes. The variation belongs to the text.
+- **Sound classes (suggestive).** Half of the 98 consonant changes stay inside one class (stops,
+  liquids and nasals, sibilants) against 21% by letter frequency; Markov-3 surrogates give 37% on
+  few cases, and the classes were drawn after seeing the pairs. Needs an independent check.
+
+## 45. Do the letter changes follow sounds? (module a41)
+
+Classes fixed beforehand: manner (stops PBTDCGKQ, fricatives FVSZXH, nasals MN, liquids LR) and
+place (lips PBFMV, tongue tip TDSZNLR, back CGKQXH).
+
+- 14-letter variants, 98 consonant changes: inside a manner class 40.8%; by letter frequency 20.8%;
+  12 pooled Markov-3 surrogates 35.8% (p 0.18). Place: 34.7% vs 41.0% surrogate.
+- Fresh evidence, 10-letter passages at other positions (3,457 changes): manner 38.5% vs 35.5%
+  surrogate; place 45.7% vs 46.2%. Surrogates give the same commonest pairs (L/N, L/R, H/L).
+- Verdict: the sound-likeness of the changes is what the positional grammar already produces.
+  REFUTED as a separate rule.
+- Kept: interchangeable consonants share manner, not place, well above letter frequency; also in
+  Dee's spaced words of leaf 1 (1,932 pairs: manner 25.7% vs 20.9%, p < 0.001; place p 0.28). REAL,
+  as a property of the grammar.
+
+## 46. The map of repeats, and a correction (module a42)
+
+- **Correction.** OXAD+NOCHA is also OX+ADNOCHA (overlapping names); shuffling names counted it as a
+  rare meeting. The string itself: 23 in the book, 16.4 in Markov-3 surrogates (p 0.07). REFUTED.
+- **GETH+ACLAX holds.** GETHACLAX 17 vs 3.8; GETHACLAXTO 6 vs 0.25; never reversed. REAL.
+- **Repeats are neighbours.** 387 pairs of sides share 12 letters: 51% inside one part (20% at
+  random); inside parts 7.2 tables apart vs 8.1 (p < 0.001). Same leaf not favoured (p 0.19).
+  Sisters: 20a-22a, 21b-24b, 21b-25a.
+- **No drift of spelling** between earlier and later sides (best p 0.125 of 8).
+
+## 47. Recency (module a43)
+
+- **Cache model.** Order-3 letter model trained on half the sides: 2.920 bits per letter on the
+  rest; with a cache of the same side 2.906; identical with the side's lines shuffled. No use of
+  the recent past beyond the side's own vocabulary.
+- **Echo by lines.** 8-letter strings: flat from 1 to 30 lines. 5-letter strings: +9% at 1-4 lines
+  (z 5.4), nothing at 5-16; slightly column-aligned (p 0.02). Window chosen after the profile.
+- **Echo by sides.** 15.6 per 1000 for neighbours, 9.3 at twenty sides, 7.4 at random.
+- Reading: the unit of memory is the leaf and its neighbourhood; inside a side the lines are almost
+  exchangeable, with a faint trace over four lines.
+
+## 48. Positive control (module a44)
+
+The King James Bible, cut like the tables, is seen by all three blind tests (next unit z 15.7;
+order of lines 0.025 bits, z 10.0; echo over four lines +68%, z 37.8). Word-shuffled Bible and
+Markov-3 surrogates: nothing. Tables 2-24: next unit z 1.9; order of lines 0.0023 bits (z 4.5);
+echo +8% (z 5.3). Prose-like sentences along the rows would have been detected. The Calls (4,700
+letters) are too short for these tests. Source of the control: Project Gutenberg #10, kept in
+data/raw/ (not redistributed).
+
+## 49. What decides the variant (module a45)
+
+129 frames, 3,420 occurrences. Filler depends on part (z 8.5), table inside the part (z 3.7),
+nearest vowel before the frame (z 3.1). Not on side a/b, row, column, or the previous choice
+(z 0.3). No positional channel.
+
+## 50. The false book (module a46)
+
+G5L (five letters of context, model per side with three neighbours each way) reproduces repeats of
+12 (378 vs 365), master names (1866 vs 1861), GETHACLAX (9 vs 10), the gradient between sides.
+Residue: echo over four lines; one-letter variants of long passages (110 vs 74); repeats of 14
+(70 vs 53).

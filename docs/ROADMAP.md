@@ -136,3 +136,14 @@ Still open, from the literature survey (`data/raw/research_hypotheses.md`, git-i
 **Update (a37, a38):** 25b third series done and extended (27a, 26a re-decoded); 43–48 replication,
 every k-th letter and Heptarchic layouts refuted. Left: the unclear corner of 26a (90 letters); table 49's 21 words; spot checks on the manuscript images; a22 with the measured confusions;
 update the 3D viewer's currents for 26a/27a to the mixed layout.
+
+**Update (a39, a40):** long repeats real against Markov-3 and explained by formulas of about six
+letters; no syntax between names; fixed-order compounds (OXAD+NOCHA, GETH+ACLAX) real; 179 passages
+recur with one letter changed and the changes are not the copyist's. Positive control done (a44): the tests see English
+prose at this size and do not see it in the tables. Variant choice is dialect, not a channel (a45).
+A per-leaf six-letter machine writes the book (a46); the residue is the echo over four lines and an
+excess of one-letter variants of long passages: mine templates with one free slot (units of 8–14
+letters), and test whether the echo over four lines survives in the diagonal and diamond tables.
+Sound classes checked (a41): no rule
+beyond the slot grammar; interchangeable consonants share manner, not place. Left from this lead: the variation by part of the book and by house;
+the same counts on another transcription of the tables when one is available.

@@ -129,6 +129,14 @@ src/                          LAYER A - the Loagaeth analysis
   a36_soyga_calibration.py        Soyga tables regenerated (Reeds) -> error rate and confusions of the scribe
   a37_mixed_decoding.py           25b-28b re-decoded: row blocks and zones (writes data/loagaeth_mixed_decoded.json)
   a38_open_leads.py               every k-th letter, tables 43-48 as a pattern, Heptarchic number layouts
+  a39_long_repeats.py             long repeats against surrogates; names joined to names
+  a40_formulas.py                 memory of the text (held-out), compounds, one-letter variants of passages
+  a41_sound_classes.py            do the letter changes follow sounds? classes fixed beforehand, three data sets
+  a42_repeat_map.py               where repeats fall (sister sides, distance), drift of spelling, compounds re-tested
+  a43_recency.py                  does the text remember what it just wrote? echo by lines and sides, a model with a cache
+  a44_positive_control.py         the same blind tests on a text with sentences (King James Bible) and on controls
+  a45_variation_channel.py        what decides which variant of a formula is written
+  a46_generator.py                three machines write a false book; what they fail to reproduce
   make_figures.py             draws every figure in figures/ from the results
   make_viz_data.py            builds viz/loagaeth_viz_data.js for the 3D viewer
 viz/                          loagaeth_3d.html - interactive three.js viewer
@@ -543,6 +551,136 @@ diagonal zones keep their arrows, and the unclear corner of 26a is dimmed.
   shuffles), no drift of numbers down the rows that survives six tests (best p 0.012). The layouts
   behave as free scrambles; T5 and T7 carry the known damaged cells (duplicates 3, 7, 15, 18 / 17;
   missing 17, 28, 32, 35 / 27). **REFUTED.**
+
+### Long repeats, formulas and controlled variation `[a39, a40]`
+
+A reader of this study pointed out that strings longer than ten letters repeat in the book, and asked
+why we assume there are no sentences. Both points tested.
+
+- **Long repeats are real.** Distinct strings that occur twice or more inside a line, against a
+  Markov-3 surrogate: 12 letters, 549 vs 116; 14 letters, 94 vs 11; 16 letters, 5 vs 1. The longest:
+  ADNACHEPHALZEDNOC (17, twice on 19b), ADNOCHANTANTOXAL (19a, 22a), ACHEDNOCHALZINTO (21b, 23b),
+  CHASTORANTANTOXA (21b, 24b). One repeat of 16 letters is expected by chance in a text this
+  repetitive; the count at 12–14 letters is the evidence. **REAL.**
+- **How long is the memory?** Half the sides against the other half: 259 strings of 12 letters are
+  shared. A letter model trained on the first half only produces 120 with three letters of context
+  and 521 with five. The book needs more than three and no more than five: formulas of about six
+  letters, chained. No longer unit is needed. **BOUNDED.**
+- **No syntax between names.** Of 693 successive names inside lines, the next is not tied to the
+  previous one (1.007 bits vs 1.051 when names are shuffled inside each side, p 0.86). Sentences
+  are **not shown** — which is not the same as shown absent.
+- **One compound, not two `[a42]`.** A first test (names shuffled inside each side) gave two
+  fixed-order compounds, OXAD+NOCHA and GETH+ACLAX. The shuffle was misled: OXAD+NOCHA is also
+  OX+ADNOCHA, two names that overlap. Searching the strings themselves in Markov-3 surrogates:
+  OXADNOCHA 23 vs 16.4 (p 0.07) — **REFUTED, a correction of our own result**; GETHACLAX 17 vs 3.8
+  and GETHACLAXTO 6 vs 0.25 (p < 10⁻⁶, never reversed) — **REAL.** GETH is followed by ACLAX, the
+  two names of the same house.
+- **Repeats are neighbours `[a42]`.** 387 pairs of sides share a string of 12 letters. Half fall
+  inside one part of the book (20% if sides are relabelled at random), and inside a part they are
+  closer than chance (7.2 tables apart vs 8.1; within one table 14.7% vs 11.1%, p 0.001). The two
+  sides of one leaf are not favoured (p 0.19). Closest sisters: 20a–22a, 21b–24b, 21b–25a (4–6
+  times what their sizes predict). **REAL (local reuse).**
+- **Almost no memory inside a side `[a43]`.** A letter model given a cache of what it has just read
+  on the same side barely improves (2.920 → 2.906 bits per letter), and the gain is the same with
+  the lines of the side shuffled: what a side reuses is its own vocabulary, not what was written
+  just before. Long strings (8 letters) are echoed no more one line below than thirty lines below.
+- **A faint echo over four lines `[a43]`.** Short strings (5 letters) recur 1–4 lines below 9% more
+  often than with the lines shuffled (16.3 vs 15.0 per thousand, z 5.4), and no more at 5–16 lines
+  (z 1.0); the echo leans to the same columns (17.5% within three columns vs 16.0%, p 0.02). The
+  window of four lines was chosen after looking at the profile, so the size is honest and the p is
+  generous. **REAL but weak.**
+- **Across sides the likeness fades slowly `[a43]`.** Neighbouring sides share 15.6 per thousand of
+  their 8-letter strings, sides twenty apart 9.3, sides in random order 7.4 (p ≤ 0.015 at every
+  distance). The memory of the book lives at the scale of leaves, not of lines. **REAL.**
+- **No drift of spelling `[a42]`.** In the 170 one-letter variants between different sides, no letter
+  belongs to the earlier side and its partner to the later (A then O 18, O then A 12; best of 8
+  tests p 0.125). **NOT SHOWN.**
+- **Not copied in place.** The two occurrences of a long repeat start in unrelated columns (within
+  two columns in 10% of cases; 14% in shuffles).
+- **Controlled variation.** 179 passages of 14 letters recur with exactly one letter changed
+  (surrogates: 21–30). The changes are few and recurrent: A/O 31 (ADNOCHA / ADNACHA), A/E 10, A/I 8,
+  E/O 8, H/L 7 (NOCHANT / NOCLANT), P/T 7 (CHAPHAL / CHATHAL), L/R 7, L/N 7, M/N 6, G/Z 5, S/Z 4.
+  **REAL.**
+- **It is not the copyist.** The confusions measured on the Soyga tables (Z/X, N/U, I/Y, I/L, C/E)
+  account for 2 of the 179 changes. The variation belongs to the text.
+- **Do the changes follow sounds? `[a41]`** Checked with classes fixed beforehand (manner: stops,
+  fricatives, nasals, liquids; place: lips, tongue tip, back). Consonant changes stay inside a manner
+  class 41% of the time against 21% by letter frequency — but Markov-3 surrogates, which share only
+  the letter contexts, give 36% (p 0.18). On 3,457 fresh changes in 10-letter passages: 38.5% vs
+  35.5%. The surrogates even produce the same commonest pairs (L/N, L/R, H/L). So the likeness is
+  what the positional grammar already gives: letters that fill the same slot are alike. As a rule
+  of its own, **REFUTED.**
+- **What survives:** consonants that can replace one another share *manner* of articulation more
+  than letter frequency allows, and not *place* (place: 35% vs 36%). The same holds in Dee's own
+  spaced words of leaf 1 (1,932 pairs differing in one consonant: manner 25.7% vs 20.9%, p < 0.001;
+  place 36.4% vs 35.7%, p 0.28). The slots of the language sort consonants the way a pronounceable
+  language does. **REAL (property of the grammar).**
+
+### Can our tests see sentences at all? A positive control `[a44]`
+
+"No sign of sentences" is worth something only if the same tests find sentences where they exist.
+So the opening 108,000 letters of the King James Bible were treated exactly as the tables reach us
+(letters only, no spaces, lines of 49, sides of 49 lines) and run blind through three tests, with
+texts that have no syntax as negative controls.
+
+| text | next unit tied to the previous (z) | bits lost when lines are shuffled | echo 1–4 lines below (z) |
+|---|---|---|---|
+| Bible, English | 15.7 | 0.0250 (z 10.0) | +68% (z 37.8) |
+| Bible, words shuffled inside each side | −2.6 | 0.0005 (z 0.5) | +2% (z 0.9) |
+| Markov-3 surrogate of the Bible | −0.5 | 0.0011 (z 2.5) | −2% (z −1.1) |
+| Markov-3 surrogate of the tables | 0.4 | −0.0008 (z −1.3) | +3% (z 1.2) |
+| **Tables 2–24** | **1.9** | **0.0023 (z 4.5)** | **+8% (z 5.3)** |
+
+- **The tests work.** English prose is seen by all three, at the size of the tables; the texts
+  without syntax are seen by none.
+- **The tables are not prose of that kind.** Units three or more letters apart are not tied to one
+  another (z 1.9, against 15.7); the order of lines carries about a tenth of what it carries in
+  English; the echo over four lines is about an eighth. **REAL: sentences like those of a natural
+  language, running along the rows, would have been detected.**
+- **What the tables do have** is the small order-of-lines signal (z 4.5) and the faint echo (z 5.3):
+  real, absent from every control without syntax, and far below prose.
+- **Units that touch** score everywhere, surrogates included (tables z 20.8, surrogate 13.5): pieces
+  of one word. That is the six-letter formula again, not syntax.
+- **The Calls are too short to judge** (4,700 letters): at that size the test misses the syntax of
+  the Bible itself. Nothing can be said from them with these tools.
+
+### What decides which variant is written `[a45]`
+
+129 frames (three letters, a slot, three letters) take two or more fillers; 3,420 occurrences in
+tables 2–24. ADN_CHA takes O 158 times and A 62; ACH_DNO takes A 44, E 23, I 11.
+
+- The choice depends on the **part of the book** (z 8.5) and, inside a part, on the **table**
+  (z 3.7): the dialect of the leaf.
+- It depends weakly on the **nearest vowel before the frame**, four to nine letters back (z 3.1,
+  p 0.007; after the frame z 2.1): the formula reaches a little further than its frame.
+- It does **not** depend on the side a/b (p 0.88), the row (p 0.77), the column (p 0.77), or on
+  which filler was written the previous time on that side (z 0.3).
+- So the variant is not a signal laid over the page. **REFUTED as a positional channel.**
+
+### A false book: what the rules explain and what they leave `[a46]`
+
+Three machines rewrite tables 2–24: G3 (three letters of context), G5 (five), and G5L (five, one
+model per side trained on the side and its three neighbours each way).
+
+| measurement | book | G3 | G5 | G5L |
+|---|---|---|---|---|
+| repeated strings of 12 letters | 365 | 127 | 370 | 378 |
+| repeated strings of 14 letters | 70 | 14 | 55 | 53 |
+| one-letter variants of 14-letter passages | 110 | 30 | 85 | 74 |
+| the 12 master names | 1861 | 1672 | 1853 | 1866 |
+| CHASTOR | 122 | 89 | 126 | 123 |
+| GETHACLAX | 10 | 2.7 | 5.7 | 9 |
+| shared with the next side (per 1000) | 22.0 | 9.6 | 15.5 | 29.9 |
+| shared 20 sides away (per 1000) | 9.6 | 9.6 | 15.7 | 8.9 |
+| echo 1–4 lines / shuffled | 1.08 | 1.01 | 1.01 | 0.98 |
+
+- **A six-letter machine with the vocabulary of the leaf writes this book.** G5L gives the names,
+  the long repeats, the compound and the fading likeness of neighbouring sides, with no rule about
+  names, words or sentences in it. **REAL (sufficiency).**
+- **The residue**, what no machine gives: the faint echo over four lines; more one-letter variants
+  of long passages (110 against 74–85) and more repeats of 14 letters (70 against 53–55). Three
+  runs per machine; the gaps are steady but not large. They point to units a little longer than six
+  letters with one free slot — templates — as the next thing to mine.
 
 ### A ruler for the scribe: the Soyga tables at the back of the manuscript `[a36]`
 

@@ -91,3 +91,5 @@ numbers) are language-neutral.
 - The private evidence corpus (a library of books the engine can optionally search to
   cross-check a confirmed finding). It is not redistributable; `engine/nucleo.py` runs
   fine without it (`Corpus` degrades to a no-op).
+
+- **Control text (a44):** The King James Version of the Bible, Project Gutenberg eBook #10 (https://www.gutenberg.org/ebooks/10). Fetched to `data/raw/kjv.txt` (git-ignored); only statistics are reported.

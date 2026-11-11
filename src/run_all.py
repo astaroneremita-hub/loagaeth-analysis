@@ -48,6 +48,14 @@ import a35_nalvage_coordinates
 import a36_soyga_calibration
 import a37_mixed_decoding
 import a38_open_leads
+import a39_long_repeats
+import a40_formulas
+import a41_sound_classes
+import a42_repeat_map
+import a43_recency
+import a44_positive_control
+import a45_variation_channel
+import a46_generator
 import make_figures
 import make_viz_data
 
@@ -92,6 +100,14 @@ MODULES = [
     ("35_nalvage_coordinates", a35_nalvage_coordinates),
     ("36_soyga_calibration", a36_soyga_calibration),
     ("38_open_leads", a38_open_leads),
+    ("39_long_repeats", a39_long_repeats),
+    ("40_formulas", a40_formulas),
+    ("41_sound_classes", a41_sound_classes),
+    ("42_repeat_map", a42_repeat_map),
+    ("43_recency", a43_recency),
+    ("44_positive_control", a44_positive_control),
+    ("45_variation_channel", a45_variation_channel),
+    ("46_generator", a46_generator),
 ]
 
 

@@ -190,6 +190,28 @@ text's own texture.
 | 128 | Every k-th letter gives Call-like text (Laycock) | k = 2…12 ≈ shuffled | REFUTED | a38 |
 | 129 | Tables 43–48 as a replicated pattern | not copies; less internal repetition | REFUTED | a38 |
 | 130 | Rule in the Heptarchic number layouts | no affine fit, no drift | REFUTED | a38 |
+| 131 | Do long strings repeat beyond chance? | 12 letters: 549 vs 116 (Markov-3); 14: 94 vs 11; 16: 5 vs 1 | REAL | a39 |
+| 132 | Do long repeats need units longer than formulas? (held-out halves) | 259 shared; model of the other half: 120 (order 3), 521 (order 5) | BOUNDED — about six letters | a40 |
+| 133 | Syntax between names? | adjacent 91 pairs p 0.81; successive 693 pairs p 0.86 | NOT SHOWN | a39, a40 |
+| 134 | Compounds with a fixed order | OXAD+NOCHA 16 vs 1.7; GETH+ACLAX 9 vs 0.9; never reversed | SUPERSEDED by #141 (shuffle misled by overlapping names) | a40 |
+| 135 | Long repeats copied in place? | same columns no more than shuffles (p 0.88) | REFUTED | a40 |
+| 136 | Passages recurring with one letter changed | 179 vs 21–30; A/O 31, A/E 10, H/L 7, P/T 7, L/R 7 | REAL | a40 |
+| 137 | Is that variation the copyist's? | Soyga confusions explain 2 of 179 | REAL — variation is in the text | a40 |
+| 138 | Consonant changes stay inside sound classes? | 50% vs 21% by frequency; surrogates 37%; classes post hoc | SUGGESTIVE | a40 |
+| 139 | Same, classes fixed beforehand (manner, place), 12 surrogates, fresh 10-letter variants | manner 41% vs 36% surrogate (p 0.18); fresh set 38.5% vs 35.5%; place nothing | REFUTED as a rule of its own — the slot grammar gives it | a41 |
+| 140 | Do interchangeable consonants share manner of articulation? (incl. leaf-1 words) | variants 41% vs 21% by frequency; leaf 1 25.7% vs 20.9% (p < 0.001); place at chance | REAL (property of the grammar) | a41 |
+| 141 | Compounds, strings searched in Markov-3 surrogates | GETHACLAX 17 vs 3.8, GETHACLAXTO 6 vs 0.25: REAL; OXADNOCHA 23 vs 16.4 (= OX + ADNOCHA): REFUTED | CORRECTS #134 | a42 |
+| 142 | Where do long repeats fall? | inside one part 51% vs 20%; inside parts 7.2 vs 8.1 tables apart (p < 0.001); same leaf not favoured | REAL (local reuse) | a42 |
+| 143 | Spelling drifts along the book? | 8 pairs tested, best p 0.125 | NOT SHOWN | a42 |
+| 144 | Does the text reuse what it has just written (cache model, echo by lines)? | cache 2.920 → 2.906 bits, same with lines shuffled; 8-letter echo flat over 30 lines | NOT SHOWN — lines of a side are near exchangeable | a43 |
+| 145 | Faint echo of 5-letter strings 1–4 lines below | 16.3 vs 15.0 per 1000 (z 5.4); 5–16 lines z 1.0; near same column p 0.02; window chosen post hoc | REAL but weak | a43 |
+| 146 | Likeness of sides by distance | 15.6 per 1000 (adjacent) → 9.3 (20 apart); random 7.4 | REAL | a43 |
+| 147 | Do our tests detect sentences where they exist? (Bible as the tables reach us) | English: z 15.7 / 10.0 / 37.8; no-syntax controls ≈ 0 | REAL — the tests have power | a44 |
+| 148 | The tables on the same tests | next unit z 1.9; order of lines 0.0023 bits (z 4.5), a tenth of English; echo +8% (z 5.3) | REAL — no prose-like sentences along the rows; small order signal | a44 |
+| 149 | The Calls on the same tests | 4,700 letters: the test misses the Bible's own syntax at that size | NO POWER | a44 |
+| 150 | What decides the variant of a formula? | part z 8.5; table z 3.7; vowel 4–9 letters before z 3.1; side, row, column, previous choice: nothing | REFUTED as a positional channel | a45 |
+| 151 | Can a machine write the book? | order 5 per side + neighbours reproduces repeats of 12, names, GETHACLAX, the gradient between sides | REAL (sufficiency) | a46 |
+| 152 | What no machine reproduces | echo over 4 lines (1.08 vs 1.0); one-letter variants 110 vs 74–85; repeats of 14: 70 vs 53–55 | RESIDUE — templates with a slot | a46 |
 
 Note: from #127 on, tables 25b–28b are read with the refined decoding of a37; counts quoted in entries
 79–122 moved by a few units (current values are in the README and in results/*.json).

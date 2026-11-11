@@ -885,11 +885,49 @@ def fig_book_order():
                "Similarity of every side with every other (letters + trigrams), in book order 2a → 48b.", body)
 
 
+# ---------------------------------------------------------------- 29. where the book really changes
+def fig_borders():
+    d = res("27_doubts")
+    rows = d["A3_segment_borders"]["by_blocks"]
+    keys = [f"{t}{s}" for t in range(2, 49) for s in "ab"]
+    body, x0, y0, cw = [], 40, 96, 6.4
+
+    def strip(y, borders, label, colour):
+        body.append(text(24, y - 6, label, 11, INK, weight=600))
+        cuts = {b.split("|")[1] for b in borders}
+        seg = 0
+        for i, k in enumerate(keys):
+            if k in cuts:
+                seg += 1
+            col = [P6, P2, TEAL, AMBER, CORAL, BLUE, GREEN, GRAY][seg % 8]
+            body.append(rect(x0 + i * cw, y, cw - 0.6, 18, col, 1))
+        for i, k in enumerate(keys):
+            if k.endswith("a") and int(k[:-1]) in (2, 6, 13, 25, 29, 33, 41, 44, 48):
+                body.append(text(x0 + i * cw + 3, y + 30, k[:-1], 9, MUTED, "middle"))
+    strip(y0, ["5b|6a", "25b|26a", "28b|29a", "43b|44a"], "Segments we assumed (opening · heartland · 26–28 · diamonds · end)", GRAY)
+    five = next(r for r in rows if r["blocks"] == 5)["borders"]
+    strip(y0 + 58, five, "Borders found by the data alone (5 blocks, letters + trigrams)", P6)
+    y = y0 + 120
+    body.append(text(24, y, "Variance of the side profiles explained by k blocks — book order vs shuffled order", 12, INK, weight=600))
+    for i, r in enumerate(rows):
+        yy = y + 12 + i * 20
+        body.append(text(24, yy + 12, f"{r['blocks']} blocks", 11, INK))
+        body.append(rect(100, yy + 2, r["variance_explained"] * 400, 12, P6, 2))
+        body.append(rect(100, yy + 14, r["shuffled_order_mean"] * 400, 4, GRAY, 1))
+        body.append(text(106 + r["variance_explained"] * 400, yy + 12, f"{r['variance_explained']:.2f} (shuffled {r['shuffled_order_mean']:.2f})", 10, MUTED))
+    yy = y + 12 + len(rows) * 20 + 14
+    body.append(text(24, yy, "Gains stop after 5 blocks. Stable borders: 12b|13a (every feature set), 40b|41a, 33a|33b, 25a|25b.", 11, MUTED))
+    body.append(text(24, yy + 16, "The opening 2–5 is not a block of its own; the U register begins at table 41, not 44; a new break at 12|13", 11, MUTED))
+    body.append(text(24, yy + 32, "(T and X rise, U appears). Dialect chain and U register both hold on the new parts.", 11, MUTED))
+    return svg("fig_borders", 680, yy + 50, "Where does the book really change?",
+               "Optimal cuts of the 94 sides into contiguous blocks, with no borders assumed.", body)
+
+
 FIGURES = [fig_territory, fig_digits, fig_head_regime, fig_nesting, fig_hive, fig_series, fig_letter_grammar,
            fig_book_formats, fig_diamond, fig_doubled, fig_letter_counts, fig_letters_segments, fig_u_register,
            fig_row_edges, fig_plan_7x7, fig_houses, fig_two_currents, fig_machine, fig_energy,
            fig_index_check, fig_dense_division, fig_robustness, fig_diamond_roads, fig_mi_decay,
-           fig_new_names, fig_dialects, fig_currents_vocab, fig_book_order]
+           fig_new_names, fig_dialects, fig_currents_vocab, fig_book_order, fig_borders]
 
 
 def run():

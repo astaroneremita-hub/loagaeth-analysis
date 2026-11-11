@@ -40,6 +40,12 @@ Tags in the ledger follow RESEARCH_LOG.md (REAL / REFUTED / DESCRIPTIVE / REVISE
 ## 2. Priority tracks
 
 ### Track A — Close the remaining doubts (do first)
+
+**Status (a27):** A3 done — borders 12b|13a, 25a|25b, 33a|33b, 40b|41a; segments revised (opening not
+separate, U register from 41). A2 diagnosed (8b dropped column, 9a damaged block, 7 isolated ±1); the
+corrections need the manuscript. A1 open — no table images available; next step is consulting
+Sloane 3189 images (British Library) when accessible.
+
 | # | Question | Test | Null | Stop rule |
 |---|---|---|---|---|
 | A1 | Is the U register Dee's or the transcriber's? | Check 200 random U/A and Z/X cells of tables 43–48 against the facsimile images of Sloane 3189 (manual sample, logged) | — (error rate) | If >10% of U are A in the image, rerun a16/a22 with corrected letters |

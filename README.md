@@ -117,6 +117,7 @@ src/                          LAYER A - the Loagaeth analysis
   a24_book_architecture.py        acrostics, pyramid cross, dialects, book order, two currents, verses
   a25_bridges.py                  other systems inside the Loagaeth, name constellation
   a26_letter_names.py             Dee's letter names as a reading layer (construction), letter profiles per side
+  a27_doubts.py                   data-driven segment borders, irregular rows, open manuscript checks
   make_figures.py             draws every figure in figures/ from the results
   make_viz_data.py            builds viz/loagaeth_viz_data.js for the 3D viewer
 viz/                          loagaeth_3d.html - interactive three.js viewer
@@ -485,6 +486,36 @@ As contiguous strings: AON 66× (97 expected from letter pairs), AONH 1×, ONHL 
 1,446 gave Q = 50 instead of 90), and that sum is the same in every order, so it says nothing about
 frequency. "A = 6, B = 5" is real — it is Crowley's column (and two GD-derived columns) in our
 bundled tables. Digit roots of large counts fall on each of 1–9 about 1/9 of the time.
+
+### Where does the book really change? Borders without assumptions `[a27]`
+
+![Borders](figures/fig_borders.svg)
+
+Our four segments (opening 2–5, heartland 6–25, 26–28, diamonds 29–43, end 44–48) were set by eye.
+Cutting the 94 sides into contiguous blocks by exact optimisation, with no borders given:
+
+- **Five blocks are enough** (61% of the variance of the side profiles vs 12% for shuffled orders;
+  extra blocks add nothing beyond the shuffled gain).
+- **Borders found:** **12b|13a**, **25a|25b**, **33a|33b**, **40b|41a**. 12b|13a appears with every
+  feature set (letters only, trigrams only, both); 40b|41a in all but one; 25a|25b (where the writing
+  turns from rows to diagonals) with trigrams.
+- **Revisions.** The "opening" 2–5 is **not** a block of its own — tables 2–12 form one part. The
+  **U register starts at table 41**, not 44. And there is a **new break at 12|13**: from table 13, T
+  and X roughly double (2.3 → 5.1%, 3.0 → 5.3%) and U appears (0.1 → 1.4%). **REAL / REVISED.**
+- **Checks on the new parts** (I 2a–12b · II 13a–25a · III 25b–33a · IV 33b–40b · V 41a–48b): the
+  dialect chain holds (each part reads its neighbours best), and the U register is stronger (part V
+  shares 242 five-letter formulas with parts I–II as written, 436 with U read as A; other vowels
+  ≤ 300).
+
+**Irregular rows (A2).** Of the row-written sides, seven differ from 2,401 letters by a single letter
+in a single row (3b, 5a, 7b, 9b, 10b, 11b, 16b, 17b — no 50/48 pairs, so no letter slipped across a row
+break: isolated insertions or omissions). Three are systematic: **8b** lacks one letter in every row
+from row 5 on (−37: a column dropped), **9a** lacks 376 letters (rows 1–7 hold only 35 each — a damaged
+or unfinished block), **12b** lacks one letter in rows 30–33. These need the manuscript to settle.
+
+**U/A in the manuscript (A1).** The transcription page carries photographs of 14 leaf titles only
+(e.g. 5b ZVCHASTORS), not of the tables; the U/A question for tables 41–48 stays open until images
+of Sloane 3189 can be consulted.
 
 ### Are we looking wrong? Every core result under other readings `[a22]`
 

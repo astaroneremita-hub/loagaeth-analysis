@@ -365,6 +365,13 @@ across the 91 numbers, keeping lengths** — so the global 2/3/6 excess is alrea
 - Rows open with Van/Mals/Ceph/Ged/Veh, close with Fam/Ger/Na/Med/Pal; realm signatures: opening
   Tal/Fam/Or, end Van/Don/Mals. Roadmap of open questions in docs/ROADMAP.md.
 
+### 33. Track A — borders, irregular rows — `a27`
+- Optimal contiguous blocks: 5 suffice; borders 12b|13a, 25a|25b, 33a|33b, 40b|41a. Opening 2–5 is
+  not separate; U register starts at 41; new break at 12|13 (T, X double; U appears).
+- Dialect chain and U register hold on the new parts (U→A 436 vs 242).
+- Irregular rows: 7 isolated ±1; 8b a dropped column (−37); 9a −376 in rows 1–7; 12b −4. U/A check
+  of the manuscript open (no table images).
+
 ### Provenance warning: the grimoire's "powers"
 The wider project generated a grimoire that assigns each Lord a sefira, planet, talisman,
 how-to-call and danger grade. Its own generator states these layers were *"constructed

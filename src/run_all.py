@@ -36,6 +36,7 @@ import a23_name_discovery
 import a24_book_architecture
 import a25_bridges
 import a26_letter_names
+import a27_doubts
 import make_figures
 import make_viz_data
 
@@ -67,6 +68,7 @@ MODULES = [
     ("24_book_architecture", a24_book_architecture),
     ("25_bridges", a25_bridges),
     ("26_letter_names", a26_letter_names),
+    ("27_doubts", a27_doubts),
 ]
 
 

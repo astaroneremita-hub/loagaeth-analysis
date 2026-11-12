@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gramática dos Nomes — Loagaeth</title>
+<style>
+:root{--bg:#faf9f5;--card:#fff;--ink:#1a1a18;--mut:#6b6a63;--line:#e3e1d8;--accent:#8a6d2f;
+--Fogo:#d85a30;--Terra:#8a6d2f;--Ar:#378add;--Agua:#1d9e75;--q:#7f77dd}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#17160f;--card:#201f17;--ink:#ece9dc;--mut:#9a988a;--line:#33312a;--accent:#d6b96a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 system-ui,-apple-system,sans-serif;padding:20px 16px;max-width:1000px;margin:0 auto}
+h1{font-size:22px;font-weight:600;margin:0 0 4px}h2{font-size:17px;font-weight:600;margin:28px 0 10px}
+.sub{color:var(--mut);margin:0 0 18px}
+input{width:100%;padding:12px 14px;font-size:17px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0}
+.decomp{font-size:26px;font-weight:600;letter-spacing:1px}
+.pre,.suf{color:var(--accent)}.root{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+.meta{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:12px;font-size:14px}
+.meta b{font-weight:600}
+.pill{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;color:#fff}
+.tiers .row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--line)}
+.tiers .nm{font-weight:600;min-width:120px}.tiers .tn{color:var(--mut);flex:1}.bar{height:10px;border-radius:5px;background:var(--accent)}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--line)}
+th{cursor:pointer;color:var(--mut);font-weight:600}tr:hover td{background:var(--bg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:4px}
+.sq{border-radius:5px;padding:5px 4px;font-size:11px;color:#fff;text-align:center}
+.muted{color:var(--mut);font-size:13px}
+</style>
+</head>
+<body>
+<h1>Gramática dos Nomes do Loagaeth</h1>
+<p class="sub">Digite um nome: ele se decompõe em raiz + afixo, com poder (repetição), elemento e posto. Tudo medido, no repositório.</p>
+
+<input id="q" placeholder="NOCHA, ADNOCHA, ICHASTOR, ALGETH… (ou qualquer palavra)" autofocus>
+<div id="out"></div>
+
+<h2>Hierarquia suprema</h2>
+<div class="card tiers" id="tiers"></div>
+
+<h2>Todos os nomes (ordene clicando no cabeçalho)</h2>
+<div class="card" style="overflow:auto"><table id="tbl"><thead><tr>
+<th data-k="name">nome</th><th data-k="root">raiz</th><th data-k="prefix">prefixo</th><th data-k="suffix">sufixo</th>
+<th data-k="depth">prof.</th><th data-k="power">poder</th><th data-k="element">elemento</th><th data-k="tier">posto</th>
+</tr></thead><tbody></tbody></table></div>
+
+<h2>Rei e governador de cada quadrado</h2>
+<div class="card"><div class="grid" id="map"></div>
+<p class="muted">Cada caixa: quadrado · Rei (bruto) · governador local. Cor = território da casa.</p></div>
+
+<script>
+var ECOL={Fogo:'var(--Fogo)',Terra:'var(--Terra)',Ar:'var(--Ar)',Agua:'var(--Agua)','?':'#888'};
+var FAMCOL={CHADAX:'#d85a30',NOCHA:'#7f77dd',GETH:'#1d9e75',CHASTOR:'#378add',NACHO:'#ba7517'};
+var D=null;
+fetch('grammar_data.json').then(r=>r.json()).then(d=>{D=d;init()}).catch(e=>{document.getElementById('out').innerHTML='<div class=card>Não carregou grammar_data.json. Sirva por HTTP: <code>python -m http.server 8860</code></div>'});
+
+function elem(nm){var le=D.letter_element,c={};for(var ch of nm){var e=le[ch];if(['Fogo','Terra','Ar','Agua'].includes(e))c[e]=(c[e]||0)+1}
+ var best='?',n=0;for(var k in c)if(c[k]>n){n=c[k];best=k}return best}
+function decompose(nm){var best=null;for(var root of D.roots){var i=nm.indexOf(root);if(i>=0){var pre=nm.slice(0,i),suf=nm.slice(i+root.length),dep=pre.length+suf.length;
+ var cand=[root.length,-dep,root,pre,suf];if(!best||cand>best)best=cand}}
+ if(!best)return{root:null,prefix:'',suffix:'',depth:nm.length};return{root:best[2],prefix:best[3],suffix:best[4],depth:best[3].length+best[4].length}}
+
+function show(nm){nm=nm.toUpperCase().replace(/[^A-Z]/g,'');var o=document.getElementById('out');if(!nm){o.innerHTML='';return}
+ var rec=D.names[nm], dec=rec?rec:decompose(nm), el=rec?rec.element:elem(nm), pw=rec?rec.power:null, tier=rec?rec.tier:'(não catalogado)';
+ var html='<div class=card><div class=decomp>'+(dec.prefix?'<span class=pre>'+dec.prefix+'</span>':'')+'<span class=root>'+(dec.root||nm)+'</span>'+(dec.suffix?'<span class=suf>'+dec.suffix+'</span>':'')+'</div>';
+ html+='<div class=meta>';
+ html+='<span><b>raiz:</b> '+(dec.root||'—')+'</span>';
+ html+='<span><b>profundidade:</b> '+dec.depth+(dec.depth===0?' (raiz pura)':'')+'</span>';
+ if(pw!=null)html+='<span><b>poder:</b> '+pw+'× no livro</span>';
+ html+='<span><b>elemento:</b> <span class=pill style="background:'+ECOL[el]+'">'+el+'</span></span>';
+ html+='<span><b>posto:</b> '+tier+'</span>';
+ html+='</div></div>';
+ // siblings from same root
+ if(dec.root){var sibs=Object.keys(D.names).filter(k=>D.names[k].root===dec.root).sort((a,b)=>D.names[b].power-D.names[a].power);
+  if(sibs.length){html+='<div class=card><b>Família de '+dec.root+'</b> (mesma raiz, por poder):<div style="margin-top:8px">';
+   for(var s of sibs){var r=D.names[s];html+='<div style="padding:3px 0">'+(r.depth===0?'👑 ':'')+'<b>'+s+'</b> — '+r.power+'× · '+r.tier+' · <span class=pill style="background:'+ECOL[r.element]+'">'+r.element+'</span></div>'}
+   html+='</div></div>'}}
+ o.innerHTML=html}
+
+function init(){
+ document.getElementById('q').addEventListener('input',e=>show(e.target.value));
+ // tiers
+ var mx=D.supreme[0].power,t='';for(var h of D.supreme){t+='<div class=row><span class=nm>'+h.name+'</span><span class=tn>'+h.tier+'</span><span class=bar style="width:'+(120*h.power/mx)+'px"></span><span class=muted>'+h.power+'×</span></div>'}
+ document.getElementById('tiers').innerHTML=t;
+ // table
+ renderTable('power',true);
+ document.querySelectorAll('#tbl th').forEach(th=>th.onclick=()=>renderTable(th.dataset.k,['power','depth'].includes(th.dataset.k)));
+ // map
+ var m='';for(var lf in D.leaves){var L=D.leaves[lf];m+='<div class=sq style="background:'+(FAMCOL[L.territory]||'#888')+'"><b>'+lf+'</b><br>'+L.king+'<br><span style="opacity:.8">'+(L.governor||'-')+'</span></div>'}
+ document.getElementById('map').innerHTML=m}
+
+function renderTable(k,desc){var rows=Object.keys(D.names).map(n=>Object.assign({name:n},D.names[n]));
+ rows.sort((a,b)=>{var x=a[k],y=b[k];if(typeof x==='string')return desc?y.localeCompare(x):x.localeCompare(y);return desc?y-x:x-y});
+ var tb=document.querySelector('#tbl tbody');tb.innerHTML=rows.map(r=>'<tr><td><b>'+r.name+'</b></td><td>'+r.root+'</td><td class=pre>'+(r.prefix||'')+'</td><td class=suf>'+(r.suffix||'')+'</td><td>'+r.depth+'</td><td>'+r.power+'</td><td><span class=pill style="background:'+ECOL[r.element]+'">'+r.element+'</span></td><td>'+r.tier+'</td></tr>').join('')}
+</script>
+</body>
+</html>

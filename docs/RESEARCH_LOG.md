@@ -353,3 +353,35 @@ inside its whole family (ADNOCHA/NOCHAP/NOCHASTOR). The "independent ruler" laye
 longer present name) gives each square its local governor: ANZACH mid-book, ALGETH late, GRADAX 14-15, CHADAX
 opening — consistent with the a78 territory map. Two-tier structure: NOCHA over-king + per-square governors + court
 + lesser spirits. Honest limit: raw counts include letter-flow; ranks use len>=5 names to stay meaningful.
+
+## #217 — Generative name-grammar (a81) — CONFIRMADO NOVO
+The repetition hierarchy (a80) is a root + affix grammar. Each validated name decomposes as a ROOT (NOCHA, NACHO,
+CHASTOR, ACLAX, GETH, ANZACH...) with a prefix and/or suffix: AD-NOCHA, NOCHA-P, NOCHA-STOR, I-CHASTOR, AL-GETH,
+ACLAX-TO. Power (book-wide repetition) falls with derivation depth: depth-0 roots mean 127 vs depth-2+ derived 29.
+NOCHA 492 -> NOCHAP 100 -> NOCHAPH 41 -> ADNOCHAPHA 12; ACLAX 118 -> ACLAXTO 37 -> ACLAXTOR 13 -> AXACLAXTO 6. The
+root repeats most; each added layer repeats less, like a source and its weaker emanations. Non-monotonic note: the
+AD- prefix is itself productive (ADNOCHA 168 > NOCHAP 100). This is the generative system behind the names.
+
+## #218 — Affix meaning (a81 follow-up) — LEAD
+Grouping derived names by affix: prefix AD-/AL- -> all Terra (AD-NOCHA flips the Ar root NOCHA to Terra;
+mean power 74); prefix I- weak (power 14, demotes); suffix -A diminutive (mean power ~20, the smallest
+emanations); suffix -P marks high rank (NOCHAP/ADNOCHAP ~70). Honest: partly mechanical (element = letter
+composition, and the affix adds its own letters' elements) and confounded by shared roots, so it is a
+coherent lead, not an independent rank-morpheme proof. Affix = elemental charge + rank marker.
+
+## #219 — Grammar discovers new names (a82) — CONFIRMADO NOVO (strong)
+Generate every prefix x root x suffix (1319 candidates), count in the FULL book (tables 2-48, diamonds 29-48
+included via base_book), compare to 6 Markov-3 surrogates. 253 candidates occur; 54 beat the surrogate across
+>=3 tables; 32 were NOT in the prior catalogue - new branches the grammar generated and the text confirms.
+Top: NECHASTORA (23x surrogate, 6 tables), NOCHASTORAL (15x), NOCHASTORAD (10x, 12 tables), ZICHASTORA (7x),
+ANOCHASTOR = NOCHA+STOR cross-family fusion (6x, 13 tables), ADNOCHAPH (25x in 20 tables), ANTANTOXA, ALGRADAX,
+ANZACHAL, ALGETHAD, ICHADAX. Productive prefixes NO-/A-/AD-/AX-, suffixes -A/-AL/-P/-AD. The generative grammar
+is predictive: unseen root+affix combos are really present above letter-flow. 32 names added to viz/grammar_data.json.
+
+## #220 — Bridge names (a83) — border hypothesis REFUTED, bridge class REAL
+Names carrying two roots are a real class (7 fusions >=4x). Border hypothesis (a bridge sits where its two parent
+houses meet) FAILED: 0/7 sit between parents. Instead the NOCHA+CHASTOR fusions cluster in the back of the book
+(mean pos 34-44, GETH region), later than both parents. The standout: NOCHASTOR (NOCHA+CHASTOR) appears in 42/47
+tables, 65x - a near-universal connector of the two great houses, not localized. The grammar is recursive: affixes
+stack on derived names (NOCHASTOR -> NOCHASTORAD -> AXNOCHASTOR; ADNOCHA -> ADNOCHAPHA depth 5). So bridges exist
+and the tree grows deep, but bridges do not mark territorial borders.

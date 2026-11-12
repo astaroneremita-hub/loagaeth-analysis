@@ -111,3 +111,58 @@ compartilhado adensa, e NOCHA/ADNOCHA/NACHO/CHASTOR/ANZACH formam a espinha pres
 O que achamos numa tabela aparece nas outras — é um sistema único, não quadrados isolados. Próximo passo:
 para cada tabela, aplicar o conjunto completo de padrões (hierarquia, território, tecido) e marcar onde cada
 achado reaparece.
+
+## 9. A gramática gerativa dos nomes (a81) — CONFIRMADO NOVO
+
+A hierarquia por repetição é uma **gramática de raiz + afixo**. Cada nome validado se decompõe numa RAIZ
+(NOCHA, NACHO, CHASTOR, ACLAX, GETH, ANZACH…) com prefixo e/ou sufixo: AD-NOCHA, NOCHA-P, NO-CHASTOR,
+I-CHASTOR, AL-GETH, ACLAX-TO. E o **poder cai com a profundidade de derivação** — a raiz repete mais, cada
+camada de letras adicionada repete menos, como uma fonte e suas emanações mais fracas.
+
+![Gramática gerativa dos nomes](../figures/fig_name_derivation.png)
+
+Poder médio: raízes (prof. 0) = 127; derivados (prof. ≥2) = 29. Exemplos:
+`NOCHA 492 → NOCHA-P 100 → NOCHA-PH 41 → AD-NOCHA-PHA 12`; `ACLAX 118 → ACLAX-TO 37 → ACLAX-TOR 13 →
+AX-ACLAX-TO 6`. Nota honesta: não é perfeitamente monotônico — o prefixo AD- é produtivo (AD-NOCHA 168 >
+NOCHA-P 100). É o sistema gerativo por trás dos nomes — a resposta direta a "transformar em código": raiz +
+afixo = rank.
+
+## 10. O que os afixos significam (lead)
+
+Agrupando os derivados por afixo: o prefixo **AD-** (e AL-) puxa o nome para **Terra** — AD-NOCHA vira Terra
+mesmo tendo a raiz NOCHA (Ar) — com poder médio alto (74). O prefixo **I-** é fraco (poder 14, rebaixa). O
+sufixo **-A** é diminutivo (emanações menores, poder ~20). O sufixo **-P** marca alto posto (NOCHAP,
+ADNOCHAP ~70). Honesto: parte é mecânica (o elemento é contagem de letra, e o afixo traz suas próprias
+letras) e confundida pela raiz compartilhada — então é um lead coerente, não prova de morfema-de-posto
+independente. Leitura: afixo = carga elemental + marca de posto.
+
+Explore tudo isto no site: `viz/name_grammar.html` (sirva `viz/` por HTTP e abra
+`http://localhost:8860/name_grammar.html`) — digite qualquer nome e veja raiz, afixo, poder, elemento, posto
+e a família inteira.
+
+## 11. A gramática descobre nomes novos (a82) — CONFIRMADO NOVO
+
+Teste gerativo: gerar toda combinação prefixo × raiz × sufixo (1319 candidatos), contar no livro **inteiro**
+(tabelas 2–48, diamantes 29–48 incluídas) e comparar com surrogates Markov-3. Resultado: 253 candidatos
+aparecem; 54 batem o surrogate em ≥3 tabelas; **32 não estavam no catálogo — ramificações novas que a
+gramática gerou e o texto confirmou.**
+
+Top nomes novos (razão vs surrogate · ocorrências · tabelas):
+
+| nome | decomposição | × | tabelas | razão |
+|---|---|---|---|---|
+| NECHASTORA | NE-CHASTOR-A | 7 | 6 | 23,3 |
+| NOCHASTORAL | NO-CHASTOR-AL | 5 | 5 | 15,0 |
+| NOCHASTORAD | NO-CHASTOR-AD | 12 | 12 | 10,3 |
+| ZICHASTORA | ZI-CHASTOR-A | 8 | 8 | 6,9 |
+| ANOCHASTOR | A-NOCHA-STOR (fusão) | 14 | 13 | 6,0 |
+| ADNOCHAPH | AD-NOCHA-PH | 25 | 20 | 5,0 |
+| ANTANTOXA | ANTANTOX-A | 17 | 12 | 5,4 |
+| ALGRADAX | AL-GRADAX | 16 | 13 | 5,1 |
+| ANZACHAL | ANZACH-AL | 21 | 18 | 2,2 |
+| ICHADAX | I-CHADAX | 5 | 5 | 1,7 |
+
+Prefixos mais produtivos: NO-, A-, AD-, AX-; sufixos: -A, -AL, -P, -AD. **A gramática é preditiva** — combinações
+raiz+afixo que nunca listamos estão de fato no texto, acima do fluxo de letras. Os 32 nomes entraram no
+`viz/grammar_data.json` (aparecem no site). Nota: ANOCHASTOR = NOCHA + sufixo STOR é uma fusão entre famílias —
+um nome-ponte.

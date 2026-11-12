@@ -90,6 +90,9 @@ import a77_names_woven
 import a78_territory_map
 import a79_hierarchy_powers
 import a80_full_hierarchy
+import a81_name_derivation
+import a82_grammar_discovery
+import a83_bridge_names
 import make_figures
 import make_viz_data
 
@@ -176,6 +179,9 @@ MODULES = [
     ("78_territory_map", a78_territory_map),
     ("79_hierarchy_powers", a79_hierarchy_powers),
     ("80_full_hierarchy", a80_full_hierarchy),
+    ("81_name_derivation", a81_name_derivation),
+    ("82_grammar_discovery", a82_grammar_discovery),
+    ("83_bridge_names", a83_bridge_names),
 ]
 
 

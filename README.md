@@ -193,6 +193,31 @@ beside what was measured, is in [`docs/WHAT_THE_SOURCES_SAY.md`](docs/WHAT_THE_S
 **For the complete summary and how to use the names in practice, see
 [`docs/FINDINGS_AND_PRACTICE.md`](docs/FINDINGS_AND_PRACTICE.md).**
 
+### The findings at a glance
+
+The book is not a message to decode — it is an instrument of names set to a beat. These four figures
+carry the heart of it.
+
+![Would our tests see sentences? A positive control](figures/fig_positive_control.svg)
+
+*The same three blind tests detect sentence structure in the King James Bible (cut exactly like the
+tables) but not in the tables themselves, nor in the no-syntax controls. The Loagaeth is not prose.*
+
+![The book is a chant: metre and stress](figures/fig_metre.svg)
+
+*Every 49-letter line is tuned to ~17–18 syllables with a stress every three to four — a real metre,
+constant across the book. It is made to be intoned.*
+
+![The presiding name of each table](figures/fig_presiding_names.svg)
+
+*Most tables have one recurring name over-represented on them (a working list for the practitioner).
+The NOCHA house rules the early leaves, the GETH · ACLAX house the later ones.*
+
+![Where the book holds DAHAHOXOM](figures/fig_dahahoxom.svg)
+
+*A name reported in evocation. It is written nowhere, but its scattered letters gather, far above
+chance, at the book's opening — peak on leaf 2a, the first table a Call opens. A pointer, not a proof.*
+
 ## Everything we discovered
 
 Run `src/run_all.py` for the live numbers. Every claim below beat a null model or is true

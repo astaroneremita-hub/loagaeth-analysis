@@ -1047,12 +1047,126 @@ def fig_grammar():
                "Bars start at 2.5 bits.", body)
 
 
+def fig_metre():
+    m = res("63_metre")
+    body = []
+    # left: stress interval distribution bars
+    si = {int(k): v for k, v in m["stress_interval_distribution"].items()}
+    mx = max(si.values())
+    x0, y0, bw, bh = 24, 90, 30, 150
+    for i, k in enumerate(sorted(si)[:9]):
+        h = bh * si[k] / mx
+        c = CORAL if k in (3, 4) else P4
+        body.append(rect(x0 + i * (bw + 8), y0 + bh - h, bw, h, c, 2))
+        body.append(text(x0 + i * (bw + 8) + bw / 2, y0 + bh + 16, k, 11, MUTED, "middle"))
+        body.append(text(x0 + i * (bw + 8) + bw / 2, y0 + bh - h - 5, si[k], 10, MUTED, "middle"))
+    body.append(text(x0, y0 - 14, "Syllables between one stress and the next (the foot)", 12, INK))
+    body.append(text(x0 + 4.5 * (bw + 8), y0 + bh + 34, "stress falls every 3–4 syllables", 11, MUTED, "middle"))
+    # right: syllables per line by segment (the constant)
+    rx = x0 + 9 * (bw + 8) + 40
+    body.append(text(rx, y0 - 14, "Syllables per 49-letter line, by region", 12, INK))
+    segs = list(m["syllables_per_line_by_segment"].items())
+    for i, (nm, d) in enumerate(segs):
+        yy = y0 + i * 30
+        w = 3.0 * d["syllables_mean"]
+        body.append(rect(rx, yy, w, 18, TEAL, 2))
+        body.append(text(rx + w + 8, yy + 14, f"{nm.split(' ')[0]}  {d['syllables_mean']:.1f}", 11, MUTED))
+    body.append(text(rx, y0 + len(segs) * 30 + 10, "~17–18 on every line (real spread 1.05 vs 1.70 shuffled, z −24):", 11, MUTED))
+    body.append(text(rx, y0 + len(segs) * 30 + 26, "the lines are tuned to a beat — the book is meant to be intoned.", 11, MUTED))
+    return svg("fig_metre", rx + 260, y0 + bh + 60, "The book is a chant: metre and stress",
+               "Row-written tables; stress from the accented leaves 2a–5a.", body)
+
+
+def fig_positive_control():
+    d = res("44_positive_control")["full_size"]
+    rowmap = [("tables_2_24", "Loagaeth tables", INK), ("bible_english", "English (Bible)", BLUE),
+              ("bible_words_shuffled", "Bible, words shuffled", GRAY), ("markov3_surrogate_of_tables", "random surrogate", GRAY2)]
+    tests = [("T1_next_unit", "next unit tied\nto previous"), ("T2_order_of_lines", "order of\nlines matters"), ("T3_echo_1_to_4_lines", "echo over\n4 lines")]
+    x0, y0, gw, bh = 30, 100, 150, 150
+    body = [text(x0, y0 - 20, "Each test detects sentence structure. English scores high; the tables and the no-syntax controls do not.", 11, MUTED)]
+    zmax = 40
+    for ti, (tk, tlabel) in enumerate(tests):
+        gx = x0 + ti * (gw + 30)
+        for ri, (rk, rlabel, col) in enumerate(rowmap):
+            z = max(0, d[rk][tk]["z"])
+            h = bh * min(z, zmax) / zmax
+            bw = 26
+            body.append(rect(gx + ri * (bw + 4), y0 + bh - h, bw, h, col, 2))
+            body.append(text(gx + ri * (bw + 4) + bw / 2, y0 + bh - h - 5, f"{z:.0f}", 9, MUTED, "middle"))
+        for li, ln in enumerate(tlabel.split("\n")):
+            body.append(text(gx + 2 * (26 + 4), y0 + bh + 16 + li * 13, ln, 11, INK, "middle"))
+    body += legend(x0, y0 + bh + 60, [(c, l) for _, l, c in rowmap])
+    body.append(text(x0, y0 + bh + 86, "z-scores (bars capped at 40). The Loagaeth is not sentences — as the diary says: the reading is the appearing of the ministers.", 11, MUTED))
+    return svg("fig_positive_control", x0 * 2 + 3 * (gw + 30), y0 + bh + 104, "Would our tests see sentences? A positive control",
+               "The King James Bible cut exactly like the tables, run through the same three blind tests.", body)
+
+
+def fig_presiding_names():
+    d = res("67_presiding_names")
+    NOCHA = {"NOCHA", "NACHO", "NACHOA", "ADNOCHA", "ADNOCHAP", "NOCHAP", "NOCHAPH", "NOCHASTOR", "CHADAX", "ADNOCHAPHA", "DNOCHAPA"}
+    GETH = {"GETH", "ALGETH", "ACLAX", "ACLAXTO", "GRADAX", "AXALGRA", "AXTALGETHA"}
+    def house(n):
+        return BLUE if n in NOCHA else CORAL if n in GETH else GRAY
+    # one presiding name per table number (most significant side)
+    best = {}
+    for x in d["presiding_name_by_leaf"]:
+        t = int(x["leaf"][:-1])
+        if t not in best or x["p"] < best[t]["p"]:
+            best[t] = x
+    x0, y0, cw = 24, 96, 15
+    ts = sorted(best)
+    body = [text(x0, y0 - 16, "Each table coloured by the house of its presiding name; height = how far over chance (bright = p < 0.02).", 11, MUTED)]
+    hmax = max(min(best[t]["ratio"], 9) for t in ts)
+    for i, t in enumerate(ts):
+        x = x0 + i * cw
+        xr = best[t]
+        h = 150 * min(xr["ratio"], 9) / hmax
+        col = house(xr["name"])
+        op = "1" if xr["p"] < 0.02 else "0.4"
+        body.append(f'<rect x="{x}" y="{y0 + 150 - h}" width="{cw-2}" height="{h}" rx="1.5" fill="{col}" opacity="{op}"/>')
+        if t % 2 == 0:
+            body.append(text(x + cw / 2 - 1, y0 + 150 + 14, t, 8, MUTED, "middle"))
+    body += legend(x0, y0 + 150 + 38, [(BLUE, "NOCHA house"), (CORAL, "GETH · ACLAX house"), (GRAY, "other")])
+    body.append(text(x0, y0 + 150 + 62, "The NOCHA house rules the early leaves, the GETH house the later ones — the houses and territories, seen table by table.", 11, MUTED))
+    return svg("fig_presiding_names", x0 * 2 + len(ts) * cw, y0 + 150 + 80, "The presiding name of each table",
+               "The recurring name most over-represented on each leaf (a67).", body)
+
+
+def fig_dahahoxom():
+    d = res("68_dahahoxom_home")
+    base = d["random_name_baseline_percent_in_2_6"]["mean"]
+    share = d["opening_tables_are_this_share_of_the_book"]
+    forms = [(k, v["percent_in_opening_tables_2_6"], v["z_vs_random_names"]) for k, v in d["by_form"].items()]
+    x0, y0, bh = 180, 90, 34
+    body = [text(24, y0 - 14, "Share of each form's scattered letter-material that falls in the opening tables (leaves 2–6).", 11, MUTED)]
+    xmax = 42
+    def X(p):
+        return x0 + 300 * p / xmax
+    # baseline + fair-share reference lines (labels at opposite ends so they don't collide)
+    yb = y0 + 14 + len(forms) * bh
+    for v, lab, col, ly, anc in ((share, f"opening = {share:.0f}% of book", LINE, y0 - 2, "middle"),
+                                 (base, f"random names {base:.0f}%", GRAY, yb + 2, "middle")):
+        body.append(f'<line x1="{X(v)}" y1="{y0-4}" x2="{X(v)}" y2="{yb}" stroke="{col}" stroke-width="1" stroke-dasharray="3 3"/>')
+        body.append(text(X(v), ly, lab, 9, MUTED, anc))
+    for i, (nm, p, z) in enumerate(forms):
+        yy = y0 + 14 + i * bh
+        col = CORAL if nm == "AHOXOM" else P4
+        body.append(rect(x0, yy, 300 * p / xmax, 20, col, 2))
+        body.append(text(x0 - 8, yy + 15, nm, 12, INK, "end"))
+        body.append(text(x0 + 300 * p / xmax + 8, yy + 15, f"{p:.0f}%  (z {z:.1f})", 11, MUTED))
+    yy = y0 + 14 + len(forms) * bh + 20
+    body.append(text(24, yy, "DAHAHOXOM is written nowhere, but its scattered letters gather at the book's opening (peak leaf 2a) — far more than", 11, MUTED))
+    body.append(text(24, yy + 15, "any random or real name. The core AHOXOM, the part actually heard in evocation, concentrates most. A pointer, not a proof.", 11, MUTED))
+    return svg("fig_dahahoxom", 620, yy + 34, "Where the book holds DAHAHOXOM",
+               "Overlapping 3/4-letter fragments, density in the opening tables vs random names (a68).", body)
+
+
 FIGURES = [fig_territory, fig_digits, fig_head_regime, fig_nesting, fig_hive, fig_series, fig_letter_grammar,
            fig_book_formats, fig_diamond, fig_doubled, fig_letter_counts, fig_letters_segments, fig_u_register,
            fig_row_edges, fig_plan_7x7, fig_houses, fig_two_currents, fig_machine, fig_energy,
            fig_index_check, fig_dense_division, fig_robustness, fig_diamond_roads, fig_mi_decay,
            fig_new_names, fig_dialects, fig_currents_vocab, fig_book_order, fig_borders, fig_name_territories, fig_change_rate, fig_call_words,
-           fig_grammar]
+           fig_grammar, fig_metre, fig_positive_control, fig_presiding_names, fig_dahahoxom]
 
 
 def run():

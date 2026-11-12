@@ -14,7 +14,12 @@ by mode, for the front-end to draw.
 import json
 import random
 import statistics
+import unicodedata
 from collections import Counter
+
+
+def deaccent(s):
+    return "".join(c for c in unicodedata.normalize("NFD", s) if unicodedata.category(c) != "Mn")
 
 import load
 from a19_machine import markov3
@@ -102,7 +107,7 @@ def run():
         for w in (call.get("palavras") or []):
             if not isinstance(w, dict):
                 continue
-            en = "".join(ch for ch in str(w.get("enoquiano") or "").upper() if ch.isalpha())
+            en = "".join(ch for ch in deaccent(str(w.get("enoquiano") or "")).upper() if ch.isalpha())
             gl = str(w.get("ingles_sl3191") or "").strip()
             if not en:
                 continue

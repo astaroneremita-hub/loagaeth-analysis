@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quadrados traduzidos — Loagaeth</title>
+<style>
+:root{--bg:#f7f6f1;--card:#fff;--ink:#1b1a17;--mut:#9a9890;--line:#e4e2d8;--ac:#b07d2a;--hl:#d85a30}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13120c;--card:#1b1a13;--ink:#ece9da;--mut:#6c6b62;--line:#322f27;--ac:#d6b96a;--hl:#e08a4a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,sans-serif;max-width:1100px;margin:0 auto;padding:16px 16px 50px}
+h1{font-size:20px;font-weight:600;margin:0 0 2px;display:inline-block}
+#lang{cursor:pointer;border:1px solid var(--line);border-radius:16px;padding:3px 12px;font-size:12px;font-weight:600;float:right}
+.sub{color:var(--mut);margin:0 0 10px;font-size:13px}
+.calls{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.cb{padding:4px 9px;border:1px solid var(--line);border-radius:7px;background:var(--card);cursor:pointer;font-size:12px;font-weight:600}
+.cb.on{background:var(--ink);color:var(--bg)}
+.ctrl{display:flex;gap:14px;align-items:center;margin-bottom:10px;font-size:13px;color:var(--mut)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;overflow:auto}
+.row{font-family:ui-monospace,monospace;white-space:nowrap;line-height:1.9}
+.lt{color:var(--mut);letter-spacing:1px}
+.tr{color:#fff;background:var(--hl);border-radius:3px;padding:0 4px;margin:0 2px;font-weight:600;font-family:system-ui,sans-serif;letter-spacing:0}
+.tr:hover{outline:1px solid var(--ink)}
+.note{color:var(--mut);font-size:12px;margin-top:8px}
+</style>
+</head>
+<body>
+<span id="lang">EN</span>
+<h1 id="h1">Quadrados traduzidos do Loagaeth</h1>
+<p class="sub" id="sub">Cada tabela com as palavras das Chamadas substituídas pela tradução de Dee (em cor), letra por letra. O resto fica como letra cinza. Leitura reta, maior palavra primeiro.</p>
+<div class="calls" id="leaves"></div>
+<div class="ctrl"><label><input type="checkbox" id="rev"> incluir de trás pra frente</label> <span>mínimo de letras: <select id="minlen"><option>3</option><option selected>4</option><option>5</option></select></span></div>
+<div class="card" id="out"></div>
+<p class="note" id="note"></p>
+<script>
+var G=null,LEX=null,cur=null,LG=(localStorage.getItem('atlas_lang')||'pt'),minlen=4,rev=false;
+var T={pt:{h1:'Quadrados traduzidos do Loagaeth',sub:'Cada tabela com as palavras das Chamadas substituídas pela tradução de Dee (em cor), letra por letra. O resto fica como letra cinza. Leitura reta, maior palavra primeiro.',lang:'EN',note:'Substitui a maior palavra das Chamadas (≥ mínimo) que casa em cada ponto da linha, sem sobrepor. Honesto: palavras curtas são comuns e podem ser acaso; passe o mouse para ver a palavra original.'},
+ en:{h1:'Translated squares of the Loagaeth',sub:'Each table with the Call words replaced by Dee’s translation (in colour), letter by letter. The rest stays grey. Straight reading, longest word first.',lang:'PT',note:'Replaces the longest Call word (>= minimum) matching at each point in the row, no overlap. Honest: short words are common and may be chance; hover to see the original word.'}};
+function S(k){return T[LG][k]}
+Promise.all([fetch('table_grids.json').then(r=>r.json()),fetch('call_lexicon.json').then(r=>r.json())])
+ .then(([g,l])=>{G=g;LEX=l;boot()}).catch(e=>{document.getElementById('out').innerHTML='Abra por http://localhost:8860/ (não file://)'});
+function boot(){
+ document.getElementById('lang').onclick=()=>{LG=LG==='pt'?'en':'pt';localStorage.setItem('atlas_lang',LG);applyLang();draw()};
+ document.getElementById('rev').onchange=e=>{rev=e.target.checked;draw()};
+ document.getElementById('minlen').onchange=e=>{minlen=+e.target.value;draw()};
+ var box=document.getElementById('leaves');
+ G.order.forEach(lf=>{var b=document.createElement('span');b.className='cb';b.textContent=lf;b.onclick=()=>pick(lf);box.appendChild(b)});
+ applyLang();pick(G.order.includes('2b')?'2b':G.order[0]);
+}
+function applyLang(){document.getElementById('h1').textContent=S('h1');document.getElementById('sub').textContent=S('sub');document.getElementById('lang').textContent=S('lang');document.getElementById('note').textContent=S('note');}
+function pick(lf){cur=lf;[...document.getElementById('leaves').children].forEach(c=>c.classList.toggle('on',c.textContent===lf));draw()}
+function matchAt(row,i){ // longest Call word matching at position i (forward, or reversed if enabled)
+ for(var L=8;L>=minlen;L--){var seg=row.substr(i,L);if(seg.length<L)continue;
+  if(LEX[seg])return{len:L,gloss:LEX[seg],word:seg,rev:false};
+  if(rev){var r=seg.split('').reverse().join('');if(LEX[r])return{len:L,gloss:LEX[r],word:seg+'←'+r,rev:true};}
+ }return null}
+function draw(){
+ var L=G.leaves[cur];var html='';var nwords=0;
+ L.grid.forEach(row=>{var i=0,line='';
+  while(i<row.length){var m=matchAt(row,i);
+   if(m){line+='<span class=tr title="'+m.word+'">'+m.gloss+'</span>';i+=m.len;nwords++;}
+   else{line+='<span class=lt>'+row[i]+'</span>';i++;}
+  }
+  html+='<div class=row>'+line+'</div>';
+ });
+ document.getElementById('out').innerHTML=html;
+ document.getElementById('note').textContent=cur+' — '+nwords+(LG==='en'?' words translated · ':' palavras traduzidas · ')+S('note');
+}
+</script>
+</body>
+</html>

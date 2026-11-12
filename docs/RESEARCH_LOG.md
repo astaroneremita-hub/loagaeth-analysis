@@ -524,3 +524,33 @@ IADNAH="ark of knowledge", ALDON="gather up" (7x), LONSA="power" (4x), EMNA="her
 viz/meaning_overlay.json. UI: tables.html rebuilt with FOUR reading modes (straight / diagonal / traced king-move /
 meaning) over all 195 names + the meaning overlay (table_grids.json now carries straight, diag, trace paths, meanings).
 name_grammar.html made bilingual (EN/PT). Site now: atlas, grammar, forge, tables, language, call_map, call_translation.
+
+## #235 — Call words read every way (a98) + tables.html "all together"
+Searched the Call vocabulary in the Loagaeth by straight rows, columns, diagonals and king-move TRACE, forward and
+reversed (not just straight). Reading every way, 354 distinct Call words appear (vs ~74 straight-only). Long words
+(>=6): 6 via straight, 145 once diagonals/traces allowed (+139: ABABALOND, ARCOAZIOR, ANANAEL, BALTAN, AGTOLTORN...).
+Mode occurrence counts: straight 142, diagonal 141, trace 380. HONEST CAVEAT: trace finds almost any short word in a
+dense field (established a69/a73), so trace-presence alone is weak; diagonal and straight hits carry more weight. The
+practitioner is right that reading the grid the Watchtower way (diagonal/traced/reversed) surfaces far more Call words
+than row-reading. call_atlas.json rebuilt with per-mode positions; call_map.html now draws straight (rects) + diagonal
++ traced (polylines) per word. tables.html got an "all together" mode overlaying straight+diagonal+traced+meaning at once.
+
+## #236 — Complete recurring-word catalogue + grid search (a99)
+Walked the whole book for every recurring substring, length 2-8: 115 bigrams (freq>=400) up to 3577 8-grams (freq>=4);
+11299 words of len 4-9 at freq>=8. OLGEM confirmed (18x). Exported viz/word_catalog.json (browsable by length) and
+viz/grid_words.json. New page viz/repertoire.html browses all recurring words by length with count + tables, click to
+open in tables. tables.html gained a universal SEARCH box: type any word -> it is found live on the grid across rows,
+columns and diagonals (forward + reversed), auto-jumps to a leaf that holds it, highlights in magenta, lists each
+occurrence by direction (OLGEM -> 2b l41 c29). So any of the thousands of words is now mappable, not only the catalogued
+families. Also wrote docs/PLANO_33.md - a 33-part exploration plan (inventory, geometry, language/decipherment, bridges,
+book-structure, visual, synthesis).
+
+## #237 — Catalogue extended to 14 letters + long compound super-names (a99/a100)
+Extended the recurring-word catalogue to length 2-14. CHASTORACHANZA (14) confirmed 3x (tables 6b/17a/20a). A whole
+family of long compounds recurs: NOCHASTORA(40), GETHALCHADAX(3, 3 tables), ADNOCHANZACHA(5)... a100: of 1431 recurring
+words len 10-14, 40 are multi-root CHAINS - two fused roots: GETH+NOCHA, NOCHA+ACLAX, GETH+CHADAX, ANZACH+NOCHA, even
+NOCHA+NOCHA (DNOCHADNOCHA, doubled). HONEST on significance: the long words occur 4723x in the real book vs ~865x across
+Markov-3 surrogates = ~5.5x enrichment (real, but the surrogate still makes some, since they are built from the same
+common roots/bigrams). So the grammar chains roots into long "super-names" and specific chains recur across tables -
+these read like dynastic unions of two houses (GETH back + NOCHA front). repertoire.html tabs now go 2-14; word_catalog.json
+carries all lengths.

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tradução dos quadrados — Loagaeth</title>
+<style>
+:root{--bg:#f7f6f1;--card:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8;--ac:#8a6d2f}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13120c;--card:#1e1d15;--ink:#ece9da;--mut:#9a988a;--line:#322f27;--ac:#d6b96a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 system-ui,sans-serif;max-width:900px;margin:0 auto;padding:16px 18px 50px}
+h1{font-size:20px;font-weight:600;margin:0 0 2px;display:inline-block}
+#lang{cursor:pointer;border:1px solid var(--line);border-radius:16px;padding:3px 12px;font-size:12px;font-weight:600;float:right}
+.sub{color:var(--mut);margin:0 0 10px;font-size:13px}
+.calls{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
+.cb{padding:4px 9px;border:1px solid var(--line);border-radius:7px;background:var(--card);cursor:pointer;font-size:12px;font-weight:600}
+.cb.on{background:var(--ink);color:var(--bg)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:12px}
+.flow{line-height:2.4}
+.w{display:inline-block;margin:2px 3px;padding:2px 2px}
+.w .en{font-weight:600;color:var(--ac)}
+.w .gl{color:var(--mut);font-size:13px}
+.w .pos{color:var(--mut);font-size:10px}
+.note{color:var(--mut);font-size:12px;margin-top:6px}
+.empty{color:var(--mut)}
+</style>
+</head>
+<body>
+<span id="lang">EN</span>
+<h1 id="h1">Tradução dos quadrados do Loagaeth</h1>
+<p class="sub" id="sub">Onde um quadrado contém uma palavra que Dee traduziu, lemos o sentido. As palavras aparecem em ordem de posição (linha, coluna) — a leitura parcial do quadrado.</p>
+<div class="calls" id="leaves"></div>
+<div id="out"></div>
+<p class="note" id="note"></p>
+<script>
+var T=null,cur=null,LG=(localStorage.getItem('atlas_lang')||'pt');
+var STR={pt:{h1:'Tradução dos quadrados do Loagaeth',sub:'Onde um quadrado contém uma palavra que Dee traduziu, lemos o sentido. As palavras aparecem em ordem de posição (linha, coluna) — a leitura parcial do quadrado.',lang:'EN',empty:'Nenhuma palavra traduzível encontrada neste quadrado.',note:'Palavras das Chamadas (traduzidas por Dee) achadas na grade, em ordem de leitura. Honesto: palavras curtas podem ser só fluxo de letras; as longas pesam mais. Não é a tradução do quadrado inteiro — são os fragmentos decifráveis.',roww:'l',colw:'c'},
+ en:{h1:'Translation of the Loagaeth squares',sub:'Where a square contains a word Dee translated, we read the meaning. Words appear in position order (row, column) — the partial reading of the square.',lang:'PT',empty:'No translatable word found in this square.',note:'Call words (translated by Dee) found on the grid, in reading order. Honest: short words may be mere letter-flow; the long ones weigh more. This is not a translation of the whole square — only the decipherable fragments.',roww:'r',colw:'c'}};
+function S(k){return STR[LG][k]}
+fetch('table_grids.json').then(r=>r.json()).then(d=>{T=d;boot()}).catch(e=>{document.getElementById('out').innerHTML='Abra por http://localhost:8860/ (não file://)'});
+function boot(){
+ document.getElementById('lang').onclick=()=>{LG=LG==='pt'?'en':'pt';localStorage.setItem('atlas_lang',LG);applyLang();draw()};
+ var box=document.getElementById('leaves');
+ T.order.forEach(lf=>{var b=document.createElement('span');b.className='cb';b.textContent=lf;b.onclick=()=>pick(lf);box.appendChild(b)});
+ applyLang();pick(T.order.includes('2b')?'2b':T.order[0]);
+}
+function applyLang(){document.getElementById('h1').textContent=S('h1');document.getElementById('sub').textContent=S('sub');document.getElementById('lang').textContent=S('lang');document.getElementById('note').textContent=S('note');}
+function pick(lf){cur=lf;[...document.getElementById('leaves').children].forEach(c=>c.classList.toggle('on',c.textContent===lf));draw()}
+function draw(){
+ var L=T.leaves[cur],ms=(L.meanings||[]).slice().map(m=>{var c=m.cells?m.cells[0]:[m.row,m.col];return Object.assign({_r:c[0],_c:c[1]},m)}).sort((a,b)=>a._r-b._r||a._c-b._c);
+ var h='<div class=card><div style="font-weight:600;margin-bottom:8px">'+cur+' — '+ms.length+' '+(LG==='en'?'words':'palavras')+'</div>';
+ if(!ms.length){h+='<div class=empty>'+S('empty')+'</div>';}
+ else{h+='<div class=flow>';ms.forEach(m=>{h+='<span class=w><span class=en>'+m.word+'</span> <span class=gl>'+m.meaning+'</span> <span class=pos>('+(m.mode||'reta')+' '+S('roww')+m._r+' '+S('colw')+m._c+')</span></span> · ';});h+='</div>';
+  // continuous gloss line
+  h+='<div class=note style="margin-top:10px;color:var(--ink);font-style:italic">… '+ms.map(m=>m.meaning).join(' · ')+' …</div>';}
+ h+='</div>';
+ document.getElementById('out').innerHTML=h;
+}
+</script>
+</body>
+</html>

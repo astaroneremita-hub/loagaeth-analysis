@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repertório — palavras recorrentes do Loagaeth</title>
+<style>
+:root{--bg:#f7f6f1;--card:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8;--ac:#8a6d2f;
+--Fogo:#d85a30;--Terra:#b07d2a;--Ar:#2f7fd4;--Agua:#199e70}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13120c;--card:#1e1d15;--ink:#ece9da;--mut:#9a988a;--line:#322f27;--ac:#d6b96a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,sans-serif;max-width:1000px;margin:0 auto;padding:16px 18px 50px}
+h1{font-size:20px;font-weight:600;margin:0 0 2px;display:inline-block}
+#lang{cursor:pointer;border:1px solid var(--line);border-radius:16px;padding:3px 12px;font-size:12px;font-weight:600;float:right}
+.sub{color:var(--mut);margin:0 0 10px;font-size:13px}
+.tabs{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.tb{padding:5px 12px;border:1px solid var(--line);border-radius:7px;background:var(--card);cursor:pointer;font-size:13px;font-weight:600}
+.tb.on{background:var(--ink);color:var(--bg)}
+input{width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font-size:14px;margin-bottom:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
+.w{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:7px 10px;font-size:13px;display:flex;justify-content:space-between;gap:6px;cursor:pointer}
+.w:hover{border-color:var(--ac)}
+.w .en{font-weight:600}.w .c{color:var(--mut)}
+.sw{width:8px;height:8px;border-radius:2px;display:inline-block;margin-right:5px;vertical-align:0}
+.note{color:var(--mut);font-size:12px;margin:8px 0}
+</style>
+</head>
+<body>
+<span id="lang">EN</span>
+<h1 id="h1">Repertório — palavras recorrentes do Loagaeth</h1>
+<p class="sub" id="sub">Toda palavra que se repete no livro, por comprimento (2 a 14 letras), com quantas vezes e em quantas tabelas. Clique para abrir no visualizador de tabelas.</p>
+<div class="tabs" id="tabs"></div>
+<input id="q" placeholder="filtrar (ex. OLGEM)…">
+<p class="note" id="stat"></p>
+<div class="grid" id="list"></div>
+<script>
+var ELH={Fogo:'#d85a30',Terra:'#b07d2a',Ar:'#2f7fd4',Agua:'#199e70','?':'#8a8a8a'};
+var D=null,n=5,flt='',LG=(localStorage.getItem('atlas_lang')||'pt');
+var T={pt:{h1:'Repertório — palavras recorrentes do Loagaeth',sub:'Toda palavra que se repete no livro, por comprimento (2 a 14 letras), com quantas vezes e em quantas tabelas. Clique para abrir no visualizador de tabelas.',lang:'EN',stat:function(a,b){return a+' palavras de '+b+' letras'},tab:'tabelas'},
+ en:{h1:'Repertoire — recurring words of the Loagaeth',sub:'Every word that repeats in the book, by length (2 to 14 letters), with how many times and in how many tables. Click to open in the table viewer.',lang:'PT',stat:function(a,b){return a+' words of '+b+' letters'},tab:'tables'}};
+function S(k){return T[LG][k]}
+fetch('word_catalog.json').then(r=>r.json()).then(d=>{D=d;boot()}).catch(e=>{document.getElementById('list').innerHTML='Abra por http://localhost:8860/ (não file://)'});
+function boot(){
+ document.getElementById('lang').onclick=()=>{LG=LG==='pt'?'en':'pt';localStorage.setItem('atlas_lang',LG);applyLang();draw()};
+ var tb=document.getElementById('tabs');
+ [2,3,4,5,6,7,8,9,10,11,12,13,14].forEach(k=>{var b=document.createElement('span');b.className='tb'+(k===n?' on':'');b.textContent=k+(LG==='en'?' letters':' letras');b.dataset.n=k;b.onclick=()=>{n=k;[...tb.children].forEach(c=>c.classList.toggle('on',+c.dataset.n===k));draw()};tb.appendChild(b)});
+ document.getElementById('q').addEventListener('input',e=>{flt=e.target.value.toUpperCase();draw()});
+ applyLang();draw();
+}
+function applyLang(){document.getElementById('h1').textContent=S('h1');document.getElementById('sub').textContent=S('sub');document.getElementById('lang').textContent=S('lang');
+ [...document.querySelectorAll('#tabs .tb')].forEach(b=>b.textContent=b.dataset.n+(LG==='en'?' letters':' letras'));}
+function draw(){
+ var list=(D.lengths[n]||[]).filter(x=>!flt||x.w.indexOf(flt)>=0);
+ document.getElementById('stat').textContent=S('stat')(list.length,n);
+ document.getElementById('list').innerHTML=list.map(x=>'<div class=w onclick="go(\''+x.w+'\')"><span class=en><span class=sw style="background:'+ELH[x.element]+'"></span>'+x.w+'</span><span class=c>'+x.count+'× · '+x.tables+' '+S('tab')+'</span></div>').join('');
+}
+function go(w){location.href='tables.html?find='+w}
+window.go=go;
+</script>
+</body>
+</html>

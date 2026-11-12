@@ -466,3 +466,63 @@ LONSA="power" (4×), EMNA="here" (30×), CALZ="above the firmaments" (10×), NOC
   (as palavras das Chamadas com tradução de Dee acesas na grade). Toggle no topo.
 
 **name_grammar.html** agora é bilíngue (EN/PT), como atlas/forge/tables/language/call_map/call_translation.
+
+## 30. As Chamadas lidas de todos os jeitos (a98) + tables "todos juntos"
+
+Antes busquei as palavras das Chamadas só na linha (reta + reverso). Agora busquei também em **coluna, diagonal e
+traçado king-move**, nos dois sentidos. Lendo de todos os jeitos, **354 palavras das Chamadas** aparecem na Loagaeth
+(contra ~74 só na reta). Palavras longas (≥6 letras): **6 na reta → 145 com diagonal/traçado** (+139: ABABALOND,
+ARCOAZIOR, ANANAEL, BALTAN, AGTOLTORN…). Ocorrências por modo: reta 142, diagonal 141, traçado 380.
+
+**Ressalva honesta:** o **traçado acha quase qualquer palavra curta** no campo denso (já medido em a69/a73), então a
+presença só por traçado é fraca; reta e diagonal pesam mais. Mas o ponto do praticante está certo: ler a grade do
+jeito das Torres (diagonal, traçado, de trás pra frente) revela **muito mais** palavras das Chamadas que a leitura por
+linha. (`viz/call_atlas.json` reconstruído com posições por modo.)
+
+**Páginas:** `call_map.html` agora desenha cada palavra na reta (retângulos) e na diagonal/traçado (linhas) por folha.
+`tables.html` ganhou o modo **"todos juntos"**, que sobrepõe reta + diagonal + traçado + sentido numa só tela.
+
+## 31. Tradução dos quadrados (square_reading.html)
+
+Nova página: **traduz os quadrados** onde há palavras. Para cada tabela, lista as palavras que Dee traduziu e que
+aparecem na grade, **em ordem de posição** (linha, coluna), com o sentido — a leitura parcial daquele quadrado, e
+uma linha de glosa contínua. Ex. 2b: *here · over · over · is become · here · here · here · over*. Honesto: a maioria
+que aparece é de palavras curtas e comuns (here, over), que podem ser só fluxo de letras; as longas (IADNAH "ark of
+knowledge", ALDON "gather up") aparecem em tabelas específicas e pesam mais. Não é a tradução do quadrado inteiro —
+são os fragmentos decifráveis, onde há âncora. Serve por `http://localhost:8860/square_reading.html`. Também adicionei
+`viz/index.html` como porta de entrada com links para todos os painéis.
+
+## 32. Sentido expandido (reta + diagonal) nas tabelas e na tradução
+
+Corrigido: as telas de **sentido** (tables.html modo "sentido") e **tradução dos quadrados** (square_reading.html)
+usavam só o conjunto antigo (39 palavras, só reta). Agora a camada de sentido é reconstruída a partir da busca em
+todos os modos (a98), incluindo **reta + diagonal** (o traçado fica de fora do sentido por ser ruído de campo
+denso): **388 ocorrências** com tradução de Dee na grade. 2b passou de 8 para 25 palavras legíveis. Cada ocorrência
+é marcada pelo modo (reta/diagonal). A leitura de 2b agora traz fragmentos reais: "in thy · whose · and the Mone ·
+of the Highest · The East · with the fire · Thus you are become · the rest". Honesto: muito disso são palavras curtas
+e comuns das Chamadas (here, over), que podem ser fluxo de letras; as frases mais longas pesam mais. `call_map.html`
+já mostrava o conjunto completo por Chamada (~45 por Chamada); o erro de "não funciona" era cache do arquivo antigo.
+
+## 33. Quadrados traduzidos (call_grid_translation.html)
+
+A ideia do praticante, realizada: cada tabela (2a–28b) renderizada com as **palavras das Chamadas substituídas
+pela tradução de Dee** (em cor), letra por letra; o resto fica cinza. Ex. 2b: onde aparece EMNA → **here**, VORS →
+**over**, NOAR → **is become**, IAD → **the God**, ZOL → **hands**, ROR → **the Sonne**. Léxico de 670 palavras das
+Chamadas (≥3 letras) em `viz/call_lexicon.json`. Controles: incluir de trás pra frente, e mínimo de letras (3/4/5 —
+em 3 aparecem as curtas). Algoritmo: em cada linha, substitui a **maior** palavra que casa em cada ponto, sem
+sobrepor (leitura reta). Honesto: palavras curtas (≥3) são comuns e podem ser acaso — por isso o filtro de tamanho;
+as frases longas pesam mais. É a visão "lê o livro pela tradução" para as 27 tabelas de leitura reta.
+
+## 34. Super-nomes: cadeias longas de raízes (a99 ate 14 letras, a100)
+
+O catálogo agora vai de 2 a **14 letras**. CHASTORACHANZA (14) confirmado 3× (tabelas 6b/17a/20a), e com ele uma
+família de compostos longos recorrentes: NOCHASTORA (40×), GETHALCHADAX (3× em 3 tabelas), ADNOCHANZACHA (5×)…
+
+Das 1431 palavras recorrentes de 10-14 letras, **40 são cadeias de duas raízes** — fusões de casas: **GETH+NOCHA**,
+**NOCHA+ACLAX**, **GETH+CHADAX**, **ANZACH+NOCHA**, e até **NOCHA+NOCHA** (DNOCHADNOCHA, dobrado). São como **uniões
+dinásticas**: a casa do fundo (GETH) fundida com a da frente (NOCHA) num super-nome único.
+
+**Ressalva honesta:** esses nomes longos ocorrem 4723× no livro real contra ~865× em surrogates Markov-3 —
+**~5,5× de enriquecimento** (real, mas o surrogate ainda produz alguns, porque são feitos das mesmas raízes/bigramas
+comuns). Então a gramática encadeia raízes em nomes longos e o livro repete cadeias específicas; é estrutura real,
+não cifra oculta. O `repertoire.html` agora navega de 2 a 14 letras.

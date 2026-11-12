@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Loagaeth — painéis</title>
+<style>
+:root{--bg:#f7f6f1;--card:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8;--ac:#8a6d2f}
+@media (prefers-color-scheme:dark){:root{--bg:#13120c;--card:#1e1d15;--ink:#ece9da;--mut:#9a988a;--line:#322f27;--ac:#d6b96a}}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 system-ui,sans-serif;max-width:760px;margin:0 auto;padding:28px 20px 60px}
+h1{font-size:24px;font-weight:600;margin:0 0 4px}.sub{color:var(--mut);margin:0 0 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+a.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;text-decoration:none;color:var(--ink)}
+a.card:hover{border-color:var(--ac)}
+.t{font-size:17px;font-weight:600;color:var(--ac)}.d{color:var(--mut);font-size:13px;margin-top:3px}
+.warn{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--mut);margin-bottom:18px}
+code{font-family:ui-monospace,monospace;background:rgba(138,109,47,.12);padding:1px 5px;border-radius:4px}
+</style>
+</head>
+<body>
+<h1>Loagaeth — painéis</h1>
+<p class="sub">Todos os visualizadores da análise, num lugar só.</p>
+<div class="warn">Abra sempre por <code>http://localhost:8860/</code>. Abrir o arquivo direto (<code>file:///…</code>) não funciona — o navegador bloqueia o carregamento dos dados. Servir: <code>cd viz &amp;&amp; python -m http.server 8860</code></div>
+<div class="grid">
+<a class="card" href="atlas.html"><div class="t">Atlas das Entidades</div><div class="d">cada nome: força, potência, elemento, perigo, família</div></a>
+<a class="card" href="name_grammar.html"><div class="t">Gramática dos Nomes</div><div class="d">decompõe qualquer nome em raiz + afixo</div></a>
+<a class="card" href="forge.html"><div class="t">Forja de Nomes</div><div class="d">escolhe elemento + força → monta nomes</div></a>
+<a class="card" href="tables.html"><div class="t">Tabelas na grade</div><div class="d">nomes na reta, diagonal, traçado, sentido, todos juntos</div></a>
+<a class="card" href="language.html"><div class="t">A Língua Loagaeth</div><div class="d">provas de língua, âncoras, morfologia</div></a>
+<a class="card" href="call_map.html"><div class="t">Chamadas na Loagaeth</div><div class="d">palavras das 19 Chamadas acesas na grade</div></a>
+<a class="card" href="call_translation.html"><div class="t">Chamadas — tradução</div><div class="d">cada Chamada na tradução de Dee</div></a>
+<a class="card" href="square_reading.html"><div class="t">Tradução dos quadrados</div><div class="d">as palavras traduzíveis de cada tabela, em ordem</div></a>
+<a class="card" href="repertoire.html"><div class="t">Repertório completo</div><div class="d">todas as palavras recorrentes, 2 a 14 letras</div></a>
+<a class="card" href="call_grid_translation.html"><div class="t">Quadrados traduzidos</div><div class="d">cada tabela com as palavras trocadas pela tradução</div></a>
+<a class="card" href="path_view.html"><div class="t">Traçado (king-move)</div><div class="d">traça um nome como caminho na grade</div></a>
+<a class="card" href="name_finder.html"><div class="t">Busca de nomes</div><div class="d">procura qualquer palavra em Loagaeth e Torres</div></a>
+<a class="card" href="names_catalog.html"><div class="t">Catálogo de nomes</div><div class="d">lista dos nomes descobertos</div></a>
+<a class="card" href="loagaeth_3d.html"><div class="t">Loagaeth 3D</div><div class="d">visão tridimensional das tabelas</div></a>
+</div>
+</body>
+</html>

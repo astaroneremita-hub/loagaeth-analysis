@@ -107,6 +107,9 @@ import a94_call_words_in_loagaeth
 import a95_call_atlas
 import a96_diagonal_segment
 import a97_name_meanings
+import a98_calls_all_modes
+import a99_full_word_catalog
+import a100_long_compounds
 import make_figures
 import make_viz_data
 
@@ -210,6 +213,9 @@ MODULES = [
     ("95_call_atlas", a95_call_atlas),
     ("96_diagonal_segment", a96_diagonal_segment),
     ("97_name_meanings", a97_name_meanings),
+    ("98_calls_all_modes", a98_calls_all_modes),
+    ("99_full_word_catalog", a99_full_word_catalog),
+    ("100_long_compounds", a100_long_compounds),
 ]
 
 

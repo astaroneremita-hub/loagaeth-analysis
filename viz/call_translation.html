@@ -52,7 +52,7 @@ function draw(){
  [...document.getElementById('calls').children].forEach((b,i)=>b.classList.toggle('on',i===cur));
  var html='';
  c.words.forEach(w=>{
-  var cls='w'+(w.loag_count>0?' found':'');
+  var cls='w'+(w.count>0?' found':'');
   if(mode==='tr'){
    var g=(w.gloss&&w.gloss.toLowerCase()!=='none')?w.gloss:null;
    if(g){html+='<span class="'+cls+'" title="'+w.en+'">'+g+'</span> '}

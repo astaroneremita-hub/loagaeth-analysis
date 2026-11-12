@@ -106,6 +106,7 @@ import a93_call_char_trace
 import a94_call_words_in_loagaeth
 import a95_call_atlas
 import a96_diagonal_segment
+import a97_name_meanings
 import make_figures
 import make_viz_data
 
@@ -208,6 +209,7 @@ MODULES = [
     ("94_call_words_in_loagaeth", a94_call_words_in_loagaeth),
     ("95_call_atlas", a95_call_atlas),
     ("96_diagonal_segment", a96_diagonal_segment),
+    ("97_name_meanings", a97_name_meanings),
 ]
 
 

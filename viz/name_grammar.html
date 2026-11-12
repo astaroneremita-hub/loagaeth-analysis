@@ -28,29 +28,36 @@ th{cursor:pointer;color:var(--mut);font-weight:600}tr:hover td{background:var(--
 </style>
 </head>
 <body>
-<h1>Gramática dos Nomes do Loagaeth</h1>
-<p class="sub">Digite um nome: ele se decompõe em raiz + afixo, com poder (repetição), elemento e posto. Tudo medido, no repositório.</p>
+<span id="lang" style="cursor:pointer;border:1px solid var(--line);border-radius:16px;padding:3px 12px;font-size:12px;font-weight:600;float:right">EN</span>
+<h1 id="h1">Gramática dos Nomes do Loagaeth</h1>
+<p class="sub" id="sub">Digite um nome: ele se decompõe em raiz + afixo, com poder (repetição), elemento e posto. Tudo medido, no repositório.</p>
 
-<input id="q" placeholder="NOCHA, ADNOCHA, ICHASTOR, ALGETH… (ou qualquer palavra)" autofocus>
+<input id="q" placeholder="NOCHA, ADNOCHA, ICHASTOR, ALGETH…" autofocus>
 <div id="out"></div>
 
-<h2>Hierarquia suprema</h2>
+<h2 id="hsup">Hierarquia suprema</h2>
 <div class="card tiers" id="tiers"></div>
 
-<h2>Todos os nomes (ordene clicando no cabeçalho)</h2>
+<h2 id="hall">Todos os nomes (ordene clicando no cabeçalho)</h2>
 <div class="card" style="overflow:auto"><table id="tbl"><thead><tr>
 <th data-k="name">nome</th><th data-k="root">raiz</th><th data-k="prefix">prefixo</th><th data-k="suffix">sufixo</th>
 <th data-k="depth">prof.</th><th data-k="power">poder</th><th data-k="element">elemento</th><th data-k="tier">posto</th>
 </tr></thead><tbody></tbody></table></div>
 
-<h2>Rei e governador de cada quadrado</h2>
+<h2 id="hmap">Rei e governador de cada quadrado</h2>
 <div class="card"><div class="grid" id="map"></div>
-<p class="muted">Cada caixa: quadrado · Rei (bruto) · governador local. Cor = território da casa.</p></div>
+<p class="muted" id="mapcap">Cada caixa: quadrado · Rei (bruto) · governador local. Cor = território da casa.</p></div>
 
 <script>
 var ECOL={Fogo:'var(--Fogo)',Terra:'var(--Terra)',Ar:'var(--Ar)',Agua:'var(--Agua)','?':'#888'};
 var FAMCOL={CHADAX:'#d85a30',NOCHA:'#7f77dd',GETH:'#1d9e75',CHASTOR:'#378add',NACHO:'#ba7517'};
-var D=null;
+var D=null,LG=(localStorage.getItem('atlas_lang')||'pt'),lastQ='';
+var STR={pt:{h1:'Gramática dos Nomes do Loagaeth',sub:'Digite um nome: ele se decompõe em raiz + afixo, com poder (repetição), elemento e posto. Tudo medido, no repositório.',lang:'EN',ph:'NOCHA, ADNOCHA, ICHASTOR, ALGETH…',hsup:'Hierarquia suprema',hall:'Todos os nomes (ordene clicando no cabeçalho)',hmap:'Rei e governador de cada quadrado',mapcap:'Cada caixa: quadrado · Rei (bruto) · governador local. Cor = território da casa.',th:['nome','raiz','prefixo','sufixo','prof.','poder','elemento','posto'],raiz:'raiz',prof:'profundidade',pura:' (raiz pura)',poder:'poder',vezes:'× no livro',elemento:'elemento',posto:'posto',naocat:'(não catalogado)',fam:'Família de',mesma:'(mesma raiz, por poder)'},
+ en:{h1:'The Loagaeth Name Grammar',sub:'Type a name: it decomposes into root + affix, with power (repetition), element and rank. All measured, in the repo.',lang:'PT',ph:'NOCHA, ADNOCHA, ICHASTOR, ALGETH…',hsup:'Supreme hierarchy',hall:'All names (click a header to sort)',hmap:'King and governor of each square',mapcap:'Each box: square · King (raw) · local governor. Colour = house territory.',th:['name','root','prefix','suffix','depth','power','element','rank'],raiz:'root',prof:'depth',pura:' (pure root)',poder:'power',vezes:'× in the book',elemento:'element',posto:'rank',naocat:'(not catalogued)',fam:'Family of',mesma:'(same root, by power)'},};
+function S(k){return STR[LG][k]}
+function applyLang(){document.getElementById('h1').textContent=S('h1');document.getElementById('sub').textContent=S('sub');document.getElementById('lang').textContent=S('lang');document.getElementById('q').placeholder=S('ph');
+ document.getElementById('hsup').textContent=S('hsup');document.getElementById('hall').textContent=S('hall');document.getElementById('hmap').textContent=S('hmap');document.getElementById('mapcap').textContent=S('mapcap');
+ document.querySelectorAll('#tbl th').forEach((th,i)=>th.textContent=S('th')[i]);}
 fetch('grammar_data.json').then(r=>r.json()).then(d=>{D=d;init()}).catch(e=>{document.getElementById('out').innerHTML='<div class=card>Não carregou grammar_data.json. Sirva por HTTP: <code>python -m http.server 8860</code></div>'});
 
 function elem(nm){var le=D.letter_element,c={};for(var ch of nm){var e=le[ch];if(['Fogo','Terra','Ar','Agua'].includes(e))c[e]=(c[e]||0)+1}
@@ -59,24 +66,26 @@ function decompose(nm){var best=null;for(var root of D.roots){var i=nm.indexOf(r
  var cand=[root.length,-dep,root,pre,suf];if(!best||cand>best)best=cand}}
  if(!best)return{root:null,prefix:'',suffix:'',depth:nm.length};return{root:best[2],prefix:best[3],suffix:best[4],depth:best[3].length+best[4].length}}
 
-function show(nm){nm=nm.toUpperCase().replace(/[^A-Z]/g,'');var o=document.getElementById('out');if(!nm){o.innerHTML='';return}
- var rec=D.names[nm], dec=rec?rec:decompose(nm), el=rec?rec.element:elem(nm), pw=rec?rec.power:null, tier=rec?rec.tier:'(não catalogado)';
+function show(nm){nm=nm.toUpperCase().replace(/[^A-Z]/g,'');lastQ=nm;var o=document.getElementById('out');if(!nm){o.innerHTML='';return}
+ var rec=D.names[nm], dec=rec?rec:decompose(nm), el=rec?rec.element:elem(nm), pw=rec?rec.power:null, tier=rec?rec.tier:S('naocat');
  var html='<div class=card><div class=decomp>'+(dec.prefix?'<span class=pre>'+dec.prefix+'</span>':'')+'<span class=root>'+(dec.root||nm)+'</span>'+(dec.suffix?'<span class=suf>'+dec.suffix+'</span>':'')+'</div>';
  html+='<div class=meta>';
- html+='<span><b>raiz:</b> '+(dec.root||'—')+'</span>';
- html+='<span><b>profundidade:</b> '+dec.depth+(dec.depth===0?' (raiz pura)':'')+'</span>';
- if(pw!=null)html+='<span><b>poder:</b> '+pw+'× no livro</span>';
- html+='<span><b>elemento:</b> <span class=pill style="background:'+ECOL[el]+'">'+el+'</span></span>';
- html+='<span><b>posto:</b> '+tier+'</span>';
+ html+='<span><b>'+S('raiz')+':</b> '+(dec.root||'—')+'</span>';
+ html+='<span><b>'+S('prof')+':</b> '+dec.depth+(dec.depth===0?S('pura'):'')+'</span>';
+ if(pw!=null)html+='<span><b>'+S('poder')+':</b> '+pw+' '+S('vezes')+'</span>';
+ html+='<span><b>'+S('elemento')+':</b> <span class=pill style="background:'+ECOL[el]+'">'+el+'</span></span>';
+ html+='<span><b>'+S('posto')+':</b> '+tier+'</span>';
  html+='</div></div>';
  // siblings from same root
  if(dec.root){var sibs=Object.keys(D.names).filter(k=>D.names[k].root===dec.root).sort((a,b)=>D.names[b].power-D.names[a].power);
-  if(sibs.length){html+='<div class=card><b>Família de '+dec.root+'</b> (mesma raiz, por poder):<div style="margin-top:8px">';
+  if(sibs.length){html+='<div class=card><b>'+S('fam')+' '+dec.root+'</b> '+S('mesma')+':<div style="margin-top:8px">';
    for(var s of sibs){var r=D.names[s];html+='<div style="padding:3px 0">'+(r.depth===0?'👑 ':'')+'<b>'+s+'</b> — '+r.power+'× · '+r.tier+' · <span class=pill style="background:'+ECOL[r.element]+'">'+r.element+'</span></div>'}
    html+='</div></div>'}}
  o.innerHTML=html}
 
 function init(){
+ applyLang();
+ document.getElementById('lang').onclick=()=>{LG=LG==='pt'?'en':'pt';localStorage.setItem('atlas_lang',LG);applyLang();renderTable('power',true);document.querySelectorAll('#tbl th').forEach(th=>th.onclick=()=>renderTable(th.dataset.k,['power','depth'].includes(th.dataset.k)));if(lastQ)show(lastQ)};
  document.getElementById('q').addEventListener('input',e=>show(e.target.value));
  // tiers
  var mx=D.supreme[0].power,t='';for(var h of D.supreme){t+='<div class=row><span class=nm>'+h.name+'</span><span class=tn>'+h.tier+'</span><span class=bar style="width:'+(120*h.power/mx)+'px"></span><span class=muted>'+h.power+'×</span></div>'}

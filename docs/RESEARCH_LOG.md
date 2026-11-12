@@ -515,3 +515,12 @@ diamonds (29-48) 15.4. The diagonal reading surfaces MORE names than straight re
 decode. The same roots dominate every segment (GETH, NOCHA) and the element balance is identical (Terra ~35/Agua
 ~27/Ar 22/Fogo ~15), so the diagonal segment and the diamonds are the SAME onomasticon on a different geometry,
 GETH-dominated toward the back (matches the territory map). Item 2 finished.
+
+## #234 — Meaning overlay + tables.html 4 modes + name_grammar EN (a97)
+a97: our own name-stems (NOCHA, CHASTOR, GETH) match 0/195 Call words - no external meaning, sense sealed (sui-generis
+lexicon). But 39 TRANSLATED Call words appear in the Loagaeth and get a real Dee-given meaning placed on the grid:
+IADNAH="ark of knowledge", ALDON="gather up" (7x), LONSA="power" (4x), EMNA="here" (30x), CALZ="above the firmaments"
+(10x), NOCO="the servant". Honest decipherment: meaning only where an anchor reaches, never invented. Exported
+viz/meaning_overlay.json. UI: tables.html rebuilt with FOUR reading modes (straight / diagonal / traced king-move /
+meaning) over all 195 names + the meaning overlay (table_grids.json now carries straight, diag, trace paths, meanings).
+name_grammar.html made bilingual (EN/PT). Site now: atlas, grammar, forge, tables, language, call_map, call_translation.

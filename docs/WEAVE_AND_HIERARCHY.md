@@ -452,3 +452,17 @@ reta — o que valida a leitura diagonal. As mesmas raízes dominam todos os seg
 elemental é idêntico (Terra ~35% / Água ~27% / Ar 22% / Fogo ~15%). Logo o segmento diagonal e os diamantes são
 **o mesmo onomasticon em outra geometria**, mais denso justamente na diagonal e dominado por GETH no fundo (bate
 com o mapa de territórios). Não é outro livro — é a mesma língua lida de outro jeito.
+
+## 29. Sentido na grade + tables.html com 4 modos (a97)
+
+**Sentido (honesto).** Nossos nomes-raiz (NOCHA, CHASTOR, GETH) batem com **0 de 195** palavras das Chamadas — não
+têm sentido externo, ficam selados (léxico próprio). Mas **39 palavras traduzidas das Chamadas aparecem na Loagaeth**
+e recebem o sentido que Dee deu, posto na posição da grade: IADNAH="ark of knowledge", ALDON="gather up" (7×),
+LONSA="power" (4×), EMNA="here" (30×), CALZ="above the firmaments" (10×), NOCO="the servant". Decifração só onde há
+âncora, nunca por suposição. (`viz/meaning_overlay.json`.)
+
+**tables.html — 4 modos de leitura** sobre os 195 nomes:
+- **reta** (nomes em linha), **diagonal** (nas diagonais), **traçado** (caminho king-move = o "sigilo"), **sentido**
+  (as palavras das Chamadas com tradução de Dee acesas na grade). Toggle no topo.
+
+**name_grammar.html** agora é bilíngue (EN/PT), como atlas/forge/tables/language/call_map/call_translation.

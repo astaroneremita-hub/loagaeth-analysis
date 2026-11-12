@@ -9,74 +9,84 @@
 --Fogo:#d85a30;--Terra:#b07d2a;--Ar:#2f7fd4;--Agua:#199e70}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13120c;--card:#1b1a13;--ink:#ece9da;--mut:#9a988a;--line:#322f27}}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,sans-serif;max-width:1120px;margin:0 auto;padding:16px 16px 50px}
-h1{font-size:20px;font-weight:600;margin:0 0 2px}.sub{color:var(--mut);margin:0 0 12px;font-size:13px}
-.top{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
-.lf{padding:5px 10px;border:1px solid var(--line);border-radius:7px;background:var(--card);color:var(--ink);cursor:pointer;font-size:12px;font-weight:600}
-.lf.on{background:var(--ink);color:var(--bg)}
+h1{font-size:20px;font-weight:600;margin:0 0 2px;display:inline-block}
+#lang{cursor:pointer;border:1px solid var(--line);border-radius:16px;padding:3px 12px;font-size:12px;font-weight:600;float:right}
+.sub{color:var(--mut);margin:0 0 10px;font-size:13px}
+.calls,.modes{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.cb,.mb{padding:4px 10px;border:1px solid var(--line);border-radius:7px;background:var(--card);cursor:pointer;font-size:12px;font-weight:600}
+.cb.on,.mb.on{background:var(--ink);color:var(--bg)}
 .layout{display:flex;gap:16px;flex-wrap:wrap}
 .gridwrap{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px;flex:1;min-width:300px}
 svg{display:block;width:100%;height:auto}
-.side{width:230px;flex-shrink:0}
+.side{width:250px;flex-shrink:0}
 .side h3{font-size:13px;margin:4px 0 8px;color:var(--mut)}
-.nlist{max-height:520px;overflow:auto}
+.nlist{max-height:540px;overflow:auto}
 .ni{padding:4px 8px;border-radius:6px;cursor:pointer;font-size:12px;display:flex;justify-content:space-between;gap:6px}
 .ni:hover{background:var(--bg)}.ni.on{outline:1px solid var(--ink)}
 .sw{width:9px;height:9px;border-radius:2px;display:inline-block;margin-right:5px;vertical-align:-1px}
-.leg{display:flex;gap:12px;font-size:12px;color:var(--mut);margin:8px 0}
+.leg{display:flex;gap:12px;font-size:12px;color:var(--mut);margin:6px 0}
 .cnt{color:var(--mut);font-size:12px}
+.gl{color:var(--mut);font-style:italic}
 </style>
 </head>
 <body>
-<div style="display:flex;justify-content:space-between;align-items:center"><h1 id="h1">Tabelas do Loagaeth — os nomes na grade original</h1><span id="lang" style="cursor:pointer;border:1px solid var(--line);border-radius:16px;padding:3px 12px;font-size:12px;font-weight:600">EN</span></div>
-<p class="sub" id="sub">Escolha um quadrado. Cada nome do sistema aparece aceso por cima das letras, colorido pelo elemento. Passe o mouse para ver o nome; clique na lista para isolar.</p>
-<div class="top" id="leaves"></div>
-<div class="leg" id="leg"><span><span class="sw" style="background:var(--Fogo)"></span>Fogo</span><span><span class="sw" style="background:var(--Terra)"></span>Terra</span><span><span class="sw" style="background:var(--Ar)"></span>Ar</span><span><span class="sw" style="background:var(--Agua)"></span>Água</span></div>
+<span id="lang">EN</span>
+<h1 id="h1">Tabelas do Loagaeth — os nomes na grade original</h1>
+<p class="sub" id="sub">Escolha um quadrado e um modo de leitura. Reta, diagonal e traçado (king-move) mostram os nomes; sentido mostra as palavras das Chamadas com tradução de Dee.</p>
+<div class="modes" id="modes"></div>
+<div class="calls" id="leaves"></div>
+<div class="leg" id="leg"></div>
 <div class="layout">
  <div class="gridwrap"><svg id="grid" viewBox="0 0 640 640"></svg></div>
- <div class="side"><h3 id="sideh">nomes</h3><div class="nlist" id="nlist"></div></div>
+ <div class="side"><h3 id="sideh">—</h3><div class="nlist" id="nlist"></div></div>
 </div>
 <script>
-var ELH={Fogo:'#d85a30',Terra:'#b07d2a',Ar:'#2f7fd4',Agua:'#199e70','?':'#888'};
-var T=null,cur=null,iso=null,SVG='http://www.w3.org/2000/svg';
-var LG=(localStorage.getItem('atlas_lang')||'pt');
-var STR={pt:{h1:'Tabelas do Loagaeth — os nomes na grade original',sub:'Escolha um quadrado. Cada nome do sistema aparece aceso por cima das letras, colorido pelo elemento. Passe o mouse para ver o nome; clique na lista para isolar.',lang:'EN',els:['Fogo','Terra','Ar','Água'],nomes:'nomes',occ:'ocorrências'},
- en:{h1:'Loagaeth tables — the names on the original grid',sub:'Pick a square. Each system-name lights up over the letters, coloured by element. Hover to see the name; click the list to isolate.',lang:'PT',els:['Fire','Earth','Air','Water'],nomes:'names',occ:'occurrences'}};
-function applyLang(){document.getElementById('h1').textContent=STR[LG].h1;document.getElementById('sub').textContent=STR[LG].sub;document.getElementById('lang').textContent=STR[LG].lang;
- var cols=['--Fogo','--Terra','--Ar','--Agua'];document.getElementById('leg').innerHTML=STR[LG].els.map((e,i)=>'<span><span class="sw" style="background:var('+cols[i]+')"></span>'+e+'</span>').join('')}
+var ELH={Fogo:'#d85a30',Terra:'#b07d2a',Ar:'#2f7fd4',Agua:'#199e70','?':'#8a8a8a'};
+var T=null,cur=null,iso=null,mode='reta',SVG='http://www.w3.org/2000/svg',LG=(localStorage.getItem('atlas_lang')||'pt');
+var STR={pt:{h1:'Tabelas do Loagaeth — os nomes na grade original',sub:'Escolha um quadrado e um modo de leitura. Reta, diagonal e traçado (king-move) mostram os nomes; sentido mostra as palavras das Chamadas com tradução de Dee.',lang:'EN',
+ modes:{reta:'reta',diag:'diagonal',trace:'traçado',meaning:'sentido'},els:['Fogo','Terra','Ar','Água'],occ:'ocorrências',names:'nomes',words:'palavras'},
+ en:{h1:'Loagaeth tables — the names on the original grid',sub:'Pick a square and a reading mode. Straight, diagonal and traced (king-move) show the names; meaning shows the translated Call words.',lang:'PT',
+ modes:{reta:'straight',diag:'diagonal',trace:'traced',meaning:'meaning'},els:['Fire','Earth','Air','Water'],occ:'occurrences',names:'names',words:'words'}};
+function S(k){return STR[LG][k]}
 fetch('table_grids.json').then(r=>r.json()).then(d=>{T=d;boot()}).catch(e=>{document.getElementById('grid').outerHTML='<p>Sirva por HTTP: python -m http.server 8860</p>'});
 function boot(){
- document.getElementById('lang').onclick=()=>{LG=LG==='pt'?'en':'pt';localStorage.setItem('atlas_lang',LG);applyLang();if(cur)draw()};applyLang();
+ document.getElementById('lang').onclick=()=>{LG=LG==='pt'?'en':'pt';localStorage.setItem('atlas_lang',LG);applyLang();draw()};
+ var mb=document.getElementById('modes');
+ ['reta','diag','trace','meaning'].forEach(m=>{var b=document.createElement('span');b.className='mb'+(m===mode?' on':'');b.dataset.m=m;b.onclick=()=>{mode=m;iso=null;[...mb.children].forEach(c=>c.classList.toggle('on',c.dataset.m===m));draw()};mb.appendChild(b)});
  var box=document.getElementById('leaves');
- T.order.forEach(lf=>{var b=document.createElement('span');b.className='lf';b.textContent=lf;b.onclick=()=>pick(lf,b);box.appendChild(b)});
- pick(T.order.indexOf('2b')>=0?'2b':T.order[0],box.children[Math.max(0,T.order.indexOf('2b'))]);
+ T.order.forEach(lf=>{var b=document.createElement('span');b.className='cb';b.textContent=lf;b.onclick=()=>pick(lf);box.appendChild(b)});
+ applyLang();pick(T.order.includes('2b')?'2b':T.order[0]);
 }
-function pick(lf,btn){cur=lf;iso=null;[...document.getElementById('leaves').children].forEach(c=>c.classList.toggle('on',c.textContent===lf));draw()}
+function applyLang(){document.getElementById('h1').textContent=S('h1');document.getElementById('sub').textContent=S('sub');document.getElementById('lang').textContent=S('lang');
+ [...document.querySelectorAll('#modes .mb')].forEach(b=>b.textContent=S('modes')[b.dataset.m]);
+ var cols=['--Fogo','--Terra','--Ar','--Agua'];document.getElementById('leg').innerHTML=S('els').map((e,i)=>'<span><span class="sw" style="background:var('+cols[i]+')"></span>'+e+'</span>').join('');}
+function pick(lf){cur=lf;iso=null;[...document.getElementById('leaves').children].forEach(c=>c.classList.toggle('on',c.textContent===lf));draw()}
+function items(){var L=T.leaves[cur];return mode==='reta'?L.straight:mode==='diag'?L.diag:mode==='trace'?L.trace:L.meanings}
+function cellsOf(o){if(o.cells)return o.cells;var out=[];for(var k=0;k<o.len;k++)out.push([o.row,o.col+k]);return out}
 function draw(){
- var L=T.leaves[cur],g=L.grid,svg=document.getElementById('grid');svg.innerHTML='';
- var cell=640/49;
- // highlight rects behind (under isolation filter)
- L.names.forEach((o,i)=>{if(iso&&o.name!==iso)return;
-  var rc=document.createElementNS(SVG,'rect');rc.setAttribute('x',(o.col*cell).toFixed(1));rc.setAttribute('y',(o.row*cell).toFixed(1));
-  rc.setAttribute('width',(o.len*cell).toFixed(1));rc.setAttribute('height',cell.toFixed(1));rc.setAttribute('rx',2);
-  rc.setAttribute('fill',ELH[o.element]);rc.setAttribute('fill-opacity',iso?0.5:0.28);
-  rc.style.cursor='pointer';rc.addEventListener('mouseenter',()=>{document.getElementById('sideh').textContent=o.name+' · '+o.element});
-  rc.addEventListener('click',()=>{iso=iso===o.name?null:o.name;draw()});
-  svg.appendChild(rc);
+ var L=T.leaves[cur],g=L.grid,svg=document.getElementById('grid');svg.innerHTML='';var cell=640/49;
+ var list=items();
+ list.forEach(o=>{var key=mode==='meaning'?o.word:o.name;if(iso&&key!==iso)return;
+  var col=mode==='meaning'?'#8a6d2f':ELH[o.element];var cells=cellsOf(o);
+  if(mode==='trace'||mode==='diag'){
+   var pts=cells.map(c=>((c[1]+0.5)*cell).toFixed(1)+','+((c[0]+0.5)*cell).toFixed(1)).join(' ');
+   var pl=document.createElementNS(SVG,'polyline');pl.setAttribute('points',pts);pl.setAttribute('fill','none');pl.setAttribute('stroke',col);pl.setAttribute('stroke-width',iso?2.4:1.4);pl.setAttribute('stroke-opacity',iso?0.95:0.6);pl.setAttribute('stroke-linejoin','round');pl.setAttribute('stroke-linecap','round');svg.appendChild(pl);
+   var s=cells[0];var d=document.createElementNS(SVG,'circle');d.setAttribute('cx',((s[1]+0.5)*cell).toFixed(1));d.setAttribute('cy',((s[0]+0.5)*cell).toFixed(1));d.setAttribute('r',2.4);d.setAttribute('fill',col);svg.appendChild(d);
+  }else{
+   cells.forEach(c=>{var rc=document.createElementNS(SVG,'rect');rc.setAttribute('x',(c[1]*cell).toFixed(1));rc.setAttribute('y',(c[0]*cell).toFixed(1));rc.setAttribute('width',cell.toFixed(1));rc.setAttribute('height',cell.toFixed(1));rc.setAttribute('rx',1.5);rc.setAttribute('fill',col);rc.setAttribute('fill-opacity',iso?0.55:0.28);svg.appendChild(rc)});
+  }
  });
- // letters
- for(var r=0;r<49;r++)for(var c=0;c<49;c++){var t=document.createElementNS(SVG,'text');
-  t.setAttribute('x',(c*cell+cell/2).toFixed(1));t.setAttribute('y',(r*cell+cell*0.72).toFixed(1));
-  t.setAttribute('text-anchor','middle');t.setAttribute('font-size',(cell*0.72).toFixed(1));t.setAttribute('fill','var(--ink)');
-  t.setAttribute('opacity',0.82);t.style.fontFamily='ui-monospace,monospace';t.textContent=g[r][c];svg.appendChild(t);}
- // side list
- var counts={};L.names.forEach(o=>counts[o.name]=(counts[o.name]||0)+1);
- var order=Object.keys(counts).sort((a,b)=>counts[b]-counts[a]);
- document.getElementById('sideh').textContent=cur+' — '+L.distinct+' '+STR[LG].nomes+', '+L.names.length+' '+STR[LG].occ;
- document.getElementById('nlist').innerHTML=order.map(n=>{var el=L.names.find(o=>o.name===n).element;
-  return '<div class="ni'+(iso===n?' on':'')+'" onclick="isolate(\''+n+'\')"><span><span class=sw style="background:'+ELH[el]+'"></span>'+n+'</span><span class=cnt>'+counts[n]+'×</span></div>'}).join('');
+ for(var r=0;r<49;r++)for(var c=0;c<49;c++){var t=document.createElementNS(SVG,'text');t.setAttribute('x',(c*cell+cell/2).toFixed(1));t.setAttribute('y',(r*cell+cell*0.72).toFixed(1));t.setAttribute('text-anchor','middle');t.setAttribute('font-size',(cell*0.7).toFixed(1));t.setAttribute('fill','var(--ink)');t.setAttribute('opacity',0.8);t.style.fontFamily='ui-monospace,monospace';t.textContent=g[r][c];svg.appendChild(t);}
+ // sidebar
+ var counts={},meta={};
+ list.forEach(o=>{var key=mode==='meaning'?o.word:o.name;counts[key]=(counts[key]||0)+1;meta[key]=o});
+ var keys=Object.keys(counts).sort((a,b)=>counts[b]-counts[a]);
+ document.getElementById('sideh').textContent=cur+' — '+keys.length+' '+(mode==='meaning'?S('words'):S('names'))+', '+list.length+' '+S('occ');
+ document.getElementById('nlist').innerHTML=keys.map(k=>{var o=meta[k],col=mode==='meaning'?'#8a6d2f':ELH[o.element];
+  var extra=mode==='meaning'?' <span class=gl>'+(o.meaning||'')+'</span>':'';
+  return '<div class="ni'+(iso===k?' on':'')+'" onclick="iso=(iso===\''+k.replace(/'/g,"")+'\'?null:\''+k.replace(/'/g,"")+'\');draw()"><span><span class=sw style="background:'+col+'"></span>'+k+extra+'</span><span class=cnt>'+counts[k]+'×</span></div>'}).join('');
 }
-function isolate(n){iso=iso===n?null:n;draw()}
-window.isolate=isolate;
+window.draw=draw;
 </script>
 </body>
 </html>

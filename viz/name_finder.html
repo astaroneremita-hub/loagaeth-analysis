@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Name Finder — Loagaeth & Watchtowers</title>
+<style>
+:root{
+  --bg:#ece4d4; --panel:#f5efe2; --panel2:#efe7d6; --ink:#2a2317; --soft:#726a56; --rule:#cdc3ad;
+  --loa:#b5472f; --tow:#2f6d8c; --hit:#c58a1a; --off:#c9bfa8;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:"Segoe UI",system-ui,sans-serif; --mono:"Consolas",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#17140e; --panel:#201b12; --panel2:#262013; --ink:#e7e0cf; --soft:#9a9077; --rule:#39321f;
+  --loa:#e4765c; --tow:#5ea7c6; --hit:#e0b14a; --off:#473f2b;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5}
+.wrap{max-width:1040px;margin:0 auto;padding:36px 18px 90px}
+h1{font-family:var(--serif);font-weight:500;font-size:clamp(1.6rem,4.5vw,2.4rem);margin:0 0 4px}
+.lede{color:var(--soft);max-width:70ch;margin:0 0 22px;font-size:.98rem}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:8px}
+input#q{font:inherit;font-family:var(--serif);font-size:1.4rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:10px 14px;border:1px solid var(--rule);border-radius:8px;background:var(--panel);color:var(--ink);flex:1 1 260px;min-width:0}
+button.go{font:inherit;padding:11px 20px;border:0;border-radius:8px;background:var(--ink);color:var(--bg);cursor:pointer;font-weight:600}
+.modes{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 22px}
+.mode{font:inherit;font-size:.92rem;border:1px solid var(--rule);background:var(--panel);color:var(--soft);border-radius:999px;padding:6px 14px;cursor:pointer}
+.mode[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.sum{display:flex;flex-wrap:wrap;gap:10px 22px;margin:0 0 20px;color:var(--soft)}
+.sum b{font-family:var(--serif);font-size:1.5rem;color:var(--ink);font-weight:500;margin-right:6px}
+h2{font-family:var(--serif);font-weight:500;font-size:1.2rem;margin:26px 0 10px;border-bottom:1px solid var(--rule);padding-bottom:6px}
+.panel{background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{text-align:left;padding:5px 10px 5px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+th{color:var(--soft);font-weight:500;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.piece{font-family:var(--serif);letter-spacing:.08em;font-size:1.02rem}
+.pos{font-family:var(--mono);font-size:.82rem;color:var(--soft)}
+.ctx{font-family:var(--serif);letter-spacing:.06em}
+.ctx mark{background:var(--hit);color:#1a1509;padding:0 2px;border-radius:2px}
+.tag{display:inline-block;font-size:.74rem;padding:1px 7px;border-radius:999px;margin-right:5px}
+.tag.loa{background:var(--loa);color:#fff}.tag.tow{background:var(--tow);color:#fff}
+.bars{display:grid;grid-template-columns:auto 1fr auto;gap:2px 10px;align-items:center;font-size:.85rem}
+.bars i{display:block;height:11px;background:var(--loa);border-radius:1px;min-width:1px}
+.bars span:last-child{font-variant-numeric:tabular-nums;color:var(--soft)}
+.note{margin-top:8px;padding:14px 16px;border-left:3px solid var(--rule);background:var(--panel2);border-radius:0 8px 8px 0;color:var(--soft);font-size:.92rem}
+.note b{color:var(--ink);font-weight:500}
+.quick{color:var(--soft);font-size:.86rem;margin:0 0 18px}
+.quick a{color:var(--loa);cursor:pointer;text-decoration:none;border-bottom:1px dotted}
+.muted{color:var(--soft)}
+.empty{color:var(--soft);padding:20px 0}
+footer{margin-top:40px;color:var(--soft);font-size:.84rem;max-width:74ch}
+:focus-visible{outline:2px solid var(--tow);outline-offset:2px}
+@media(max-width:560px){.pos{display:block}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Name Finder</h1>
+  <p class="lede">Digite um nome. A ferramenta procura sozinha onde ele — e cada pedaço, letra e
+  repetição dele — aparece no <b>Liber Loagaeth</b> (96 faces) e nas <b>quatro Torres de Vigia</b>.
+  Quebra o nome automaticamente (DA·HAHOXOM, DAH·AHOXOM, …) e mostra onde cada parte está distribuída.</p>
+
+  <div class="bar">
+    <input id="q" autocomplete="off" spellcheck="false" placeholder="DAHAHOXOM" value="DAHAHOXOM">
+    <button class="go" id="go">Buscar</button>
+  </div>
+  <p class="quick">Exemplos: <a data-ex="DAHAHOXOM">DAHAHOXOM</a> · <a data-ex="CHASTOR">CHASTOR</a> ·
+    <a data-ex="NOCHA">NOCHA</a> · <a data-ex="OL">OL (Chamada 1)</a> · <a data-ex="MADARIATZA">MADARIATZA</a></p>
+
+  <div class="modes" id="modes"></div>
+  <div class="sum" id="sum"></div>
+  <div id="out"><p class="empty">Carregando os dados…</p></div>
+
+  <footer>Loagaeth: transcrição de Peterson, letras apenas (195.548). Torres: Grande Tábua de Dee (1584),
+  12×13 por elemento + Tábua da União. A busca no Loagaeth usa cada linha para frente e de trás para
+  frente; nas Torres, todas as oito direções (linhas, colunas, diagonais, invertidas). Que as letras
+  de um nome existam espalhadas não é prova — quase qualquer nome pode ser montado; peso real só tem
+  uma leitura contígua ou uma regra fixa.</footer>
+</div>
+
+<script>
+const EL={q:document.getElementById("q"),out:document.getElementById("out"),sum:document.getElementById("sum"),modes:document.getElementById("modes")};
+const MODES=[["contiguo","Nome inteiro"],["pedacos","Por pedaço (quebra automática)"],["letra","Por letra"],["repeticao","Repetição & distribuição"],["montagem","Montável?"]];
+let mode="contiguo", DATA=null;
+const VOW=new Set("AEIOUVY");
+
+MODES.forEach(([k,label],i)=>{const b=document.createElement("button");b.className="mode";b.textContent=label;b.setAttribute("aria-pressed",i===0);b.onclick=()=>{mode=k;[...EL.modes.children].forEach(c=>c.setAttribute("aria-pressed","false"));b.setAttribute("aria-pressed","true");run();};EL.modes.appendChild(b);});
+document.getElementById("go").onclick=run;
+EL.q.addEventListener("keydown",e=>{if(e.key==="Enter")run();});
+document.querySelectorAll("[data-ex]").forEach(a=>a.onclick=()=>{EL.q.value=a.dataset.ex;run();});
+
+fetch("search_data.json").then(r=>r.json()).then(d=>{DATA=d;prep();run();}).catch(e=>{EL.out.innerHTML='<p class="empty">Não consegui carregar search_data.json. Sirva a pasta por HTTP (python -m http.server) e abra por http://…</p>';});
+
+// precompute tower reading-lines (8 directions) with position metadata
+let TOWLINES={};
+function towerLines(name,rows,zones){
+  const R=rows.length,C=rows[0].length,out=[];
+  const push=(cells,dir)=>{out.push({dir,cells})};
+  for(let r=0;r<R;r++){let a=[];for(let c=0;c<C;c++)a.push({ch:rows[r][c],r,c,z:zones[r][c]});push(a,"linha →");push([...a].reverse(),"linha ←");}
+  for(let c=0;c<C;c++){let a=[];for(let r=0;r<R;r++)a.push({ch:rows[r][c],r,c,z:zones[r][c]});push(a,"coluna ↓");push([...a].reverse(),"coluna ↑");}
+  for(let d=-R+1;d<C;d++){let a=[];for(let r=0;r<R;r++){let c=r+d;if(c>=0&&c<C)a.push({ch:rows[r][c],r,c,z:zones[r][c]});}if(a.length>=2){push(a,"diag ↘");push([...a].reverse(),"diag ↖");}}
+  for(let s=0;s<R+C-1;s++){let a=[];for(let r=0;r<R;r++){let c=s-r;if(c>=0&&c<C)a.push({ch:rows[r][c],r,c,z:zones[r][c]});}if(a.length>=2){push(a,"anti ↙");push([...a].reverse(),"anti ↗");}}
+  return out;
+}
+function prep(){
+  for(const el in DATA.towers){const t=DATA.towers[el];TOWLINES[el]=towerLines(el,t.rows,t.zones);}
+}
+const ELNAME={ar:"Ar",agua:"Água",terra:"Terra",fogo:"Fogo",uniao:"União"};
+const ZN={grandecruz:"grande cruz",serviente:"servientes",querubico:"querúbico",calvario:"calvário",uniao:"união"};
+
+// ---- search helpers ----
+function findInLoagaeth(sub){ // contiguous in rows, fwd + reversed
+  const hits=[]; const L=DATA.loagaeth;
+  for(const leaf in L){const rows=L[leaf];
+    for(let ri=0;ri<rows.length;ri++){const row=rows[ri];
+      let i=row.indexOf(sub);while(i>=0){hits.push({leaf,row:ri+1,col:i+1,dir:"linha →",ctx:ctx(row,i,sub.length)});i=row.indexOf(sub,i+1);}
+      const rev=[...row].reverse().join("");let j=rev.indexOf(sub);while(j>=0){hits.push({leaf,row:ri+1,col:row.length-j,dir:"linha ←",ctx:ctx(rev,j,sub.length)});j=rev.indexOf(sub,j+1);}
+    }}
+  return hits;
+}
+function countLoagaeth(sub){let n=0;const L=DATA.loagaeth;for(const leaf in L)for(const row of L[leaf]){let i=row.indexOf(sub);while(i>=0){n++;i=row.indexOf(sub,i+1);}const rev=[...row].reverse().join("");let j=rev.indexOf(sub);while(j>=0){n++;j=rev.indexOf(sub,j+1);}}return n;}
+function findInTowers(sub){const hits=[];for(const el in TOWLINES){for(const line of TOWLINES[el]){const s=line.cells.map(c=>c.ch).join("");let i=s.indexOf(sub);while(i>=0){const a=line.cells[i],b=line.cells[i+sub.length-1];hits.push({el,dir:line.dir,from:a,to:b,sub});i=s.indexOf(sub,i+1);}}}
+  // dedupe same cells+sub
+  const seen=new Set(),out=[];for(const h of hits){const key=el2(h);if(!seen.has(key)){seen.add(key);out.push(h);}}return out;}
+function el2(h){return h.el+h.from.r+","+h.from.c+">"+h.to.r+","+h.to.c+h.sub;}
+function ctx(s,i,len){return esc(s.slice(Math.max(0,i-8),i))+"\u0001"+esc(s.slice(i,i+len))+"\u0001"+esc(s.slice(i+len,i+len+8));}
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;");}
+function mark(c){return c.replace(/\u0001(.*?)\u0001/,"<mark>$1</mark>");}
+
+// letter availability
+function letterCounts(L){const loa={},tow={};for(const ch of new Set(L)){loa[ch]=countLoagaethLetter(ch);tow[ch]=countTowerLetter(ch);}return{loa,tow};}
+function countLoagaethLetter(ch){let n=0;for(const leaf in DATA.loagaeth)for(const row of DATA.loagaeth[leaf])for(const c of row)if(c===ch)n++;return n;}
+function countTowerLetter(ch){const per={};for(const el in DATA.towers){let n=0;for(const row of DATA.towers[el].rows)for(const c of row)if(c===ch)n++;per[el]=n;}return per;}
+function towerLetterSpots(ch){const spots=[];for(const el in DATA.towers){const t=DATA.towers[el];for(let r=0;r<t.rows.length;r++)for(let c=0;c<t.rows[r].length;c++)if(t.rows[r][c]===ch)spots.push({el,r:r+1,c:c+1,z:t.zones[r][c]});}return spots;}
+
+// splits & pieces
+function binarySplits(name){const out=[];for(let i=1;i<name.length;i++)out.push([name.slice(0,i),name.slice(i)]);return out;}
+function substrings(name,min){const set=new Set();for(let i=0;i<name.length;i++)for(let j=i+min;j<=name.length;j++)set.add(name.slice(i,j));return[...set].sort((a,b)=>b.length-a.length||a.localeCompare(b));}
+
+// fragment density by leaf (distribution)
+function densityByLeaf(name){const fr=substrings(name,3).filter(s=>s.length<=4);const d={};let tot=0,totlen=0;
+  for(const leaf in DATA.loagaeth){const s=DATA.loagaeth[leaf].join("");let c=0;for(const f of fr){let i=s.indexOf(f);while(i>=0){c++;i=s.indexOf(f,i+1);}}d[leaf]=1000*c/Math.max(1,s.length);tot+=c;totlen+=s.length;}
+  return{d,rate:1000*tot/totlen,frags:fr};}
+
+// ---- render ----
+function run(){
+  if(!DATA)return;
+  const name=(EL.q.value||"").toUpperCase().replace(/[^A-Z]/g,"");
+  EL.q.value=name;if(!name){EL.out.innerHTML='<p class="empty">Digite um nome.</p>';EL.sum.innerHTML="";return;}
+  const loaN=countLoagaeth(name),towN=findInTowers(name).length;
+  EL.sum.innerHTML=`<div><b>${loaN}</b>no Loagaeth (inteiro)</div><div><b>${towN}</b>nas Torres (inteiro)</div><div><b>${name.length}</b>letras</div>`;
+  if(mode==="contiguo")renderContig(name);
+  else if(mode==="pedacos")renderPieces(name);
+  else if(mode==="letra")renderLetters(name);
+  else if(mode==="repeticao")renderRepet(name);
+  else renderAssembly(name);
+}
+
+function renderContig(name){
+  const loa=findInLoagaeth(name), tow=findInTowers(name);
+  let h="";
+  h+=`<h2>Loagaeth — nome inteiro, contíguo <span class="muted">(${loa.length})</span></h2>`;
+  if(!loa.length)h+='<p class="empty">Não aparece inteiro em nenhuma linha (nem invertido).</p>';
+  else{h+='<div class="panel"><table><tr><th>face</th><th class="n">linha</th><th class="n">col</th><th>direção</th><th>contexto</th></tr>';
+    loa.slice(0,200).forEach(x=>{h+=`<tr><td><span class="tag loa">${x.leaf}</span></td><td class="n">${x.row}</td><td class="n">${x.col}</td><td class="pos">${x.dir}</td><td class="ctx">…${mark(x.ctx)}…</td></tr>`;});
+    h+='</table>'+(loa.length>200?'<p class="muted">(primeiros 200)</p>':'')+'</div>';}
+  h+=`<h2>Torres de Vigia — nome inteiro, 8 direções <span class="muted">(${tow.length})</span></h2>`;
+  if(!tow.length)h+='<p class="empty">Não aparece inteiro em nenhuma Torre, em nenhuma direção.</p>';
+  else{h+='<div class="panel"><table><tr><th>torre</th><th>de → até</th><th>direção</th></tr>';
+    tow.forEach(x=>{h+=`<tr><td><span class="tag tow">${ELNAME[x.el]}</span></td><td class="pos">r${x.from.r}c${x.from.c} → r${x.to.r}c${x.to.c}</td><td class="pos">${x.dir}</td></tr>`;});
+    h+='</table></div>';}
+  EL.out.innerHTML=h;
+}
+
+function renderPieces(name){
+  // progressive binary splits + all substrings
+  let h=`<h2>Quebra automática (todas as divisões em duas partes)</h2><div class="panel"><table><tr><th>divisão</th><th class="n">parte A · Loa/Tor</th><th class="n">parte B · Loa/Tor</th></tr>`;
+  binarySplits(name).forEach(([a,b])=>{const al=countLoagaeth(a),at=findInTowers(a).length,bl=countLoagaeth(b),bt=findInTowers(b).length;
+    h+=`<tr><td class="piece">${a}·${b}</td><td class="n">${a} — ${al}/${at}</td><td class="n">${b} — ${bl}/${bt}</td></tr>`;});
+  h+='</table></div>';
+  h+=`<h2>Todos os pedaços (≥3 letras), onde estão</h2><div class="panel"><table><tr><th>pedaço</th><th class="n">Loagaeth</th><th class="n">Torres</th><th>onde (amostra)</th></tr>`;
+  substrings(name,3).forEach(s=>{const lc=countLoagaeth(s),tw=findInTowers(s);const sample=findInLoagaeth(s).slice(0,3).map(x=>x.leaf+":"+x.row+","+x.col).join("  ")||(tw[0]?ELNAME[tw[0].el]+":"+tw[0].dir:"—");
+    h+=`<tr><td class="piece">${s}</td><td class="n" style="color:${lc?'var(--loa)':'var(--soft)'}">${lc}</td><td class="n" style="color:${tw.length?'var(--tow)':'var(--soft)'}">${tw.length}</td><td class="pos">${sample}</td></tr>`;});
+  h+='</table></div>';
+  EL.out.innerHTML=h;
+}
+
+function renderLetters(name){
+  const uniq=[...new Set(name)];
+  let h=`<h2>Por letra — onde cada uma está</h2><div class="panel"><table><tr><th>letra</th><th class="n">Loagaeth</th><th class="n">Ar</th><th class="n">Água</th><th class="n">Terra</th><th class="n">Fogo</th><th>subquadrantes (Torres, amostra)</th></tr>`;
+  uniq.forEach(ch=>{const lo=countLoagaethLetter(ch);const tw=countTowerLetter(ch);const spots=towerLetterSpots(ch).slice(0,6).map(s=>`${ELNAME[s.el][0]}·${ZN[s.z]||s.z||""} r${s.r}c${s.c}`).join("  ");
+    const miss=lo===0&&Object.values(tw).every(n=>n===0);
+    h+=`<tr><td class="piece" style="color:${miss?'var(--soft)':'var(--ink)'}">${ch}</td><td class="n">${lo}</td><td class="n">${tw.ar||0}</td><td class="n">${tw.agua||0}</td><td class="n">${tw.terra||0}</td><td class="n">${tw.fogo||0}</td><td class="pos">${spots||'—'}</td></tr>`;});
+  h+='</table></div>';
+  const missing=uniq.filter(ch=>countLoagaethLetter(ch)===0 && Object.values(countTowerLetter(ch)).every(n=>n===0));
+  h+=`<p class="note">${missing.length?('Letras ausentes de tudo: <b>'+missing.join(", ")+'</b> — o nome não pode ser montado.'):'Todas as letras existem nos dois corpora — o nome <b>pode</b> ser montado de letras soltas (o que, sozinho, não significa nada: ver "Montável?").'}</p>`;
+  EL.out.innerHTML=h;
+}
+
+function renderRepet(name){
+  // repeated pieces + fragment density by leaf
+  let h=`<h2>Pedaços que mais se repetem no Loagaeth</h2><div class="panel"><table><tr><th>pedaço</th><th class="n">vezes</th><th>por face (amostra)</th></tr>`;
+  const subs=substrings(name,3).map(s=>[s,countLoagaeth(s)]).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]).slice(0,14);
+  if(!subs.length)h+='<tr><td class="empty" colspan="3">Nenhum pedaço ≥3 aparece.</td></tr>';
+  subs.forEach(([s,n])=>{const byleaf={};findInLoagaeth(s).forEach(x=>byleaf[x.leaf]=(byleaf[x.leaf]||0)+1);const top=Object.entries(byleaf).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([l,c])=>l+"("+c+")").join(" ");
+    h+=`<tr><td class="piece">${s}</td><td class="n">${n}</td><td class="pos">${top}</td></tr>`;});
+  h+='</table></div>';
+  // distribution
+  const {d,rate}=densityByLeaf(name);
+  const order=Object.keys(d).sort((a,b)=>(parseInt(a)||0)-(parseInt(b)||0)||a.localeCompare(b));
+  const mx=Math.max(...Object.values(d),0.01);
+  h+=`<h2>Onde o material do nome se concentra <span class="muted">(fragmentos 3–4 letras, por 1000)</span></h2><div class="panel"><div class="bars">`;
+  order.forEach(leaf=>{const v=d[leaf];const ratio=v/rate;h+=`<span class="piece">${leaf}</span><i style="width:${(100*v/mx).toFixed(1)}%;background:${ratio>=1.8?'var(--hit)':'var(--loa)'}"></i><span>${v.toFixed(1)} ${ratio>=1.8?('· '+ratio.toFixed(1)+'×'):''}</span>`;});
+  h+=`</div><p class="muted" style="margin-top:8px">Média do livro: ${rate.toFixed(1)}/1000. Barras douradas = ≥1,8× a média (onde o começo do nome se junta).</p></div>`;
+  EL.out.innerHTML=h;
+}
+
+function renderAssembly(name){
+  const uniq=[...new Set(name)];
+  const miss=uniq.filter(ch=>countLoagaethLetter(ch)===0 && Object.values(countTowerLetter(ch)).every(n=>n===0));
+  const need={};for(const ch of name)need[ch]=(need[ch]||0)+1;
+  let h=`<h2>Montável de letras soltas?</h2><div class="panel"><table><tr><th>letra</th><th class="n">precisa</th><th class="n">tem no Loagaeth</th><th class="n">tem nas Torres</th></tr>`;
+  uniq.forEach(ch=>{const lo=countLoagaethLetter(ch),tw=Object.values(countTowerLetter(ch)).reduce((a,b)=>a+b,0);
+    h+=`<tr><td class="piece">${ch}</td><td class="n">${need[ch]}</td><td class="n" style="color:${lo>=need[ch]?'var(--ink)':'var(--loa)'}">${lo}</td><td class="n" style="color:${tw>=need[ch]?'var(--ink)':'var(--soft)'}">${tw}</td></tr>`;});
+  h+='</table></div>';
+  const canLoa=uniq.every(ch=>countLoagaethLetter(ch)>=need[ch]);
+  const canTow=uniq.every(ch=>Object.values(countTowerLetter(ch)).reduce((a,b)=>a+b,0)>=need[ch]);
+  h+=`<p class="note"><b>Loagaeth:</b> ${canLoa?'sim, todas as letras existem em quantidade suficiente.':'não — falta '+miss.join(", ")+'.'} <b>Torres:</b> ${canTow?'sim.':'não.'}<br><br>
+  <b>Mas isto quase nunca significa algo.</b> A maioria dos nomes usa poucas letras comuns, então são "montáveis" por definição. O que pesa é uma leitura <b>contígua</b> (aba "Nome inteiro") ou uma <b>regra fixa</b> de posição — não a mera presença das letras soltas.</p>`;
+  EL.out.innerHTML=h;
+}
+</script>
+</body>
+</html>

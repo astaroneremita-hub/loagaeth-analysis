@@ -430,3 +430,88 @@ hierarchy are one being by number, an independent confirmation of the rotation=s
 system each, weak). B) Cross-system: the grammar roots (NOCHA, CHASTOR, GETH...) appear ZERO times in the Heptarchy's
 49 angels, the 91 Governors, the kings, or the Call words. The Loagaeth name-system is its own layer, not shared with
 or copied from the other Enochian systems.
+
+## #226 — External name search + what the book says (a88)
+Searched 15 top Loagaeth names/roots against Shem-72, Goetia-72, planetary angels, and the Enochian kings/91
+governors/Bonorum-49: ZERO matches (exact, substring, or within 1-2 letters). The Loagaeth onomasticon is sui
+generis - its names recur nowhere in the standard angel/spirit corpora. Consistent with a87 (roots absent from
+Calls/Heptarchy) and with Dee's own claim of a distinct primordial language. What the book says of itself
+(docs/WHAT_THE_SOURCES_SAY.md): "every letter here bringeth furth the Names of God: but... they are but one
+Name" (S99); "49 voices, whereunto the so many powers shall be obedient" (S73); "the mystical and holy voices
+of the Angels... the CABALA of NATURE" (T158). Dee's description (it IS names; they are powers/angels; they are
+one Name) matches the measured structure (a generative name-system; NOCHA=NACHO one value) remarkably.
+
+## #227 — Calls-as-Loagaeth-coordinates + element methodology + loosened absence (a89)
+Element methodology documented (WEAVE sec 17): letter->GD sign->element (triplicities), name = sum, dominant = power.
+Coordinate theory test (a89): trigram cross-entropy. The Calls fit a Loagaeth-trained model (4.72 bits/char) better
+than a Watchtower model (5.15) but EQUAL to shuffled-Loagaeth (4.68) - they share the Loagaeth letter INVENTORY, not
+its local sequence. That is exactly what the coordinate theory predicts (letters picked from scattered locations keep
+the inventory, lose local flow), so the test is CONSISTENT WITH but cannot prove the theory; the letter-by-letter
+version needs the reception numbers digitised. Loosened absence probe: even reversed + consonant-skeleton + edit<=1
+against 264 external names (Shem/Goetia/planetary/governors/kings) gives ZERO real matches (one spurious PHANGE~PHENEX).
+The Loagaeth names are unique by every matching method.
+
+## #228 — Element re-proof (multi-variable) + danger + roadmap 5/8/calls (a90, a91)
+a90: element by 3 independent variables - zodiac sign (F04), second sign system (F05), and the ruling PLANET's
+classical element. They disagree for some letters (N = Scorpio->Water by sign, Mars->Fire by planet). 55/89 names
+have a ROBUST element (all agree); the rest are "majority" or "ambiguous" (sign vs planet split). All 89 still
+match the single-variable sign reading (sign dominates the vote). Added a DANGER reading (traditional
+correspondence, 0-100): Fire + martial/Saturn + nodal letters (T/F dragon, D spirit). NOCHA danger 43 (medium,
+martial); CHASTOR 20 (low); ADNOCHA 43 (martial+nodal). Exported to viz/entity_power.json, shown in the atlas.
+a91: (8) ELEMENTAL FLOW IS ORDERED - dominant element per table makes 17 transitions vs 25 shuffle (regions, not
+random; Terra 2-5, Ar 6-14, Terra 15-30, Ar 31-44). CONFIRMADO. (Calls) Calls 1-2 words: 0 present as substrings
+in the Loagaeth (chance also 0) - inconclusive, and consistent with the coordinate theory (Call words are not
+contiguous Loagaeth substrings). (5) The odd/superfluous letter = the centre cell: spread over 15 letters, no
+fixed mark - the mathematical pivot of 2401=2400+1, slight vowel lean.
+
+## #229 — Is it a language? YES (a92); Call char-trace refuted (a93)
+a92 — three independent linguistic signatures: (A) ZIPF: the name-vocabulary frequency follows a power law,
+slope -1.14, r2 0.981 (real languages do this, random text does not). (B) ENTROPY LADDER: Loagaeth drops
+h0=4.01 -> h3=2.52 bits/char, far below frequency-matched random (h3=3.41) and matching its own Markov-3
+surrogate - it carries conditional information like a language, not noise (stays high) nor a rigid cipher
+(near zero). (C) MORPHOLOGY: 13 vowel-alternation minimal pairs (same consonant skeleton, different vowels)
+mirror Dee's own translated minimal pair pola/pala ("two together"/"two separated"), plus the intensifier
+prefix (cru- -> crucanse). This is SEMITIC-STYLE morphology: consonantal root + vocalic pattern. Conclusion:
+the Loagaeth is language-like and decipherable by linguistic method (anchor on the few translated words, use
+morphology and minimal pairs), not only by evocation.
+a93 — Call char-by-char trace: no Call traces as a connected king-move path through any Loagaeth leaf above
+chance (Call 1: 9/349 vs shuffle max 14; and not the table Dee says it moves). Contiguous-path coordinate
+theory refuted; a real link would be non-contiguous (scattered coordinates), untestable without the reception
+numbers.
+
+## #230 — CORRECTION: Call words ARE in the Loagaeth (a94)
+Earlier (#225/a89) I concluded Call words were absent - WRONG, it filtered the data badly. The practitioner showed
+GOHO across tables and PIADNAGENSAD at 21b. Proper test: 631 Call word-forms, 74 occur in the Loagaeth. GOHO 6x
+(5 tables), SONF 4x, and of the 10 words >=6 letters, 5 are above chance: BALTAN (ratio 10, surrogate 0.00),
+VNALAH (3x), LONDOH, IADNAH, PARACH. The 12-letter phrase PIADNAGENSAD sits at 21b. So the Calls and the Loagaeth
+SHARE VOCABULARY, not just an alphabet - the same language. The overlap is real but partial (most Call words like
+MICMA/ZODIRE do not appear), consistent with the Calls being drawn from / related to the Loagaeth field. Record
+corrected.
+
+## #231 — Item 3 (Bonorum titles) + PDFs + language page
+Item 3: the 49 Bonorum (Dee's Tabula Collecta angels: BALIGON, BORNOGO...) vs our per-table governors: 0 matches.
+The Loagaeth's own name-system is independent of the Heptarchic 49-angel assignment (consistent with a88).
+PDFs attached (Tabula bonorum Sloane 3191, 29pp; 48 Claves Sloane 3191, 13pp) are SCANNED images (0 extractable
+text); their content is already transcribed in engine/data (heptarquia bonorum, chamadas). Built viz/language.html
+(bilingual): the three language proofs (Zipf -1.14/r2 0.981, entropy ladder 4.01->2.52, morphology), Dee's
+translated anchors (canse/crucanse, pola/pala), the vowel-alternation minimal-pair repertoire, affixes with
+element, and the Call words found in the Loagaeth (GOHO 6x, SONF 4x, BALTAN...). Data in viz/language_data.json.
+
+## #232 — All 19 Calls mapped + Dee's translation pattern (a95) + two front-end pages
+Mapped every word of all 19 Calls (1085 words) into the Loagaeth: count, tables, element, grid positions; with Dee's
+English gloss (1071 translated). Translation pattern: (A) 96% of words are 1:1 Enochian:English - the Calls follow
+ENGLISH WORD ORDER (reproduces Laycock's thesis that the grammar is English). (B) Morphology: only 7% of word-pairs
+share >=2 consonants with the English gloss and 0 share the full consonant skeleton - the Enochian words do NOT derive
+from English sounds; the lexicon is its OWN. (C) Lexicon consistency: 62% of words seen >=3x keep the same gloss - a
+real, stable dictionary. Net: Enochian = English SYNTAX + an independent fixed LEXICON. Front-end: viz/call_map.html
+(click a Call word -> its lit positions on the original 49x49 grid, with element + Dee gloss) and viz/call_translation.html
+(each Call as Dee's English translation, Loagaeth-present words highlighted, toggle to Enochian). Data in viz/call_atlas.json.
+
+## #233 — tables.html = ALL names (195) + diagonal segment finished (a96)
+Rebuilt viz/table_grids.json with the FULL present-name set (195 names, len>=5, >=2x: a23 discoveries + roots +
+all present root+affix combos), 2615 occurrences across tables - tables.html now lights up all names, not just the
+top. a96 diagonal segment: name density per 1000 letters - straight (2-24) 28.8, DIAGONAL (25-28) 44.4 (the HIGHEST),
+diamonds (29-48) 15.4. The diagonal reading surfaces MORE names than straight reading - validating the diagonal
+decode. The same roots dominate every segment (GETH, NOCHA) and the element balance is identical (Terra ~35/Agua
+~27/Ar 22/Fogo ~15), so the diagonal segment and the diamonds are the SAME onomasticon on a different geometry,
+GETH-dominated toward the back (matches the territory map). Item 2 finished.

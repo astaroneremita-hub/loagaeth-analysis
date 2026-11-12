@@ -26,13 +26,13 @@ input[type=range]{width:180px}
 </style>
 </head>
 <body>
-<h1>Forja de Nomes do Loagaeth</h1>
-<p class="sub">Escolha o <b>elemento</b> e a <b>força</b> que quer. A forja devolve as raízes, prefixos e sufixos que constroem um ser com esses atributos — e marca os que o livro já contém.</p>
+<div style="display:flex;justify-content:space-between;align-items:center"><h1 id="h1">Forja de Nomes do Loagaeth</h1><span id="lang" style="cursor:pointer;border:1px solid var(--line);border-radius:16px;padding:3px 12px;font-size:12px;font-weight:600">EN</span></div>
+<p class="sub" id="sub">Escolha o <b>elemento</b> e a <b>força</b> que quer. A forja devolve as raízes, prefixos e sufixos que constroem um ser com esses atributos — e marca os que o livro já contém.</p>
 
 <div class="panel">
- <div class="grp"><label>elemento desejado</label><div class="els" id="els"></div></div>
- <div class="grp"><label>força (tamanho do ser): <span id="flab">média</span></label><input type="range" id="force" min="0" max="2" value="1" step="1"></div>
- <div class="grp"><label>camadas de afixo</label><input type="range" id="depth" min="1" max="2" value="1" step="1"> <span id="dlab" class="meta2">1</span></div>
+ <div class="grp"><label id="lel">elemento desejado</label><div class="els" id="els"></div></div>
+ <div class="grp"><label id="lf">força (tamanho do ser): <span id="flab">média</span></label><input type="range" id="force" min="0" max="2" value="1" step="1"></div>
+ <div class="grp"><label id="ld">camadas de afixo</label><input type="range" id="depth" min="1" max="2" value="1" step="1"> <span id="dlab" class="meta2">1</span></div>
 </div>
 <p class="note" id="summary"></p>
 <div class="out" id="out"></div>
@@ -40,7 +40,15 @@ input[type=range]{width:180px}
 <script>
 var ELC={Fogo:'var(--Fogo)',Terra:'var(--Terra)',Ar:'var(--Ar)',Agua:'var(--Agua)'};
 var ELH={Fogo:'#d85a30',Terra:'#b07d2a',Ar:'#2f7fd4',Agua:'#199e70'};
-var F=null,LE=null,sel='Terra';
+var F=null,LE=null,sel='Terra',LG=(localStorage.getItem('atlas_lang')||'pt');
+var ELN={pt:{Fogo:'Fogo',Terra:'Terra',Ar:'Ar',Agua:'Água'},en:{Fogo:'Fire',Terra:'Earth',Ar:'Air',Agua:'Water'}};
+var STR={pt:{h1:'Forja de Nomes do Loagaeth',sub:'Escolha o <b>elemento</b> e a <b>força</b> que quer. A forja devolve as raízes, prefixos e sufixos que constroem um ser com esses atributos — e marca os que o livro já contém.',lang:'EN',lel:'elemento desejado',lf:'força (tamanho do ser): ',ld:'camadas de afixo',lvl:['fraca','média','forte'],cons:'construções para',att:'já atestadas no livro',pre:'prefixos',suf:'sufixos',fromroot:'(vêm da raiz)',inbook:'✓ no livro',pot:'pot',pred:'força prevista ~',raiz:'raiz',prefixo:'prefixo',sufixo:'sufixo'},
+ en:{h1:'Loagaeth Name Forge',sub:'Pick the <b>element</b> and the <b>force</b> you want. The forge returns the roots, prefixes and suffixes that build a being with those attributes — and marks the ones the book already holds.',lang:'PT',lel:'desired element',lf:'force (size of the being): ',ld:'affix layers',lvl:['weak','medium','strong'],cons:'builds for',att:'already attested in the book',pre:'prefixes',suf:'suffixes',fromroot:'(come from the root)',inbook:'✓ in the book',pot:'pot',pred:'predicted force ~',raiz:'root',prefixo:'prefix',sufixo:'suffix'}};
+function S(k){return STR[LG][k]}
+function applyLang(){document.getElementById('h1').textContent=S('h1');document.getElementById('sub').innerHTML=S('sub');document.getElementById('lang').textContent=S('lang');
+ document.getElementById('lel').textContent=S('lel');document.getElementById('ld').textContent=S('ld');
+ document.getElementById('lf').childNodes[0].nodeValue=S('lf');document.getElementById('flab').textContent=S('lvl')[+document.getElementById('force').value];
+ [...document.querySelectorAll('#els .el')].forEach(b=>{var k=b.dataset.k;b.textContent=ELN[LG][k]})}
 Promise.all([fetch('forge_data.json').then(r=>r.json()),fetch('entity_astro.json').then(r=>r.json())])
  .then(([f,a])=>{F=f;LE={};for(var ch in a.letters)LE[ch]=a.letters[ch].element;boot()})
  .catch(e=>{document.getElementById('out').innerHTML='Sirva por HTTP: python -m http.server 8860';});
@@ -49,11 +57,12 @@ function elemOf(s){var c={Fogo:0,Terra:0,Ar:0,Agua:0};for(var ch of s){var e=LE[
  var best='?',n=-1;for(var k in c)if(c[k]>n){n=c[k];best=k}return best}
 function boot(){
  var e=document.getElementById('els');
- ['Fogo','Terra','Ar','Agua'].forEach(el=>{var b=document.createElement('span');b.className='el'+(el===sel?'':' off');b.textContent=el;b.style.background=ELH[el];
+ ['Fogo','Terra','Ar','Agua'].forEach(el=>{var b=document.createElement('span');b.className='el'+(el===sel?'':' off');b.dataset.k=el;b.textContent=ELN[LG][el];b.style.background=ELH[el];
   b.onclick=()=>{sel=el;[...e.children].forEach(c=>c.className='el off');b.className='el';render()};e.appendChild(b)});
- document.getElementById('force').oninput=()=>{document.getElementById('flab').textContent=['fraca','média','forte'][+force.value];render()};
+ document.getElementById('force').oninput=()=>{document.getElementById('flab').textContent=S('lvl')[+force.value];render()};
  document.getElementById('depth').oninput=()=>{document.getElementById('dlab').textContent=depth.value;render()};
- render();
+ document.getElementById('lang').onclick=()=>{LG=LG==='pt'?'en':'pt';localStorage.setItem('atlas_lang',LG);applyLang();render()};
+ applyLang();render();
 }
 function render(){
  var want=sel,fb=+document.getElementById('force').value,dep=+document.getElementById('depth').value;
@@ -84,14 +93,14 @@ function render(){
   if(!!b.att-!!a.att)return !!b.att-!!a.att; return wa-wb});
  var top=uniq.slice(0,40);
  var att=top.filter(c=>c.att).length;
- document.getElementById('summary').innerHTML='<b>'+top.length+'</b> construções para <span style="color:'+ELH[want]+'">'+want+'</span> · <b>'+att+'</b> já atestadas no livro · prefixos '+want+': '+(pre.map(p=>p.affix).join(', ')||'(vêm da raiz)')+' · sufixos: '+suf.map(s=>s.affix).join(', ');
+ document.getElementById('summary').innerHTML='<b>'+top.length+'</b> '+S('cons')+' <span style="color:'+ELH[want]+'">'+ELN[LG][want]+'</span> · <b>'+att+'</b> '+S('att')+' · '+S('pre')+' '+ELN[LG][want]+': '+(pre.map(p=>p.affix).join(', ')||S('fromroot'))+' · '+S('suf')+': '+suf.map(s=>s.affix).join(', ');
  document.getElementById('out').innerHTML=top.map(c=>{
   var dec=(c.pre?'<span class=pre>'+c.pre+'</span>':'')+c.root+(c.suf?'<span class=suf>'+c.suf+'</span>':'');
   var f=c.att?c.att.forca:Math.round(c.rootforce/(1+c.pre.length+c.suf.length));
   return '<div class="n'+(c.att?' att':'')+'"><div class=nm>'+dec+'</div>'+
-   '<span class=tag style="background:'+ELH[c.el]+'">'+c.el+'</span> '+
-   '<span class=badge>'+(c.att?'✓ no livro ('+c.att.forca+'×, pot '+c.att.potencia+'×)':'força prevista ~'+f)+'</span>'+
-   '<div class=meta2>raiz '+c.root+(c.pre?' · prefixo '+c.pre:'')+(c.suf?' · sufixo '+c.suf:'')+'</div></div>';
+   '<span class=tag style="background:'+ELH[c.el]+'">'+ELN[LG][c.el]+'</span> '+
+   '<span class=badge>'+(c.att?S('inbook')+' ('+c.att.forca+'×, '+S('pot')+' '+c.att.potencia+'×)':S('pred')+f)+'</span>'+
+   '<div class=meta2>'+S('raiz')+' '+c.root+(c.pre?' · '+S('prefixo')+' '+c.pre:'')+(c.suf?' · '+S('sufixo')+' '+c.suf:'')+'</div></div>';
  }).join('');
 }
 </script>

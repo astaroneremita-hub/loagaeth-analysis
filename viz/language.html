@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Língua Loagaeth</title>
+<style>
+:root{--bg:#f7f6f1;--card:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8;--ac:#8a6d2f}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13120c;--card:#1e1d15;--ink:#ece9da;--mut:#9a988a;--line:#322f27;--ac:#d6b96a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 system-ui,sans-serif;max-width:940px;margin:0 auto;padding:18px 18px 60px}
+h1{font-size:22px;font-weight:600;margin:0 0 2px}h2{font-size:17px;font-weight:600;margin:26px 0 8px}
+.sub{color:var(--mut);margin:0 0 6px;font-size:13px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+.k{color:var(--mut);font-size:12px}.v{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums}
+.vs{font-size:13px;color:var(--mut)}
+.bar{display:flex;gap:3px;height:120px;align-items:flex-end;margin-top:8px}
+.bar .b{flex:1;border-radius:4px 4px 0 0;background:var(--ac);position:relative}
+.bar .b span{position:absolute;top:-16px;left:0;right:0;text-align:center;font-size:11px;color:var(--mut)}
+.bar .b em{position:absolute;bottom:-18px;left:0;right:0;text-align:center;font-size:11px;color:var(--mut);font-style:normal}
+.anchor{display:flex;gap:10px;align-items:baseline;padding:6px 0;border-bottom:1px solid var(--line)}
+.en{font-size:19px;font-weight:600;color:var(--ac);min-width:120px}.gl{color:var(--mut)}
+.pairs{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px}
+.pair{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:14px}
+.pair b{color:var(--ac)}.sk{color:var(--mut);font-size:12px}
+.pill{display:inline-block;padding:1px 8px;border-radius:12px;color:#fff;font-size:11px;font-weight:600}
+.row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--line);font-size:14px}
+.note{color:var(--mut);font-size:13px;margin:4px 0}
+#lang{cursor:pointer;border:1px solid var(--line);border-radius:16px;padding:3px 12px;font-size:12px;font-weight:600;float:right}
+</style>
+</head>
+<body>
+<span id="lang">EN</span>
+<h1 id="h1">A Língua Loagaeth</h1>
+<p class="sub" id="sub">É uma língua, não ruído nem cifra. Aqui as provas, as palavras que Dee traduziu, a morfologia e o repertório — tudo medido.</p>
+<div id="body"></div>
+<script>
+var ELH={Fogo:'#d85a30',Terra:'#b07d2a',Ar:'#2f7fd4',Agua:'#199e70','?':'#888'};
+var LG=(localStorage.getItem('atlas_lang')||'pt'),D=null;
+var T={pt:{h1:'A Língua Loagaeth',sub:'É uma língua, não ruído nem cifra. As provas, as palavras que Dee traduziu, a morfologia e o repertório — tudo medido.',lang:'EN',
+ q1:'É uma língua? Três provas',zipf:'Zipf (lei de potência)',zipfv:'inclinação / r²',zipfn:'línguas reais seguem lei de potência; aleatório não',
+ ent:'Escada de entropia (bits/char)',entn:'cai com o contexto = carrega informação, como língua (aleatório fica alto; cifra rígida ~0)',
+ anc:'As palavras que Dee traduziu (âncoras)',ancn:'o ponto de partida para decifrar o sentido',
+ mp:'Pares de alternação vocálica (repertório)',mpn:'mesma raiz consonantal, vogais trocadas — morfologia tipo semítica (como pola/pala)',
+ af:'Afixos e seu elemento',afn:'o prefixo/sufixo muda o posto e a carga elemental',
+ cw:'Palavras das Chamadas achadas na Loagaeth',cwn:'Loagaeth e Chamadas partilham vocabulário — a mesma língua',
+ verdict:'Veredito: assinatura de LÍNGUA. Decifrável por método linguístico (âncoras + morfologia + pares mínimos), não só por evocação.'},
+ en:{h1:'The Loagaeth Language',sub:'It is a language, not noise nor a cipher. The proofs, the words Dee translated, the morphology and the repertoire — all measured.',lang:'PT',
+ q1:'Is it a language? Three proofs',zipf:'Zipf (power law)',zipfv:'slope / r²',zipfn:'real languages follow a power law; random text does not',
+ ent:'Entropy ladder (bits/char)',entn:'drops with context = carries information, like a language (random stays high; rigid cipher ~0)',
+ anc:'The words Dee translated (anchors)',ancn:'the starting point to decipher meaning',
+ mp:'Vowel-alternation pairs (repertoire)',mpn:'same consonant skeleton, different vowels — Semitic-style morphology (like pola/pala)',
+ af:'Affixes and their element',afn:'the prefix/suffix changes rank and elemental charge',
+ cw:'Call words found in the Loagaeth',cwn:'Loagaeth and the Calls share vocabulary — the same language',
+ verdict:'Verdict: LANGUAGE signature. Decipherable by linguistic method (anchors + morphology + minimal pairs), not only by evocation.'}};
+function S(k){return T[LG][k]}
+fetch('language_data.json').then(r=>r.json()).then(d=>{D=d;render()}).catch(e=>{document.getElementById('body').innerHTML='Sirva por HTTP: python -m http.server 8860'});
+document.getElementById('lang').onclick=()=>{LG=LG==='pt'?'en':'pt';localStorage.setItem('atlas_lang',LG);render()};
+function render(){
+ document.getElementById('h1').textContent=S('h1');document.getElementById('sub').textContent=S('sub');document.getElementById('lang').textContent=S('lang');
+ var h='';
+ h+='<h2>'+S('q1')+'</h2>';
+ h+='<div class=cards>';
+ h+='<div class=card><div class=k>'+S('zipf')+'</div><div class=v>'+D.zipf.slope+'</div><div class=vs>r² '+D.zipf.r2+'</div><div class=note>'+S('zipfn')+'</div></div>';
+ // entropy bars
+ var lo=D.entropy.Loagaeth, rd=D.entropy.aleatorio;
+ h+='<div class=card style="grid-column:span 2"><div class=k>'+S('ent')+'</div><div class=bar>';
+ [['h0',lo.h0],['h1',lo.h1],['h2',lo.h2],['h3',lo.h3]].forEach(x=>{var pct=100*x[1]/4.1;h+='<div class=b style="height:'+pct+'%"><span>'+x[1]+'</span><em>'+x[0]+'</em></div>'});
+ h+='</div><div class=note style="margin-top:22px">'+S('entn')+' · '+(LG==='en'?'random h3=':'aleatório h3=')+rd.h3+'</div></div>';
+ h+='</div>';
+ h+='<p class=note style="font-weight:600;color:var(--ink)">'+S('verdict')+'</p>';
+
+ h+='<h2>'+S('anc')+'</h2><p class=sub>'+S('ancn')+'</p>';
+ for(var w in D.translated){h+='<div class=anchor><span class=en>'+w+'</span><span class=gl>'+D.translated[w]+'</span></div>'}
+
+ h+='<h2>'+S('mp')+'</h2><p class=sub>'+S('mpn')+'</p><div class=pairs>';
+ for(var sk in D.minimal_pairs){h+='<div class=pair><span class=sk>['+sk+']</span><br>'+D.minimal_pairs[sk].map(n=>'<b>'+n+'</b>').join(' · ')+'</div>'}
+ h+='</div>';
+
+ h+='<h2>'+S('af')+'</h2><p class=sub>'+S('afn')+'</p><div class=cards>';
+ D.prefixes.concat(D.suffixes).forEach(a=>{if(!a.ex||!a.ex.length)return;h+='<div class=card><div class=v style="font-size:18px">'+a.a+'- <span class=pill style="background:'+ELH[a.el]+'">'+a.el+'</span></div><div class=note>'+a.ex.slice(0,3).join(', ')+'</div></div>'});
+ h+='</div>';
+
+ h+='<h2>'+S('cw')+'</h2><p class=sub>'+S('cwn')+'</p>';
+ D.call_extra.forEach(c=>{h+='<div class=row><b>'+c.word+'</b><span class=gl>'+c.gloss+' — '+c.n+'×</span></div>'});
+ D.call_words_in_loag.forEach(c=>{h+='<div class=row><b>'+c.word+'</b><span class=gl>'+c.len+' '+(LG==='en'?'letters':'letras')+' · '+c.count+'× · '+(LG==='en'?'ratio':'razão')+' '+c.ratio+'×</span></div>'});
+ document.getElementById('body').innerHTML=h;
+}
+</script>
+</body>
+</html>

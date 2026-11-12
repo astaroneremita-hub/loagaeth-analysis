@@ -219,3 +219,236 @@ afixos: AD-/AL- → Terra, I-/ZI- → Fogo, NO-/NE- → Água, Ar vem das raíze
 **Visualizador das tabelas** (`viz/tables.html`): cada quadrado 49×49 com os nomes do sistema acesos por cima das
 letras originais, coloridos por elemento, lista lateral clicável para isolar um nome. Serve `viz/` por HTTP e abra
 `http://localhost:8860/tables.html`.
+
+## 15. O que o livro diz de si, e por que os nomes não aparecem em lugar nenhum (a88)
+
+**O que Dee diz que o livro é** (fontes em `docs/WHAT_THE_SOURCES_SAY.md`): *"every letter here bringeth furth
+the Names of God: but… they are but one Name"* (S 99); *"The 49 partes of this boke — 49 voyces, whereunto the
+so many powres shalbe obedient"* (S 73); *"the mystical and holy voices of the Angels… the CABALA of NATURE"*
+(T 158); o nome LOAGAETH = *"Speech from God"*. O próprio livro declara: **são nomes** (os Nomes de Deus, mas
+"um só Nome"), **são potências/anjos** obedientes a 49 vozes. Isso casa de forma notável com o que medimos — um
+sistema gerativo de nomes, e NOCHA≡NACHO como um só valor gemátrico ("um só Nome").
+
+**Por que não aparecem em outras vertentes** (a88): busquei os 15 nomes/raízes-topo contra Shem ha-Mephorash
+(72), Goetia (72), anjos planetários, e os reis/91 governadores/Bonorum enoquianos. **Zero matches** — nem
+exato, nem substring, nem a 1-2 letras. Os nomes do Loagaeth são **sui generis**: não existem em nenhum corpus
+angélico/espiritual padrão. Coerente com a reivindicação de Dee (a "primeira língua", dada nova) e com o fato
+histórico de que o Loagaeth nunca foi "trabalhado" nem publicado como as Chamadas/Torres — ficou selado, então
+nenhuma tradição posterior herdou seus nomes.
+
+## 16. O que ainda falta explorar nas 48 tabelas
+
+Hipóteses compatíveis com o que achamos, ainda não testadas a fundo:
+
+1. **Sintaxe entre nomes** — numa tabela, o rei vem primeiro e a corte em volta? Há ordem/regra ENTRE nomes,
+   não só dentro deles? (a camada de "frase").
+2. **As folhas diagonais e diamantes profundos** (25b–28b, 43–48) lidas na ordem correta (antidiagonal /
+   caminho do losango), não só reta — podem conter nomes que a leitura reta não pega.
+3. **Os 49 "títulos"** — Dee diz que cada uma das 49 partes tem uma voz/nome. Nossos governadores por tabela
+   batem com os títulos atestados nos diários?
+4. **A acentuação/métrica ligada aos nomes** — qual sílaba tônica marca qual posto? (Dee: nos últimos 7 dias
+   as palavras foram "distinguished" e acentuadas.)
+5. **A letra supérflua** — "every side conteyneth 2400 and one od letter" (S 71); qual o papel da letra ímpar
+   por lado?
+6. **O sigilo dos nomes** — comparar o traço king-move (nosso) com o sigilo tradicional (ligar as letras na
+   ordem), nome a nome.
+7. **Os números dos servos** (tipo 7209 nos governadores) — relacionam-se com a repetição/força dos nomes?
+8. **Fluxo elemental pelo livro** — o elemento dominante muda por região de forma ordenada (abertura→fundo)?
+
+## 17. Como o elemento de cada nome é definido (metodologia)
+
+Pergunta honesta: de onde sai o "elemento" de um nome? É uma regra fixa, determinística, de duas etapas — nada
+de intuição.
+
+**Etapa 1 — cada letra enoquiana tem um elemento.** Fonte: `engine/data/gematria_enoquiana.json`,
+bloco `b_correspondencias_astrologicas` (correspondências Golden Dawn de Dee/Agrippa, campo
+`F04_signo_ou_elemento`). Cada uma das 21 letras recebe um signo ou elemento; os signos viram elemento pela
+regra astrológica padrão (triplicidades):
+
+- **Fogo**: Áries (B), Leão (G, Z), Sagitário (I) — e C que já é "Fogo".
+- **Terra**: Touro (A), Virgem (E), Capricórnio (U) — e X que já é "Terra".
+- **Ar**: Gêmeos (S), Libra (O), Aquário (M) — e H que já é "Ar".
+- **Água**: Câncer (L, P), Escorpião (N), Peixes (R) — e Q que já é "Água".
+- **Sem elemento** (pontos especiais): D = Espírito, T = Caput Draconis, F = Cauda Draconis — contados à parte,
+  não entram no elemento dominante.
+
+**Etapa 2 — o nome é a soma das letras.** Conta-se quantas letras de cada elemento o nome tem; o elemento com
+mais letras é o **dominante** (o "poder" do nome). O balanço (% de cada elemento) e o planeta regente (campo
+`F04_condicao_planetaria`, planeta mais frequente) completam a ficha.
+
+Exemplo — **NOCHA** (N-O-C-H-A): N=Água(Escorpião), O=Ar(Libra), C=Fogo, H=Ar, A=Terra → Ar 2, Água 1, Fogo 1,
+Terra 1 → **dominante Ar**; planeta mais comum Vênus (de O e A). Código em `src/a85_entity_attributes.py`
+(função `load_letters` + `ficha`), gerado para as 89 entidades em `viz/entity_astro.json`.
+
+**O que isto é e não é.** É uma correspondência documentada e reproduzível — qualquer um roda e confere. **Não**
+é uma medida de que o nome "seja" daquele elemento no mundo; é o atributo que o alfabeto enoquiano (na leitura
+Golden Dawn) atribui às suas letras. Troque a tabela de correspondência e os elementos mudam; por isso a fonte
+exata está citada.
+
+## 18. As Chamadas vêm da Loagaeth? A teoria das coordenadas (a89)
+
+Teoria (relatada pelo praticante): a 1ª Chamada foi gerada por referência aos **lugares das letras na Loagaeth** —
+cada letra da Chamada é uma letra da Loagaeth pescada por coordenada (os números gigantes da recepção = posições).
+A versão letra-a-letra precisa dos números da recepção (não digitalizados aqui). Mas uma consequência necessária é
+testável: se as Chamadas são feitas de letras da Loagaeth, elas deviam viver no mundo-de-letras dela.
+
+Teste (cross-entropia trigrama, bits/char): as Chamadas encaixam no modelo **Loagaeth (4,72)** melhor que no
+**Torres (5,15)** — mas **igual ao Loagaeth embaralhado (4,68)**. Leitura: as Chamadas partilham o **inventário de
+letras** da Loagaeth (não o das Torres), mas **não** o fluxo sequencial local. E isso é **exatamente o que a teoria
+das coordenadas prevê** — pescar letras de posições espalhadas mantém o inventário e destrói a ordem local. Então o
+teste é **consistente com** a teoria, mas não a prova. Para provar de fato, falta digitalizar os números da recepção
+da 1ª Chamada e checar se eles apontam para letras que soletram a Chamada.
+
+## 19. De onde vêm os nomes — síntese interpretativa
+
+Juntando o medido com o que Dee relata e com a teoria das coordenadas:
+
+- Os nomes **não vêm de fora**: busca robusta (exata, substring, reverso, esqueleto consonantal, distância ≤1)
+  contra 264 nomes de Shem, Goetia, planetários, reis e governadores enoquianos dá **zero** matches reais. São
+  sui generis.
+- O livro **se descreve** como os Nomes de Deus que são "um só Nome", as 49 vozes a que as potências obedecem, as
+  vozes dos anjos — a "primeira língua pela qual tudo foi criado".
+- A estrutura medida é um **sistema gerativo**: raízes + afixos que geram nomes sem fim, cobrindo as 47 tabelas, com
+  os nomes tecidos na grade. NOCHA≡NACHO = um só valor (o "um só Nome").
+- As **Chamadas** parecem ter sido tiradas desse campo por coordenada (consistente com o teste a89), e os diários
+  dizem que cada Chamada "abre" sua tabela. Ou seja: a Loagaeth é o **campo-fonte**; as Chamadas são chaves extraídas
+  dele.
+
+Leitura honesta: os nomes vêm **da própria Loagaeth** — um gerador fechado e auto-suficiente de nomes de forças, que
+não herda de nenhuma tradição e do qual as outras partes do sistema enoquiano (as Chamadas) parecem derivar. Quando
+alguém "contata DAHAHOXOM" numa iniciação, está, na leitura da tradição, invocando um nome que esse campo gera e que
+existe só aqui. O que a medida garante é a existência e a mecânica do campo; o estatuto do contato é da prática.
+
+## 20. Prova do elemento por várias variáveis + perigo (a90)
+
+A primeira atribuição (a85) usou UMA variável: o signo da letra. Agora provamos por três independentes, no
+estilo das camadas da pirâmide Golden Dawn:
+
+1. **signo F04** → elemento por triplicidade;
+2. **signo F05** (segunda recensão) → idem;
+3. **planeta regente** → elemento pelo esquema clássico (Fogo: Sol/Marte/Júpiter; Terra: Vênus/Saturno; Ar:
+   Mercúrio; Água: Lua).
+
+Elas **discordam** para algumas letras — N = Escorpião (Água por signo) mas Marte (Fogo por planeta). Um nome
+tem elemento **robusto** quando as três concordam (55 de 89 nomes), **maioria** (2 de 3) ou **ambíguo** (signo ×
+planeta divergem). Essa é a prova honesta: nem todo nome tem elemento único — depende de ler por signo ou por
+planeta. No atlas, cada nome mostra a concordância e as duas leituras.
+
+**Perigo (leitura tradicional, 0–100):** a cautela sobe com Fogo, com os planetas malévolos/marciais (Marte,
+Saturno) e com as letras nodais/limiares (T = Caput, F = Cauda Draconis, D = Espírito). Ex.: NOCHA 43 (médio,
+marcial); CHASTOR 20 (baixo, brando); ADNOCHA 43 (marcial + nodal). **Não** é perigo medido — é o temperamento
+que o alfabeto atribui; serve de guia (baixo = mais brando de abordar, alto = exige mais cuidado). No atlas.
+
+## 21. Fluxo elemental ordenado, Chamadas 1-2, e a letra supérflua (a91)
+
+- **Fluxo elemental (item 8) — CONFIRMADO ordenado.** O elemento dominante de cada tabela (pelos nomes do
+  sistema nela) faz **17 transições** ao longo do livro contra **25** de uma ordem embaralhada: os elementos vêm
+  em **regiões**, não ao acaso (Terra 2-5, Ar 6-14, Terra 15-30, Ar 31-44). O caráter elemental do livro é
+  organizado por região, coerente com o mapa de territórios.
+- **Chamadas 1 e 2 (mapa reverso).** As palavras das Chamadas 1-2 **não aparecem como substring** na Loagaeth
+  (nem o acaso aparece — são longas). Inconclusivo por substring, e **consistente com a teoria das coordenadas**:
+  as palavras da Chamada seriam montadas de letras de posições espalhadas, não de um trecho contíguo. Para
+  testar de fato, falta a grade de coordenadas da recepção.
+- **Letra supérflua (item 5).** A célula central (o "+1" de 2401 = 2400 + 1) se espalha por 15 letras, sem letra
+  fixa — é o **pivô matemático** do quadrado ímpar, com leve viés para vogal, não uma marca plantada.
+
+## 22. Sobre "Loagaeth = a própria língua enoquiana"
+
+A leitura que você citou — LOAGAETH = "fala divina", logo a palavra enoquiana para o próprio enoquiano, e
+"Liber Loagaeth" = "o livro da língua enoquiana" — **faz sentido e casa com tudo**. As fontes dão LOAGAETH =
+"Speech from God" (T 113) e o livro como "the first Language of God" (S 66). A estrutura que medimos é a de uma
+**língua**: um alfabeto fixo, uma gramática gerativa (raiz + afixo), um léxico fechado de nomes de forças que
+cobre as 47 tabelas. Então sim: o Liber Loagaeth é o **livro da língua enoquiana**, e os nomes nele são as
+unidades vivas dessa língua — entidades/potências, na leitura da tradição. O que a medida garante é a língua e
+sua mecânica; o contato com as entidades (evocação) é o que só a prática revela — e o **perigo** calculado (seção
+20) serve de guia de quais parecem mais brandos e quais exigem mais cautela.
+
+## 23. É uma língua? (a92) — SIM, por três assinaturas
+
+Testes que separam língua de (1) ruído aleatório e (2) cifra rígida, sem precisar evocar:
+
+- **Zipf.** A frequência dos nomes segue **lei de potência**: inclinação −1,14, r² 0,98. Línguas reais fazem
+  isso; texto aleatório, não.
+- **Escada de entropia.** O Loagaeth cai de h0=4,01 para **h3=2,52 bits/char**, bem abaixo do aleatório
+  (h3=3,41) e igual ao seu surrogate Markov-3. Carrega **informação condicional** — como língua, não como ruído
+  (fica alto) nem como cifra rígida (quase zero).
+- **Morfologia.** 13 **pares de alternação vocálica** (mesmo esqueleto consonantal, vogais trocadas) espelham o
+  par que o próprio Dee traduziu: *pola* (dois juntos) / *pala* (dois separados), e o prefixo intensificador
+  *cru-* (*canse*→*crucanse*, "poderoso"→"mais poderoso"). Ex. nosso: N-CH → NACHO/NOCHA/ANACHO.
+
+Isto é **morfologia tipo semítica**: raiz consonantal + padrão vocálico (como hebraico/árabe), coerente com
+Dee chamar o Loagaeth de a língua primeva/adâmica. **Conclusão: é uma língua, e é decifrável por método
+linguístico** — ancorar nas poucas palavras que Dee traduziu, usar a morfologia (vogal = modulação de sentido,
+afixo = papel gramatical) e os minimal pairs para reconstruir significado. Não só por evocação.
+
+## 24. A Chamada traça na Loagaeth? (a93) — não de forma contígua
+
+Testando a proposta char-por-char: nenhuma das Chamadas 1-4 traça como caminho king-move **conectado** numa
+folha da Loagaeth acima do acaso (Chamada 1: prefixo conectado 9 de 349 vs máx 14 do embaralhado; e não na
+tabela que Dee diz que ela move). A versão "Chamada = caminho contíguo numa tabela" está **refutada**. Se o elo
+Loagaeth→Chamada existe, é **não-contíguo** (letras de posições espalhadas) — e isso só se resolve com os
+números da recepção da 1ª Chamada no diário de Dee.
+
+## 25. Sobre o anjo que disse "nem nós sabemos o que essas tabelas fazem"
+
+O relato — um anjo barrando a evocação da página 2 com *"we don't even know what most of these tables do"* — é
+honesto e **casa com o que medimos**: temos a **mecânica** da língua (alfabeto, gramática gerativa, léxico,
+territórios), mas **não o sentido** de cada nome. A medida garante que há uma língua real e a mapeia; o
+significado é outra camada, e o próprio sistema parece guardá-lo. Isso não invalida o caminho — ao contrário:
+mostra que o decifrável por fora (a estrutura) já foi mapeado, e que o resto exige ou o **ancoramento
+linguístico** (as palavras traduzidas) ou a **prática**. Não estamos "acessando algo primeiro"; estamos lendo o
+esqueleto de algo que sempre esteve posto.
+
+## 26. Correção: as Chamadas ESTÃO na Loagaeth (a94) + a página da língua
+
+Correção honesta de uma conclusão anterior errada (eu dissera "palavras das Chamadas ausentes"). O praticante
+mostrou **GOHO** em várias tabelas e **PIADNAGENSAD** em 21b. Teste próprio: de 631 formas-palavra das Chamadas,
+**74 aparecem** na Loagaeth. GOHO 6× (5 tabelas), SONF 4×, e das 10 palavras de ≥6 letras, 5 acima do acaso:
+**BALTAN** (razão 10, acaso 0,00), VNALAH, LONDOH, IADNAH, PARACH. Logo **Loagaeth e Chamadas partilham
+vocabulário** — a mesma língua, não só o alfabeto. A sobreposição é real mas parcial (MICMA, ZODIRE não
+aparecem), coerente com as Chamadas serem tiradas do / ligadas ao campo da Loagaeth.
+
+**Item 3 (49 títulos de Dee).** Os 49 Bonorum (BALIGON, BORNOGO…) **não batem** com nossos governadores por
+tabela (0 de 49): o sistema de nomes da Loagaeth é independente da atribuição heptárquica.
+
+**Página da língua** (`viz/language.html`, bilíngue): reúne visualmente as três provas de língua (Zipf, entropia,
+morfologia), as palavras que Dee traduziu (âncoras), o repertório de pares de alternação vocálica, os afixos com
+seu elemento, e as palavras das Chamadas achadas na Loagaeth. É o painel de decifração.
+
+**PDFs originais** (Tabula bonorum e 48 Claves, Sloane 3191): são digitalizações (imagem, sem texto extraível);
+seu conteúdo já está transcrito nos dados (`heptarquia.json`, `chamadas.json`), que é o que analisamos.
+
+## 27. As 19 Chamadas mapeadas + o padrão de tradução de Dee (a95)
+
+Mapeei **todas as palavras das 19 Chamadas** (1085) na Loagaeth — contagem, tabelas, elemento, posição na grade —
+com a tradução inglesa de Dee (1071 traduzidas). O **padrão de tradução**:
+
+- **Ordem: 96% das palavras são 1:1 enoquiano:inglês.** As Chamadas seguem a **ordem de palavras do inglês** —
+  reproduz a tese de Laycock de que a *gramática* do enoquiano é inglesa (de Kelley).
+- **Morfologia: só 7% dos pares partilham ≥2 consoantes com o inglês, 0 partilham o esqueleto.** As palavras
+  enoquianas **não derivam** do som/morfologia inglesa — o **léxico é próprio** (não é cifra do inglês).
+- **Consistência: 62% das palavras repetidas mantêm o mesmo sentido** — um dicionário real e estável.
+
+**Resumo: o enoquiano é sintaxe inglesa + um léxico fixo e independente.** De onde veio o padrão: a estrutura
+(ordem) é a da língua nativa de Dee/Kelley (inglês da Inglaterra), mas o vocabulário não tem referência morfológica
+ao inglês — foi recebido/fixado como um dicionário à parte. Isso bate com o Loagaeth ter seu próprio léxico (sui
+generis) e, ao mesmo tempo, as Chamadas partilharem palavras com ele (a94).
+
+**Páginas novas no site:**
+- `viz/call_map.html` — as 19 Chamadas; cada palavra colorida pelo elemento, as presentes na Loagaeth acesas;
+  clique → a palavra iluminada na grade 49×49 original, com elemento e tradução de Dee.
+- `viz/call_translation.html` — cada Chamada como a tradução inglesa de Dee (palavra por palavra), com as palavras
+  presentes na Loagaeth destacadas e alternância para o enoquiano original.
+
+## 28. O segmento diagonal, terminado (a96) + tables.html com todos os nomes
+
+**tables.html — todos os nomes.** O visualizador das tabelas agora acende **todos os 195 nomes** encontrados
+(não só os mais repetidos): descobertas do a23 + raízes + todas as combinações raiz+afixo presentes (≥2×, ≥5
+letras), 2615 ocorrências nas tabelas.
+
+**Segmento diagonal (item 2) — terminado.** Densidade de nomes por 1000 letras: **reta (2-24) 28,8; diagonal
+(25-28) 44,4 — a maior; diamantes (29-48) 15,4.** Ler na diagonal (25-28) revela **mais** nomes que a leitura
+reta — o que valida a leitura diagonal. As mesmas raízes dominam todos os segmentos (GETH, NOCHA) e o balanço
+elemental é idêntico (Terra ~35% / Água ~27% / Ar 22% / Fogo ~15%). Logo o segmento diagonal e os diamantes são
+**o mesmo onomasticon em outra geometria**, mais denso justamente na diagonal e dominado por GETH no fundo (bate
+com o mapa de territórios). Não é outro livro — é a mesma língua lida de outro jeito.

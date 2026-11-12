@@ -97,6 +97,15 @@ import a84_entity_profiles
 import a85_entity_attributes
 import a86_forge_and_grids
 import a87_gematria_crosssystem
+import a88_external_names
+import a89_calls_source
+import a90_element_proof_danger
+import a91_flow_calls_oddletter
+import a92_is_it_a_language
+import a93_call_char_trace
+import a94_call_words_in_loagaeth
+import a95_call_atlas
+import a96_diagonal_segment
 import make_figures
 import make_viz_data
 
@@ -190,6 +199,15 @@ MODULES = [
     ("85_entity_attributes", a85_entity_attributes),
     ("86_forge_and_grids", a86_forge_and_grids),
     ("87_gematria_crosssystem", a87_gematria_crosssystem),
+    ("88_external_names", a88_external_names),
+    ("89_calls_source", a89_calls_source),
+    ("90_element_proof_danger", a90_element_proof_danger),
+    ("91_flow_calls_oddletter", a91_flow_calls_oddletter),
+    ("92_is_it_a_language", a92_is_it_a_language),
+    ("93_call_char_trace", a93_call_char_trace),
+    ("94_call_words_in_loagaeth", a94_call_words_in_loagaeth),
+    ("95_call_atlas", a95_call_atlas),
+    ("96_diagonal_segment", a96_diagonal_segment),
 ]
 
 

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>As Chamadas na Loagaeth</title>
+<style>
+:root{--bg:#f7f6f1;--card:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8;
+--Fogo:#d85a30;--Terra:#b07d2a;--Ar:#2f7fd4;--Agua:#199e70}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13120c;--card:#1b1a13;--ink:#ece9da;--mut:#9a988a;--line:#322f27}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,sans-serif;max-width:1120px;margin:0 auto;padding:16px 16px 50px}
+h1{font-size:20px;font-weight:600;margin:0 0 2px;display:inline-block}
+#lang{cursor:pointer;border:1px solid var(--line);border-radius:16px;padding:3px 12px;font-size:12px;font-weight:600;float:right}
+.sub{color:var(--mut);margin:0 0 10px;font-size:13px}
+.calls{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
+.cb{padding:4px 9px;border:1px solid var(--line);border-radius:7px;background:var(--card);cursor:pointer;font-size:12px;font-weight:600}
+.cb.on{background:var(--ink);color:var(--bg)}
+.layout{display:flex;gap:16px;flex-wrap:wrap}
+.text{flex:1;min-width:320px;line-height:2.1}
+.w{padding:1px 4px;border-radius:5px;cursor:default;white-space:nowrap}
+.w.found{cursor:pointer;color:#fff;font-weight:600}
+.w.sel{outline:2px solid var(--ink)}
+.side{width:320px;flex-shrink:0}
+.side .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+svg{display:block;width:100%;height:auto}
+.leg{color:var(--mut);font-size:12px;margin:6px 0}
+.stat{font-size:13px;color:var(--mut)}
+.occ{font-size:12px;padding:3px 0;border-bottom:1px solid var(--line)}
+</style>
+</head>
+<body>
+<span id="lang">EN</span>
+<h1 id="h1">As Chamadas Enoquianas na Loagaeth</h1>
+<p class="sub" id="sub">As 19 Chamadas. Cada palavra colorida pelo elemento; as que aparecem na Loagaeth ficam acesas — clique para ver onde, na grade original.</p>
+<div class="calls" id="calls"></div>
+<div class="leg"><span style="color:var(--Fogo)">■</span> Fogo <span style="color:var(--Terra)">■</span> Terra <span style="color:var(--Ar)">■</span> Ar <span style="color:var(--Agua)">■</span> Água · <span id="statline"></span></div>
+<div class="layout">
+ <div class="text" id="text"></div>
+ <div class="side" id="side"></div>
+</div>
+<script>
+var ELH={Fogo:'#d85a30',Terra:'#b07d2a',Ar:'#2f7fd4',Agua:'#199e70','?':'#8a8a8a'};
+var A=null,G=null,cur=0,sel=null,LG=(localStorage.getItem('atlas_lang')||'pt');
+var T={pt:{h1:'As Chamadas Enoquianas na Loagaeth',sub:'As 19 Chamadas. Cada palavra colorida pelo elemento; as que aparecem na Loagaeth ficam acesas — clique para ver onde, na grade original.',lang:'EN',found:'palavras na Loagaeth',of:'de',occ:'ocorrências',gloss:'tradução de Dee',none:'clique numa palavra acesa'},
+ en:{h1:'The Enochian Calls in the Loagaeth',sub:'The 19 Calls. Each word coloured by element; those present in the Loagaeth are lit — click to see where, on the original grid.',lang:'PT',found:'words in the Loagaeth',of:'of',occ:'occurrences',gloss:"Dee's translation",none:'click a lit word'}};
+function S(k){return T[LG][k]}
+Promise.all([fetch('call_atlas.json').then(r=>r.json()),fetch('table_grids.json').then(r=>r.json())])
+ .then(([a,g])=>{A=a;G=g;boot()}).catch(e=>{document.getElementById('text').innerHTML='Sirva por HTTP: python -m http.server 8860'});
+function boot(){
+ document.getElementById('lang').onclick=()=>{LG=LG==='pt'?'en':'pt';localStorage.setItem('atlas_lang',LG);applyLang();draw()};
+ var box=document.getElementById('calls');
+ A.calls.forEach((c,i)=>{var b=document.createElement('span');b.className='cb';b.textContent=c.numero;b.onclick=()=>{cur=i;sel=null;draw()};box.appendChild(b)});
+ applyLang();draw();
+}
+function applyLang(){document.getElementById('h1').textContent=S('h1');document.getElementById('sub').textContent=S('sub');document.getElementById('lang').textContent=S('lang')}
+function draw(){
+ var c=A.calls[cur];
+ [...document.getElementById('calls').children].forEach((b,i)=>b.classList.toggle('on',i===cur));
+ var found=c.words.filter(w=>w.loag_count>0).length;
+ document.getElementById('statline').textContent=found+' '+S('found')+' '+S('of')+' '+c.words.length;
+ var html='';
+ c.words.forEach((w,i)=>{
+  var col=ELH[w.element]||'#888';
+  if(w.loag_count>0){html+='<span class="w found'+(sel===i?' sel':'')+'" style="background:'+col+'" data-i="'+i+'" title="'+w.gloss.replace(/\"/g,'')+' — '+w.loag_count+'×">'+w.en+'</span> '}
+  else{html+='<span class="w" style="color:'+col+'" title="'+w.gloss.replace(/\"/g,'')+'">'+w.en+'</span> '}
+ });
+ var t=document.getElementById('text');t.innerHTML=html;
+ t.querySelectorAll('.w.found').forEach(el=>el.onclick=()=>{sel=+el.dataset.i;draw()});
+ // side
+ if(sel==null||!c.words[sel]||c.words[sel].loag_count===0){document.getElementById('side').innerHTML='<div class=card><div class=stat>'+S('none')+'</div></div>';return}
+ var w=c.words[sel];
+ var sh='<div class=card><div style="font-size:20px;font-weight:600;color:'+ELH[w.element]+'">'+w.en+'</div>';
+ sh+='<div class=stat>'+S('gloss')+': <b style="color:var(--ink)">'+w.gloss+'</b></div>';
+ sh+='<div class=stat>'+w.loag_count+' '+S('occ')+' · '+w.loag_tables+' '+(LG==='en'?'tables':'tabelas')+' · '+w.element+'</div></div>';
+ // render first occurrence grid
+ if(w.pos&&w.pos.length){var p=w.pos[0];var L=G.leaves[p.leaf];
+  if(L){var cell=300/49;var svg='<svg viewBox="0 0 300 300">';
+   // highlight all occurrences of this word on this leaf
+   w.pos.filter(q=>q.leaf===p.leaf).forEach(q=>{svg+='<rect x="'+(q.col*cell).toFixed(1)+'" y="'+(q.row*cell).toFixed(1)+'" width="'+(w.en.length*cell).toFixed(1)+'" height="'+cell.toFixed(1)+'" rx="1.5" fill="'+ELH[w.element]+'" fill-opacity="0.45"/>'});
+   for(var r=0;r<49;r++)for(var cc=0;cc<49;cc++){svg+='<text x="'+(cc*cell+cell/2).toFixed(1)+'" y="'+(r*cell+cell*0.75).toFixed(1)+'" text-anchor="middle" font-size="'+(cell*0.7).toFixed(1)+'" fill="var(--ink)" opacity="0.8" font-family="ui-monospace,monospace">'+L.grid[r][cc]+'</text>'}
+   svg+='</svg>';
+   sh+='<div class=card><div class=stat style="margin-bottom:6px">'+(LG==='en'?'leaf':'folha')+' '+p.leaf+'</div>'+svg+'</div>';}}
+ // occurrence list
+ sh+='<div class=card>';w.pos.forEach(q=>{sh+='<div class=occ>'+q.leaf+' · '+(LG==='en'?'row':'linha')+' '+q.row+' · '+(LG==='en'?'col':'col')+' '+q.col+'</div>'});sh+='</div>';
+ document.getElementById('side').innerHTML=sh;
+}
+</script>
+</body>
+</html>

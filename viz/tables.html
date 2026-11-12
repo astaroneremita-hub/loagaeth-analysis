@@ -27,10 +27,10 @@ svg{display:block;width:100%;height:auto}
 </style>
 </head>
 <body>
-<h1>Tabelas do Loagaeth — os nomes na grade original</h1>
-<p class="sub">Escolha um quadrado. Cada nome do sistema aparece aceso por cima das letras, colorido pelo elemento. Passe o mouse para ver o nome; clique na lista para isolar.</p>
+<div style="display:flex;justify-content:space-between;align-items:center"><h1 id="h1">Tabelas do Loagaeth — os nomes na grade original</h1><span id="lang" style="cursor:pointer;border:1px solid var(--line);border-radius:16px;padding:3px 12px;font-size:12px;font-weight:600">EN</span></div>
+<p class="sub" id="sub">Escolha um quadrado. Cada nome do sistema aparece aceso por cima das letras, colorido pelo elemento. Passe o mouse para ver o nome; clique na lista para isolar.</p>
 <div class="top" id="leaves"></div>
-<div class="leg"><span><span class="sw" style="background:var(--Fogo)"></span>Fogo</span><span><span class="sw" style="background:var(--Terra)"></span>Terra</span><span><span class="sw" style="background:var(--Ar)"></span>Ar</span><span><span class="sw" style="background:var(--Agua)"></span>Água</span></div>
+<div class="leg" id="leg"><span><span class="sw" style="background:var(--Fogo)"></span>Fogo</span><span><span class="sw" style="background:var(--Terra)"></span>Terra</span><span><span class="sw" style="background:var(--Ar)"></span>Ar</span><span><span class="sw" style="background:var(--Agua)"></span>Água</span></div>
 <div class="layout">
  <div class="gridwrap"><svg id="grid" viewBox="0 0 640 640"></svg></div>
  <div class="side"><h3 id="sideh">nomes</h3><div class="nlist" id="nlist"></div></div>
@@ -38,8 +38,14 @@ svg{display:block;width:100%;height:auto}
 <script>
 var ELH={Fogo:'#d85a30',Terra:'#b07d2a',Ar:'#2f7fd4',Agua:'#199e70','?':'#888'};
 var T=null,cur=null,iso=null,SVG='http://www.w3.org/2000/svg';
+var LG=(localStorage.getItem('atlas_lang')||'pt');
+var STR={pt:{h1:'Tabelas do Loagaeth — os nomes na grade original',sub:'Escolha um quadrado. Cada nome do sistema aparece aceso por cima das letras, colorido pelo elemento. Passe o mouse para ver o nome; clique na lista para isolar.',lang:'EN',els:['Fogo','Terra','Ar','Água'],nomes:'nomes',occ:'ocorrências'},
+ en:{h1:'Loagaeth tables — the names on the original grid',sub:'Pick a square. Each system-name lights up over the letters, coloured by element. Hover to see the name; click the list to isolate.',lang:'PT',els:['Fire','Earth','Air','Water'],nomes:'names',occ:'occurrences'}};
+function applyLang(){document.getElementById('h1').textContent=STR[LG].h1;document.getElementById('sub').textContent=STR[LG].sub;document.getElementById('lang').textContent=STR[LG].lang;
+ var cols=['--Fogo','--Terra','--Ar','--Agua'];document.getElementById('leg').innerHTML=STR[LG].els.map((e,i)=>'<span><span class="sw" style="background:var('+cols[i]+')"></span>'+e+'</span>').join('')}
 fetch('table_grids.json').then(r=>r.json()).then(d=>{T=d;boot()}).catch(e=>{document.getElementById('grid').outerHTML='<p>Sirva por HTTP: python -m http.server 8860</p>'});
 function boot(){
+ document.getElementById('lang').onclick=()=>{LG=LG==='pt'?'en':'pt';localStorage.setItem('atlas_lang',LG);applyLang();if(cur)draw()};applyLang();
  var box=document.getElementById('leaves');
  T.order.forEach(lf=>{var b=document.createElement('span');b.className='lf';b.textContent=lf;b.onclick=()=>pick(lf,b);box.appendChild(b)});
  pick(T.order.indexOf('2b')>=0?'2b':T.order[0],box.children[Math.max(0,T.order.indexOf('2b'))]);
@@ -65,7 +71,7 @@ function draw(){
  // side list
  var counts={};L.names.forEach(o=>counts[o.name]=(counts[o.name]||0)+1);
  var order=Object.keys(counts).sort((a,b)=>counts[b]-counts[a]);
- document.getElementById('sideh').textContent=cur+' — '+L.distinct+' nomes, '+L.names.length+' ocorrências';
+ document.getElementById('sideh').textContent=cur+' — '+L.distinct+' '+STR[LG].nomes+', '+L.names.length+' '+STR[LG].occ;
  document.getElementById('nlist').innerHTML=order.map(n=>{var el=L.names.find(o=>o.name===n).element;
   return '<div class="ni'+(iso===n?' on':'')+'" onclick="isolate(\''+n+'\')"><span><span class=sw style="background:'+ELH[el]+'"></span>'+n+'</span><span class=cnt>'+counts[n]+'×</span></div>'}).join('');
 }

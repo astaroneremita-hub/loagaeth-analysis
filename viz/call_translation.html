@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chamadas — tradução de Dee</title>
+<style>
+:root{--bg:#f7f6f1;--card:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8;--ac:#8a6d2f;
+--Fogo:#d85a30;--Terra:#b07d2a;--Ar:#2f7fd4;--Agua:#199e70}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13120c;--card:#1e1d15;--ink:#ece9da;--mut:#9a988a;--line:#322f27;--ac:#d6b96a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 system-ui,sans-serif;max-width:860px;margin:0 auto;padding:16px 18px 50px}
+h1{font-size:20px;font-weight:600;margin:0 0 2px;display:inline-block}
+#lang{cursor:pointer;border:1px solid var(--line);border-radius:16px;padding:3px 12px;font-size:12px;font-weight:600;float:right}
+.sub{color:var(--mut);margin:0 0 10px;font-size:13px}
+.calls{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
+.cb{padding:4px 9px;border:1px solid var(--line);border-radius:7px;background:var(--card);cursor:pointer;font-size:12px;font-weight:600}
+.cb.on{background:var(--ink);color:var(--bg)}
+.toggle{display:inline-flex;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:12px}
+.toggle span{padding:5px 12px;cursor:pointer;font-size:12px;font-weight:600}
+.toggle .on{background:var(--ink);color:var(--bg)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.w{cursor:default}.found{color:var(--ac);font-weight:600}
+.orig{color:var(--mut);font-style:italic}
+.note{color:var(--mut);font-size:12px;margin-top:10px}
+</style>
+</head>
+<body>
+<span id="lang">EN</span>
+<h1 id="h1">As Chamadas — tradução de Dee</h1>
+<p class="sub" id="sub">A tradução em inglês que Dee registrou, palavra por palavra. Em destaque, as palavras que também aparecem na Loagaeth. Alterne para ver o enoquiano original.</p>
+<div class="calls" id="calls"></div>
+<div class="toggle" id="toggle"><span data-m="pt" class="on">tradução</span><span data-m="en">enoquiano</span></div>
+<div class="card" id="out"></div>
+<p class="note" id="note"></p>
+<script>
+var A=null,cur=0,mode='tr',LG=(localStorage.getItem('atlas_lang')||'pt');
+var T={pt:{h1:'As Chamadas — tradução de Dee',sub:'A tradução em inglês que Dee registrou, palavra por palavra. Em destaque, as palavras que também aparecem na Loagaeth. Alterne para ver o enoquiano original.',lang:'EN',tr:'tradução',en:'enoquiano',note:'Destacadas = palavras presentes também na Loagaeth. Onde Dee não traduziu, fica o enoquiano original.'},
+ en:{h1:'The Calls — Dee’s translation',sub:'The English translation Dee recorded, word by word. Highlighted: words that also appear in the Loagaeth. Toggle to see the original Enochian.',lang:'PT',tr:'translation',en:'Enochian',note:'Highlighted = words present in the Loagaeth too. Where Dee did not translate, the Enochian stays.'}};
+function S(k){return T[LG][k]}
+fetch('call_atlas.json').then(r=>r.json()).then(a=>{A=a;boot()}).catch(e=>{document.getElementById('out').textContent='Sirva por HTTP: python -m http.server 8860'});
+function boot(){
+ document.getElementById('lang').onclick=()=>{LG=LG==='pt'?'en':'pt';localStorage.setItem('atlas_lang',LG);applyLang();draw()};
+ var box=document.getElementById('calls');
+ A.calls.forEach((c,i)=>{var b=document.createElement('span');b.className='cb';b.textContent=c.numero;b.onclick=()=>{cur=i;draw()};box.appendChild(b)});
+ document.querySelectorAll('#toggle span').forEach(s=>s.onclick=()=>{mode=s.dataset.m==='pt'?'tr':'en';document.querySelectorAll('#toggle span').forEach(x=>x.classList.toggle('on',x===s));draw()});
+ applyLang();draw();
+}
+function applyLang(){document.getElementById('h1').textContent=S('h1');document.getElementById('sub').textContent=S('sub');document.getElementById('lang').textContent=S('lang');document.getElementById('note').textContent=S('note');
+ var ts=document.querySelectorAll('#toggle span');ts[0].textContent=S('tr');ts[1].textContent=S('en')}
+function draw(){
+ var c=A.calls[cur];
+ [...document.getElementById('calls').children].forEach((b,i)=>b.classList.toggle('on',i===cur));
+ var html='';
+ c.words.forEach(w=>{
+  var cls='w'+(w.loag_count>0?' found':'');
+  if(mode==='tr'){
+   var g=(w.gloss&&w.gloss.toLowerCase()!=='none')?w.gloss:null;
+   if(g){html+='<span class="'+cls+'" title="'+w.en+'">'+g+'</span> '}
+   else{html+='<span class="w orig" title="(sem tradução)">'+w.en+'</span> '}
+  }else{
+   html+='<span class="'+cls+'" title="'+(w.gloss||'')+'">'+w.en+'</span> '
+  }
+ });
+ document.getElementById('out').innerHTML=html;
+}
+</script>
+</body>
+</html>

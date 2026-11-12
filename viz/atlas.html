@@ -57,12 +57,13 @@ var ELN={pt:{Fogo:'Fogo',Terra:'Terra',Ar:'Ar',Agua:'Água','?':'?'},en:{Fogo:'F
 var CLN={pt:{raiz:'raiz',derivado:'derivado',ponte:'ponte'},en:{raiz:'root',derivado:'derived',ponte:'bridge'}};
 var FORMA_EN={Fogo:'fiery form - light, flame, the impulse that bursts',Terra:'dense form - body, stone, root, that which sustains',Ar:'subtle form - breath, voice, thought that runs',Agua:'fluid form - wave, mirror, emotion that dissolves','?':'undefined form'};
 var NAT_EN={Fogo:'ardent (will, impulse)',Terra:'firm (matter, body)',Ar:'mental (thought, word)',Agua:'fluid (emotion, intuition)','?':'undefined'};
-var STR={pt:{h1:'Atlas das Entidades do Loagaeth',sub:'Cada entidade é um nome medido no livro inteiro. Posição: <b>força</b> (quanto repete) × <b>potência</b> (quão acima do acaso está colocada). Tamanho da bolha: <b>alcance</b> (tabelas). Cor: <b>elemento</b>. Clique para o perfil.',lang:'EN',xax:'força → (quanto repete)',yax:'potência → (acima do acaso)',chance:'acaso (1×)',forca:'força (tamanho)',alcance:'alcance',tabelas:'tabelas',potencia:'potência (acima do acaso)',elemento:'elemento',classe:'classe',raizw:'raiz',prof:'profundidade',fusao:'fusão',ficha:'Ficha pelo alfabeto enoquiano',planeta:'planeta regente',pontos:'pontos',signos:'signos das letras',familia:'Família de',tipTab:'tab'},
- en:{h1:'Atlas of the Loagaeth Entities',sub:'Each entity is a name measured across the whole book. Position: <b>force</b> (how often it repeats) × <b>potency</b> (how far above chance it is placed). Bubble size: <b>reach</b> (tables). Colour: <b>element</b>. Click for the profile.',lang:'PT',xax:'force → (how much it repeats)',yax:'potency → (above chance)',chance:'chance (1×)',forca:'force (size)',alcance:'reach',tabelas:'tables',potencia:'potency (above chance)',elemento:'element',classe:'class',raizw:'root',prof:'depth',fusao:'fusion',ficha:'Profile from the Enochian alphabet',planeta:'ruling planet',pontos:'points',signos:'signs of the letters',familia:'Family of',tipTab:'tab'}};
+var STR={pt:{h1:'Atlas das Entidades do Loagaeth',sub:'Cada entidade é um nome medido no livro inteiro. Posição: <b>força</b> (quanto repete) × <b>potência</b> (quão acima do acaso está colocada). Tamanho da bolha: <b>alcance</b> (tabelas). Cor: <b>elemento</b>. Clique para o perfil.',lang:'EN',xax:'força → (quanto repete)',yax:'potência → (acima do acaso)',chance:'acaso (1×)',forca:'força (tamanho)',alcance:'alcance',tabelas:'tabelas',potencia:'potência (acima do acaso)',elemento:'elemento',classe:'classe',raizw:'raiz',prof:'profundidade',fusao:'fusão',ficha:'Ficha pelo alfabeto enoquiano',planeta:'planeta regente',pontos:'pontos',signos:'signos das letras',familia:'Família de',tipTab:'tab',danger:'perigo (leitura tradicional)',agree:'concordância do elemento',robusto:'robusto (3 fontes concordam)',maioria:'maioria (2 de 3)',ambiguo:'ambíguo (signo × planeta divergem)',bySign:'por signo',byPlanet:'por planeta',dhi:'alto',dmed:'médio',dlo:'baixo'},
+ en:{h1:'Atlas of the Loagaeth Entities',sub:'Each entity is a name measured across the whole book. Position: <b>force</b> (how often it repeats) × <b>potency</b> (how far above chance it is placed). Bubble size: <b>reach</b> (tables). Colour: <b>element</b>. Click for the profile.',lang:'PT',xax:'force → (how much it repeats)',yax:'potency → (above chance)',chance:'chance (1×)',forca:'force (size)',alcance:'reach',tabelas:'tables',potencia:'potency (above chance)',elemento:'element',classe:'class',raizw:'root',prof:'depth',fusao:'fusion',ficha:'Profile from the Enochian alphabet',planeta:'ruling planet',pontos:'points',signos:'signs of the letters',familia:'Family of',tipTab:'tab',danger:'danger (traditional reading)',agree:'element agreement',robusto:'robust (3 sources agree)',maioria:'majority (2 of 3)',ambiguo:'ambiguous (sign × planet split)',bySign:'by sign',byPlanet:'by planet',dhi:'high',dmed:'medium',dlo:'low'}};
 function S(k){return STR[LG][k]}
 function eln(e){return ELN[LG][e]||e}
-Promise.all([fetch('entity_data.json').then(r=>r.json()),fetch('entity_astro.json').then(r=>r.json()).catch(()=>null)])
- .then(([d,a])=>{D=d;ASTRO=a;boot()})
+var POWER=null;
+Promise.all([fetch('entity_data.json').then(r=>r.json()),fetch('entity_astro.json').then(r=>r.json()).catch(()=>null),fetch('entity_power.json').then(r=>r.json()).catch(()=>null)])
+ .then(([d,a,p])=>{D=d;ASTRO=a;POWER=p;boot()})
  .catch(e=>{document.getElementById('detail').innerHTML='<div class=card>Não carregou entity_data.json — sirva por HTTP: <code>python -m http.server 8860</code></div>'});
 
 function renderFilters(){var f=document.getElementById('filters');f.innerHTML='';
@@ -124,6 +125,14 @@ function showDetail(n){var e=D.entities[n];if(!e)return;curName=n;
  h+='<div class=attr><div class=k>'+S('potencia')+'</div><div class=v>'+e.potencia+'×</div>'+meter(e.potencia,D.potencia_max,'#7f77dd')+'</div>';
  h+='<div class=attr><div class=k>'+S('elemento')+'</div><div class=v><span class=pill style="background:'+ELH[e.elemento]+'">'+eln(e.elemento)+'</span></div><div class=muted style="margin-top:4px">'+nat+'</div></div>';
  h+='</div>';
+ if(POWER&&POWER[n]){var pw=POWER[n],em=pw.element_multi,dg=pw.danger;
+  var agL=S(em.agreement)||em.agreement;
+  var dcol=dg.band==='alto'?'#d03b3b':dg.band==='medio'?'#eda100':'#1d9e75';
+  var dband=dg.band==='alto'?S('dhi'):dg.band==='medio'?S('dmed'):S('dlo');
+  h+='<div class=attrs style="margin-top:10px">';
+  h+='<div class=attr><div class=k>'+S('agree')+'</div><div class=v style="font-size:14px">'+agL+'</div><div class=muted style="margin-top:3px">'+S('bySign')+': '+eln(em.by_sign)+' · '+S('byPlanet')+': '+eln(em.by_planet)+'</div></div>';
+  h+='<div class=attr><div class=k>'+S('danger')+'</div><div class=v><span class=pill style="background:'+dcol+'">'+dg.score+' · '+dband+'</span></div><div class=meter style="margin-top:5px"><i style="width:'+dg.score+'%;background:'+dcol+'"></i></div><div class=muted style="margin-top:4px">'+dg.cautions.join(' · ')+'</div></div>';
+  h+='</div>';}
  // ficha astral do alfabeto
  if(ASTRO&&ASTRO.fichas[n]){var f=ASTRO.fichas[n],eb=f.element_balance;
   h+='<div class=fam><b>'+S('ficha')+'</b>';

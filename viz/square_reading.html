@@ -29,21 +29,33 @@ h1{font-size:20px;font-weight:600;margin:0 0 2px;display:inline-block}
 <h1 id="h1">Tradução dos quadrados do Loagaeth</h1>
 <p class="sub" id="sub">Onde um quadrado contém uma palavra que Dee traduziu, lemos o sentido. As palavras aparecem em ordem de posição (linha, coluna) — a leitura parcial do quadrado.</p>
 <div class="calls" id="leaves"></div>
-<div id="out"></div>
-<p class="note" id="note"></p>
+<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start">
+ <div style="flex:1;min-width:320px"><div id="out"></div><p class="note" id="note"></p></div>
+ <aside style="width:280px;flex-shrink:0;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px">
+  <div style="font-weight:600;margin-bottom:6px" id="nfh">Não encontradas no livro</div>
+  <div class="note" id="nfsub">Palavras das Chamadas (com tradução de Dee) que NÃO aparecem em nenhuma tabela.</div>
+  <div id="nflist" style="max-height:520px;overflow:auto;margin-top:8px"></div>
+ </aside>
+</div>
 <script>
 var T=null,cur=null,LG=(localStorage.getItem('atlas_lang')||'pt');
 var STR={pt:{h1:'Tradução dos quadrados do Loagaeth',sub:'Onde um quadrado contém uma palavra que Dee traduziu, lemos o sentido. As palavras aparecem em ordem de posição (linha, coluna) — a leitura parcial do quadrado.',lang:'EN',empty:'Nenhuma palavra traduzível encontrada neste quadrado.',note:'Palavras das Chamadas (traduzidas por Dee) achadas na grade, em ordem de leitura. Honesto: palavras curtas podem ser só fluxo de letras; as longas pesam mais. Não é a tradução do quadrado inteiro — são os fragmentos decifráveis.',roww:'l',colw:'c'},
  en:{h1:'Translation of the Loagaeth squares',sub:'Where a square contains a word Dee translated, we read the meaning. Words appear in position order (row, column) — the partial reading of the square.',lang:'PT',empty:'No translatable word found in this square.',note:'Call words (translated by Dee) found on the grid, in reading order. Honest: short words may be mere letter-flow; the long ones weigh more. This is not a translation of the whole square — only the decipherable fragments.',roww:'r',colw:'c'}};
 function S(k){return STR[LG][k]}
-fetch('table_grids.json').then(r=>r.json()).then(d=>{T=d;boot()}).catch(e=>{document.getElementById('out').innerHTML='Abra por http://localhost:8860/ (não file://)'});
+var COV=null;
+Promise.all([fetch('table_grids.json').then(r=>r.json()),fetch('call_coverage.json').then(r=>r.json()).catch(()=>null)])
+ .then(([d,c])=>{T=d;COV=c;boot()}).catch(e=>{document.getElementById('out').innerHTML='Abra por http://localhost:8860/ (não file://)'});
+function renderNotFound(){if(!COV)return;var nf=COV.not_found||{};var ks=Object.keys(nf).sort();
+ document.getElementById('nfh').textContent=LG==='en'?'Not found in the book':'Não encontradas no livro';
+ document.getElementById('nfsub').textContent=(LG==='en'?'Call words (with Dee’s translation) that do NOT appear in any table — ':'Palavras das Chamadas (com tradução de Dee) que NÃO aparecem em nenhuma tabela — ')+ks.length;
+ document.getElementById('nflist').innerHTML=ks.map(w=>'<div style="padding:3px 0;border-bottom:1px solid var(--line);font-size:13px"><b>'+w+'</b> <span class=gl>'+nf[w]+'</span></div>').join('');}
 function boot(){
  document.getElementById('lang').onclick=()=>{LG=LG==='pt'?'en':'pt';localStorage.setItem('atlas_lang',LG);applyLang();draw()};
  var box=document.getElementById('leaves');
  T.order.forEach(lf=>{var b=document.createElement('span');b.className='cb';b.textContent=lf;b.onclick=()=>pick(lf);box.appendChild(b)});
  applyLang();pick(T.order.includes('2b')?'2b':T.order[0]);
 }
-function applyLang(){document.getElementById('h1').textContent=S('h1');document.getElementById('sub').textContent=S('sub');document.getElementById('lang').textContent=S('lang');document.getElementById('note').textContent=S('note');}
+function applyLang(){document.getElementById('h1').textContent=S('h1');document.getElementById('sub').textContent=S('sub');document.getElementById('lang').textContent=S('lang');document.getElementById('note').textContent=S('note');renderNotFound();}
 function pick(lf){cur=lf;[...document.getElementById('leaves').children].forEach(c=>c.classList.toggle('on',c.textContent===lf));draw()}
 function draw(){
  var L=T.leaves[cur],ms=(L.meanings||[]).slice().map(m=>{var c=m.cells?m.cells[0]:[m.row,m.col];return Object.assign({_r:c[0],_c:c[1]},m)}).sort((a,b)=>a._r-b._r||a._c-b._c);

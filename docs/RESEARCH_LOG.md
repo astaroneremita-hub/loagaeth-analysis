@@ -554,3 +554,42 @@ Markov-3 surrogates = ~5.5x enrichment (real, but the surrogate still makes some
 common roots/bigrams). So the grammar chains roots into long "super-names" and specific chains recur across tables -
 these read like dynastic unions of two houses (GETH back + NOCHA front). repertoire.html tabs now go 2-14; word_catalog.json
 carries all lengths.
+
+## #238 — Deaccent fix: accented Call words now match + index complete
+Bug: accented Call words (GOHÓ, ÓBÓLEH, QÄA, NOTHÓA, IÁDPIL, LÓHÖLO, IAÏDA, IÁDPIL) were kept with accents, so they
+never matched the (unaccented) Loagaeth grid. Fixed a98 to strip accents (NFD + drop combining marks) and lowered the
+search to len>=3. Call-word presence: 489 distinct words now appear (was 354); Call 1 marks 68/86 words (was 45; the
+rest are 1-2 letter particles OL/TA/DS/OD). call_atlas.json, call_lexicon.json and table_grids meanings rebuilt
+deaccented. index.html now lists ALL 14 panels (added names_catalog, loagaeth_3d).
+
+## #239 — Plan items: name syntax, maximal words, 7x7, servants (a101-a103)
+a101 (item 5, syntax): directional root collocation. GETHACLAX occurs 17x (26x chance) and ACLAXGETH 0x - a FIXED
+ORDER (GETH before ACLAX, asymmetry 17:0); GETH+NOCHA 5:0. GETH is a leading root. First sign of word-order/syntax
+BETWEEN names (narrow - few roots chain directly adjacent, but real). a102 (item 2, maximal words): branching-entropy
+segmentation. 197 of 1288 frequent substrings behave as maximal word-units (high left+right branching, >=2.5 bits):
+OTHA, ANGE, AGEN, ACHA, AXOR... the candidate real lexicon/morphemes (honest: high branching = common free chunks,
+not proven semantic words). a103: (24) 7x7 plane - neighbours sim 0.59 vs distant 0.37 (more alike, but mostly the
+smooth book order). (27) servant numbers (91 governors, 1230-9996) do NOT match any Loagaeth name's force - the
+Heptarchic servant counts are a separate layer. Exported viz/maximal_words.json.
+
+## #240 — Call search to len>=2 + coverage + square_reading not-found block + index EN
+Lowered Call-word search to len>=2 (deaccented): 515 distinct Call words appear in the Loagaeth; of the 671 translated
+Call words (len>=2), 506 are present and 165 absent. OL/TI/CLA/CABA/GOHO/IAD now mapped. table_grids meanings rebuilt
+(2b: 112). square_reading.html gained a right-side "Not found in the book" block listing the 165 absent Call words with
+their Dee translation (viz/call_coverage.json). index.html made bilingual (EN/PT toggle). Left = found & substituted,
+right = not found.
+
+## #241 — Not-found deep trace (a104) + grammatical classes (a105)
+a104: of the 165 Call words not found straight/diagonal, 68 trace as a king-move path, 97 are absent by ANY reading.
+HONEST: trace finds almost anything in a dense field, so trace-only is weak; 12 LONG words (>=8) trace and those
+matter - MADRIIAX "O you heavens" (Call 1 opening), ZIRENAIAD "I am the Lord yor God", FETHARZI, PARACLEDA, OISALMAN.
+97 are genuinely absent (PIRIPSON, LUCIFTIAS, BALZIZRAS, IADOIASMOMAR 12 letters). call_coverage.json updated to a
+3-way split: found / trace_only / not_found(97). a105 (item 15, classes): distributional clustering of the top
+maximal words by left/right context - real groups 22 words vs 28 in a Markov-3 surrogate = BELOW the null. No
+grammatical word-classes beyond letter-flow; the groups that form just share consonant skeletons. Item 15 negative.
+
+## #242 — Single-letter Call words + diagonal/reversed translated-squares
+call_lexicon.json rebuilt to len>=1 (singles: I="is", D="the third", L/M/O/P/Q). call_grid_translation.html gained a
+DIRECTION control (reta / diagonal down-right / down-left / column) plus the existing reversed toggle and a min-length
+1-5 selector - so each table can be read-and-translated straight, diagonally, by column, forward or reversed. Verified
+diagonal: 2b shows "of your Creation", "have setled" along the down-right diagonal.

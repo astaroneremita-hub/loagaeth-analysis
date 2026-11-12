@@ -110,6 +110,11 @@ import a97_name_meanings
 import a98_calls_all_modes
 import a99_full_word_catalog
 import a100_long_compounds
+import a101_name_syntax
+import a102_maximal_words
+import a103_plane_and_servants
+import a104_notfound_deep
+import a105_word_classes
 import make_figures
 import make_viz_data
 
@@ -216,6 +221,11 @@ MODULES = [
     ("98_calls_all_modes", a98_calls_all_modes),
     ("99_full_word_catalog", a99_full_word_catalog),
     ("100_long_compounds", a100_long_compounds),
+    ("101_name_syntax", a101_name_syntax),
+    ("102_maximal_words", a102_maximal_words),
+    ("103_plane_and_servants", a103_plane_and_servants),
+    ("104_notfound_deep", a104_notfound_deep),
+    ("105_word_classes", a105_word_classes),
 ]
 
 

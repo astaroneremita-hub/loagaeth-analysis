@@ -28,11 +28,21 @@ h1{font-size:20px;font-weight:600;margin:0 0 2px;display:inline-block}
 <h1 id="h1">Quadrados traduzidos do Loagaeth</h1>
 <p class="sub" id="sub">Cada tabela com as palavras das Chamadas substituídas pela tradução de Dee (em cor), letra por letra. O resto fica como letra cinza. Leitura reta, maior palavra primeiro.</p>
 <div class="calls" id="leaves"></div>
-<div class="ctrl"><label><input type="checkbox" id="rev"> incluir de trás pra frente</label> <span>mínimo de letras: <select id="minlen"><option>3</option><option selected>4</option><option>5</option></select></span></div>
+<div class="ctrl">
+ <span>direção: <select id="dir"><option value="reta">reta →</option><option value="dr">diagonal ↘</option><option value="dl">diagonal ↙</option><option value="col">coluna ↓</option></select></span>
+ <label><input type="checkbox" id="rev"> incluir de trás pra frente</label>
+ <span>mínimo de letras: <select id="minlen"><option>1</option><option>2</option><option>3</option><option selected>4</option><option>5</option></select></span>
+</div>
 <div class="card" id="out"></div>
 <p class="note" id="note"></p>
 <script>
-var G=null,LEX=null,cur=null,LG=(localStorage.getItem('atlas_lang')||'pt'),minlen=4,rev=false;
+var G=null,LEX=null,cur=null,LG=(localStorage.getItem('atlas_lang')||'pt'),minlen=4,rev=false,dir='reta';
+function buildLines(grid){var R=49,out=[];
+ if(dir==='reta'){for(var r=0;r<R;r++)out.push(Array.from({length:R},(_,c)=>[r,c]));}
+ else if(dir==='col'){for(var c=0;c<R;c++)out.push(Array.from({length:R},(_,r)=>[r,c]));}
+ else if(dir==='dr'){for(var s=0;s<R;s++){out.push(Array.from({length:R-s},(_,k)=>[s+k,k]));if(s>0)out.push(Array.from({length:R-s},(_,k)=>[k,s+k]));}}
+ else{for(var s=0;s<R;s++){out.push(Array.from({length:R-s},(_,k)=>[s+k,R-1-k]));if(s>0)out.push(Array.from({length:R-s},(_,k)=>[k,R-1-s-k]));}}
+ return out.map(cells=>({cells:cells,str:cells.map(c=>grid[c[0]][c[1]]).join('')}));}
 var T={pt:{h1:'Quadrados traduzidos do Loagaeth',sub:'Cada tabela com as palavras das Chamadas substituídas pela tradução de Dee (em cor), letra por letra. O resto fica como letra cinza. Leitura reta, maior palavra primeiro.',lang:'EN',note:'Substitui a maior palavra das Chamadas (≥ mínimo) que casa em cada ponto da linha, sem sobrepor. Honesto: palavras curtas são comuns e podem ser acaso; passe o mouse para ver a palavra original.'},
  en:{h1:'Translated squares of the Loagaeth',sub:'Each table with the Call words replaced by Dee’s translation (in colour), letter by letter. The rest stays grey. Straight reading, longest word first.',lang:'PT',note:'Replaces the longest Call word (>= minimum) matching at each point in the row, no overlap. Honest: short words are common and may be chance; hover to see the original word.'}};
 function S(k){return T[LG][k]}
@@ -42,6 +52,7 @@ function boot(){
  document.getElementById('lang').onclick=()=>{LG=LG==='pt'?'en':'pt';localStorage.setItem('atlas_lang',LG);applyLang();draw()};
  document.getElementById('rev').onchange=e=>{rev=e.target.checked;draw()};
  document.getElementById('minlen').onchange=e=>{minlen=+e.target.value;draw()};
+ document.getElementById('dir').onchange=e=>{dir=e.target.value;draw()};
  var box=document.getElementById('leaves');
  G.order.forEach(lf=>{var b=document.createElement('span');b.className='cb';b.textContent=lf;b.onclick=()=>pick(lf);box.appendChild(b)});
  applyLang();pick(G.order.includes('2b')?'2b':G.order[0]);
@@ -55,7 +66,7 @@ function matchAt(row,i){ // longest Call word matching at position i (forward, o
  }return null}
 function draw(){
  var L=G.leaves[cur];var html='';var nwords=0;
- L.grid.forEach(row=>{var i=0,line='';
+ buildLines(L.grid).forEach(ln=>{var row=ln.str;var i=0,line='';
   while(i<row.length){var m=matchAt(row,i);
    if(m){line+='<span class=tr title="'+m.word+'">'+m.gloss+'</span>';i+=m.len;nwords++;}
    else{line+='<span class=lt>'+row[i]+'</span>';i++;}

@@ -18,9 +18,10 @@ code{font-family:ui-monospace,monospace;background:rgba(138,109,47,.12);padding:
 </style>
 </head>
 <body>
-<h1>Loagaeth — painéis</h1>
-<p class="sub">Todos os visualizadores da análise, num lugar só.</p>
-<div class="warn">Abra sempre por <code>http://localhost:8860/</code>. Abrir o arquivo direto (<code>file:///…</code>) não funciona — o navegador bloqueia o carregamento dos dados. Servir: <code>cd viz &amp;&amp; python -m http.server 8860</code></div>
+<span id="lang" style="cursor:pointer;border:1px solid var(--line);border-radius:16px;padding:3px 12px;font-size:12px;font-weight:600;float:right">EN</span>
+<h1 id="h1">Loagaeth — painéis</h1>
+<p class="sub" id="sub">Todos os visualizadores da análise, num lugar só.</p>
+<div class="warn" id="warn">Abra sempre por <code>http://localhost:8860/</code>. Abrir o arquivo direto (<code>file:///…</code>) não funciona — o navegador bloqueia o carregamento dos dados. Servir: <code>cd viz &amp;&amp; python -m http.server 8860</code></div>
 <div class="grid">
 <a class="card" href="atlas.html"><div class="t">Atlas das Entidades</div><div class="d">cada nome: força, potência, elemento, perigo, família</div></a>
 <a class="card" href="name_grammar.html"><div class="t">Gramática dos Nomes</div><div class="d">decompõe qualquer nome em raiz + afixo</div></a>
@@ -37,5 +38,29 @@ code{font-family:ui-monospace,monospace;background:rgba(138,109,47,.12);padding:
 <a class="card" href="names_catalog.html"><div class="t">Catálogo de nomes</div><div class="d">lista dos nomes descobertos</div></a>
 <a class="card" href="loagaeth_3d.html"><div class="t">Loagaeth 3D</div><div class="d">visão tridimensional das tabelas</div></a>
 </div>
+<script>
+var EN={h1:'Loagaeth — panels',sub:'Every visualizer of the analysis, in one place.',warn:'Always open via <code>http://localhost:8860/</code>. Opening the file directly (<code>file:///…</code>) does not work — the browser blocks data loading. Serve: <code>cd viz &amp;&amp; python -m http.server 8860</code>',cards:{
+ 'atlas.html':['Entity Atlas','each name: force, potency, element, danger, family'],
+ 'name_grammar.html':['Name Grammar','decomposes any name into root + affix'],
+ 'forge.html':['Name Forge','pick element + force → build names'],
+ 'tables.html':['Tables on the grid','names straight, diagonal, traced, meaning, all together; search'],
+ 'language.html':['The Loagaeth Language','language proofs, anchors, morphology'],
+ 'call_map.html':['The Calls in the Loagaeth','words of the 19 Calls lit on the grid'],
+ 'call_translation.html':['Calls — translation','each Call in Dee’s translation'],
+ 'square_reading.html':['Translation of the squares','the translatable words of each table, in order'],
+ 'repertoire.html':['Full repertoire','every recurring word, 2 to 14 letters'],
+ 'call_grid_translation.html':['Translated squares','each table with words replaced by the translation'],
+ 'path_view.html':['Trace (king-move)','traces a name as a path on the grid'],
+ 'name_finder.html':['Name search','search any word in Loagaeth and Watchtowers'],
+ 'names_catalog.html':['Name catalogue','list of discovered names'],
+ 'loagaeth_3d.html':['Loagaeth 3D','three-dimensional view of the tables']}};
+var PT={};[...document.querySelectorAll('.card')].forEach(a=>{var h=a.getAttribute('href');PT[h]=[a.querySelector('.t').textContent,a.querySelector('.d').textContent]});
+var PTtxt={h1:document.getElementById('h1').textContent,sub:document.getElementById('sub').textContent,warn:document.getElementById('warn').innerHTML};
+var LG=(localStorage.getItem('atlas_lang')||'pt');
+function apply(){var en=LG==='en';document.getElementById('h1').textContent=en?EN.h1:PTtxt.h1;document.getElementById('sub').textContent=en?EN.sub:PTtxt.sub;document.getElementById('warn').innerHTML=en?EN.warn:PTtxt.warn;document.getElementById('lang').textContent=en?'PT':'EN';
+ [...document.querySelectorAll('.card')].forEach(a=>{var h=a.getAttribute('href');var s=en?EN.cards[h]:PT[h];if(s){a.querySelector('.t').textContent=s[0];a.querySelector('.d').textContent=s[1];}});}
+document.getElementById('lang').onclick=()=>{LG=LG==='pt'?'en':'pt';localStorage.setItem('atlas_lang',LG);apply()};
+apply();
+</script>
 </body>
 </html>

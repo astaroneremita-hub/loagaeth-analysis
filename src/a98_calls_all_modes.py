@@ -112,7 +112,7 @@ def run():
             if not en:
                 continue
             rec = {"en": en, "gloss": gl, "straight": [], "diag": [], "trace": []}
-            if len(en) >= 4:
+            if len(en) >= 2:
                 rev = en[::-1]
                 for lf in order:
                     for s, cells in leaf_lines[lf]:

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tabelas do Loagaeth — nomes na grade</title>
+<style>
+:root{--bg:#f7f6f1;--card:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8;
+--Fogo:#d85a30;--Terra:#b07d2a;--Ar:#2f7fd4;--Agua:#199e70}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13120c;--card:#1b1a13;--ink:#ece9da;--mut:#9a988a;--line:#322f27}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,sans-serif;max-width:1120px;margin:0 auto;padding:16px 16px 50px}
+h1{font-size:20px;font-weight:600;margin:0 0 2px}.sub{color:var(--mut);margin:0 0 12px;font-size:13px}
+.top{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.lf{padding:5px 10px;border:1px solid var(--line);border-radius:7px;background:var(--card);color:var(--ink);cursor:pointer;font-size:12px;font-weight:600}
+.lf.on{background:var(--ink);color:var(--bg)}
+.layout{display:flex;gap:16px;flex-wrap:wrap}
+.gridwrap{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px;flex:1;min-width:300px}
+svg{display:block;width:100%;height:auto}
+.side{width:230px;flex-shrink:0}
+.side h3{font-size:13px;margin:4px 0 8px;color:var(--mut)}
+.nlist{max-height:520px;overflow:auto}
+.ni{padding:4px 8px;border-radius:6px;cursor:pointer;font-size:12px;display:flex;justify-content:space-between;gap:6px}
+.ni:hover{background:var(--bg)}.ni.on{outline:1px solid var(--ink)}
+.sw{width:9px;height:9px;border-radius:2px;display:inline-block;margin-right:5px;vertical-align:-1px}
+.leg{display:flex;gap:12px;font-size:12px;color:var(--mut);margin:8px 0}
+.cnt{color:var(--mut);font-size:12px}
+</style>
+</head>
+<body>
+<h1>Tabelas do Loagaeth — os nomes na grade original</h1>
+<p class="sub">Escolha um quadrado. Cada nome do sistema aparece aceso por cima das letras, colorido pelo elemento. Passe o mouse para ver o nome; clique na lista para isolar.</p>
+<div class="top" id="leaves"></div>
+<div class="leg"><span><span class="sw" style="background:var(--Fogo)"></span>Fogo</span><span><span class="sw" style="background:var(--Terra)"></span>Terra</span><span><span class="sw" style="background:var(--Ar)"></span>Ar</span><span><span class="sw" style="background:var(--Agua)"></span>Água</span></div>
+<div class="layout">
+ <div class="gridwrap"><svg id="grid" viewBox="0 0 640 640"></svg></div>
+ <div class="side"><h3 id="sideh">nomes</h3><div class="nlist" id="nlist"></div></div>
+</div>
+<script>
+var ELH={Fogo:'#d85a30',Terra:'#b07d2a',Ar:'#2f7fd4',Agua:'#199e70','?':'#888'};
+var T=null,cur=null,iso=null,SVG='http://www.w3.org/2000/svg';
+fetch('table_grids.json').then(r=>r.json()).then(d=>{T=d;boot()}).catch(e=>{document.getElementById('grid').outerHTML='<p>Sirva por HTTP: python -m http.server 8860</p>'});
+function boot(){
+ var box=document.getElementById('leaves');
+ T.order.forEach(lf=>{var b=document.createElement('span');b.className='lf';b.textContent=lf;b.onclick=()=>pick(lf,b);box.appendChild(b)});
+ pick(T.order.indexOf('2b')>=0?'2b':T.order[0],box.children[Math.max(0,T.order.indexOf('2b'))]);
+}
+function pick(lf,btn){cur=lf;iso=null;[...document.getElementById('leaves').children].forEach(c=>c.classList.toggle('on',c.textContent===lf));draw()}
+function draw(){
+ var L=T.leaves[cur],g=L.grid,svg=document.getElementById('grid');svg.innerHTML='';
+ var cell=640/49;
+ // highlight rects behind (under isolation filter)
+ L.names.forEach((o,i)=>{if(iso&&o.name!==iso)return;
+  var rc=document.createElementNS(SVG,'rect');rc.setAttribute('x',(o.col*cell).toFixed(1));rc.setAttribute('y',(o.row*cell).toFixed(1));
+  rc.setAttribute('width',(o.len*cell).toFixed(1));rc.setAttribute('height',cell.toFixed(1));rc.setAttribute('rx',2);
+  rc.setAttribute('fill',ELH[o.element]);rc.setAttribute('fill-opacity',iso?0.5:0.28);
+  rc.style.cursor='pointer';rc.addEventListener('mouseenter',()=>{document.getElementById('sideh').textContent=o.name+' · '+o.element});
+  rc.addEventListener('click',()=>{iso=iso===o.name?null:o.name;draw()});
+  svg.appendChild(rc);
+ });
+ // letters
+ for(var r=0;r<49;r++)for(var c=0;c<49;c++){var t=document.createElementNS(SVG,'text');
+  t.setAttribute('x',(c*cell+cell/2).toFixed(1));t.setAttribute('y',(r*cell+cell*0.72).toFixed(1));
+  t.setAttribute('text-anchor','middle');t.setAttribute('font-size',(cell*0.72).toFixed(1));t.setAttribute('fill','var(--ink)');
+  t.setAttribute('opacity',0.82);t.style.fontFamily='ui-monospace,monospace';t.textContent=g[r][c];svg.appendChild(t);}
+ // side list
+ var counts={};L.names.forEach(o=>counts[o.name]=(counts[o.name]||0)+1);
+ var order=Object.keys(counts).sort((a,b)=>counts[b]-counts[a]);
+ document.getElementById('sideh').textContent=cur+' — '+L.distinct+' nomes, '+L.names.length+' ocorrências';
+ document.getElementById('nlist').innerHTML=order.map(n=>{var el=L.names.find(o=>o.name===n).element;
+  return '<div class="ni'+(iso===n?' on':'')+'" onclick="isolate(\''+n+'\')"><span><span class=sw style="background:'+ELH[el]+'"></span>'+n+'</span><span class=cnt>'+counts[n]+'×</span></div>'}).join('');
+}
+function isolate(n){iso=iso===n?null:n;draw()}
+window.isolate=isolate;
+</script>
+</body>
+</html>

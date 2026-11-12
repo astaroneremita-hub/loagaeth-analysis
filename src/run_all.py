@@ -93,6 +93,10 @@ import a80_full_hierarchy
 import a81_name_derivation
 import a82_grammar_discovery
 import a83_bridge_names
+import a84_entity_profiles
+import a85_entity_attributes
+import a86_forge_and_grids
+import a87_gematria_crosssystem
 import make_figures
 import make_viz_data
 
@@ -182,6 +186,10 @@ MODULES = [
     ("81_name_derivation", a81_name_derivation),
     ("82_grammar_discovery", a82_grammar_discovery),
     ("83_bridge_names", a83_bridge_names),
+    ("84_entity_profiles", a84_entity_profiles),
+    ("85_entity_attributes", a85_entity_attributes),
+    ("86_forge_and_grids", a86_forge_and_grids),
+    ("87_gematria_crosssystem", a87_gematria_crosssystem),
 ]
 
 

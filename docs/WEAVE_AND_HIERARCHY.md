@@ -166,3 +166,56 @@ Prefixos mais produtivos: NO-, A-, AD-, AX-; sufixos: -A, -AL, -P, -AD. **A gram
 raiz+afixo que nunca listamos estão de fato no texto, acima do fluxo de letras. Os 32 nomes entraram no
 `viz/grammar_data.json` (aparecem no site). Nota: ANOCHASTOR = NOCHA + sufixo STOR é uma fusão entre famílias —
 um nome-ponte.
+
+## 12. Perfil medido das entidades + atlas interativo (a84)
+
+Os rótulos emprestados das Torres (Rei/Arcanjo/Anjo) **não se sustentam** — foram largados. Cada entidade (89
+nomes) é definida só pelo que se mede no livro inteiro:
+
+- **força** (tamanho): ocorrências totais.
+- **alcance**: em quantas tabelas aparece (0–74) — a extensão do domínio.
+- **potência**: ocorrências ÷ surrogate Markov-3 — quão acima do fluxo de letras está colocada (deliberação).
+- **elemento**: elemento Golden Dawn dominante das letras; **natureza** = o temperamento desse elemento
+  (correspondência, não medida): Fogo ardente, Água fluida, Ar mental, Terra firme.
+- **classe** (medida, da gramática): raiz / derivado / ponte; **profundidade** de derivação.
+
+Dois eixos independentes aparecem: **força ≠ potência**. NOCHA tem força 621 mas potência 1,1× (comum,
+ubíqua, não "colocada"); já NOCHASTORA tem potência 4,8× e NOCHAPH 2,8× (mais raras, mas apontadas de
+propósito). Os reis são onipresentes; as emanações derivadas são as que o texto crava.
+
+**Atlas interativo:** `viz/atlas.html` — sirva `viz/` por HTTP e abra `http://localhost:8860/atlas.html`. Cada
+entidade é uma bolha: posição força × potência, tamanho = alcance, cor = elemento, contorno = ponte. Filtre por
+elemento/classe, busque, clique para o perfil completo e a família. Dados em `viz/entity_data.json`.
+
+## 13. Cobertura e o algoritmo de atributos (a85)
+
+**Cobertura — todas as 48 tabelas?** O sistema de nomes aparece nas **47 tabelas (2–48, diamantes incluídas)**.
+Denso em 2–38 (mediana 25 nomes por tabela, até 190 ocorrências); tênue nos diamantes profundos 43–48 (1–6 nomes
+— que também são os menos reconstruídos). Então **sim, cobre o livro inteiro**, forte na maioria, fraco nas últimas
+diamante.
+
+**Algoritmo de atributos.** Cada letra enoquiana carrega um signo + condição planetária + elemento (Golden Dawn).
+O nome é lido como a soma: balanço elemental (4 elementos %), planeta regente, signos, e uma "forma do ser". É
+determinístico e reproduzível — gerado para as 89 entidades (`viz/entity_astro.json`) e mostrado no atlas (clique
+num nome → ficha completa). Ex.: NOCHA — forma sutil, Ar 40%, planeta Vênus; ADNOCHA — forma densa, Terra, com
+ponto de Espírito (letra D).
+
+**O que está provado vs o que é leitura.** Provado e medido: (1) as tabelas são um **sistema de nomes** estruturado,
+cobrindo todo o livro; (2) o alfabeto **atribui** a cada nome elemento, planeta e forma, por regra fixa. Não provado
+pela medida: que os nomes sejam **entidades conscientes** com poderes reais — isso é a leitura da tradição. A
+estrutura medida é totalmente consistente em tratá-los como nomes de forças, mas esse último passo é prática/fé, não
+prova estatística.
+
+## 14. Quantos nomes são possíveis + duas ferramentas (a86)
+
+**O espaço de nomes é finito e numerável** — a gramática o limita. 10 raízes × (1+11 prefixos) × (1+12 sufixos) =
+**1320 combinações** com um afixo de cada lado, **~15.840** com uma segunda camada. Atestados no livro: **89**
+(≥3×), 253 em qualquer contagem. Não é infinito; é um sistema fechado e contável.
+
+**Forja de nomes** (`viz/forge.html`): escolha o elemento e a força desejados; devolve as raízes, prefixos e
+sufixos que constroem um ser com esses atributos, marcando os que o livro já contém. Empuxo elemental medido dos
+afixos: AD-/AL- → Terra, I-/ZI- → Fogo, NO-/NE- → Água, Ar vem das raízes.
+
+**Visualizador das tabelas** (`viz/tables.html`): cada quadrado 49×49 com os nomes do sistema acesos por cima das
+letras originais, coloridos por elemento, lista lateral clicável para isolar um nome. Serve `viz/` por HTTP e abra
+`http://localhost:8860/tables.html`.

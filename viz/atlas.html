@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas das Entidades — Loagaeth</title>
+<style>
+:root{--bg:#f7f6f1;--card:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8;
+--Fogo:#d85a30;--Terra:#b07d2a;--Ar:#2f7fd4;--Agua:#199e70;--q:#000}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13120c;--card:#1e1d15;--ink:#ece9da;--mut:#9a988a;--line:#322f27;--q:#fff}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 system-ui,-apple-system,sans-serif}
+header{padding:16px 20px 8px;max-width:1100px;margin:0 auto}
+h1{font-size:21px;font-weight:600;margin:0 0 2px}.sub{color:var(--mut);margin:0 0 12px;font-size:13px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px 40px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.chip{padding:5px 12px;border:1px solid var(--line);border-radius:20px;background:var(--card);cursor:pointer;font-size:12px;font-weight:600;color:var(--ink);user-select:none}
+.chip.off{opacity:.35}.chip .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+input{padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font-size:14px;min-width:160px;flex:1}
+.plotwrap{position:relative;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px}
+svg{display:block;width:100%;height:auto}
+.axlab{fill:var(--mut);font-size:11px}
+.tip{position:fixed;pointer-events:none;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:12px;box-shadow:0 4px 18px rgba(0,0,0,.18);z-index:9;max-width:230px;opacity:0;transition:opacity .08s}
+.detail{margin-top:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.big{font-size:26px;font-weight:600;letter-spacing:1px}
+.pre{color:#b07d2a}.suf{color:#b07d2a}
+.attrs{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:12px}
+.attr{background:var(--bg);border-radius:8px;padding:8px 10px}.attr .k{color:var(--mut);font-size:11px}.attr .v{font-size:17px;font-weight:600}
+.meter{height:7px;border-radius:4px;background:var(--line);margin-top:5px;overflow:hidden}.meter>i{display:block;height:100%}
+.pill{display:inline-block;padding:2px 9px;border-radius:14px;color:#fff;font-size:12px;font-weight:600}
+.fam{margin-top:10px}.fam .r{padding:2px 0}
+.muted{color:var(--mut);font-size:12px}
+</style>
+</head>
+<body>
+<header>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+<h1 id="h1">Atlas das Entidades do Loagaeth</h1>
+<span id="lang" style="cursor:pointer;border:1px solid var(--line);border-radius:16px;padding:3px 12px;font-size:12px;font-weight:600">EN</span>
+</div>
+<p class="sub" id="sub">Cada entidade é um nome medido no livro inteiro. Posição: <b>força</b> (quanto repete) × <b>potência</b> (quão acima do acaso está colocada). Tamanho da bolha: <b>alcance</b> (tabelas). Cor: <b>elemento</b>. Clique para o perfil.</p>
+</header>
+<div class="wrap">
+<div class="bar" id="filters"></div>
+<div class="bar"><input id="q" placeholder="buscar nome…"></div>
+<div class="plotwrap"><svg id="plot" viewBox="0 0 1000 540" preserveAspectRatio="xMidYMid meet"></svg></div>
+<div class="detail" id="detail"></div>
+</div>
+<div class="tip" id="tip"></div>
+<script>
+var EL={Fogo:'var(--Fogo)',Terra:'var(--Terra)',Ar:'var(--Ar)',Agua:'var(--Agua)','?':'#999'};
+var ELH={Fogo:'#d85a30',Terra:'#b07d2a',Ar:'#2f7fd4',Agua:'#199e70','?':'#999'};
+var D=null,ASTRO=null,state={el:{Fogo:1,Terra:1,Ar:1,Agua:1},cls:{raiz:1,derivado:1,ponte:1},q:''};
+var SVG='http://www.w3.org/2000/svg';
+var LG=(localStorage.getItem('atlas_lang')||'pt'),curName='NOCHA';
+var ELN={pt:{Fogo:'Fogo',Terra:'Terra',Ar:'Ar',Agua:'Água','?':'?'},en:{Fogo:'Fire',Terra:'Earth',Ar:'Air',Agua:'Water','?':'?'}};
+var CLN={pt:{raiz:'raiz',derivado:'derivado',ponte:'ponte'},en:{raiz:'root',derivado:'derived',ponte:'bridge'}};
+var FORMA_EN={Fogo:'fiery form - light, flame, the impulse that bursts',Terra:'dense form - body, stone, root, that which sustains',Ar:'subtle form - breath, voice, thought that runs',Agua:'fluid form - wave, mirror, emotion that dissolves','?':'undefined form'};
+var NAT_EN={Fogo:'ardent (will, impulse)',Terra:'firm (matter, body)',Ar:'mental (thought, word)',Agua:'fluid (emotion, intuition)','?':'undefined'};
+var STR={pt:{h1:'Atlas das Entidades do Loagaeth',sub:'Cada entidade é um nome medido no livro inteiro. Posição: <b>força</b> (quanto repete) × <b>potência</b> (quão acima do acaso está colocada). Tamanho da bolha: <b>alcance</b> (tabelas). Cor: <b>elemento</b>. Clique para o perfil.',lang:'EN',xax:'força → (quanto repete)',yax:'potência → (acima do acaso)',chance:'acaso (1×)',forca:'força (tamanho)',alcance:'alcance',tabelas:'tabelas',potencia:'potência (acima do acaso)',elemento:'elemento',classe:'classe',raizw:'raiz',prof:'profundidade',fusao:'fusão',ficha:'Ficha pelo alfabeto enoquiano',planeta:'planeta regente',pontos:'pontos',signos:'signos das letras',familia:'Família de',tipTab:'tab'},
+ en:{h1:'Atlas of the Loagaeth Entities',sub:'Each entity is a name measured across the whole book. Position: <b>force</b> (how often it repeats) × <b>potency</b> (how far above chance it is placed). Bubble size: <b>reach</b> (tables). Colour: <b>element</b>. Click for the profile.',lang:'PT',xax:'force → (how much it repeats)',yax:'potency → (above chance)',chance:'chance (1×)',forca:'force (size)',alcance:'reach',tabelas:'tables',potencia:'potency (above chance)',elemento:'element',classe:'class',raizw:'root',prof:'depth',fusao:'fusion',ficha:'Profile from the Enochian alphabet',planeta:'ruling planet',pontos:'points',signos:'signs of the letters',familia:'Family of',tipTab:'tab'}};
+function S(k){return STR[LG][k]}
+function eln(e){return ELN[LG][e]||e}
+Promise.all([fetch('entity_data.json').then(r=>r.json()),fetch('entity_astro.json').then(r=>r.json()).catch(()=>null)])
+ .then(([d,a])=>{D=d;ASTRO=a;boot()})
+ .catch(e=>{document.getElementById('detail').innerHTML='<div class=card>Não carregou entity_data.json — sirva por HTTP: <code>python -m http.server 8860</code></div>'});
+
+function renderFilters(){var f=document.getElementById('filters');f.innerHTML='';
+ ['Fogo','Terra','Ar','Agua'].forEach(e=>{var c=mkchip(e,'<span class=dot style="background:'+ELH[e]+'"></span>'+eln(e),()=>{state.el[e]=!state.el[e];c.classList.toggle('off',!state.el[e]);draw()});c.classList.toggle('off',!state.el[e]);f.appendChild(c)});
+ ['raiz','derivado','ponte'].forEach(k=>{var c=mkchip(k,CLN[LG][k],()=>{state.cls[k]=!state.cls[k];c.classList.toggle('off',!state.cls[k]);draw()});c.classList.toggle('off',!state.cls[k]);f.appendChild(c)});}
+function boot(){
+ renderFilters();
+ document.getElementById('q').addEventListener('input',e=>{state.q=e.target.value.toUpperCase();draw()});
+ document.getElementById('lang').onclick=()=>{LG=LG==='pt'?'en':'pt';localStorage.setItem('atlas_lang',LG);applyLang();draw();showDetail(curName)};
+ applyLang();
+ draw(); // pick the king first
+ showDetail('NOCHA');
+}
+function applyLang(){document.getElementById('h1').textContent=S('h1');document.getElementById('sub').innerHTML=S('sub');document.getElementById('lang').textContent=S('lang');document.getElementById('q').placeholder=LG==='en'?'search name…':'buscar nome…';renderFilters()}
+function mkchip(id,html,on){var c=document.createElement('span');c.className='chip';c.innerHTML=html;c.onclick=on;return c}
+
+function sx(f){var lo=Math.log(3),hi=Math.log(D.force_max);return 70+(Math.log(f)-lo)/(hi-lo)*880}
+function sy(p){var lo=Math.log(1),hi=Math.log(D.potencia_max);return 500-(Math.log(Math.max(p,1))-lo)/(hi-lo)*470}
+function sr(a){return 4+Math.sqrt(a/D.tables_max)*22}
+
+function draw(){
+ var svg=document.getElementById('plot');svg.innerHTML='';
+ // axes
+ [['força → (quanto repete, log)',500,500,500,30],].forEach(()=>{});
+ addLine(70,500,950,500);addLine(70,500,70,30);
+ addText(510,532,S('xax'),'axlab','middle');
+ var yl=addText(0,0,S('yax'),'axlab','middle');yl.setAttribute('transform','translate(22,270) rotate(-90)');
+ // reference: potencia=1 line
+ var y1=sy(1);addText(74,y1-4,S('chance'),'axlab','start');
+ var ents=Object.entries(D.entities).filter(([n,e])=>state.el[e.elemento]&&state.cls[e.classe]);
+ ents.sort((a,b)=>a[1].alcance-b[1].alcance); // big last (on top)
+ ents.forEach(([n,e])=>{
+  var hit=state.q&&n.indexOf(state.q)>=0;
+  var c=document.createElementNS(SVG,'circle');
+  c.setAttribute('cx',sx(e.forca));c.setAttribute('cy',sy(e.potencia));c.setAttribute('r',sr(e.alcance));
+  c.setAttribute('fill',ELH[e.elemento]);c.setAttribute('fill-opacity',state.q?(hit?0.95:0.12):0.78);
+  c.setAttribute('stroke',e.classe==='ponte'?'var(--q)':'none');c.setAttribute('stroke-width',e.classe==='ponte'?2:0);
+  c.style.cursor='pointer';
+  c.addEventListener('mousemove',ev=>tip(ev,n,e));c.addEventListener('mouseleave',hideTip);
+  c.addEventListener('click',()=>showDetail(n));
+  svg.appendChild(c);
+  if(e.forca>120||hit){var t=addText(sx(e.forca),sy(e.potencia)-sr(e.alcance)-3,n,'axlab','middle');t.style.pointerEvents='none';t.setAttribute('fill','var(--ink)');t.setAttribute('font-weight','600')}
+ });
+}
+function addLine(x1,y1,x2,y2){var l=document.createElementNS(SVG,'line');l.setAttribute('x1',x1);l.setAttribute('y1',y1);l.setAttribute('x2',x2);l.setAttribute('y2',y2);l.setAttribute('stroke','var(--line)');document.getElementById('plot').appendChild(l)}
+function addText(x,y,s,cls,anch){var t=document.createElementNS(SVG,'text');t.setAttribute('x',x);t.setAttribute('y',y);t.setAttribute('class',cls);t.setAttribute('text-anchor',anch||'start');t.textContent=s;document.getElementById('plot').appendChild(t);return t}
+function tip(ev,n,e){var t=document.getElementById('tip');t.innerHTML='<b>'+n+'</b><br>'+S('forca').split(' ')[0]+' '+e.forca+' · '+S('alcance')+' '+e.alcance+' '+S('tipTab')+' · '+S('potencia').split(' ')[0]+' '+e.potencia+'×<br><span class=pill style="background:'+ELH[e.elemento]+'">'+eln(e.elemento)+'</span> '+CLN[LG][e.classe];t.style.left=(ev.clientX+14)+'px';t.style.top=(ev.clientY+14)+'px';t.style.opacity=1}
+function hideTip(){document.getElementById('tip').style.opacity=0}
+
+function showDetail(n){var e=D.entities[n];if(!e)return;curName=n;
+ var dec='';if(e.raiz){var i=n.indexOf(e.raiz);dec=(i>0?'<span class=pre>'+n.slice(0,i)+'</span>':'')+'<u>'+e.raiz+'</u>'+(n.slice(i+e.raiz.length)?'<span class=suf>'+n.slice(i+e.raiz.length)+'</span>':'')}else dec=n;
+ function meter(v,mx,col){return '<div class=meter><i style="width:'+Math.min(100,100*v/mx)+'%;background:'+col+'"></i></div>'}
+ var nat=LG==='en'?NAT_EN[e.elemento]:e.natureza;
+ var h='<div class=card><div class=big>'+dec+'</div>';
+ h+='<div class=muted style="margin-top:4px">'+S('classe')+' '+CLN[LG][e.classe]+(e.raiz?' · '+S('raizw')+' '+e.raiz+' · '+S('prof')+' '+e.profundidade:'')+(e.roots&&e.roots.length>1?' · '+S('fusao')+' '+e.roots.join('+'):'')+'</div>';
+ h+='<div class=attrs>';
+ h+='<div class=attr><div class=k>'+S('forca')+'</div><div class=v>'+e.forca+'</div>'+meter(e.forca,D.force_max,ELH[e.elemento])+'</div>';
+ h+='<div class=attr><div class=k>'+S('alcance')+'</div><div class=v>'+e.alcance+' '+S('tabelas')+'</div>'+meter(e.alcance,D.tables_max,'#888')+'</div>';
+ h+='<div class=attr><div class=k>'+S('potencia')+'</div><div class=v>'+e.potencia+'×</div>'+meter(e.potencia,D.potencia_max,'#7f77dd')+'</div>';
+ h+='<div class=attr><div class=k>'+S('elemento')+'</div><div class=v><span class=pill style="background:'+ELH[e.elemento]+'">'+eln(e.elemento)+'</span></div><div class=muted style="margin-top:4px">'+nat+'</div></div>';
+ h+='</div>';
+ // ficha astral do alfabeto
+ if(ASTRO&&ASTRO.fichas[n]){var f=ASTRO.fichas[n],eb=f.element_balance;
+  h+='<div class=fam><b>'+S('ficha')+'</b>';
+  h+='<div class=muted style="margin:6px 0">'+(LG==='en'?FORMA_EN[e.elemento]:f.forma)+'</div>';
+  h+='<div style="display:flex;gap:3px;height:16px;border-radius:5px;overflow:hidden;margin:6px 0">';
+  for(var el of ['Fogo','Terra','Ar','Agua'])if(eb[el])h+='<span title="'+el+' '+eb[el]+'%" style="width:'+eb[el]+'%;background:'+ELH[el]+'"></span>';
+  h+='</div>';
+  h+='<div class=muted>'+S('planeta')+': <b>'+(f.ruling_planet||'—')+'</b>'+(f.special_points&&f.special_points.length?' · '+S('pontos')+': '+f.special_points.join(', '):'')+'</div>';
+  h+='<div class=muted>'+S('signos')+': '+Object.keys(f.signs).map(s=>s+'×'+f.signs[s]).join(', ')+'</div>';
+  h+='</div>'}
+ // family
+ if(e.raiz){var sibs=Object.keys(D.entities).filter(k=>D.entities[k].raiz===e.raiz).sort((a,b)=>D.entities[b].forca-D.entities[a].forca);
+  if(sibs.length>1){h+='<div class=fam><b>'+S('familia')+' '+e.raiz+'</b>';for(var s of sibs.slice(0,12)){var r=D.entities[s];h+='<div class=r style="cursor:pointer" onclick="showDetail(\''+s+'\')">'+(s===e.raiz?'◆ ':'· ')+'<b>'+s+'</b> — força '+r.forca+' · '+r.potencia+'× · <span class=pill style="background:'+ELH[r.elemento]+'">'+r.elemento+'</span></div>'}h+='</div>'}}
+ h+='</div>';
+ document.getElementById('detail').innerHTML=h;
+}
+window.showDetail=showDetail;
+</script>
+</body>
+</html>

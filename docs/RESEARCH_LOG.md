@@ -385,3 +385,48 @@ houses meet) FAILED: 0/7 sit between parents. Instead the NOCHA+CHASTOR fusions 
 tables, 65x - a near-universal connector of the two great houses, not localized. The grammar is recursive: affixes
 stack on derived names (NOCHASTOR -> NOCHASTORAD -> AXNOCHASTOR; ADNOCHA -> ADNOCHAPHA depth 5). So bridges exist
 and the tree grows deep, but bridges do not mark territorial borders.
+
+## #221 — Entity profiles + interactive atlas (a84)
+Dropped the borrowed Watchtower ranks (Rei/Arcanjo/Anjo) - they did not hold. Each name (89 entities) is now
+profiled by MEASURED attributes over the full book: forca (total occurrences), alcance (tables, 0-74), potencia
+(occurrences / Markov-3 surrogate = how far above letter-flow), elemento (GD element of its letters), natureza
+(the element's temperament, a labelled correspondence), classe (raiz/derivado/ponte, from the grammar), profundidade.
+Two axes emerge: forca (ubiquity) and potencia (deliberate placement) are DIFFERENT - NOCHA force 621 but potencia
+1.1x (common, not placed), while NOCHASTORA potencia 4.8x, NOCHAPH 2.8x (rarer, pointedly woven). Interactive atlas
+at viz/atlas.html (scatter forca x potencia, size=alcance, colour=elemento, click for profile + family). Data in
+viz/entity_data.json.
+
+## #222 — Two layers: common substrate vs deliberate compounds (a84 follow-up)
+High-potencia entities (>=2.5, n=56) are mostly long DERIVED names (49/56 derivado, median len 8, median forca 11,
+alcance 10). Low-potencia (<1.5, n=11) are short ROOTS (5 raiz, median len 6, forca 151, alcance 45). So the book has
+a common substrate (short roots, ubiquitous, textura) and a deliberate layer (long compound/derived names placed far
+above chance). Partly a length effect (long strings have low surrogate expectation), but the long compounds recur well
+beyond chance, so they are the genuinely-placed entities; the roots are the shared alphabet of the name-system.
+
+## #223 — Coverage + attribute algorithm (a85)
+Coverage: the name-system appears in ALL 47 tables (2-48, diamonds included). Dense in 2-38 (median 25 names/table,
+up to 190 occurrences); thin in the deep diamonds 43-48 (1-6 names - also the least-reconstructed). So it spans the
+whole book, strongly for most, faintly at the deepest diamonds.
+Attribute algorithm (a85): each Enochian letter carries a GD sign + planetary condition + element; a name is read as
+the sum -> element balance (4 elements %), ruling planet, signs, and a traditional "forma do ser". Deterministic,
+reproducible. Generated for all 89 entities, exported to viz/entity_astro.json and rendered in the atlas detail (clic
+a name -> full ficha). Honest scope: this DEFINES the attributes the alphabet assigns a name; it does not prove the
+name denotes a literal spirit - that remains the practitioner's reading, which the measured structure supports but
+cannot establish.
+
+## #224 — Name space + two tools (a86)
+Name space is FINITE and numerable, bounded by the grammar: 10 roots x (1+11 prefixes) x (1+12 suffixes) = 1320
+combos at depth 1, ~15840 with a second affix layer; 89 attested (>=3x), 253 present at any count. Not infinite.
+Affix element pushes measured: AD-/AL- -> Terra (force ~57/48), I-/ZI- -> Fogo, NO-/NE- -> Agua, Ar comes from the
+roots. Two tools built in the repo site: viz/forge.html (pick element + force -> the roots/prefixes/suffixes that
+build such a name, marking attested ones) and viz/tables.html (every 49x49 straight leaf with its system-names lit
+on the original grid, coloured by element, click to isolate). Data: viz/forge_data.json, viz/table_grids.json.
+
+## #225 — Gematria + cross-system (a87)
+A) Gematria of top names across 12 systems: NOCHA and NACHO carry the SAME value in every system (149 isopsefia,
+387 Crowley-astro, 141 primes...) - they are anagrams, so gematrically identical. The two top-ranked names of the
+hierarchy are one being by number, an independent confirmation of the rotation=same-entity reading. Also CHASTOR=ANZACH
+(24, digital), NOCHA/NACHO/ALGETH share 23. Notable: CHASTOR=30 (Aethyrs), GRADAX=12 (tribes) in Hildebrandt (one
+system each, weak). B) Cross-system: the grammar roots (NOCHA, CHASTOR, GETH...) appear ZERO times in the Heptarchy's
+49 angels, the 91 Governors, the kings, or the Call words. The Loagaeth name-system is its own layer, not shared with
+or copied from the other Enochian systems.

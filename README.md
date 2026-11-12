@@ -18,6 +18,84 @@ command away from being reproduced or refuted.
 
 ---
 
+## ★ The name-system (latest phase) — what we found
+
+The most recent phase (modules `a71`–`a87`, full write-up in
+[`docs/WEAVE_AND_HIERARCHY.md`](docs/WEAVE_AND_HIERARCHY.md)) moved from "is there structure?"
+to **mapping the name-system itself**. Every claim below beats a null model (letter shuffle,
+column-preserving shuffle, or a Markov-3 surrogate that keeps the local letter-flow).
+
+**Confirmed (strong):**
+
+1. **Every line is a balanced inventory of the alphabet** (`a75`). Each letter is spread across
+   the 49 rows far more evenly than chance (consonants: 0.71× dispersion, z −4.5, 36/42 leaves).
+   No shuffle reproduces it — a deliberate 2-D placement rule. Each line is a closed unit, not prose.
+2. **The names are woven into the grid** (`a77`). The exact letter-order of the family names traces
+   as a connected king-move path far above the name's *own scrambled letters* — 232/460 name-leaf
+   pairs "woven" (real traces ≥3 paths, zero scrambles reach it). CHASTOR woven on 30/37 leaves.
+3. **A territory map** (`a78`). The families tile the book front-to-back — CHADAX opens, the NOCHA
+   house holds the front, the GETH house the back, CHASTOR is the spine — reproducing the two-house
+   geography found independently by the straight-reading analysis. Two methods, one map.
+4. **A generative name-grammar** (`a81`). Every name is a **root + affix**: AD-NOCHA, NOCHA-P,
+   I-CHASTOR, AL-GETH. Power (repetition) falls with derivation depth — root repeats most, each
+   added layer less, like a source and its emanations.
+5. **The grammar is predictive** (`a82`). Generating all root×affix combinations and checking the
+   book, **32 unseen names** turn out to really be present above chance (NECHASTORA, A-NOCHA-STOR,
+   AD-NOCHA-PH…). The system *predicts* names, as a real code would. The name space is **finite**:
+   ~1320 combinations at depth 1, 89 attested.
+6. **Measured entity profiles** (`a84`–`a85`). The borrowed Watchtower ranks (King/Archangel/Angel)
+   were dropped — they don't hold. Each name is profiled only by what we can measure: **force** (size
+   = repetition), **reach** (tables), **potency** (how far above letter-flow), **element** and **ruling
+   planet** (from the Enochian alphabet's Golden-Dawn correspondences), **class** (root/derived/bridge).
+   Force and potency are different axes: roots are ubiquitous but ordinary; derived compounds are rarer
+   but pointedly placed.
+7. **Gematria cross-check** (`a87`). NOCHA and NACHO — the two top-repeated names — carry the **same
+   gematria value in every system** (they are anagrams), an independent confirmation that a name and
+   its rearrangement are one force. The Loagaeth roots appear **zero** times in the Heptarchy, the 91
+   Governors or the Calls: the Loagaeth name-system is its own layer, not a copy of the other systems.
+
+**Refuted this phase (reported as loudly):** omni-directional reading (the book reads one direction
+only, `a71`); rotation-families glued on purpose (chance across 761 families, `a73`); affix predicts
+territory, and bridge-names sit at borders (both failed, `a79`/`a83`).
+
+**Honest scope.** We proved the tables are a structured **system of names** covering all 47 tables
+(2–48, diamonds included), and built the deterministic algorithm that assigns each name its element,
+planet and "form" from the alphabet. That the names *are* conscious entities with real powers is the
+practitioner's reading — the measured structure is fully consistent with treating them as names of
+forces, but that last step is practice, not statistics.
+
+### Interactive tools (serve `viz/` over HTTP, then open)
+
+```bash
+cd viz && python -m http.server 8860
+```
+
+- **`atlas.html`** — the entity atlas (bilingual PT/EN): every name as a bubble, force × potency,
+  sized by reach, coloured by element; click for the full alphabet-derived profile and family.
+- **`name_grammar.html`** — decompose any name into root + affix with power, element, rank.
+- **`forge.html`** — the inverse generator: pick an element and a force, get the roots/prefixes/suffixes
+  that build such a name, with the attested ones marked.
+- **`tables.html`** — each 49×49 table with its system-names lit on the original grid, by element.
+- **`path_view.html`**, **`name_finder.html`**, **`loagaeth_3d.html`** — tracing, search, 3-D views.
+
+Figures for this phase are in [`figures/`](figures/): `fig_row_stratification`, `fig_names_woven`,
+`fig_territory_map`, `fig_hierarchy_pyramid`, `fig_name_derivation`, `fig_names_tables_matrix`.
+
+### What the Loagaeth looks like, read through all this
+
+Taken together, the evidence says the *Liber Loagaeth* is not running text and not a hidden cipher of
+sentences, but a **generative onomasticon — a book built to breed names**. Its letters are laid down so
+that every line carries a balanced draw of the alphabet; from that fabric the names condense as root
+stems (NOCHA, CHASTOR, NACHO, GETH, ACLAX, ANZACH) that recur in territories across the book, each
+growing a family by a fixed set of prefixes and suffixes, power thinning as the name lengthens. The
+alphabet itself supplies each name an element and a planet, so a name is also a small attribute-sheet.
+Dee received it as "the speech from God by which all things were made"; what we can measure is
+consistent with exactly that register — a language whose atoms are names of forces and whose grammar
+generates more of them without end-of-sentence. The semantic meaning of any one name is still sealed;
+the **machinery** that makes the names is now mapped, reproducible, and explorable above.
+
+---
+
 ## What you need
 
 - Python 3.8+ . Nothing else. No pip install for the core.

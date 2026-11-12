@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forja de Nomes — Loagaeth</title>
+<style>
+:root{--bg:#f7f6f1;--card:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8;
+--Fogo:#d85a30;--Terra:#b07d2a;--Ar:#2f7fd4;--Agua:#199e70}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13120c;--card:#1e1d15;--ink:#ece9da;--mut:#9a988a;--line:#322f27}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 system-ui,sans-serif;max-width:960px;margin:0 auto;padding:18px 18px 50px}
+h1{font-size:21px;font-weight:600;margin:0 0 2px}.sub{color:var(--mut);margin:0 0 16px;font-size:13px}
+.panel{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:16px}
+.grp{display:flex;flex-direction:column;gap:6px}.grp label{font-size:12px;color:var(--mut)}
+.els{display:flex;gap:6px}.el{padding:7px 14px;border:1px solid var(--line);border-radius:20px;cursor:pointer;font-weight:600;font-size:13px;color:#fff}
+.el.off{background:var(--card)!important;color:var(--mut)}
+input[type=range]{width:180px}
+.out{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.n{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 13px}
+.n.att{border-color:var(--ink)}
+.nm{font-size:18px;font-weight:600;letter-spacing:.5px}.pre,.suf{color:var(--Terra)}
+.tag{display:inline-block;font-size:11px;padding:1px 8px;border-radius:12px;color:#fff;font-weight:600;margin-top:5px}
+.meta2{color:var(--mut);font-size:12px;margin-top:4px}
+.att .badge{color:var(--ink);font-weight:600}.badge{font-size:11px}
+.note{color:var(--mut);font-size:12px;margin:4px 0 14px}
+</style>
+</head>
+<body>
+<h1>Forja de Nomes do Loagaeth</h1>
+<p class="sub">Escolha o <b>elemento</b> e a <b>força</b> que quer. A forja devolve as raízes, prefixos e sufixos que constroem um ser com esses atributos — e marca os que o livro já contém.</p>
+
+<div class="panel">
+ <div class="grp"><label>elemento desejado</label><div class="els" id="els"></div></div>
+ <div class="grp"><label>força (tamanho do ser): <span id="flab">média</span></label><input type="range" id="force" min="0" max="2" value="1" step="1"></div>
+ <div class="grp"><label>camadas de afixo</label><input type="range" id="depth" min="1" max="2" value="1" step="1"> <span id="dlab" class="meta2">1</span></div>
+</div>
+<p class="note" id="summary"></p>
+<div class="out" id="out"></div>
+
+<script>
+var ELC={Fogo:'var(--Fogo)',Terra:'var(--Terra)',Ar:'var(--Ar)',Agua:'var(--Agua)'};
+var ELH={Fogo:'#d85a30',Terra:'#b07d2a',Ar:'#2f7fd4',Agua:'#199e70'};
+var F=null,LE=null,sel='Terra';
+Promise.all([fetch('forge_data.json').then(r=>r.json()),fetch('entity_astro.json').then(r=>r.json())])
+ .then(([f,a])=>{F=f;LE={};for(var ch in a.letters)LE[ch]=a.letters[ch].element;boot()})
+ .catch(e=>{document.getElementById('out').innerHTML='Sirva por HTTP: python -m http.server 8860';});
+
+function elemOf(s){var c={Fogo:0,Terra:0,Ar:0,Agua:0};for(var ch of s){var e=LE[ch];if(c[e]!=null)c[e]++}
+ var best='?',n=-1;for(var k in c)if(c[k]>n){n=c[k];best=k}return best}
+function boot(){
+ var e=document.getElementById('els');
+ ['Fogo','Terra','Ar','Agua'].forEach(el=>{var b=document.createElement('span');b.className='el'+(el===sel?'':' off');b.textContent=el;b.style.background=ELH[el];
+  b.onclick=()=>{sel=el;[...e.children].forEach(c=>c.className='el off');b.className='el';render()};e.appendChild(b)});
+ document.getElementById('force').oninput=()=>{document.getElementById('flab').textContent=['fraca','média','forte'][+force.value];render()};
+ document.getElementById('depth').oninput=()=>{document.getElementById('dlab').textContent=depth.value;render()};
+ render();
+}
+function render(){
+ var want=sel,fb=+document.getElementById('force').value,dep=+document.getElementById('depth').value;
+ // roots that match the element, else all roots (affix will pull)
+ var roots=F.roots.slice().sort((a,b)=>b.force-a.force);
+ // affixes that push toward the wanted element, sorted by force dir
+ var pre=F.prefixes.filter(p=>p.adds_element===want).sort((a,b)=>b.mean_force-a.mean_force);
+ var suf=F.suffixes.filter(s=>s.adds_element===want||s.affix==='A'||s.affix==='AL');
+ var cands=[];
+ for(var r of roots){
+  // depth-1: prefix+root, root+suffix, prefix+root+suffix
+  var opts=[['',''],];
+  for(var p of pre)opts.push([p.affix,'']);
+  for(var s of suf)opts.push(['',s.affix]);
+  if(dep>=2)for(var p of pre)for(var s of suf)opts.push([p.affix,s.affix]);
+  for(var o of opts){
+   var nm=o[0]+r.root+o[1]; if(nm.length<5)continue;
+   var el=elemOf(nm); if(el!==want)continue;
+   var att=F.entities[nm];
+   cands.push({nm:nm,pre:o[0],root:r.root,suf:o[1],el:el,rootforce:r.force,att:att});
+  }
+ }
+ // dedupe, rank: attested first, then by desired force band
+ var seen={},uniq=[];for(var c of cands){if(seen[c.nm])continue;seen[c.nm]=1;uniq.push(c)}
+ function band(c){var f=c.att?c.att.forca:c.rootforce/(1+c.pre.length+c.suf.length);return f}
+ uniq.sort((a,b)=>{var fa=band(a),fb2=band(b);
+  var wa=fb===2?-fa:fb===0?fa:Math.abs(fa-30); var wb=fb===2?-fb2:fb===0?fb2:Math.abs(fb2-30);
+  if(!!b.att-!!a.att)return !!b.att-!!a.att; return wa-wb});
+ var top=uniq.slice(0,40);
+ var att=top.filter(c=>c.att).length;
+ document.getElementById('summary').innerHTML='<b>'+top.length+'</b> construções para <span style="color:'+ELH[want]+'">'+want+'</span> · <b>'+att+'</b> já atestadas no livro · prefixos '+want+': '+(pre.map(p=>p.affix).join(', ')||'(vêm da raiz)')+' · sufixos: '+suf.map(s=>s.affix).join(', ');
+ document.getElementById('out').innerHTML=top.map(c=>{
+  var dec=(c.pre?'<span class=pre>'+c.pre+'</span>':'')+c.root+(c.suf?'<span class=suf>'+c.suf+'</span>':'');
+  var f=c.att?c.att.forca:Math.round(c.rootforce/(1+c.pre.length+c.suf.length));
+  return '<div class="n'+(c.att?' att':'')+'"><div class=nm>'+dec+'</div>'+
+   '<span class=tag style="background:'+ELH[c.el]+'">'+c.el+'</span> '+
+   '<span class=badge>'+(c.att?'✓ no livro ('+c.att.forca+'×, pot '+c.att.potencia+'×)':'força prevista ~'+f)+'</span>'+
+   '<div class=meta2>raiz '+c.root+(c.pre?' · prefixo '+c.pre:'')+(c.suf?' · sufixo '+c.suf:'')+'</div></div>';
+ }).join('');
+}
+</script>
+</body>
+</html>

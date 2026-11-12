@@ -115,6 +115,7 @@ import a102_maximal_words
 import a103_plane_and_servants
 import a104_notfound_deep
 import a105_word_classes
+import a106_syntax_broad
 import make_figures
 import make_viz_data
 
@@ -226,6 +227,7 @@ MODULES = [
     ("103_plane_and_servants", a103_plane_and_servants),
     ("104_notfound_deep", a104_notfound_deep),
     ("105_word_classes", a105_word_classes),
+    ("106_syntax_broad", a106_syntax_broad),
 ]
 
 

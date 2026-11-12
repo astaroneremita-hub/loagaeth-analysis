@@ -57,6 +57,7 @@ Tudo medido contra modelo nulo (embaralhamento, surrogate Markov-3, anagrama). M
 - **REFUTADO — Nomes do Loagaeth em outras vertentes** (0 matches em Shem/Goetia/planetários/governadores, mesmo
   afrouxando). Sui generis. (a88)
 - **REFUTADO — Afixo prediz território; ponte vive na fronteira; servos ligados à força.** (a79/a83/a103)
+- **REFUTADO — Sintaxe de ordem AMPLA entre palavras.** 19 pares ordenados no livro vs 16.2 no surrogate Markov-3: nao bate null. So pares de conta alta (GETH→ACLAX) tem ordem fixa real; nao e regra geral do lexico. (a106)
 - Refutados antigos: códigos longos, cópia, numerologia.
 
 ## 7. Onde isto chega

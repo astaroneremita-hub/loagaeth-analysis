@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Língua dos Nomes — Loagaeth</title>
+<style>
+:root{--bg:#f7f6f1;--card:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8;--ac:#8a6d2f;--nm:#8a2f7d;--ok:#2f8a52}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13120c;--card:#1e1d15;--ink:#ece9da;--mut:#9a988a;--line:#322f27;--ac:#d6b96a;--nm:#d66ac4;--ok:#6ad68f}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 system-ui,sans-serif;max-width:860px;margin:0 auto;padding:16px 18px 60px}
+h1{font-size:22px;font-weight:700;margin:0 0 2px;display:inline-block}
+h2{font-size:16px;font-weight:700;margin:26px 0 8px;border-bottom:1px solid var(--line);padding-bottom:4px}
+#lang{cursor:pointer;border:1px solid var(--line);border-radius:16px;padding:3px 12px;font-size:12px;font-weight:600;float:right}
+.sub{color:var(--mut);margin:0 0 6px;font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 15px;margin:10px 0}
+.badge{display:inline-block;font-size:11px;font-weight:700;border-radius:5px;padding:1px 7px;margin-left:6px;vertical-align:1px}
+.ok{background:var(--ok);color:#fff}.desc{background:var(--mut);color:var(--bg)}
+table{border-collapse:collapse;width:100%;font-size:13px;margin-top:6px}
+th,td{text-align:left;padding:4px 8px;border-bottom:1px solid var(--line)}
+th{color:var(--mut);font-weight:600}
+.nm{color:var(--nm);font-weight:700}
+.mono{font-family:ui-monospace,monospace}
+.chip{display:inline-block;border:1px solid var(--line);border-radius:6px;padding:2px 8px;margin:2px;font-weight:600;font-family:ui-monospace,monospace}
+.big{font-size:20px;font-weight:700;color:var(--ac)}
+.tpl{font-family:ui-monospace,monospace;font-size:17px;text-align:center;margin:10px 0}
+.tpl .p{color:var(--ac)}.tpl .r{color:var(--nm)}.tpl .s{color:var(--ok)}
+.note{color:var(--mut);font-size:12px}
+</style>
+</head>
+<body>
+<span id="lang">EN</span>
+<h1 id="h1">A Língua dos Nomes</h1>
+<p class="sub" id="sub">A gramática decifrada do onomasticon do Loagaeth — raízes, afixos, derivação e léxico, cada peça testada contra o acaso.</p>
+<div id="body"></div>
+<script>
+var D=null,LG=(localStorage.getItem('atlas_lang')||'pt');
+var S={pt:{
+ h1:'A Língua dos Nomes',lang:'EN',
+ sub:'A gramática decifrada do onomasticon do Loagaeth — raízes, afixos, derivação e léxico, cada peça testada contra o acaso.',
+ premise:'O Loagaeth não é prosa nem Chamada cifrada (cinco testes de nulidade independentes). É um <b>onomasticon</b>: um léxico de NOMES distribuído pelas 36 folhas 49×49, gerado por morfologia. Abaixo, as regras dessa língua.',
+ h_morph:'Morfologia — o template',morph:'Cada nome é <b>prefixo · raiz · sufixo</b>. A morfologia é <b>posicional</b>: '+'%F%'+' dos afixos ficam num lado só (prefixo ou sufixo), contra '+'%N%'+' no acaso (p='+'%P%'+').',
+ prefixes:'Prefixos',suffixes:'Sufixos',roots:'Raízes',examples:'Exemplos de decomposição',
+ h_phono:'Fonotática — as regras de combinação',phono:'A língua tem restrições categóricas de sequência: <b>%A%</b> pares de letra são fortemente evitados (vs %AN% no acaso). O traço central é a <b>fuga do hiato</b> — vogais quase nunca se tocam — e o <b>dobro de letra</b> cai a %DR% do esperado. Isto força a estrutura silábica CV (consoante-vogal).',avoided:'Pares evitados (observado vs esperado)',
+ h_comp:'Composição — os super-nomes',comp:'Os nomes longos fundem <b>duas raízes</b> (super-nomes): %CR% dos nomes são compostos vs %CN% em strings aleatórias. A ordem é <b>fixa</b>: a matriz vem primeiro. ',
+ h_matrix:'A matriz geradora',matrix:'A raiz <b class=nm>%M%</b> semeia a casa dominante e aparece em <b>%MT%/%TT%</b> folhas. A ubiquidade cai com a profundidade de derivação, mas <b>toda camada ainda bate o acaso</b> — a hierarquia inteira é atestada.',
+ depth:'Profundidade',real:'% ainda reais',mt:'média de folhas',
+ h_tree:'A árvore da casa',tree:'Nome · profundidade · folhas · quantas vezes mais que o acaso.',
+ name:'Nome',d:'prof.',tbl:'folhas',enr:'vs acaso',
+ h_lex:'Léxico-núcleo',lex:'Os nomes mais ubíquos — as "palavras" da língua, que reaparecem em quase toda folha. Uma string aleatória do mesmo tamanho aparece em ~0 folhas.',
+ h_house:'A casa dominante',house:'Três raízes distintas que <b>viajam juntas</b> pelas folhas acima do acaso (co-ocorrência φ 0.68–0.71): ',
+ h_zipf:'Lei de Zipf',zipf:'O léxico segue Zipf (inclinação %ZS%, R²=%ZR%) — uma assinatura de frequência linguística. Descritivo: o surrogate também é Zipfiano, então isto documenta, não prova.',
+ conf:'CONFIRMADO',descr:'DESCRITIVO'
+},en:{
+ h1:'The Language of Names',lang:'PT',
+ sub:'The deciphered grammar of the Loagaeth onomasticon — roots, affixes, derivation and lexicon, every piece tested against chance.',
+ premise:'The Loagaeth is not prose nor an enciphered Call (five independent null tests). It is an <b>onomasticon</b>: a lexicon of NAMES distributed across the 36 49×49 sheets, generated by morphology. Below, the rules of that language.',
+ h_morph:'Morphology — the template',morph:'Each name is <b>prefix · root · suffix</b>. The morphology is <b>positional</b>: '+'%F%'+' of affixes sit on one side only (prefix or suffix), vs '+'%N%'+' by chance (p='+'%P%'+').',
+ prefixes:'Prefixes',suffixes:'Suffixes',roots:'Roots',examples:'Decomposition examples',
+ h_phono:'Phonotactics — the combination rules',phono:'The language has categorical sequence constraints: <b>%A%</b> letter pairs are strongly avoided (vs %AN% by chance). The core trait is <b>hiatus avoidance</b> — vowels almost never touch — and <b>doubled letters</b> drop to %DR% of expected. This forces CV (consonant-vowel) syllable structure.',avoided:'Avoided pairs (observed vs expected)',
+ h_comp:'Compounding — the super-names',comp:'The long names fuse <b>two roots</b> (super-names): %CR% of names are compounds vs %CN% in random strings. The order is <b>fixed</b>: the matrix comes first. ',
+ h_matrix:'The generative matrix',matrix:'The root <b class=nm>%M%</b> seeds the dominant house and appears in <b>%MT%/%TT%</b> sheets. Ubiquity falls with derivation depth, but <b>every layer still beats chance</b> — the whole hierarchy is attested.',
+ depth:'Depth',real:'% still real',mt:'mean sheets',
+ h_tree:'The house tree',tree:'Name · depth · sheets · how many times above chance.',
+ name:'Name',d:'depth',tbl:'sheets',enr:'vs chance',
+ h_lex:'Core lexicon',lex:'The most ubiquitous names — the "words" of the language, recurring in nearly every sheet. A random string of the same length appears in ~0 sheets.',
+ h_house:'The dominant house',house:'Three distinct roots that <b>travel together</b> across sheets above chance (co-occurrence φ 0.68–0.71): ',
+ h_zipf:'Zipf’s law',zipf:'The lexicon follows Zipf (slope %ZS%, R²=%ZR%) — a linguistic frequency signature. Descriptive: the surrogate is Zipfian too, so this documents, it does not prove.',
+ conf:'CONFIRMED',descr:'DESCRIPTIVE'
+}};
+function T(k){return S[LG][k]}
+fetch('name_language.json').then(r=>r.json()).then(d=>{D=d;render()}).catch(()=>{document.getElementById('body').innerHTML='Abra por http://localhost:8860/';});
+document.getElementById('lang').onclick=()=>{LG=LG==='pt'?'en':'pt';localStorage.setItem('atlas_lang',LG);render()};
+function render(){
+ document.getElementById('lang').textContent=T('lang');
+ document.getElementById('h1').textContent=T('h1');document.getElementById('sub').textContent=T('sub');
+ var h='';
+ h+='<div class=card>'+T('premise')+'</div>';
+ // morphology
+ h+='<h2>'+T('h_morph')+'<span class="badge ok">'+T('conf')+'</span></h2>';
+ h+='<div class=tpl><span class=p>'+T('prefixes').toUpperCase().slice(0,6)+'-</span><span class=r>ROOT</span><span class=s>-'+T('suffixes').toUpperCase().slice(0,6)+'</span></div>';
+ var morph=T('morph').replace('%F%',Math.round(D.affix_fixity*100)+'%').replace('%N%',Math.round(D.affix_fixity_null*100)+'%').replace('%P%',D.affix_p);
+ h+='<div class=card>'+morph+'</div>';
+ h+='<div class=card><b>'+T('prefixes')+':</b><br>'+D.prefixes.map(p=>'<span class=chip style="color:var(--ac)">'+p[0]+'- <span class=note>'+p[1]+'</span></span>').join('')+
+    '<br><br><b>'+T('suffixes')+':</b><br>'+D.suffixes.map(p=>'<span class=chip style="color:var(--ok)">-'+p[0]+' <span class=note>'+p[1]+'</span></span>').join('')+'</div>';
+ h+='<div class=card><b>'+T('examples')+':</b><br>'+D.decomp.map(e=>'<span class=chip>'+e[0].replace(/-/g,'·')+'</span>').join('')+'</div>';
+ // phonotactics
+ h+='<h2>'+T('h_phono')+'<span class="badge ok">'+T('conf')+'</span></h2>';
+ var ph=T('phono').replace('%A%',D.phono_avoided).replace('%AN%',D.phono_avoided_null).replace('%DR%',Math.round(D.phono_double_ratio*100)+'%');
+ h+='<div class=card>'+ph+'<table><tr><th>'+T('avoided')+'</th><th></th></tr>'+
+    D.phono_top_avoided.map(p=>'<tr><td class=mono>'+p[0]+'</td><td class=note>'+p[1]+' vs '+p[2]+'</td></tr>').join('')+'</table></div>';
+ // compounding
+ h+='<h2>'+T('h_comp')+'<span class="badge ok">'+T('conf')+'</span></h2>';
+ var cp=T('comp').replace('%CR%',Math.round(D.compound_rate*100)+'%').replace('%CN%',(D.compound_null*100).toFixed(2)+'%');
+ h+='<div class=card>'+cp+D.compound_fixed.map(f=>'<span class=chip style="color:var(--nm)">'+f[0].replace('+','·')+' ('+f[1]+'/'+f[2]+')</span>').join(' ')+
+    '<br><br>'+D.compound_sample.map(s=>'<span class=chip>'+s[0]+' = '+s[1].replace('+','·')+'</span>').join('')+'</div>';
+ // matrix
+ h+='<h2>'+T('h_matrix')+'<span class="badge ok">'+T('conf')+'</span></h2>';
+ var mt=T('matrix').replace('%M%',D.matrix).replace('%MT%',D.matrix_tables).replace(/%TT%/g,D.tables_total);
+ h+='<div class=card>'+mt+'<table><tr><th>'+T('depth')+'</th><th>'+T('real')+'</th><th>'+T('mt')+'</th></tr>'+
+    Object.keys(D.by_depth).sort().map(k=>'<tr><td>'+k+'</td><td>'+Math.round(D.by_depth[k].real_frac*100)+'%</td><td>'+D.by_depth[k].mean_tables+'</td></tr>').join('')+'</table></div>';
+ // tree
+ h+='<h2>'+T('h_tree')+'</h2><div class=card><div class=note>'+T('tree')+'</div><table><tr><th>'+T('name')+'</th><th>'+T('d')+'</th><th>'+T('tbl')+'</th><th>'+T('enr')+'</th></tr>'+
+    D.tree.map(t=>'<tr><td class=nm>'+t[0]+'</td><td>d'+t[1]+'</td><td>'+t[2]+'/'+D.tables_total+'</td><td>'+t[3]+'×</td></tr>').join('')+'</table></div>';
+ // lexicon
+ h+='<h2>'+T('h_lex')+'<span class="badge ok">'+T('conf')+'</span></h2><div class=card><div class=note>'+T('lex')+'</div><table><tr><th>'+T('name')+'</th><th>'+T('tbl')+'</th><th>'+T('enr')+'</th></tr>'+
+    D.core_lexicon.map(x=>'<tr><td class=nm>'+x[0]+'</td><td>'+x[1]+'/'+D.tables_total+'</td><td>'+x[2]+'×</td></tr>').join('')+'</table></div>';
+ // house
+ h+='<h2>'+T('h_house')+'<span class="badge ok">'+T('conf')+'</span></h2><div class=card>'+T('house')+D.house.map(n=>'<span class=chip class=nm style="color:var(--nm)">'+n+'</span>').join(' ')+'</div>';
+ // zipf
+ h+='<h2>'+T('h_zipf')+'<span class="badge desc">'+T('descr')+'</span></h2><div class=card>'+T('zipf').replace('%ZS%',D.zipf_slope).replace('%ZR%',D.zipf_r2)+'</div>';
+ document.getElementById('body').innerHTML=h;
+}
+</script>
+</body>
+</html>

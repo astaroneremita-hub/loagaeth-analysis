@@ -5,65 +5,143 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tradução dos quadrados — Loagaeth</title>
 <style>
-:root{--bg:#f7f6f1;--card:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8;--ac:#8a6d2f}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13120c;--card:#1e1d15;--ink:#ece9da;--mut:#9a988a;--line:#322f27;--ac:#d6b96a}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 system-ui,sans-serif;max-width:900px;margin:0 auto;padding:16px 18px 50px}
+:root{--bg:#f7f6f1;--card:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8;--dee:#8a6d2f;--lei:#2f6d8a;--dic:#2f8a52;--nm:#8a2f7d}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13120c;--card:#1e1d15;--ink:#ece9da;--mut:#9a988a;--line:#322f27;--dee:#d6b96a;--lei:#6ab6d6;--dic:#6ad68f;--nm:#d66ac4}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 system-ui,sans-serif;max-width:940px;margin:0 auto;padding:16px 18px 50px}
 h1{font-size:20px;font-weight:600;margin:0 0 2px;display:inline-block}
 #lang{cursor:pointer;border:1px solid var(--line);border-radius:16px;padding:3px 12px;font-size:12px;font-weight:600;float:right}
 .sub{color:var(--mut);margin:0 0 10px;font-size:13px}
-.calls{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
+.calls{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
 .cb{padding:4px 9px;border:1px solid var(--line);border-radius:7px;background:var(--card);cursor:pointer;font-size:12px;font-weight:600}
 .cb.on{background:var(--ink);color:var(--bg)}
+.ctrl{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:12px;font-size:13px;color:var(--mut);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+.ctrl select{font-size:13px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:12px}
-.flow{line-height:2.4}
-.w{display:inline-block;margin:2px 3px;padding:2px 2px}
-.w .en{font-weight:600;color:var(--ac)}
+.flow{line-height:2.5}
+.w{display:inline-block;margin:2px 3px}
+.w .or{font-weight:700}
+.w.dee .or{color:var(--dee)}.w.lei .or{color:var(--lei)}.w.dic .or{color:var(--dic)}.w.multi .or{color:var(--ink)}.w.nm .or{color:var(--nm);font-weight:700}
 .w .gl{color:var(--mut);font-size:13px}
-.w .pos{color:var(--mut);font-size:10px}
+.w .pos{color:var(--mut);font-size:10px;opacity:.8}
+.w.un{opacity:.8}.w.un .or{color:var(--mut)}.w.un .gl{font-style:italic}
+.tag{font-size:9px;border:1px solid var(--line);border-radius:4px;padding:0 3px;vertical-align:1px}
+.tag.dee{color:var(--dee)}.tag.lei{color:var(--lei)}.tag.dic{color:var(--dic)}
 .note{color:var(--mut);font-size:12px;margin-top:6px}
 .empty{color:var(--mut)}
+label{cursor:pointer;user-select:none}
 </style>
 </head>
 <body>
 <span id="lang">EN</span>
 <h1 id="h1">Tradução dos quadrados do Loagaeth</h1>
-<p class="sub" id="sub">Onde um quadrado contém uma palavra que Dee traduziu, lemos o sentido. As palavras aparecem em ordem de posição (linha, coluna) — a leitura parcial do quadrado.</p>
+<p class="sub" id="sub">Cada palavra do quadrado na ordem em que as letras aparecem, com a glosa (Dee ou Leitch) ou marcada como sem tradução. Escolha a direção de leitura e a fonte.</p>
 <div class="calls" id="leaves"></div>
+<div class="ctrl">
+ <span id="l_dir">direção: <select id="dir"><option value="reta">reta →</option><option value="coluna">coluna ↓</option><option value="diagonal">diagonal ⟋⟍</option><option value="todas">todas</option></select></span>
+ <span id="l_src">fonte: <select id="src"><option value="all">Todas</option><option value="dee">só Dee</option><option value="dict">só Dicionário</option><option value="leitch">só Leitch</option></select></span>
+ <label><input type="checkbox" id="showun" checked> <span id="l_un">mostrar sem tradução</span></label>
+</div>
 <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start">
- <div style="flex:1;min-width:320px"><div id="out"></div><p class="note" id="note"></p></div>
- <aside style="width:280px;flex-shrink:0;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px">
+ <div style="flex:1;min-width:340px"><div id="out"></div></div>
+ <aside style="width:270px;flex-shrink:0;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px">
   <div style="font-weight:600;margin-bottom:6px" id="nfh">Não encontradas no livro</div>
   <div class="note" id="nfsub">Palavras das Chamadas (com tradução de Dee) que NÃO aparecem em nenhuma tabela.</div>
   <div id="nflist" style="max-height:520px;overflow:auto;margin-top:8px"></div>
  </aside>
 </div>
 <script>
-var T=null,cur=null,LG=(localStorage.getItem('atlas_lang')||'pt');
-var STR={pt:{h1:'Tradução dos quadrados do Loagaeth',sub:'Onde um quadrado contém uma palavra que Dee traduziu, lemos o sentido. As palavras aparecem em ordem de posição (linha, coluna) — a leitura parcial do quadrado.',lang:'EN',empty:'Nenhuma palavra traduzível encontrada neste quadrado.',note:'Palavras das Chamadas (traduzidas por Dee) achadas na grade, em ordem de leitura. Honesto: palavras curtas podem ser só fluxo de letras; as longas pesam mais. Não é a tradução do quadrado inteiro — são os fragmentos decifráveis.',roww:'l',colw:'c'},
- en:{h1:'Translation of the Loagaeth squares',sub:'Where a square contains a word Dee translated, we read the meaning. Words appear in position order (row, column) — the partial reading of the square.',lang:'PT',empty:'No translatable word found in this square.',note:'Call words (translated by Dee) found on the grid, in reading order. Honest: short words may be mere letter-flow; the long ones weigh more. This is not a translation of the whole square — only the decipherable fragments.',roww:'r',colw:'c'}};
+var T=null,COV=null,LEX=null,NAMES=null,NSET=null,cur=null,LG=(localStorage.getItem('atlas_lang')||'pt');
+var dir='reta',src='all',showun=true,minlen=2;
+var STR={
+ pt:{h1:'Tradução dos quadrados do Loagaeth',sub:'Cada palavra do quadrado na ordem em que as letras aparecem, com a glosa (Dee ou Leitch) ou marcada como sem tradução. Escolha a direção de leitura e a fonte.',lang:'EN',empty:'Nenhuma palavra encontrada nesta direção/fonte.',roww:'l',colw:'c',dir:'direção: ',srcl:'fonte: ',un:'mostrar sem tradução',notr:'sem tradução',items:'itens',tr:'traduzidos',ut:'sem tradução'},
+ en:{h1:'Translation of the Loagaeth squares',sub:'Every word of the square in the order the letters appear, with its gloss (Dee or Leitch) or marked untranslated. Pick reading direction and source.',lang:'PT',empty:'No word found in this direction/source.',roww:'r',colw:'c',dir:'direction: ',srcl:'source: ',un:'show untranslated',notr:'no translation',items:'items',tr:'translated',ut:'untranslated'}};
 function S(k){return STR[LG][k]}
-var COV=null;
-Promise.all([fetch('table_grids.json').then(r=>r.json()),fetch('call_coverage.json').then(r=>r.json()).catch(()=>null)])
- .then(([d,c])=>{T=d;COV=c;boot()}).catch(e=>{document.getElementById('out').innerHTML='Abra por http://localhost:8860/ (não file://)'});
-function renderNotFound(){if(!COV)return;var nf=COV.not_found||{};var ks=Object.keys(nf).sort();
- document.getElementById('nfh').textContent=LG==='en'?'Not found in the book':'Não encontradas no livro';
- document.getElementById('nfsub').textContent=(LG==='en'?'Call words (with Dee’s translation) that do NOT appear in any table — ':'Palavras das Chamadas (com tradução de Dee) que NÃO aparecem em nenhuma tabela — ')+ks.length;
- document.getElementById('nflist').innerHTML=ks.map(w=>'<div style="padding:3px 0;border-bottom:1px solid var(--line);font-size:13px"><b>'+w+'</b> <span class=gl>'+nf[w]+'</span></div>').join('');}
+Promise.all([fetch('table_grids.json').then(r=>r.json()),fetch('call_coverage.json').then(r=>r.json()).catch(()=>null),fetch('translate_lexicon.json').then(r=>r.json()),fetch('name_field.json').then(r=>r.json()).catch(()=>[])])
+ .then(([d,c,l,nm])=>{T=d;COV=c;LEX=l;NAMES=nm;NSET=new Set(nm);boot()}).catch(e=>{document.getElementById('out').innerHTML='Abra por http://localhost:8860/ (não file://)'});
 function boot(){
  document.getElementById('lang').onclick=()=>{LG=LG==='pt'?'en':'pt';localStorage.setItem('atlas_lang',LG);applyLang();draw()};
+ document.getElementById('dir').onchange=e=>{dir=e.target.value;draw()};
+ document.getElementById('src').onchange=e=>{src=e.target.value;draw()};
+ document.getElementById('showun').onchange=e=>{showun=e.target.checked;draw()};
  var box=document.getElementById('leaves');
  T.order.forEach(lf=>{var b=document.createElement('span');b.className='cb';b.textContent=lf;b.onclick=()=>pick(lf);box.appendChild(b)});
- applyLang();pick(T.order.includes('2b')?'2b':T.order[0]);
+ applyLang();pick(T.order.includes('2a')?'2a':T.order[0]);
 }
-function applyLang(){document.getElementById('h1').textContent=S('h1');document.getElementById('sub').textContent=S('sub');document.getElementById('lang').textContent=S('lang');document.getElementById('note').textContent=S('note');renderNotFound();}
+function applyLang(){
+ document.getElementById('h1').textContent=S('h1');document.getElementById('sub').textContent=S('sub');
+ document.getElementById('lang').textContent=S('lang');document.getElementById('l_un').textContent=S('un');
+ renderNotFound();
+}
+function renderNotFound(){if(!COV){document.getElementById('nflist').innerHTML='';return;}var nf=COV.not_found||{};var ks=Object.keys(nf).sort();
+ document.getElementById('nfh').textContent=LG==='en'?'Not found in the book':'Não encontradas no livro';
+ document.getElementById('nfsub').textContent=(LG==='en'?'Call words (with Dee’s translation) that do NOT appear in any table — ':'Palavras das Chamadas (com tradução de Dee) que NÃO aparecem em nenhuma tabela — ')+ks.length;
+ document.getElementById('nflist').innerHTML=ks.map(w=>'<div style="padding:3px 0;border-bottom:1px solid var(--line);font-size:13px"><b>'+w+'</b> <span style="color:var(--mut)">'+nf[w]+'</span></div>').join('');}
 function pick(lf){cur=lf;[...document.getElementById('leaves').children].forEach(c=>c.classList.toggle('on',c.textContent===lf));draw()}
+function lookup(seg){ // longest dict word, respecting source toggle; returns {gloss,src} or null
+ var e=LEX[seg];if(!e)return null;var srcs=e.srcs||[];
+ if(src!=='all'&&srcs.indexOf(src)<0)return null;
+ var g=(src!=='all'&&e[src])?e[src]:e.g;
+ var tag=(src!=='all')?src:(srcs.length===1?srcs[0]:'multi');
+ return{gloss:g,src:tag};
+}
+function buildLines(grid){ // list of {cells:[[r,c]..]} for the chosen direction
+ var R=grid.length,out=[];
+ if(dir==='reta'||dir==='todas'){for(var r=0;r<R;r++)out.push(Array.from({length:R},(_,c)=>[r,c]));}
+ else if(dir==='coluna'){for(var c=0;c<R;c++)out.push(Array.from({length:R},(_,r)=>[r,c]));}
+ else{ // diagonal: both ↘ and ↙
+  for(var s=0;s<R;s++){out.push(Array.from({length:R-s},(_,k)=>[s+k,k]));if(s)out.push(Array.from({length:R-s},(_,k)=>[k,s+k]));}
+  for(var s2=0;s2<R;s2++){out.push(Array.from({length:R-s2},(_,k)=>[s2+k,R-1-k]));if(s2)out.push(Array.from({length:R-s2},(_,k)=>[k,R-1-s2-k]));}
+ }
+ return out;
+}
+function nameAt(str,i){ // longest attested name/root at i (len 4..11)
+ for(var Ln=Math.min(11,str.length-i);Ln>=4;Ln--){var seg=str.substr(i,Ln);if(NSET&&NSET.has(seg))return{len:Ln,word:seg};}
+ return null;
+}
 function draw(){
- var L=T.leaves[cur],ms=(L.meanings||[]).slice().map(m=>{var c=m.cells?m.cells[0]:[m.row,m.col];return Object.assign({_r:c[0],_c:c[1]},m)}).sort((a,b)=>a._r-b._r||a._c-b._c);
- var h='<div class=card><div style="font-weight:600;margin-bottom:8px">'+cur+' — '+ms.length+' '+(LG==='en'?'words':'palavras')+'</div>';
- if(!ms.length){h+='<div class=empty>'+S('empty')+'</div>';}
- else{h+='<div class=flow>';ms.forEach(m=>{h+='<span class=w><span class=en>'+m.word+'</span> <span class=gl>'+m.meaning+'</span> <span class=pos>('+(m.mode||'reta')+' '+S('roww')+m._r+' '+S('colw')+m._c+')</span></span> · ';});h+='</div>';
-  // continuous gloss line
-  h+='<div class=note style="margin-top:10px;color:var(--ink);font-style:italic">… '+ms.map(m=>m.meaning).join(' · ')+' …</div>';}
+ var L=T.leaves[cur],grid=L.grid,R=grid.length;
+ var lines=buildLines(grid);
+ var tokens=[]; // {kind:'word'|'name'|'noise', word, gloss, src, r, c}
+ var covWord=0,covName=0,letters=0;
+ lines.forEach(cells=>{
+  var str=cells.map(c=>grid[c[0]][c[1]]).join('');letters+=str.length;
+  var i=0,run='',runStart=null;
+  function flushRun(){if(run){if(showun)tokens.push({kind:'noise',word:run,r:cells[runStart][0],c:cells[runStart][1]});run='';runStart=null;}}
+  while(i<str.length){
+   var hit=null;
+   for(var Ln=Math.min(9,str.length-i);Ln>=minlen;Ln--){var seg=str.substr(i,Ln);var e=lookup(seg);if(e){hit={len:Ln,word:seg,gloss:e.gloss,src:e.src};break;}}
+   if(hit){flushRun();tokens.push({kind:'word',word:hit.word,gloss:hit.gloss,src:hit.src,r:cells[i][0],c:cells[i][1]});covWord+=hit.len;i+=hit.len;continue;}
+   var nm=nameAt(str,i);
+   if(nm){flushRun();tokens.push({kind:'name',word:nm.word,r:cells[i][0],c:cells[i][1]});covName+=nm.len;i+=nm.len;continue;}
+   if(runStart===null)runStart=i;run+=str[i];i++;
+  }
+  flushRun();
+ });
+ var nw=tokens.filter(t=>t.kind==='word').length, nn=tokens.filter(t=>t.kind==='name').length, nz=tokens.filter(t=>t.kind==='noise').length;
+ var covered=covWord+covName, pct=letters?Math.round(covered/letters*100):0, uncov=letters-covered;
+ var pctN=letters?Math.round(covName/letters*100):0;
+ var dlabel={reta:'reta →',coluna:'coluna ↓',diagonal:'diagonal ⟋⟍',todas:'reta →'}[dir];
+ var leg=LG==='en'
+   ?'<span style="color:var(--dee)">■ word (Dee)</span> · <span style="color:var(--dic)">■ word (Dict)</span> · <span style="color:var(--lei)">■ word (Leitch)</span> · <span style="color:var(--nm)">■ name/root</span> · <span style="color:var(--mut)">■ unstructured letters</span>'
+   :'<span style="color:var(--dee)">■ palavra (Dee)</span> · <span style="color:var(--dic)">■ palavra (Dic)</span> · <span style="color:var(--lei)">■ palavra (Leitch)</span> · <span style="color:var(--nm)">■ nome/raiz</span> · <span style="color:var(--mut)">■ letras sem estrutura</span>';
+ var h='<div class=card><div style="font-weight:600;margin-bottom:4px">'+cur+' — '+dlabel+'</div>'+
+   '<div class=note style="margin-bottom:6px">'+
+   (LG==='en'?('<b>'+nw+'</b> dictionary words · <b>'+nn+'</b> names/roots ('+pctN+'% of letters) · <b>'+uncov+'</b> unstructured letters · <b>'+pct+'%</b> of letters in a word or name'):
+              ('<b>'+nw+'</b> palavras de dicionário · <b>'+nn+'</b> nomes/raízes ('+pctN+'% das letras) · <b>'+uncov+'</b> letras sem estrutura · <b>'+pct+'%</b> das letras num nome ou palavra'))+'</div>'+
+   '<div class=note style="margin-bottom:10px;font-size:11px">'+leg+'</div>';
+ if(!tokens.length){h+='<div class=empty>'+S('empty')+'</div>';}
+ else{
+  h+='<div class=flow>';tokens.forEach(m=>{
+   if(m.kind==='word'){var cmap={dee:'dee',dict:'dic',leitch:'lei',multi:'multi'},cl=cmap[m.src]||'dee';
+    var tmap={dee:'<span class="tag dee">D</span>',dict:'<span class="tag dic">Dic</span>',leitch:'<span class="tag lei">L</span>',multi:'<span class="tag dee">D+</span>'},tag=tmap[m.src]||'';
+    h+='<span class="w '+cl+'"><span class=or>'+m.word+'</span> <span class=gl>'+m.gloss+'</span> '+tag+' <span class=pos>('+S('roww')+m.r+' '+S('colw')+m.c+')</span></span> · ';}
+   else if(m.kind==='name'){h+='<span class="w nm"><span class=or>'+m.word+'</span> <span class=gl>'+(LG==='en'?'[name/root]':'[nome/raiz]')+'</span> <span class=pos>('+S('roww')+m.r+' '+S('colw')+m.c+')</span></span> · ';}
+   else h+='<span class="w un"><span class=or>'+m.word+'</span> <span class=gl>['+(LG==='en'?'no structure':'sem estrutura')+']</span> <span class=pos>('+S('roww')+m.r+' '+S('colw')+m.c+')</span></span> · ';
+  });h+='</div>';
+  var NT=(LG==='en'?'[—]':'[—]');
+  var txt=tokens.map(m=>m.kind==='word'?m.gloss:(m.kind==='name'?('«'+m.word+'»'):NT)).join(' ');
+  h+='<div style="margin-top:16px;border-top:1px solid var(--line);padding-top:12px"><div style="font-weight:600;font-size:13px;margin-bottom:6px">'+(LG==='en'?'Running reading (glosses + «names»)':'Leitura corrida (glosas + «nomes»)')+'</div><div style="font-style:italic;color:var(--ink);line-height:1.8">'+txt+'</div></div>';
+ }
  h+='</div>';
  document.getElementById('out').innerHTML=h;
 }

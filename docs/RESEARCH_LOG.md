@@ -593,3 +593,209 @@ call_lexicon.json rebuilt to len>=1 (singles: I="is", D="the third", L/M/O/P/Q).
 DIRECTION control (reta / diagonal down-right / down-left / column) plus the existing reversed toggle and a min-length
 1-5 selector - so each table can be read-and-translated straight, diagonally, by column, forward or reversed. Verified
 diagonal: 2b shows "of your Creation", "have setled" along the down-right diagonal.
+
+## #243 — Sintaxe entre palavras testada ampla (a106): REFUTADA
+a101 achou GETH→ACLAX com ordem fixa (17× vs 0×), conta alta, robusto. a106 estendeu a 60 palavras-topo: 48 pares
+encadeiam >=3×; 19 ficam fortemente ordenados (uma direção >=3:1). MAS o null importa: surrogate Markov-3 (preserva
+fluxo de letras, destrói ordem) dá 16.2 pares ordenados em média. 19 vs 16.2 NÃO bate chance — a assimetria em
+contagens 3-6 é quase toda ruído de número pequeno. Conclusão honesta: NÃO existe gramática de ordem ampla no léxico.
+A ordem fixa é real só em pares específicos de conta alta (GETH→ACLAX), não uma regra geral entre unidades.
+
+## #244 — Leitch Vol II lida: as não-traduzidas da 2a são NOMES do Loagaeth, não palavras
+Extraí o texto das 595 págs do "Angelical Language Vol II: Encyclopedic Lexicon" (Leitch) — 751 KB. Duas fontes:
+Keys cross-reference (págs 44-90, glosa de Dee por palavra) e o lexicon A-Z. Meu call_lexicon já era chamadas.json
+(678/679 palavras das 19 Chamadas, inglês do próprio Dee) — então as Chamadas já estavam 100% cobertas.
+As 10 palavras SEM tradução da 2a (ANCHANO, VOXAR, PHADOL, PHANGE, NOCHADAX, ANOCHA, CHADAX, NOCHA, ANZACHOR,
+ANZACH) NÃO estão no Leitch tampouco. Motivo: são os nomes-raiz das famílias do próprio Loagaeth (NOCHA/ANZACH/
+CHADAX/CHASTOR), não vocábulo angelical de dicionário. Leitch (p95) diz explicitamente que EXCLUIU "milhares de
+palavras indefinidas" — exatamente essas. Autoridade independente confirma: o Loagaeth gera NOMES, não frases.
+Isso reforça o onomasticon. Leitch acrescenta ~240 palavras angelicais fora das 19 Chamadas (LAD=God, TAIDON=All
+Powerful, GCIAD=Lord and Master...) salvas em viz/leitch_extra_lexicon.json — ampliam cobertura em OUTRAS tabelas,
+não na 2a. A "tradução fluida" anterior (parágrafo em prosa) era costura minha com conectivos; removida. O literal
+fiel (glosa de Dee por posição, sem-tradução no lugar) está em docs/2a_literal.txt e no square_reading.html.
+
+## #245 — Lexicon mesclado Dee+Leitch com fonte por palavra; frontend com toggles
+a109 reconstrói viz/table_grids.json `meanings` de um lexicon mesclado (919 palavras: Dee 679 das Chamadas +
+Leitch 240 extraídas do Vol II), cada ocorrência marcada src=dee/leitch/both, buscada em reta+coluna+2 diagonais.
+45.984 ocorrências em 42 tabelas. viz/translate_lexicon.json = mesmo lexicon para o call_grid.
+square_reading.html reescrito: seletor de direção (reta/coluna/diagonal/todas), seletor de fonte (Dee+Leitch / só
+Dee / só Leitch), checkbox mostrar/esconder sem-tradução; stream fiel na ordem das letras, Dee dourado, Leitch azul
+(tag L), sem-tradução cinza no lugar. 2a reta: 409 itens (355 só-Dee, +54 Leitch). call_grid_translation.html ganhou
+o mesmo toggle de fonte e cor por fonte. Honesto: Leitch acrescenta cobertura mas algumas glosas dele são OCR-ruído
+(MAN=Of) — por isso o toggle, pra isolar Dee puro quando quiser.
+
+## #246 — square_reading: leitura ladrilhada (tiling) com cobertura real de letras
+Troquei a contagem de "hits sobrepostos" (que inflava: cada letra contada em várias palavras) por LEITURA LADRILHADA:
+varre a direção, pega a maior palavra do dicionário em cada ponto SEM reusar letra, o resto vira run [SEM TRADUÇÃO].
+Agora o número é honesto. 2a reta (Dee+Leitch): 313 palavras traduzidas, 1676 de 2401 letras sem tradução, 30% das
+letras cobertas (só Dee: 297, 27%). Confirma quantitativamente: ~70% da grade NÃO forma palavra de dicionário
+conhecida — é material de nome (famílias NOCHA/ANZACH/CHASTOR). O frontend mostra cobertura %, trechos sem tradução
+crus no lugar, e o texto corrido final com [SEM TRADUÇÃO] nas lacunas. Toggle Dee/Leitch e esconder sem-tradução.
+Nota: glosas curtas do Leitch (AG=None etc) são ruído de OCR — por isso o toggle só-Dee.
+
+## #247 — Cobertura por vocabulário angelical vs null (a110): quase-nula
+Tiling de todo o livro com o lexicon Dee+Leitch, cobertura de letras real vs 10 surrogates Markov-3.
+len>=3: real 10.9% vs surrogate 10.5% (máx 10.8%), z=3.1 — passa por um fio, mas efeito de só 0.4pp.
+len>=4: real 3.1% vs 3.0% (máx 3.1%), z=2.8 — some. Conclusão honesta: o Loagaeth NÃO é densamente tecido do léxico
+angelical traduzido; a cobertura está no chão de ruído. Reforça o onomasticon pelo outro lado — o grosso do livro é
+material de nome próprio intraduzível, não texto das Chamadas num grid. Consistente com #243 (sintaxe ampla refutada)
+e com o null de presença (a107).
+
+## #248 — Leitch extra lexicon limpo (ruído OCR)
+leitch_extra_lexicon.json 240 → 195: removidas entradas de prosa capturadas pelo regex (MAN=Of, NOT=To Smile),
+glosas-lixo (None/Of/The), palavras <4 letras e vazamentos de pronúncia. Restam angelicais reais (MALPURG=Fiery
+Darts, TAIDON=All Powerful, GCIAD=Lord and Master, ODZAMRAN=And Appear). table_grids.json e translate_lexicon.json
+re-gerados (874 palavras: 679 Dee + 195 Leitch). Nota: AG=None NÃO é ruído — é glosa do próprio Dee (Chamada 4,
+"ag"=none), fica. 2a reta cai de 30% para 28% de cobertura (o ruído inflava).
+
+## #249 — 3a fonte: "Dicionário enoquiano (mentoria 2025)", glosas em inglês
+Extraí o PDF "dicionario enoquiano (1).pdf" (24 págs, PT→enoquiano por Chamada + as 49 virtudes de Deus). Curei à
+mão ~349 pares de alta confiança, traduzindo a glosa PT→INGLÊS (ROR=Sun, GRAA=Moon, NAZPS=Sword, PRGE=Fire,
+TELOCH=death, CAOSGO=earth, SALMAN=house, MICAOLZ=mighty, VPAAH=wings, LONSH=in power exalted above, as 49 nomes de
+Deus: lucal=North, raasy=East, soboln=West, babage=South, gizyax=earthquakes...). Salvo em viz/dict_enoq_lexicon.json.
+a109.build_lexicon agora mescla 3 fontes com lista `srcs` por palavra e prioridade de glosa Dee>dict>Leitch: 957
+palavras (Dee 679, Dicionário 349, Leitch 195). table_grids.json e translate_lexicon.json re-gerados.
+square_reading.html e call_grid_translation.html ganharam a fonte "Dicionário" (verde, tag Dic) no seletor
+Todas/Dee/Dicionário/Leitch. 2a reta: 302 palavras (só Dicionário: 25). Glosas em inglês como pedido.
+
+## #250 — Revisão das glosas do dicionário
+Cruzei dict_enoq_lexicon.json com o Dee (autoritativo): 257/354 palavras aparecem em ambos e as glosas batem
+semanticamente (ROR=Sun/the Sonne, GRAA=Moon/the Mone, ZACAR=Move, MICMA=Behold). Onde divergem (QAA dict=Creation
+vs Dee=your garments — o próprio dicionário corrige Dee), a glosa primária mostrada é a do Dee (prioridade), então
+a leitura do dict só aparece sob o filtro "só Dicionário", corretamente rotulada. Os 94 vocábulos só-dict conferidos
+contra o enoquiano canônico: todos padrão (NAZPS=Sword, MAMAO=crown, TELOCK=death, BABALOND=harlot, ZILODARP=
+conquest, CHISTEOS=let there be...). Único defeito: 4 chaves malformadas com sufixo "_" (hack de dedup), todas
+duplicatas de versões limpas já presentes (NAPEAI, TABAAN, BUTMONA, TABAORD) — removidas, nenhuma glosa perdida.
+Dicionário fica em 350 entradas; lexicon mesclado segue com 957 palavras.
+
+## #251 — Varredura de minlen (a111): nenhuma escala bate o acaso + plano de sentido
+Varredura minlen 1-6 (reta, léxico Dee), cobertura de letras real vs 10 surrogates Markov-3:
+1:42.4/42.1 2:24.6/24.2(z2.7) 3:6.2/6.0 4:2.4/2.3 5:0.17/0.17 6:0.03/0.03. Nenhuma escala passa z>=3 — em todo
+comprimento mínimo a cobertura do livro ≈ grade aleatória. Impor dicionário é ruído em qualquer minlen; a leitura
+faz salada porque, do jeito imposto, É salada. Diagnóstico: estamos impondo dicionário numa grade sem fronteira de
+palavra. Plano em docs/PLANO_SENTIDO.md: Bloco B (descobrir fronteiras naturais por entropia, não impor), Bloco C
+(testar se algum quadrado soletra uma Chamada EM ORDEM — o teste real de sentido), Bloco D (mapear os ~70%
+intraduzíveis = campo de nomes, lente cabalística), Bloco E (frontend 3 classes: palavra/nome/ruído).
+
+## #252 — Bloco B: fronteiras naturais (a112). Estrutura é ONOMÁSTICA, não lexical
+Segmentação por entropia de ramificação (máximo local, invariante de escala) das fronteiras naturais da grade.
+Unidade natural média = 2.78 letras. Palavras de dicionário nas fronteiras naturais: 1.9% real vs 1.8% surrogate,
+z=1.3 — NULL. Cortando onde o livro se corta sozinho, as unidades ainda não são palavras.
+MAS o descritivo é forte: as unidades naturais são SÍLABAS DE NOME — CHA (2150×), DNO, NTA, DNA, THA, PHA, NZA, LGE,
+XAR, CLA, STOR, DRA... que montam as famílias (CHASTOR=CHA+STOR, NOCHA=NO+CHA, ANZACH=AN+ZACH).
+Teste de concentração do top-20 sílabas: 32.4% real vs 30.1% surrogate, z=2.4 — fraco, PORQUE o Markov-3 preserva
+trigramas por construção; testar silabário contra Markov-3 é circular (o null já tem as sílabas).
+Síntese (converge com a107/a110/a111): nível palavra/frase = sem estrutura (não é prosa); nível sílaba/3-gram =
+silabário trivial (= Markov); nível NOME (6-14 letras, famílias) = REAL acima do null (a99-a102). O grão com sentido
+é o NOME. A leitura certa dos quadrados é o campo de nomes (onomasticon), não uma sentença. Bloco B fecha nisso.
+
+## #253 — Bloco C: nenhum quadrado soletra uma Chamada EM ORDEM (a113). NULL decisivo
+Para cada linha/coluna/diagonal (reta+invertida) de cada tabela, tile da vocabulário Dee + maior corrida de palavras
+consecutivas atribuíveis a UMA Chamada com posição crescente. Resultado: maior corrida real = 5 palavras (Chamada 1,
+tabela 6a) vs surrogate Markov-3 = 5 (média 4.8). Igual ao acaso. Os quadrados NÃO escondem as Chamadas em ordem.
+Veredito definitivo com 5 métodos independentes, TODOS null: a107 (presença), a110 (cobertura), a111 (minlen sweep),
+a112 (fronteiras naturais, nível palavra), a113 (Chamada em ordem). Nenhuma estrutura de palavra/frase acima do
+acaso. A única estrutura real é o NOME (famílias NOCHA/ANZACH/CHASTOR, 6-14 letras, confirmado acima do null em
+a99-a102). Conclusão: os quadrados do Loagaeth são um CAMPO DE NOMES (onomasticon), não texto cifrado nem prosa. O
+"sentido" é a leitura dos nomes, não de sentenças. Próximo: Bloco E — frontend marca nome vs palavra vs ruído.
+
+## #254 — Bloco E: frontend honesto, 3 classes (palavra / nome / ruído)
+Gerado viz/name_field.json (90 nomes atestados + 10 raízes: NOCHA/ANZACH/CHASTOR/GETH/ACLAX/CHADAX/PHANGE...).
+square_reading.html agora ladrilha em 3 classes com prioridade palavra>nome>ruído: palavra de dicionário (dourado/
+verde/azul por fonte), NOME/raiz atestado (roxo, marcado «nome/raiz» — não mais "sem tradução"), e run de letras sem
+estrutura (cinza [sem estrutura]). Cabeçalho mostra contagem das 3 classes + % de letras num nome ou palavra + %
+nomes. Legenda de cores. Leitura corrida = glosas + «nomes» + [—] pras lacunas. Reflete a conclusão dos Blocos A-C:
+a estrutura real é o NOME; o resto é campo sem estrutura lexical. 2a reta: 298 palavras, 8 nomes, 29% das letras em
+palavra ou nome. PLANO_SENTIDO completo (A/B/C/E feitos; D opcional).
+
+## #255 — Bloco D: campo de nomes tem assinatura elemental distinta (a114)
+Lente Golden Dawn (letra→elemento) sobre os três campos. D1 (letras do livro): 24% palavra glosável, 7% nome
+atestado, 69% sem estrutura. D2 (perfil elemental, campo-nome vs campo-palavra, TV vs null de relabel aleatório 500×):
+  palavra: Fogo 7.6 Terra 36.1 Ar 20.0 Agua 22.7
+  nome:    Fogo 18.0 Terra 29.6 Ar 25.1 Agua 16.8
+TV=0.154 vs 0.008 no acaso, p=0.002 — os nomes puxam Fogo/Ar (vontade/mente, ativo), as palavras glosáveis puxam
+Terra/Agua (manifesto). CONFIRMADO: os nomes são uma camada elemental distinta do vocabulário comunicável.
+RESSALVA honesta: o null só prova composição de letras diferente (esperado pra vocabulários distintos); que seja
+intenção elemental de Dee/anjos é interpretação, não prova. O fato (assinatura distinta) é real e mensurável.
+PLANO_SENTIDO completo: A (minlen null), B (fronteiras null, estrutura onomástica), C (Chamada-em-ordem null), D
+(camada elemental dos nomes), E (frontend 3 classes). Veredito do conjunto: Loagaeth = campo de nomes (onomasticon)
+com os nomes formando uma camada Fogo/Ar sobre um substrato glosável Terra/Agua esparso.
+
+## #256 — Identidade elemental por tabela (a115) e viés de invocação (a116): ambos NULL
+a115: a dispersão do Fogo entre tabelas é 0.0007 real vs 0.0014 null (p=0.996) — as tabelas NÃO têm identidade
+elemental própria; o elemento espalha uniforme (até mais uniforme que o acaso). Refuta "tabelas ígneas vs aquosas".
+a116 (motivado pelo usuário traduzir a leitura corrida da 2a no Google e obter um sermão coerente): a fração de
+tokens glosados que são do registro de invocação (Deus/Nove/Primeiro/Espíritos/trevas/nome...) é 17.4% real vs 17.2%
+surrogate (máx 17.9%), z=0.5 — SEM viés. O "tema de invocação" é pareidolia: as palavras enoquianas frequentes já
+soam a invocação, e uma grade aleatória das mesmas letras dá a mesma fração. O sermão coerente é costura do tradutor
++ completamento humano de padrão, não texto codificado. CONFIRMADO (negativo): a coerência temática não bate o acaso.
+O único sinal real nos quadrados segue sendo os NOMES (famílias, acima do null); a matriz ao redor só parece frase.
+
+## #257 — A CHAVE: 2a é fatia de um corpus; léxico-núcleo onomástico (a117/a118)
+a117: dentro da 2a as raízes estão no acaso (z=1.1, 6 ocorrências) — uma folha NÃO é texto fechado.
+a118: mas os nomes da 2a recorrem pelas 36 tabelas 49×49 MUITO acima do acaso. Enriquecimento vs string aleatória
+do mesmo tamanho: NOCHA 35/36 (175×), GETH 34/36 (16×), NACHO 32/36 (160×), ANZACH 29/36 (580×), CHASTOR 28/36
+(560×), ADNOCHA 28/36 (560×), CHADAX 25/36 (500×). Uma string aleatória do mesmo tamanho aparece em ~0 tabelas.
+Léxico-núcleo: 86 nomes recorrentes acima do acaso, 12 ubíquos (>=60% das tabelas). A morfologia é visível no léxico:
+raiz NOCHA gera ADNOCHA, NOCHAP, NOCHAPH, ADNOCHAP, NOCHASTOR, NOCHASTORA; CHASTOR->CHASTORA,NOCHASTOR; GETH->ALGETH.
+LEITURA DE LINGUISTA: o Loagaeth é UM texto distribuído em 49 folhas com um léxico onomástico compartilhado,
+gerado por morfologia (raiz+afixo). Uma folha (2a) é uma página de um registro de nomes — só faz sentido lida contra
+o corpus das 49 tabelas, não isolada. O que faltava pra 2a "fazer sentido" eram as outras 48 folhas. Este é o sinal
+mais forte do projeto (100-580× o acaso) e fecha a questão: o sentido é um léxico de nomes de poder cruzado pelo
+corpus, não uma sentença numa folha.
+
+## #258 — Assento posicional dos nomes (a119): fraco, folhas não são template registrado
+Para cada nome-núcleo, posições (linha,coluna) de todas as ocorrências reta (linha+coluna) nas 36 folhas; dispersão
+real (distância Chebyshev média entre pares) vs 200 nulls de posições uniformes. 9 de 43 nomes passam p<0.05, MAS
+efeito minúsculo: NOCHA 392 ocorrências, espalhamento 21.2 vs null 22.9; ADNOCHA 148 → 20.6 vs 22.9. Significativo só
+por N grande; concentração mal difere do acaso. Conclusão: as 49 folhas NÃO são template posicional registrado — os
+nomes são colocados livremente em cada folha, não cada um num assento fixo. Só a família NOCHA/ADNOCHA/ANTANTOX tem
+leve tendência posicional. Refina a síntese: FORTE = léxico onomástico compartilhado pelo corpus (a118, 100-580×
+acima do acaso); FRACO = alinhamento posicional entre folhas. Metáfora: livro de orações onde os mesmos nomes
+reaparecem em toda página em posições variáveis — litania distribuída, não planta-baixa fixa.
+
+## #259 — Co-ocorrência entre folhas (a120): super-família CHASTOR-ACLAX-NOCHA
+Matriz nome×folha (36 tabelas), nomes de incidência variável (5..31 folhas), phi entre pares, null por permutação
+(|phi| máx médio 0.61). Excluídos pares aninhados por substring (CHASTORA⊃CHASTOR = artefato trivial).
+Entre RAÍZES DISTINTAS, acima do null: CHASTOR+ACLAX 0.71, ADNOCHA+ACLAX 0.71, CHASTOR+ADNOCHA 0.68 — as três
+raízes-família (CHASTOR, ACLAX, NOCHA/ADNOCHA) formam um super-cluster distribucional: viajam juntas pelas mesmas
+folhas, uma "casa" dominante tecida pelo corpus. LEAD (não confirmado, abaixo do null): VOXAR/OXAR complementar a
+ACLAX (phi -0.48) — possível corrente oposta, fica como pista. Sem pares complementares fortes acima do limiar.
+Converge com a ideia antiga de "duas casas" mas só a casa dominante (CHASTOR-ACLAX-NOCHA) passa o null aqui.
+
+## #260 — Hierarquia gerativa da casa (a121): matriz NOCHA, atestada camada a camada
+Casa = 66 nomes contendo CHASTOR/ACLAX/NOCHA/GETH etc. Matriz geradora = NOCHA (raiz contida em 19 dos 66 nomes, em
+35/36 folhas). Ubiquidade por profundidade de derivação (letras além da raiz), com fração que ainda bate o null do
+próprio tamanho (string aleatória de mesmo comprimento):
+  d0 raiz:  100% reais, média 24.9 folhas
+  d1-2:      97% reais, média  9.6 folhas
+  d3-4:     100% reais, média  7.7 folhas
+  d5+:      100% reais, média  6.4 folhas
+Árvore: NOCHA (262× o acaso) -> NOCHAP, ADNOCHA, NACHOA -> NOCHASTOR (d4, 440×), NOCHASTORA (d5, 360×). Enriquecimento
+segue astronômico (320-580×) até d5. ASSINATURA GERATIVA CONFIRMADA: raiz-matriz onipresente; cada camada de afixo
+gera nome mais específico e mais raro, mas ainda real e atestado. Não é só raiz solta — é uma hierarquia de emanação
+completa (matriz -> filhos afixados -> netos compostos), cada nó um nome real distribuído pelo corpus. Converge com
+a família CHASTOR/super-nomes (a99-a102) agora quantificada por profundidade vs null de comprimento.
+
+## #261 — Plano de 20 passos (linguista) + passos 9, 15 + site 'A Língua dos Nomes'
+Criado docs/PLANO_LINGUISTA_20.md: decifração da língua dos nomes em 6 fases (grafêmica, fonologia/silabário,
+morfologia, léxico, semântica, sintaxe+gramática gerativa), 20 passos, cada um com null. 7 já feitos (1,4,7,8,10,13,14).
+Passo 9 (a125) — ORDEM DOS AFIXOS: CONFIRMADO morfologia posicional. 80% dos tipos de afixo ficam num lado só
+(prefixo xor sufixo) vs 53% no acaso, p=0.002. Template prefixo·raiz·sufixo. Prefixos AD-/NO-/A-/ZI-/AX-; sufixos
+-A/-AL/-AD/-P/-PH. Ex: NO-CHASTOR-AL, AD-NOCHA-PHA, ZI-CHASTOR-A.
+Passo 15 (a128) — ZIPF: DESCRITIVO. Léxico segue Zipf (inclinação -1.31, R²=0.957, NOCHA 394 ocorrências) mas o
+surrogate também é Zipfiano (R²=0.973) — não prova, documenta; único ganho: 88 nomes reais vs 69 surrogate.
+SITE: nova página viz/name_language.html ("A Língua dos Nomes") bilíngue — template morfológico, matriz NOCHA +
+tabela de profundidade, árvore da casa, léxico-núcleo, casa CHASTOR-ACLAX-NOCHA, Zipf; cada seção marcada
+CONFIRMADO/DESCRITIVO. Dados em viz/name_language.json. Adicionada ao index.html (PT+EN).
+
+## #262 — Passos 3 (fonotática) e 11 (composição): CONFIRMADOS, integrados no site
+Passo 3 (a123) — FONOTÁTICA: CONFIRMADO forte. 172 pares de letra fortemente evitados (obs < 20% do esperado) vs 0.6
+no shuffle. Traço central: FUGA DO HIATO — vogais quase nunca adjacentes (AA esp 6310/obs 199; AO, OA, OO, AE, EA
+quase proibidos). Dobro de letra = 7% do acaso (regra "não dobra" categórica). Força estrutura silábica CV.
+Passo 11 (a126) — COMPOSIÇÃO: CONFIRMADO. 7.8% dos nomes são compostos de 2 raízes vs 0.00% em strings aleatórias
+(156×). Ordem FIXA: NOCHA+CHASTOR 6/6 (nunca inverso). A matriz NOCHA é a cabeça do composto (vem primeiro).
+NOCHASTOR=NOCHA+CHASTOR, NOCHADAX=NOCHA+CHADAX. SITE: name_language.html ganhou seções Fonotática e Composição
+(ambas CONFIRMADO); name_language.json atualizado. Gramática confirmada agora cobre: fonotática (CV, anti-hiato),
+morfologia (prefixo·raiz·sufixo posicional), composição (raiz+raiz, matriz-inicial), derivação (matriz NOCHA,
+atestada por profundidade), léxico-núcleo e casa distribucional. Passos feitos: 1,3,4,7,8,9,10,11,13,14 (+15 descr.).

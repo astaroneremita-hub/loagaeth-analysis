@@ -19,6 +19,8 @@ h1{font-size:20px;font-weight:600;margin:0 0 2px;display:inline-block}
 .row{font-family:ui-monospace,monospace;white-space:nowrap;line-height:1.9}
 .lt{color:var(--mut);letter-spacing:1px}
 .tr{color:#fff;background:var(--hl);border-radius:3px;padding:0 4px;margin:0 2px;font-weight:600;font-family:system-ui,sans-serif;letter-spacing:0}
+.tr.trl{background:#2f6d8a}
+.tr.trd{background:#2f8a52}
 .tr:hover{outline:1px solid var(--ink)}
 .note{color:var(--mut);font-size:12px;margin-top:8px}
 </style>
@@ -30,13 +32,14 @@ h1{font-size:20px;font-weight:600;margin:0 0 2px;display:inline-block}
 <div class="calls" id="leaves"></div>
 <div class="ctrl">
  <span>direção: <select id="dir"><option value="reta">reta →</option><option value="dr">diagonal ↘</option><option value="dl">diagonal ↙</option><option value="col">coluna ↓</option></select></span>
+ <span>fonte: <select id="src"><option value="both">Todas</option><option value="dee">só Dee</option><option value="dict">só Dicionário</option><option value="leitch">só Leitch</option></select></span>
  <label><input type="checkbox" id="rev"> incluir de trás pra frente</label>
  <span>mínimo de letras: <select id="minlen"><option>1</option><option>2</option><option>3</option><option selected>4</option><option>5</option></select></span>
 </div>
 <div class="card" id="out"></div>
 <p class="note" id="note"></p>
 <script>
-var G=null,LEX=null,cur=null,LG=(localStorage.getItem('atlas_lang')||'pt'),minlen=4,rev=false,dir='reta';
+var G=null,LEX=null,cur=null,LG=(localStorage.getItem('atlas_lang')||'pt'),minlen=4,rev=false,dir='reta',src='both';
 function buildLines(grid){var R=49,out=[];
  if(dir==='reta'){for(var r=0;r<R;r++)out.push(Array.from({length:R},(_,c)=>[r,c]));}
  else if(dir==='col'){for(var c=0;c<R;c++)out.push(Array.from({length:R},(_,r)=>[r,c]));}
@@ -46,29 +49,37 @@ function buildLines(grid){var R=49,out=[];
 var T={pt:{h1:'Quadrados traduzidos do Loagaeth',sub:'Cada tabela com as palavras das Chamadas substituídas pela tradução de Dee (em cor), letra por letra. O resto fica como letra cinza. Leitura reta, maior palavra primeiro.',lang:'EN',note:'Substitui a maior palavra das Chamadas (≥ mínimo) que casa em cada ponto da linha, sem sobrepor. Honesto: palavras curtas são comuns e podem ser acaso; passe o mouse para ver a palavra original.'},
  en:{h1:'Translated squares of the Loagaeth',sub:'Each table with the Call words replaced by Dee’s translation (in colour), letter by letter. The rest stays grey. Straight reading, longest word first.',lang:'PT',note:'Replaces the longest Call word (>= minimum) matching at each point in the row, no overlap. Honest: short words are common and may be chance; hover to see the original word.'}};
 function S(k){return T[LG][k]}
-Promise.all([fetch('table_grids.json').then(r=>r.json()),fetch('call_lexicon.json').then(r=>r.json())])
+Promise.all([fetch('table_grids.json').then(r=>r.json()),fetch('translate_lexicon.json').then(r=>r.json())])
  .then(([g,l])=>{G=g;LEX=l;boot()}).catch(e=>{document.getElementById('out').innerHTML='Abra por http://localhost:8860/ (não file://)'});
 function boot(){
  document.getElementById('lang').onclick=()=>{LG=LG==='pt'?'en':'pt';localStorage.setItem('atlas_lang',LG);applyLang();draw()};
  document.getElementById('rev').onchange=e=>{rev=e.target.checked;draw()};
  document.getElementById('minlen').onchange=e=>{minlen=+e.target.value;draw()};
  document.getElementById('dir').onchange=e=>{dir=e.target.value;draw()};
+ document.getElementById('src').onchange=e=>{src=e.target.value;draw()};
  var box=document.getElementById('leaves');
  G.order.forEach(lf=>{var b=document.createElement('span');b.className='cb';b.textContent=lf;b.onclick=()=>pick(lf);box.appendChild(b)});
  applyLang();pick(G.order.includes('2b')?'2b':G.order[0]);
 }
 function applyLang(){document.getElementById('h1').textContent=S('h1');document.getElementById('sub').textContent=S('sub');document.getElementById('lang').textContent=S('lang');document.getElementById('note').textContent=S('note');}
 function pick(lf){cur=lf;[...document.getElementById('leaves').children].forEach(c=>c.classList.toggle('on',c.textContent===lf));draw()}
-function matchAt(row,i){ // longest Call word matching at position i (forward, or reversed if enabled)
- for(var L=8;L>=minlen;L--){var seg=row.substr(i,L);if(seg.length<L)continue;
-  if(LEX[seg])return{len:L,gloss:LEX[seg],word:seg,rev:false};
-  if(rev){var r=seg.split('').reverse().join('');if(LEX[r])return{len:L,gloss:LEX[r],word:seg+'←'+r,rev:true};}
+function lookup(seg){ // respect source toggle, return {gloss,src} or null
+ var e=LEX[seg];if(!e)return null;var srcs=e.srcs||[];
+ if(src!=='both'&&srcs.indexOf(src)<0)return null;
+ var g=(src!=='both'&&e[src])?e[src]:e.g;
+ var tag=(src!=='both')?src:(srcs.length===1?srcs[0]:'multi');
+ return{gloss:g,src:tag};
+}
+function matchAt(row,i){ // longest dictionary word matching at position i (forward, or reversed if enabled)
+ for(var L=9;L>=minlen;L--){var seg=row.substr(i,L);if(seg.length<L)continue;
+  var e=lookup(seg);if(e)return{len:L,gloss:e.gloss,src:e.src,word:seg,rev:false};
+  if(rev){var r=seg.split('').reverse().join('');var e2=lookup(r);if(e2)return{len:L,gloss:e2.gloss,src:e2.src,word:seg+'←'+r,rev:true};}
  }return null}
 function draw(){
  var L=G.leaves[cur];var html='';var nwords=0;
  buildLines(L.grid).forEach(ln=>{var row=ln.str;var i=0,line='';
   while(i<row.length){var m=matchAt(row,i);
-   if(m){line+='<span class=tr title="'+m.word+'">'+m.gloss+'</span>';i+=m.len;nwords++;}
+   if(m){var sc=m.src==='leitch'?' trl':(m.src==='dict'?' trd':'');line+='<span class="tr'+sc+'" title="'+m.word+' ['+m.src+']">'+m.gloss+'</span>';i+=m.len;nwords++;}
    else{line+='<span class=lt>'+row[i]+'</span>';i++;}
   }
   html+='<div class=row>'+line+'</div>';

@@ -863,3 +863,24 @@ the concentration. The peak is leaf 2a, and table 2 is the first table a Call op
 with you is the first"). No random or master name tested concentrates in the opening like this. This
 locates where the text holds the name's letters; it proves nothing about the entity and is offered,
 read-only, as a pointer for the practice.
+
+## 75. Path-tracing explored to the end (module a69)
+
+A name spelled as a connected king-move path (8 neighbours, no reuse) through a 49x49 leaf - the
+Watchtower reading. Three questions settle whether it finds anything:
+
+- **Sequence beats scramble.** Real names walk far more on their best leaf than their own anagrams:
+  NOCHASTOR 292 paths (z 292), CHASTOR 160 (z 174), ADNOCHAP 381 (z 78). So the letter ORDER of a
+  real name is genuinely walkable, not just the letters. REAL.
+- **Real names beat random strings.** Real catalogue names walk ~160 paths on their best leaf against
+  ~22 for random strings of the same lengths. Real names are Loagaeth-shaped (common bigrams), so
+  they walk ~7x more. REAL, but a property of the letter-patterns, not meaning.
+- **But it does NOT locate a name.** A name walks most on the leaf where it is actually written only
+  7 of 56 times (12%). CHASTOR walks most on 18b but is written on 17a; NOCHASTOR walks on 18b,
+  written on 16a. So where a name walks best says nothing about where it belongs.
+
+Conclusion: path-tracing reflects that the names are built from the book's own letter-patterns (real
+and measurable), but a specific walk on a specific leaf is the dense field, not something "meant" -
+you can walk almost any Loagaeth-shaped name on many leaves. For DAHAHOXOM the one thing that lines
+up is that its best walk-leaf (2b) is also where its fragments concentrate (a68) and the leaf the
+practitioner named; for most names the walk-leaf is unrelated to anything.

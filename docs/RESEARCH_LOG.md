@@ -266,6 +266,7 @@ text's own texture.
 | 204 | A 7-fold substructure (49=7x7)? And a column template? | word points at mult-7 11.6% (below 12.5% chance); names flat mod 7; vowel autocorr peaks at lag 3 not 7; column vowel-share swings only in the first 5 columns, flat after (z 25 but it is a line-onset signature) | 7x7 is the frame not a rhythm; column effect = line-onset shape only | a66 |
 | 205 | Does each table have a presiding (over-represented) name? | most leaves have one at p < 0.01 (NOCHA on 12-14, ANZACH 6.1x on 25a, ACLAX ~7x on 29); the map follows the houses and territories | REAL — a per-table working list of names | a67 |
 | 206 | If DAHAHOXOM is gathered from scattered letters, where does its material concentrate? | whole name 28% of its fragment-density in the opening tables 2-6 (z 3.0); the distinctive core AHOXOM 37% (z 4.5); peak leaf 2a; tables 2-6 are 12% of the book | REAL and specific (no other name tested concentrates so) — the text holds the name at its opening; not a claim about the entity | a68 |
+| 207 | Is a name "walkable" as a king-move path on a leaf a real signal or the dense field? | real names walk far above their own anagrams (NOCHASTOR 292, CHASTOR 160, z >100) and above random strings (160 vs 22 best paths); BUT the walk-leaf matches the leaf where the name is actually written only 7/56 (12%) | REAL as a language property (names are Loagaeth-shaped and walkable), NOT a locator — a walk on a given leaf is not "meant" | a69 |
 
 Note: from #127 on, tables 25b–28b are read with the refined decoding of a37; counts quoted in entries
 79–122 moved by a few units (current values are in the README and in results/*.json).
@@ -279,3 +280,76 @@ Note: from #127 on, tables 25b–28b are read with the refined decoding of a37; 
   are respected as such; they are not used as evidence about the manuscript.
 - **External anchor.** No source we hold glosses CHASTOR or its family (lexicon search, 81-book
   corpus). The meaning of the proper names remains sealed.
+
+## #208 — Omni-directional reading (a71) — REFUTED
+Image 4 (Vincent Bridges) claims Enochian squares read from 4 directions × 4 corners. Test: 8 dihedral
+orientations of each 49×49 leaf, catalogue-name hits per orientation, vs Markov-3 surrogate. Written rows
+52.4 hits; other 7 directions 0.7 each (77× fewer); real-other 0.7 ≈ surrogate 0.7 (z −0.51). The Loagaeth
+reads ONE way; no omni-directional design like the Watchtowers'. Confirms "direção única."
+
+## #209 — Rotation-family clustering (a72) — DESCRIPTIVE, one real hit
+Murilo's reading: rotations/branches of a name = same entity, so they sit "glued together." Test: NN-distance
+among positions of a name + its cyclic rotations (both writings) on its busiest leaf, vs 8 Markov-3 surrogates
+of that leaf. Mean z −0.87 (threshold −1). Branches ARE near each other on the page (NN 1.7–3), but a same-flow
+surrogate glues them about as tight — the gluing is the shared letters, not placement beyond flow. OXAD itself
+z +0.48 (not glued beyond flow). Exception: CHADAX z −5.40 (real NN 3.0 vs surrogate 8.4) — a genuinely tight
+family, worth a follow-up.
+
+## #210 — Massive family-clustering sweep (a73) — REFUTED (CHADAX was a tail event)
+Seeds: 761 recurring 4/5-gram rotation-families across the whole book. NN-distance on busiest leaf vs 24
+Markov-3 surrogates (cached per leaf). z<-2: 1 observed vs 17 expected by chance; z<-3: 0 vs 1; mean z −0.30;
+scattered (z>+2): 1. No excess of glued families — the opposite. CHADAX's earlier z−5.4 came from only 8
+surrogates (noisy sd) and regressed. No deliberately-placed glued sub-population; the gluing is letter-flow
+everywhere. Visual (ACHNZ 25a, OXAD 15b): real and surrogate scatter look equally clustered.
+
+## #211 — Row stratification: every line is a balanced inventory (a74→a75) — CONFIRMADO NOVO
+Chased from a gematria probe (a74): under a small ordinal value-map, row-sums are far more uniform than any
+shuffle (DEE_ORD row-cv z −2.8, 35/42 leaves) while ISO (wild values) is flat and columns go the opposite way.
+Not arithmetic. Traced (a75) to the cause: each LETTER is spread across the 49 rows more evenly than chance —
+index of dispersion var/mean of per-row counts is sub-Poisson. All letters ratio 0.72 (z −5.2), VOWELS 0.68
+(z −2.8), CONSONANTS 0.71 (z −4.5), 36/42 leaves z<−3. Holds for consonants, so it is NOT the known
+~constant-syllables-per-line metre. Neither a full shuffle (0.92) nor a column-preserving shuffle (0.93)
+reproduces the real value (~0.57) — so it is a genuine 2D placement rule, not letter frequency and not per-column
+grammar. Every row carries a near-equal share of every letter. New global compositional rule. Visual: letter A on
+2b sits at 9–11 every row (var 1.4) vs 4–16 shuffled (var 8.3).
+
+## #212 — Letter column-position map (a76) — no fixed column, only edges
+Follow-up to a75: within a row, where does each letter sit? Column concentration 0.07 (0=no preference).
+Odd-vs-even row column-profiles agree at cosine 0.59 real vs 0.58 shuffle (gain 0.013) — column position is
+not predictable. Each letter roams the whole row. Only edge preferences (known rule): I/E to the start, V/P/Z/G
+col 0, S/H/X col 48; weak (6-10% peak share). So the book lets you predict HOW MANY of a letter per line
+(stratification), not WHERE in the line. book_column_profile saved for mapping.
+
+## #213 — Names are woven into the grid (a77) — CONFIRMADO NOVO (strong)
+Fair control = the name's OWN letters scrambled. Core family names trace as connected king-move paths far
+above their scrambles, book-wide: 232/460 name-leaf pairs (50%) are "woven" (real traces >=3 paths AND 0 of 80
+scrambles reach it). CHASTOR woven on 30/37 leaves (15b ratio 271x), ADNOCHA 28/42 (14b 619 paths vs 0),
+ALGETH 26/39. Longer names (ICHASTOR, NECHASTOR) trace while every scramble traces zero. Each family has a home
+region: CHASTOR 15b/18b/22b, DAHAHOXOM 2b (43x), NOCHA 14b, GETH 23b. The specific letter-ORDER of these names
+is built into the grid; permutations are not. Reading: the book is woven from this name-vocabulary. (Interpretive
+limit stated once: "beats own scramble" = the order follows the book's own letter-weave, which is why the names —
+the book's own words — thread it; it is the weave and the names being the same fabric, not a separate hidden cipher.)
+
+## #214 — Territory map from the weave (a78) — CONFIRMADO NOVO (convergent)
+Per-family z-normalised weave-ratio assigns each leaf a home family. Mean book position: CHADAX 13.2 (opening),
+NOCHA 17.8 (front-middle), CHASTOR 18.2, GETH 28.3 (back). GETH rules the back (16a-27b almost solid), NOCHA the
+12a-14b block, CHADAX the opening. Built only from king-move tracing vs letter-scrambles, this reproduces the
+two-house geography (NOCHA early / GETH late) found independently by the straight-reading analysis (a67) — two
+unrelated methods agree on the same map. Families are placed in regions, like governors over territories.
+
+## #215 — Hierarchy and elemental powers (a79) — DESCRIPTIVE (clean for 2 houses)
+Each Enochian letter carries a GD element (sign->element). Name's dominant element = its power. By family:
+CHADAX = Terra/Earth (3/3 members, opening territory), CHASTOR = Ar/Air (3/3, spine), NOCHA = Ar/Água mixed,
+GETH = Fogo/Terra mixed, DAHAHOXOM = Ar. Honest limit: family agreement is largely driven by the shared root
+letters, so it is not independent proof of a house-element, and a clean 4-element division does not hold — only
+CHADAX=Earth and CHASTOR=Air are clean. Next: test whether a family's HOME territory leaves carry that element's
+letters above chance (would tie power to territory beyond the stem).
+
+## #216 — Complete hierarchy map (a80) — DESCRIPTIVE (Murilo's model realized)
+Rank validated catalogue names (len>=5, forward+reversed) by repetition per square and book-wide, Watchtower-style.
+SUPREME: NOCHA=Rei (492 total, king of 34 squares), ADNOCHA=Nome de Deus (168), NACHO=Espirito (148), CHASTOR=
+Arcanjo (132), ANZACH=Senior (127); singletons = anjos menores. NOCHA is king nearly everywhere because it nests
+inside its whole family (ADNOCHA/NOCHAP/NOCHASTOR). The "independent ruler" layer (top name not a substring of a
+longer present name) gives each square its local governor: ANZACH mid-book, ALGETH late, GRADAX 14-15, CHADAX
+opening — consistent with the a78 territory map. Two-tier structure: NOCHA over-king + per-square governors + court
++ lesser spirits. Honest limit: raw counts include letter-flow; ranks use len>=5 names to stay meaningful.

@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Path on the Grid — Loagaeth</title>
+<style>
+:root{
+  --bg:#ece4d4; --panel:#f5efe2; --ink:#2a2317; --soft:#726a56; --rule:#cdc3ad;
+  --off:#b9af97; --path:#b5472f; --line:#b5472f; --start:#2f7d8c;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif; --sans:"Segoe UI",system-ui,sans-serif; --mono:"Consolas",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#17140e; --panel:#201b12; --ink:#e7e0cf; --soft:#9a9077; --rule:#39321f;
+  --off:#4a4230; --path:#e4765c; --line:#e4765c; --start:#5ea7c6;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5}
+.wrap{max-width:1000px;margin:0 auto;padding:30px 16px 80px}
+h1{font-family:var(--serif);font-weight:500;font-size:clamp(1.5rem,4vw,2.2rem);margin:0 0 4px}
+.lede{color:var(--soft);max-width:66ch;margin:0 0 18px;font-size:.96rem}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+input,select{font:inherit;padding:8px 12px;border:1px solid var(--rule);border-radius:8px;background:var(--panel);color:var(--ink)}
+input#name{font-family:var(--serif);font-size:1.2rem;letter-spacing:.1em;text-transform:uppercase;flex:1 1 180px;min-width:0}
+button{font:inherit;padding:9px 16px;border:0;border-radius:8px;background:var(--ink);color:var(--bg);cursor:pointer;font-weight:600}
+button.sec{background:var(--panel);color:var(--ink);border:1px solid var(--rule);font-weight:400}
+.stat{display:flex;flex-wrap:wrap;gap:8px 20px;margin:4px 0 16px;color:var(--soft);font-size:.95rem}
+.stat b{font-family:var(--serif);font-size:1.3rem;color:var(--ink);font-weight:500;margin-right:5px}
+.stage{position:relative;max-width:640px;margin:0 auto;background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:10px}
+.grid{display:grid;gap:0;position:relative}
+.c{display:grid;place-items:center;font-family:var(--mono);color:var(--off);aspect-ratio:1;font-size:clamp(5px,1.1vw,9px);user-select:none}
+.c.on{color:#fff;font-weight:700;border-radius:2px;background:var(--path);font-family:var(--serif);z-index:2}
+.c.on.s0{background:var(--start)}
+svg.ov{position:absolute;inset:10px;pointer-events:none;z-index:1}
+.modes{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.mode{font:inherit;font-size:.92rem;border:1px solid var(--rule);background:var(--panel);color:var(--soft);border-radius:999px;padding:6px 14px;cursor:pointer}
+.mode[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.namelist{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:12px 0}
+.nmtag{font:inherit;font-family:var(--serif);letter-spacing:.06em;font-size:.95rem;border:1px solid var(--rule);background:var(--panel);color:var(--ink);border-radius:6px;padding:3px 10px;cursor:pointer}
+.nmtag small{font-family:var(--sans);letter-spacing:0;color:var(--soft);margin-left:5px;font-size:.78rem}
+.chain{font-family:var(--serif);letter-spacing:.08em;text-align:center;font-size:1.15rem;margin:8px 0;line-height:1.8}
+.chain span{padding:2px 6px;border-radius:4px;color:#fff;margin:0 1px}
+.chain i{color:var(--soft);font-style:normal;margin:0 3px}
+.steps{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:14px 0 0}
+.seq{font-family:var(--serif);letter-spacing:.14em;font-size:1.3rem;text-align:center;margin:10px 0 2px}
+.seq b{color:var(--path)}
+.coords{text-align:center;color:var(--soft);font-family:var(--mono);font-size:.82rem;margin-bottom:6px}
+.note{margin:22px auto 0;max-width:66ch;padding:14px 16px;border-left:3px solid var(--rule);background:var(--panel);border-radius:0 8px 8px 0;color:var(--soft);font-size:.92rem}
+.note b{color:var(--ink);font-weight:500}
+.empty{color:var(--soft);text-align:center;padding:30px}
+:focus-visible{outline:2px solid var(--start);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Caminho na grade</h1>
+  <p class="lede">O nome escrito célula a célula, pulando para uma vizinha (8 direções) a cada letra, sem repetir
+  célula — a mesma leitura dos nomes das Torres. Compare com o quanto as <b>mesmas letras embaralhadas</b> se traçam:
+  essa é a diferença entre padrão real e coincidência.</p>
+
+  <div class="modes" id="modes"></div>
+  <div class="bar">
+    <input id="name" value="DAHAHOXOM" autocomplete="off" spellcheck="false">
+    <select id="leaf"></select>
+    <button id="go">Traçar</button>
+  </div>
+  <div class="stat" id="stat"></div>
+
+  <div id="view"><p class="empty">Carregando…</p></div>
+
+  <div class="note" id="note"></div>
+</div>
+
+<script>
+let DATA=null, paths=[], cur=0, GRID=null, mode="one", showAll=true, lastNet=null;
+const NAMES=["ACHADNACHO","ACHARDAN","ACLAX","ACLAXTO","ACLAXTOR","ADNACHEPHA","ADNOCHA","ADNOCHAP","ADNOCHAPHA","ALCHADAX","ALGETH","ANCHANO","ANTANTOX","ANTANTOXAL","ANZACH","AOXARD","AXACHAR","AXACLAXTO","AXALGRA","AXTALGETHA","CHADAX","CHARDAX","CHASTOR","CHIDAXTO","CHUSTOR","DAHAHOXOM","DNOCHAPA","DONCHAL","DRAGRA","GASTA","GETH","GRADAX","HNAXAD","ICHASTOR","ICHASTORA","NACHO","NACHOA","NACHOAD","NACHOAL","NACLANSA","NADAB","NECHASTOR","NOCHA","NOCHAP","NOCHAPH","NOCHASTOR","NOCHASTORA","NODALGA","OLCHADNA","ONDANVAGE","OXAD","OXARDRAH","PHADOL","PHANGE","RONZIN","TAXALGRA","UCHER","VOXAR","ZICHASTOR","ZIDNOPHA"];
+const HUES=["#b5472f","#2f7d8c","#8a5a1f","#3b64b2","#7a4a9c","#4a7a3a","#b07d1a","#2f8c6d","#a53f6f","#5a6fb5"];
+const $=id=>document.getElementById(id);
+fetch("search_data.json").then(r=>r.json()).then(d=>{DATA=d;initLeaves();run();}).catch(()=>{$("view").innerHTML='<p class="empty">Sirva a pasta por HTTP (python -m http.server) e abra por http://…</p>';});
+
+function initLeaves(){
+  const keys=Object.keys(DATA.loagaeth).sort((a,b)=>(parseInt(a)||0)-(parseInt(b)||0)||a.localeCompare(b));
+  $("leaf").innerHTML=keys.map(k=>`<option value="${k}"${k==="2b"?" selected":""}>folha ${k}</option>`).join("");
+}
+[["one","Um nome"],["net","Rede (encadeados)"],["pack","Empacotar — todos sem sobrepor"]].forEach(([k,label],i)=>{const b=document.createElement("button");b.className="mode";b.textContent=label;b.setAttribute("aria-pressed",i===0);b.onclick=()=>{mode=k;[...$("modes").children].forEach(c=>c.setAttribute("aria-pressed","false"));b.setAttribute("aria-pressed","true");$("name").parentElement.style.display=k==="one"?"":"none";run();};$("modes").appendChild(b);});
+$("go").onclick=run;
+$("name").addEventListener("keydown",e=>{if(e.key==="Enter")run();});
+$("leaf").onchange=run;
+
+function neighbors(r,c,R,cols){const o=[];for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++){if(!dr&&!dc)continue;const nr=r+dr,nc=c+dc;if(nr>=0&&nr<R&&nc>=0&&nc<cols[nr])o.push([nr,nc]);}return o;}
+function findPaths(grid,name,cap=400){
+  const R=grid.length,cols=grid.map(x=>x.length),out=[];
+  function dfs(r,c,idx,path){
+    if(idx===name.length){out.push(path.slice());return out.length<cap;}
+    for(const[nr,nc]of neighbors(r,c,R,cols)){
+      if(grid[nr][nc]===name[idx]&&!path.some(p=>p[0]===nr&&p[1]===nc)){path.push([nr,nc]);if(!dfs(nr,nc,idx+1,path))return false;path.pop();}
+    }
+    return true;
+  }
+  for(let r=0;r<R;r++)for(let c=0;c<cols[r];c++)if(grid[r][c]===name[0])dfs(r,c,1,[[r,c]]);
+  return out;
+}
+function countPaths(grid,name,cap=5000){return findPaths(grid,name,cap).length;}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function run(){
+  if(!DATA)return;
+  const lk=$("leaf").value; GRID=DATA.loagaeth[lk];
+  if(mode==="net"){runNetwork(lk);return;}
+  if(mode==="pack"){runPack(lk);return;}
+  const name=($("name").value||"").toUpperCase().replace(/[^A-Z]/g,"");$("name").value=name;
+  if(!name){$("view").innerHTML='<p class="empty">Digite um nome.</p>';return;}
+  paths=findPaths(GRID,name);cur=0;
+  // anagram control
+  const letters=name.split("");let anagTot=0,anagMax=0,trials=12;
+  for(let t=0;t<trials;t++){const a=shuffle(letters).join("");if(a===name){t--;continue;}const n=countPaths(GRID,a);anagTot+=n;anagMax=Math.max(anagMax,n);}
+  const anagAvg=anagTot/trials;
+  $("stat").innerHTML=`<div><b>${paths.length}</b>caminhos de ${name} na ${lk}</div><div><b>${anagAvg.toFixed(1)}</b>média das letras embaralhadas</div><div><b>${anagMax}</b>maior anagrama</div>`;
+  render();
+  const ratio=anagAvg>0?(paths.length/anagAvg):paths.length;
+  $("note").innerHTML = paths.length===0
+    ? `<b>${name}</b> não se traça como caminho conectado na folha ${lk}.`
+    : `Na folha ${lk}, <b>${name}</b> se traça ${paths.length}× como caminho conectado; as mesmas letras embaralhadas, ${anagAvg.toFixed(1)}× em média. ${ratio>=4?`<b>${ratio.toFixed(0)}× mais que o acaso</b> — a sequência importa aqui, não só as letras.`:`Perto do acaso — provavelmente só agrupamento de letras, não a sequência.`} Traçar com pulo diagonal é uma leitura permissiva; o controle do anagrama já desconta isso. Não prova entidade alguma; mostra que o nome é <b>codificável</b> ali.`;
+}
+
+function runNetwork(lk){
+  $("stat").innerHTML='<div class="empty" style="padding:6px">calculando…</div>';
+  setTimeout(()=>networkCompute(lk),20);
+}
+function networkCompute(lk){
+  // for each name: collect up to 60 of its king-move paths (start cell, end cell) on this leaf
+  const traced=[];
+  for(const nm of NAMES){
+    if(nm.length<4)continue;
+    const ps=findPaths(GRID,nm,400);
+    if(!ps.length)continue;
+    let an=0;for(let t=0;t<8;t++){const a=shuffle(nm.split("")).join("");if(a===nm){t--;continue;}an+=countPaths(GRID,a,400);}
+    traced.push({nm,count:ps.length,paths:ps.slice(0,60),path:ps[0],anag:an/8});
+  }
+  traced.sort((a,b)=>b.count-a.count);
+  const real=traced.filter(t=>t.count>=3 && t.count>=3*Math.max(0.5,t.anag));
+  // CONTINUOUS chain: name B follows name A if some path of B STARTS where a path of A ENDS
+  // (same cell = the trace flows through; the shared cell is the junction, like CHASTOR+ANTANTOX).
+  const cellKey=p=>p[0]+","+p[1];
+  // index: for each name, set of end-cells and map start-cell -> path
+  const startIdx={}; // "r,c" -> [{nm, path}]
+  real.forEach(t=>t.paths.forEach(p=>{const k=cellKey(p[0]);(startIdx[k]=startIdx[k]||[]).push({nm:t.nm,path:p});}));
+  // DFS to build the longest continuous chain of distinct names with no reused cell
+  let best={names:[],cells:[],paths:[]};
+  function extend(curPath,nm,chainNames,chainPaths,usedCells){
+    if(chainNames.length>best.names.length){best={names:chainNames.slice(),paths:chainPaths.slice()};}
+    const endK=cellKey(curPath[curPath.length-1]);
+    for(const cand of (startIdx[endK]||[])){
+      if(chainNames.includes(cand.nm))continue;
+      // candidate path must not reuse cells already in the chain (except the shared junction = its first cell)
+      if(cand.path.slice(1).some(c=>usedCells.has(cellKey(c))))continue;
+      const nu=new Set(usedCells);cand.path.forEach(c=>nu.add(cellKey(c)));
+      extend(cand.path,cand.nm,chainNames.concat(cand.nm),chainPaths.concat([cand.path]),nu);
+    }
+  }
+  // start from each name's each path (cap work)
+  let starts=0;
+  for(const t of real){for(const p of t.paths){if(starts++>2000)break;const used=new Set(p.map(cellKey));extend(p,t.nm,[t.nm],[p],used);}if(starts>2000)break;}
+  const byName=Object.fromEntries(real.map(t=>[t.nm,t]));
+  renderNetwork(lk,traced,real,best,byName);
+}
+function renderNetwork(lk,traced,real,chain,byName){
+  lastNet={lk,traced,real,chain,byName};
+  const view=$("view");
+  const chainNames=chain.names||[], chainPaths=chain.paths||[];
+  $("stat").innerHTML=`<div><b>${traced.length}</b>nomes traçam na ${lk}</div><div><b>${real.length}</b>acima do acaso</div><div><b>${chainNames.length}</b>maior cadeia contínua</div>`;
+  view.innerHTML="";
+  const R=GRID.length,cols=GRID.map(x=>x.length),maxc=Math.max(...cols);
+  if(chainNames.length>=2){
+    const cd=document.createElement("div");cd.className="chain";
+    cd.innerHTML=chainNames.map((nm,i)=>`<span style="background:${HUES[i%HUES.length]}">${nm}</span>`).join('<i>→</i>');
+    view.appendChild(cd);
+    const lab=document.createElement("p");lab.className="coords";lab.textContent="cadeia contínua: o fim de um nome É o começo do próximo (mesma célula), um traço só";
+    view.appendChild(lab);
+    const cellHue={};chainPaths.forEach((p,i)=>p.forEach(c=>{if(cellHue[c[0]+","+c[1]]===undefined)cellHue[c[0]+","+c[1]]=HUES[i%HUES.length];}));
+    const built=buildGridHued(R,maxc,cols,cellHue);
+    const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");svg.setAttribute("class","ov");svg.setAttribute("viewBox",`0 0 ${maxc} ${R}`);svg.setAttribute("preserveAspectRatio","none");
+    chainPaths.forEach((p,i)=>{let d="";p.forEach((c,j)=>{d+=(j?"L":"M")+(c[1]+0.5)+" "+(c[0]+0.5)+" ";});const pe=document.createElementNS("http://www.w3.org/2000/svg","path");pe.setAttribute("d",d);pe.setAttribute("fill","none");pe.setAttribute("stroke",HUES[i%HUES.length]);pe.setAttribute("stroke-width","0.22");pe.setAttribute("stroke-linejoin","round");pe.setAttribute("stroke-linecap","round");pe.setAttribute("opacity","0.95");svg.appendChild(pe);});
+    built.grid.appendChild(svg);view.appendChild(built.wrap);
+  } else {
+    const p=document.createElement("p");p.className="coords";p.textContent="Nenhuma cadeia contínua de 2+ nomes nesta folha (nenhum nome começa exatamente onde outro termina).";view.appendChild(p);
+    const cellHue={};real.forEach((t,i)=>t.path.forEach(c=>{cellHue[c[0]+","+c[1]]=HUES[i%HUES.length];}));
+    view.appendChild(buildGridHued(R,maxc,cols,cellHue).wrap);
+  }
+  const list=document.createElement("div");list.className="namelist";
+  traced.slice(0,40).forEach(t=>{const sig=real.includes(t);const b=document.createElement("button");b.className="nmtag";b.innerHTML=`${t.nm}<small>${t.count}${sig?"":" ·acaso"}</small>`;b.style.opacity=sig?"1":"0.5";b.onclick=()=>{mode="one";[...$("modes").children].forEach((c,i)=>c.setAttribute("aria-pressed",i===0));$("name").parentElement.style.display="";$("name").value=t.nm;run();};list.appendChild(b);});
+  view.appendChild(list);
+  $("note").innerHTML = chainNames.length>=2
+    ? `Em <b>${lk}</b>: a maior cadeia contínua liga <b>${chainNames.length} nomes</b> num traço só — cada nome começa exatamente na célula onde o anterior termina, como o DAHAHOXOM se traça. Clique num nome da lista para vê-lo sozinho.`
+    : `Em <b>${lk}</b>, ${real.length} nomes se traçam acima do acaso, mas nenhum começa exatamente onde outro termina — então não há cadeia contínua aqui. Muitos traçados soltos é esperado num campo denso; a cadeia contínua é o que seria especial.`;
+}
+function buildGridHued(R,maxc,cols,cellHue){
+  const wrap=document.createElement("div");wrap.className="stage";
+  const grid=document.createElement("div");grid.className="grid";grid.style.gridTemplateColumns=`repeat(${maxc},1fr)`;
+  for(let r=0;r<R;r++)for(let c=0;c<maxc;c++){
+    const cell=document.createElement("div");cell.className="c";
+    if(c<cols[r]){cell.textContent=GRID[r][c];const h=cellHue[r+","+c];if(h){cell.classList.add("on");cell.style.background=h;}}
+    grid.appendChild(cell);
+  }
+  wrap.appendChild(grid);return{wrap,grid};
+}
+function runPack(lk){$("stat").innerHTML='<div class="empty" style="padding:6px">empacotando… (pode levar alguns segundos)</div>';setTimeout(()=>packCompute(lk),20);}
+function packCompute(lk){
+  const key=c=>c[0]+","+c[1];
+  // collect paths for every name >=4 letters
+  const cand=[];
+  for(const nm of NAMES){if(nm.length<4)continue;const ps=findPaths(GRID,nm,300);if(ps.length)cand.push({nm,paths:ps});}
+  // place rarer/longer names first (fewer options, harder to fit) -> better packing
+  cand.sort((a,b)=> (a.paths.length-b.paths.length) || (b.nm.length-a.nm.length));
+  const used=new Set(); const placed=[];
+  for(const t of cand){
+    for(const p of t.paths){
+      if(p.every(c=>!used.has(key(c)))){p.forEach(c=>used.add(key(c)));placed.push({nm:t.nm,path:p});break;}
+    }
+  }
+  // pass 2: try to squeeze in more occurrences of names already placeable (same name again, different cells)
+  let added=true;
+  while(added){added=false;
+    for(const t of cand){
+      for(const p of t.paths){
+        if(p.every(c=>!used.has(key(c)))){p.forEach(c=>used.add(key(c)));placed.push({nm:t.nm,path:p});added=true;break;}
+      }
+    }
+  }
+  renderPack(lk,placed,used.size);
+}
+function renderPack(lk,placed,cellsUsed){
+  const view=$("view");
+  const R=GRID.length,cols=GRID.map(x=>x.length),maxc=Math.max(...cols);
+  const uniqNames=new Set(placed.map(p=>p.nm));
+  $("stat").innerHTML=`<div><b>${placed.length}</b>traços lado a lado, nenhum sobre o outro</div><div><b>${uniqNames.size}</b>nomes distintos</div><div><b>${cellsUsed}</b>células ocupadas (de ${R*maxc})</div>`;
+  view.innerHTML="";
+  const cellHue={};placed.forEach((t,i)=>t.path.forEach(c=>{cellHue[c[0]+","+c[1]]=HUES[i%HUES.length];}));
+  const built=buildGridHued(R,maxc,cols,cellHue);
+  const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");svg.setAttribute("class","ov");svg.setAttribute("viewBox",`0 0 ${maxc} ${R}`);svg.setAttribute("preserveAspectRatio","none");
+  placed.forEach((t,i)=>{let d="";t.path.forEach((c,j)=>{d+=(j?"L":"M")+(c[1]+0.5)+" "+(c[0]+0.5)+" ";});const pe=document.createElementNS("http://www.w3.org/2000/svg","path");pe.setAttribute("d",d);pe.setAttribute("fill","none");pe.setAttribute("stroke",HUES[i%HUES.length]);pe.setAttribute("stroke-width","0.16");pe.setAttribute("stroke-linejoin","round");pe.setAttribute("stroke-linecap","round");pe.setAttribute("opacity","0.9");svg.appendChild(pe);});
+  built.grid.appendChild(svg);view.appendChild(built.wrap);
+  // list the placed names (with counts)
+  const by={};placed.forEach(p=>by[p.nm]=(by[p.nm]||0)+1);
+  const list=document.createElement("div");list.className="namelist";
+  Object.entries(by).sort((a,b)=>b[0].length-a[0].length).forEach(([nm,n],i)=>{const b=document.createElement("button");b.className="nmtag";b.innerHTML=`${nm}${n>1?`<small>×${n}</small>`:""}`;b.onclick=()=>{mode="one";[...$("modes").children].forEach((c,j)=>c.setAttribute("aria-pressed",j===0));$("name").parentElement.style.display="";$("name").value=nm;run();};list.appendChild(b);});
+  view.appendChild(list);
+  $("note").innerHTML=`Em <b>${lk}</b>: ${placed.length} traços de nomes cabem ao mesmo tempo sem nenhum cruzar o outro — cada nome com suas próprias células. ${uniqNames.size} nomes distintos. Coloquei os mais difíceis (menos opções) primeiro, para caber o máximo. Isto mostra o <b>quanto</b> do quadrado é "preenchível" por nomes do catálogo em traços disjuntos — num campo denso, é muito. Clique num nome para vê-lo sozinho.`;
+}
+function render(){
+  const R=GRID.length,cols=GRID.map(x=>x.length),maxc=Math.max(...cols);
+  const view=$("view");
+  if(!paths.length){view.innerHTML='';const g=buildGrid(R,maxc,cols,null);view.appendChild(g.wrap);return;}
+  const path=paths[cur];
+  const posOf=new Map(path.map((p,i)=>[p[0]+","+p[1],i]));
+  const built=buildGrid(R,maxc,cols,posOf);
+  // overlay lines
+  const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");svg.setAttribute("class","ov");svg.setAttribute("viewBox",`0 0 ${maxc} ${R}`);svg.setAttribute("preserveAspectRatio","none");
+  let d="";path.forEach((p,i)=>{const x=p[1]+0.5,y=p[0]+0.5;d+=(i?"L":"M")+x+" "+y+" ";});
+  const pathEl=document.createElementNS("http://www.w3.org/2000/svg","path");pathEl.setAttribute("d",d);pathEl.setAttribute("fill","none");pathEl.setAttribute("stroke","var(--line)");pathEl.setAttribute("stroke-width","0.16");pathEl.setAttribute("stroke-linejoin","round");pathEl.setAttribute("stroke-linecap","round");pathEl.setAttribute("opacity","0.9");
+  svg.appendChild(pathEl);built.grid.appendChild(svg);
+  view.innerHTML="";
+  const seq=document.createElement("div");seq.className="seq";seq.innerHTML=path.map((p,i)=>`<b>${GRID[p[0]][p[1]]}</b>`).join("");
+  const coords=document.createElement("div");coords.className="coords";coords.textContent=path.map(p=>`${GRID[p[0]][p[1]]}(l${p[0]+1},c${p[1]+1})`).join(" → ");
+  view.appendChild(seq);view.appendChild(coords);view.appendChild(built.wrap);
+  if(paths.length>1){
+    const steps=document.createElement("div");steps.className="steps";
+    const prev=document.createElement("button");prev.className="sec";prev.textContent="‹ anterior";prev.onclick=()=>{cur=(cur-1+paths.length)%paths.length;render();};
+    const lab=document.createElement("button");lab.className="sec";lab.textContent=`caminho ${cur+1} / ${paths.length}`;lab.onclick=()=>{cur=(cur+1)%paths.length;render();};
+    const next=document.createElement("button");next.className="sec";next.textContent="próximo ›";next.onclick=()=>{cur=(cur+1)%paths.length;render();};
+    steps.append(prev,lab,next);view.appendChild(steps);
+  }
+}
+function buildGrid(R,maxc,cols,posOf){
+  const wrap=document.createElement("div");wrap.className="stage";
+  const grid=document.createElement("div");grid.className="grid";grid.style.gridTemplateColumns=`repeat(${maxc},1fr)`;
+  for(let r=0;r<R;r++){for(let c=0;c<maxc;c++){
+    const cell=document.createElement("div");cell.className="c";
+    if(c<cols[r]){cell.textContent=GRID[r][c];
+      if(posOf){const k=posOf.get(r+","+c);if(k!==undefined){cell.classList.add("on");if(k===0)cell.classList.add("s0");cell.textContent=GRID[r][c];cell.title="passo "+(k+1);}}
+    }
+    grid.appendChild(cell);
+  }}
+  wrap.appendChild(grid);return{wrap,grid};
+}
+</script>
+</body>
+</html>

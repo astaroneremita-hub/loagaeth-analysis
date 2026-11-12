@@ -78,6 +78,18 @@ import a65_bridges_refrains_acrostics
 import a66_seven_and_columns
 import a67_presiding_names
 import a68_dahahoxom_home
+import a69_path_tracing
+import a70_packing_meaning
+import a71_omnidirectional
+import a72_rotation_family
+import a73_family_sweep
+import a74_gematria_lines
+import a75_row_stratification
+import a76_letter_position_map
+import a77_names_woven
+import a78_territory_map
+import a79_hierarchy_powers
+import a80_full_hierarchy
 import make_figures
 import make_viz_data
 
@@ -152,6 +164,18 @@ MODULES = [
     ("66_seven_and_columns", a66_seven_and_columns),
     ("67_presiding_names", a67_presiding_names),
     ("68_dahahoxom_home", a68_dahahoxom_home),
+    ("69_path_tracing", a69_path_tracing),
+    ("70_packing_meaning", a70_packing_meaning),
+    ("71_omnidirectional", a71_omnidirectional),
+    ("72_rotation_family", a72_rotation_family),
+    ("73_family_sweep", a73_family_sweep),
+    ("74_gematria_lines", a74_gematria_lines),
+    ("75_row_stratification", a75_row_stratification),
+    ("76_letter_position_map", a76_letter_position_map),
+    ("77_names_woven", a77_names_woven),
+    ("78_territory_map", a78_territory_map),
+    ("79_hierarchy_powers", a79_hierarchy_powers),
+    ("80_full_hierarchy", a80_full_hierarchy),
 ]
 
 

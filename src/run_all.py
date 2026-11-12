@@ -58,6 +58,23 @@ import a45_variation_channel
 import a46_generator
 import a47_templates
 import a48_beyond_five_elsewhere
+import a49_leaf_and_junctions
+import a50_chessboard_order
+import a51_word_points
+import a52_origin_of_formulas
+import a53_second_transcription
+import a54_source_checks
+import a55_leaf49_words
+import a56_one_name
+import a57_forum_checks
+import a58_direction_and_transition
+import a59_calls_every_path
+import a60_tampering
+import a61_navigation_and_soyga_rule
+import a62_chant_and_cube
+import a63_metre
+import a64_finer_chant
+import a65_bridges_refrains_acrostics
 import make_figures
 import make_viz_data
 
@@ -112,6 +129,23 @@ MODULES = [
     ("46_generator", a46_generator),
     ("47_templates", a47_templates),
     ("48_beyond_five_elsewhere", a48_beyond_five_elsewhere),
+    ("49_leaf_and_junctions", a49_leaf_and_junctions),
+    ("50_chessboard_order", a50_chessboard_order),
+    ("51_word_points", a51_word_points),
+    ("52_origin_of_formulas", a52_origin_of_formulas),
+    ("53_second_transcription", a53_second_transcription),
+    ("54_source_checks", a54_source_checks),
+    ("55_leaf49_words", a55_leaf49_words),
+    ("56_one_name", a56_one_name),
+    ("57_forum_checks", a57_forum_checks),
+    ("58_direction_and_transition", a58_direction_and_transition),
+    ("59_calls_every_path", a59_calls_every_path),
+    ("60_tampering", a60_tampering),
+    ("61_navigation_and_soyga_rule", a61_navigation_and_soyga_rule),
+    ("62_chant_and_cube", a62_chant_and_cube),
+    ("63_metre", a63_metre),
+    ("64_finer_chant", a64_finer_chant),
+    ("65_bridges_refrains_acrostics", a65_bridges_refrains_acrostics),
 ]
 
 

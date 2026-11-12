@@ -21,7 +21,7 @@ from coincidence - including our own favorite ideas, several of which died.
   NECHASTOR, ZICHASTOR, NOCHASTORAD, ...). The same affixes recur on other stems
   (-GETH, -DAX families). This is the most language-like behavior in the manuscript.
 - **Per-table signature names.** Each of the 48 tables has its own distinctive name
-  (HZEMBL, DAHOXI, DOMNAG, ...); none belong to the CHASTOR family.
+  (DOMNAG, ...; HZEMBL and DAHOXI, first listed here, cross word boundaries and are withdrawn - a51); none belong to the CHASTOR family.
 - **A small real bridge to the Calls.** 23 of 2,619 word-spaced tokens exactly match
   attested Angelical forms (~10x chance); four carry known meanings (IAD god, GAH
   spirits, ORS darkness, URAN elders).

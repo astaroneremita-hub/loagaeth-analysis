@@ -144,6 +144,35 @@ prose at this size and do not see it in the tables. Variant choice is dialect, n
 A per-leaf six-letter machine writes the book (a46); the residue is the echo over four lines and an
 excess of one-letter variants of long passages. Templates mined (a47): the machine makes them too, and
 a direct test finds no memory beyond five letters inside a side (English: z 7–22). Done for the other formats too (a48): no memory beyond five letters anywhere; echo real in rows and chessboard leaves only. Was left: test whether the echo over four lines survives in the diagonal and diamond tables.
+The other dimension (a49): rows of a side are one stream read downwards (junction z 15.9; doubled
+letters avoided across the break; names straddle it); sides of a leaf are not copies of each other;
+a faint half-turn likeness (p 0.01 corrected) waits for a second transcription. Done: catalogue counts names over the joined stream; diamonds run on in the stored order (z 10.6, 6.2).
+Chessboard order (a50): two ↘ colours settled; ↖ and ↙ colours probably run in the opposite order
+(a ↘ stream on a half-turned page). Open: the four ↘ colours that show nothing alone, the row blocks, 26a's zones;
+check on the manuscript images whether the second colour is written upside down.
+Word points (a51): gold boundaries for 2a–5a; words almost never repeat (95% once); names are parts of
+words; rows hold whole words. Imprints (a52): own sound-pattern, mild English lean, more regular than
+speech. kondor.de is a copy of Peterson (a53). Next: rebuild the loader so that points and accents are
+kept everywhere; redo name discovery inside words (roots, endings) on the pointed tables; manuscript
+images for 25b–28b; dated record of the leaves if a fuller transcript of Sloane 3188 is found.
 Sound classes checked (a41): no rule
 beyond the slot grammar; interchangeable consonants share manner, not place. Left from this lead: the variation by part of the book and by house;
 the same counts on another transcription of the tables when one is available.
+
+## 5. After reading the diaries (docs/WHAT_THE_SOURCES_SAY.md)
+
+The record says the tables are not a discourse: their reading is the appearing of the ministers
+when a table is opened by its Call. Searching the letters for sentences or a cipher of meaning is
+closed. What remains worth doing, in order:
+
+1. Done (images read): the second series of 25b–28b is written turned half round; leaves 29–48 are
+   chessboards with one series; f.57 is empty grids. Left: higher-resolution images to settle n/u, the
+   exact end of the points on 4a–5a, the angelic titles above the tables, the note on 43a in full.
+2. Rebuild the loader to keep points and accents; a reading aid for leaf 1 and leaves 2-5 (words,
+   stress) built from them.
+3. The book in the order and direction Dee was told to write it ("backward", "the first leaf is the
+   last"): a view of the catalogue and of the 3D viewer in that order.
+4. Calls and tables as a matter of use (Call n with table n + 1): show them side by side in the
+   catalogue; no further statistical test is called for.
+5. Books I-IV of Sloane 3188 in the manuscript, and the remaining parts of A True and Faithful
+   Relation, read in full (so far surveyed or searched).

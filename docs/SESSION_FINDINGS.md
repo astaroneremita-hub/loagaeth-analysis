@@ -58,7 +58,7 @@ the referents are not.
 - *How:* most-frequent recurring 6-gram per table + autocorrelation vs shuffle null.
 
 ### 6. Each table also has its own signature name — module `a05`
-- All 48 tables have a distinctive local name (HZEMBL, DAHOXI…); none are CHASTOR-family.
+- All 48 tables have a distinctive local string; none are CHASTOR-family. (The two examples first given here, HZEMBL and DAHOXI, were read across word boundaries and are withdrawn: see section 56.)
 
 ### 7. The readable layer: ~20 glossed particles in leaf 1 — module `a06`
 - Leaf 1 (the word-spaced *prophecy*) carries attested Angelical words with known meanings:
@@ -596,3 +596,237 @@ Residue: echo over four lines; one-letter variants of long passages (110 vs 74);
 - Echo over four lines, against same-shape surrogates: rows z 7.0; chessboard z 3.9; diamonds z 1.1
   and 1.4. Naive shuffling fakes an echo of 1.4 where lines differ in length.
 - Leaf 1 is not in the decoded book used here; not tested.
+
+## 53. Junctions and the leaf (module a49)
+
+- Start of a row given the end of the row above: 12.47 bits against 13.91 for rows in random order
+  (z 15.9); 44 of 46 sides positive. Upwards z 1.0, boustrophedon z 1.4, across the leaf z 1.1, last
+  row of a side to first row of the next z -0.8. Inside a row the same three letters cost 7.05.
+- Same letter on both sides of the break: 85 against 161 (z -7.0). Inside rows: 643 against 9,250.
+- Names split between rows: 32 against 16.7 (z 3.0). Examples: 13b rows 45-46 NOCHASTORA; 7a rows
+  39-40 CHASTOR; 12b rows 48-49 ANZACH.
+- Two sides of a leaf (13 leaves): same cell, mirrored, upside down, transposed: nothing. Half turn
+  8.94% against 8.40% (p 0.002; 0.01 corrected): suggestive only.
+- Reading: a side is one stream written downwards; the row end is a favoured pause, not a wall.
+
+## 54. Junctions in the other formats; the catalogue recounted
+
+- Diamonds 29-40: next diagonal 13.86 bits against 15.26 (z 10.6); 41-48: 13.64 against 14.56
+  (z 6.2); opposite order nothing. The stored order of the diagonals is the order of the stream.
+- Chessboard leaves 25b-28b: z 2.4 forwards, 3.7 backwards; by colour, forwards on 25b colour 0 and
+  27b colour 1, backwards on 25b colour 1, 26b, 27a colour 1, 27b colour 0; others nothing. Open.
+- Catalogue: names counted along the whole side on rows and diamonds; 51 of 3,968 occurrences are
+  split between two lines (CHASTOR 5, NOCHA 8, OXAD 9, ACLAX 6, ADNOCHA 4, ANZACH 3).
+
+## 55. Order of the diagonals on leaves 25b-28b (module a50)
+
+- Settled alone: 25b colour 0 and 27b colour 1 (both down-right), stored order, z 3.2 and 3.5.
+  Independent signs: same letter across a junction 1 against 6.2; names split 4 against 0.3 (z 6.6).
+- Pooled by road: down-right stored order z 3.0 (the two above carry it); up-left opposite order
+  z 3.2 (5 blocks); down-left opposite order z 3.0 (2 blocks). On the blocks not settled alone the
+  rule gives same-letter 21 against 36 (z -2.9); reversed rule z -0.6.
+- Geometry: an up-left colour in opposite order is a down-right stream on a page turned half round.
+- Unsettled: row blocks of 26a and 27a, zones of 26a colour 0, down-right colours of 26b, 27a,
+  28a, 28b alone.
+
+## 56. The word points (module a51)
+
+- Source: Peterson's rows keep the points and accents on 2a, 2b, 3a, 3b (full), 4a, 4b, 5a (part):
+  232 rows, 1,425 words, 1,193 points inside rows. Our loader had dropped them.
+- HZEMBL (leaf 1: "...h zembl...") and DAHOXI ("dah.oxi...") cross word boundaries. Withdrawn.
+- 1,383 different words; 95.2% written once. Leaf 1 67.5%, Calls 56.9%, Bible 8.8%. Mean length 8.0.
+- Names: whole word 3, start 13, end 11, inside 20, cut by a point 10 (24.6 at random; z -4.2).
+- Row edges: last word 7.4 letters, first 8.9, inner 7.9; blind cutting would give 5.1.
+- Segmenters: F1 0.335 (word model), 0.223 (surprise), 0.114 (random).
+- Accents: 59% of words; next-to-last vowel 391, earlier 443, last 64.
+
+## 57. Two imprints (module a52)
+
+- Read as English / Latin (bits per letter): tables 5.57 / 6.32; leaf 1 5.58 / 6.19; Calls 5.83 /
+  6.30; English 2.93 / 5.23; Latin 4.98 / 3.06; Soyga 8.13 / 8.52.
+- Observed / expected: doubles 0.07 (English 0.44, Latin 0.39, Calls 0.37, leaf 1 0.15, Soyga
+  0.90); ABA 0.57; alternation 1.50; three consonants 0.14; two vowels 0.24.
+
+## 58. kondor.de (module a53) and the diaries
+
+- 846 rows aligned; 23,712 letters in rows of equal length; 1 differs; no n/u; same pointed sides;
+  same 13 irregular rows. A copy of Peterson.
+- Diaries (secondary notes in data/raw): leaf 1 dictated 29 March - 6 April 1583; leaf 18 read on
+  15 April; "24 leaves being written" on 18 April; tables finished 6 May. The end of the
+  row-written tables (25a/25b) coincides with the 18 April count. On 20 June the words were still
+  to be "distinguished" and accented: the points stop at leaf 5.
+
+## 59. The diaries read, and four tests taken from them (module a54)
+
+- The record: docs/WHAT_THE_SOURCES_SAY.md. The tables are an instrument opened by the Calls, not a
+  discourse; "Interpret not"; "every letter ... bringeth furth the Names of God".
+- Leaf 1 side 1: 25 of the first 30 rows have exactly 49 words: a table of words, as the diary says.
+- Leaf 1 as a key square for square: 336 tests, mean z -0.1. Refuted.
+- Nine letter rows of leaf 1 side 2: 3.84 bits under the tables' model (tables 2.80; leaf-1 words
+  4.79; shuffled 6.76); NACHO and OXAD already present.
+- Leaf 18: not set apart from tables 13-24.
+
+## 60. The manuscript seen (images of Sloane 3189)
+
+- 25b-28b: every square filled; two series on alternate squares, tilted, turned half round from one
+  another. Confirms on the page what a50 found from the junctions.
+- 29-48: the same square ruling, letters on alternate squares only. One series of a chessboard, not
+  a lozenge. Note on 43a: "every empty square is to be filled as these are".
+- 8a, 9a, 10b, 11a carry figures (capitals, ring, boxed corners, inset blocks): the irregular rows.
+- Leaf 1 side 1 is not in the book; f.57 is empty grids with two lines of angelic characters.
+- n and u mostly cannot be told apart; z and x can.
+- Two views were checked directly for this note (f.34 and f.42 regions); the rest is the reading
+  recorded in data/raw/notes_sloane3189_images.md.
+
+## 61. The 21 words of the 49th leaf (module a55)
+
+From the diary (18 June 1583): Loagaeth seg lovi brtnc / Larzed dox ner habzilb adnor / doncha Larb
+vors hirobra / exi vr zednip taiip chimvane / chermach lendix nor zandox (22 tokens printed, 21
+words; one division doubtful). Never in our data before.
+
+- Short words occur freely in the tables: DOX 545, VR 482, NOR 144, NER 56, VORS 27, ADNOR 17,
+  DONCHA 17, SEG 13, LARB 3, EXI 2, LOVI/LARZED/ZANDOX 1.
+- The long words occur nowhere: LOAGAETH, BRTNC, HABZILB, HIROBRA, ZEDNIP, TAIIP, CHIMVANE,
+  CHERMACH, LENDIX. They carry consonant clusters (BRTNC, HABZILB, ZEDNIP) absent from the tables.
+- Read under a letter model of the tables they cost 4.23 bits (leaf-1 model 4.58, Calls 4.42); a
+  real table row costs 2.51. They are neither table language nor leaf-1 language: a third register.
+- Only catalogue link: DONCHA is DONCHAL without its last letter.
+- Fits the diary: Galvah calls the first leaf "a hotchpot without order", unlike the ordered tables.
+
+## 62. "One Name", measured (module a56)
+
+Reading the diary's "they are but one Name" as "few roots": under the affix rules (prefixes AD-,
+NO-, NE-, NI-, ZI-, A-, AX-, AL-; suffixes -A, -AL, -AD, -H, -HA, -R, -TO, -TOR, -P) and an interior
+A/O/E fold, the 58 recurring names collapse to 45 roots. Surrogate name-sets (Markov-3 strings of
+the same lengths) collapse to only 57.9 (p 0.002): the rules compress the real names far more than
+random strings. But 45 roots is not one: the largest (CHAS: CHASTOR, ICHASTOR, NECHASTOR,
+NOCHASTOR, ZICHASTOR) covers 5; the five biggest cover 26%. The literal "one Name" is not supported;
+the family structure (a23, a28) is confirmed by a second method. (Root-stripping is approximate, so
+a few roots that should merge stay apart; the headline is robust to that.)
+
+## 63. Two reader claims checked (module a57)
+
+- **DAHAHOXOM.** A practitioner was addressed by an angel "DAHAHOXOM" and thought DAHOXI resembled
+  it. DAHAHOXOM and its near forms (DAHOXOM, DAHAHOX, AHOXOM, HOXOM) occur nowhere in the book,
+  forward or backward, whole or by leaf. DAHOX occurs 6×; 3 are DAHOXI, which in the pointed tables
+  is "dah.oxi" across a word point (two words, a51). The angel name is not in the text, so the
+  resemblance cannot be tested against the book; the experience is respected, not contradicted.
+- **Calls assembled from scattered letters.** The reader notes the first two Calls look built from
+  letters spread through the whole book, unlike Watchtower names. Confirmed three ways: (1) the
+  diary indexes each Call letter to a table and number, and the tables are scattered (21st, 41st,
+  46th; 13 April 1584); (2) a35 could not recover the number→place rule; (3) fresh test: Call words
+  (≥4 letters) occur as whole strings in the tables only 144× against 136.9 for random strings of
+  the same lengths (z 0.8) — first two Calls 21/89 vs 21.7 — so they are not localized chunks.
+
+## 64. DAHAHOXOM, the wide search
+
+A reader was addressed in evocation by an angel DAHAHOXOM and asked whether it, or its halves
+(DAHA + HOXOM, DAH + AHOXOM, DAH + AHOX + OM), is in the book. Searched exhaustively: eight reading
+paths (rows both ways, columns both ways, the two diagonals, the two anti-diagonals), scribe
+letters folded (V/U, Z/X, I/Y, J/I), and approximate matching up to two edits.
+
+- The whole name DAHAHOXOM never occurs, in any path or direction.
+- The distinctive parts AHOXOM, HAXOM, HAHOXOM never occur. DAHA is a common fragment; OXOM occurs
+  a few times; DAHAH, AHOXO, AHAHOX occur once or twice. The two ends never sit together.
+- The single nearest form in the whole book within two edits is DABAHOXIM on leaf 2b — and in the
+  pointed transcription it is "…APRINDABAH.OXIMAGEN…", i.e. the words APRINDABAH and OXIMAGEN run
+  together across two word points. Like DAHOXI = "dah.oxi" (a51), it is a word-boundary artefact,
+  not a word.
+- Reading: the LETTERS of DAHAHOXOM are all in the book, but scattered and never adjacent. By the
+  book's own method — each name's letters gathered from numbered places in different tables (a57) —
+  the name could be assembled letter by letter; it is simply not written anywhere as a unit. The
+  resemblance the reader felt (DAHOXI ~ DAHAHOXOM) is a real surface pattern, but every form close
+  to it that the book produces comes from reading across the word-separating points.
+
+## 65. The Call words along every reading path (module a59)
+
+The reader's idea: search the tables for the Call words read other ways — diagonals, backward,
+columns. Eight paths tested (rows both ways, columns both ways, two diagonals, two anti-diagonals),
+Call words forward and reversed, against two nulls and a placebo wordlist (Dee's leaf-1 words).
+
+- Under a Markov-3 surrogate of each path's stream, the anti-diagonal reaches z 3.6 — looked like a
+  signal. It does NOT survive the stronger word-scramble null (each word's own letters shuffled):
+  anti-diagonal z 1.5, and the leaf-1 placebo z −0.6 there. One of eight paths; not robust.
+- On the rows both Calls (z 8.9) and leaf-1 words (z 23.3) beat letter-scrambles — but that is what
+  any real Loagaeth-structured word does in a Loagaeth stream; the placebo beats the Calls, so it is
+  a property of the language, not hidden placement of the Calls.
+- Conclusion: no reading path hides the Calls. Matches a57 and the diary: the Call letters are
+  gathered from scattered numbered places (different tables), not laid along one path.
+
+## 66. Any trace of later tampering? (module a60)
+
+Two kinds of alteration: one that breaks the text's rules (detectable), one that preserves the local
+statistics (invisible from one copy).
+
+- Bits per leaf: flat (mean 2.16, sd 0.08), no outlier. A replaced or scrambled leaf would show.
+- Doubled-letter rate: two mild high leaves (3a, 7b), the extra doubles spread across many rows, not
+  a localized corruption.
+- Letter profile: 43-48 distinct = the known fourth segment (a15), not a seam.
+- Largest bits jumps: 24b|25a and 25a|25b (the rows→chessboard format border), which matches the
+  diary's "24 leaves written by 18 April 1583". Structural, not tampering.
+- Geometry: 13 of the 20 leaves 29-48 are exactly 1201+1200=2401; the other seven are off by one or
+  two cells (~0.1%, ordinary copying slips) or in the known irregular end 44-48 (leaf 36 is off by 25,
+  the largest). None is scrambled; a shuffle would not leave near-complete grids.
+- Conclusion: no trace of alteration that broke the text's rules; the book is a coherent whole whose
+  seams the record explains. LIMIT: alteration preserving the local statistics (a same-dialect leaf
+  swap, letter substitution keeping the letter-flow) cannot be caught from one transcription; only an
+  independent copy could. The one ground-truth check (Soyga tables, Reeds' generator, a36) shows 3.3%
+  copying error, no systematic tampering.
+
+## 67. Navigation numbers and the Soyga-rule hypothesis (module a61)
+
+- **Nalvage's numbers.** Using the exact letter-by-letter instructions from the diary (TFR 173-174)
+  and checking each decoded cell against the letter it must hold, the best decoding (row-major, or
+  column-major with a one-table offset) lands right only 4-5 of ~24, against 2.2-2.6 expected by
+  chance - within the noise of twelve combinations. The numbers run to 312004, far past a table's
+  2401 cells, so they encode a path whose traversal Dee never wrote down. Not recoverable. Sharpest
+  test yet; confirms a35.
+- **Soyga-style rule.** A Soyga cell is fixed by the cell above plus a function of the cell to the
+  left (Reeds). A Loagaeth cell keeps 3.02 bits of entropy of 3.95 given its above and left
+  neighbours - they remove only 0.94 bits (the ordinary row-flow), not the ~all that a deterministic
+  rule removes. The Loagaeth is not generated by a Soyga neighbour rule.
+
+## 68. The book as a chant, and as a cube (module a62)
+
+- **Chant (REAL).** The rows are tuned to a syllable count: ~17.65 syllables per 49-letter row, spread
+  sd 1.05 - well below the sd 1.70 the same rows give with their letters shuffled (z -24). So the beat
+  is not just the fixed line width; the vowel/consonant arrangement holds it (the strict alternation
+  of a52 is the mechanism). Stress falls on the penultimate syllable far more than any other (452),
+  then the antepenultimate (301), rarely the last (72). The lines carry metre - consistent with a
+  text the record says is intoned ("sounded Logah", the accents of a51). This is the first structural
+  trace of the book's spoken use.
+- **Cube (REFUTED).** 49 leaves x 49 x 49: no readable third axis. The same cell on adjacent leaves
+  shares 0.0016 bits above chance (z ~6 but negligible - the dialect of neighbouring leaves, a43), and
+  no names read down the depth axis (z 0.4). "Every element hath 49 understandings" is not a literal
+  third dimension.
+
+## 69. The metre, developed (module a63)
+
+- The ~17.6-syllable beat is a constant of the main body: segment I 17.58, II 17.71, III 17.89; it
+  loosens only in the end segment V (16.0, the U-register tail).
+- Stress rhythm on the accented tables 2a-5a: stresses fall mostly three or four syllables apart
+  (mean interval 3.75), more regularly than the same number of stresses placed at random (sd 1.79 vs
+  2.64, z about -9 to -11 across samples).
+- So each line has a fixed length in syllables and a recurring stress - metre, not just a count. The
+  first measurable structure of the book's spoken use.
+
+## 70. Finer chant structure — rhyme, syllabary, melody (module a64)
+
+Beyond the metre (a63): no further poetic structure.
+- Rhyme: consecutive lines share their last two letters only a little above shuffled (z ~2). No rhyme scheme.
+- Syllabary: ~441 syllables cover 90% of the text, against ~505 for a Markov-3 surrogate — barely more closed.
+- Vowel vs consonant: the order structure lives in the consonants (~0.71 bits saved against shuffle),
+  not the vowels (~0.13). No vowel melody; the pattern is the consonant skeleton of the names.
+- So the lines are metrical (syllable beat + stress) but not rhymed, and carry their structure in the
+  consonants — consistent with a book of consonant-framed names set to a beat.
+
+## 71. Bridges, refrains, acrostics — all null (module a65)
+
+- Bridges: the 91 governors appear in the tables 1 time (random 0.1), the Heptarchy names 1 time —
+  Poisson noise on long rare strings. The systems stay separate (confirms a25; matches the record,
+  which makes the Loagaeth a different language from the Calls and the Great Table).
+- Refrains: no whole line and no 20-letter line-opening ever repeats. No chant refrain.
+- Acrostics: no recurring name reads down the left or right margin (0 vs ~0.3 expected). (Reading a
+  whole top/bottom row finds names, but that is ordinary row text, not an acrostic.)
+- So the book's structure is the names set in metrical rows (a62-a64); nothing hides in other
+  systems, refrains, or margins.

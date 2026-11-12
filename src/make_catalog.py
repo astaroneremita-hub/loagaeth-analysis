@@ -19,13 +19,6 @@ from a26_letter_names import FOLD, MEANINGS, dee_names
 from a42_repeat_map import part
 
 MASTERS = ["CHASTOR", "CHUSTOR", "ANZACH", "GETH", "ALGETH", "NOCHA", "ADNOCHA", "ACLAX", "OXAD", "CHADAX", "NACHO", "ANTANTOX", "GRADAX"]
-MEANINGS_PT = {
-    "A": "força indomável, pulsante", "B": "recipiente", "C": "conquista coroada", "D": "fisicalidade",
-    "E": "poder de ser", "F": "conexão", "G": "nutrição, recompensa, sustento", "H": "vida",
-    "I": "espiritualidade", "L": "aprendizado", "M": "realização, conclusão", "N": "emergência",
-    "O": "percepção", "P": "fala", "Q": "retidão", "R": "crescimento", "S": "vaso cósmico",
-    "T": "bondade / nutrição cósmica", "U": "lei verdadeira", "X": "suporte", "Z": "movimento",
-}
 # family = the core a name is built on (first match wins)
 ROOTS = [("CHASTOR", ["CHASTOR", "CHUSTOR"]), ("NACHO", ["NACHO"]), ("NOCHA", ["NOCHA", "NACHE", "NACHAP"]),
          ("ACLAX", ["ACLAX"]), ("GETH", ["GETH"]), ("ANZACH", ["ANZACH"]), ("ANTANTOX", ["ANTANTOX"]),
@@ -37,8 +30,26 @@ ALPHA = "ABCDEFGHILMNOPQRSTUVXYZ"
 def run():
     book = base_book()
     keys = sorted(book, key=lambda k: (tnum(k), k))
-    text = {k: "|".join(r for r in book[k] if r) for k in keys}
+    # a49: on the row-written tables and the diamonds the lines of a side are one stream (the end of
+    # a line runs on into the next), so names are counted over the joined lines; on the chessboard
+    # leaves 25b-28b the order of the diagonals is not settled and lines stay apart ("|").
+    joined = lambda k: not ((tnum(k) == 25 and k.endswith("b")) or 26 <= tnum(k) <= 28)
+    text, brk = {}, {}
+    for k in keys:
+        ls = [r for r in book[k] if r]
+        if joined(k):
+            text[k] = "".join(ls)
+            pos, b = 0, set()
+            for r in ls[:-1]:
+                pos += len(r)
+                b.add(pos)
+            brk[k] = b
+        else:
+            text[k], brk[k] = "|".join(ls), set()
     S = "|".join(text[k] for k in keys)
+
+    def show(k, a, b):
+        return "".join(("/" if p in brk[k] and p > a else "") + text[k][p] for p in range(a, b))
     d23 = json.load(open(os.path.join(load.RESULTS, "23_name_discovery.json"), encoding="utf-8"))["A_candidates"]["top"]
     d28 = json.load(open(os.path.join(load.RESULTS, "28_names_deep.json"), encoding="utf-8"))
     stat = {x["name"]: x for x in d23}
@@ -64,7 +75,7 @@ def run():
                         var.append((v, k, i))
         var.sort(key=lambda x: -x[1])
         before, after = Counter(), Counter()
-        ex = []
+        ex, cut = [], []
         for k in keys:
             t = text[k]
             i = t.find(n)
@@ -74,12 +85,16 @@ def run():
                 j = i + len(n)
                 if j < len(t) and t[j] != "|":
                     after[t[j]] += 1
-                if len(ex) < 60:
-                    a, b = t.rfind("|", 0, i) + 1, t.find("|", j)
-                    b = len(t) if b < 0 else b
-                    ex.append((k, t[max(a, i - 12):i], t[j:min(b, j + 12)]))
+                a, b = t.rfind("|", 0, i) + 1, t.find("|", j)
+                b = len(t) if b < 0 else b
+                e = (k, show(k, max(a, i - 12), i), show(k, i, j), ("/" if j in brk[k] else "") + show(k, j, min(b, j + 12)).lstrip("/"))
+                if any(i < p < j for p in brk[k]):
+                    cut.append(e)
+                elif len(ex) < 60:
+                    ex.append(e)
                 i = t.find(n, i + 1)
         step = max(1, len(ex) // 4)
+        ex = ex[::step][:4 - min(2, len(cut))] + cut[:2]
         parts = [0] * 6
         for k, c in zip(keys, per):
             parts[part(k)] += c
@@ -91,9 +106,9 @@ def run():
             "top": sorted(((keys[i], c) for i, c in enumerate(per) if c), key=lambda x: -x[1])[:5],
             "longer": longer[:10], "inside": inside[:4], "var": [(v, k) for v, k, _ in var[:8]],
             "before": before.most_common(4), "after": after.most_common(4), "nb": sum(before.values()), "na": sum(after.values()),
-            "ex": [list(e) for e in ex[::step][:4]],
+            "ex": [list(e) for e in ex], "cut": len(cut),
             "z": st.get("z"), "exp": st.get("markov3_expected"),
-            "letters": [[c, dn.get(FOLD.get(c, c), "?"), MEANINGS_PT.get(FOLD.get(c, c), ""), MEANINGS.get(FOLD.get(c, c), "")] for c in n]})
+            "letters": [[c, dn.get(FOLD.get(c, c), "?"), MEANINGS.get(FOLD.get(c, c), "")] for c in n]})
     data = {"keys": keys, "part": [part(k) for k in keys], "names": names,
             "letters_in_book": sum(len(r) for k in keys for r in book[k])}
     tpl = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "catalog_template.html"), encoding="utf-8").read()

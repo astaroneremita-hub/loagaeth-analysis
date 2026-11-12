@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Catálogo dos nomes</title>
+<title>Names catalogue</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Alegreya+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -26,13 +26,10 @@
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.5}
 .wrap{max-width:1180px;margin:0 auto;padding:0 16px 96px}
-header.top{padding:40px 0 20px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start}
+header.top{padding:40px 0 20px}
 h1{font-family:var(--serif);font-weight:500;font-size:clamp(2rem,5vw,3.1rem);line-height:1.05;margin:0 0 14px;letter-spacing:-.01em}
 .lede{max-width:62ch;margin:0;color:var(--soft);font-size:1.06rem}
 .lede b{color:var(--ink);font-weight:500}
-.lang{display:flex;border:1px solid var(--rule);border-radius:3px;overflow:hidden}
-.lang button{font:inherit;font-size:.9rem;background:none;color:var(--soft);border:0;padding:6px 12px;cursor:pointer}
-.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
 .facts{display:flex;flex-wrap:wrap;gap:8px 28px;margin:22px 0 0;padding:0;list-style:none;color:var(--soft);font-size:.98rem}
 .facts b{font-family:var(--serif);font-size:1.5rem;font-weight:500;color:var(--ink);margin-right:6px}
 
@@ -96,7 +93,6 @@ footer{margin-top:56px;color:var(--soft);font-size:.92rem;max-width:70ch}
 
 @media (max-width:760px){
   :root{--namecol:1fr;--countcol:3.2rem}
-  header.top{grid-template-columns:1fr}
   .spine{grid-template-columns:1fr}.spine .cap{display:none}
   .row{grid-template-columns:1fr auto;row-gap:2px}.row .st{grid-column:1/-1}
   .detail{display:block}.detail>div{margin-bottom:18px}
@@ -112,9 +108,6 @@ footer{margin-top:56px;color:var(--soft);font-size:.92rem;max-width:70ch}
       <h1 data-t="title"></h1>
       <p class="lede" data-t="lede"></p>
       <ul class="facts" id="facts"></ul>
-    </div>
-    <div class="lang" role="group" aria-label="Language">
-      <button type="button" data-lang="pt">Português</button><button type="button" data-lang="en">English</button>
     </div>
   </header>
 
@@ -136,24 +129,8 @@ footer{margin-top:56px;color:var(--soft);font-size:.92rem;max-width:70ch}
 <script>
 const D = /*DATA*/null;
 const T = {
- pt:{title:"Os nomes do Liber Loagaeth",
-  lede:"O livro não corre como prosa: repete <b>nomes</b>, com variações, ao longo das suas 94 faces. Cada linha abaixo é um nome. A faixa à direita é o livro inteiro, da tabela 2 à 48: quanto mais forte a marca, mais vezes o nome está escrito naquela face. Toque num nome para abrir.",
-  fNames:"nomes",fOcc:"ocorrências",fSides:"faces do livro",fLetters:"letras",
-  search:"Buscar um nome ou trecho (ex.: CHAS, NOCH)",all:"Todos",none:"Sem casa",
-  sFam:"Ordenar por família",sCount:"Ordenar por frequência",sAlpha:"Ordem alfabética",sFirst:"Por onde aparece primeiro",
-  capName:"Nome",capCount:"Vezes",leaf1:"Folha 1",
-  parts:["Folha 1","Parte I<br>tabelas 2–12","Parte II<br>13–25a","Parte III<br>25b–33a","Parte IV<br>33b–40","Parte V<br>41–48"],
-  famOf:"Família de",alone:"Nomes sem família",house:"casa",members:n=>n+(n==1?" nome":" nomes"),
-  kind:{master:"",discovered:"descoberto",hidden:"sob outro nome"},
-  letters:"Letra por letra",lettersNote:"Nome da letra segundo a tabela de Dee. O sentido de cada letra é a sua camada de leitura, não vem do manuscrito.",
-  where:"Onde mora",whereNote:(s)=>"Escrito em "+s+" das 94 faces. Faces mais carregadas:",byPart:"Por parte do livro",
-  forms:"Formas maiores",inside:"Contém",variants:"Com uma letra trocada",noForms:"Nenhuma forma maior no catálogo.",
-  near:"O que vem colado",before:"Antes",after:"Depois",
-  pass:"No livro",times:"×",expected:(z,e)=>"Esperado por acaso: "+e+" (z "+z+")",
-  empty:"Nenhum nome com esse trecho. Apague a busca para ver todos.",
-  foot:"Contagens feitas sobre a transcrição de Peterson, com as folhas 25b–28b e os losangos lidos pelo caminho medido neste estudo. Famílias e casas vêm da estatística do livro; os sentidos das letras são atribuição do praticante. Nenhum nome das tabelas tem tradução em fonte histórica."},
  en:{title:"The names of Liber Loagaeth",
-  lede:"The book does not run as prose: it repeats <b>names</b>, with variation, across its 94 sides. Each row below is a name. The band on the right is the whole book, table 2 to 48: the stronger the mark, the more often the name is written on that side. Select a name to open it.",
+  lede:"The book does not run as prose: it repeats <b>names</b>, with variation, across its 94 sides. Each row below is a name. The band on the right is the whole book, table 2 to 48: the stronger the mark, the more often the name is written on that side. Names are counted along the whole side, so one that is cut by the end of a line and continues on the next is counted too. Select a name to open it.",
   fNames:"names",fOcc:"occurrences",fSides:"sides of the book",fLetters:"letters",
   search:"Find a name or a piece of one (e.g. CHAS, NOCH)",all:"All",none:"No house",
   sFam:"Sort by family",sCount:"Sort by frequency",sAlpha:"Alphabetical",sFirst:"By first appearance",
@@ -165,12 +142,12 @@ const T = {
   where:"Where it lives",whereNote:(s)=>"Written on "+s+" of the 94 sides. Heaviest sides:",byPart:"By part of the book",
   forms:"Longer forms",inside:"Contains",variants:"With one letter changed",noForms:"No longer form in the catalogue.",
   near:"What touches it",before:"Before",after:"After",
-  pass:"In the book",times:"×",expected:(z,e)=>"Expected by chance: "+e+" (z "+z+")",
+  pass:"In the book",passNote:c=>"A slash marks the end of a line of the table; the text runs on into the next line."+(c?" This name is split between two lines "+c+(c==1?" time.":" times."):""),times:"×",expected:(z,e)=>"Expected by chance: "+e+" (z "+z+")",
   empty:"No name holds that piece. Clear the search to see them all.",
-  foot:"Counts made on Peterson's transcription, with leaves 25b–28b and the diamonds read along the roads measured in this study. Families and houses come from the statistics of the book; the senses of the letters are the practitioner's attribution. No name of the tables has a translation in a historical source."}
+  foot:"Counts made on Peterson's transcription, with leaves 25b–28b and the diamonds read along the roads measured in this study. On the row-written tables and the diamonds the lines of a side are read as one stream; on leaves 25b–28b each diagonal is read alone, because the order of the diagonals is not settled. Families and houses come from the statistics of the book; the senses of the letters are the practitioner's attribution. No name of the tables has a translation in a historical source."}
 };
-let lang = "pt", house = "all", sort = "fam", query = "", open = null;
-try{ lang = localStorage.getItem("cat-lang") || lang }catch(e){}
+const lang = "en";
+let house = "all", sort = "fam", query = "", open = null;
 const $ = s => document.querySelector(s), el = (t,c,h) => { const e = document.createElement(t); if(c) e.className = c; if(h!=null) e.innerHTML = h; return e };
 const color = n => n.house.startsWith("GETH") ? "var(--geth)" : n.house==="NOCHA" ? "var(--nocha)" : "var(--other)";
 const byName = Object.fromEntries(D.names.map(n => [n.n, n]));
@@ -189,7 +166,7 @@ function bgRects(cw, gap, h){ let x = 0, s = ""; partN.forEach(k => { if(!k) ret
 
 function detail(n){
   const t = T[lang], d = el("div","detail"); d.style.setProperty("--c", color(n));
-  const tiles = n.letters.map(l => `<div class="tile"><b>${l[0]}</b><em>${l[1]}</em><span>${lang==="pt"?l[2]:l[3]}</span></div>`).join("");
+  const tiles = n.letters.map(l => `<div class="tile"><b>${l[0]}</b><em>${l[1]}</em><span>${l[2]}</span></div>`).join("");
   const pmax = Math.max(...n.parts, 1);
   const bars = n.parts.map((c,i) => `<span>${t.parts[i+1].replace("<br>"," · ")}</span><i style="width:${(100*c/pmax).toFixed(1)}%"></i><span>${c}</span>`).join("");
   const tag = ([m,c]) => byName[m] ? `<button type="button" class="tag" data-go="${m}">${m}<small>${c}</small></button>` : `<span class="tag">${m}<small>${c}</small></span>`;
@@ -202,16 +179,14 @@ function detail(n){
       ${n.inside.length?`<h3 style="margin-top:14px">${t.inside}</h3><div class="tags">${n.inside.map(tag).join("")}</div>`:""}
       ${n.var.length?`<h3 style="margin-top:14px">${t.variants}</h3><div class="tags">${n.var.map(tag).join("")}</div>`:""}</div>
     <div class="d-near"><h3>${t.near}</h3><p class="note">${t.before}</p><div class="tags" style="margin-bottom:10px">${pct(n.before,n.nb)}</div><p class="note">${t.after}</p><div class="tags">${pct(n.after,n.na)}</div></div>
-    <div class="d-pass"><h3>${t.pass}</h3>${n.ex.map(e=>`<p class="pass"><small>${e[0]}</small>${e[1]}<mark>${n.n}</mark>${e[2]}</p>`).join("")}</div>`;
+    <div class="d-pass"><h3>${t.pass}</h3>${n.ex.map(e=>`<p class="pass"><small>${e[0]}</small>${e[1]}<mark>${e[2]}</mark>${e[3]}</p>`).join("")}<p class="note" style="margin-top:8px">${t.passNote(n.cut)}</p></div>`;
   d.querySelectorAll("[data-go]").forEach(b => b.onclick = () => { query = ""; $("#q").value = ""; house = "all"; open = b.dataset.go; render(); requestAnimationFrame(() => document.getElementById("r-"+open)?.scrollIntoView({block:"center"})) });
   return d;
 }
 
 function render(){
-  const t = T[lang]; document.documentElement.lang = lang === "pt" ? "pt-BR" : "en";
-  document.title = lang === "pt" ? "Catálogo dos nomes" : "Names catalogue";
+  const t = T[lang];
   document.querySelectorAll("[data-t]").forEach(e => e.innerHTML = t[e.dataset.t]);
-  document.querySelectorAll("[data-lang]").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === lang));
   $("#q").placeholder = t.search; $("#q").setAttribute("aria-label", t.search);
   $("#facts").innerHTML = `<li><b>${D.names.length}</b>${t.fNames}</li><li><b>${D.names.reduce((a,n)=>a+n.c,0).toLocaleString(lang)}</b>${t.fOcc}</li><li><b>${D.keys.length}</b>${t.fSides}</li><li><b>${D.letters_in_book.toLocaleString(lang)}</b>${t.fLetters}</li>`;
   $("#sort").innerHTML = [["fam",t.sFam],["count",t.sCount],["alpha",t.sAlpha],["first",t.sFirst]].map(([v,l]) => `<option value="${v}"${v===sort?" selected":""}>${l}</option>`).join("");
@@ -251,7 +226,6 @@ function render(){
 }
 $("#q").oninput = e => { query = e.target.value; open = null; render(); $("#q").focus() };
 $("#sort").onchange = e => { sort = e.target.value; render() };
-document.querySelectorAll("[data-lang]").forEach(b => b.onclick = () => { lang = b.dataset.lang; try{ localStorage.setItem("cat-lang", lang) }catch(e){} render() });
 render();
 </script>
 </body>

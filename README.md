@@ -139,6 +139,12 @@ src/                          LAYER A - the Loagaeth analysis
   a46_generator.py                three machines write a false book; what they fail to reproduce
   a47_templates.py                templates with a free slot; is there anything beyond five letters of context?
   a48_beyond_five_elsewhere.py    the same limit on the chessboard leaves and the diamonds, with a shape-matched control
+  a49_leaf_and_junctions.py       the two sides of a leaf cell by cell; does the text run on from row to row?
+  a50_chessboard_order.py         leaves 25b-28b: order of the diagonals of each colour (writes data/loagaeth_chessboard_streams.json)
+  a51_word_points.py              the points between words in tables 2a-5a: a gold standard (writes data/loagaeth_word_points.json)
+  a52_origin_of_formulas.py       the imprint of a language (English, Latin) and of a hand making letters at will
+  a53_second_transcription.py     kondor.de against Peterson: independent witness or copy?
+  a54_source_checks.py            tests taken from the diaries: leaf 1 as a table of words, leaf 1 as a key, the nine letter rows, leaf 18
   make_catalog.py                 builds viz/names_catalog.html (template: catalog_template.html)
   make_figures.py             draws every figure in figures/ from the results
   make_viz_data.py            builds viz/loagaeth_viz_data.js for the 3D viewer
@@ -164,6 +170,25 @@ docs/
 ```
 
 ---
+
+## Read this first: what the diaries say the book is
+
+The diaries that record the reception of the book (Sloane 3188; *A True and Faithful Relation*) say
+what it is and how it is to be read, and this study read them late. In short:
+
+- every leaf is 49 × 49 squares; on the first leaf a square holds a word, on the others a letter;
+- on the page, leaves 25b–28b carry two series of letters on alternate squares, turned half round from
+  one another, and leaves 29–48 are the same chessboard with only one series written (the "diamonds"
+  of this repository are how the transcription prints them, not what the page shows);
+- "every letter here bringeth furth the Names of God: But … they are but one Name";
+- the 49 tables answer to "49 voyces, or callings", the Keys that open 48 of them; the first has none;
+- "There is no other reading of the Book, but the appearing of the Ministers and Creatures of God";
+- "Interpret not, till your understanding be furnished."
+
+So the tables are not a discourse awaiting translation, and the measurements below — no sentences,
+words almost never repeated, a text made of recurring names — describe an instrument, as the record
+says, not a message. The full record, with page references and a table setting each statement
+beside what was measured, is in [`docs/WHAT_THE_SOURCES_SAY.md`](docs/WHAT_THE_SOURCES_SAY.md).
 
 ## Everything we discovered
 
@@ -557,9 +582,10 @@ diagonal zones keep their arrows, and the unclear corner of 26a is dimmed.
 
 ### The names, as a catalogue to consult
 
-`viz/names_catalog.html` (built by `src/make_catalog.py`; Portuguese and English) lists the 67
+`viz/names_catalog.html` (built by `src/make_catalog.py`) lists the 67
 recurring names — the master names, the 49 discovered by a23, the ones found under them by a28 —
-one row each, under a shared band that is the whole book from table 2 to 48: the mark on each of
+one row each, counted along the whole side (a name cut by the end of a line is counted too),
+under a shared band that is the whole book from table 2 to 48: the mark on each of
 the 94 sides is as strong as the name is frequent there. Rows are grouped by family and coloured by
 house. Opening a name shows its letters with Dee's letter names (and, labelled as such, the
 practitioner's sense of each letter), the sides where it is heaviest, its count by part of the
@@ -749,6 +775,188 @@ positive control has the same size and shape.
 - **Order of lines:** chessboard leaves lose 0.0085 bits per letter when their lines are shuffled
   (z 2.3); the diamonds lose nothing — but at that shape the test barely sees the Bible either
   (z 1.1–1.6), so for the diamonds it decides nothing.
+
+### Tests taken from the diaries `[a54]`
+
+- **Leaf 1 is a table of words.** The diary says each of its 49 × 49 squares holds a word. In the
+  transcription 25 of the first 30 rows of side 1 have exactly 49 words (the others 47, 48, 50, 54).
+  **CONFIRMED.**
+- **Leaf 1 is not a key to the other leaves, square for square.** For each of the 42 sides with a
+  full grid: does the letter in a cell agree with the first letter, the last letter, any letter or
+  the length of the word in the same square of leaf 1, counting squares as transcribed or from the
+  right hand? 336 tests against leaf 1 with its rows shuffled: mean z −0.1, one above 3 (chance
+  gives 0.5). **REFUTED.**
+- **The nine rows of single letters that close leaf 1** read, under the tables' letter model, at
+  3.84 bits per letter: between the tables (2.80) and the word rows of leaf 1 with their spaces
+  removed (4.79); shuffled letters 6.76. They already hold names of the tables (NACHO, OXAD). They
+  are the passage from the language of words to the language of the tables. **DESCRIPTIVE.**
+- **The eighteenth leaf**, "of the spirites of the earth" — the only leaf whose content the record
+  states — is not set apart from tables 13–24 in letters (sides rank 14th and 23rd of 24 by distance
+  from the average) or in how the others read it. NECHASTOR is written 5 times where 1.3 is the
+  share of a leaf, too few to count. **NOT SHOWN.**
+
+### The points between words: a gold standard that was in the source `[a51]`
+
+In the first tables the manuscript divides words with a point, and Peterson's transcription keeps
+the points and the accents (`a b í m a c h a.v o r t.n a l v m. …`). Our loader kept letters only, so
+every module before this one read those tables as unbroken rows. A reader of this study pointed
+this out. The points cover 2a, 2b, 3a, 3b in full and parts of 4a, 4b, 5a: 232 rows, 1,425 words.
+(The diaries explain why they stop: on 20 June 1583 the words of the book were still "to be
+distinguished" and accented; the work was evidently not carried past the fifth leaf.)
+
+- **Two errors of ours, corrected.** HZEMBL and DAHOXI, listed earlier as "local names", are not
+  words: DAHOXI is `dah.oxi…` across a point, and HZEMBL is the end of one word of leaf 1 and the
+  start of the next (*nethoth zembloh*, *zúnasch zemblagen*; the word is ZEMBL-). Both came from
+  reading across word boundaries. **Withdrawn.**
+- **Almost every word is written once.** Of 1,425 words, 1,383 are different and 95.2% occur a
+  single time. Leaf 1 (Dee's spaced words) 67.5%, the Calls 56.9%, the Bible at the same length
+  8.8%. The words are long (mean 8.0 letters; six to ten is the bulk). **REAL — and the plainest
+  sign so far that the tables are not sentences of a vocabulary: a text that never repeats a word
+  has no lexicon to build sentences from.**
+- **The names are pieces of words.** 57 occurrences of catalogue names fall in the pointed rows:
+  3 are a whole word, 13 begin one, 11 end one, 20 lie inside one, 10 are cut by a point (24.6
+  expected if placed at random, z −4.2). They respect the word boundaries, but they are roots and
+  endings inside longer unique words, not words standing alone.
+- **Rows end where words end.** The last word of a row has 7.4 letters and the first 8.9, like the
+  words inside rows (7.9); rows cutting words blindly would leave pieces of 5.1. So in these tables
+  each row holds whole words; the running-on found by a49 (the start of a row fits the end of the
+  row above) is the fit of one word to the next, not a word broken in two. The 32 names "split
+  between rows" of a49 lie in later tables, which have no points to check them against.
+- **Our word-cutters, scored at last against the manuscript:** the word model trained on leaf 1
+  finds half of the points with one cut in four right (F1 0.335); letter-surprise peaks F1 0.223;
+  random cuts 0.114. Better than chance, far from good: segmentations proposed in this study
+  beyond the pointed tables are guesses of that quality.
+- **Accents.** 59% of the words carry a stress mark (59 carry two). It falls on the next-to-last
+  vowel 391 times, earlier 443 times, on the last vowel 64 times: the stress avoids the end of the
+  word. For reading aloud, the points and accents of each row are in
+  `data/loagaeth_word_points.json`.
+
+### Where the formulas come from: two imprints `[a52]`
+
+- **A language behind them?** Letter models of English (King James Bible) and Latin (Caesar) read
+  the tables at 5.57 and 6.32 bits per letter; leaf 1 at 5.58 and 6.19; the Calls at 5.83 and 6.30.
+  All three lean to English, by 0.5–0.75 bits. But the lean is small beside the distance: Latin
+  itself is read by the English model at 4.98, and English by its own at 2.93. The commonest pairs
+  of the tables (CH, HA, AN, AD, AX, NO) are their own; the pairs that mark English (TH, SH, EA…)
+  are as rare in them as in Latin. **A sound-pattern of its own, with a mild English lean.**
+- **The hand.** Each figure is observed / expected from the text's own letter frequencies:
+
+  | | letter follows itself | returns after one other (ABA) | vowel/consonant alternation | three consonants | two vowels |
+  |---|---|---|---|---|---|
+  | Soyga tables (made by a rule) | 0.90 | 1.08 | 1.02 | 0.98 | 0.93 |
+  | English | 0.44 | 0.74 | 1.28 | 0.46 | 0.62 |
+  | Latin | 0.39 | 0.93 | 1.46 | 0.13 | 0.46 |
+  | the Calls | 0.37 | 1.08 | 1.33 | 0.40 | 0.53 |
+  | leaf 1 | 0.15 | 0.73 | 1.41 | 0.34 | 0.36 |
+  | **tables 2–24** | **0.07** | **0.57** | **1.50** | **0.14** | **0.24** |
+
+  The rule-made tables sit at 1 on every measure, as they should. Languages avoid doubles and
+  clusters somewhat. The Calls behave like a language. The tables go further than any language on
+  every column: almost no letter after itself, fewer returns, the strictest alternation of vowel
+  and consonant, hardly a pair of vowels. Leaf 1 lies between. **REAL: the tables are the most
+  regular, most "pronounceable-by-rule" text of the six — more regular than speech.**
+
+### A second transcription on line `[a53]`
+
+kondor.de publishes the 96 sides. Of the rows our parser could align (846, in rows of equal length
+23,712 letters) one letter differs. There is no n/u or z/x difference, where an independent reading
+of this hand would show hundreds (a36); the word points are on the same seven sides; the 13
+irregular rows of tables 2–24 have the same lengths. **It is a copy of Peterson's text, not an
+independent witness.** An independent reading (Klein's, unpublished; a critical edition is
+announced) remains the one thing that can separate the text from its transcriber.
+
+### The text runs on from row to row `[a49]`
+
+Until here each row was treated as a unit. A letter model reads the first three letters of a row
+given the last three of another row of the same side (tables 2–24, 2,208 junctions):
+
+| the three letters are read after… | bits | rows paired at random | z |
+|---|---|---|---|
+| the row above them (ordinary reading, downwards) | 12.47 | 13.91 | 15.9 |
+| the row below them (reading upwards) | 13.83 | 13.92 | 1.0 |
+| the row above, the new row read backwards (boustrophedon) | 17.84 | 18.01 | 1.4 |
+| the same row on the other side of the leaf | 13.74 | 13.88 | 1.1 |
+| (for scale: three letters in the middle of a row) | 7.05 | | |
+
+- **The end of a row tells the start of the next one below**, on almost every side taken alone (44
+  of 46 sides, gain 0.5–2.8 bits). Not upwards, not backwards, not across the leaf, and not from
+  the last row of a side to the first row of the next (z −0.8). **REAL: the rows of a side are one
+  stream, written downwards; each side starts afresh.**
+- **The rule against doubled letters crosses the break.** Inside rows a letter follows itself 643
+  times where letter frequency predicts 9,250 (93% suppressed). Across the line break: 85 times
+  where the same rows in random order give 161 (47% suppressed, z −7.0). Whoever began a row knew
+  the letter the row before had ended on.
+- **Names straddle the break:** 32 names of the catalogue are split between two rows, against 16.7
+  for rows in random order (z 3.0). 13b, rows 45–46: …AHNOCHAS / TORADCLA… (NOCHASTORA); 7a, rows
+  39–40: …RGEDACHA / STORLABA… (CHASTOR); 12b, rows 48–49: …HACHANZA / CHANTALZ… (ANZACH).
+- **But the break is not invisible.** The junction costs 12.5 bits against 7.1 inside a row: most
+  rows still end where a unit ends (rows end in A, O, H; begin in A, V, N, C, P). The stream runs
+  on, and the row end is a strong place to pause. This is the small order-of-lines signal of a44
+  (z 4.5), now located: it sits at the junctions.
+- **The diamonds run on too.** Their diagonals, in the order found by a15, form a stream: start of
+  a diagonal given the end of the one before, 13.86 bits against 15.26 at random (z 10.6) in
+  diamonds 29–40, and 13.64 against 14.56 (z 6.2) in 41–48; nothing in the opposite order. This
+  confirms the order of the diagonals as well as their direction.
+- **The chessboard leaves are not settled.** On 25b–28b the stored order of the diagonals shows a
+  weak signal both ways (z 2.4 forwards, 3.7 backwards), and colour by colour it changes side: some
+  colours run forwards (25b first colour z 3.0; 27b second colour z 3.9), some backwards (25b
+  second colour, 26b, 27a second colour, 27b first colour: z 1.9–2.6), some show nothing. The order
+  in which the diagonals of each colour follow one another is an open piece of the decoding.
+- **Reading for use:** a name cut by the end of a row continues at the start of the row below. The
+  catalogue (`viz/names_catalog.html`) counts names along the whole side on the row-written tables
+  and the diamonds, and shows the cut with a slash: 51 occurrences of its 67 names are split between
+  two lines. The counts of the earlier modules of this study were made line by line and miss them.
+
+### Leaves 25b–28b: the order of the diagonals `[a50]`
+
+a37 fixed the road of each line on these leaves; the junction test of a49 can now say in which
+order the lines of a colour follow one another. For each colour, the lines are read in the stored
+order and in the opposite one, and the end of each line is asked to predict the start of the next.
+
+- **Two colours settle alone:** 25b first colour and 27b second colour, both read ↘, run in the
+  stored order — from the top-right corner towards the bottom-left (z 3.2 and 3.5; opposite order
+  −0.5 and −0.4). Checked with two signs the choice did not use: the same letter on both sides of a
+  junction once in 85 where random order gives 6.2 (z −2.5), and four catalogue names split between
+  two diagonals where random order gives 0.3 (z 6.6). The rejected order shows neither. **REAL.**
+- **Pooled by road** (one colour alone has about 43 junctions): the ↘ colours run in the stored
+  order (6 blocks, z 3.0 — carried by the two above; the other four show nothing by themselves);
+  the ↖ colours run in the **opposite** order (5 blocks, z 3.2; stored order −0.2); the ↙ colours
+  also in the opposite order (2 blocks, z 3.0).
+- **Check on the blocks that did not settle alone** (451 junctions): read by that rule, the same
+  letter meets itself across a junction 21 times where random order gives 36 (z −2.9); with the
+  rule reversed, 33 (z −0.6). Split names add nothing there (3 against 3.3). **PROBABLE.**
+- **What it means on the page.** A ↖ colour whose diagonals follow one another from the bottom-left
+  corner to the top-right is exactly a ↘ stream on a page turned half round. On 25b, 27b, 28a and
+  28b one colour is ↘ and the other ↖: one current is read with the leaf as it lies, the other
+  with the leaf turned upside down. (a49 found a faint half-turn likeness between the two sides of
+  a leaf; the two observations are independent and point the same way, and neither is strong.)
+- **Seen on the page.** The images of Sloane 3189 show it directly: on ff.33v–36v every square is
+  filled, one series tilted about 45° and the series on the alternate squares turned half round
+  from it, so that the leaf is turned to read each. What the junctions made probable is how the
+  leaves are written. **CONFIRMED on the manuscript** (orientation; the order of the lines within a
+  series still rests on the statistics above).
+- **Unsettled:** the row blocks (26a rows 1–8, 27a rows 1–28), the zones of 26a's first colour, and
+  the ↘ colours of 26b, 27a, 28a, 28b taken alone. `data/loagaeth_chessboard_streams.json` holds
+  each block in the order found, with its status; the rest of the study still reads these leaves
+  line by line.
+
+### The two sides of a leaf `[a49]`
+
+Side b against side a, cell by cell, on the 13 leaves with two full 49 × 49 grids (tables 2–24),
+against side a paired with side b of other leaves.
+
+| side b is… | equal letters, true pairs | other pairs | p |
+|---|---|---|---|
+| in the same cell | 8.89% | 8.74% | 0.25 |
+| mirrored left–right (what shows through the paper) | 8.58% | 8.39% | 0.15 |
+| upside down | 8.96% | 8.75% | 0.15 |
+| half-turned | 8.94% | 8.40% | 0.002 |
+| transposed | 8.50% | 8.48% | 0.45 |
+
+- **No copying, mirroring or show-through** between the two sides of a leaf. **REFUTED.**
+- **A half turn stands out, faintly:** 10 of 13 leaves above the average of their mismatched pairs,
+  half a percentage point in all (p 0.002; 0.01 after correcting for five transforms). Too small to
+  build on and from one transcription only. **SUGGESTIVE — to be repeated on a second transcription.**
 
 ### A ruler for the scribe: the Soyga tables at the back of the manuscript `[a36]`
 

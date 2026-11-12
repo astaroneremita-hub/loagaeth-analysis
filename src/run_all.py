@@ -75,6 +75,9 @@ import a62_chant_and_cube
 import a63_metre
 import a64_finer_chant
 import a65_bridges_refrains_acrostics
+import a66_seven_and_columns
+import a67_presiding_names
+import a68_dahahoxom_home
 import make_figures
 import make_viz_data
 
@@ -146,6 +149,9 @@ MODULES = [
     ("63_metre", a63_metre),
     ("64_finer_chant", a64_finer_chant),
     ("65_bridges_refrains_acrostics", a65_bridges_refrains_acrostics),
+    ("66_seven_and_columns", a66_seven_and_columns),
+    ("67_presiding_names", a67_presiding_names),
+    ("68_dahahoxom_home", a68_dahahoxom_home),
 ]
 
 

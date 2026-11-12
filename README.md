@@ -190,6 +190,9 @@ words almost never repeated, a text made of recurring names — describe an inst
 says, not a message. The full record, with page references and a table setting each statement
 beside what was measured, is in [`docs/WHAT_THE_SOURCES_SAY.md`](docs/WHAT_THE_SOURCES_SAY.md).
 
+**For the complete summary and how to use the names in practice, see
+[`docs/FINDINGS_AND_PRACTICE.md`](docs/FINDINGS_AND_PRACTICE.md).**
+
 ## Everything we discovered
 
 Run `src/run_all.py` for the live numbers. Every claim below beat a null model or is true

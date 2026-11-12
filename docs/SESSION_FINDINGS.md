@@ -830,3 +830,36 @@ Beyond the metre (a63): no further poetic structure.
   whole top/bottom row finds names, but that is ordinary row text, not an acrostic.)
 - So the book's structure is the names set in metrical rows (a62-a64); nothing hides in other
   systems, refrains, or margins.
+
+## 72. The 7x7 frame and a column onset-signature (module a66)
+
+- **No 7-fold rhythm.** Word boundaries fall on multiples of 7 slightly below chance (11.6 vs 12.5%);
+  names start evenly across positions mod 7; the vowel autocorrelation peaks at lag 3, not 7. 49=7x7
+  is the frame of the grid, not a rhythm in the text. (The lag-3 peak is the 3-syllable stress foot
+  of a63.)
+- **Column effect = line onset only.** Vowel share per column swings in the first five columns
+  (col 1 vowel-heavy 0.57, col 2 consonant-heavy 0.25) and is flat from column five on (~0.39-0.42).
+  The z 25 is real but it is a characteristic line-opening shape, not a deep vertical template. Rows
+  begin with a preferred shape, then position stops predicting the letter - the rows as a stream
+  (a49) with a signature onset.
+
+## 73. The presiding name of each table (module a67)
+
+For every leaf, the recurring name most over-represented relative to the whole book (Poisson p). Most
+leaves have one at p < 0.01, and the map is coherent with the houses and territories: OXAD on 2-6;
+the NOCHA house (NACHO, NOCHA, ADNOCHA) on 7-22 (NOCHA on 12-14 and 19-22 at p~0); the GETH house
+(ACLAX, GETH, ALGETH) on 17-48 (ACLAX ~7x on 29, GETH on 24-48); ANZACH 6.1x on 25a; CHASTOR around
+32. This is a per-table working list - the name most at home on each leaf - not a claim about a
+table's "true" minister; the record names a minister for no leaf except 18 (earth spirits).
+
+## 74. Where the book holds DAHAHOXOM (module a68)
+
+DAHAHOXOM is written nowhere (a57). But if it is gathered from the book's scattered letters - the
+method the record uses for the Calls - its material is not spread evenly. The overlapping 3/4-letter
+fragments of the whole name put 28% of their density in the opening tables (leaves 2-6, only 12% of
+the book; z 3.0 vs freq-weighted random 9-letter names). The distinctive core AHOXOM - the part the
+practitioner actually heard - puts 37% there (z 4.5); the more distinctive the piece, the stronger
+the concentration. The peak is leaf 2a, and table 2 is the first table a Call opens ("the second,
+with you is the first"). No random or master name tested concentrates in the opening like this. This
+locates where the text holds the name's letters; it proves nothing about the entity and is offered,
+read-only, as a pointer for the practice.

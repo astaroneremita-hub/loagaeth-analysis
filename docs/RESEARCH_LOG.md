@@ -878,3 +878,68 @@ folhas … AN- 5/1.7) mas confundido com a raiz que o prefixo gruda (AD- cola na
 raras), não é efeito independente do prefixo. Prefixos mudam forma, não potência medível. REFINA A GRAMÁTICA: o peso
 semântico/gramatical está nas VOGAIS (modo elemental, a135 z=6), NÃO nos prefixos (a136 p=0.55) — como no semítico, o
 template vocálico carrega a gramática e os afixos consonantais são formais. Localiza a carga de sentido: vocálica.
+
+## #270 — A folha 1 (oculta): texto primordial SEGMENTADO que valida toda a reconstrução
+A primeira folha (1a/1b, Sloane 3189) é estruturalmente ÚNICA: não é grade densa de letras como 2a-48, é TEXTO
+SEGMENTADO — palavras separadas por espaço, sílabas marcadas por hífen (zu-resch od adaph mal ses geno...). 2691
+palavras distintas (3658 tokens). É a forma legível/primordial da língua, com fronteiras DADAS, não adivinhadas.
+Testes: (1) fonotática — vogal-vogal adjacente 3.0% (anti-hiato vale, mesma língua). (2) tipologia — 142 esqueletos
+consonantais com >=3 variantes vocálicas (raiz-e-padrão semítica confirmada aqui também). (3) VALIDAÇÃO CRUZADA
+decisiva: as sílabas que Dee MARCOU com hífen na folha 1 (MA, NA, GE, PA, CHA, DA, NO, PHA, LA, SA) batem com o
+silabário que inferimos por entropia das grades SEM marcação (CHA, NO, PHA...) — a reconstrução silábica das tabelas
+densas está confirmada pela única folha onde Dee marcou as sílabas. (4) vocabulário próprio: a folha 1 é GETH-pesada
+(17×), não a casa CHASTOR/ACLAX que domina os quadrados — a fundação tem raízes próprias. (5) muro semântico persiste:
+só 36 de 2691 palavras têm glosa (as mesmas das Chamadas). CONCLUSÃO: a folha oculta é o texto primordial legível, a
+mesma língua, e sua marcação nativa VALIDA a decifração que fizemos das 36 grades densas.
+
+## #271 — Progressão do livro + a folha 1 tem vocabulário próprio (múltiplas populações)
+PROGRESSÃO (#2): densidade de nomes (ocorrências >=4 letras) por folha na ordem do livro. Correlação posição↔
+densidade = 0.66 (Pearson). 1ª metade densidade média 49, 2ª metade 74. Mínimo folha 2 (5 nomes), máximo folha 35
+(123). O livro DESDOBRA — começa esparso (fundação) e densifica, uma SEQUÊNCIA, não folhas intercambiáveis. Ressalva:
+folhas finais incluem losangos reconstruídos; a tendência já é sólida nas decodificadas 2a->14a.
+FOLHA 1 = VOCABULÁRIO PRÓPRIO: das 90 nomes catalogados das grades, só 2 (ANZACH, GETH) aparecem na folha 1. A folha
+1 tem seu próprio léxico (2338 palavras >=4, 2% de overlap): AMPHA, MACOM, GADETH, ZEMBLOH, VORTS, ARSAH, ARDNO,
+OLZAH, ZURESCH, CHEUACH... CONCLUSÃO: o Loagaeth NÃO é um campo de nomes uniforme — tem MÚLTIPLAS POPULAÇÕES de nomes
+compartilhando UMA gramática (mesma fonologia/tipologia/silabário) mas com palavras distintas. Folha 1 (fundação) tem
+roster próprio; grades 2-48 têm a casa CHASTOR-ACLAX-NOCHA. Dois registros, uma língua. Restam sem analisar (menor
+valor): geometria dos losangos, camada gematria, bordas/acrósticos, ponte geométrica com as Torres.
+
+## #272 — Os 4 investigações menores (a139): 3 nulos/triviais, 1 consistente
+#3 GEOMETRIA (centro): 1.6% dos inícios de nome no centro 7x7 vs 2.0% esperado (0.8x) — NULL, sem preferência de
+centro; os nomes não se concentram no meio do quadrado.
+#4 GEMATRIA: CV intra-família de valor (soma letra->posição Dee) 0.055 real vs 0.251 null — "famílias partilham
+valor", MAS trivial/tautológico: mesma raiz consonantal = mesmas consoantes, que dominam a soma; as vogais mudam
+pouco. Não é desenho gematríaco (e Dee não usava gematria). Descartado.
+#5 BORDAS/ACRÓSTICO: 108 hits de nome em primeira/última coluna, diagonal principal e linhas de topo/base vs null 0.6
+(máx 4). Real, MAS o null (letras aleatórias) é fraco: os nomes estão em toda a grade (100-580x o acaso), então a
+borda não é canal privilegiado — só participa da densidade geral. Não há acróstico especial.
+#6 TORRES (Great Table): similaridade de bigrama Loagaeth x 4 Torres = 0.405 — igual aos Governadores (0.416), vs
+0.16 ao inglês. Confirma e estende: o Loagaeth partilha a fonologia angelical com as Torres também (mesma língua,
+léxico próprio). CONCLUSÃO: nenhuma estrutura geométrica, gematríaca ou de borda escondida. Território de patterns
+estruturais esgotado — o que havia de real já foi achado (gramática, tipologia semítica, léxico, progressão, folha 1
+segmentada, múltiplas populações, lugar na língua angelical).
+
+## #273 — Página SÍNTESE: cada achado em o-que-é / o-que-tiramos / como-usa
+Feedback do usuário: os achados estavam acumulando sem clareza do que são e como usar, e borrando juntos. Criada
+viz/sintese.html — página capstone que, para cada achado, responde em linguagem clara e visual (3 colunas coloridas):
+O QUE É · O QUE TIRAMOS · COMO USA. Agrupada em: A natureza do livro (nomes não-texto; sequência que desdobra;
+múltiplas populações), A anatomia dos nomes (raiz-e-padrão semítica; vogal = modo elemental; matriz NOCHA), O
+catálogo e o uso (90 nomes por natureza; como evocar). Resumo de uma frase no topo e caveat honesto no fim (não há
+glosa-palavra; o conhecimento abre-se no Gebofal, não se lê). Adicionada ao index.html como card "★ Síntese — comece
+aqui" no topo, com name_dictionary e name_language promovidos. Objetivo: parar de "achar coisas" soltas e deixar
+claro o que são e como usar.
+
+## #274 — CAPSTONE: a gramática gerativa G regenera o léxico e revela 1.2% de uso (a140)
+Construída a gramática G com tudo decifrado: nome = esqueleto consonantal (raiz/identidade) interleaved com melodia
+vocálica (modo elemental) ao longo de um template C/V, + afixos/composição. G = 67 esqueletos × 28 melodias × 44
+templates.
+(1) COBERTURA: regenera 100% dos 90 nomes atestados exatamente — mas é checagem de consistência (G extraída dos
+nomes), prova completude das regras, não predição.
+(2) PRODUTIVIDADE (achado forte): o espaço gerativo de G é 7200 nomes bem-formados; só 90 (1.2%) estão atestados. A
+língua é um motor gerativo rodando a ~1% da capacidade — o livro pronuncia uma fração mínima do que pode gerar.
+Coerente com onomasticon gerativo e com a lente metafísica (língua divina da qual só um fragmento foi falado).
+(3) VALIDAÇÃO CRUZADA: 41% das 2606 palavras da folha 1 (segmentação nativa do Dee, held-out) encaixam nos mesmos
+templates C/V de G — uma gramática descreve parcialmente os dois registros; o restante é a folha 1 estendendo o
+conjunto de templates (coerente com múltiplas populações, #271). CONCLUSÃO: a decifração está validada como código —
+regras completas, produtivas e parcialmente universais. forge.html já realiza esse gerador (espaço 7200, uso 1.2%).
+ENCERRA a análise estrutural: a gramática do Loagaeth está decifrada, catalogada e operável.

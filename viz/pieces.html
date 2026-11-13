@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Peças da Língua — Loagaeth</title>
+<style>
+:root{--bg:#f7f6f1;--card:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8;
+ --fogo:#c0392b;--terra:#6b8e23;--ar:#2f80c0;--agua:#1f7a6b;--vel:#7a7a7a}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13120c;--card:#1e1d15;--ink:#ece9da;--mut:#9a988a;--line:#322f27;--fogo:#e06a5a;--terra:#a7c65a;--ar:#6ab6e0;--agua:#5ac4b0;--vel:#9a9a9a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 system-ui,sans-serif;max-width:900px;margin:0 auto;padding:16px 18px 60px}
+h1{font-size:22px;font-weight:700;margin:0 0 2px}
+.sub{color:var(--mut);margin:0 0 12px;font-size:13px}
+h2{font-size:15px;font-weight:700;margin:24px 0 4px}
+.legend{font-size:12px;margin:6px 0 10px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:2px;margin:0 3px 0 10px;vertical-align:middle}
+.d-Fogo{background:var(--fogo)}.d-Terra{background:var(--terra)}.d-Ar{background:var(--ar)}.d-Agua{background:var(--agua)}.d-\\?{background:var(--vel)}
+.grid{display:flex;flex-wrap:wrap;gap:6px}
+.pc{border:2px solid var(--line);border-radius:9px;padding:5px 9px;background:var(--card);font-family:ui-monospace,monospace}
+.pc.Fogo{border-color:var(--fogo)}.pc.Terra{border-color:var(--terra)}.pc.Ar{border-color:var(--ar)}.pc.Agua{border-color:var(--agua)}.pc\\?{border-color:var(--vel)}
+.pc .big{font-weight:700;font-size:15px}
+.pc .n{color:var(--mut);font-size:11px;font-family:system-ui}
+.pc .ex{color:var(--mut);font-size:10px;font-family:system-ui;display:block;margin-top:1px}
+.note{color:var(--mut);font-size:12px;margin:8px 0}
+.tabs{display:flex;gap:8px;margin-bottom:8px}
+.tab{padding:5px 14px;border:1px solid var(--line);border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;background:var(--card)}
+.tab.on{background:var(--ink);color:var(--bg)}
+</style>
+</head>
+<body>
+<h1>Peças da Língua</h1>
+<p class="sub">Os tijolos que montam todo nome: <b>esqueletos consonantais</b> (quem é o poder) e <b>melodias vocálicas</b> (o modo elemental). Cor = elemento.</p>
+<div class="legend"><b>Elementos:</b><span class="dot d-Ar"></span>Ar (mente)<span class="dot d-Terra"></span>Terra (corpo)<span class="dot d-Fogo"></span>Fogo (vontade)<span class="dot d-Agua"></span>Água (emoção)<span class="dot d-?"></span>velado</div>
+<div class="tabs"><span class="tab on" data-t="sk">Esqueletos (raízes)</span><span class="tab" data-t="ml">Melodias (modos)</span></div>
+<div id="out"></div>
+<script>
+var D=null,TAB='sk',PAGE=0,PER=120;
+fetch('pieces.json').then(r=>r.json()).then(d=>{D=d;draw()}).catch(()=>{document.getElementById('out').innerHTML='Abra por http://localhost:8860/';});
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{TAB=t.dataset.t;PAGE=0;document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===t));draw()});
+function pager(total){
+ var pages=Math.ceil(total/PER);if(pages<=1)return'';
+ return '<div style="margin:12px 0;display:flex;gap:8px;align-items:center">'+
+  '<button class="tab pprev" '+(PAGE<=0?'disabled':'')+'>‹ anterior</button>'+
+  '<span class=note>página '+(PAGE+1)+' de '+pages+' — itens '+(PAGE*PER+1)+'–'+Math.min((PAGE+1)*PER,total)+' de '+total+'</span>'+
+  '<button class="tab pnext" '+(PAGE>=pages-1?'disabled':'')+'>próxima ›</button></div>';
+}
+function wire(total){
+ var pages=Math.ceil(total/PER);
+ document.querySelectorAll('.pprev').forEach(b=>b.onclick=()=>{if(PAGE>0){PAGE--;draw()}});
+ document.querySelectorAll('.pnext').forEach(b=>b.onclick=()=>{if(PAGE<pages-1){PAGE++;draw()}});
+}
+function draw(){
+ var h='',items,total,note;
+ if(TAB==='sk'){items=D.skeletons;total=D.total_skeletons||items.length;
+  note='<b>'+total+'</b> esqueletos consonantais no livro inteiro (todos, por frequência). As raízes/identidades de poder. Cor pela natureza das consoantes.';}
+ else{items=D.melodies;total=D.total_melodies||items.length;
+  note='<b>'+total+'</b> melodias vocálicas atestadas (de 780 possíveis) = os modos. A vogal carrega o elemento: A→Terra, O→Ar, I→Fogo.';}
+ var slice=items.slice(PAGE*PER,(PAGE+1)*PER);
+ h+='<p class=note>'+note+'</p>'+pager(items.length)+'<div class=grid>';
+ slice.forEach(x=>{
+  if(TAB==='sk')h+='<div class="pc '+x.el+'"><span class=big>'+x.s.split('').join('·')+'</span> <span class=n>'+x.n+'×</span>'+(x.ex&&x.ex.length?'<span class=ex>'+x.ex.join(', ')+'</span>':'')+'</div>';
+  else h+='<div class="pc '+x.el+'"><span class=big>'+x.m.split('').join('·')+'</span> <span class=n>'+x.n+'×</span></div>';
+ });
+ h+='</div>'+pager(items.length);
+ document.getElementById('out').innerHTML=h;
+ wire(items.length);
+}
+</script>
+</body>
+</html>

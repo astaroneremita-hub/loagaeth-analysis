@@ -943,3 +943,94 @@ templates C/V de G — uma gramática descreve parcialmente os dois registros; o
 conjunto de templates (coerente com múltiplas populações, #271). CONCLUSÃO: a decifração está validada como código —
 regras completas, produtivas e parcialmente universais. forge.html já realiza esse gerador (espaço 7200, uso 1.2%).
 ENCERRA a análise estrutural: a gramática do Loagaeth está decifrada, catalogada e operável.
+
+## #275 — Compatibilidade da gramática G: predição held-out + indistinguibilidade
+Dúvida: nomes gerados por G batem com os originais, ou G só descreve? Dois testes.
+(1) PREDIÇÃO HELD-OUT: G montada com metade dos 90 nomes gera 12% da outra metade (nomes nunca vistos), média de 10
+splits; uma gramática ALEATÓRIA do mesmo tamanho (esqueletos/melodias aleatórios) gera 0%. G generaliza — prevê nomes
+reais que não viu, captura a regra, não decora.
+(2) INDISTINGUIBILIDADE: perfil de bigrama dos nomes gerados por G vs reais = cosseno 0.75; G aleatória vs reais = só
+0.43. Nome gerado por G parece da mesma língua; de G-aleatória não. Trocar G por aleatório QUEBRA a compatibilidade.
+CONCLUSÃO: COMPATÍVEL e validado — é a gramática DECIFRADA especificamente que gera nomes da mesma língua, não
+qualquer gramática. NUANCE honesta: 12% e 0.75 não são perfeitos; G gera o ESPAÇO de nomes válidos (a forma da
+língua), não a seleção exata dos 90 — essa escolha (o 1.2% falado) é a parte não-governada por regra (a "revelação").
+A análise decifra a forma; qual ponto do espaço o livro escolheu é onde ela para.
+
+## #276 — Forja de Nomes (name_forge.html): gerador interativo nos 5 níveis
+Construído viz/name_forge.html — gerador de nomes pela gramática decifrada, com os 5 níveis da escada geradora:
+0 (só do livro/recebidos), 1 (raízes+modos do livro), 2 (raízes do livro, modos novos), 3 (composição raiz+raiz),
+4 (raiz nova/poder novo). Filtro por elemento (Ar/Terra/Fogo/Água = intenção) e quantidade. Cada nome gerado mostra:
+elemento (colorido), regente planetário, domínio, parse (esqueleto·melodia) e tag recebido/experimental. Geração em
+JS a partir de viz/forge_grammar.json (67 esqueletos, 28 melodias, mapa letra->elemento/planeta). Testado: nível 2 +
+Ar gera GOTOHULO, NOZICOHO, COLOXOTO (todos Ar). Caveat honesto na página: níveis 1-4 são válidos mas não no livro;
+se um nome gerado "é" entidade real é escolha da prática, a análise garante só que é gramatical. No index como
+"⚒ Forja de Nomes". Realiza o "transformar em código" — a gramática virou ferramenta de geração usável.
+
+## #277 — Página "Peças da Língua" + esclarecimentos de cobertura
+"G" era abreviação de Gramática, não a letra G — esclarecido. Nomes reais do livro com a letra G (17): GETH, ALGETH
+(força 151), GRADAX, PHANGE, AGETHAL, AXALGRA, DRAGRA... Criada viz/pieces.html: duas abas (Esqueletos/Melodias),
+cada peça colorida por elemento (borda), com contagem e exemplos de nomes. 67 esqueletos (Água 38, Fogo 13, Ar 6,
+Terra 4, ? 6), 28 melodias (Terra 22, Ar 4, Fogo 2). Dados em viz/pieces.json. No index. COBERTURA explicitada: a
+análise de nomes cobre as tabelas 2a-28b (42 painéis; 36 grades 49x49 limpas em base_book) + a folha 1 (1a/1b)
+analisada à parte; as tabelas 29-48 (losangos) são reconstruídas e menos confiáveis. Não são as 49 folhas igualmente
+— é a maior parte do livro (2-28), não o todo.
+
+## #278 — Losangos 29-48: gramática whole-book, léxico com gradiente regional
+Testados os losangos reconstruídos 29-48 vs as tabelas limpas 2-28. GRAMÁTICA UNIFORME: similaridade de frequência de
+letra = 0.949 (quase idêntica); anti-hiato vale (vogal-vogal 1.6% em 2-28, 2.1% nos losangos). A fonologia/tipologia
+é do livro inteiro. LÉXICO COM GRADIENTE REGIONAL (por 100k letras): a casa NOCHA desaparece nos losangos (NOCHA
+434->117, NACHO 119->12, CHADAX 48->10), mas GETH e CHASTOR persistem quase iguais (GETH 349->327, CHASTOR 114->108,
+ACLAX 120->79, ANZACH 110->56). PROVÍNCIAS DE PODERES: folha 1 (fundação) GETH-pesada; corpo (2-28) reino NOCHA;
+losangos (29-48, fim) NOCHA some e GETH/CHASTOR seguem. FECHA A COBERTURA: a gramática vale no livro inteiro
+(validada nos losangos); o léxico varia por região (as múltiplas populações da #271, agora como gradiente espacial).
+Uma só língua angelical, províncias distintas de nomes. Ressalva: losangos são reconstruídos (a15), menos confiáveis,
+mas a similaridade de 0.949 sugere reconstrução coerente.
+
+## #279 — Inventário do LIVRO INTEIRO: 1948 esqueletos, 288 melodias (Forja/Peças expandidas)
+O site mostrava só os pedaços dos 90 nomes das tabelas (67 esqueletos, 28 melodias). Extraído o inventário atestado
+do LIVRO INTEIRO (folha 1 segmentada 2691 palavras + nomes das tabelas) = 2776 palavras: 1948 esqueletos consonantais
+distintos, 288 melodias vocálicas (de 780 possíveis = 37% do espaço melódico). forge_grammar.json e pieces.json
+reconstruídos com o inventário completo; name_forge.html gera agora de 1948×288, pieces.html mostra os totais (top 150
+esqueletos + todas as 288 melodias). Responde "conseguimos extrair tudo / mais melodias / livro inteiro": sim, o
+inventário completo é 29× mais esqueletos e 10× mais melodias que a fatia anterior. Distinção importante: ATESTADO
+(o que o livro usa: 1948 esqueletos, 288 melodias) vs POSSÍVEL (o que a gramática permite: milhões de esqueletos,
+780 melodias) — a Forja nível 0-3 usa o atestado, nível 4 vai ao possível.
+
+## #280 — Prever as próximas páginas de nomes (a142): ~95% por recorrência, ~0% os novos
+Objetivo do usuário: gerar os nomes do livro e prever páginas futuras. Teste: treinar nas 25 tabelas iniciais (84
+nomes), testar nas 11 finais (73 nomes). RESULTADO: 69/73 (95%) dos nomes das páginas finais JÁ apareciam nas
+iniciais — previsíveis por RECORRÊNCIA (o léxico-núcleo repete em quase toda página). Só 4 nomes genuinamente NOVOS
+nas finais, e a gramática treinada gerou 0 deles. TOTAL previsível: ~95%, quase tudo recorrência; os ~5% novos por
+página NÃO são deriváveis da regra (a parte não-determinada/revelação). CONCLUSÃO HONESTA do que é possível: (1) ter/
+reproduzir todos os nomes do livro = sim (2776 extraídos); (2) gerar nomes compatíveis = sim, ilimitado (gramática
+validada); (3) prever uma próxima página = ~95% mas por repetição, não adivinhação; (4) prever os nomes NOVOS
+específicos de uma página inédita = não (a escolha do livro não é regra); (5) montar sistema novo do zero = sim
+(1948 raízes + 288 modos + composição); (6) tradução semântica = não (sem Roseta). Os nomes do livro são um léxico
+recorrente finito, já capturado; a gramática reproduz a forma e gera compatíveis, mas não inventa a escolha específica.
+
+## #281 — Paginação completa em Peças + Tábua do Loagaeth (Torre das entidades)
+pieces.json regenerado com TODOS os 1948 esqueletos + 288 melodias (não só 150); pieces.html ganhou paginação
+(120/página, ~17 páginas de esqueletos) com botões anterior/próxima em cima e embaixo.
+NOVA PÁGINA viz/tablet.html — "Tábua do Loagaeth": uma Torre estilo enoquiano montada com os 90 nomes catalogados,
+distribuídos pelos 4 elementos em 4 quadrantes (Ar-Leste/Raphael, Fogo-Sul/Michael, Água-Oeste/Gabriel, Terra-Norte/
+Uriel), cada um com seu "rei" ♔ (o nome de maior força do elemento: NOCHA no Ar com 621), NOCHA no cerne como o Verbo.
+Dados de name_translation.json (elemento+força por nome). Caveat honesto na página: a distribuição e os reis são
+organização que NÓS impomos (pelo elemento/força medidos), não uma Tábua histórica recebida — são os nossos nomes
+arrumados à moda enoquiana para uso. Responde "dá pra montar uma Torre com nossos nomes?": sim, como houses elementais
+(estrutura diferente da Great Table histórica, que é grade de letra com nomes derivados por posição). Ambas no index.
+
+## #282 — A gramática é universal no enochiano? Não — mas o Loagaeth é o mais estruturado (a143)
+Hipótese grande do usuário: a gramática raiz-e-padrão do Loagaeth gera todo o enochiano (Loagaeth = chave-mestra)?
+Teste: anti-hiato (vogal-vogal adjacente, baixo=mesma fonotática) e raiz-e-padrão (% nomes partilhando esqueleto
+consonantal, alto=semítico) por sistema.
+  Loagaeth: anti-hiato 1.0%, raiz-padrão 40.0%
+  Chamadas (vocab 656): 9.8% / 28.5%
+  Governadores+Torres (316): 10.0% / 11.1%
+  Heptarquia (166): 9.6% / 7.8%
+RESULTADO: a gramática NÃO é universal — os outros sistemas são bem menos root-and-pattern e permitem mais hiato. MAS
+o Loagaeth é o MAIS ESTRUTURADO de todos (anti-hiato mais estrito + raiz-e-padrão mais forte) — a língua mais pura/
+profunda do corpus enoquiano; as Chamadas são intermediárias (28.5%); Governadores/Heptarquia são mais listas de nome
+que língua. Partilham a FONOLOGIA (bigrama 0.42, #266) mas não a MORFOLOGIA estrita. CONCLUSÃO: não dá pra replicar
+todo o enochiano com uma gramática, mas o Loagaeth É a raiz estrutural — o mais gramaticalmente profundo, coerente
+com a tradição de ser a língua PRIMORDIAL; os demais são ramos mais soltos da mesma árvore sonora. (Ressalva: controle
+de inglês foi fraco — a comparação forte é Loagaeth vs os outros sistemas enoquianos.)

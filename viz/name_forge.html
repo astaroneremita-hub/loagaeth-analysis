@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forja de Nomes — Loagaeth</title>
+<style>
+:root{--bg:#f7f6f1;--card:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8;--nm:#8a2f7d;
+ --fogo:#c0392b;--terra:#6b8e23;--ar:#2f80c0;--agua:#1f7a6b;--vel:#7a7a7a}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13120c;--card:#1e1d15;--ink:#ece9da;--mut:#9a988a;--line:#322f27;--nm:#d66ac4;--fogo:#e06a5a;--terra:#a7c65a;--ar:#6ab6e0;--agua:#5ac4b0;--vel:#9a9a9a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 system-ui,sans-serif;max-width:860px;margin:0 auto;padding:16px 18px 60px}
+h1{font-size:22px;font-weight:700;margin:0 0 2px}
+.sub{color:var(--mut);margin:0 0 14px;font-size:13px}
+.ctrl{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:12px;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.ctrl label{font-size:13px;font-weight:600}
+select,button{font:inherit;font-size:14px;padding:5px 10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+button{background:var(--nm);color:#fff;border:0;font-weight:700;cursor:pointer;padding:7px 18px}
+.lvl{font-size:12px;color:var(--mut);margin:-4px 0 12px}
+.name{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 15px;margin:8px 0;display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+.name .n{font-size:22px;font-weight:700;font-family:ui-monospace,monospace}
+.el{font-weight:700;font-size:11px;border-radius:5px;padding:1px 7px;color:#fff}
+.el.Fogo{background:var(--fogo)}.el.Terra{background:var(--terra)}.el.Ar{background:var(--ar)}.el.Agua{background:var(--agua)}
+.name .meta{font-size:13px;color:var(--mut)}
+.name .parse{font-family:ui-monospace,monospace;font-size:13px;color:var(--nm)}
+.tag{font-size:10px;font-weight:700;border:1px solid var(--line);border-radius:5px;padding:1px 6px;text-transform:uppercase}
+.tag.real{color:var(--terra)}.tag.exp{color:var(--mut)}
+.warn{background:var(--card);border:1px dashed var(--line);border-radius:10px;padding:8px 12px;font-size:12px;color:var(--mut);margin:10px 0}
+</style>
+</head>
+<body>
+<h1>Forja de Nomes</h1>
+<p class="sub">Gera nomes pela gramática decifrada — raiz (quem) + melodia vocálica (modo elemental). Cada um vem com sua natureza.</p>
+<div class="ctrl">
+ <span><label>Nível:</label> <select id="lvl">
+   <option value="0">0 — só do livro (recebidos)</option>
+   <option value="1">1 — raízes + modos do livro</option>
+   <option value="2" selected>2 — raízes do livro, modos novos</option>
+   <option value="3">3 — composição (raiz+raiz)</option>
+   <option value="4">4 — raiz nova (poder novo)</option>
+ </select></span>
+ <span><label>Elemento:</label> <select id="el">
+   <option value="">qualquer</option>
+   <option value="Ar">Ar — mente/palavra</option>
+   <option value="Terra">Terra — corpo/matéria</option>
+   <option value="Fogo">Fogo — vontade</option>
+   <option value="Agua">Água — emoção</option>
+ </select></span>
+ <span><label>Quantos:</label> <select id="qt"><option>5</option><option>10</option><option>20</option><option>50</option><option>100</option><option>500</option><option>1000</option></select></span>
+ <button id="go">Forjar ⚒</button>
+</div>
+<div class="lvl" id="lvldesc"></div>
+<div id="out"></div>
+<div class="warn" id="warn"></div>
+<script>
+var G=null;
+fetch('forge_grammar.json').then(r=>r.json()).then(d=>{G=d;boot()}).catch(()=>{document.getElementById('out').innerHTML='Abra por http://localhost:8860/';});
+var LVLD={
+ '0':'Os 90 nomes que Dee recebeu. Reais pela tradição.',
+ '1':'Raiz e modo ambos do livro, recombinados. Gramática fechada do Loagaeth.',
+ '2':'Raízes do livro em modos (melodias) nunca falados. O mesmo poder, modo novo. Experimental defensável.',
+ '3':'Duas raízes fundidas (como NOCHA+CHASTOR). Poderes conhecidos combinados.',
+ '4':'Esqueleto consonantal inteiramente novo = um poder novo. Pura criação estruturada.'
+};
+function rnd(a){return a[Math.floor(Math.random()*a.length)]}
+function elementOf(w){var c={};for(var ch of w){var e=(G.letters[ch]||{}).e||'?';c[e]=(c[e]||0)+1}var b='?',bn=0;for(var k in c)if(c[k]>bn){bn=c[k];b=k}return b}
+function planetOf(w){var c={};for(var ch of w){var p=(G.letters[ch]||{}).p;if(p&&p!=='-'){c[p]=(c[p]||0)+1}}var b='-',bn=0;for(var k in c)if(c[k]>bn){bn=c[k];b=k}return b}
+function weave(skel,mel){ // interleave C V C V ... (anti-hiato garantido)
+ var out='',mi=0;
+ for(var i=0;i<skel.length;i++){out+=skel[i];if(mi<mel.length){out+=mel[mi++]}}
+ out+=mel.slice(mi); return out;
+}
+function vowelsFor(el,n){ // melody biased to target element's vowel
+ var pref={Ar:'O',Terra:'A',Fogo:'I',Agua:'A'}[el];var pool=G.vowels;var m='';
+ for(var i=0;i<n;i++){ m+= (pref&&Math.random()<0.6)?pref:rnd(pool); }
+ return m;
+}
+function randSkel(n){var m='';for(var i=0;i<n;i++)m+=rnd(G.consonants);return m}
+function genOne(lvl,el){
+ var skel,mel,parse;
+ if(lvl==='0'){var nm=rnd(G.real_names);return{name:nm,parse:nm,real:true}}
+ if(lvl==='1'){skel=rnd(G.skeletons);mel=rnd(G.melodies.filter(m=>Math.abs(m.length-skel.length)<=1))||rnd(G.melodies);}
+ else if(lvl==='2'){skel=rnd(G.skeletons);mel=el?vowelsFor(el,skel.length):Array.from({length:skel.length},()=>rnd(G.vowels)).join('');}
+ else if(lvl==='3'){var a=rnd(G.skeletons),b=rnd(G.skeletons);skel=a+b;mel=el?vowelsFor(el,skel.length):Array.from({length:skel.length},()=>rnd(G.vowels)).join('');parse=a+'+'+b;}
+ else{var ln=2+Math.floor(Math.random()*3);skel=randSkel(ln);mel=el?vowelsFor(el,ln):Array.from({length:ln},()=>rnd(G.vowels)).join('');}
+ if(!mel)mel=rnd(G.vowels);
+ var name=weave(skel,mel);
+ return{name:name,parse:parse||(skel.split('').join('·')+' / '+mel),real:false};
+}
+function draw(list){
+ document.getElementById('out').innerHTML=list.map(x=>{
+  var el=elementOf(x.name),pl=planetOf(x.name),dom=G.domains[el]||'';
+  var tag=x.real?'<span class="tag real">recebido</span>':'<span class="tag exp">experimental</span>';
+  return '<div class=name><span class=n>'+x.name+'</span><span class="el '+el+'">'+el+'</span>'+tag+
+   '<span class=meta>'+dom+' · regente '+pl+'</span><span class=parse>'+x.parse+'</span></div>';
+ }).join('');
+}
+function boot(){
+ document.getElementById('warn').textContent='Honesto: nível 0 são recebidos; 1-4 são gerados pela gramática (válidos, mas não no livro). Se um nome gerado "é" uma entidade real ou criação bem-formada, é escolha da tua prática — a análise garante só que é gramatical.';
+ function upd(){document.getElementById('lvldesc').textContent=LVLD[document.getElementById('lvl').value]}
+ document.getElementById('lvl').onchange=upd; upd();
+ document.getElementById('go').onclick=()=>{
+  var lvl=document.getElementById('lvl').value,el=document.getElementById('el').value,qt=+document.getElementById('qt').value;
+  if(lvl==='0'){ // só do livro: no máximo os reais que existem
+   var pool=G.real_names.slice();for(var i=pool.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=pool[i];pool[i]=pool[j];pool[j]=t;}
+   var r0=pool.map(n=>({name:n,parse:n,real:true}));if(el)r0=r0.filter(o=>elementOf(o.name)===el);
+   draw(r0.slice(0,qt));return;
+  }
+  var out=[],tries=0,seen={},maxtry=qt*200+5000;
+  while(out.length<qt && tries<maxtry){tries++;var o=genOne(lvl,el);
+   if(seen[o.name])continue;
+   if(el && elementOf(o.name)!==el)continue;
+   seen[o.name]=1;out.push(o);}
+  draw(out);
+ };
+ document.getElementById('go').click();
+}
+</script>
+</body>
+</html>

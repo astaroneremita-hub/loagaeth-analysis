@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Torre do Loagaeth — grade de nomes</title>
+<style>
+:root{--bg:#f7f6f1;--card:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8;--hl:#8a2f7d;--hl2:#d85a30}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13120c;--card:#1b1a13;--ink:#ece9da;--mut:#9a988a;--line:#322f27;--hl:#d66ac4;--hl2:#e08a4a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.4 system-ui,sans-serif;max-width:1050px;margin:0 auto;padding:14px 16px 50px}
+h1{font-size:21px;font-weight:700;margin:0 0 2px}
+.sub{color:var(--mut);margin:0 0 10px;font-size:13px}
+.ctrl{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:10px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.ctrl label{font-weight:600}select,button,input{font:inherit;padding:5px 9px;border-radius:7px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+button{background:var(--hl);color:#fff;border:0;font-weight:700;cursor:pointer;padding:6px 16px}
+.wrap{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start}
+.gridbox{overflow:auto;border:1px solid var(--line);border-radius:8px;background:var(--card);padding:6px}
+table{border-collapse:collapse}
+td{width:20px;height:20px;text-align:center;font-family:ui-monospace,monospace;font-size:12px;color:var(--mut);padding:0;border:1px solid transparent}
+td.hl{background:var(--hl);color:#fff;font-weight:700;border-radius:3px}
+td.hl2{background:var(--hl2);color:#fff;font-weight:700}
+aside{width:220px;flex-shrink:0}
+.names{max-height:460px;overflow:auto;border:1px solid var(--line);border-radius:8px;background:var(--card);padding:6px}
+.ni{padding:3px 7px;border-radius:6px;cursor:pointer;font-family:ui-monospace,monospace;font-size:13px}
+.ni:hover,.ni.on{background:var(--hl);color:#fff}
+.note{color:var(--mut);font-size:12px;margin-top:6px}
+</style>
+</head>
+<body>
+<h1>Torre do Loagaeth</h1>
+<p class="sub">Uma grade quadrada de letras, igual às tabelas do livro, com os nomes <b>embutidos e visíveis</b>. Clique num nome pra achá-lo na grade.</p>
+<div class="ctrl">
+ <span><label>Lado:</label> <select id="size"><option>21</option><option selected>25</option><option>33</option><option>49</option></select></span>
+ <span><label>Fonte:</label> <select id="src"><option value="real">nomes do livro</option><option value="gen">gerados (gramática)</option></select></span>
+ <span><label>Elemento:</label> <select id="el"><option value="">qualquer</option><option>Ar</option><option>Terra</option><option>Fogo</option><option>Agua</option></select></span>
+ <button id="go">Montar Torre</button>
+ <input id="find" placeholder="procurar nome..." style="width:150px">
+</div>
+<div class="wrap">
+ <div class="gridbox"><div id="grid"></div></div>
+ <aside><div class="note" id="cnt"></div><div class="names" id="names"></div></aside>
+</div>
+<script>
+var G=null,CELLS=[],PLACED=[],N=25;
+fetch('forge_grammar.json').then(r=>r.json()).then(d=>{G=d;boot()}).catch(()=>{document.getElementById('grid').innerHTML='Abra por http://localhost:8860/';});
+function rnd(a){return a[Math.floor(Math.random()*a.length)]}
+function elementOf(w){var c={};for(var ch of w){var e=(G.letters[ch]||{}).e||'?';c[e]=(c[e]||0)+1}var b='?',bn=0;for(var k in c)if(c[k]>bn){bn=c[k];b=k}return b}
+function weave(skel,mel){var o='',mi=0;for(var i=0;i<skel.length;i++){o+=skel[i];if(mi<mel.length)o+=mel[mi++]}return o+mel.slice(mi)}
+function genName(el){var s=rnd(G.skeletons);var m=el?biased(el,s.length):Array.from({length:s.length},()=>rnd(G.vowels)).join('');return weave(s,m)}
+function biased(el,n){var p={Ar:'O',Terra:'A',Fogo:'I',Agua:'A'}[el],m='';for(var i=0;i<n;i++)m+=(p&&Math.random()<0.6)?p:rnd(G.vowels);return m}
+function build(){
+ N=+document.getElementById('size').value;var src=document.getElementById('src').value,el=document.getElementById('el').value;
+ CELLS=Array.from({length:N},()=>Array(N).fill(null));PLACED=[];
+ // candidate names
+ var pool;
+ if(src==='real'){pool=G.real_names.slice();if(el)pool=pool.filter(w=>elementOf(w)===el);}
+ else{pool=[];var guard=0;while(pool.length<N*3&&guard++<N*40){var g=genName(el);if((!el||elementOf(g)===el)&&g.length<=N)pool.push(g);}}
+ for(var i=pool.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=pool[i];pool[i]=pool[j];pool[j]=t;}
+ // place names horizontally, non-overlapping-ish
+ for(var pi=0;pi<pool.length;pi++){var w=pool[pi];if(w.length>N)continue;var placed=false;
+  for(var tr=0;tr<40&&!placed;tr++){var r=Math.floor(Math.random()*N),c=Math.floor(Math.random()*(N-w.length+1));
+   var ok=true;for(var k=0;k<w.length;k++){var cur=CELLS[r][c+k];if(cur!==null&&cur!==w[k]){ok=false;break}}
+   if(ok){var cells=[];for(var k=0;k<w.length;k++){CELLS[r][c+k]=w[k];cells.push([r,c+k])}PLACED.push({w:w,cells:cells});placed=true;}
+  }
+ }
+ // fill blanks with letters (anti-hiato: alternate)
+ var ALL=G.consonants.concat(G.vowels);
+ for(var r=0;r<N;r++)for(var c=0;c<N;c++)if(CELLS[r][c]===null){
+  var left=c>0?CELLS[r][c-1]:'';var leftV=G.vowels.indexOf(left)>=0;
+  CELLS[r][c]=leftV?rnd(G.consonants):rnd(ALL);
+ }
+ render();
+}
+function render(sel){
+ var h='<table>';
+ for(var r=0;r<N;r++){h+='<tr>';for(var c=0;c<N;c++){var id='c'+r+'_'+c;h+='<td id="'+id+'">'+CELLS[r][c]+'</td>';}h+='</tr>';}
+ h+='</table>';document.getElementById('grid').innerHTML=h;
+ document.getElementById('cnt').textContent=PLACED.length+' nomes embutidos na grade '+N+'×'+N;
+ var seen={},list=PLACED.filter(p=>{if(seen[p.w])return false;seen[p.w]=1;return true});
+ document.getElementById('names').innerHTML=list.map(p=>'<div class="ni" data-w="'+p.w+'">'+p.w+'</div>').join('');
+ document.querySelectorAll('.ni').forEach(n=>n.onclick=()=>{highlight(n.dataset.w);document.querySelectorAll('.ni').forEach(x=>x.classList.toggle('on',x===n))});
+}
+function highlight(w){
+ document.querySelectorAll('td.hl,td.hl2').forEach(t=>t.classList.remove('hl','hl2'));
+ PLACED.filter(p=>p.w===w).forEach((p,idx)=>p.cells.forEach(cc=>{var e=document.getElementById('c'+cc[0]+'_'+cc[1]);if(e)e.classList.add(idx===0?'hl':'hl2')}));
+}
+function boot(){
+ document.getElementById('go').onclick=build;
+ document.getElementById('find').oninput=e=>{var v=e.target.value.toUpperCase().trim();if(v)highlight(v);};
+ document.getElementById('size').onchange=build;document.getElementById('src').onchange=build;document.getElementById('el').onchange=build;
+ build();
+}
+</script>
+</body>
+</html>

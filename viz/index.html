@@ -37,6 +37,7 @@ code{font-family:ui-monospace,monospace;background:rgba(138,109,47,.12);padding:
 <a class="card" href="name_finder.html"><div class="t">Busca de nomes</div><div class="d">procura qualquer palavra em Loagaeth e Torres</div></a>
 <a class="card" href="names_catalog.html"><div class="t">Catálogo de nomes</div><div class="d">lista dos nomes descobertos</div></a>
 <a class="card" href="name_language.html"><div class="t">A Língua dos Nomes</div><div class="d">a gramática decifrada: raízes, afixos, matriz NOCHA, léxico</div></a>
+<a class="card" href="name_dictionary.html"><div class="t">Dicionário de Nomes</div><div class="d">tradução do léxico: parse, elemento, domínio, força, contexto</div></a>
 <a class="card" href="loagaeth_3d.html"><div class="t">Loagaeth 3D</div><div class="d">visão tridimensional das tabelas</div></a>
 </div>
 <script>
@@ -55,6 +56,7 @@ var EN={h1:'Loagaeth — panels',sub:'Every visualizer of the analysis, in one p
  'name_finder.html':['Name search','search any word in Loagaeth and Watchtowers'],
  'names_catalog.html':['Name catalogue','list of discovered names'],
  'name_language.html':['The Language of Names','the deciphered grammar: roots, affixes, NOCHA matrix, lexicon'],
+ 'name_dictionary.html':['Dictionary of Names','lexicon translation: parse, element, domain, force, context'],
  'loagaeth_3d.html':['Loagaeth 3D','three-dimensional view of the tables']}};
 var PT={};[...document.querySelectorAll('.card')].forEach(a=>{var h=a.getAttribute('href');PT[h]=[a.querySelector('.t').textContent,a.querySelector('.d').textContent]});
 var PTtxt={h1:document.getElementById('h1').textContent,sub:document.getElementById('sub').textContent,warn:document.getElementById('warn').innerHTML};

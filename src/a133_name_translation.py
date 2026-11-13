@@ -14,6 +14,38 @@ from collections import Counter
 
 import load
 from a85_entity_attributes import load_letters
+from a22_robustness_and_depth import base_book
+
+
+def _square_grids():
+    book = base_book()
+    out = []
+    for k in book:
+        g = ["".join(r) for r in book[k] if r]
+        if len(g) == 49 and all(len(x) == 49 for x in g):
+            out.append(g)
+    return out
+
+
+def _lines(g):
+    R = 49
+    o = [g[r] for r in range(R)]
+    o += ["".join(g[r][c] for r in range(R)) for c in range(R)]
+    for s in range(R):
+        o.append("".join(g[s + k][k] for k in range(R - s)))
+        if s:
+            o.append("".join(g[k][s + k] for k in range(R - s)))
+    return o
+
+
+def _table_counts(names):
+    grids = _square_grids()
+    texts = ["\n".join(_lines(g)) for g in grids]
+    rtexts = ["\n".join(l[::-1] for l in _lines(g)) for g in grids]
+    out = {}
+    for w in names:
+        out[w] = sum(1 for i in range(len(grids)) if w in texts[i] or w in rtexts[i])
+    return out, len(grids)
 
 ROOTS = ["ANTANTOX", "CHASTOR", "GRADAX", "CHADAX", "ANZACH", "NOCHA", "NACHO", "ACLAX", "PHANGE", "GETH"]
 DOMAIN = {"Fogo": "will / force / spirit", "Terra": "matter / body / the fixed",
@@ -56,8 +88,10 @@ def run():
     L = load_letters()
     ent = json.load(open(load.ROOT + "/viz/entity_data.json", encoding="utf-8"))["entities"]
     nl = json.load(open(load.ROOT + "/viz/name_language.json", encoding="utf-8"))
-    core = [x[0] for x in nl["core_lexicon"]]
-    tables_of = {x[0]: x[1] for x in nl["core_lexicon"]}
+    allnames = json.load(open(load.ROOT + "/viz/name_field.json", encoding="utf-8"))
+    tables_of, ntab = _table_counts(allnames)
+    # order by ubiquity
+    core = sorted(allnames, key=lambda w: -tables_of.get(w, 0))
 
     # affix glosses: element each affix's letters add
     def morph_gloss(m):

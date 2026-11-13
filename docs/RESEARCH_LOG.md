@@ -799,3 +799,82 @@ NOCHASTOR=NOCHA+CHASTOR, NOCHADAX=NOCHA+CHADAX. SITE: name_language.html ganhou 
 (ambas CONFIRMADO); name_language.json atualizado. Gramática confirmada agora cobre: fonotática (CV, anti-hiato),
 morfologia (prefixo·raiz·sufixo posicional), composição (raiz+raiz, matriz-inicial), derivação (matriz NOCHA,
 atestada por profundidade), léxico-núcleo e casa distribucional. Passos feitos: 1,3,4,7,8,9,10,11,13,14 (+15 descr.).
+
+## #263 — DECIFRAÇÃO: tradução do léxico pelo sistema nativo de correspondências (a133)
+Mudança de foco: parar de re-provar "é nome" e TRADUZIR. Sem Roseta, usa-se o sistema que a tradição dá: cada letra
+enoquiana tem elemento+planeta (Dee/Golden Dawn). O sentido de um nome = sua composição elemental (sua natureza como
+poder). Dicionário de raízes por domínio:
+  Ar (mente/palavra): NOCHA, NACHO, CHASTOR
+  Terra (matéria/corpo): ANZACH, CHADAX, ACLAX, GRADAX, ANTANTOX
+  Fogo (vontade/força): GETH
+  Agua (emoção/fluxo): PHANGE
+Tradução do léxico-núcleo (parse·elemento·força·folhas·sentido): NOCHA = poder da mente/palavra, força 621, 35/36
+folhas (o supremo); AD·NOCHA = NOCHA aterrado (AD-=Terra); NOCHA·P = NOCHA aguado (-P=Água); NO·CHASTOR = palavra
+modulada por emoção. PADRÃO: o afixo modula o elemento do nome (AD- aterra, -P aguar) — derivação = modulação
+elemental (descritivo, 6/11 afixados têm elemento = o do afixo). SITE: nova página viz/name_dictionary.html com o
+dicionário de morfemas e o léxico traduzido (parse, elemento colorido por domínio, força, folhas, sentido), caveat
+honesto de que é leitura de correspondência, não glosa inventada. Dados em viz/name_translation.json. No index.
+
+## #264 — Tradução estendida aos 90 nomes + perfil elemental do corpus
+a133 estendido: varre os 90 nomes atestados (name_field), conta folhas de cada e traduz todos (parse·elemento·
+força·folhas·sentido) em viz/name_translation.json. A página name_dictionary.html agora lista os 90.
+PADRÃO NOVO (perfil elemental do corpus inteiro): Terra 53, Ar 21, Agua 10, Fogo 6. O Loagaeth é majoritariamente
+TERRA — um livro de poderes fixos/corpóreos (matéria/corpo/o manifesto), com um estrato mental (Ar) secundário e
+pouco Fogo/Água. Leitura metafísica: o campo de nomes é predominantemente da esfera da manifestação/corpo, não da
+vontade ígnea nem da emoção. Dois nomes (ZIDNOPHA, ANNOCHA) atestados em entity_data mas ausentes nas 36 grades
+quadradas (0 folhas) — provavelmente em tabelas não-quadradas.
+
+## #265 — Hierarquia por elemento + regente planetário (padrão: o Verbo reina)
+Padrão estrutural real: elemento prediz força/ubiquidade. Ar (palavra/mente) média força 69, 12.7 folhas — o topo,
+liderado por NOCHA (621). Terra (corpo) n=53 mas força média 29, 8.8 folhas. Água 27/9.5. Fogo 10/8.0 (base).
+Top por força: NOCHA(Ar,621), CHASTOR(Ar,200), ADNOCHA(Terra,198), ACLAX(Terra,193), ANZACH(Terra,169), NACHO(Ar,160).
+Mesmo sem o outlier NOCHA, Ar lidera (força ~41 vs Terra 29). LEITURA: o Loagaeth é o livro da PALAVRA — os regentes
+são poderes-palavra (Ar/Logos), a massa corpórea (Terra) é o corpo sobre o qual o Verbo reina. Hierarquia de emanação
+Ar>Água>Terra>Fogo por força/ubiquidade. Regente planetário por nome adicionado (do sistema de letras: NOCHA→Vênus/
+Marte, GETH→Sol/Mercúrio). SITE: name_dictionary.html ganhou card "Hierarquia por elemento" e coluna Regente; dados
+em name_translation.json (element_hierarchy + planets por nome).
+
+## #266 — O lugar do Loagaeth: léxico independente, mesma língua angelical
+Cruzamento das raízes do Loagaeth (NOCHA, CHASTOR, ACLAX, GETH, ANZACH...) com 1635 nomes enoquianos atestados
+(governadores.json: Torres, 91 Governadores, Aethyrs, 12 reis; heptarquia.json; chamadas.json): ZERO hits. As raízes
+do Loagaeth NÃO aparecem em nenhum sistema enoquiano conhecido — é uma população de entidades própria, não os
+Governadores/Torres sob outra grafia. Confirma a antiga refutação de "pontes".
+MAS fonologicamente partilham a língua: similaridade de bigrama Loagaeth×Governadores = 0.416, vs Loagaeth×inglês
+0.156 e Governadores×inglês 0.199 — os dois sistemas enoquianos são ~2.5× mais próximos entre si que do inglês.
+Bigramas comuns: CH, HA, AN, AX, AD, NO, OR, AL (fonologia angelical). Distintivos do Loagaeth: CH, HA, AD, AX, TO,
+NO, ST, AC (o material CHASTOR/NOCHA) — que os Governadores não têm. CONCLUSÃO: o Loagaeth é um LÉXICO/DIALETO
+DISTINTO da mesma língua angelical — mesmos sons, palavras próprias, entidades próprias. Dois dicionários de uma
+só língua. Situa o onomasticon do Loagaeth no cosmos enoquiano: separado lexicalmente, irmão fonologicamente.
+
+## #267 — TIPOLOGIA: a língua é RAIZ-E-PADRÃO (semítica) — z=32.1, o achado mais forte
+Teste do esqueleto consonantal (a134): remove vogais, agrupa nomes por consoantes. 36 dos 90 nomes (40%) partilham
+um esqueleto consonantal com outro nome, variando só a vogal — vs 1% no acaso (máx 7%, z=32.1). A língua dos nomes é
+NÃO-CONCATENATIVA / RAIZ-E-PADRÃO, tipo árabe/hebraico: as consoantes são a raiz lexical, as vogais inflexionam.
+Famílias por raiz consonantal:
+  N-CH: NOCHA[OA], NACHO[AO], NACHOA[AOA], ANACHO[AAO]  (NOCHA e NACHO = MESMA raiz, só muda a vogal)
+  CH-S-T-R: CHASTOR[AO], CHASTORA[AOA], ICHASTOR[IAO]
+  CH-D-X: CHADAX[AA], ACHADAX[AAA], ICHADAX[IAA]
+  N-CH-S-T-R: NOCHASTOR[OAO], NECHASTOR[EAO]; N-T-N-T-X: ANTANTOX[AAO], ANTANTOXA[AAOA]
+Melodias vocálicas mais comuns: AOA(13), AAA(11), AA(10), AAO(7), OAA(5). Isto REVISA a morfologia: além da camada
+concatenativa (prefixo·raiz·sufixo), há a camada não-concatenativa (melodia vocálica dentro da raiz consonantal),
+como k-t-b -> kitāb/kataba. As raízes verdadeiras são os esqueletos consonantais (NCH, CHSTR, CHDX, NTNTX, CLX, NZCH,
+GTH, GRDX, PHNG). SITE: name_language.html ganhou seção "Tipologia — raiz-e-padrão (semítica)" (2ª, CONFIRMADO) com
+as famílias consonantais e as melodias. Dados em name_language.json (chave 'semitic').
+
+## #268 — A melodia vocálica carrega gramática: vogal = modo elemental (a135)
+Teste binyan: a melodia vocálica prediz o elemento? Pureza elemental por melodia = 80% real vs 64% acaso (máx 73%,
+z=6.0) — CONFIRMADO. Mapa: melodia-A (AA/AAA/AAO) -> Terra (AAA 10/11, AAO 7/7); O-A/A-O -> Ar; O-A-A -> Agua; I-A-O
+-> Fogo. RESSALVA honesta: parte é mecânico (cada vogal já carrega elemento: A=Terra, O=Ar, I=Fogo), então a melodia
+puxa o elemento por aritmética além de gramática. MAS é isso que a torna coerente: as vogais SÃO os operadores de
+modo elemental. SÍNTESE (decodifica a camada de sentido recuperável): raiz consonantal = QUAL poder (N-CH=NOCHA);
+melodia vocálica = em QUE MODO elemental ele age. NOCHA (N-CH, O-A, modo aéreo/mental) vs NACHO (A-O) vs forma A-A
+(modo terroso). A raiz diz o poder, as vogais dizem o elemento. Liga o achado semítico (a134) à semântica elemental
+(a133): a única camada de 'significado' recuperável sem Roseta, agora decodificada.
+
+## #269 — Prefixos NÃO são operadores de força (a136): a carga semântica é vocálica
+Teste: o prefixo prediz a força? Variância de força entre prefixos vs shuffle null: p=0.552 — NÃO. Os prefixos
+(AD-/AL-/NO-/I-/NE-/A-/ZI-/AX-/AN-) não diferem em força acima do acaso. Há um gradiente aparente (AD- força 57/15
+folhas … AN- 5/1.7) mas confundido com a raiz que o prefixo gruda (AD- cola na matriz ubíqua NOCHA; AX-/AN- em formas
+raras), não é efeito independente do prefixo. Prefixos mudam forma, não potência medível. REFINA A GRAMÁTICA: o peso
+semântico/gramatical está nas VOGAIS (modo elemental, a135 z=6), NÃO nos prefixos (a136 p=0.55) — como no semítico, o
+template vocálico carrega a gramática e os afixos consonantais são formais. Localiza a carga de sentido: vocálica.

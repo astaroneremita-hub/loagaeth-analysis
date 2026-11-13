@@ -1,0 +1,1 @@
+{"alpha_loag": "ABCDEFGHIKLMNOPQRSTUVWXYZ", "alpha_wt": "ABCDEFGHILMNOPRSTUVXYZ", "alpha_common": 22, "cos_letter_wt": 0.896, "cos_letter_eng": 0.521, "cos_bigram_wt": 0.551, "cos_bigram_eng": 0.175, "hiato_loag": 1.4, "hiato_wt": 13.6, "hiato_eng": 0.0, "rootpat_loag": 40.0, "rootpat_wt": 16.7, "shared_names": 0}

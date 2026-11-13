@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Língua-Mãe — parentesco Loagaeth × Torres</title>
+<style>
+:root{--bg:#f7f6f1;--card:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8;--ok:#2f8a52;--no:#c0392b;--ac:#8a6d2f}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13120c;--card:#1e1d15;--ink:#ece9da;--mut:#9a988a;--line:#322f27;--ok:#6ad68f;--no:#e06a5a;--ac:#d6b96a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 system-ui,sans-serif;max-width:860px;margin:0 auto;padding:16px 18px 50px}
+h1{font-size:22px;font-weight:700;margin:0 0 2px}
+.sub{color:var(--mut);margin:0 0 14px;font-size:13px}
+.lead{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 15px;margin-bottom:14px}
+.lvl{border:1px solid var(--line);border-left-width:5px;border-radius:10px;padding:10px 14px;margin:8px 0;background:var(--card)}
+.lvl.ok{border-left-color:var(--ok)}.lvl.no{border-left-color:var(--no)}
+.lvl h3{margin:0 0 3px;font-size:15px}
+.badge{font-size:11px;font-weight:700;border-radius:5px;padding:1px 8px;color:#fff;margin-left:8px}
+.badge.ok{background:var(--ok)}.badge.no{background:var(--no)}
+.nums{font-size:13px;color:var(--mut);margin-top:4px}
+.nums b{color:var(--ink)}
+.tree{text-align:center;font-family:ui-monospace,monospace;font-size:13px;margin:14px 0;color:var(--mut)}
+.tree b{color:var(--ac)}
+.warn{background:var(--card);border:1px dashed var(--line);border-radius:10px;padding:9px 13px;font-size:12px;color:var(--mut);margin-top:12px}
+</style>
+</head>
+<body>
+<h1>A Língua-Mãe</h1>
+<p class="sub">Loagaeth e as Torres de Vigia são parentes? A prova, nível por nível — o que partilham e o que não.</p>
+<div class="lead" id="lead"></div>
+<div class="tree">
+A LÍNGUA ANGELICAL (alfabeto + sons)<br>
+│<br>
+├──────────────┬──────────────<br>
+<b>LOAGAETH</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>TORRES</b><br>
+(raiz-padrão,&nbsp;&nbsp;(mais soltas,<br>
+anti-hiato)&nbsp;&nbsp;&nbsp;&nbsp;léxico próprio)
+</div>
+<div id="levels"></div>
+<div class="warn">Honesto: isto prova PARENTESCO (mesma língua-mãe), não DERIVAÇÃO. Testamos de 9 jeitos se as Torres estão dentro do Loagaeth (substring, reverso, anagrama, traço, 6-grama, embaralhado, nomes sagrados, cifra de salto, palavras da folha 1) — todos negativos. Não há um dentro do outro. São irmãs do mesmo alfabeto/sons angelicais, com gramáticas e nomes próprios — como inglês e polonês no alfabeto latino.</div>
+<script>
+fetch('parentesco.json').then(r=>r.json()).then(d=>build(d)).catch(()=>{document.getElementById('levels').innerHTML='Abra por http://localhost:8860/';});
+function build(d){
+ document.getElementById('lead').innerHTML='<b>Veredito:</b> Loagaeth e Torres são <b>dois idiomas diferentes escritos no mesmo alfabeto angelical</b>. Partilham os <span style="color:var(--ok)">sons</span> (letra e bigrama ~3× mais perto entre si que do inglês), mas <span style="color:var(--no)">não</span> as regras nem o léxico. Parentesco real; derivação não.';
+ var L=[
+  {n:'1. Alfabeto',ok:true,t:'Mesmo conjunto de letras angelicais.',num:'Loagaeth e Torres: '+d.alpha_common+' letras em comum. Praticamente o mesmo alfabeto.'},
+  {n:'2. Fonologia — frequência de letra',ok:true,t:'As letras aparecem nas mesmas proporções.',num:'Semelhança Loagaeth×Torres <b>'+d.cos_letter_wt+'</b> vs ×inglês '+d.cos_letter_eng+'.'},
+  {n:'2. Fonologia — bigramas (pares de letra)',ok:true,t:'Os pares de letra seguem o mesmo padrão.',num:'Semelhança Loagaeth×Torres <b>'+d.cos_bigram_wt+'</b> vs ×inglês '+d.cos_bigram_eng+' (3× mais perto entre si).'},
+  {n:'3. Fonotática — regra do hiato',ok:false,t:'REGRA DIFERENTE. O Loagaeth proíbe vogais juntas; as Torres permitem.',num:'Vogal-vogal: Loagaeth <b>'+d.hiato_loag+'%</b> (estrito) vs Torres <b>'+d.hiato_wt+'%</b> (10× mais).'},
+  {n:'4. Morfologia — raiz-e-padrão',ok:false,t:'O Loagaeth é muito mais semítico (raiz consonantal + melodia); as Torres menos.',num:'Nomes partilhando esqueleto: Loagaeth <b>'+d.rootpat_loag+'%</b> vs Torres <b>'+d.rootpat_wt+'%</b>.'},
+  {n:'5. Léxico — os nomes',ok:false,t:'Nenhum nome em comum. Vocabulários distintos.',num:'Nomes compartilhados: <b>'+d.shared_names+'</b>.'}
+ ];
+ document.getElementById('levels').innerHTML=L.map(x=>'<div class="lvl '+(x.ok?'ok':'no')+'"><h3>'+x.n+'<span class="badge '+(x.ok?'ok':'no')+'">'+(x.ok?'COMPARTILHADO':'DIFERENTE')+'</span></h3><div>'+x.t+'</div><div class=nums>'+x.num+'</div></div>').join('');
+}
+</script>
+</body>
+</html>

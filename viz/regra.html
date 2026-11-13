@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Regra de Leitura — Loagaeth</title>
+<style>
+:root{--bg:#f7f6f1;--card:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8;--hl:#8a2f7d;--ac:#8a6d2f}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13120c;--card:#1b1a13;--ink:#ece9da;--mut:#9a988a;--line:#322f27;--hl:#d66ac4;--ac:#d6b96a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,sans-serif;max-width:1050px;margin:0 auto;padding:14px 16px 50px}
+h1{font-size:21px;font-weight:700;margin:0 0 2px}
+.sub{color:var(--mut);margin:0 0 10px;font-size:13px}
+.rule{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 15px;margin-bottom:12px}
+.rule ol{margin:6px 0 0;padding-left:20px}.rule li{margin:3px 0}
+.rule b{color:var(--ac)}
+.ctrl{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+select,button{font:inherit;padding:5px 9px;border-radius:7px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+button{background:var(--hl);color:#fff;border:0;font-weight:700;cursor:pointer;padding:6px 16px}
+.wrap{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start}
+.gridbox{overflow:auto;border:1px solid var(--line);border-radius:8px;background:var(--card);padding:6px}
+table{border-collapse:collapse}td{width:17px;height:17px;text-align:center;font-family:ui-monospace,monospace;font-size:11px;color:var(--mut)}
+td.hl{color:#fff;font-weight:700;border-radius:2px}
+aside{width:210px;flex-shrink:0}.names{max-height:460px;overflow:auto;border:1px solid var(--line);border-radius:8px;background:var(--card);padding:6px}
+.ni{padding:3px 7px;border-radius:6px;cursor:pointer;font-family:ui-monospace,monospace;font-size:13px}.ni:hover,.ni.on{background:var(--hl);color:#fff}
+.note{color:var(--mut);font-size:12px}
+</style>
+</head>
+<body>
+<h1>A Regra de Leitura</h1>
+<p class="sub">Como achar os nomes numa tabela do Loagaeth, no olho — a regra que tiramos de toda a análise, aplicada a uma folha real.</p>
+<div class="rule">
+<b>A REGRA</b> (vale pra qualquer tabela):
+<ol>
+<li><b>Ancora numa sílaba-raiz:</b> onde vês <code>CHA</code>, <code>NO</code>, <code>GE</code>, <code>STOR</code>, <code>NZA</code>, <code>DNO</code> — ali começa um nome.</li>
+<li><b>Lê em linha:</b> reta (→ linha, ↓ coluna) ou diagonal (↘↙). O Loagaeth lê em linha, não em salto.</li>
+<li><b>Alterna consoante-vogal</b> (C-V-C-V), <b>sem duas vogais juntas</b> (anti-hiato). Segue enquanto alternar; para quando quebra.</li>
+<li><b>4 letras ou mais.</b> Abaixo disso é fluxo, não nome.</li>
+<li>Se o trecho <b>casa o léxico</b> (os nomes conhecidos), é nome confirmado. Clique num nome pra vê-lo aceso.</li>
+</ol>
+</div>
+<div class="ctrl">
+ <span>Folha: <select id="leaf"></select></span>
+ <span>Direção: <select id="dir"><option value="reta">reta (linha)</option><option value="col">coluna</option><option value="diag">diagonal</option><option value="all" selected>todas</option></select></span>
+ <button id="go">Aplicar a regra ⌖</button>
+</div>
+<div class="wrap">
+ <div class="gridbox"><div id="grid"></div></div>
+ <aside><div class="note" id="cnt"></div><div class="names" id="names"></div></aside>
+</div>
+<script>
+var T=null,NAMES=[],N=49,CUR=null,FOUND=[];
+Promise.all([fetch('table_grids.json').then(r=>r.json()),fetch('name_field.json').then(r=>r.json())])
+ .then(([t,n])=>{T=t;NAMES=n.filter(w=>w.length>=4).sort((a,b)=>b.length-a.length);boot()}).catch(()=>{document.getElementById('grid').innerHTML='Abra por http://localhost:8860/';});
+function lineCells(dir){
+ var out=[],R=N;
+ if(dir==='reta'||dir==='all')for(var r=0;r<R;r++)out.push(Array.from({length:R},(_,c)=>[r,c]));
+ if(dir==='col'||dir==='all')for(var c=0;c<R;c++)out.push(Array.from({length:R},(_,r)=>[r,c]));
+ if(dir==='diag'||dir==='all'){for(var s=0;s<R;s++){out.push(Array.from({length:R-s},(_,k)=>[s+k,k]));if(s)out.push(Array.from({length:R-s},(_,k)=>[k,s+k]));out.push(Array.from({length:R-s},(_,k)=>[s+k,R-1-k]));if(s)out.push(Array.from({length:R-s},(_,k)=>[k,R-1-s-k]));}}
+ return out;
+}
+function apply(){
+ var leaf=document.getElementById('leaf').value,dir=document.getElementById('dir').value;
+ var g=T.leaves[leaf].grid;FOUND=[];
+ lineCells(dir).forEach(cells=>{
+  var str=cells.map(c=>g[c[0]][c[1]]).join('');
+  NAMES.forEach(w=>{var i=str.indexOf(w);while(i>=0){FOUND.push({w:w,cells:cells.slice(i,i+w.length)});i=str.indexOf(w,i+1);}});
+ });
+ render(leaf,g);
+}
+function render(leaf,g){
+ var h='<table>';
+ for(var r=0;r<N;r++){h+='<tr>';for(var c=0;c<N;c++)h+='<td id="g'+r+'_'+c+'">'+g[r][c]+'</td>';h+='</tr>';}
+ h+='</table>';document.getElementById('grid').innerHTML=h;
+ var seen={},list=FOUND.filter(f=>{if(seen[f.w])return false;seen[f.w]=1;return true});
+ document.getElementById('cnt').textContent=list.length+' nomes achados pela regra em '+leaf+' ('+FOUND.length+' ocorrências)';
+ document.getElementById('names').innerHTML=list.map(f=>'<div class=ni data-w="'+f.w+'">'+f.w+'</div>').join('');
+ document.querySelectorAll('.ni').forEach(n=>n.onclick=()=>{hi(n.dataset.w);document.querySelectorAll('.ni').forEach(x=>x.classList.toggle('on',x===n))});
+ // light all faintly
+ FOUND.forEach(f=>f.cells.forEach(cc=>{var e=document.getElementById('g'+cc[0]+'_'+cc[1]);if(e){e.style.background='var(--line)';}}));
+}
+function hi(w){
+ document.querySelectorAll('td.hl').forEach(t=>{t.classList.remove('hl');t.style.background='var(--line)';});
+ FOUND.filter(f=>f.w===w).forEach(f=>f.cells.forEach(cc=>{var e=document.getElementById('g'+cc[0]+'_'+cc[1]);if(e){e.classList.add('hl');e.style.background='var(--hl)';}}));
+}
+function boot(){
+ var sel=document.getElementById('leaf');T.order.forEach(k=>{var o=document.createElement('option');o.value=k;o.textContent=k;sel.appendChild(o)});
+ document.getElementById('go').onclick=apply;sel.onchange=apply;document.getElementById('dir').onchange=apply;
+ apply();
+}
+</script>
+</body>
+</html>

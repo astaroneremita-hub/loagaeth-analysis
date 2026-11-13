@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Torre de Vigia do Loagaeth — compilador</title>
+<style>
+:root{--bg:#f7f6f1;--card:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8;--cross:#8a2f7d;--ker:#b07d2a;
+ --fogo:#c0392b;--terra:#6b8e23;--ar:#2f80c0;--agua:#1f7a6b}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13120c;--card:#1b1a13;--ink:#ece9da;--mut:#9a988a;--line:#322f27;--cross:#d66ac4;--ker:#d6b96a;--fogo:#e06a5a;--terra:#a7c65a;--ar:#6ab6e0;--agua:#5ac4b0}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,sans-serif;max-width:1000px;margin:0 auto;padding:14px 16px 50px}
+h1{font-size:21px;font-weight:700;margin:0 0 2px}
+.sub{color:var(--mut);margin:0 0 10px;font-size:13px}
+.how{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 14px;margin-bottom:12px;font-size:13px}
+.how b{color:var(--cross)}
+.ctrl{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+select,button{font:inherit;padding:5px 9px;border-radius:7px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+button{background:var(--cross);color:#fff;border:0;font-weight:700;cursor:pointer;padding:6px 16px}
+.wrap{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start}
+.gridbox{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:8px}
+table{border-collapse:collapse}td{width:22px;height:22px;text-align:center;font-family:ui-monospace,monospace;font-size:12px;color:var(--mut);border:1px solid var(--line)}
+td.cross{background:var(--cross);color:#fff;font-weight:700}
+td.ker{background:var(--ker);color:#fff;font-weight:700}
+td.q{opacity:.95}
+aside{width:260px;flex-shrink:0}
+.derived{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:10px 12px;margin-bottom:10px}
+.derived h3{margin:0 0 6px;font-size:14px}
+.nm{font-family:ui-monospace,monospace;font-weight:700;font-size:16px}
+.el{font-weight:700;font-size:10px;border-radius:4px;padding:1px 6px;color:#fff;margin-left:6px}
+.el.Fogo{background:var(--fogo)}.el.Terra{background:var(--terra)}.el.Ar{background:var(--ar)}.el.Agua{background:var(--agua)}
+.row{margin:4px 0;font-size:13px}
+.warn{background:var(--card);border:1px dashed var(--line);border-radius:10px;padding:9px 13px;font-size:12px;color:var(--mut);margin-top:10px}
+</style>
+</head>
+<body>
+<h1>Torre de Vigia do Loagaeth</h1>
+<p class="sub">O processo inverso: pega a fonte Loagaeth e <b>compila</b> numa Torre — os nomes emergem das posições, igual às Torres de vigia.</p>
+<div class="how">
+<b>Como funciona (o compilador):</b> preenche uma grade com material do Loagaeth, depois LÊ os nomes das posições fixas da Torre —
+a <b style="color:var(--cross)">Cruz central</b> (horizontal + vertical) dá os Nomes Divinos; o <b style="color:var(--ker)">topo de cada quadrante</b> dá os anjos-reis. Os nomes derivados não foram colocados — <b>emergem do arranjo</b>, como numa Torre real.
+</div>
+<div class="ctrl">
+ <span>Lado: <select id="size"><option>11</option><option selected>13</option><option>15</option></select></span>
+ <span>Fonte: <select id="src"><option value="real">nomes do livro</option><option value="gen">gerados</option></select></span>
+ <button id="go">Compilar Torre</button>
+</div>
+<div class="wrap">
+ <div class="gridbox"><div id="grid"></div></div>
+ <aside id="out"></aside>
+</div>
+<div class="warn" id="warn"></div>
+<script>
+var G=null,N=13,CELLS=[];
+fetch('forge_grammar.json').then(r=>r.json()).then(d=>{G=d;boot()}).catch(()=>{document.getElementById('grid').innerHTML='Abra por http://localhost:8860/';});
+function rnd(a){return a[Math.floor(Math.random()*a.length)]}
+function elementOf(w){var c={};for(var ch of w){var e=(G.letters[ch]||{}).e||'?';c[e]=(c[e]||0)+1}var b='?',bn=0;for(var k in c)if(c[k]>bn){bn=c[k];b=k}return b}
+function weave(s,m){var o='',mi=0;for(var i=0;i<s.length;i++){o+=s[i];if(mi<m.length)o+=m[mi++]}return o+m.slice(mi)}
+function genName(){var s=rnd(G.skeletons);return weave(s,Array.from({length:s.length},()=>rnd(G.vowels)).join(''))}
+function build(){
+ N=+document.getElementById('size').value;var src=document.getElementById('src').value;
+ CELLS=Array.from({length:N},()=>Array(N).fill(null));
+ var pool=src==='real'?G.real_names.slice():Array.from({length:N*3},genName);
+ pool=pool.filter(w=>w.length<=N);for(var i=pool.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=pool[i];pool[i]=pool[j];pool[j]=t;}
+ // place names in rows (each row seeded with a name)
+ for(var r=0;r<N;r++){var w=pool[r%pool.length];var c=Math.floor(Math.random()*(N-w.length+1));for(var k=0;k<w.length;k++)CELLS[r][c+k]=w[k];}
+ var ALL=G.consonants.concat(G.vowels);
+ for(var r=0;r<N;r++)for(var c=0;c<N;c++)if(CELLS[r][c]===null){var left=c>0?CELLS[r][c-1]:'';CELLS[r][c]=(G.vowels.indexOf(left)>=0)?rnd(G.consonants):rnd(ALL);}
+ render();
+}
+function readRow(r,c0,len){var s='';for(var k=0;k<len&&c0+k<N;k++)s+=CELLS[r][c0+k];return s}
+function readCol(c,r0,len){var s='';for(var k=0;k<len&&r0+k<N;k++)s+=CELLS[r0+k][c];return s}
+function render(){
+ var mid=Math.floor(N/2);
+ // derived names: central cross (horizontal + vertical), and the top row of each quadrant
+ var crossH=readRow(mid,0,N), crossV=readCol(mid,0,N);
+ var half=Math.floor(N/2);
+ var quads=[
+  {nm:'Fogo (NO)',name:readRow(0,0,half)},
+  {nm:'Ar (NE)',name:readRow(0,half+1,half)},
+  {nm:'Água (SO)',name:readRow(N-1,0,half)},
+  {nm:'Terra (SE)',name:readRow(N-1,half+1,half)}
+ ];
+ var h='<table>';
+ for(var r=0;r<N;r++){h+='<tr>';for(var c=0;c<N;c++){
+   var cls='';if(r===mid||c===mid)cls='cross';else if((r===0||r===N-1))cls='ker';
+   h+='<td class="'+cls+'">'+CELLS[r][c]+'</td>';}h+='</tr>';}
+ h+='</table>';document.getElementById('grid').innerHTML=h;
+ var o='<div class=derived><h3>✚ Cruz Central — os Nomes Divinos</h3>'+
+   '<div class=row><span class=nm>'+crossH+'</span><span class="el '+elementOf(crossH)+'">'+elementOf(crossH)+'</span> <span class=note>horizontal</span></div>'+
+   '<div class=row><span class=nm>'+crossV+'</span><span class="el '+elementOf(crossV)+'">'+elementOf(crossV)+'</span> <span class=note>vertical</span></div></div>';
+ o+='<div class=derived><h3>♔ Reis dos Quadrantes</h3>'+quads.map(q=>'<div class=row>'+q.nm+': <span class=nm>'+q.name+'</span><span class="el '+elementOf(q.name)+'">'+elementOf(q.name)+'</span></div>').join('')+'</div>';
+ document.getElementById('out').innerHTML=o;
+ document.getElementById('warn').textContent='Honesto: esta é uma Torre SINTÉTICA — a geometria (cruz, quadrantes) é inspirada na Great Table real, mas os nomes derivados emergem do arranjo do nosso material Loagaeth, não da Torre histórica (que não vem do Loagaeth). É o processo inverso REALIZADO: fonte pura -> estrutura compilada com nomes emergentes.';
+}
+function boot(){document.getElementById('go').onclick=build;document.getElementById('size').onchange=build;document.getElementById('src').onchange=build;build();}
+</script>
+</body>
+</html>

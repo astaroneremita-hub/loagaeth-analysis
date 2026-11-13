@@ -1034,3 +1034,198 @@ que língua. Partilham a FONOLOGIA (bigrama 0.42, #266) mas não a MORFOLOGIA es
 todo o enochiano com uma gramática, mas o Loagaeth É a raiz estrutural — o mais gramaticalmente profundo, coerente
 com a tradição de ser a língua PRIMORDIAL; os demais são ramos mais soltos da mesma árvore sonora. (Ressalva: controle
 de inglês foi fraco — a comparação forte é Loagaeth vs os outros sistemas enoquianos.)
+
+## #283 — MISSÃO ligações: as Chamadas são a ponte; Torres/Governadores/Heptarquia não contidos (a144)
+Teste: nomes dos sistemas enoquianos aparecem DENTRO das tabelas do Loagaeth (reta/coluna/diagonal, fwd+rev) vs null
+de strings aleatórias do mesmo tamanho. Governadores+Torres 6/274 (2% vs 1% acaso) ≈ acaso; Heptarquia 5/161 (3% vs
+1%, ex "AAAAOA" = ruído); Chamadas vocab >=4 110/610 (18% vs 8% acaso = 2.2x), e os longos são REAIS (CORAXO, DORPHA,
+IADNAH, PARACH, ADROCH). CONCLUSÃO: LOAGAETH<->CHAMADAS = ligação forte e dupla: (1) estrutural - cada Chamada abre
+uma folha (TFR: Chamada 1->folha 2, 2->3... 18->19, 19a dos Aires->Tábuas dos 30 Aethyrs; folha 1 sem Chamada = a
+oculta); (2) lexical - vocabulário das Chamadas permeia o Loagaeth 2.2x acima do acaso. LOAGAETH<->GOVERNADORES/TORRES/
+HEPTARQUIA = SEM ligação de conteúdo (nomes não aparecem, ≈acaso); primos pela fonologia (bigrama 0.42, #266), não
+derivados. Ponte INDIRETA: Governadores/Aethyrs conectam via a 19a Chamada (que abre os Aethyrs), não direto ao
+Loagaeth. Mapa: Loagaeth(folhas 2-19)<-18 Chamadas; Loagaeth(Aethyrs)<-19a Chamada->30 Aethyrs->91 Governadores;
+Torres/Heptarquia à parte. A ponte de todo o enochiano ao Loagaeth são as CHAMADAS (as chaves).
+
+## #284 — Call<->leaf NÃO é lexical (a145): o elo é língua+ritual, não código cifrado
+Teste profundo: o vocabulário de cada Chamada concentra na folha que ela abre? Média 4.7% na folha aberta vs 4.1%
+nas outras; 7/12 têm mais, 5/12 menos, razões caóticas (1.03, 0.0, 3.33, 0.54). SEM concentração — o par Chamada->
+folha é RITUAL/estrutural (tradição/Gebofal), não lexical. CONSOLIDAÇÃO DA MISSÃO (ligações Loagaeth<->resto do
+enochiano): Loagaeth<->Chamadas = ligação real por (a) vocabulário compartilhado no livro inteiro (2.2x o acaso,
+a144), (b) função ritual (cada Chamada abre uma folha), MAS não por concentração por folha (a145) nem derivação
+cifrada — o elo é língua comum + função. Loagaeth<->Torres/Governadores/Heptarquia = sem ligação de conteúdo (nomes
+não aparecem, a144), só primos fonológicos (bigrama 0.42), conectam indiretamente via a 19a Chamada->Aethyrs. VERDADE
+SEM ROMANTIZAR: o Loagaeth NÃO é a chave cifrada de todo o enochiano; é a língua-fonte mais pura (a143), acoplada às
+Chamadas; os outros sistemas são da mesma árvore sonora mas independentes. A ponte de todos ao Loagaeth é sempre via
+as Chamadas, nunca direta.
+
+## #285 — A Regra de Leitura (regra.html) + Forja até 1000 + Torre quadrada
+Entregues a pedido: (1) Forja gera até 1000 nomes (opções 50/100/500/1000; nível 0 limitado aos 90 reais). (2)
+torre.html — grade quadrada de letras (21-49) com nomes embutidos, clicáveis pra achar na grade; tablet.html — Tábua
+por elemento com reis. (3) regra.html — "A Regra de Leitura": a regra prática tirada de toda a análise (ancorar em
+sílaba-raiz CHA/NO/GE/STOR; ler em linha reta/coluna/diagonal; alternar C-V sem hiato; 4+ letras; casar o léxico),
+aplicada a uma folha REAL do livro — escolhe a folha e a direção, a regra acende os nomes achados (ex 2a: 8 nomes).
+Todas no index.
+
+## #286 — O processo inverso: compilador Torre de Vigia (watchtower.html)
+Intuição do usuário: Loagaeth = código-máquina, Torre = a máquina traduzindo — dá pra fazer o inverso? Construído
+viz/watchtower.html, o COMPILADOR: preenche uma grade (11-15) com material do Loagaeth (nomes reais ou gerados) e LÊ
+nomes das posições fixas da Torre — a Cruz Central (horizontal+vertical) = Nomes Divinos; o topo de cada quadrante =
+reis/anjos. Os nomes derivados EMERGEM do arranjo (não foram colocados), igual a Great Table real deriva os Nomes
+Divinos da cruz. Ex 13×13: cruz horizontal "XANTANTOXANDF" (contém a raiz real ANTANTOX). Caveat honesto: é uma Torre
+SINTÉTICA — geometria inspirada na Great Table, nomes do nosso material Loagaeth, não a Torre histórica (que não vem
+do Loagaeth, provado #144/#282). Realiza o processo inverso: fonte pura -> estrutura compilada com nomes emergentes.
+No index. Também explicada a Regra de Leitura (manual de achar nomes no olho) e consolidada a missão de ligações.
+
+## #287 — Nomes do Loagaeth NÃO estão nas Torres (nem anagrama) + sem estrutura 7-fold (a146)
+Pergunta do usuário: os nomes das entidades do Loagaeth estão nas Torres, mesmo embaralhado? Teste definitivo com as
+letras reais das Torres (nomes divinos+reis+anjos de tabuas_dee1584 + governadores, 1408 tokens, 8631 letras): nomes
+do Loagaeth (>=4) como SUBSTRING = 0/78 (vs 0 null); como ANAGRAMA (mesmo multiset) = 3/78 (NOCHA, NACHO, NOCHAP) vs
+1 no acaso — e os 3 são o mesmo conjunto de letras ACHNO, ou seja ~1 coincidência. DENTRO do acaso. CONCLUSÃO
+DEFINITIVA: os nomes do Loagaeth NÃO estão nas Torres — nem retos, nem reversos, nem anagramas, acima do acaso.
+Sistemas independentes no nível do nome; ligação só fonológica + via Chamadas. (Nota: quadrados.json ar/agua/terra/
+fogo não é grade-limpa das Torres, é descrição por componentes; usei as letras dos nomes atestados.)
+a146 — ESTRUTURA 7-FOLD (49=7^4, número sagrado do enochiano): autocorrelação de densidade de nomes no lag 7 = 0.05
+(p=0.69); concentração em 7 bandas de 7 linhas = variância 312 vs 461 null (p=0.70); vizinhos lags 5-9 sem pico no 7.
+NULL — o formato 49x49=7^4 é sagrado no número mas NÃO se reflete na distribuição espacial dos nomes.
+
+## #288 — PEDAÇOS dos nomes das Torres no Loagaeth: silabário compartilhado (observação do usuário)
+Usuário notou: fragmentos dos nomes dos Reis das Torres (BATAIVAH, ICZHIHAL, RAAGIOSL, EDLPRNAA) aparecem muitas vezes
+no Loagaeth. Teste rigoroso (fragmentos dos 8 Reis/nomes de Torre vs fragmentos aleatórios do mesmo tamanho no
+Loagaeth, 36 grades, reta+coluna+diagonal+reverso): 4-gramas 79% presentes vs 38% aleatório (2.1x); 5-gramas 15% vs
+0% (7x); 6-gramas 0% vs 0%. CONFIRMADO NOVO: os PEDAÇOS (4-5 letras) dos nomes das Torres estão no Loagaeth acima do
+acaso, mas nenhum chunk de 6+ letras — os nomes inteiros NÃO estão (confirma #287), mas os MORFEMAS/sílabas que os
+constroem SÃO compartilhados. É o silabário angelical comum: Torres e Loagaeth são feitos dos mesmos tijolos de 4-5
+letras, montados em nomes diferentes (como inglês/alemão partilham sílabas sem partilhar palavras). Mais fundo que a
+fonologia de bigrama (0.42, #266), agora no nível de 5-grama (7x). Refina a ligação: os sistemas enoquianos não se
+contêm, mas partilham o MATERIAL DE CONSTRUÇÃO; o Loagaeth (língua mais pura, a143) é o que melhor expõe o silabário.
+
+## #289 — Esqueleto/traço dos nomes das Torres no Loagaeth: refutado pelo controle de anagrama
+Usuário: dá pra ver um esqueleto/posição dos nomes das Torres e traçar? Teste king-move (8-vizinhos, sem reuso) dos 4
+Reis (BATAIVAH, ICZHIHAL, RAAGIOSL, EDLPRNAA). Primeiro: 4/4 Reis traçam em alguma grade vs só 1/12 strings aleatórias
+uniformes — PARECE sinal. MAS controle justo (null por frequência): os ANAGRAMAS de cada Rei traçam 7-10/10. A ordem
+NÃO importa — o anagrama traça quase igual ao nome real. CONCLUSÃO: os Reis traçam por COMPOSIÇÃO DE LETRAS (comuns,
+do silabário compartilhado), não porque a sequência do nome está codificada num caminho. Não há esqueleto posicional
+dos nomes das Torres no Loagaeth; o traço é artefato de campo denso (a104). Separadas as duas coisas: os PEDAÇOS/
+sílabas são compartilhados acima do acaso (#288, real), mas os NOMES não estão lá de forma alguma (reto/anagrama/
+traço todos negativos ou dentro do acaso). Fecha a linha "nomes das Torres escondidos no Loagaeth" definitivamente.
+
+## #290 — Nomes da Tábua da União (EXARP/BITOM/NANTA/HCOMA) vs Markov-3: nenhum embutido
+Usuário testou os nomes do Black Cross/Tábua da União (5 letras). Contra surrogate Markov-3 (null estrito que já
+reproduz trigramas/sílabas comuns): NANTA 4 real vs 4.6 surrogate (0.9x = acaso — é o ANTA de ANTANTOX coincidindo);
+EXARP 0 vs 0.2; BITOM 0 vs 0; HCOMA 0 vs 0. CALIBRAÇÃO (prova que o método detecta embedding real): ANTANTOX (raiz
+Loagaeth longa) 19 vs 2.8 = 6.8x; NOCHA/GETH/ANTA todos 1.0x (reproduzidos pelo trigrama, pois curtos/comuns).
+CONCLUSÃO: nenhum nome das Torres/União está embutido no Loagaeth acima do silabário comum. NANTA parece estar mas é
+o ANTA (tijolo central do Loagaeth) coincidindo. O método PROVA-se capaz de achar embedding (ANTANTOX 6.8x) e os
+nomes de outros sistemas NÃO passam. Fecha definitivamente, com o null mais justo (Markov-3): Loagaeth e os outros
+sistemas partilham o SILABÁRIO (trigramas), não os NOMES. Contra Markov-3 até os roots curtos do próprio Loagaeth
+(NOCHA 1.0x) não se distinguem — só os longos (ANTANTOX); o sinal de nome real exige comprimento, e os sistemas
+externos não têm nenhuma sequência longa no Loagaeth.
+
+## #291 — Hipótese do molde (impressora 3D): Torre do Ar vs Loagaeth
+Extraída a Torre do Ar REAL do quadrados.json (campo 'letter'+'row'+'col' = grade 13x12; linha 7 = OROIBAHAOZPI ✓).
+Teste do molde: pedaços da grade da Torre do Ar (linhas+colunas) no Loagaeth vs surrogate Markov-3: 4-grama 2.7x,
+5-grama 3.1x, 6-grama 5.8x (7/187), 7-grama 0. SINAL REAL e MAIS FORTE que os nomes (que davam 0.9x contra Markov) —
+a Torre-como-GRADE partilha 6-gramas com o Loagaeth acima do acaso. MAS os 7 6-gramas que batem (OOAIAO->12a,
+TPALOA->15b, NAOCOT->17a, OAIAOA->21b, AMOOOA->14a, AVTOTA->15a, OCANMA->2b) estão ESPALHADOS por 7 folhas
+diferentes, não concentrados numa fonte; e a similaridade de freq de letra é uniforme (0.80-0.89 com todas as folhas,
+sem destaque). NÃO há molde/fonte única nem regra de derivação. Os 6-gramas que casam são ricos em vogais (a Torre
+permite hiato, o Loagaeth não), casando só nas leituras de coluna/diagonal — coincidência de material, não molde.
+CONCLUSÃO: os tijolos são compartilhados (agora no nível 6-grama, mais que os nomes), mas a Torre do Ar NÃO é
+'impressa' do Loagaeth por regra recuperável. Impressora partilha a tinta, não o molde.
+
+## #292 — Hipótese do molde REFUTADA pelo controle embaralhado (todas as 4 Torres)
+Testadas as 4 Torres (6-grama da grade no Loagaeth vs Markov-3): Ar 2.7x, Água 2.5x, Terra 1.2x (acaso), Fogo 2.7x —
+modesto. CONTROLE DECISIVO: a Torre do Ar EMBARALHADA (mesmas letras, ordem aleatória) dá 8.5x — MAIS que a real
+(2.7x). Isso mata a hipótese do molde: se a Torre fosse impressa/codificada no Loagaeth, a versão embaralhada
+apareceria MENOS; aparece MAIS. O overlap é 100% composição de letras (as Torres são vogal-pesadas, casando nas
+leituras de coluna/diagonal do Loagaeth), não a sequência da Torre. CONCLUSÃO FINAL da linha "Torres saem do Loagaeth":
+não há molde, regra de montagem, nem presença específica de nenhuma Torre no Loagaeth. Testado tudo: substring,
+reverso, anagrama, king-move trace, 6-grama vs Markov, e o controle embaralhado. Loagaeth e Torres partilham só o
+SILABÁRIO (letras/sílabas da língua angelical), nada mais — não os nomes, não a estrutura, não um molde. O único elo
+real do Loagaeth com o enochiano é via as Chamadas (vocabulário + abertura das folhas). Linha definitivamente fechada.
+
+## #293 — Nomes sagrados do Ar vs Markov: mesmo padrão (silabário 5-grama, zero 6+)
+Testados os 109 nomes sagrados da Torre do Ar (god/angel dos 156 quadrados + 3 nomes divinos + rei). Presentes no
+Loagaeth: 11 vs 5.2 surrogate (~2x), MAS só len-5; len 6/7/8 = 0 de 0. E os 11 são rotações de ~4 conjuntos de letra
+(RACON/RCONA/RNACO/RONAC; XTOTT/XTTTO). Mesmo padrão de tudo: silabário comum no nível 5-grama (2x), nada de 6+.
+Nem os nomes mais sagrados escapam. CONSOLIDAÇÃO: a linha "Torres dentro do Loagaeth" foi testada de 8 ângulos
+(substring, reverso, anagrama, king-move trace, 6-grama grade vs Markov, controle embaralhado 8.5x>2.7x, 6-grama por
+Torre, nomes sagrados) — TODOS convergem em silabário compartilhado (5-grama) sem embedding de nome/estrutura. A
+sensação de "tem como" é a pareidolia dos pedaços (as sílabas estão lá; o olho monta o nome). PRÓXIMA PORTA (vizinha,
+não testada): não "Torre dentro do Loagaeth" mas "Torre e Loagaeth = dois outputs da MESMA gramática-fonte" (irmãos,
+não pai-filho) — testar se a Torre do Ar obedece a gramática raiz-e-padrão/esqueleto+melodia do Loagaeth.
+
+## #294 — ELS + folha 1 segmentada: linha esgotada, 9 métodos convergem
+Cifra de salto (ELS, equidistant letter sequence, método tipo "códigos da Bíblia", skip 1-25): só AOZPI aparece no
+real e não no surrogate (1 coincidência de 5 letras entre muitas; EXARP/HCOMA/NANTA aparecem NO surrogate também);
+nenhum nome de 6+ letras por salto, real ou surrogate. Folha 1 segmentada (2708 palavras reais): nenhum nome sagrado
+das Torres é palavra/sílaba, só ORO (3 letras, trivial). CONSOLIDAÇÃO FINAL: a hipótese "Torres dentro do Loagaeth"
+foi testada por 9 métodos independentes (substring, reverso, anagrama, king-move trace, 6-grama grade vs Markov,
+controle embaralhado, nomes sagrados, ELS, lista de palavras da folha 1) — TODOS null para 6+ letras; só sílabas
+curtas coincidem. Não há código. INSIGHT HISTÓRICO/METODOLÓGICO (o "caminho" certo): Dee recebeu Loagaeth (Sloane
+3189) e Great Table como revelações SEPARADAS; nunca derivou uma da outra. A conexão é LINGUÍSTICA (mesma língua
+angelical: silabário comum = #288/#291), não criptográfica (código escondido). São irmãs da mesma língua-mãe, não
+pai-filho. Procurar a Torre dentro do Loagaeth é procurar filho onde há irmão. Linha encerrada com rigor máximo.
+
+## #295 — PROVA da língua-mãe: Loagaeth e Torres, irmãs do mesmo alfabeto (parentesco.html)
+Medidos 5 níveis linguísticos Loagaeth vs Torres (letras das 4 tábuas de quadrados.json) vs inglês:
+NÍVEL 1 ALFABETO: 22 letras em comum — mesmo alfabeto angelical. COMPARTILHADO.
+NÍVEL 2 FONOLOGIA: cosseno freq-letra Loagaeth×Torres 0.896 (vs inglês 0.521); bigrama 0.551 (vs inglês 0.175) —
+~3x mais perto entre si que do inglês. COMPARTILHADO.
+NÍVEL 3 FONOTÁTICA: hiato (vogal-vogal) Loagaeth 1.4% (estrito anti-hiato) vs Torres 13.6% (10x mais) — REGRA
+DIFERENTE. 
+NÍVEL 4 MORFOLOGIA: raiz-e-padrão Loagaeth 40% vs Torres 16.7% — DIFERENTE (Loagaeth muito mais semítico).
+NÍVEL 5 LÉXICO: 0 nomes em comum — DIFERENTE.
+PROVA: Loagaeth e Torres são dois IDIOMAS DIFERENTES escritos no MESMO alfabeto angelical, partilhando os SONS mas
+não as regras nem o léxico — como inglês e polonês no alfabeto latino. Parentesco real (níveis 1-2), derivação não
+(níveis 3-5, e os 9 testes de containment todos null). A mãe é o alfabeto/sons angelicais; Loagaeth e Torres são
+filhas com gramáticas próprias. Página viz/parentesco.html (árvore genealógica + 5 níveis COMPARTILHADO/DIFERENTE),
+dados em parentesco.json, no index. Resolve a questão: a intuição do usuário de conexão está CERTA (parentesco), e a
+busca por "Torre dentro do Loagaeth" corretamente refutada — são irmãs, não mãe-filha.
+
+## #296 — A FAMÍLIA da língua angelical: gramática própria de cada sistema (atacar as Torres sozinhas)
+Aplicada a mesma lente (esqueletos, raiz-e-padrão, anti-hiato, tamanho) às Torres/Heptarquia/Chamadas independente do
+Loagaeth. Resultado (nomes | esqueletos | raiz-padrão% | hiato% | tam.médio | top esqueletos):
+  LOAGAETH   90  | 67  | 40.0 | 1.0 | 7.6 | NCHSTR, CHSTR, NCH (família NOCHA)
+  TORRES    978  | 620 | 51.5 | 8.5 | 5.2 | CP, PD, DP, CL, DR (consonantais próprios)
+  HEPTARQUIA 558 | 487 | 19.5 | 7.3 | 6.6 | MS, PRC, NM
+  CHAMADAS  610  | 503 | 26.6 | 9.7 | 5.8 | NS, DN, CSG, SLMN
+CADA SISTEMA TEM GRAMÁTICA E RAÍZES PRÓPRIAS — mesmo alfabeto angelical, dialetos/línguas diferentes. Torres são ATÉ
+mais raiz-e-padrão que o Loagaeth (51.5% vs 40%) mas com nomes curtos (5.2) e raízes consonantais distintas (CP/PD/DP,
+não NCH/CHSTR). Heptarquia a menos estruturada (19.5%, lista planetária). Confirma e completa o parentesco (#295):
+família de dialetos do alfabeto angelical, cada um com seu léxico e grau de estrutura; Loagaeth = nomes mais longos e
+anti-hiato mais estrito (a língua mais pura/profunda). Diferença de MAGIA: Heptarquia=planetária, Torres=elemental,
+Loagaeth=onomástica/geradora de nomes (a língua da Criação/Verbo), não ligada a planeta nem elemento mas PRIOR a eles.
+
+## #297 — Losangos 29-48 explorados: coerentes, validados, Loag completo
+Explorados os losangos reconstruídos 29-48 (diamantes, largura 2-48, duas pirâmides). CONTEÚDO COERENTE: 70 de 90
+nomes catalogados aparecem lá; os roots estão presentes mas GETH/CHASTOR-dominantes (GETH 327 vs 349 por 100k =
+quase igual; CHASTOR 108 vs 114) e NOCHA mais raro (117 vs 434), ADNOCHA 17 vs 146 — confirma o gradiente regional
+(#278: NOCHA some no fim, GETH/CHASTOR persistem). Material novo mínimo (6-gramas ricos novos: THAXOR 16x, NZACHL 15x
+= mesmas famílias AXOR/ANZACH). A reconstrução dos losangos (a15) está VALIDADA pela presença de 70/90 nomes. Loag
+INTEIRO mapeado e coerente: folha 1 (fundação, GETH-heavy) -> 2-28 (reino NOCHA) -> 29-48 (losangos, GETH/CHASTOR) —
+uma língua, três províncias. Inventário completo (1948 esqueletos já cobrem; losangos confirmam, não adicionam roots
+maiores). Nada defasado nem faltando.
+
+## #298 — Arco elemental do livro: Terra->Água, mas confundido com a reconstrução (a148)
+Elemento dominante por folha na ordem: Terra domina as folhas 2-28 (73 folhas Terra), vira Água nos losangos 29-48
+(21 folhas Água). Tendências: Água sobe (corr posição +0.62, 1a metade 27.2% -> 2a 29.5%), Ar -0.43, Terra -0.36,
+Fogo +0.30. Leitura metafísica: da Terra (matéria/manifesto, corpo) para a Água (profundo/dissolução, fim) — descenso
+do fixo ao fluido. RESSALVA SÉRIA: a virada pra Água cai EXATAMENTE na fronteira dos losangos reconstruídos (29-48);
+as tabelas limpas 2-28 são uniformemente Terra sem tendência. Não dá pra separar: o arco pode ser real (losangos = a
+região aquosa/dissolução do livro) OU artefato da reconstrução (a15) que enviesou a composição de letra dos losangos.
+DESCRITIVO COM CONFUSÃO, não arco autoral provado. Sólido: os losangos são província distinta (GETH/CHASTOR lexical +
+Água elemental), mas parte pode ser reconstrução. Para desconfundir precisaria dos losangos originais do Sloane 3189.
+
+## #299 — CORREÇÃO: dados COMPLETOS (Sloane 3189 original) + arco elemental real e suave
+CORREÇÃO de #298: loagaeth_grades_simples.json vem do Sloane 3189 ORIGINAL (esotericarchives.com/dee/sl3189.htm) —
+temos as 49 folhas inteiras (96 lados) como LETRAS ORIGINAIS. a15 só reconstrói a GEOMETRIA (formato losango), não as
+letras. Dados NÃO estão incompletos; só o arranjo geométrico tem incerteza, não o conteúdo.
+Arco elemental re-rodado nas LETRAS CRUAS ORIGINAIS (sem reconstrução): folha 1 Fogo12/Terra36/Ar30/Agua23;
+tabelas 2-28 Fogo15/Terra36/Ar22/Agua27; losangos 29-48 Fogo16/Terra33/Ar22/Agua30. O arco é REAL mas MAIS SUAVE que
+o base_book sugeria (a reconstrução exagerava): Água sobe 27->30%, Terra cai 36->33% rumo ao fim; Terra ainda lidera
+mas os losangos são a região mais aquosa. Dominante-por-folha ainda vira Agua em 21 folhas (os losangos). LEITURA
+CABALÍSTICA: folha 1 = mais Ar/mente (Verbo/Palavra, a fundação); 2-28 = Terra (corpo manifesto); 29-48 = tendência
+Água (profundo/dissolução). Jornada: do Verbo (Ar) pela Matéria (Terra) ao Profundo (Água). Suave, real, sobre dados
+ORIGINAIS — não é artefato de reconstrução (confound de #298 resolvido: letras são originais).

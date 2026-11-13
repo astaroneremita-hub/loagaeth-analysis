@@ -25,28 +25,30 @@ button{background:var(--nm);color:#fff;border:0;font-weight:700;cursor:pointer;p
 .tag{font-size:10px;font-weight:700;border:1px solid var(--line);border-radius:5px;padding:1px 6px;text-transform:uppercase}
 .tag.real{color:var(--terra)}.tag.exp{color:var(--mut)}
 .warn{background:var(--card);border:1px dashed var(--line);border-radius:10px;padding:8px 12px;font-size:12px;color:var(--mut);margin:10px 0}
+#lang{cursor:pointer;border:1px solid var(--line);border-radius:16px;padding:3px 12px;font-size:12px;font-weight:600;float:right}
 </style>
 </head>
 <body>
-<h1>Forja de Nomes</h1>
-<p class="sub">Gera nomes pela gramática decifrada — raiz (quem) + melodia vocálica (modo elemental). Cada um vem com sua natureza.</p>
+<span id="lang">EN</span>
+<h1 data-en="Name Forge">Forja de Nomes</h1>
+<p class="sub" data-en="Generates names by the deciphered grammar — root (who) + vowel melody (elemental mode). Each comes with its nature.">Gera nomes pela gramática decifrada — raiz (quem) + melodia vocálica (modo elemental). Cada um vem com sua natureza.</p>
 <div class="ctrl">
- <span><label>Nível:</label> <select id="lvl">
-   <option value="0">0 — só do livro (recebidos)</option>
-   <option value="1">1 — raízes + modos do livro</option>
-   <option value="2" selected>2 — raízes do livro, modos novos</option>
-   <option value="3">3 — composição (raiz+raiz)</option>
-   <option value="4">4 — raiz nova (poder novo)</option>
+ <span><label data-en="Level:">Nível:</label> <select id="lvl">
+   <option value="0" data-en="0 — book only (received)">0 — só do livro (recebidos)</option>
+   <option value="1" data-en="1 — roots + modes from the book">1 — raízes + modos do livro</option>
+   <option value="2" selected data-en="2 — book roots, new modes">2 — raízes do livro, modos novos</option>
+   <option value="3" data-en="3 — compounding (root+root)">3 — composição (raiz+raiz)</option>
+   <option value="4" data-en="4 — new root (new power)">4 — raiz nova (poder novo)</option>
  </select></span>
- <span><label>Elemento:</label> <select id="el">
-   <option value="">qualquer</option>
-   <option value="Ar">Ar — mente/palavra</option>
-   <option value="Terra">Terra — corpo/matéria</option>
-   <option value="Fogo">Fogo — vontade</option>
-   <option value="Agua">Água — emoção</option>
+ <span><label data-en="Element:">Elemento:</label> <select id="el">
+   <option value="" data-en="any">qualquer</option>
+   <option value="Ar" data-en="Air — mind/word">Ar — mente/palavra</option>
+   <option value="Terra" data-en="Earth — body/matter">Terra — corpo/matéria</option>
+   <option value="Fogo" data-en="Fire — will">Fogo — vontade</option>
+   <option value="Agua" data-en="Water — emotion">Água — emoção</option>
  </select></span>
- <span><label>Quantos:</label> <select id="qt"><option>5</option><option>10</option><option>20</option><option>50</option><option>100</option><option>500</option><option>1000</option></select></span>
- <button id="go">Forjar ⚒</button>
+ <span><label data-en="How many:">Quantos:</label> <select id="qt"><option>5</option><option>10</option><option>20</option><option>50</option><option>100</option><option>500</option><option>1000</option></select></span>
+ <button id="go" data-en="Forge ⚒">Forjar ⚒</button>
 </div>
 <div class="lvl" id="lvldesc"></div>
 <div id="out"></div>
@@ -55,12 +57,22 @@ button{background:var(--nm);color:#fff;border:0;font-weight:700;cursor:pointer;p
 var G=null;
 fetch('forge_grammar.json').then(r=>r.json()).then(d=>{G=d;boot()}).catch(()=>{document.getElementById('out').innerHTML='Abra por http://localhost:8860/';});
 var LVLD={
- '0':'Os 90 nomes que Dee recebeu. Reais pela tradição.',
- '1':'Raiz e modo ambos do livro, recombinados. Gramática fechada do Loagaeth.',
- '2':'Raízes do livro em modos (melodias) nunca falados. O mesmo poder, modo novo. Experimental defensável.',
- '3':'Duas raízes fundidas (como NOCHA+CHASTOR). Poderes conhecidos combinados.',
- '4':'Esqueleto consonantal inteiramente novo = um poder novo. Pura criação estruturada.'
+ pt:{
+  '0':'Os 90 nomes que Dee recebeu. Reais pela tradição.',
+  '1':'Raiz e modo ambos do livro, recombinados. Gramática fechada do Loagaeth.',
+  '2':'Raízes do livro em modos (melodias) nunca falados. O mesmo poder, modo novo. Experimental defensável.',
+  '3':'Duas raízes fundidas (como NOCHA+CHASTOR). Poderes conhecidos combinados.',
+  '4':'Esqueleto consonantal inteiramente novo = um poder novo. Pura criação estruturada.'
+ },
+ en:{
+  '0':'The 90 names Dee received. Real by tradition.',
+  '1':'Root and mode both from the book, recombined. The closed grammar of the Loagaeth.',
+  '2':'Book roots in modes (melodies) never spoken. Same power, new mode. Defensible experimental.',
+  '3':'Two roots fused (like NOCHA+CHASTOR). Known powers combined.',
+  '4':'An entirely new consonantal skeleton = a new power. Pure structured creation.'
+ }
 };
+var DOMEN={Ar:'mind · word · knowledge',Terra:'matter · body · stability',Fogo:'will · force · action',Agua:'emotion · flow · bond'};
 function rnd(a){return a[Math.floor(Math.random()*a.length)]}
 function elementOf(w){var c={};for(var ch of w){var e=(G.letters[ch]||{}).e||'?';c[e]=(c[e]||0)+1}var b='?',bn=0;for(var k in c)if(c[k]>bn){bn=c[k];b=k}return b}
 function planetOf(w){var c={};for(var ch of w){var p=(G.letters[ch]||{}).p;if(p&&p!=='-'){c[p]=(c[p]||0)+1}}var b='-',bn=0;for(var k in c)if(c[k]>bn){bn=c[k];b=k}return b}
@@ -87,16 +99,24 @@ function genOne(lvl,el){
  return{name:name,parse:parse||(skel.split('').join('·')+' / '+mel),real:false};
 }
 function draw(list){
+ window.LASTLIST=list;var en=window.LANG==='en';
  document.getElementById('out').innerHTML=list.map(x=>{
-  var el=elementOf(x.name),pl=planetOf(x.name),dom=G.domains[el]||'';
-  var tag=x.real?'<span class="tag real">recebido</span>':'<span class="tag exp">experimental</span>';
+  var el=elementOf(x.name),pl=planetOf(x.name),dom=(en?DOMEN[el]:G.domains[el])||'';
+  var tag=x.real?'<span class="tag real">'+(en?'received':'recebido')+'</span>':'<span class="tag exp">experimental</span>';
   return '<div class=name><span class=n>'+x.name+'</span><span class="el '+el+'">'+el+'</span>'+tag+
-   '<span class=meta>'+dom+' · regente '+pl+'</span><span class=parse>'+x.parse+'</span></div>';
+   '<span class=meta>'+dom+' · '+(en?'ruler':'regente')+' '+pl+'</span><span class=parse>'+x.parse+'</span></div>';
  }).join('');
 }
+function upd(){document.getElementById('lvldesc').textContent=LVLD[window.LANG==='en'?'en':'pt'][document.getElementById('lvl').value]}
+function setWarn(){document.getElementById('warn').textContent=window.LANG==='en'
+   ?'Honest: level 0 are received; 1-4 are generated by the grammar (valid, but not in the book). Whether a generated name "is" a real entity or a well-formed creation is your practice’s call — the analysis only guarantees it is grammatical.'
+   :'Honesto: nível 0 são recebidos; 1-4 são gerados pela gramática (válidos, mas não no livro). Se um nome gerado "é" uma entidade real ou criação bem-formada, é escolha da tua prática — a análise garante só que é gramatical.';}
+window.onLangChange=function(){
+ if(!G)return;
+ setWarn();upd();if(window.LASTLIST)draw(window.LASTLIST);
+};
 function boot(){
- document.getElementById('warn').textContent='Honesto: nível 0 são recebidos; 1-4 são gerados pela gramática (válidos, mas não no livro). Se um nome gerado "é" uma entidade real ou criação bem-formada, é escolha da tua prática — a análise garante só que é gramatical.';
- function upd(){document.getElementById('lvldesc').textContent=LVLD[document.getElementById('lvl').value]}
+ setWarn();
  document.getElementById('lvl').onchange=upd; upd();
  document.getElementById('go').onclick=()=>{
   var lvl=document.getElementById('lvl').value,el=document.getElementById('el').value,qt=+document.getElementById('qt').value;
@@ -115,5 +135,6 @@ function boot(){
  document.getElementById('go').click();
 }
 </script>
+<script src="i18n.js"></script>
 </body>
 </html>

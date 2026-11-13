@@ -25,13 +25,15 @@ h2{font-size:15px;font-weight:700;margin:24px 0 4px}
 .tabs{display:flex;gap:8px;margin-bottom:8px}
 .tab{padding:5px 14px;border:1px solid var(--line);border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;background:var(--card)}
 .tab.on{background:var(--ink);color:var(--bg)}
+#lang{cursor:pointer;border:1px solid var(--line);border-radius:16px;padding:3px 12px;font-size:12px;font-weight:600;float:right}
 </style>
 </head>
 <body>
-<h1>Peças da Língua</h1>
-<p class="sub">Os tijolos que montam todo nome: <b>esqueletos consonantais</b> (quem é o poder) e <b>melodias vocálicas</b> (o modo elemental). Cor = elemento.</p>
-<div class="legend"><b>Elementos:</b><span class="dot d-Ar"></span>Ar (mente)<span class="dot d-Terra"></span>Terra (corpo)<span class="dot d-Fogo"></span>Fogo (vontade)<span class="dot d-Agua"></span>Água (emoção)<span class="dot d-?"></span>velado</div>
-<div class="tabs"><span class="tab on" data-t="sk">Esqueletos (raízes)</span><span class="tab" data-t="ml">Melodias (modos)</span></div>
+<span id="lang">EN</span>
+<h1 data-en="Pieces of the Language">Peças da Língua</h1>
+<p class="sub" data-en="The bricks that build every name: <b>consonantal skeletons</b> (who the power is) and <b>vowel melodies</b> (the elemental mode). Colour = element.">Os tijolos que montam todo nome: <b>esqueletos consonantais</b> (quem é o poder) e <b>melodias vocálicas</b> (o modo elemental). Cor = elemento.</p>
+<div class="legend" data-en='<b>Elements:</b><span class="dot d-Ar"></span>Air (mind)<span class="dot d-Terra"></span>Earth (body)<span class="dot d-Fogo"></span>Fire (will)<span class="dot d-Agua"></span>Water (emotion)<span class="dot d-?"></span>veiled'><b>Elementos:</b><span class="dot d-Ar"></span>Ar (mente)<span class="dot d-Terra"></span>Terra (corpo)<span class="dot d-Fogo"></span>Fogo (vontade)<span class="dot d-Agua"></span>Água (emoção)<span class="dot d-?"></span>velado</div>
+<div class="tabs"><span class="tab on" data-t="sk" data-en="Skeletons (roots)">Esqueletos (raízes)</span><span class="tab" data-t="ml" data-en="Melodies (modes)">Melodias (modos)</span></div>
 <div id="out"></div>
 <script>
 var D=null,TAB='sk',PAGE=0,PER=120;
@@ -39,10 +41,11 @@ fetch('pieces.json').then(r=>r.json()).then(d=>{D=d;draw()}).catch(()=>{document
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{TAB=t.dataset.t;PAGE=0;document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===t));draw()});
 function pager(total){
  var pages=Math.ceil(total/PER);if(pages<=1)return'';
+ var en=window.LANG==='en';
  return '<div style="margin:12px 0;display:flex;gap:8px;align-items:center">'+
-  '<button class="tab pprev" '+(PAGE<=0?'disabled':'')+'>‹ anterior</button>'+
-  '<span class=note>página '+(PAGE+1)+' de '+pages+' — itens '+(PAGE*PER+1)+'–'+Math.min((PAGE+1)*PER,total)+' de '+total+'</span>'+
-  '<button class="tab pnext" '+(PAGE>=pages-1?'disabled':'')+'>próxima ›</button></div>';
+  '<button class="tab pprev" '+(PAGE<=0?'disabled':'')+'>‹ '+(en?'previous':'anterior')+'</button>'+
+  '<span class=note>'+(en?'page':'página')+' '+(PAGE+1)+(en?' of ':' de ')+pages+(en?' — items ':' — itens ')+(PAGE*PER+1)+'–'+Math.min((PAGE+1)*PER,total)+(en?' of ':' de ')+total+'</span>'+
+  '<button class="tab pnext" '+(PAGE>=pages-1?'disabled':'')+'>'+(en?'next':'próxima')+' ›</button></div>';
 }
 function wire(total){
  var pages=Math.ceil(total/PER);
@@ -51,10 +54,13 @@ function wire(total){
 }
 function draw(){
  var h='',items,total,note;
+ var en=window.LANG==='en';
  if(TAB==='sk'){items=D.skeletons;total=D.total_skeletons||items.length;
-  note='<b>'+total+'</b> esqueletos consonantais no livro inteiro (todos, por frequência). As raízes/identidades de poder. Cor pela natureza das consoantes.';}
+  note=en?'<b>'+total+'</b> consonantal skeletons in the whole book (all, by frequency). The roots/power-identities. Colour by the nature of the consonants.'
+         :'<b>'+total+'</b> esqueletos consonantais no livro inteiro (todos, por frequência). As raízes/identidades de poder. Cor pela natureza das consoantes.';}
  else{items=D.melodies;total=D.total_melodies||items.length;
-  note='<b>'+total+'</b> melodias vocálicas atestadas (de 780 possíveis) = os modos. A vogal carrega o elemento: A→Terra, O→Ar, I→Fogo.';}
+  note=en?'<b>'+total+'</b> attested vowel melodies (of 780 possible) = the modes. The vowel carries the element: A→Earth, O→Air, I→Fire.'
+         :'<b>'+total+'</b> melodias vocálicas atestadas (de 780 possíveis) = os modos. A vogal carrega o elemento: A→Terra, O→Ar, I→Fogo.';}
  var slice=items.slice(PAGE*PER,(PAGE+1)*PER);
  h+='<p class=note>'+note+'</p>'+pager(items.length)+'<div class=grid>';
  slice.forEach(x=>{
@@ -65,6 +71,8 @@ function draw(){
  document.getElementById('out').innerHTML=h;
  wire(items.length);
 }
+window.onLangChange=function(){if(D)draw()};
 </script>
+<script src="i18n.js"></script>
 </body>
 </html>

@@ -26,31 +26,42 @@ h1{font-size:22px;font-weight:700;margin:0 0 2px}
 .center .t{font-size:9px;opacity:.8}
 .warn{background:var(--card);border:1px dashed var(--line);border-radius:10px;padding:9px 13px;font-size:12px;color:var(--mut);margin:12px 0}
 @media(max-width:640px){.tablet{grid-template-columns:1fr}.center{display:none}}
+#lang{cursor:pointer;border:1px solid var(--line);border-radius:16px;padding:3px 12px;font-size:12px;font-weight:600;float:right}
 </style>
 </head>
 <body>
-<h1>Tábua do Loagaeth</h1>
-<p class="sub">Uma Torre estilo enoquiano montada com os nomes que achamos — as entidades distribuídas pelos 4 elementos, as mais fortes no cerne. O rei de cada quadrante = o nome mais forte do seu elemento.</p>
+<span id="lang">EN</span>
+<h1 data-en="Tablet of the Loagaeth">Tábua do Loagaeth</h1>
+<p class="sub" data-en="An Enochian-style Tower built from the names we found — the entities spread across the 4 elements, the strongest at the core. The king of each quadrant = the strongest name of its element.">Uma Torre estilo enoquiano montada com os nomes que achamos — as entidades distribuídas pelos 4 elementos, as mais fortes no cerne. O rei de cada quadrante = o nome mais forte do seu elemento.</p>
 <div class="warn" id="warn"></div>
 <div class="tablet" id="tab"></div>
 <script>
-var LAB={Ar:{nome:'Ar — Leste',dom:'mente · palavra · conhecimento',arc:'Raphael'},Fogo:{nome:'Fogo — Sul',dom:'vontade · força · ação',arc:'Michael'},Agua:{nome:'Água — Oeste',dom:'emoção · fluxo · vínculo',arc:'Gabriel'},Terra:{nome:'Terra — Norte',dom:'matéria · corpo · estabilidade',arc:'Uriel'}};
-var ORDER=['Ar','Fogo','Agua','Terra'];
-fetch('name_translation.json').then(r=>r.json()).then(d=>{build(d.names)}).catch(()=>{document.getElementById('tab').innerHTML='Abra por http://localhost:8860/';});
-function build(names){
- document.getElementById('warn').textContent='Honesto: a distribuição pelos 4 elementos e o "rei" de cada quadrante são uma ORGANIZAÇÃO que nós impomos (pelo elemento e força já medidos dos nomes) — não é uma Tábua histórica recebida. É os nossos nomes arrumados à moda enoquiana, para uso.';
+var LAB={
+ pt:{Ar:{nome:'Ar — Leste',dom:'mente · palavra · conhecimento',arc:'Raphael'},Fogo:{nome:'Fogo — Sul',dom:'vontade · força · ação',arc:'Michael'},Agua:{nome:'Água — Oeste',dom:'emoção · fluxo · vínculo',arc:'Gabriel'},Terra:{nome:'Terra — Norte',dom:'matéria · corpo · estabilidade',arc:'Uriel'}},
+ en:{Ar:{nome:'Air — East',dom:'mind · word · knowledge',arc:'Raphael'},Fogo:{nome:'Fire — South',dom:'will · force · action',arc:'Michael'},Agua:{nome:'Water — West',dom:'emotion · flow · bond',arc:'Gabriel'},Terra:{nome:'Earth — North',dom:'matter · body · stability',arc:'Uriel'}}
+};
+var ORDER=['Ar','Fogo','Agua','Terra'],NAMES=null;
+fetch('name_translation.json').then(r=>r.json()).then(d=>{NAMES=d.names;build()}).catch(()=>{document.getElementById('tab').innerHTML='Open via http://localhost:8860/';});
+window.onLangChange=function(){if(NAMES)build()};
+function build(){
+ var names=NAMES,en=window.LANG==='en',LB=LAB[en?'en':'pt'];
+ document.getElementById('warn').textContent=en
+   ?'Honest: the spread across the 4 elements and the "king" of each quadrant are an ORGANIZATION we impose (by the already-measured element and force of the names) — not a received historical Tablet. It is our names arranged in the Enochian manner, for use.'
+   :'Honesto: a distribuição pelos 4 elementos e o "rei" de cada quadrante são uma ORGANIZAÇÃO que nós impomos (pelo elemento e força já medidos dos nomes) — não é uma Tábua histórica recebida. É os nossos nomes arrumados à moda enoquiana, para uso.';
  var by={Ar:[],Fogo:[],Agua:[],Terra:[]};
  names.forEach(x=>{if(by[x.whole_element])by[x.whole_element].push(x)});
+ var ent=en?'entities':'entidades',arcw=en?'archangel':'arcanjo';
  var h='';
  ORDER.forEach(el=>{
   var list=by[el].sort((a,b)=>(b.force||0)-(a.force||0));
-  var L=LAB[el];
-  h+='<div class="quad '+el+'"><h2>'+L.nome+'</h2><div class=dom>'+L.dom+' · arcanjo '+L.arc+' · '+list.length+' entidades</div><div class=cells>';
+  var L=LB[el];
+  h+='<div class="quad '+el+'"><h2>'+L.nome+'</h2><div class=dom>'+L.dom+' · '+arcw+' '+L.arc+' · '+list.length+' '+ent+'</div><div class=cells>';
   list.forEach((x,i)=>{h+='<span class="cell'+(i===0?' king':'')+'">'+(i===0?'♔ ':'')+'<b>'+x.name+'</b> <span class=f>'+(x.force||'—')+'</span></span>';});
   h+='</div></div>';
  });
- document.getElementById('tab').innerHTML=h+'<div class=center><div class=n>NOCHA</div><div class=t>o Verbo · cerne</div></div>';
+ document.getElementById('tab').innerHTML=h+'<div class=center><div class=n>NOCHA</div><div class=t>'+(en?'the Word · core':'o Verbo · cerne')+'</div></div>';
 }
 </script>
+<script src="i18n.js"></script>
 </body>
 </html>

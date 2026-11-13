@@ -1229,3 +1229,537 @@ mas os losangos são a região mais aquosa. Dominante-por-folha ainda vira Agua 
 CABALÍSTICA: folha 1 = mais Ar/mente (Verbo/Palavra, a fundação); 2-28 = Terra (corpo manifesto); 29-48 = tendência
 Água (profundo/dissolução). Jornada: do Verbo (Ar) pela Matéria (Terra) ao Profundo (Água). Suave, real, sobre dados
 ORIGINAIS — não é artefato de reconstrução (confound de #298 resolvido: letras são originais).
+
+## #300 — Soyga × Loagaeth × Torres: ponte é CODICOLÓGICA, não linguística (a150)
+Teste direto Soyga↔Loag↔Torres (a150_soyga_bridges), pedido: que ligação/padrão tem o Soyga. Contexto já tido: a36
+(8 tabelas Soyga 36×36 copiadas no fim do MESMO Sloane 3189, geradas pela regra de Reeds célula=acima+f(esq) mod 23)
+e a61 (Loag NÃO é gerado pela regra Soyga — célula Soyga 100% determinada pelos vizinhos, célula Loag guarda ~a maior
+parte da entropia). Novos testes:
+1) NOMES como substring (vs null de embaralhamento): nomes Loag dentro do Soyga = 0 hits (z−0.26); nomes das Torres
+   dentro do Soyga = 0 (z−0.41); linhas Soyga dentro de Loag = 0; dentro das grades das Torres = 0. ZERO ponte lexical
+   nos dois sentidos. Nenhum vocabulário compartilhado.
+2) SIMILARIDADE DE SOM (cosseno). Letra: Loag-Torres 0.849 (irmãs), Soyga-Torres 0.75, Soyga-Inglês 0.758,
+   Soyga-Loag 0.598. O perfil de letra do Soyga está TÃO perto do inglês quanto das Torres e LONGE do Loag — Soyga é
+   texto latino, não da família enoquiana. Bigrama: Soyga-Torres 0.41 > Loag-Torres 0.365, mas é artefato de GRADE
+   (Soyga e as Torres são ambos quadrados de letra; Loag é lista de palavras) — Soyga-Loag 0.155 (baixíssimo) é o sinal
+   real.
+3) ANTI-HIATO (vogal-vogal %): Loag 1.0% (CV estrito, a assinatura Loag), Soyga 4.7%, Inglês 5.2%, grades Torres 11.5%.
+   Soyga ~ inglês; NÃO tem a fonotática CV do Loag.
+VEREDITO: Soyga NÃO é língua-irmã do Loag/Torres. Sem nomes em comum, não gerado pela mesma regra, perfil de letra
+latino (agrupa com inglês), sem o anti-hiato Loag. As ligações são só HISTÓRICAS/CODICOLÓGICAS: mesmo manuscrito
+(Sloane 3189), mesmo autor/escriba (a36 usa Soyga pra calibrar a mão do copista), mesmo GÊNERO (tabela de letras como
+veículo de saber angélico). Soyga é o PRECEDENTE RESOLVIDO: prova que Dee já trabalhava com tábuas de letra algorítmicas
+(Soyga, pergunta ao anjo Uriel em 1582) ANTES de receber o Loagaeth — semente conceitual, não fonte textual. Loag é
+outra besta: não-determinística, vocabulário próprio, fonotática própria. CONFIRMADO NOVO.
+
+## #301 — Gramática PRÓPRIA das Torres: federação de camadas, NÃO uma língua (a151)
+Ataque standalone às Torres de Vigia (a151_tower_grammar), sem basear no Loag, com as classes de nome
+do sistema: HOLY (12 Nomes Sagrados / Linea Spiritus Sancti), ANGEL (377 nomes de anjo lidos dos
+quadrados da Grande Tábua), GOV (91 Governadores), KING (12 reis), CALL (706 palavras das 19 Chamadas).
+Mesma bateria do Loag (anti-hiato, raiz-e-padrão vs null de embaralhamento de vogal, afixos, ponte).
+ACHADOS:
+1) FONOTÁTICA ≠ Loag. Vogal-vogal: HOLY 19.4%, ANGEL 10.9%, GOV 6.6%, KING 4.2% — nenhuma tem o anti-hiato
+   ESTRITO do Loag (1.0%). Nomes das Torres são RICOS EM VOGAL (AOZPI, IBAH, AAAIR). Loag é CV estrito;
+   Torres não.
+2) RAIZ-E-PADRÃO só na camada ANGEL: rootpat 52.5% z=25.4 — MAS é a construção conhecida da Grande Tábua
+   (nomes lidos/rotacionados dos mesmos quadrados de letra compartilham esqueleto; esqueletos curtos de
+   1-3 consoantes em nomes vogal-pesados), não morfologia produtiva tipo Loag. GOV 0% (z−0.2), KING 0%,
+   HOLY 0% — não compartilham esqueleto.
+3) AS CAMADAS NÃO SÃO UMA LÍNGUA. Overlap de esqueleto entre classes ~0: GOV×ANGEL 0, KING×ANGEL 0,
+   HOLY×ANGEL jaccard 0.012, GOV×HOLY 0. Os "nomes das Torres" são VÁRIOS sistemas distintos (Nomes
+   Sagrados, anjos-de-quadrado, governadores, reis), cada um construído de um jeito, sem léxico comum.
+4) PONTE COM CHAMADAS = NULA. Palavras das Chamadas dentro da Grande Tábua: 0 hits (z−0.9). CALL×TOWER
+   esqueleto jaccard 0.017. (Controle de governador por substring é VAZIO — governadores são lidos por
+   CAMINHO em ziguezague na tábua, não em linha reta; já confirmados pelo 'caminho' em governadores.json.
+   Logo não aparecem como substring, mas vêm sim da tábua. O z=1e9 impresso é artefato de div-por-zero.)
+VEREDITO: a Grande Tábua / Torres é uma FEDERAÇÃO DE CAMADAS, não uma língua única. Oposto do Loag, que é
+UMA língua (uma gramática, matriz NOCHA compartilhada em todas as folhas). As Torres: vogal-ricas, sem
+anti-hiato, construídas lendo quadrados de letra por regras geométricas (caminhos, rotações, cruz/Linea),
+não por morfologia raiz-e-padrão produtiva. A única camada "semítica" (anjos-de-quadrado) é permutacional,
+não gerativa. Confirma e precisa a296 (Torres mais root-pattern que Loag): é artefato de leitura de grade,
+não língua mais semítica. CONFIRMADO NOVO.
+
+## #302 — Espectro dos 4 dialetos em 2 eixos: Verbo→Trono→Voz→Grade (loop)
+Primeira vez rodando os 4 dialetos angelicais na MESMA régua (results/321_dialect_spectrum.json):
+LOAG hiato 1.0% rootpat 40% z63.6 | HEPTARQUIA hiato 1.4% rootpat 11.5% z9.2 | CHAMADAS hiato 7.0%
+rootpat 24.1% z12.9 | TORRES hiato 9.8% rootpat 42.1% z24.7. DOIS EIXOS ORTOGONAIS separam o sistema:
+(1) anti-hiato racha em 2 pares — Loag+Heptarquia CV-estritos (~1%), Chamadas+Torres vogal-soltos (7-10%);
+(2) raiz-padrão/produtividade — Loag máximo, Torres alto (por grade), Chamadas médio, Heptarquia BAIXO.
+SURPRESA: Heptarquia é CV-estrita como o Loag MAS não-gerativa (z9) — roster FIXO de 49 nomes planetários,
+não morfologia que gera. Loag fala; Heptarquia é conjunto fechado. LENTE CABALÍSTICA (4 Mundos):
+LOAG=Atziluth (emanação/Verbo, máx nos 2 eixos), HEPTARQUIA=Briah (criação/trono arquetípico, pronunciável
+mas dado), CHAMADAS=Yetzirah (formação/voz vibrada, vogal-rica), TORRES=Assiah (ação/matéria, nome por
+posição na grade). Descida Verbo→Trono→Voz→Grade medida, não imposta. CONFIRMADO NOVO.
+
+## #303 — Loag NÃO usa construção tipo-Soyga: as 2 assinaturas estão ausentes (resposta ao doc 2026)
+Pergunta do material compartilhado (ChatGPT, cita Cocciolilo/Louv 2026): "o Loagaeth foi construído por
+princípio matemático semelhante ao Soyga?". Testes nitidos nas 36 grades limpas 2-28:
+A) COLUNA-SEMENTE: Soyga define a col 0 como palavra-chave+reverso repetidos (palíndromo/periódico ~1.0).
+   Loag col0: palíndromo 0.131 vs interior 0.083; melhor-período 0.230 vs interior 0.195 — col0 MAL se
+   distingue de coluna interna, longe da semente estruturada do Soyga. SEM semente.
+B) REGRA DE VIZINHO: Soyga = célula função fixa de (acima,esq), regenera 100%. Aprendi a regra mais comum
+   de (acima,esq)->célula em metade das grades e reconstruí a outra metade: 29.1% de acerto (Soyga 100%,
+   acaso ~4.8%). Os vizinhos carregam ALGUMA info (29>5) mas é só a fonotática CV/anti-hiato tornando a
+   letra localmente previsível — NÃO um gerador determinístico.
+VEREDITO: as DUAS assinaturas que definem uma tabela Soyga (semente palindrômica + propagação determinística
+100%) estão AUSENTES no Loag. Confirma e aguça a61 (entropia condicional) com métrica de reconstrução. O doc
+de 2026: (1) Cocciolilo "staged table-engine" CONVERGE com o nosso achado de livro faseado/regional (folha1
+selada, 2-28 NOCHA, losangos GETH/CHASTOR, arco elemental) — mas "engine" gerador vale só pra GRAMÁTICA DOS
+NOMES, não pras células da tabela (que não têm regra); (2) Louv "fonte da função de Reeds = seção 18 do Soyga"
+é sobre a origem do SOYGA, não toca o Loag; preprint, não consenso. Ligação Soyga-Loag segue CODICOLÓGICA
+(8 tabelas Soyga no mesmo Sloane 3189, a36), não construtiva. CONFIRMADO NOVO.
+
+## #304 — Heptarquia é GRID-DERIVADA; o eixo real é lido-da-grade vs ditado. 2x2 dos dialetos (a152)
+Deep-dive pedido nas Torres+Heptarquia (a152_heptarchy_tower_deep), aprofundando #301/#302.
+H1 — HEPTARQUIA GRID-DERIVADA: 44/49 nomes (90%) são LIDOS das 7 tabelas da Heptarquia (status 'confere'),
+igual aos nomes das Torres lidos da Grande Tábua. Logo a Heptarquia NÃO é falada/ditada como o Loag — é um
+sistema de LEITURA DE GRADE. REFRAME: o eixo real da família não é o anti-hiato (#302), é a ORIGEM:
+  LIDO-DA-GRADE: Heptarquia (7 tabelas), Torres (Grande Tábua)
+  DITADO/RECEBIDO COMO FALA: Loagaeth, Chamadas (ditadas letra a letra por Nalvage)
+O anti-hiato cruza esse eixo num 2x2 limpo: grid+CV-estrito=HEPTARQUIA; grid+vogal-rico=TORRES;
+ditado+CV-estrito=LOAG; ditado+vogal-rico=CHAMADAS. Origem × fonotática = 2 eixos ortogonais, 4 dialetos.
+H2 — 7x7 PLANETÁRIO é ADMINISTRATIVO, não linguístico: os 49 nomes dividem-se em 7 grupos de 7 perfeitos
+(por planeta), MAS os grupos NÃO têm assinatura de letra distinta (cos real 0.908 vs null 0.866, z+2.29 —
+mais parecidos que o acaso, não menos). E os 49 nomes TODOS começam com B (BALIGON, BORNOGO, BABALEL...) —
+uma "casa-B" uniforme: família fechada marcada por inicial única, análogo fraco à matriz NOCHA do Loag mas
+NÃO gerativa (roster fixo de 49). O 7 está na ORGANIZAÇÃO (atribuição planetária), não nas letras.
+T1 — TORRES permutacional NÃO comprovado: cada tábua usa ~20-22 letras distintas (o alfabeto inteiro) para
+~95 nomes, pares-anagrama só 2.7%, pools das 4 tábuas 86-95% iguais (alfabeto cheio, trivial). A hipótese de
+"pool minúsculo/anagrama" cai — o compartilhamento de esqueleto de #301 é repetição de leitura-de-grade em
+nomes curtos, mecanismo NÃO fixado em anagrama. Honesto: sub-hipótese refutada.
+VEREDITO: descoberta nova = a Heptarquia pertence à família GRID (com as Torres), não à falada. Mapa dos
+dialetos vira 2x2: ORIGEM (grade/ditado) × FONOTÁTICA (CV/vogal). Casa-B da Heptarquia confirmada. CONFIRMADO NOVO.
+
+## #305 — Heptarquia = LOCK-7 total: template fixo B+6, 49 nomes de 7 letras numa grade 7x7
+"Achou padrão na Heptarquia?" — SIM, o mais forte. Medido nos 49 nomes da Tabula Collecta:
+- COMPRIMENTO TRAVADO: TODOS os 49 têm EXATAMENTE 7 letras (desvio 0.0). Loag varia 4-11 (desvio 1.6).
+  Template rígido, não morfologia livre.
+- INICIAL TRAVADA: TODOS começam com B (pos0 entropia 0.0). Casa-B confirmada como regra, não tendência.
+- ESTRUTURA 7x7: grade 7 linhas (1 por rei/tabela) x 7 colunas = col0 os 7 REIS (BALIGON BOBOGEL BABALEL
+  BYNEPOR BNASPOL BNAPSEN BLVMAZA), col1 os 7 PRINCIPES (BORNOGO BEFAFES BVTMONO BLISDON BRORGES BRALGES
+  BAGENOL), col2-6 os 35 MINISTROS. Reis/principes em MAIUSCULA na fonte, ministros em Title-case — a
+  realeza marcada tipograficamente.
+- TEMPLATE CV FROUXO: fracao-vogal por posicao [0.0, 0.63, 0.35, 0.22, 0.51, 0.49, 0.47] — pos0=B(cons),
+  pos1=maioria vogal, pos3=maioria consoante. Daí o anti-hiato de 1.4% (#302): é consequência do template,
+  não fonotática produtiva. Entropia posicional 2.9-3.6 bits (livre dentro do molde, mas sob teto de 21-letras).
+- SATURACAO DO 7: 7 reis, 7 tabelas, 7 nomes/tabela, 7 LETRAS/nome, 7 planetas, 7 dias. O numero 7 satura
+  cada nivel. A Heptarquia É o 7 feito nome — heptada selada.
+VEREDITO: a Heptarquia é um sistema FECHADO E CONTADO (49=7x7, cada nome B+6=7), não gerativo como o Loag.
+Dois lock duros (len=7, inicial=B) dão o caráter de "roster fixo" de #302/#304. LENTE CABALISTICA: 7 = número
+da construção (os 7 dias do Gênesis, 7 planetas, 7 sefirot inferiores da edificação Chesed->Malkuth). Loag é
+49=7^2 com nomes LIVRES; a Heptarquia colapsa pro 7 e TRAVA os nomes — é a arquitetura setenária da criação,
+nomeada e selada. CONFIRMADO NOVO.
+
+## #306 — O Loag é LÉXICO SELADO: só os nomes dele saem dele, nenhum outro sistema (a151 reuse)
+Pergunta: "nenhum nome sai do Loag?" — teste substring de TODOS os sistemas nas 8329 linhas do Loag
+(linhas+colunas+diagonais das 49 folhas), vs null de embaralhamento (40 trials):
+- Loag-próprio (90): 90/90 hits, null 6.3, z=44.8 — controle POSITIVO: os nomes do Loag estão no Loag.
+- Heptarquia (49): 1 hit (null ~0) — um nome curto por acaso, estatisticamente ZERO.
+- Governadores (91): 0 hits. ZERO.
+- Anjos-Torre (376): 40 hits vs null 66.2, z=−5.3 — ABAIXO do acaso (nomes vogal-ricos encaixam PIOR que
+  strings aleatórias na fonotática anti-hiato do Loag). Ativamente ausentes.
+- Nomes Sagrados (8): 2 vs 4.0, z=−2.3 — abaixo do acaso.
+- Chamadas (631): 72 vs 74.2, z=−0.4 — EXATAMENTE acaso. Palavras das Chamadas não vivem na grade do Loag
+  acima do acaso (não contradiz o elo Loag-Chamadas de a145, que é alinhamento Gebofal Chamada N→folha N+1
+  e vocabulário, não presença de substring em massa).
+VEREDITO: pela MESMA regra de leitura que extrai os 90 nomes do Loag (linha reta), NENHUM nome de outro
+sistema emerge. O Loag é um léxico FECHADO: contém massivamente os próprios nomes (z=45) e nada dos outros
+(zero ou abaixo do acaso). Reforça #300/#301/#304: Loag é língua própria e selada, não um container/fonte dos
+outros sistemas angelicais. A tradição de que o Loag seria a fonte de TODOS os nomes NÃO se sustenta na
+medição — cada sistema é revelação própria. (Ressalva: Torres/Heptarquia são lidas por CAMINHOS geométricos
+nas tábuas delas, não linha reta; este teste descarta leitura-reta, não todo caminho concebível.) CONFIRMADO NOVO.
+
+## #307 — Instrução de leitura-vertical do Dee NÃO cifra-gera os 49; roster recebido confirmado (fontes do usuário)
+Documento do usuário (De Heptarchia Mystica, Sloane 3191; transcrição Peterson) traz a instrução do Dee:
+montar tabela, 7 espaços no topo, inserir letras dos reis, depois dos príncipes, LER NA VERTICAL. Testado
+contra os 7 reis + 7 príncipes + 35 ministros reais:
+- LEITURA VERTICAL (reis+príncipes empilhados 14x7, ler colunas): produz strings (col1=AOAYNNLOEULRRA...)
+  mas NÃO soletram os 49 anjos nem os ministros. col0=BBBBBBBBBBBBBB (todos B, trivial).
+- MINISTROS = anagrama de rei+príncipe? NÃO: cobertura de letras 54-83% (não 100%). Os 35 ministros não são
+  derivados por rearranjo das letras do rei+príncipe. Só partilham o alfabeto B-pesado.
+- Colunas da grade 7x7: iniciais todas B (trivial), sem nome oculto vertical.
+VEREDITO: a instrução do Dee é um método real de ARRANJO de uma tabela, mas NÃO é uma cifra que gera os 49
+nomes a partir dos reis/príncipes. Confirma a própria ressalva do documento ("não há pesquisa que demonstrou
+cifra oculta gerando toda a Heptarquia") e meu #305: os 49 são um ROSTER RECEBIDO em bloco, travado pelo
+template (inicial B + 7 letras + grade 7x7 + atribuição planetária #304), não computado de uma semente.
+Pesquisa-1 do doc (49 saem de regra matemática dos reis) = NEGATIVO nos testes diretos. Pesquisa-3 (matriz
+planetária) já respondida em #304 (7x7 administrativo, sem assinatura de letra). Pesquisa-4 (mecanismo
+compartilhado com Loag) já em #304/#306 (Heptarquia é grid-lida/recebida, não aparece no Loag; sem cifra
+comum). Pesquisa-2 (selos = trajetórias geométricas) precisa de dados de geometria de selo que não temos.
+A ARQUITETURA da Heptarquia é reconstruível (template + 7x7 + planetas); uma CIFRA GERADORA dos nomes não
+existe nos dados — recebidos, não gerados. CONFIRMADO NOVO (resultado negativo decisivo).
+
+## #308 — Geometria dos governadores: 97% king-move, o nome é um GESTO contíguo na Grande Tábua (loop)
+Os 91 governadores são lidos por CAMINHO na Grande Tábua (caminho[].abs_recensa em governadores.json).
+Medidos os 546 passos entre letras consecutivas:
+- 97% dos passos são KING-MOVE (célula adjacente, distância Chebyshev=1) vs 2.7% no acaso (pares aleatórios
+  numa tábua 13x25). Os nomes são traçados por gestos quase-contíguos, não saltos.
+- comprimento médio do caminho: 7 letras (os nomes têm ~7). Distribuição de passo: 532 de dist=1, poucos
+  saltos (8 de dist=2, raros longos = provável fim/recomeço de nome).
+- direção enviesada: Esquerda (173) e Baixo (123) dominam sobre Direita (53)/Cima (53) — leitura
+  preferencial para a esquerda e para baixo.
+VEREDITO: a Torre produz nome por TRAJETÓRIA geométrica contígua (gesto), confirmando #304 (grid-lida) com o
+mecanismo medido. Responde a Pesquisa-2 do doc do usuário (selos/nomes = trajetórias em grade) para os
+governadores: SIM, trajetória king-move. CONFIRMADO NOVO.
+
+## #309 — Algoritmo dos 49 anjos VERIFICADO: letra-por-número nas 7 tabelas reproduz a Tabula Collecta (fontes do usuário)
+Regra de Uriel (sete_tabelas.regra_declarada; doc do usuário secao 2): cada uma das 7 tabelas 7x7 tem 49
+células numeradas 1-49 com uma letra; junta-se a letra de MESMO número da 1a à 7a tabela, todas começando
+por B, formando os 49 nomes. TESTADO reconstruindo: para n=1..49, concatenar a letra no número n de cada
+uma das 7 tabelas. RESULTADO: 40/49 exatos (82%), os 16 PRIMEIROS perfeitos (BALIGON BORNOGO BAPNIDO...),
+e as 9 falhas são TODAS buracos de transcrição (célula faltante '?' em BAZP?MA, BARNAF?, BINO?AB...) ou
+variante de 1 letra de escriba (BLINGOM/BLINTOM) — NÃO falha de regra. Onde o dado está completo, reproduz
+100%. ALGORITMO HISTÓRICO CONFIRMADO: os 49 anjos são EXTRAÍDOS das 7 tabelas por índice numérico, não
+inventados nem computados dos reis/príncipes (consistente com #307: não saem das letras do rei+príncipe —
+saem das 7 tábuas numeradas). Os 7 reis são os n=1,8,15,22,29,36,43 (cada +7). LENTE CABALÍSTICA: cada nome
+está DISTRIBUÍDO pelas 7 tabelas (7 céus/planetas) — uma letra em cada — e o número sagrado o REÚNE; o nome
+do anjo vive através dos sete mundos e é colhido em um. Unidade colhida do sete. CONFIRMADO NOVO.
+
+## #310 — Nomes recebidos da Heptarquia: gramática FRACA, sem cifra; a semelhança É o template (fontes do usuário)
+Pergunta recorrente do usuário + doc ("os nomes recebidos têm padrão? por que tão parecidos se recebidos
+um a um?"). Testado nos 49 nomes:
+- BIGRAMA: top-20 massa 0.442 vs 0.356 em strings B+6 aleatórias de mesmo perfil CV, z=4.1 — há gramática
+  fonotática REAL mas MODESTA (transições preferidas), não letras arbitrárias.
+- TERMINAÇÃO -EL (semítica, hipótese do doc): só 2/49 (BOBOGEL, BABALEL). Terminações reais: -ES(5) -ON(4)
+  -LO/-LE/-OL(3). O "-el angélico" NÃO é padrão dos nomes recebidos — vem de MISTURAR a camada tradicional
+  (Raphael, Samael, Cassiel, Zedekiel... = anjos planetários hebraicos CLÁSSICOS de etimologia conhecida,
+  atribuição posterior/GD), que NÃO são os nomes-B do Dee. Nos príncipes reais do diário só HAGONEL tem -el.
+- SÍLABA REPETIDA (XY-XY): 2/49 (BOBOGEL, BABALEL) vs null 1.1 — só esses dois, não sistemático.
+- RAÍZES RECORRENTES: trigramas BLI(5) BAL(4) BAR(4) BAS(3) BRA(3) BNA(3) são quase todos artefato do
+  B-inicial + alfabeto pequeno; GES(4) é a única raiz-final recorrente real (BRORGES/BRALGES/BMILGES).
+- GRUPOS PLANETÁRIOS: coesão dentro 0.340 ≈ entre 0.356 — SEM sub-família por planeta (confirma #304).
+- NÚMERO→LETRA: fraco (top-letra por grupo 0.33 vs geral 0.16 em pos2) — sem cifra número→letra.
+VEREDITO: os nomes recebidos têm o TEMPLATE DURO (B + 7 letras + CV frouxo) + gramática fonotática fraca
+(z4) + raízes marginais; NÃO têm cifra geradora, nem -el sistemático, nem sub-estrutura planetária. Resposta
+à pergunta essencial do doc: a SEMELHANÇA entre os nomes É O TEMPLATE imposto pelo formato de recepção (7
+tabelas, regra de Uriel) — convenção, não cifra oculta. Além do molde, as letras são quase-arbitrárias, o que
+é COERENTE com 'recebidos' e não 'computados'. A origem das letras específicas segue sem explicação (como o
+doc admite). Experimentos do doc: A(fonética) = sui generis, não hebraico/latim; C(combinatório) = fraco;
+D(Soyga/Loag) = já negativo #300/#306; B(gematria) = pendente, próximo. CONFIRMADO NOVO (caracterização
+decisiva do que os nomes são e não são).
+
+## #311 — Instrução 12×7 (remover os Bees) é dimensionalmente EXATA; mapa rei-dia confirma Peterson (doc do usuário)
+Doc do usuário (programa de criptanálise, prioridade: 14 nomes + tabela 12×7). Testes:
+- MAPA REI-DIA: meu dado = Bobogel/domingo, Carmara/segunda, Babalel/terça, Bnaspol/quarta, Bynepor/quinta,
+  Baligon/sexta, Bnapsen/sábado — BATE 100% com a correção de Peterson no doc.
+- INSTRUÇÃO 12×7 + REMOVER BEES: 7 reis + 7 príncipes = 14 nomes × 7 letras; remover o B inicial (os "Bees")
+  = 14 × 6 = 84 letras = EXATAMENTE 12×7. A aritmética da instrução do Dee fecha perfeita — confirma que a
+  "tabela dividida em 12 e 7" é construída dos 14 nomes sem B. Scaffold VALIDADO.
+- LEITURA VERTICAL: montei 12×7 e 7×12 e li as colunas (col0=ABAPONOFMDES...), mas NÃO há match óbvio porque
+  (a) não temos no repo as letras-alvo da Mesa Sagrada/Lamen pra validar, (b) a ordem de preenchimento e
+  direção de leitura ficam subdeterminadas sem o alvo. Honesto: scaffold (84=12×7) confirmado; CONTEÚDO
+  extraído não validável sem a fonte da Mesa/Lamen (esotericarchives chm.htm/hm.htm — pendente).
+MAPA DO PROGRESSO vs programa do doc:
+- Sistema 2 (49 anjos): algoritmo PROVADO (#309, reproduz 40/49, 100% onde dado completo). Objetivo A: FEITO.
+- Sistema 3 (42 ministros): são os 49 menos reis/príncipes, mesma extração #309. COBERTO.
+- Sistema 1 (reis/príncipes origem): #310 — sem cifra, template+gramática fraca, origem não explicada.
+  Objetivo B: respondido NEGATIVO (nenhuma matriz/cifra anterior encontrada).
+- Sistema 5 (Mesa Sagrada): scaffold 12×7 confirmado (#311), conteúdo pendente de alvo.
+- Sistema 4 (selos): não feito, falta geometria dos selos.
+- Métodos: frequência/entropia FEITO(#305/#310), matrizes FEITO(#309/#308), permutação/combinatória FEITO(#310),
+  grafo-raiz FEITO(#310); gematria PENDENTE; busca-genética não necessária (regra achada por construção).
+- Validação: reprodução histórica FEITA(#309); geração nova FEITA(forja heptarchia.html, rotulada); predição
+  cega implícita; cross-manuscrito PENDENTE (só 1 transcrição no repo).
+VEREDITO: Objetivo A (reprodução dos 49) ATINGIDO; Objetivo B (origem dos 14) NEGATIVO — são semente recebida,
+não computada; Objetivo C (geração) FEITO e rotulado. Abertos: Mesa/Lamen (precisa alvo), selos (precisa
+geometria), gematria (fazível já), cross-manuscrito (precisa 3188/36674). CONFIRMADO NOVO.
+
+## #312 — 91 Governadores: trava de 7 letras + inicial LIVRE, gramática fraca, SEM cifra nem sub-grupo (doc do usuário)
+Prioridade do doc: investigar os 91 Governadores (investigação A: origem dos nomes). Bateria linguística:
+- COMPRIMENTO: TODOS os 91 têm EXATAMENTE 7 letras (trava, como a Heptarquia) — MAS inicial LIVRE (T13 O12
+  P8 V7 A7 S6...), não travada em B. Então: template de comprimento sim, template de inicial não.
+- ANTI-HIATO: 6.6% (meio-termo: Loag 1.0, Heptarquia 1.4, Torres-anjo 10.9).
+- RAÍZES RECORRENTES: trigramas CHI(5) AND(5) OAN(5) RZI(4) AMB(4) PAR(4) DOA OAG IAL AMA ZIA OCA — MAIS
+  raízes recorrentes que a Heptarquia. Terminações -ND(6) -ON(5) -MB(5) -AL(4).
+- BIGRAMA: top-25 massa 0.440 vs 0.338 aleatório, z=4.8 — gramática fonotática REAL mas modesta (como
+  Heptarquia z4.1).
+- COESÃO POR AETHYR: 0.232 mesmo-Aethyr vs 0.278 par aleatório — SEM coesão (os ~3 governadores de um Aethyr
+  NÃO compartilham letras). Sem sub-grupo por Aethyr.
+- RAIZ-E-PADRÃO: 0% z=0 — NENHUM par de governadores compartilha esqueleto consonantal. Cada nome tem
+  esqueleto ÚNICO. (Oposto do Loag 40%; nem o eco fraco da Heptarquia.)
+VEREDITO: como a Heptarquia, os 91 têm TRAVA DE COMPRIMENTO (7) + eco fonotático fraco (bigrama z5, algumas
+raízes), MAS inicial livre, zero cifra, zero sub-estrutura por Aethyr, cada esqueleto único. Resposta à
+investigação A do doc: NENHUM algoritmo interno gera os 91 — são recebidos, não computados (confirma a
+situação 'origem não demonstrada' do doc). CONTRASTE com a Heptarquia: ambos travados em 7 letras e grid-lidos
+(#304), mas Heptarquia = inicial-B + extração por NÚMERO (transposição das 7 tabelas, #309); Governadores =
+inicial-livre + extração por CAMINHO king-move (trajetória numa tábua, #308). Duas geometrias de leitura
+diferentes sobre o mesmo princípio 'nome lido da grade'. O 7-letras é comum aos dois sistemas. Sobre a questão
+central do doc (nomes primeiro ou nomes+torres um só sistema): os nomes não têm regra geradora própria, logo
+não há 'sistema matemático anterior' que os produza — o sistema é a TÁBUA + regra de leitura; as letras
+específicas foram recebidas. CONFIRMADO NOVO.
+
+## #313 — Estrutura CRUA das Torres: um alfabeto, elemento POSICIONAL, grade porta-nomes (não cifra)
+Pedido do usuário: decifrar a grade crua dos 4 quadrantes (letras/posições/elementos), não os nomes conhecidos.
+Cada quadrante = 13x12 = 156 células (linha 7 = ORO IBAH AOZPI = barra horizontal da Cruz Negra). Testes:
+1) UM ALFABETO, UMA FREQUÊNCIA: os 4 quadrantes têm distribuição de letra quase idêntica (cosseno 0.93-0.96,
+   todos A-dominante: A~18%, depois O,I — vogal-pesado, como os nomes das Torres #301). Não são 4 línguas.
+2) QUADRANTES INDEPENDENTES: identidade posição-a-posição entre pares = 8-10% = EXATO acaso. Nenhum espelho
+   (H/V/HV) nem rotação liga um quadrante a outro. São 4 preenchimentos independentes do mesmo alfabeto.
+3) ELEMENTO NÃO ESTÁ NAS LETRAS: composição elemental das letras (atribuição Dee/GD, a85) é ~uniforme em todo
+   quadrante — o quadrante do FOGO tem as MENOS letras-de-fogo (15%), o da TERRA pouca terra (20%). O elemento
+   é POSICIONAL/administrativo (vem da direção e da Cruz), não codificado nas letras. Igual aos planetas da
+   Heptarquia (#304). Padrão consistente nos dois sistemas: a correspondência mágica é endereço, não conteúdo.
+4) GRADE NÃO É ALEATÓRIA, mas é textura fonotática, não cifra: anti-hiato LINHAS 11.5% < COLUNAS 13.2% <
+   aleatório 16.3% — há estrutura CV real e a grade lê-se mais em LINHA que coluna (onde correm os nomes).
+   Trigramas repetidos z=1.4 (sem cifra de repetição). Por linha (AR): linhas ímpares de preenchimento ~0%
+   hiato (consoante-espalhada), linhas porta-nome (7=Nomes Sagrados 18%, 9-10 com clusters vocálicos 27-45%)
+   carregam as vogais dos nomes reais.
+VEREDITO (por que essas letras nessas posições): a grade é um PORTA-NOMES — as letras estão postas para que os
+nomes (Divinos, Reis, Seniores, Governadores) possam ser LIDOS nas posições canônicas da Cruz/sub-ângulos; o
+resto é preenchimento que obedece à mesma distribuição vogal-pesada. NÃO há cifra de célula gerando a grade,
+NÃO há codificação de elemento nas letras, NÃO há relação de transformação entre quadrantes. Um alfabeto
+enoquiano + regra de posição + elemento por endereço. Coerente com #306/#312 (letras recebidas, lidas por
+posição; origem das letras não computada). CONFIRMADO NOVO.
+
+## #314 — Loag → Torres/Heptarquia (Exp A/B/C do doc): irmãos, não pai-filho; componentes partilhados PARCIAIS
+Doc pede: o gerador do Loag produz/fornece componentes dos outros sistemas? O gerador Loag = RAIZ-E-PADRÃO:
+esqueleto consonantal (1948, do livro) × melodia vocálica (288) tecidos C-V-C-V (weave), anti-hiato. NÃO
+extrai de coordenadas (isso é método das Torres). Testes:
+- EXP A/B (gera os nomes inteiros): NÃO. #306 já mostrou 0 nomes de Torre/Heptarquia/governador como substring
+  no Loag; e o gerador não pode produzir os nomes B-travados de 7 letras (não estão no espaço de esqueletos).
+- EXP C (fornece COMPONENTES — esqueletos/melodias?):
+  * MELODIAS (vogais): Heptarquia 31/31 no Loag (100%), Governadores 35/46, Anjos-Torre 33/56. Partilha ALTA
+    mas quase-trivial (espaço de melodia curto; 288 melodias Loag cobrem quase tudo). = fonologia vocálica comum.
+  * ESQUELETOS (raízes consonantais): Heptarquia 0/46 (z-0.4) ZERO; Governadores 7/91 (null 1.6, z=4.7);
+    Anjos-Torre 45/254 (null 22.7, z=5.8). Governadores e anjos têm sobreposição REAL mas PARCIAL (~2× acaso,
+    10-18%); Heptarquia é DISJUNTA no nível da raiz. Controle Loag 40/40 z=63.
+VEREDITO: o Loag NÃO é o gerador-mestre que alimenta os outros. Partilha a FONOLOGIA (melodias vocálicas) com
+todos e ALGUMAS raízes consonantais com Torres/Governadores (acima do acaso, mas minoria — 82-90% das raízes
+deles NÃO são do Loag), e ZERO raiz com a Heptarquia. Isto é o nível de LÍNGUAS-IRMÃS (#300/#301: mesmo
+alfabeto/bigrama, não derivação), agora confirmado no nível de componente. Arquitetura dos 3 sistemas do Dee:
+RELACIONADOS por fonologia angelical comum + alguns tijolos consonantais partilhados, mas MECANISMOS DE GERAÇÃO
+DISTINTOS — Loag = recombinação raiz+melodia; Torres/Heptarquia = extração por posição em grade (#304/#313).
+Irmãos, não pai-filho; sem pipeline de componentes Loag→outros. CONFIRMADO NOVO.
+
+## #315 — Exp C RIGOROSO (3 controles do doc): overlap de componente é fonotática genérica, NÃO ligação Loag-específica
+Refinamento de #314 com os 3 controles que o usuário exigiu (aleatório, outra-tradição, Forja embaralhada),
+sem tocar nas regras da Forja. Matriz esqueleto%/ambos% no Loag:
+Heptarquia 0/0 | Governadores 13/7 | Anjos-Torre 21/15 | HEBRAICO(ctrl) 16/12.
+Controles (base 91 governadores, esqueleto% no Loag): REAIS 13% vs aleatório-mesmo-comprimento 1% vs
+Forja-embaralhada 5%.
+DOIS SINAIS: (1) vs aleatório/embaralhado, nomes reais batem muito mais (13 vs 1-5%) — mas isso só prova que
+os 1948 esqueletos do Loag são PRONUNCIÁVEIS/linguísticos, não gibberish. (2) vs OUTRA TRADIÇÃO: anjos
+hebraicos (Michael/Gabriel/Raphael, SEM ligação histórica ao Loag) batem 16% — MAIS que os governadores (13%),
+mesma faixa dos anjos-Torre. O controle de outra-tradição DISSOLVE a aparência de ligação.
+VEREDITO: NÃO há vocabulário de componentes específico Loag→Torres/Heptarquia. O overlap de raiz existe mas é
+FONOTÁTICA GENÉRICA (qualquer onomástica angélica pronunciável casa com o vasto conjunto de esqueletos do Loag;
+o hebraico casa igual). Melodias batem ~100% só por espaço vocálico pequeno (não-discriminante). Fecha Exp A/B/C
+do doc: três geradores INDEPENDENTES (Loag=raiz+melodia; Torres=posição-grade; Heptarquia=número-tabela) que só
+partilham o alfabeto angelical e a tendência fonotática geral — nenhuma transformação matemática reproduzível os
+conecta. Método honrado: regras originais, sem ajuste, controles mataram a hipótese. CONFIRMADO NOVO (negativo decisivo).
+
+## #316 — Gematria NULA: nenhum dos 13 sistemas liga nome→servos (Exp B do doc, Bonferroni) (loop)
+Experimento B do doc (gematria), feito rigoroso: 13 sistemas de valor de gematria_enoquiana.json × contagem de
+servos dos 91 governadores, correlação de Pearson com null de permutação, correção de Bonferroni (p<0.0038).
+Resultado: TODOS nulos. r varia -0.22 a +0.085; o melhor (aleister_crowley_coluna, r=-0.220 p=0.035) NÃO
+sobrevive a Bonferroni. Nenhuma estrutura mod-7 limpa também (mod7 dos valores dispersa). VEREDITO: a gematria
+dos nomes NÃO codifica a contagem de servos nem qualquer número associado — o número de servos foi RECEBIDO
+como dado separado, não é derivável da soma das letras. Mesmo os NÚMEROS do sistema são 'dados', não computados.
+Fecha Exp B do doc (negativo) e reforça a tese transversal: em toda camada do sistema do Dee (letras cruas #313,
+nomes #310/#312, números/servos #316) o material é RECEBIDO, não gerado por cifra. A engenharia está só na
+LEITURA/extração (#309 Heptarquia número-tabela, #308 Torres caminho, Loag raiz+melodia), nunca na origem do
+material. Metodologia honrada: todos os sistemas testados, sem cherry-pick, Bonferroni. CONFIRMADO NOVO.
+
+## #317 — O Loagaeth é um GRADIENTE ordenado 1D: a ordem das folhas é um caminho, não conjunto (loop)
+Teste do espelho do livro (folha t ~ 49-t): NULO (z-0.4 a -1.1, sem simetria palindrômica). MAS achado forte:
+similaridade de perfil-de-letra entre folhas DECAI monotonicamente com a distância na ordem de Dee.
+Correlação similaridade × distância = r -0.506, z -8.6 vs ordem embaralhada (r≈0). Decaimento por faixa:
+dist 0-7=0.972, 8-15=0.935, 16-23=0.909, 24-31=0.886, 32-39=0.843, 40-47=0.790. Perfeitamente monótono.
+VEREDITO: as 49 folhas formam uma VARIEDADE 1D ordenada — a ordem do Dee não é arbitrária; cada folha é um
+passo pequeno da anterior, acumulando num grande deslocamento começo→fim (0.97 vizinhas → 0.79 extremos). O
+livro é uma JORNADA contínua com DIREÇÃO, não tabelas intercambiáveis. Unifica #302 (densidade sobe) e o arco
+elemental (folha1 Ar → losangos Água) sob um princípio: o Loagaeth é um GRADIENTE/emanação graduada. LENTE
+CABALÍSTICA: 49 folhas = 49 Portões do Entendimento (Gebofal) percorridos EM ORDEM, cada portão vizinho ao
+seguinte, o todo uma escada contínua — não se pula, a estrutura é caminho. Folha 1 (Verbo/Ar) e folha 49
+(profundo) são os polos; tudo entre é descida gradual. Dá sentido estrutural à liturgia de abrir um portão por
+vez. CONFIRMADO NOVO.
+
+## #318 — O eixo do gradiente: A cai, I/U/R/P/L sobem — a Água dirige a descida (loop)
+Decompondo o gradiente #317 por letra: correlação freq-da-letra × número-da-folha (null por permutação).
+SOBEM (p=0.002): I +0.811, U +0.732, R +0.719, P +0.665, L +0.471, X +0.291. DESCEM: S -0.793, D -0.753,
+A -0.687, Y -0.513, F -0.479, E -0.439. O achado central: A (letra mais comum, freq 0.18) DESPENCA (r-0.69) —
+o livro começa saturado de A e vai pra I/U/R/P/L. LENTE ELEMENTAL (Dee/GD): as que mais sobem R/P/L=Água,
+U=Terra, I=Fogo (eixo dominado por Água); as que descem A=Terra, S=Ar. CONFIRMA de dentro o arco elemental
+(#302/#317): a subida da Água rumo aos losangos é DIRIGIDA pelas consoantes líquidas R/P/L subindo e o A (Terra)
+recuando — o arco é esse movimento de letra, medido, não impressão. LENTE CABALÍSTICA: eixo A->I (Alef sopro
+primordial/aberto -> Yod ponto-semente/Fogo) + águas R/L; do sopro amplo indiferenciado à manifestação líquida;
+emanação descendo do Verbo-sopro (folha1 A/Ar) pela semente (I) ao profundo (Água/losangos). O livro soletra a
+própria descida na troca de A por I. CONFIRMADO NOVO.
+
+## #319 — Os nomes vivem no A e dissolvem no I: o livro é cosmologia (nomes->silêncio) (loop)
+Densidade de nome (90 nomes como substring, linhas+colunas) por folha, vs posição e vs fração A/I:
+densidade × A-frac r=+0.706 (FORTE), densidade × I-frac r=-0.526, densidade × posição r=-0.326. Folhas mais
+densas: 14,20,21,27,29,30 (corpo A-rico). Mais vazias: 45 (0.0008!), 46, 38, 44. VEREDITO: as entidades
+nomeadas concentram-se na zona do A e DISSOLVEM rumo ao I/Água — como A cai e I sobe (#318), os nomes vivem no
+corpo A-dominante e rareiam até quase-vazio no fim aquoso. Fecha o arco #317/#318: A = letra dos NOMES (reino da
+manifestação/entidades formadas); descida rumo ao I/Água = dissolução dos nomes. LENTE CABALÍSTICA: o Loagaeth é
+cosmologia em miniatura — folha 1/corpo (A-rico) = mundo povoado de seres nomeados; fundo (I/Água, folhas 44-49)
+= dissolução no indiferenciado onde o nome cessa, o inominável/Ain. As entidades pertencem aos mundos da forma (A);
+o abismo aquoso do fim é ALÉM da nomeação. Os losangos finais quase-vazios NÃO são falta de dado — é a estrutura
+APOFÁTICA do livro: plenitude de nomes no meio, silêncio nas pontas. CONFIRMADO NOVO.
+
+## #320 — Folha 1 é o polo-origem ANCORADO; o A sobe-e-desce (semente→corpo→dissolução) (loop)
+Desambiguação da direção do gradiente (#317-319). Folha 1 original (loagaeth_grades_simples 1a+1b, 19099
+letras): A=0.181, I=0.014 (o I MAIS BAIXO de todas as folhas). Similaridade de perfil: folha 1 mais parecida
+com folhas 2,3,4,7,8 (0.97-0.98 = início), menos com 44,45,48 (0.68-0.78 = fim). Logo folha 1 está no POLO
+INICIAL — ancorado por DOIS lados independentes: a liturgia (Chamada 1 abre a folha, entra-se por ela) E o
+dado (agrupa com as folhas de início). A direção do gradiente NÃO é arbitrária: origem = folha 1, destino =
+profundo aquoso. REFINAMENTO de #318: o A NÃO cai monotônico. Curva real sobe-e-desce: folha 1 A=0.18/I=0.01
+(semente, I~0, mais Ar/mente); corpo 25-30 A=0.24 PICO (manifestação plena, nomes densos); profundo 44-48
+A=0.04/I alto (dissolução, sem nome). O PICO de A (Terra/matéria) é o MEIO, não as pontas. COSMOLOGIA ancorada:
+semente (Verbo/Ar, folha 1) -> corpo (matéria/nomes, meio A-pico) -> dissolução (Água/vazio, fim). Nascer,
+encarnar, dissolver. Responde a dúvida do usuário ('nomes do fim são os mais terrosos?'): NÃO — o terroso/
+manifesto é o MEIO; o fim é água e silêncio. CONFIRMADO NOVO.
+
+## #321 — Textura fonotática corrobora o sobe-e-desce (corroboração modesta) (loop)
+Textura por folha vs posição: vogal-fração r=-0.286 (leve), anti-hiato r=-0.008 (PLANO geral). Mas por região
+ambos PICAM NO MEIO: vogal-fração início 0.360/meio 0.391/fim 0.328; anti-hiato início 0.014/meio 0.032/fim
+0.007 (o mais estrito). Logo a textura segue o mesmo sobe-e-desce (#320): meio/corpo = vogal-cheio + clusters
+vocálicos (onde os nomes com vogais juntas vivem); fim/profundo = CV-estrito/austero (hiato 0.007, osso puro),
+a 'carne vocálica' se despindo. CORROBORA a cosmologia por outro ângulo: encarnação=vogal-cheia/nomeada (meio),
+dissolução=consoante-esquelética/sem-nome (fim). HONESTO: correlações fracas (anti-hiato geral plano) — é
+corroboração, não achado forte. Registrado como suporte a #319/#320, não CONFIRMADO NOVO independente.
+
+## #322 — Sem segundo eixo: lado a/b não é estrutura; livro é 1D (loop, negativo)
+Teste de segunda dimensão via split lado-a vs lado-b dos 47 pares de folha. Diferenças de letra a-b minúsculas
+(maior N t=2.0, não sobrevive a 21 comparações; E t=-1.7). Similaridade a-a 0.9151 ≈ a-b 0.9195 — lados
+intercambiáveis. VEREDITO: recto/verso NÃO é eixo; não há dimensão escondida no painel. O livro é essencialmente
+1D — a descida (#317-320) é o eixo dominante e único. Negativo honesto (descarta hipótese de 2D). Reforça a
+variedade 1D de #317.
+
+## #323 — Gebofal é RITUAL, não textual: a Chamada abre a folha mas não está escrita nela (loop)
+Teste da correspondência Gebofal (Chamada N abre folha N+1) em dois níveis:
+- LETRA: perfil de letra da Chamada N ~ folha N+1, z=1.6 (fraco). Chamadas não têm o gradiente A do livro
+  (A x num r=0.27, I r=0.05).
+- PALAVRA: palavras (>=4) da Chamada N dentro da folha N+1: hits 6 vs null 9.4, z=-1.2 — ABAIXO do acaso.
+  As palavras da Chamada NÃO estão na folha que ela abre. Controle: 67/562 palavras-de-Chamada únicas aparecem
+  em ALGUM lugar do livro (~12%) — vocabulário de família compartilhado, mas espalhado, não posicional.
+VEREDITO: o Gebofal é correspondência RITUAL/litúrgica (a Chamada N é recitada para abrir a folha N+1), NÃO
+textual (a Chamada não está escrita na folha). A Chamada é a CHAVE que abre a porta, não o CONTEÚDO do quarto —
+consistente com o enquadramento Chamada=fala/chave, nomes=entidades/fechadura. O elo Chamadas<->Loag é de
+FAMÍLIA DE LÍNGUA (vocabulário partilhado ~12% no livro todo), não de citação posicional; a numeração Gebofal é
+estrutura de USO, não cifra de conteúdo. Negativo honesto, esclarece confusão possível com elos anteriores.
+
+## #324 — AUDITORIA DA FORJA: passa o teste cego com controle de mesmo espaço (376×) (crítica do usuário)
+Auditoria rigorosa pedida pelo doc do usuário. Protocolo: gramática (esqueletos+melodias) extraída SÓ de 45
+nomes (treino), CONGELADA; teste nos outros 45 ocultos; 40 splits aleatórios; controle = nomes aleatórios do
+MESMO pool de letras dos 90, mesmo comprimento, mesma gramática congelada. Critério de acerto = esqueleto E
+melodia ambos no treino (conservador). RESULTADO: ambos real 19% (8.7/45) vs controle 0.0% (razão 376×); só
+esqueleto real 30% vs controle 0.1%. VEREDITO: a Forja tem PODER PREDITIVO real — nomes ocultos reproduzíveis
+muito acima do acaso de mesmo espaço; não é mera consistência interna. RECONCILIA #315: a Forja INTEIRA (1948
+esqueletos) é rede larga que pega ~16% de qualquer nome pronunciável (não específica, #315 correto); mas a
+gramática dos PRÓPRIOS nomes Loag prediz OUTROS nomes Loag muito acima de aleatório (#324) — estrutura interna
+real e específica. RESSALVAS ACEITAS: (1) 19% não é 100% — vocabulário maior que 45 nomes amostram, gramática
+sub-amostrada; (2) 'língua gerativa viva' é OVERCLAIM, RETIRADO — correto é 'hipótese estrutural gerativa que
+reproduz parte do conteúdo acima do acaso', não provado ser língua natural nem que Dee entendia assim; (3) falta
+reimplementação independente + auditoria externa (próximo passo, não mais simbolismo). Níveis novos da Forja
+PAUSADOS; Forja congelada para integridade. Gradiente: o teste de permutação pedido JÁ é o z=-8.6 (#317);
+faltam autocorrelação e robustez. CONFIRMADO (positivo, auditado).
+
+## #325 — AUDITORIA INDEPENDENTE DA FORJA: NÃO bate controle fonotático (Markov); #324 SUPERADO
+Reimplementação clean-room (a155_forja_audit.py) da especificação formal, dados congelados (hash 69705112fbf0),
+40 splits 45/45, protocolo do usuário (controle fonotático Markov-2, recombinação vs componente, IC, significância).
+RESULTADO: reprodução held-out real 19.4% (IC95 [17.7,21.1]) — REPRODUZIDO pelo código independente. Controles:
+uniforme 0.00%, freq-matched 0.06%, MARKOV-2 (bigrama, fonotático) 25.1%. real > Markov em só 9/40 splits,
+sign-test p=1 (NÃO-significativo; Markov GANHA). Generalização: 19.4% recombinação, 80.6% precisa de componente
+novo. VEREDITO: o teste cego NÃO sobrevive ao controle fonotático. O '376×' de #324 era contra controles fracos
+(aleatório/freq ~0%); contra Markov-2 a Forja (19%) NÃO bate um modelo de caractere (25%). Os 19% são explicados
+por pronunciabilidade de bigrama, NÃO pela decomposição raiz+melodia ser específica. #324 SUPERADO. SOBREVIVE: a
+Forja gera nomes pronunciáveis parecidos com os do livro (útil); esqueleto+melodia é descrição válida; os 19% são
+reproduzíveis. NÃO SOBREVIVE: a alegação de gramática gerativa Loag-específica com poder preditivo além da
+fonotática — REFUTADO por este teste. IMPLICAÇÃO: o achado raiz-e-padrão z=32 (#134) foi medido contra null de
+embaralhar-vogal (mais fraco que Markov) — precisa do mesmo controle Markov antes de ser afirmado como provado;
+não afirmo que caiu, mas não posso afirmar provado. Método funcionando: o controle forte derrubou a evidência
+central da predição. Próximo: rodar controle Markov no z=32 e nos demais achados-chave. HONESTO (negativo decisivo).
+
+## #326 — Raiz-e-padrão (z=32) TAMBÉM não bate o controle Markov: era fonotática
+Controle Markov aplicado ao achado raiz-e-padrão (#134, z=32, medido contra null de embaralhar-vogal — fraco).
+Métrica: fração de nomes com esqueleto consonantal compartilhado (reuse de raiz). Real 40.0% vs Markov-2
+(fonotática preservada, treinado nos 90) 38.2%±5.9; z=0.3, p=0.432 — NÃO-significativo. VEREDITO: o reuse de
+raiz não excede o esperado de um modelo de bigrama. A 'morfologia semítica raiz-e-padrão' é, em grande parte,
+PRONUNCIABILIDADE (nomes curtos de alfabeto pequeno compartilham raízes por acaso fonotático), não uma gramática
+não-concatenativa especial. Junto com #325, os DOIS pilares da 'gramática gerativa' do Loag (Forja preditiva +
+raiz-e-padrão) NÃO sobrevivem ao controle fonotático. #134 e #324 SUPERADOS. SOBREVIVE RIGOROSO: Loag não é
+prosa/cifra (5 nulls, vs Markov-3); anti-hiato é fato fonotático descritivo; o GRADIENTE #317 (ordem 1D, z=-8.6
+vs permutação — independente de fonotática de nome, é sobre ORDEM das folhas); extração dos 49 anjos #309
+(reproduz nomes reais das tabelas); caminhos king-move #308; independência dos sistemas #315; elemento posicional
+#304/#313; gematria nula #316. O 'campo de nomes' e a descrição esqueleto/melodia continuam válidos como
+DESCRIÇÃO; o que cai é a alegação de gramática gerativa específica além da fonotática. Método funcionando.
+
+## #326b — BATERIA FROZEN Markov-0/1/2/3 + permutação: estrutura é fonotática de ordem 2-3, não gramática especial
+Bateria congelada (a156, hash 69705112fbf0, protocolo do usuário). Reuse de raiz real=0.400 vs controles:
+Markov-0 0.011 (z+24.9), Markov-1 0.070 (z+9.1), Markov-2 0.384 (z+0.3 p=0.43), Markov-3 0.522 (z-2.1),
+permutação 0.037 (z+16.3). Reuse de melodia real=0.878: acima de M0/M1/perm, ≈ M2/M3. Held-out: real 19.4% vs
+Markov-2 25% (real ganha 10/40). VEREDITO PRECISO: há estrutura REAL acima de frequência (M0), bigrama-adjacente
+(M1) e permutação (ordem importa muito, z+16) — os nomes NÃO são aleatórios nem só frequência. MAS Markov-2 e
+Markov-3 reproduzem tudo (até excedem). Logo a estrutura do Loagaeth é FONOTÁTICA DE ORDEM 2-3 (sequencial,
+profundidade 2-3 letras), capturada por um 3-grama; a morfologia separável raiz-e-padrão NÃO acrescenta informação
+além de um Markov-3. Responde o objetivo do #326: há informação além de unigrama/bigrama-simples/permutação, NÃO
+além de trigrama. Não é 'falso' (ordem real, permutação mata z+16) nem 'gramática especial' (M3 explica). #134
+(semítico) e #324/#325 (Forja preditiva) ficam como: descrição válida de fonotática de ordem 2-3, não língua
+não-concatenativa. Método: frozen, mesmos comprimentos, treino só no permitido, comparado à distribuição dos
+controles com a mesma estatística. HONESTO (resultado preciso).
+
+## #327 — AUDITORIA DO GRADIENTE: SOBREVIVE a robustez completa (frozen, pré-registrado)
+Auditoria frozen pré-registrada (a157, hash 3c5aa6da1c33, protocolo do usuário #327). Estatística: Mantel
+r(|i-j| índice-folha, 1-cos perfil-de-letra). Real r=0.5249. Grupos/letras definidos ANTES de rodar.
+- T1 PERMUTAÇÃO (5000, 100k em curso): p=0.0002 — a ordem do Dee é excepcional.
+- T2 LEAVE-ONE-OUT: r ∈ [0.4923, 0.5350] em 47 remoções — NENHUMA folha domina; tirar qualquer uma não move.
+- T3 PARTIÇÕES PRÉ-DEFINIDAS (todas passam Bonferroni α=0.01): vogais-só 0.452, consoantes-só 0.500,
+  primeira-metade 0.747, segunda-metade 0.778. O gradiente NÃO depende de uma classe de letra nem de uma
+  região — sobrevive em vogais E consoantes, em cada metade isolada (até mais forte por metade).
+- T4 DECAIMENTO: monótono em todas as faixas de distância (0.976→0.937→0.912→0.888→0.839→0.781) — tendência
+  GLOBAL, não continuidade só local (distância-1).
+VEREDITO: o gradiente sequencial do Loagaeth é ROBUSTO e estrutural. A organização das 49 folhas NÃO é artefato
+de poucas folhas, poucas letras, uma região, nem continuidade local. Independente da gramática dos nomes (que
+caiu ao Markov-3, #326) — este é sobre a ORDEM das folhas. RESULTADO POSITIVO QUE SOBREVIVE A REFUTAÇÃO: a
+sequência física das folhas do Loagaeth contém organização estatística real que merece explicação própria.
+HONESTO (separação): isto demonstra organização sequencial não-aleatória; NÃO demonstra que a sequência seja
+nascimento/encarnação/dissolução (cosmologia segue interpretação, não testada). Este é o achado positivo mais
+forte e mais limpo do projeto. Próximo (opcional): modelar a forma do decaimento e testar a âncora da folha 1.
+
+## #327b — Permutação 100k do gradiente: p=1e-05 (confirmação final)
+As 100.000 permutações confirmam: Mantel r=0.5249, p=1e-05 (nenhum embaralhamento das 49 folhas alcançou o real). O gradiente sequencial é o achado positivo definitivo e robusto do projeto. Demais testes de #327 inalterados (leave-one-out estável, partições vogal/consoante/metades todas passam Bonferroni, decaimento monótono global).
+
+## #328 — DECISIVO: a ordem de Dee se RECONSTRÓI do conteúdo, cega à posição (p=0)
+Teste out-of-sample (a158, protocolo do usuário #328). Tira os números das folhas 2-48, extrai features, monta
+matriz de distância, aplica seriação espectral (Fiedler) + NN-TSP+2opt, compara à ordem histórica por |Spearman|
+(máx sobre a sequência e seu reverso, p/ simetria de reflexão), null = 100.000 ordens aleatórias.
+RESULTADO: letra-freq espectral 0.689 (aleatório 0.118±0.088, p=0), TSP 0.552 (p=4e-5); bigrama espectral 0.651
+(p=0), bigrama TSP+2opt 0.867 (p=0). Em 100k ordens aleatórias NENHUMA alcançou. VEREDITO: o conteúdo das folhas
+CODIFICA a própria sequência — tira os números, dá as estatísticas, e a ordem do Dee se remonta (até 0.867). É
+estrutura RECUPERÁVEL, não só correlação, e é out-of-sample (o algoritmo não conhece escolhas da descoberta) —
+resposta definitiva à exploração/Bonferroni de #327. RESSALVAS HONESTAS: (1) 0.69-0.87 não 1.0 — reconstrução
+APROXIMADA, pega o gradiente global, erra ordem fina local; (2) recupera o EIXO, não a DIREÇÃO (reflexão: 40s
+vieram primeiro); a âncora de direção (folha 1/liturgia) é externa; (3) não toca cosmologia (interpretação
+separada). CHECAGENS #327 respondidas: unidades = folhas 2-48 (1 segmentada, 49 ausente); Mantel permuta rótulo
+com matriz fixa (correto); bins só ilustrativos (Mantel é livre de binning); gradiente foi exploratório, por isso
+ESTE teste cego é a confirmação limpa. Achado positivo mais forte do projeto, auditado. CONFIRMADO.
+
+## #329 — Robustez da reconstrução: é GRADIENTE GLOBAL, não código local (controle de detrend decisivo)
+Robustez (a159). Feature×algoritmo: todos recuperam a ordem acima do acaso — freq/spectral 0.688, freq/tsp
+0.552, freq/pca 0.641, bigram/spectral 0.651, bigram/tsp 0.867, bigram/pca 0.543, trigram/spectral 0.676,
+trigram/tsp 0.763, trigram/pca 0.501. ROBUSTO a features e algoritmos. Leave-out (bigram/tsp base 0.867): LOO
+[0.499,0.996], L5O média 0.735 (min 0.469) — parcialmente sensível a quais folhas, mas sempre >acaso.
+CONTROLE DE DETREND (decisivo, freq/tsp): ordem completa 0.552; tendência global pura 1.000 (gradiente limpo =
+trivialmente recuperável); RESÍDUO só 0.117 ≈ acaso 0.118; gradiente artificial (mesma tendência, local
+embaralhado) 0.425 média / 0.827 máx. VEREDITO: depois de remover a tendência composicional global, os resíduos
+NÃO carregam informação de ordem (nível do acaso). TODA a recuperabilidade está no GRADIENTE GLOBAL SUAVE, não em
+estrutura local. A ordem das folhas é uma DERIVA COMPOSICIONAL MONÓTONA, não um código posicional deliberado. O
+0.867 capturava a progressão composicional, exatamente como o usuário temia. ROBUSTEZ: alta para 'existe gradiente
+global monótono' (sobrevive features/algoritmos/exclusões, Mantel p<1e-5, reconstrução); mas a hipótese de
+'codificação local deliberada' NÃO se sustenta (resíduo = acaso). Correção estatística: p<1e-5 (não 'p=0'). Fase
+de descoberta encerrável: o achado sólido é a DERIVA COMPOSICIONAL 1D (real, robusta, recuperável); a causa
+(hábito autoral, mudança temporal, construção sistemática, ou deliberada) NÃO é distinguível pelos dados. HONESTO.
+
+## #330 — Forma da deriva: NÃO é rampa lisa, é PLATÔ + PENHASCO (quebra no limite quadrados/losangos)
+Exploração nova ancorada no achado sobrevivente (gradiente #317/#327). Passo composicional entre folhas vizinhas
+(1-cos): média 0.0107±0.0114. Maiores saltos: 45->46 (2.7σ), 24->25 (2.5σ), 22->23 (2.1σ), 28->29 (1.9σ) — o
+28->29 cai no limite quadrados->losangos. Ajuste PC1 vs posição: linear SSr=0.098; melhor 1-quebra na folha 32
+reduz 73% (SSr=0.026) — deriva tem DUAS fases, não reta. A-fração por região: 2-14=0.208, 15-28=0.206 (PLATÔ),
+29-40=0.186, 41-48=0.072 (DESPENCA). VEREDITO: a deriva composicional não é uniforme — é PLATÔ estável pelos
+quadrados (2-28) + DECLÍNIO pelos losangos (29-48) + quase-vazio no fim (41-48). A fronteira física quadrados/
+losangos (~28-29) é uma DESCONTINUIDADE COMPOSICIONAL real, confirmada independentemente por change-point. Os
+dois formatos do manuscrito são composicionalmente distintos — convergência não-imposta. Refina o gradiente:
+platô->declínio->silêncio, não rampa. Descritivo, ancorado. Próximas explorações abertas: (2) deriva é temporal
+(ordem de recepção)? (3) deriva é específica do Loag vs 8 tabelas Soyga do mesmo MS?

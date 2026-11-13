@@ -21,13 +21,15 @@ h1{font-size:22px;font-weight:700;margin:0 0 2px}
 .tree{text-align:center;font-family:ui-monospace,monospace;font-size:13px;margin:14px 0;color:var(--mut)}
 .tree b{color:var(--ac)}
 .warn{background:var(--card);border:1px dashed var(--line);border-radius:10px;padding:9px 13px;font-size:12px;color:var(--mut);margin-top:12px}
+#lang{cursor:pointer;border:1px solid var(--line);border-radius:16px;padding:3px 12px;font-size:12px;font-weight:600;float:right}
 </style>
 </head>
 <body>
-<h1>A Língua-Mãe</h1>
-<p class="sub">Loagaeth e as Torres de Vigia são parentes? A prova, nível por nível — o que partilham e o que não.</p>
+<span id="lang">EN</span>
+<h1 data-en="The Mother Language">A Língua-Mãe</h1>
+<p class="sub" data-en="Are the Loagaeth and the Watchtowers related? The proof, level by level — what they share and what they do not.">Loagaeth e as Torres de Vigia são parentes? A prova, nível por nível — o que partilham e o que não.</p>
 <div class="lead" id="lead"></div>
-<div class="tree">
+<div class="tree" data-en="THE ANGELICAL LANGUAGE (alphabet + sounds)<br>│<br>├──────────────┬──────────────<br><b>LOAGAETH</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>WATCHTOWERS</b><br>(root-pattern,&nbsp;&nbsp;(looser,<br>anti-hiatus)&nbsp;&nbsp;&nbsp;&nbsp;own lexicon)">
 A LÍNGUA ANGELICAL (alfabeto + sons)<br>
 │<br>
 ├──────────────┬──────────────<br>
@@ -36,12 +38,24 @@ A LÍNGUA ANGELICAL (alfabeto + sons)<br>
 anti-hiato)&nbsp;&nbsp;&nbsp;&nbsp;léxico próprio)
 </div>
 <div id="levels"></div>
-<div class="warn">Honesto: isto prova PARENTESCO (mesma língua-mãe), não DERIVAÇÃO. Testamos de 9 jeitos se as Torres estão dentro do Loagaeth (substring, reverso, anagrama, traço, 6-grama, embaralhado, nomes sagrados, cifra de salto, palavras da folha 1) — todos negativos. Não há um dentro do outro. São irmãs do mesmo alfabeto/sons angelicais, com gramáticas e nomes próprios — como inglês e polonês no alfabeto latino.</div>
+<div class="warn" data-en="Honest: this proves KINSHIP (same mother language), not DERIVATION. We tested 9 ways whether the Towers are inside the Loagaeth (substring, reverse, anagram, trace, 6-gram, shuffled, sacred names, skip cipher, leaf-1 words) — all negative. One is not inside the other. They are sisters of the same angelical alphabet/sounds, with their own grammars and names — like English and Polish in the Latin alphabet.">Honesto: isto prova PARENTESCO (mesma língua-mãe), não DERIVAÇÃO. Testamos de 9 jeitos se as Torres estão dentro do Loagaeth (substring, reverso, anagrama, traço, 6-grama, embaralhado, nomes sagrados, cifra de salto, palavras da folha 1) — todos negativos. Não há um dentro do outro. São irmãs do mesmo alfabeto/sons angelicais, com gramáticas e nomes próprios — como inglês e polonês no alfabeto latino.</div>
 <script>
-fetch('parentesco.json').then(r=>r.json()).then(d=>build(d)).catch(()=>{document.getElementById('levels').innerHTML='Abra por http://localhost:8860/';});
-function build(d){
- document.getElementById('lead').innerHTML='<b>Veredito:</b> Loagaeth e Torres são <b>dois idiomas diferentes escritos no mesmo alfabeto angelical</b>. Partilham os <span style="color:var(--ok)">sons</span> (letra e bigrama ~3× mais perto entre si que do inglês), mas <span style="color:var(--no)">não</span> as regras nem o léxico. Parentesco real; derivação não.';
- var L=[
+var DATA=null;
+fetch('parentesco.json').then(r=>r.json()).then(d=>{DATA=d;build()}).catch(()=>{document.getElementById('levels').innerHTML='Open via http://localhost:8860/';});
+window.onLangChange=function(){if(DATA)build()};
+function build(){
+ var d=DATA,en=window.LANG==='en';
+ document.getElementById('lead').innerHTML=en
+  ?'<b>Verdict:</b> Loagaeth and the Towers are <b>two different languages written in the same angelical alphabet</b>. They share the <span style="color:var(--ok)">sounds</span> (letter and bigram ~3× closer to each other than to English), but <span style="color:var(--no)">not</span> the rules nor the lexicon. Real kinship; not derivation.'
+  :'<b>Veredito:</b> Loagaeth e Torres são <b>dois idiomas diferentes escritos no mesmo alfabeto angelical</b>. Partilham os <span style="color:var(--ok)">sons</span> (letra e bigrama ~3× mais perto entre si que do inglês), mas <span style="color:var(--no)">não</span> as regras nem o léxico. Parentesco real; derivação não.';
+ var L=en?[
+  {n:'1. Alphabet',ok:true,t:'Same set of angelical letters.',num:'Loagaeth and Towers: '+d.alpha_common+' letters in common. Practically the same alphabet.'},
+  {n:'2. Phonology — letter frequency',ok:true,t:'The letters appear in the same proportions.',num:'Similarity Loagaeth×Towers <b>'+d.cos_letter_wt+'</b> vs ×English '+d.cos_letter_eng+'.'},
+  {n:'2. Phonology — bigrams (letter pairs)',ok:true,t:'Letter pairs follow the same pattern.',num:'Similarity Loagaeth×Towers <b>'+d.cos_bigram_wt+'</b> vs ×English '+d.cos_bigram_eng+' (3× closer to each other).'},
+  {n:'3. Phonotactics — the hiatus rule',ok:false,t:'DIFFERENT RULE. The Loagaeth forbids adjacent vowels; the Towers allow them.',num:'Vowel-vowel: Loagaeth <b>'+d.hiato_loag+'%</b> (strict) vs Towers <b>'+d.hiato_wt+'%</b> (10× more).'},
+  {n:'4. Morphology — root-and-pattern',ok:false,t:'The Loagaeth is far more Semitic (consonantal root + melody); the Towers less.',num:'Names sharing a skeleton: Loagaeth <b>'+d.rootpat_loag+'%</b> vs Towers <b>'+d.rootpat_wt+'%</b>.'},
+  {n:'5. Lexicon — the names',ok:false,t:'No name in common. Distinct vocabularies.',num:'Shared names: <b>'+d.shared_names+'</b>.'}
+ ]:[
   {n:'1. Alfabeto',ok:true,t:'Mesmo conjunto de letras angelicais.',num:'Loagaeth e Torres: '+d.alpha_common+' letras em comum. Praticamente o mesmo alfabeto.'},
   {n:'2. Fonologia — frequência de letra',ok:true,t:'As letras aparecem nas mesmas proporções.',num:'Semelhança Loagaeth×Torres <b>'+d.cos_letter_wt+'</b> vs ×inglês '+d.cos_letter_eng+'.'},
   {n:'2. Fonologia — bigramas (pares de letra)',ok:true,t:'Os pares de letra seguem o mesmo padrão.',num:'Semelhança Loagaeth×Torres <b>'+d.cos_bigram_wt+'</b> vs ×inglês '+d.cos_bigram_eng+' (3× mais perto entre si).'},
@@ -49,8 +63,10 @@ function build(d){
   {n:'4. Morfologia — raiz-e-padrão',ok:false,t:'O Loagaeth é muito mais semítico (raiz consonantal + melodia); as Torres menos.',num:'Nomes partilhando esqueleto: Loagaeth <b>'+d.rootpat_loag+'%</b> vs Torres <b>'+d.rootpat_wt+'%</b>.'},
   {n:'5. Léxico — os nomes',ok:false,t:'Nenhum nome em comum. Vocabulários distintos.',num:'Nomes compartilhados: <b>'+d.shared_names+'</b>.'}
  ];
- document.getElementById('levels').innerHTML=L.map(x=>'<div class="lvl '+(x.ok?'ok':'no')+'"><h3>'+x.n+'<span class="badge '+(x.ok?'ok':'no')+'">'+(x.ok?'COMPARTILHADO':'DIFERENTE')+'</span></h3><div>'+x.t+'</div><div class=nums>'+x.num+'</div></div>').join('');
+ var SH=en?'SHARED':'COMPARTILHADO',DF=en?'DIFFERENT':'DIFERENTE';
+ document.getElementById('levels').innerHTML=L.map(x=>'<div class="lvl '+(x.ok?'ok':'no')+'"><h3>'+x.n+'<span class="badge '+(x.ok?'ok':'no')+'">'+(x.ok?SH:DF)+'</span></h3><div>'+x.t+'</div><div class=nums>'+x.num+'</div></div>').join('');
 }
 </script>
+<script src="i18n.js"></script>
 </body>
 </html>

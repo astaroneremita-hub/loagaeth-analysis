@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tabula Collecta — simulador da Heptarquia</title>
+<style>
+:root{--bg:#f7f6f1;--card:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8;--ac:#8a6d2f;--hl:#8a2f7d;
+ --t0:#c0392b;--t1:#d87a0a;--t2:#b8a000;--t3:#2f8a52;--t4:#2f80c0;--t5:#5b3fb0;--t6:#8a2f7d}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13120c;--card:#1e1d15;--ink:#ece9da;--mut:#9a988a;--line:#322f27;--ac:#d6b96a;--hl:#d66ac4;
+ --t0:#e06a5a;--t1:#e0a24a;--t2:#d6c24a;--t3:#6ad68f;--t4:#6ab6e0;--t5:#9a7de0;--t6:#d66ac4}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,sans-serif;max-width:1000px;margin:0 auto;padding:16px 18px 60px}
+h1{font-size:22px;font-weight:700;margin:0 0 2px;display:inline-block}
+.sub{color:var(--mut);margin:0 0 12px;font-size:13px}
+#lang{cursor:pointer;border:1px solid var(--line);border-radius:16px;padding:3px 12px;font-size:12px;font-weight:600;float:right}
+.rule{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 14px;margin-bottom:12px;font-size:13px}
+.rule b{color:var(--ac)}
+.ctrl{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+input[type=range]{width:230px;vertical-align:middle}
+button,select{font:inherit;padding:5px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+button.on{background:var(--hl);color:#fff;border:0;font-weight:700}
+.tables{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.tbl{border:2px solid var(--line);border-radius:8px;padding:5px;background:var(--card)}
+.tbl h4{margin:0 0 4px;font-size:11px;text-align:center;font-weight:700}
+table{border-collapse:collapse}
+td{width:16px;height:16px;text-align:center;font-family:ui-monospace,monospace;font-size:10px;color:var(--mut);border:1px solid transparent}
+td.hit{color:#fff;font-weight:700;border-radius:3px}
+.assembly{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin:10px 0;text-align:center}
+.bigname{font-family:ui-monospace,monospace;font-size:34px;font-weight:700;letter-spacing:4px}
+.bigname span{display:inline-block}
+.gather{font-size:12px;color:var(--mut);margin-top:6px}
+.tag{font-size:11px;font-weight:700;border-radius:5px;padding:1px 8px;color:#fff;margin:0 3px}
+.all{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:7px;margin-top:10px}
+.ni{border:1px solid var(--line);border-radius:8px;padding:6px 9px;background:var(--card);font-size:12px}
+.ni .nm{font-family:ui-monospace,monospace;font-weight:700;font-size:15px}
+.ni .nm span{display:inline-block}
+.ni .meta{color:var(--mut);font-size:10px}
+.legend{font-size:11px;color:var(--mut);margin:4px 0}
+.legend span{display:inline-block;width:9px;height:9px;border-radius:2px;margin:0 2px 0 8px;vertical-align:middle}
+.warn{background:var(--card);border:1px dashed var(--line);border-radius:10px;padding:9px 13px;font-size:12px;color:var(--mut);margin-top:12px}
+</style>
+</head>
+<body>
+<span id="lang">EN</span>
+<h1 data-en="Tabula Collecta — simulator">Tabula Collecta — simulador</h1>
+<p class="sub" data-en="How the 49 angels of the Heptarchy are GATHERED from the 7 tables — Uriel's rule, verified (RESEARCH_LOG #309).">Como os 49 anjos da Heptarquia são COLHIDOS das 7 tabelas — a regra de Uriel, verificada (RESEARCH_LOG #309).</p>
+<div class="rule" data-en="<b>The rule (Uriel):</b> Dee received <b>7 tables of 7×7</b>; each cell holds a letter and a number 1–49. To build an angel name, take the letter at the <b>same number</b> in table 1, then table 2, … to table 7 — all begin with <b>B</b>. Collecting number n across the seven tables gives the n-th name. Name 1 = BALIGON. The first 29 are 'the more excellent'. 49 in all."><b>A regra (Uriel):</b> Dee recebeu <b>7 tabelas de 7×7</b>; cada célula tem uma letra e um número 1–49. Para formar o nome de um anjo, pega-se a letra no <b>mesmo número</b> na tabela 1, depois na 2, … até a 7 — todas começam por <b>B</b>. Juntar o número n pelas sete tabelas dá o n-ésimo nome. O nome 1 = BALIGON. Os 29 primeiros são 'os mais excelentes'. 49 no total.</div>
+<div class="ctrl">
+ <span><span data-en="Angel number:">Número do anjo:</span> <b id="nlbl">1</b> <input type="range" id="num" min="1" max="49" value="1"></span>
+ <button id="toggle" data-en="Show all 49">Mostrar os 49</button>
+ <button id="forge" data-en="⚒ Forge a new Heptarchy">⚒ Forjar nova Heptarquia</button>
+</div>
+<div class="legend" id="legend"></div>
+<div id="single">
+ <div class="tables" id="tables"></div>
+ <div class="assembly" id="asm"></div>
+</div>
+<div class="all" id="allview" style="display:none"></div>
+<div class="warn" id="genwarn" data-en="Generate new? The RULE is historical and exact (7 tables → 49 names, a reshape). It lets us REPAIR gaps (5 missing cells recovered by cross-reading) — real. Making NEW names means supplying NEW source tables: that is construction in Dee's exact method, faithful but experimental, not revealed.">Gerar novos? A REGRA é histórica e exata (7 tabelas → 49 nomes, um rearranjo). Ela deixa a gente REPARAR buracos (5 células recuperadas por leitura cruzada) — real. Fazer nomes NOVOS = fornecer tabelas-fonte NOVAS: é construção no método exato do Dee, fiel mas experimental, não revelado.</div>
+<script>
+var TB=['var(--t0)','var(--t1)','var(--t2)','var(--t3)','var(--t4)','var(--t5)','var(--t6)'];
+var D=null,showAll=false;
+fetch('heptarchia.json').then(r=>r.json()).then(d=>{D=d;boot()}).catch(()=>{document.getElementById('tables').innerHTML='Open via http://localhost:8860/';});
+function roleLbl(r){var en=window.LANG==='en';return r==='rei'?(en?'king':'rei'):r==='principe'?(en?'prince':'príncipe'):(en?'minister':'ministro');}
+function renderSingle(n){
+ var html='';
+ for(var t=0;t<7;t++){
+  var tb=D.tables[t];
+  html+='<div class="tbl" style="border-color:'+TB[t]+'"><h4 style="color:'+TB[t]+'">'+tb.id+'</h4><table>';
+  var byn={};tb.cells.forEach(c=>byn[c.n]=c);
+  for(var r=0;r<7;r++){html+='<tr>';for(var c=0;c<7;c++){var idx=r*7+c+1;var cell=byn[idx];var hit=idx===n;
+    html+='<td class="'+(hit?'hit':'')+'" style="'+(hit?'background:'+TB[t]:'')+'">'+(cell?cell.l||'·':'')+'</td>';}html+='</tr>';}
+  html+='</table></div>';
+ }
+ document.getElementById('tables').innerHTML=html;
+ var nm=D.names[n-1];
+ var big=nm.letters.map((l,t)=>'<span style="color:'+TB[t]+'">'+l+'</span>').join('');
+ var en=window.LANG==='en';
+ document.getElementById('asm').innerHTML='<div class=bigname>'+big+'</div>'+
+   '<div class=gather>'+(en?'letter from table ':'letra da tabela ')+'1→7, '+(en?'all numbered':'todas no número')+' '+n+'</div>'+
+   '<div style="margin-top:8px"><span class="tag" style="background:var(--ac)">'+roleLbl(nm.role)+'</span>'+
+   '<span class="tag" style="background:var(--hl)">'+(nm.planet||'')+'</span>'+
+   (nm.excelente?'<span class="tag" style="background:var(--t3)">'+(en?'more excellent':'mais excelente')+'</span>':'')+'</div>';
+}
+function renderAll(){
+ var en=window.LANG==='en';
+ document.getElementById('allview').innerHTML=D.names.map(nm=>{
+  var big=nm.letters.map((l,t)=>'<span style="color:'+TB[t]+'">'+l+'</span>').join('');
+  return '<div class=ni><div class=nm>'+big+'</div><div class=meta>#'+nm.n+' · '+roleLbl(nm.role)+' · '+(nm.planet||'')+'</div></div>';
+ }).join('');
+}
+// faithful generator: Dee's exact method (7 tables -> collect by number), honoring the proven template
+// (table 1 = all B; name = B + 6 letters by the measured positional vowel profile #305, anti-hiatus, no CCC)
+var VPROF=[0,0.63,0.35,0.22,0.51,0.49,0.47],VOW='AEIOU',CONS='BCDFGHKLMNPQRSTXZ';
+function rc(s){return s[Math.floor(Math.random()*s.length)]}
+function genName(){var nm='B',run=1;for(var i=1;i<7;i++){var wantV=Math.random()<VPROF[i];
+  if(wantV&&VOW.indexOf(nm[nm.length-1])>=0)wantV=false; if(!wantV&&run>=2)wantV=true;
+  var ch=wantV?rc(VOW):rc(CONS); nm+=ch; run=VOW.indexOf(ch)>=0?0:run+1;} return nm;}
+function forgeView(){
+ var en=window.LANG==='en';var seen={},names=[];
+ while(names.length<49){var g=genName();if(!seen[g]){seen[g]=1;names.push(g);}}
+ var planets=['Venus','Jupiter','Marte','Sol','Lua','Mercurio','Saturno'];
+ var html='<div class=ni style="grid-column:1/-1;border-color:var(--hl)"><b style="color:var(--hl)">'+
+   (en?'⚒ CONSTRUCTED — experimental':'⚒ CONSTRUÍDO — experimental')+'</b><div class=meta>'+
+   (en?'New 7 tables in Dee’s exact method (B + 6, collected by number). Faithful to the rule, NOT revealed names.'
+      :'7 tabelas novas no método exato do Dee (B + 6, colhido por número). Fiel à regra, NÃO são nomes revelados.')+'</div></div>';
+ html+=names.map((nm,i)=>{
+   var big=nm.split('').map((l,t)=>'<span style="color:'+TB[t]+'">'+l+'</span>').join('');
+   var role=i%7===0?(en?'king':'rei'):i%7===1?(en?'prince':'príncipe'):(en?'minister':'ministro');
+   return '<div class=ni><div class=nm>'+big+'</div><div class=meta>#'+(i+1)+' · '+role+' · '+planets[Math.floor(i/7)]+'</div></div>';
+ }).join('');
+ document.getElementById('allview').innerHTML=html;
+}
+function legend(){var en=window.LANG==='en';
+ document.getElementById('legend').innerHTML=(en?'Each colour = one of the 7 tables (= one letter position): ':'Cada cor = uma das 7 tabelas (= uma posição de letra): ')+
+  D.tables.map((t,i)=>'<span style="background:'+TB[i]+'"></span>'+t.id).join('');}
+window.onLangChange=function(){if(!D)return;legend();if(showAll)renderAll();else renderSingle(+document.getElementById('num').value);};
+function boot(){
+ legend();
+ var num=document.getElementById('num');
+ num.oninput=()=>{document.getElementById('nlbl').textContent=num.value;renderSingle(+num.value);};
+ document.getElementById('toggle').onclick=function(){showAll=!showAll;this.classList.toggle('on',showAll);
+   this.textContent=showAll?(window.LANG==='en'?'Show one':'Mostrar um'):(window.LANG==='en'?'Show all 49':'Mostrar os 49');
+   document.getElementById('single').style.display=showAll?'none':'';
+   document.getElementById('allview').style.display=showAll?'grid':'none';
+   if(showAll)renderAll();};
+ document.getElementById('forge').onclick=function(){showAll=true;document.getElementById('toggle').classList.add('on');
+   document.getElementById('single').style.display='none';document.getElementById('allview').style.display='grid';forgeView();};
+ renderSingle(1);
+}
+</script>
+<script src="i18n.js"></script>
+</body>
+</html>

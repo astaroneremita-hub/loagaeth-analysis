@@ -24,17 +24,19 @@ aside{width:220px;flex-shrink:0}
 .ni{padding:3px 7px;border-radius:6px;cursor:pointer;font-family:ui-monospace,monospace;font-size:13px}
 .ni:hover,.ni.on{background:var(--hl);color:#fff}
 .note{color:var(--mut);font-size:12px;margin-top:6px}
+#lang{cursor:pointer;border:1px solid var(--line);border-radius:16px;padding:3px 12px;font-size:12px;font-weight:600;float:right}
 </style>
 </head>
 <body>
-<h1>Torre do Loagaeth</h1>
-<p class="sub">Uma grade quadrada de letras, igual às tabelas do livro, com os nomes <b>embutidos e visíveis</b>. Clique num nome pra achá-lo na grade.</p>
+<span id="lang">EN</span>
+<h1 data-en="Tower of the Loagaeth">Torre do Loagaeth</h1>
+<p class="sub" data-en="A square grid of letters, like the book&#39;s tables, with the names <b>embedded and visible</b>. Click a name to find it in the grid.">Uma grade quadrada de letras, igual às tabelas do livro, com os nomes <b>embutidos e visíveis</b>. Clique num nome pra achá-lo na grade.</p>
 <div class="ctrl">
- <span><label>Lado:</label> <select id="size"><option>21</option><option selected>25</option><option>33</option><option>49</option></select></span>
- <span><label>Fonte:</label> <select id="src"><option value="real">nomes do livro</option><option value="gen">gerados (gramática)</option></select></span>
- <span><label>Elemento:</label> <select id="el"><option value="">qualquer</option><option>Ar</option><option>Terra</option><option>Fogo</option><option>Agua</option></select></span>
- <button id="go">Montar Torre</button>
- <input id="find" placeholder="procurar nome..." style="width:150px">
+ <span><label data-en="Side:">Lado:</label> <select id="size"><option>21</option><option selected>25</option><option>33</option><option>49</option></select></span>
+ <span><label data-en="Source:">Fonte:</label> <select id="src"><option value="real" data-en="names from the book">nomes do livro</option><option value="gen" data-en="generated (grammar)">gerados (gramática)</option></select></span>
+ <span><label data-en="Element:">Elemento:</label> <select id="el"><option value="" data-en="any">qualquer</option><option value="Ar" data-en="Air">Ar</option><option value="Terra" data-en="Earth">Terra</option><option value="Fogo" data-en="Fire">Fogo</option><option value="Agua" data-en="Water">Agua</option></select></span>
+ <button id="go" data-en="Build Tower">Montar Torre</button>
+ <input id="find" placeholder="procurar nome..." data-en-ph="search name..." style="width:150px">
 </div>
 <div class="wrap">
  <div class="gridbox"><div id="grid"></div></div>
@@ -75,7 +77,9 @@ function render(sel){
  var h='<table>';
  for(var r=0;r<N;r++){h+='<tr>';for(var c=0;c<N;c++){var id='c'+r+'_'+c;h+='<td id="'+id+'">'+CELLS[r][c]+'</td>';}h+='</tr>';}
  h+='</table>';document.getElementById('grid').innerHTML=h;
- document.getElementById('cnt').textContent=PLACED.length+' nomes embutidos na grade '+N+'×'+N;
+ document.getElementById('cnt').textContent=window.LANG==='en'
+   ?PLACED.length+' names embedded in the '+N+'×'+N+' grid'
+   :PLACED.length+' nomes embutidos na grade '+N+'×'+N;
  var seen={},list=PLACED.filter(p=>{if(seen[p.w])return false;seen[p.w]=1;return true});
  document.getElementById('names').innerHTML=list.map(p=>'<div class="ni" data-w="'+p.w+'">'+p.w+'</div>').join('');
  document.querySelectorAll('.ni').forEach(n=>n.onclick=()=>{highlight(n.dataset.w);document.querySelectorAll('.ni').forEach(x=>x.classList.toggle('on',x===n))});
@@ -90,6 +94,8 @@ function boot(){
  document.getElementById('size').onchange=build;document.getElementById('src').onchange=build;document.getElementById('el').onchange=build;
  build();
 }
+window.onLangChange=function(){if(CELLS.length)render()};
 </script>
+<script src="i18n.js"></script>
 </body>
 </html>

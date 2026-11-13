@@ -23,12 +23,14 @@ td.hl{color:#fff;font-weight:700;border-radius:2px}
 aside{width:210px;flex-shrink:0}.names{max-height:460px;overflow:auto;border:1px solid var(--line);border-radius:8px;background:var(--card);padding:6px}
 .ni{padding:3px 7px;border-radius:6px;cursor:pointer;font-family:ui-monospace,monospace;font-size:13px}.ni:hover,.ni.on{background:var(--hl);color:#fff}
 .note{color:var(--mut);font-size:12px}
+#lang{cursor:pointer;border:1px solid var(--line);border-radius:16px;padding:3px 12px;font-size:12px;font-weight:600;float:right}
 </style>
 </head>
 <body>
-<h1>A Regra de Leitura</h1>
-<p class="sub">Como achar os nomes numa tabela do Loagaeth, no olho — a regra que tiramos de toda a análise, aplicada a uma folha real.</p>
-<div class="rule">
+<span id="lang">EN</span>
+<h1 data-en="The Reading Rule">A Regra de Leitura</h1>
+<p class="sub" data-en="How to find the names in a Loagaeth table by eye — the rule we drew from the whole analysis, applied to a real leaf.">Como achar os nomes numa tabela do Loagaeth, no olho — a regra que tiramos de toda a análise, aplicada a uma folha real.</p>
+<div class="rule" data-en="<b>THE RULE</b> (holds for any table):<ol><li><b>Anchor on a root-syllable:</b> where you see <code>CHA</code>, <code>NO</code>, <code>GE</code>, <code>STOR</code>, <code>NZA</code>, <code>DNO</code> — a name starts there.</li><li><b>Read in a line:</b> straight (→ row, ↓ column) or diagonal (↘↙). The Loagaeth reads in lines, not by skips.</li><li><b>Alternate consonant-vowel</b> (C-V-C-V), <b>no two vowels together</b> (anti-hiatus). Keep going while it alternates; stop when it breaks.</li><li><b>4 letters or more.</b> Below that it is flow, not a name.</li><li>If the stretch <b>matches the lexicon</b> (the known names), it is a confirmed name. Click a name to light it up.</li></ol>">
 <b>A REGRA</b> (vale pra qualquer tabela):
 <ol>
 <li><b>Ancora numa sílaba-raiz:</b> onde vês <code>CHA</code>, <code>NO</code>, <code>GE</code>, <code>STOR</code>, <code>NZA</code>, <code>DNO</code> — ali começa um nome.</li>
@@ -39,9 +41,9 @@ aside{width:210px;flex-shrink:0}.names{max-height:460px;overflow:auto;border:1px
 </ol>
 </div>
 <div class="ctrl">
- <span>Folha: <select id="leaf"></select></span>
- <span>Direção: <select id="dir"><option value="reta">reta (linha)</option><option value="col">coluna</option><option value="diag">diagonal</option><option value="all" selected>todas</option></select></span>
- <button id="go">Aplicar a regra ⌖</button>
+ <span><span data-en="Leaf:">Folha:</span> <select id="leaf"></select></span>
+ <span><span data-en="Direction:">Direção:</span> <select id="dir"><option value="reta" data-en="straight (row)">reta (linha)</option><option value="col" data-en="column">coluna</option><option value="diag" data-en="diagonal">diagonal</option><option value="all" selected data-en="all">todas</option></select></span>
+ <button id="go" data-en="Apply the rule ⌖">Aplicar a regra ⌖</button>
 </div>
 <div class="wrap">
  <div class="gridbox"><div id="grid"></div></div>
@@ -72,7 +74,9 @@ function render(leaf,g){
  for(var r=0;r<N;r++){h+='<tr>';for(var c=0;c<N;c++)h+='<td id="g'+r+'_'+c+'">'+g[r][c]+'</td>';h+='</tr>';}
  h+='</table>';document.getElementById('grid').innerHTML=h;
  var seen={},list=FOUND.filter(f=>{if(seen[f.w])return false;seen[f.w]=1;return true});
- document.getElementById('cnt').textContent=list.length+' nomes achados pela regra em '+leaf+' ('+FOUND.length+' ocorrências)';
+ document.getElementById('cnt').textContent=window.LANG==='en'
+   ?list.length+' names found by the rule in '+leaf+' ('+FOUND.length+' occurrences)'
+   :list.length+' nomes achados pela regra em '+leaf+' ('+FOUND.length+' ocorrências)';
  document.getElementById('names').innerHTML=list.map(f=>'<div class=ni data-w="'+f.w+'">'+f.w+'</div>').join('');
  document.querySelectorAll('.ni').forEach(n=>n.onclick=()=>{hi(n.dataset.w);document.querySelectorAll('.ni').forEach(x=>x.classList.toggle('on',x===n))});
  // light all faintly
@@ -87,6 +91,8 @@ function boot(){
  document.getElementById('go').onclick=apply;sel.onchange=apply;document.getElementById('dir').onchange=apply;
  apply();
 }
+window.onLangChange=function(){if(T)apply()};
 </script>
+<script src="i18n.js"></script>
 </body>
 </html>

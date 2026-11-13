@@ -30,19 +30,21 @@ aside{width:260px;flex-shrink:0}
 .el.Fogo{background:var(--fogo)}.el.Terra{background:var(--terra)}.el.Ar{background:var(--ar)}.el.Agua{background:var(--agua)}
 .row{margin:4px 0;font-size:13px}
 .warn{background:var(--card);border:1px dashed var(--line);border-radius:10px;padding:9px 13px;font-size:12px;color:var(--mut);margin-top:10px}
+#lang{cursor:pointer;border:1px solid var(--line);border-radius:16px;padding:3px 12px;font-size:12px;font-weight:600;float:right}
 </style>
 </head>
 <body>
-<h1>Torre de Vigia do Loagaeth</h1>
-<p class="sub">O processo inverso: pega a fonte Loagaeth e <b>compila</b> numa Torre — os nomes emergem das posições, igual às Torres de vigia.</p>
-<div class="how">
+<span id="lang">EN</span>
+<h1 data-en="Loagaeth Watchtower">Torre de Vigia do Loagaeth</h1>
+<p class="sub" data-en="The inverse process: take the Loagaeth source and <b>compile</b> it into a Tower — the names emerge from the positions, just like the Watchtowers.">O processo inverso: pega a fonte Loagaeth e <b>compila</b> numa Torre — os nomes emergem das posições, igual às Torres de vigia.</p>
+<div class="how" data-en='<b>How it works (the compiler):</b> fills a grid with Loagaeth material, then READS the names from the Tower&#39;s fixed positions — the <b style="color:var(--cross)">central Cross</b> (horizontal + vertical) gives the Divine Names; the <b style="color:var(--ker)">top of each quadrant</b> gives the king-angels. The derived names were not placed — they <b>emerge from the arrangement</b>, as in a real Tower.'>
 <b>Como funciona (o compilador):</b> preenche uma grade com material do Loagaeth, depois LÊ os nomes das posições fixas da Torre —
 a <b style="color:var(--cross)">Cruz central</b> (horizontal + vertical) dá os Nomes Divinos; o <b style="color:var(--ker)">topo de cada quadrante</b> dá os anjos-reis. Os nomes derivados não foram colocados — <b>emergem do arranjo</b>, como numa Torre real.
 </div>
 <div class="ctrl">
- <span>Lado: <select id="size"><option>11</option><option selected>13</option><option>15</option></select></span>
- <span>Fonte: <select id="src"><option value="real">nomes do livro</option><option value="gen">gerados</option></select></span>
- <button id="go">Compilar Torre</button>
+ <span><span data-en="Side:">Lado:</span> <select id="size"><option>11</option><option selected>13</option><option>15</option></select></span>
+ <span><span data-en="Source:">Fonte:</span> <select id="src"><option value="real" data-en="names from the book">nomes do livro</option><option value="gen" data-en="generated">gerados</option></select></span>
+ <button id="go" data-en="Compile Tower">Compilar Torre</button>
 </div>
 <div class="wrap">
  <div class="gridbox"><div id="grid"></div></div>
@@ -74,25 +76,30 @@ function render(){
  // derived names: central cross (horizontal + vertical), and the top row of each quadrant
  var crossH=readRow(mid,0,N), crossV=readCol(mid,0,N);
  var half=Math.floor(N/2);
+ var en=window.LANG==='en';
  var quads=[
-  {nm:'Fogo (NO)',name:readRow(0,0,half)},
-  {nm:'Ar (NE)',name:readRow(0,half+1,half)},
-  {nm:'Água (SO)',name:readRow(N-1,0,half)},
-  {nm:'Terra (SE)',name:readRow(N-1,half+1,half)}
+  {nm:en?'Fire (NW)':'Fogo (NO)',name:readRow(0,0,half)},
+  {nm:en?'Air (NE)':'Ar (NE)',name:readRow(0,half+1,half)},
+  {nm:en?'Water (SW)':'Água (SO)',name:readRow(N-1,0,half)},
+  {nm:en?'Earth (SE)':'Terra (SE)',name:readRow(N-1,half+1,half)}
  ];
  var h='<table>';
  for(var r=0;r<N;r++){h+='<tr>';for(var c=0;c<N;c++){
    var cls='';if(r===mid||c===mid)cls='cross';else if((r===0||r===N-1))cls='ker';
    h+='<td class="'+cls+'">'+CELLS[r][c]+'</td>';}h+='</tr>';}
  h+='</table>';document.getElementById('grid').innerHTML=h;
- var o='<div class=derived><h3>✚ Cruz Central — os Nomes Divinos</h3>'+
+ var o='<div class=derived><h3>'+(en?'✚ Central Cross — the Divine Names':'✚ Cruz Central — os Nomes Divinos')+'</h3>'+
    '<div class=row><span class=nm>'+crossH+'</span><span class="el '+elementOf(crossH)+'">'+elementOf(crossH)+'</span> <span class=note>horizontal</span></div>'+
    '<div class=row><span class=nm>'+crossV+'</span><span class="el '+elementOf(crossV)+'">'+elementOf(crossV)+'</span> <span class=note>vertical</span></div></div>';
- o+='<div class=derived><h3>♔ Reis dos Quadrantes</h3>'+quads.map(q=>'<div class=row>'+q.nm+': <span class=nm>'+q.name+'</span><span class="el '+elementOf(q.name)+'">'+elementOf(q.name)+'</span></div>').join('')+'</div>';
+ o+='<div class=derived><h3>'+(en?'♔ Kings of the Quadrants':'♔ Reis dos Quadrantes')+'</h3>'+quads.map(q=>'<div class=row>'+q.nm+': <span class=nm>'+q.name+'</span><span class="el '+elementOf(q.name)+'">'+elementOf(q.name)+'</span></div>').join('')+'</div>';
  document.getElementById('out').innerHTML=o;
- document.getElementById('warn').textContent='Honesto: esta é uma Torre SINTÉTICA — a geometria (cruz, quadrantes) é inspirada na Great Table real, mas os nomes derivados emergem do arranjo do nosso material Loagaeth, não da Torre histórica (que não vem do Loagaeth). É o processo inverso REALIZADO: fonte pura -> estrutura compilada com nomes emergentes.';
+ document.getElementById('warn').textContent=en
+   ?'Honest: this is a SYNTHETIC Tower — the geometry (cross, quadrants) is inspired by the real Great Table, but the derived names emerge from the arrangement of our Loagaeth material, not from the historical Tower (which does not come from the Loagaeth). It is the inverse process REALIZED: pure source -> compiled structure with emergent names.'
+   :'Honesto: esta é uma Torre SINTÉTICA — a geometria (cruz, quadrantes) é inspirada na Great Table real, mas os nomes derivados emergem do arranjo do nosso material Loagaeth, não da Torre histórica (que não vem do Loagaeth). É o processo inverso REALIZADO: fonte pura -> estrutura compilada com nomes emergentes.';
 }
 function boot(){document.getElementById('go').onclick=build;document.getElementById('size').onchange=build;document.getElementById('src').onchange=build;build();}
+window.onLangChange=function(){if(CELLS.length)render()};
 </script>
+<script src="i18n.js"></script>
 </body>
 </html>

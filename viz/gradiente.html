@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>O Gradiente — a descida do Loagaeth</title>
+<style>
+:root{--bg:#f7f6f1;--card:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8;--ac:#8a6d2f;
+ --a:#b8862a;--i:#c0392b;--dens:#5b3fb0;--agua:#1f7a6b;--terra:#6b8e23;--ar:#2f80c0;--fogo:#c0392b}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13120c;--card:#1e1d15;--ink:#ece9da;--mut:#9a988a;--line:#322f27;--ac:#d6b96a;
+ --a:#d6b96a;--i:#e06a5a;--dens:#9a7de0;--agua:#5ac4b0;--terra:#a7c65a;--ar:#6ab6e0;--fogo:#e06a5a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 system-ui,sans-serif;max-width:920px;margin:0 auto;padding:16px 18px 60px}
+h1{font-size:23px;font-weight:700;margin:0 0 2px;display:inline-block}
+.sub{color:var(--mut);margin:0 0 14px;font-size:13px}
+#lang{cursor:pointer;border:1px solid var(--line);border-radius:16px;padding:3px 12px;font-size:12px;font-weight:600;float:right}
+.lead{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 15px;margin-bottom:14px;font-size:14px}
+.chartbox{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px}
+svg{width:100%;height:auto;display:block}
+.legend{font-size:12px;color:var(--mut);margin-top:8px;text-align:center}
+.legend b{padding:0 3px}
+.bands{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.band{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--card)}
+.band h3{margin:0 0 4px;font-size:14px}
+.band .el{font-size:11px;font-weight:700;color:#fff;border-radius:5px;padding:1px 7px}
+.band .d{font-size:12.5px;color:var(--mut);margin-top:6px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.col{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--card)}
+.col.fact{border-left:4px solid var(--terra)}.col.interp{border-left:4px solid var(--dens)}
+.col h3{margin:0 0 8px;font-size:14px}.col.fact h3{color:var(--terra)}.col.interp h3{color:var(--dens)}
+.col ul{margin:0;padding-left:18px}.col li{margin:5px 0;font-size:13px}
+.col .tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+.infl{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 15px;margin:12px 0;font-size:13.5px}
+.infl table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px}
+.infl td{padding:4px 8px;border-bottom:1px solid var(--line)}.infl td:first-child{font-weight:700;width:120px}
+.warn{background:var(--card);border:1px dashed var(--line);border-radius:10px;padding:9px 13px;font-size:12px;color:var(--mut);margin-top:12px}
+@media(max-width:620px){.split{grid-template-columns:1fr}}
+@media(max-width:620px){.bands{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<span id="lang">EN</span>
+<h1 data-en="The Descent">O Gradiente</h1>
+<p class="sub" data-en="The Loagaeth is not interchangeable tables — it is one ordered journey. Letter A falls, I rises; the named entities live in the body and dissolve at the deep (RESEARCH_LOG #317–319).">O Loagaeth não é tabelas intercambiáveis — é uma jornada ordenada. A letra A cai, o I sobe; as entidades nomeadas vivem no corpo e dissolvem no profundo (RESEARCH_LOG #317–319).</p>
+<div class="lead" data-en="<b>Measured:</b> leaf-to-leaf similarity decays smoothly with distance (r=−0.51, z=−8.6 vs shuffled order) — a real 1D gradient. Leaf 1 is the anchored origin pole (you enter through it, Call 1; and in the data it clusters with the opening leaves). The <b style='color:var(--a)'>A</b> curve (name-letter, Earth) <b>rises then falls</b>: leaf 1 = seed (moderate A, I≈0); body (leaves 25–30) = A peak (0.24, dense names); deep (44–48) = A crashes to 0.04 as <b style='color:var(--i)'>I</b>/Water rise. Name density tracks A (r=+0.71), vanishes where I is high (r=−0.53). Cosmology: <b>seed (Word) → body (matter/names) → dissolution (Water/void)</b>.">
+<b>Medido:</b> a similaridade entre folhas decai suave com a distância (r=−0.51, z=−8.6 vs ordem embaralhada) — um gradiente 1D real. A folha 1 é o polo-origem ancorado (entra-se por ela, Chamada 1; e no dado ela agrupa com as folhas de início). A forma do <b style='color:var(--a)'>A</b> (letra-dos-nomes, Terra) <b>sobe-e-desce</b>: folha 1 = semente (A moderado, I≈0); corpo (folhas 25-30) = pico de A (0.24, nomes densos); profundo (44-48) = A despenca a 0.04 e o <b style='color:var(--i)'>I</b>/Água sobem. A densidade de nomes acompanha o A (r=+0.71) e some onde o I é alto (r=−0.53). Cosmologia: <b>semente (Verbo) → corpo (matéria/nomes) → dissolução (Água/vazio)</b>.</div>
+<div class="chartbox">
+ <svg id="chart" viewBox="0 0 900 360"></svg>
+ <div class="legend" id="legend"></div>
+</div>
+<div class="bands" id="bands"></div>
+
+<div class="split">
+ <div class="col fact">
+  <h3 data-en="✓ What we actually found (measured)">✓ O que achamos de fato (medido)</h3>
+  <ul>
+   <li data-en="<b>The order is real.</b> Leaf-to-leaf similarity decays smoothly with distance in Dee's order (r=−0.51), and this is impossible by chance (z=−8.6 vs shuffled order). The 49 leaves are NOT interchangeable."><b>A ordem é real.</b> A similaridade entre folhas decai suave com a distância na ordem do Dee (r=−0.51), e isso é impossível por acaso (z=−8.6 vs ordem embaralhada). As 49 folhas NÃO são intercambiáveis.</li>
+   <li data-en="<b>A specific letter axis drives it.</b> A (freq 20%→4%), S, D fall; I, U, R, P, L rise — every one at p=0.002."><b>Um eixo de letra específico dirige.</b> A (freq 20%→4%), S, D caem; I, U, R, P, L sobem — cada um a p=0.002.</li>
+   <li data-en="<b>Names cluster with A, vanish with I.</b> Name density correlates +0.71 with A and −0.53 with I. Middle leaves are name-dense; leaf 45 has almost none (0.0008)."><b>Nomes acompanham o A, somem com o I.</b> Densidade de nome correlaciona +0.71 com A e −0.53 com I. Folhas do meio são densas; a folha 45 quase não tem (0.0008).</li>
+  </ul>
+  <div class="tag" style="color:var(--mut)" data-en="These are numbers from the book, tested against a null.">São números do livro, testados contra um null.</div>
+ </div>
+ <div class="col interp">
+  <h3 data-en="~ What is interpretation (a reading)">~ O que é interpretação (uma leitura)</h3>
+  <ul>
+   <li data-en="<b>The direction has no proven meaning.</b> The data says A falls and water rises — it does NOT say which end is 'higher', 'nearer' or 'the source'. That is a lens we add."><b>A direção não tem sentido provado.</b> O dado diz que A cai e a água sobe — NÃO diz qual ponta é 'mais alta', 'mais perto' ou 'a fonte'. Isso é lente que a gente põe.</li>
+   <li data-en="<b>The elemental names (Earth/Water/Fire) are Dee/Golden Dawn letter attributions</b>, not a measured property of the cells."><b>Os rótulos elementais (Terra/Água/Fogo) são atribuições de letra Dee/Golden Dawn</b>, não propriedade medida das células.</li>
+   <li data-en="<b>'Cosmology', 'descent', 'apophatic silence'</b> are ways of speaking about a real gradient — reasonable, but not Dee's stated intent and not provable."><b>'Cosmologia', 'descida', 'silêncio apofático'</b> são jeitos de falar de um gradiente real — razoáveis, mas não são intenção declarada do Dee nem prováveis.</li>
+  </ul>
+  <div class="tag" style="color:var(--mut)" data-en="Honest line: the gradient is fact; its 'meaning' is a choice.">Linha honesta: o gradiente é fato; o 'sentido' dele é escolha.</div>
+ </div>
+</div>
+
+<div class="infl">
+ <b data-en="Does this change what we had before? No — it unifies it.">Isso muda o que tínhamos antes? Não — unifica.</b>
+ <div data-en="Scattered findings (density rising, the elemental arc, the sealed leaf 1, the distinct diamonds) turn out to be facets of ONE thing: an ordered 1D gradient. Nothing earlier was wrong; the Forge, the grammar and the name-extraction all stand. What is NEW is that the book has a measurable DIRECTION — which also sharpens how the three systems differ:" style="margin:6px 0">Achados soltos (densidade subindo, o arco elemental, a folha 1 selada, os losangos distintos) acabam sendo faces de UMA coisa: um gradiente 1D ordenado. Nada anterior estava errado; a Forja, a gramática e a extração de nomes seguem de pé. O NOVO é que o livro tem uma DIREÇÃO mensurável — o que também afia como os três sistemas diferem:</div>
+ <table>
+  <tr><td>Loagaeth</td><td data-en="process — an ordered descent (gradient A→I), read in sequence">processo — uma descida ordenada (gradiente A→I), lido em sequência</td></tr>
+  <tr><td>Torres</td><td data-en="fixed map — spatial address, read by position">mapa fixo — endereço espacial, lido por posição</td></tr>
+  <tr><td>Heptarquia</td><td data-en="fixed map — a numbered set, read by index">mapa fixo — um conjunto numerado, lido por índice</td></tr>
+ </table>
+ <div data-en="So the Loagaeth is the only one of the three with a temporal, sequential structure — a journey that happens in order. The others simply exist in space. Word-that-flows vs Place-that-is." style="margin-top:6px">Então o Loagaeth é o único dos três com estrutura temporal, sequencial — uma jornada que acontece em ordem. Os outros simplesmente existem no espaço. Palavra-que-flui vs Lugar-que-é.</div>
+</div>
+
+<div class="warn" id="warn" data-en="Honest: this is letter-frequency and name-density per leaf, measured against a shuffled-order null. The elemental labels use Dee/Golden Dawn letter attributions. The metaphysical reading (Word → body → deep) is interpretation laid on a real, measured gradient — not claimed as Dee's stated intent.">Honesto: isto é frequência de letra e densidade de nome por folha, medidas contra um null de ordem embaralhada. Os rótulos elementais usam a atribuição de letra Dee/Golden Dawn. A leitura metafísica (Verbo → corpo → profundo) é interpretação posta sobre um gradiente real e medido — não afirmada como intenção declarada do Dee.</div>
+<script>
+var D=null;
+fetch('gradiente.json').then(r=>r.json()).then(d=>{D=d;draw()}).catch(()=>{document.getElementById('chart').outerHTML='Open via http://localhost:8860/';});
+function agg(){
+ var by={};
+ D.forEach(r=>{(by[r.n]=by[r.n]||[]).push(r)});
+ return Object.keys(by).map(n=>{var g=by[n];var m=k=>g.reduce((s,x)=>s+x[k],0)/g.length;
+   return {n:+n,A:m('A'),I:m('I'),dens:m('dens'),agua:m('agua'),terra:m('terra')};}).sort((a,b)=>a.n-b.n);
+}
+function draw(){
+ var rows=agg();var W=900,H=360,pad=40;
+ var xs=n=>pad+(n-1)/48*(W-2*pad);
+ var maxA=Math.max.apply(0,rows.map(r=>r.A));
+ var maxD=Math.max.apply(0,rows.map(r=>r.dens))||1;
+ var yA=v=>H-pad-(v/0.24)*(H-2*pad);
+ var yD=v=>H-pad-(v/maxD)*(H-2*pad);
+ function path(key,yf){return rows.map((r,i)=>(i?'L':'M')+xs(r.n).toFixed(1)+' '+yf(r[key]).toFixed(1)).join(' ');}
+ var h='';
+ // density area (bars)
+ rows.forEach(r=>{var x=xs(r.n),y=yD(r.dens);h+='<rect x="'+(x-3).toFixed(1)+'" y="'+y.toFixed(1)+'" width="6" height="'+(H-pad-y).toFixed(1)+'" fill="var(--dens)" opacity="0.25"/>';});
+ // axes
+ h+='<line x1="'+pad+'" y1="'+(H-pad)+'" x2="'+(W-pad)+'" y2="'+(H-pad)+'" stroke="var(--line)"/>';
+ // region separators: leaf 2 (start), 29 (diamonds)
+ [2,29].forEach(n=>{h+='<line x1="'+xs(n)+'" y1="'+pad+'" x2="'+xs(n)+'" y2="'+(H-pad)+'" stroke="var(--line)" stroke-dasharray="3 3"/>';});
+ // lines
+ h+='<path d="'+path('A',yA)+'" fill="none" stroke="var(--a)" stroke-width="2.5"/>';
+ h+='<path d="'+path('I',yA)+'" fill="none" stroke="var(--i)" stroke-width="2.5"/>';
+ // x labels
+ [1,10,20,29,40,49].forEach(n=>{h+='<text x="'+xs(n)+'" y="'+(H-pad+16)+'" font-size="11" fill="var(--mut)" text-anchor="middle">'+n+'</text>';});
+ var en=window.LANG==='en';
+ h+='<text x="'+(W/2)+'" y="'+(H-6)+'" font-size="11" fill="var(--mut)" text-anchor="middle">'+(en?'leaf (1 → 49)':'folha (1 → 49)')+'</text>';
+ document.getElementById('chart').innerHTML=h;
+ document.getElementById('legend').innerHTML=(en?'':'')+
+  '<b style="color:var(--a)">— A</b> '+(en?'(name-letter, falls)':'(letra-nome, cai)')+' &nbsp; '+
+  '<b style="color:var(--i)">— I</b> '+(en?'(fire, rises)':'(fogo, sobe)')+' &nbsp; '+
+  '<b style="color:var(--dens)">▮ '+(en?'name density':'densidade de nome')+'</b>';
+ var bands=en?[
+   {t:'Leaf 1 — the Word-seed',el:'Air',c:'--ar',d:'The sealed foundation (you enter through it, Call 1). I≈0 (lowest of all) — pure utterance/mind, the grain before manifestation. NOT the A peak.'},
+   {t:'2–30 — the body',el:'Earth',c:'--terra',d:'A peak (0.24) and maximum name density. The populated world: full matter, the incarnate beings.'},
+   {t:'29–49 — the deep',el:'Water',c:'--agua',d:'I and R·P·L rise, A falls, names dissolve to near-zero (leaf 45 ≈ 0.0008). The nameless, apophatic end.'}
+ ]:[
+   {t:'Folha 1 — o Verbo-semente',el:'Ar',c:'--ar',d:'A fundação selada (entra-se por ela, Chamada 1). I≈0 (o mais baixo de todas) — pura fala/mente, o grão antes da manifestação. Não é o pico de A.'},
+   {t:'2–30 — o corpo',el:'Terra',c:'--terra',d:'Pico de A (0.24) e densidade máxima de nomes. O mundo povoado: a matéria plena, os seres encarnados.'},
+   {t:'29–49 — o profundo',el:'Água',c:'--agua',d:'I e R·P·L sobem, A cai, os nomes dissolvem a quase-zero (folha 45 ≈ 0.0008). O fim inominável, apofático.'}
+ ];
+ document.getElementById('bands').innerHTML=bands.map(b=>'<div class=band><h3>'+b.t+' <span class=el style="background:var('+b.c+')">'+b.el+'</span></h3><div class=d>'+b.d+'</div></div>').join('');
+}
+window.onLangChange=function(){if(D)draw()};
+</script>
+<script src="i18n.js"></script>
+</body>
+</html>

@@ -1941,3 +1941,37 @@ a179: 90 nomes agrupados por raiz + grafo edição-1 + pontes. seed 1583.
 - Derivação por acreção: adnocha->adnochap->adnochaph->adnochapha; chastor->chastora->chastorad/al/an; prefixos I-/ZI-/NE- = linhas paralelas.
 VEREDITO: há dinastias além de CHASTOR (NOCHA maior); evento central = casamento NOCHA×CHASTOR -> NOCHASTOR (domina diagonal 26a #343 e miolo #342). 27% dos nomes sem raiz = camada avulsa.
 Docs: docs/DINASTIAS.md. Dados: results/179_dynasties.json.
+
+## #345 — Documento de pesquisa consolidado (PT) + síntese atualizada + painel
+- docs/PESQUISA_LOAGAETH.md: documento completo em PT — tese, material, método (nulls), os 12 achados (pergunta/método/null/resultado/interpretação/reproduzir), limites honestos, guia passo-a-passo reprodutível, índice de scripts/docs/viz.
+- viz/sintese.html: adicionadas cartas #10-#15 (partículas=peças, gerador livre, seleção por recorrência, ilha+léxico fino, geometria/mapa/sem-zodíaco, dinastias), bilíngue PT/EN via i18n, linkando atlas_nomes/genealogia/mapa_livro/dinastias.
+- viz/index.html: 4 telas novas no topo do painel + entradas EN.
+- Correção técnica: d3 vendorizado local (viz/d3.v7.min.js); atlas_nomes e genealogia apontam pra ele (o "atlas não funciona" era o CDN não carregar). Memória: viz PT-only (loagaeth-viz-idioma).
+
+## #346 — Forja neural v2 + Árvore da Vida + correspondências + engenharia reversa
+- viz/arvore_vida.html: 90 nomes nas 10 sefirot pelo planeta dominante das letras. Honesto: 81/90 em Netzach(Vênus) porque A e O (letras mais comuns) são Vênus/Ar — campo venusiano/aéreo, não planeta por nome. Dados: results/182_tree.json (src a182 inline bash).
+- viz/correspondencias.html: letra→elemento→planeta→sefirá (22), domínios GD, sefirá→nº nomes, inventário da forja (prefixos10/raízes10/sufixos10/esqueletos1948/melodias288/nomes90/possíveis), fontes.
+- viz/forja_neural.html v2: cada nome ganha elemento·planeta·sefirá; contador de atestados corrigido = 62/62 generáveis (só 62 dos 90 são gestáveis pelo núcleo; 28 usam peças fora das 10 raízes/afixos); botão "Coletar atestados" (determinístico, sem repetir); toggle sufixos 1|2 (espaço 1.210→12.210); TESTADOR de engenharia reversa (cola nome de qualquer sistema -> gerável? decompõe + atributos). occodon/bynepor = não geráveis (ilha #336 interativa); nochastor=no·chastor gerável.
+- forja usa só o núcleo prefixo·raiz·sufixo, não os 1948 esqueletos nem 288 melodias (modo rico = futuro).
+Painel index.html: arvore_vida, correspondencias no painel (PT+EN).
+
+## #347 — Forja neural: modo RICO (esqueleto·melodia·template) + análise Vênus
+- Regra de tecelagem real (a140): nome = esqueleto(consoantes) + melodia(vogais) + template(C/V), via interleave. name_field=90 nomes -> 67 esqueletos × 28 melodias × 44 templates, regenera 90/90 (100%).
+- forja_neural v3: toggle núcleo|rico. Núcleo (10 raízes) = 62/90 atestados generáveis; RICO (67×28×44) = 90/90. "Coletar" em rico fecha 90/90. Dados: results/183_rich.json.
+- Testador agora reporta núcleo E rico. 
+- Vênus (análise): A=176 + O=64 = 240 = 35% das letras, AMBAS Vênus(GD) -> 54% do peso planetário -> 81/90 dominante Vênus. Não é intenção do Loag; é a fonologia A-pesada batendo na atribuição GD (A,O=Vênus). Trocando a atribuição, o planeta dominante muda.
+- Nota metodológica (resposta ao usuário): auto-replicar esqueletos a partir de nomes GERADOS = falsos positivos (inflação circular). Inventário deve ancorar no manuscrito atestado (Sloane 3189); só cresce com nomes achados NO TEXTO, nunca na saída do gerador.
+
+## #348 — Nomes de anjos geráveis pela forja? NÃO (sem confirmação limpa)
+a184: testa anjos venusianos (hanael/anael/hagiel/noguel...), Filii Lucis, reis Heptarquia, controles, baal/ihrlaa.
+- Gramática apertada (90: 67esq×28mel×44tmpl): 0/53 geráveis; null 0% => restritiva/disciplinada.
+- Gramática ampla (livro: 1948esq×288mel): 8% passam MAS null também 8% (z=-0.1) => aceita qualquer coisa, falso-positivo.
+- Venusianos 3/8 vs null 0.9 (z=+2.3): bump fraco = confound A/O (anjos venusianos são A/O-pesados, e as letras Vênus SÃO as vogais comuns; mesmo efeito do #340). Não é prova independente. michael(controle) também passa.
+VEREDITO: sem confirmação. Sistema planetário é internamente consistente (Vênus=freq A/O) mas circular. Reconfirma ilha (#336). Nomes curtos falham: esqueletos/melodias fora do inventário.
+Docs: docs/TESTE_ANJOS.md.
+
+## #349 — Forja: testador busca os 1948 esqueletos + 288 melodias (transparente)
+- forja_neural testador agora reporta 3 inventários: núcleo(10 raízes), rico90(67esq·28mel·44tmpl), LIVRO(1948esq·288mel), mostrando o esqueleto/melodia exato procurado e se ∈ inventário. Aviso: o "livro" aceita ~8% de qualquer string (Babel).
+- Botão "⚡ completo" enumera todo o espaço produtivo (7.200 no rico; ~1.052.998 no livro) com aviso Babel.
+- Testados Vigilantes (Enoque): azazel(esq zzl), daniel(dnl), ramiel(rml), samyaza(smyz) — nenhum esqueleto está nem nos 1948. "Não encontra" é correto: o Loag não tem essas formas, não é bug do testador.
+- Pendente: testar a lista completa de Vigilantes com null (idea #10).

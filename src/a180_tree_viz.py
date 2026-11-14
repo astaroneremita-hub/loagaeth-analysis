@@ -68,7 +68,7 @@ COL={"NOCHA":"#5bb3e0","CHASTOR":"#9b6be0","PONTE":"#e0573b","NACHO":"#3d6bd6",
  "ANTANTOX":"#7a8696","ANZACH":"#e0a13b","PHANGE":"#6bd0c0","AVULSO":"#5b6672"}
 hof={m:hk for hk,ms in H.items() for m in ms}
 
-svg=[f'<svg viewBox="0 0 {W} {Hc}" xmlns="http://www.w3.org/2000/svg">']
+svg=[f'<svg id="dsvg" viewBox="0 0 {W} {Hc}" xmlns="http://www.w3.org/2000/svg"><g id="vp">']
 # halos das casas
 for hk,(cx,cy,R) in cells.items():
     if hk in ("AVULSO",): continue
@@ -93,7 +93,7 @@ for m,(x,y) in pos.items():
     isroot = m==hof.get(m,"").lower()
     svg.append(f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{4.5 if isroot else 3}" fill="{c}" stroke="#0e1116" stroke-width="0.6"/>')
     svg.append(f'<text x="{x:.0f}" y="{y-6:.0f}" text-anchor="middle" fill="#c7d0da" font-size="8">{m}</text>')
-svg.append('</svg>')
+svg.append('</g></svg>')
 
 html=f"""<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>Dinastias do Loagaeth</title>
@@ -101,12 +101,32 @@ html=f"""<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
 body{{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,Segoe UI,Roboto,Arial;padding:16px}}
 h1{{font-size:20px;margin:0 0 2px}} .sub{{color:var(--mut);font-size:13px;margin:0 0 12px}}
 .wrap{{background:#121820;border:1px solid var(--line);border-radius:12px;padding:8px}}
-svg{{width:100%;height:auto;display:block}} text{{font-family:ui-monospace,Menlo,Consolas,monospace}}
+svg{{width:100%;height:80vh;display:block;cursor:grab;touch-action:none}} svg:active{{cursor:grabbing}} text{{font-family:ui-monospace,Menlo,Consolas,monospace}}
+.ctrls{{margin:8px 0 0}} .ctrls button{{background:#1b2634;border:1px solid #2c3a4e;color:var(--ink);border-radius:6px;padding:3px 10px;font-size:12px;cursor:pointer}}
 .note{{color:var(--mut);font-size:12px;border-left:3px solid var(--line);padding-left:10px;margin-top:12px}}</style></head>
 <body><h1>Dinastias do Loagaeth · genealogia dos 90 nomes</h1>
-<p class="sub">Casas por raiz · arestas = edição-1 · vermelho = casamento NOCHA×CHASTOR → NOCHASTOR.</p>
+<p class="sub">Casas por raiz · arestas = edição-1 · vermelho = casamento NOCHA×CHASTOR → NOCHASTOR. · <b>roda = zoom · arraste = mover · 2 cliques = reset</b></p>
+<div class="ctrls"><button id="zin">+</button> <button id="zout">−</button> <button id="zreset">reset</button></div>
 <div class="wrap">{''.join(svg)}</div>
 <p class="note">Famílias reais (z=+229.6, #344). Contagem = casa <b>primária</b>; os compostos NOCHA+CHASTOR saem para a PONTE, então por raiz NOCHA=19 e CHASTOR=18 (#344). Ponto maior = a raiz-nome da casa. AVULSOS = 24 nomes sem raiz das 10 casas.</p>
+<script>
+(function(){{var svg=document.getElementById('dsvg'),vp=document.getElementById('vp');
+var s=1,tx=0,ty=0,drag=false,lx=0,ly=0;
+function apply(){{vp.setAttribute('transform','translate('+tx+' '+ty+') scale('+s+')');}}
+function zoomAt(cx,cy,f){{var ns=Math.min(12,Math.max(0.3,s*f));var r=svg.getBoundingClientRect();
+ var vb=svg.viewBox.baseVal;var px=(cx-r.left)/r.width*vb.width,py=(cy-r.top)/r.height*vb.height;
+ tx=px-(px-tx)*(ns/s);ty=py-(py-ty)*(ns/s);s=ns;apply();}}
+svg.addEventListener('wheel',function(e){{e.preventDefault();zoomAt(e.clientX,e.clientY,e.deltaY<0?1.15:1/1.15);}},{{passive:false}});
+svg.addEventListener('mousedown',function(e){{drag=true;lx=e.clientX;ly=e.clientY;}});
+window.addEventListener('mousemove',function(e){{if(!drag)return;var r=svg.getBoundingClientRect();var vb=svg.viewBox.baseVal;
+ tx+=(e.clientX-lx)/r.width*vb.width;ty+=(e.clientY-ly)/r.height*vb.height;lx=e.clientX;ly=e.clientY;apply();}});
+window.addEventListener('mouseup',function(){{drag=false;}});
+svg.addEventListener('dblclick',function(){{s=1;tx=0;ty=0;apply();}});
+document.getElementById('zin').onclick=function(){{var r=svg.getBoundingClientRect();zoomAt(r.left+r.width/2,r.top+r.height/2,1.25);}};
+document.getElementById('zout').onclick=function(){{var r=svg.getBoundingClientRect();zoomAt(r.left+r.width/2,r.top+r.height/2,1/1.25);}};
+document.getElementById('zreset').onclick=function(){{s=1;tx=0;ty=0;apply();}};
+}})();
+</script>
 </body></html>"""
 open(os.path.join(ROOT,"viz","dinastias.html"),"w",encoding="utf-8").write(html)
 print("escrito viz/dinastias.html |", len(pos),"nos,",len(edges),"arestas")

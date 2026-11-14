@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decifração estrutural do Liber Loagaeth — pesquisa</title>
+<style>
+:root{--bg:#f7f6f1;--card:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8;--ac:#8a6d2f;--nm:#8a2f7d;--ok:#2f8a52;--use:#2f6d8a}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13120c;--card:#1e1d15;--ink:#ece9da;--mut:#9a988a;--line:#322f27;--ac:#d6b96a;--nm:#d66ac4;--ok:#6ad68f;--use:#6ab6d6}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.68 Georgia,"Times New Roman",serif}
+.wrap{max-width:860px;margin:0 auto;padding:22px 20px 80px}
+h1{font-size:25px;font-weight:700;margin:0 0 4px;font-family:system-ui,sans-serif}
+.subt{color:var(--mut);font-size:13.5px;margin:0 0 16px;font-family:system-ui,sans-serif}
+h2{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--ac);margin:34px 0 10px;font-family:system-ui,sans-serif;border-top:1px solid var(--line);padding-top:16px}
+h3{font-size:18px;font-weight:700;margin:22px 0 4px;font-family:system-ui,sans-serif}
+h3 .tag{font-size:11px;font-weight:700;color:var(--mut);background:var(--line);border-radius:10px;padding:2px 8px;vertical-align:middle;margin-left:6px;font-family:ui-monospace,monospace}
+p{margin:6px 0}
+.tese{background:var(--card);border-left:4px solid var(--ac);border-radius:0 12px 12px 0;padding:14px 18px;margin:14px 0;font-size:16px}
+.f{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:12px 0}
+.f dl{margin:0;display:grid;grid-template-columns:92px 1fr;gap:4px 12px;font-size:14px}
+.f dt{font-weight:700;color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.4px;padding-top:3px;font-family:system-ui,sans-serif}
+.f dd{margin:0}
+.f dd.res{color:var(--ok)} .z{font-weight:700;color:var(--ac)}
+code{font-family:ui-monospace,monospace;background:var(--line);border-radius:4px;padding:0 5px;font-size:13px}
+pre{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;overflow:auto;font-size:13px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:10px 0;font-family:system-ui,sans-serif}
+th,td{border:1px solid var(--line);padding:5px 9px;text-align:left;vertical-align:top}
+th{background:var(--card);color:var(--ac)}
+.toc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:14px 0;font-size:14px;font-family:system-ui,sans-serif}
+.toc a{color:var(--use);text-decoration:none;display:inline-block;margin:2px 10px 2px 0}
+.toc a:hover{text-decoration:underline}
+.warn{background:var(--card);border:1px dashed var(--line);border-radius:10px;padding:10px 14px;font-size:13.5px;color:var(--mut);margin:12px 0;font-family:system-ui,sans-serif}
+.foot{color:var(--mut);font-style:italic;font-size:14px;margin-top:26px;border-top:1px solid var(--line);padding-top:14px}
+a.home{font-family:system-ui,sans-serif;font-size:13px;color:var(--use);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="home" href="index.html">← painel</a>
+<h1>Decifração estrutural do Liber Loagaeth</h1>
+<p class="subt">O que é, como foi achado, e como qualquer pessoa reproduz. · Transcrição-base: Sloane MS 3189 · Análise: <code>loagaeth-analysis</code> · semente 1583 · documento completo em <code>docs/PESQUISA_LOAGAETH.md</code></p>
+
+<div class="tese"><b>Tese em uma frase.</b> O Loagaeth não é um texto com sentido: é um <b>campo de nomes</b> gerado por um <b>autômato combinatório pequeno</b> (prefixo·raiz·sufixo), lido <b>em linha</b>, com uma <b>arquitetura</b> (os nomes picam no miolo e somem no fim) e uma <b>genealogia</b> (os nomes formam famílias que se casam). É <b>autônomo</b> (não se liga às Torres/Heptarquia/governadores) e carrega só uma <b>camada fina de língua real</b> (~24 palavras). O que <b>não</b> existe é tradução palavra-a-palavra dos nomes.</div>
+
+<div class="toc"><b>Índice:</b>
+<a href="#m">Método</a><a href="#p1">I· Natureza do livro</a><a href="#p2">II· O gerador</a><a href="#p3">III· Geometria e mapa</a><a href="#p4">IV· Genealogia</a><a href="#p5">V· Fronteiras</a><a href="#lim">Limites</a><a href="#guia">Guia reprodutível</a></div>
+
+<h2 id="m">Método — a disciplina do null</h2>
+<p>Cada achado segue o molde <b>Pergunta · Método · Null · Resultado · Interpretação · Reproduzir</b>. <code>z</code> = desvios-padrão acima do acaso (z&gt;3 forte; z&gt;6 decisivo). Regra do projeto: <b>nenhum padrão conta até bater um null</b>; pareidolia é o inimigo. Achados refutados ficam no registro (<code>docs/RESEARCH_LOG.md</code>, #NNN).</p>
+<table><tr><th>dado</th><th>o que é</th></tr>
+<tr><td><code>loagaeth_grades_simples.json</code></td><td>96 faces (48 folhas × 2 lados); folha 1 segmentada por Dee, grades 2-48 em letra 49×49</td></tr>
+<tr><td><code>chamadas.json</code></td><td>19 Chamadas com a tradução de Dee</td></tr>
+<tr><td><code>forge_grammar.json</code></td><td>90 nomes, 10 raízes, afixos, esqueletos, mapa letra→elemento</td></tr>
+<tr><td><code>governadores / heptarquia</code></td><td>os outros sistemas enoquianos (para o teste de ponte)</td></tr></table>
+
+<h2 id="p1">Parte I — A natureza do livro</h2>
+
+<div class="f"><h3>Campo de nomes, não prosa <span class="tag">#332</span></h3>
+<dl><dt>Pergunta</dt><dd>a folha 1 encadeia palavras em frase?</dd>
+<dt>Método</dt><dd>entropia condicional H(próxima|atual) do corpus 1a+1b.</dd>
+<dt>Null</dt><dd>embaralhar a ordem das palavras.</dd>
+<dt>Resultado</dt><dd class="res">H real 2.84 vs null 2.86, <span class="z">z=−1.3</span>. Bigramas recorrentes 12 vs 2 (z=+6.7), mas a ordem não carrega informação.</dd>
+<dt>Leitura</dt><dd>há léxico, <b>não há sintaxe</b>. O livro lista; não sentencia.</dd>
+<dt>Reproduzir</dt><dd><code>python src/a162_folha1_syntax.py</code></dd></dl></div>
+
+<div class="f"><h3>As palavras da folha 1 são léxico real <span class="tag">#331</span></h3>
+<dl><dt>Método</dt><dd>recorrência, boa-formação fonotática, famílias edição-1.</dd>
+<dt>Null</dt><dd>shuffle-resegment.</dd>
+<dt>Resultado</dt><dd class="res">306 tipos recorrentes vs 133 (<span class="z">z=+22.9</span>); boa-formação 97% vs 69% (z=+42); famílias 51% vs 20% (z=+44).</dd>
+<dt>Leitura</dt><dd>a folha 1 é um <b>léxico real</b>, não ruído.</dd>
+<dt>Reproduzir</dt><dd><code>python src/a161_folha1_wordhood.py</code></dd></dl></div>
+
+<div class="f"><h3>As "partículas" são peças do gerador, não gramática <span class="tag">#334</span></h3>
+<dl><dt>Pergunta</dt><dd>as ~162 palavras curtas são classe-função ou peças dos nomes?</dd>
+<dt>Método</dt><dd>viés posicional, fonotática (B vs glosadas A vs nomes C), e ladrilho dos 90 nomes com o inventário de peças.</dd>
+<dt>Resultado</dt><dd class="res">viés posicional nulo (igual aos nomes); B agrupa com os nomes (cos 0.806 vs 0.700); os 90 nomes <b>ladrilham 85%</b> das letras, 39/90 a 100%, vs null 36%/0.4 (<span class="z">z=+5.5</span>).</dd>
+<dt>Leitura</dt><dd>partículas = <b>morfologia onomástica</b> (afixos/fragmentos). A folha 1 é a <b>página-oficina</b>.</dd>
+<dt>Reproduzir</dt><dd><code>a169_particle_function.py</code>, <code>a170_name_tiling.py</code> · <a href="atlas_nomes.html">Atlas → Esqueletos</a></dd></dl></div>
+
+<h2 id="p2">Parte II — O gerador de nomes</h2>
+
+<div class="f"><h3>NOME := PREFIXO? RAIZ SUFIXO*, combinação livre <span class="tag">#335</span></h3>
+<dl><dt>Método</dt><dd>parsear os 90 nomes em slots; medir compressão (MDL) e restrição H(sufixo|raiz).</dd>
+<dt>Null</dt><dd>nomes aleatórios; shuffle de rótulos de raiz.</dd>
+<dt>Resultado</dt><dd class="res">62/90 parseiam 100%; null 0/90 em 2000. Compressão 684→89 letras (7.7×). H(sufixo|raiz) <span class="z">z=−0.3</span> → combinação <b>livre</b>.</dd>
+<dt>Leitura</dt><dd>gerador <b>tabular/construído</b>, não morfologia natural. Obre-gera: 1210 possíveis, ~90 usados.</dd>
+<dt>Reproduzir</dt><dd><code>a171_name_grammar.py</code>; rodar <code>python src/gerador_nomes.py</code> · <a href="genealogia.html">Genealogia (+possíveis)</a></dd></dl></div>
+
+<div class="f"><h3>A seleção é por recorrência na grade <span class="tag">#337</span></h3>
+<dl><dt>Pergunta</dt><dd>por que só ~90 dos 1210 viram nome?</dd>
+<dt>Resultado</dt><dd class="res">recorrência real 40.1 linhas vs não-real 0.97 (<span class="z">z=+14.7</span>); comprimento/lisura são subproduto.</dd>
+<dt>Leitura</dt><dd>o filtro mora <b>fora da gramática</b> — na geometria da tabela que repete as peças.</dd>
+<dt>Reproduzir</dt><dd><code>a173_selection.py</code> · <a href="mapa_livro.html">Mapa do livro</a></dd></dl></div>
+
+<h2 id="p3">Parte III — Geometria e mapa</h2>
+
+<div class="f"><h3>Lê-se em linha; coluna morta; borda e diagonal↘ são canais <span class="tag">#341</span></h3>
+<dl><dt>Método</dt><dd>ler cada face 49×49 em linha/coluna/diagonal↘/↗/borda; contar recorrência dos nomes por direção.</dd>
+<dt>Resultado</dt><dd class="res">LINHA z=+103 (parte circular); <b>BORDA <span class="z">z=+42</span></b> e <b>DIAGONAL↘ <span class="z">z=+12</span></b> (reais); <b>COLUNA z=−1.4</b> (morta).</dd>
+<dt>Leitura</dt><dd>lê em linha, nomes grudam na borda e num fio diagonal descendente; nunca coluna.</dd>
+<dt>Reproduzir</dt><dd><code>a176_geometry.py</code></dd></dl></div>
+
+<div class="f"><h3>O mapa do livro inteiro <span class="tag">#342</span></h3>
+<dl><dt>Resultado</dt><dd class="res">densidade 22.5 nomes/folha vs null 0.1 (<span class="z">z=+126</span>). Pico no miolo (folha 14: 207 ocorrências), colapso no fim. Gradiente limpo: Terra(corpo) pica no meio, Água(profundo) sobe ao fim.</dd>
+<dt>Leitura</dt><dd>arquitetura <b>abertura → corpo → costura → profundo</b>. Folha 1 é a oficina (léxico 33 vs ~5-10).</dd>
+<dt>Reproduzir</dt><dd><code>a177_sweep.py</code> · <a href="mapa_livro.html">Mapa do livro</a>, <a href="atlas_nomes.html">Atlas</a></dd></dl></div>
+
+<div class="f"><h3>As folhas 26-28 são a costura diagonal <span class="tag">#343</span></h3>
+<dl><dt>Pergunta</dt><dd>por que 26-28 dão 0 nomes por linha?</dd>
+<dt>Resultado</dt><dd class="res">ROW 1, COL 0, <b>DIAG↘ 55 nomes</b>. A diagonal de 26a soletra <code>NOCHASTORAL</code>; 28a/b dão ALGETH/ANTANTOX/RONZIN.</dd>
+<dt>Leitura</dt><dd>o eixo de leitura <b>gira 45°</b> — a costura entre a metade densa e o profundo.</dd>
+<dt>Reproduzir</dt><dd><code>a178_diag2628.py</code></dd></dl></div>
+
+<h2 id="p4">Parte IV — A genealogia</h2>
+<div class="f"><h3>Os nomes são dinastias que se casam <span class="tag">#344</span></h3>
+<dl><dt>Método</dt><dd>agrupar por raiz; grafo edição-1; achar pontes (nomes com 2 raízes).</dd>
+<dt>Null</dt><dd>o mesmo grafo sobre nomes aleatórios.</dd>
+<dt>Resultado</dt><dd class="res">55 arestas vs null 0.1 (<span class="z">z=+229.6</span>). 10 casas (NOCHA 19, CHASTOR 18…); 7 pontes, quase todas <b>NOCHA+CHASTOR → NOCHASTOR</b>.</dd>
+<dt>Leitura</dt><dd>o campo de nomes é uma <b>genealogia</b> — tudo deriva por acreção de afixo, as duas casas grandes se casam.</dd>
+<dt>Reproduzir</dt><dd><code>a179_dynasties.py</code> · <a href="dinastias.html">Dinastias</a>, <a href="genealogia.html">Genealogia viva</a></dd></dl></div>
+
+<h2 id="p5">Parte V — As fronteiras</h2>
+
+<div class="f"><h3>O Loag é uma ilha <span class="tag">#336</span></h3>
+<dl><dt>Método</dt><dd>nomes das Torres/Heptarquia/governadores como substring no livro; raízes do gerador dentro dos nomes deles (indep. de ordem).</dd>
+<dt>Resultado</dt><dd class="res">governadores 0/91; todos no acaso; <b>raízes do gerador em 0 nomes</b> de qualquer sistema.</dd>
+<dt>Leitura</dt><dd>sem ponte onomástica. O gerador do Loag é <b>disjunto</b> dos outros sistemas.</dd>
+<dt>Reproduzir</dt><dd><code>a172_bridges.py</code></dd></dl></div>
+
+<div class="f"><h3>Léxico real fino; Laycock não expande <span class="tag">#338·#339</span></h3>
+<dl><dt>Resultado</dt><dd class="res">overlap bruto 114 (z=+42.8), <b>mas</b> a Introdução do Laycock transcreve a própria folha 1 (auto-citação). Limpo: ~<b>24</b> palavras (21 Chamadas + 3 glosadas por Dee). Raízes 0/10 e nomes 0/90 no dicionário.</dd>
+<dt>Leitura</dt><dd>camada de língua real é fina; o "114" era artefato. Laycock julga o Loag glossolalia.</dd>
+<dt>Reproduzir</dt><dd><code>a174_laycock_lexicon.py "&lt;PDF&gt;"</code> · glossário em <code>docs/GLOSSARIO.md</code></dd></dl></div>
+
+<div class="f"><h3>Não há astrologia (zodíaco/planeta) <span class="tag">#340</span></h3>
+<dl><dt>Método</dt><dd>autocorrelação do perfil por folha (elemento/planeta/valor-Soyga) nos lags 12, 7, 4, 1.</dd>
+<dt>Resultado</dt><dd class="res">lag 12 <span class="z">z=−1.6</span>, lag 7 z=+1.2 (acaso); só lag 1 forte = suavidade local (o gradiente).</dd>
+<dt>Leitura</dt><dd><b>sem roda</b> zodiacal nem planetária. Soyga é outro sistema, não é chave.</dd>
+<dt>Reproduzir</dt><dd><code>a175_astro.py</code></dd></dl></div>
+
+<h2 id="lim">O que NÃO achamos (limites)</h2>
+<div class="warn">• A <b>glosa-palavra</b> de cada nome ("NOCHA = X"): não há Pedra de Roseta; Dee nunca traduziu as tabelas.<br>
+• <b>Gramática semítica especial / poder preditivo da Forja</b>: REFUTADOS por controles fortes (é fonotática de ordem 2-3; um Markov-3 reproduz). A decomposição é descrição; a geração é construção fiel, não língua decifrada (<code>docs/RELATORIO_AUDITORIA.md</code>).<br>
+• <b>Circularidade residual</b>: densidade e leitura-em-linha herdam que os nomes foram derivados por linha. Os mais sólidos são os independentes disso: gradiente, coluna morta, borda, diagonal 26-28, genealogia, pontes, astrologia.<br>
+• <b>Losangos</b> (faces de linha variável) ficaram fora da geometria quadrada.</div>
+
+<h2 id="guia">Guia passo-a-passo (reproduzir do zero)</h2>
+<p>Python 3 (stdlib). No Windows use <code>PYTHONIOENCODING=utf-8</code> por causa dos acentos.</p>
+<pre># não é frase / é léxico
+python src/a162_folha1_syntax.py        # z ≈ −1.3 (sem sintaxe)
+python src/a161_folha1_wordhood.py      # z até +44 (léxico real)
+# partículas = peças
+python src/a169_particle_function.py
+python src/a170_name_tiling.py          # ladrilho 85%, z ≈ +5.5
+# o gerador e a seleção
+python src/a171_name_grammar.py         # 62/90, null 0/90
+python src/gerador_nomes.py             # parse + gerar
+python src/a173_selection.py            # recorrência z ≈ +14.7
+# geometria e mapa
+python src/a176_geometry.py             # coluna morta, borda +42, diag↘ +12
+python src/a177_sweep.py                # densidade z ≈ +126
+python src/a178_diag2628.py             # 55 nomes na diagonal
+# genealogia e fronteiras
+python src/a179_dynasties.py            # z ≈ +229.6, NOCHASTOR
+python src/a172_bridges.py              # ilha
+python src/a175_astro.py                # sem zodíaco
+# ver tudo
+cd viz &amp;&amp; python -m http.server 8860   # abrir http://localhost:8860/</pre>
+<p>Cada script grava um <code>results/1NN_*.json</code> com os números exatos para conferência.</p>
+
+<p class="foot">Honestidade acima de resultado: cada número aqui tem um null que o sustenta, e cada limite está dito. O que o Loag é — campo de nomes gerado e arquitetado — a análise mostra. O que ele guarda além disso, se guarda, não está nesta página.</p>
+</div>
+</body>
+</html>

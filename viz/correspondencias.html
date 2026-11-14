@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Correspondências e referências — Loagaeth</title>
+<style>
+:root{--bg:#f7f6f1;--card:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8;--ac:#8a6d2f;
+  --fogo:#c0392b;--terra:#8a6d2f;--ar:#2f6d8a;--agua:#2f5a8a}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13120c;--card:#1e1d15;--ink:#ece9da;--mut:#9a988a;--line:#322f27;--ac:#d6b96a;--fogo:#e0573b;--terra:#c9a24b;--ar:#5bb3e0;--agua:#6a9bd6}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 system-ui,sans-serif}
+.wrap{max-width:900px;margin:0 auto;padding:20px 20px 70px}
+a.home{color:var(--ar);text-decoration:none;font-size:13px}
+h1{font-size:24px;font-weight:700;margin:4px 0 2px}
+.sub{color:var(--mut);font-size:13px;margin:0 0 10px}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--ac);margin:30px 0 8px;border-top:1px solid var(--line);padding-top:14px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:6px 0 2px}
+th,td{border:1px solid var(--line);padding:5px 9px;text-align:left}
+th{background:var(--card);color:var(--ac)}
+.chip{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:-1px;margin-right:5px}
+.note{color:var(--mut);font-size:12.5px;margin:4px 0}
+code{font-family:ui-monospace,monospace;background:var(--line);border-radius:4px;padding:0 5px;font-size:12.5px}
+.src{font-size:13px} .src li{margin:3px 0}
+.big{font-size:20px;font-weight:700;color:var(--ac)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="home" href="index.html">← painel</a>
+<h1>Correspondências e referências</h1>
+<p class="sub">O mapa das correspondências reais usadas na análise — letra, elemento, planeta, sefirá — e as fontes. Atribuições: Golden Dawn (padrão).</p>
+
+<h2>1. Letra → elemento → planeta → sefirá</h2>
+<p class="note">As 22 letras do alfabeto angelical usadas no Loag, cada uma com sua atribuição. (<code>?</code> / <code>—</code> = letra sem planeta atribuído.)</p>
+<div id="tletras"></div>
+
+<h2>2. Elemento → domínio → correspondências (Golden Dawn)</h2>
+<table id="telem"><tr><th>elemento</th><th>domínio</th><th>cor</th><th>direção</th><th>ferramenta</th><th>arcanjo</th></tr>
+<tr><td><span class="chip" style="background:var(--fogo)"></span>Fogo</td><td>vontade / força / espírito</td><td>vermelho</td><td>Sul</td><td>varinha</td><td>Michael</td></tr>
+<tr><td><span class="chip" style="background:var(--terra)"></span>Terra</td><td>matéria / corpo / o fixo</td><td>verde / preto</td><td>Norte</td><td>pentáculo</td><td>Uriel</td></tr>
+<tr><td><span class="chip" style="background:var(--ar)"></span>Ar</td><td>mente / palavra / sopro</td><td>amarelo</td><td>Leste</td><td>adaga</td><td>Raphael</td></tr>
+<tr><td><span class="chip" style="background:var(--agua)"></span>Água</td><td>emoção / fluxo / o profundo</td><td>azul</td><td>Oeste</td><td>cálice</td><td>Gabriel</td></tr></table>
+
+<h2>3. Sefirá → planeta → nomes do Loag</h2>
+<p class="note">Quantos dos 90 nomes caem em cada sefirá pelo planeta dominante das letras. <b>Honesto:</b> Vênus (Netzach) domina porque <code>A</code> e <code>O</code> são as letras mais comuns — campo venusiano/aéreo. Ver <a href="arvore_vida.html">Árvore da Vida</a>.</p>
+<div id="tsef"></div>
+
+<h2>4. O inventário da forja (quanto ela cobre)</h2>
+<table id="tinv"></table>
+<p class="note">A <a href="forja_neural.html">Forja neural</a> usa o <b>núcleo</b> (prefixos·raízes·sufixos). Os <b>esqueletos</b> (espinhas consonantais) e <b>melodias</b> (padrões de vogais) são o espaço de forma bruto; só ~7.200 das 561.024 combinações são bem-formadas. <b>Com significado atestado: 0 além dos ~90 nomes</b> — a forja gera forma, não glosa.</p>
+
+<h2>5. Fontes</h2>
+<ul class="src">
+<li><b>Liber Loagaeth</b> — John Dee & Edward Kelley, <b>Sloane MS 3189</b> (British Library), via esotericarchives.com/dee/sl3189.htm. A transcrição-base.</li>
+<li><b>As 48 Chamadas (Claves Angelicae)</b> — Sloane MS 3191, com a tradução inglesa de Dee.</li>
+<li><b>91 governadores / 30 Aethyrs</b> — <i>Liber Scientiae</i>; <b>Heptarquia</b> — <i>De Heptarchia Mystica</i> (ed. J. H. Peterson). Usados no teste de ponte (<a href="pesquisa.html">pesquisa §V</a>).</li>
+<li><b>Correspondências Golden Dawn</b> — atribuição elemento/planeta por letra e as sefirot (padrão Hermetic Order of the Golden Dawn).</li>
+<li><b>Donald Laycock, <i>The Complete Enochian Dictionary</i></b> — usado como léxico de validação (ver o limite honesto em <a href="pesquisa.html">pesquisa §V</a>).</li>
+</ul>
+<p class="note" style="margin-top:14px">Nenhuma correspondência aqui é invenção da análise: elemento/planeta por letra e as sefirot são atribuições Golden Dawn padrão; os números de nomes/esqueletos/melodias saem de <code>viz/forge_grammar.json</code>.</p>
+</div>
+
+<script>
+const T={"sef_planet":{"Binah":"Saturno","Chesed":"Júpiter","Geburah":"Marte","Tiphareth":"Sol","Netzach":"Vênus","Hod":"Mercúrio","Yesod":"Lua","Malkuth":"Terra/elementos","Kether":"—","Chokmah":"zodíaco"},"sephiroth":{"Kether":[],"Chokmah":[],"Binah":[{"n":"ucher","e":"Terra"}],"Chesed":[{"n":"dragra","e":"Agua"},{"n":"ichastor","e":"Ar"},{"n":"ronzin","e":"Agua"},{"n":"zichastor","e":"Fogo"}],"Geburah":[{"n":"nadab","e":"Terra"}],"Tiphareth":[{"n":"geth","e":"Fogo"}],"Netzach":[{"n":"achadax","e":"Terra"},{"n":"achadnacho","e":"Terra"},{"n":"achardan","e":"Terra"},{"n":"aclax","e":"Terra"},{"n":"aclaxp","e":"Terra"},{"n":"aclaxto","e":"Terra"},{"n":"aclaxtor","e":"Terra"},{"n":"adnachepha","e":"Terra"},{"n":"adnacho","e":"Terra"},{"n":"adnachoa","e":"Terra"},{"n":"adnocha","e":"Terra"},{"n":"adnochap","e":"Terra"},{"n":"adnochaph","e":"Ar"},{"n":"adnochapha","e":"Terra"},{"n":"agethal","e":"Terra"},{"n":"alchadax","e":"Terra"},{"n":"algeth","e":"Terra"},{"n":"algethad","e":"Terra"},{"n":"algradax","e":"Terra"},{"n":"anacho","e":"Terra"},{"n":"anchadax","e":"Terra"},{"n":"anchano","e":"Terra"},{"n":"angethal","e":"Terra"},{"n":"annocha","e":"Terra"},{"n":"anochastor","e":"Ar"},{"n":"antantox","e":"Terra"},{"n":"antantoxa","e":"Terra"},{"n":"antantoxal","e":"Terra"},{"n":"anzach","e":"Terra"},{"n":"anzachal","e":"Terra"},{"n":"aoxard","e":"Terra"},{"n":"aphange","e":"Terra"},{"n":"axachar","e":"Terra"},{"n":"axaclaxto","e":"Terra"},{"n":"axalgra","e":"Terra"},{"n":"axnacho","e":"Terra"},{"n":"axnochap","e":"Terra"},{"n":"axnochastor","e":"Ar"},{"n":"axtalgetha","e":"Terra"},{"n":"chadax","e":"Terra"},{"n":"chardax","e":"Terra"},{"n":"chastor","e":"Ar"},{"n":"chastora","e":"Ar"},{"n":"chastorad","e":"Ar"},{"n":"chastoral","e":"Ar"},{"n":"chastoran","e":"Ar"},{"n":"chastorp","e":"Ar"},{"n":"chidaxto","e":"Fogo"},{"n":"dnochapa","e":"Agua"},{"n":"donchal","e":"Ar"},{"n":"gasta","e":"Terra"},{"n":"gradax","e":"Terra"},{"n":"gradaxa","e":"Terra"},{"n":"hnaxad","e":"Terra"},{"n":"ichadax","e":"Terra"},{"n":"ichastora","e":"Ar"},{"n":"nacho","e":"Ar"},{"n":"nachoa","e":"Terra"},{"n":"nachoad","e":"Terra"},{"n":"nachoal","e":"Agua"},{"n":"naclansa","e":"Agua"},{"n":"nechastora","e":"Terra"},{"n":"nocha","e":"Ar"},{"n":"nochaal","e":"Agua"},{"n":"nochadaxa","e":"Terra"},{"n":"nochap","e":"Agua"},{"n":"nochaph","e":"Ar"},{"n":"nochastor","e":"Ar"},{"n":"nochastora","e":"Ar"},{"n":"nochastorad","e":"Ar"},{"n":"nochastoral","e":"Ar"},{"n":"nodalga","e":"Agua"},{"n":"olchadna","e":"Ar"},{"n":"ondanvage","e":"Terra"},{"n":"oxardrah","e":"Terra"},{"n":"phadol","e":"Agua"},{"n":"taxalgra","e":"Terra"},{"n":"voxar","e":"Terra"},{"n":"zichastora","e":"Fogo"},{"n":"zidnopha","e":"Fogo"},{"n":"zinocha","e":"Fogo"}],"Hod":[{"n":"nechastor","e":"Ar"}],"Yesod":[{"n":"phange","e":"Agua"}],"Malkuth":[]},"letters":{"A":{"e":"Terra","p":"Venus"},"B":{"e":"?","p":"Marte"},"C":{"e":"Fogo","p":"-"},"D":{"e":"?","p":"-"},"E":{"e":"Terra","p":"Mercurio"},"F":{"e":"?","p":"-"},"G":{"e":"Fogo","p":"Sol"},"H":{"e":"Ar","p":"-"},"I":{"e":"Fogo","p":"Jupiter"},"L":{"e":"Agua","p":"Lua minguante"},"M":{"e":"Ar","p":"Saturno"},"N":{"e":"Agua","p":"Marte"},"O":{"e":"Ar","p":"Venus"},"P":{"e":"Agua","p":"Lua crescente"},"Q":{"e":"?","p":"-"},"R":{"e":"Agua","p":"Jupiter"},"S":{"e":"Ar","p":"Mercurio"},"T":{"e":"?","p":"-"},"U":{"e":"Terra","p":"Saturno"},"V":{"e":"?","p":"-"},"X":{"e":"Terra","p":"-"},"Z":{"e":"Fogo","p":"Sol"}},"counts":{"prefixos":10,"raizes":10,"sufixos":10,"esqueletos":1948,"melodias":288,"nomes":90}};
+const EC={Fogo:"var(--fogo)",Terra:"var(--terra)",Ar:"var(--ar)",Agua:"var(--agua)","?":"var(--mut)"};
+const PL2SEF={"Saturno":"Binah","Marte":"Geburah","Jupiter":"Chesed","Sol":"Tiphareth","Venus":"Netzach","Mercurio":"Hod","Lua minguante":"Yesod","Lua crescente":"Yesod"};
+// tabela de letras
+(function(){const ks=Object.keys(T.letters).sort();let h='<table><tr><th>letra</th><th>elemento</th><th>planeta</th><th>sefirá</th></tr>';
+ ks.forEach(k=>{const e=T.letters[k].e,p=T.letters[k].p;const sef=PL2SEF[p]||"—";
+  h+=`<tr><td><b>${k}</b></td><td><span class="chip" style="background:${EC[e]||'var(--mut)'}"></span>${e}</td><td>${p==='-'?'—':p}</td><td>${sef}</td></tr>`;});
+ h+='</table>';document.getElementById("tletras").innerHTML=h;})();
+// sefirot
+(function(){const order=["Kether","Chokmah","Binah","Chesed","Geburah","Tiphareth","Netzach","Hod","Yesod","Malkuth"];
+ let h='<table><tr><th>sefirá</th><th>planeta</th><th>nº de nomes</th></tr>';
+ order.forEach(s=>{const n=(T.sephiroth[s]||[]).length;h+=`<tr><td>${s}</td><td>${T.sef_planet[s]}</td><td><b>${n}</b></td></tr>`;});
+ h+='</table>';document.getElementById("tsef").innerHTML=h;})();
+// inventario
+(function(){const c=T.counts;const pp=c.prefixos+1, sp=c.sufixos+1;
+ const rows=[["prefixos",c.prefixos+" (+∅)"],["raízes",c.raizes],["sufixos",c.sufixos+" (+∅)"],
+   ["esqueletos (espinhas consonantais)",c.esqueletos],["melodias (padrões de vogais)",c.melodias],
+   ["nomes atestados no livro",c.nomes],
+   ["possíveis ≤1 sufixo",(pp*c.raizes*sp).toLocaleString('pt-BR')],
+   ["possíveis ≤2 sufixos",(pp*c.raizes*(1+c.sufixos+c.sufixos*c.sufixos)).toLocaleString('pt-BR')],
+   ["possíveis (sufixos ilimitados)","∞"],
+   ["formas esqueleto×melodia",(c.esqueletos*c.melodias).toLocaleString('pt-BR')]];
+ let h='<tr><th>inventário</th><th>quantidade</th></tr>';
+ rows.forEach(([a,b])=>h+=`<tr><td>${a}</td><td class="big">${b}</td></tr>`);
+ document.getElementById("tinv").innerHTML=h;})();
+</script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Forja neural — Loagaeth</title>
+<style>
+  :root{--bg:#090c11;--panel:#121820;--ink:#e6edf3;--mut:#8b97a7;--line:#242c38;--gold:#e8c35a;
+    --fogo:#e0573b;--terra:#c9a24b;--ar:#5bb3e0;--agua:#3d6bd6;--q:#6b7686}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.45 system-ui,Segoe UI,Roboto,Arial;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+  header{padding:8px 14px 4px} h1{font-size:17px;margin:0} .sub{color:var(--mut);font-size:11px;margin:1px 0 0} a.home{color:var(--ar);text-decoration:none}
+  .bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:7px 14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel)}
+  button{background:#1b2634;border:1px solid #2c3a4e;color:var(--ink);border-radius:7px;padding:5px 11px;font-size:12px;cursor:pointer}
+  button#go{background:#2e4668;border-color:#4a6aa0;font-weight:600} button.on{background:#43345a;border-color:#6a4f8e} button:hover{filter:brightness(1.2)}
+  input[type=text]{background:#0b1118;border:1px solid var(--line);color:var(--ink);border-radius:6px;padding:5px 8px;font:12px monospace;width:130px}
+  label{font-size:12px;color:var(--mut);display:flex;gap:5px;align-items:center}
+  .main{flex:1;display:flex;min-height:0}
+  .net{flex:1;position:relative} svg{width:100%;height:100%;display:block}
+  .side{width:280px;border-left:1px solid var(--line);background:var(--panel);display:flex;flex-direction:column}
+  .side h2{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);margin:0;padding:9px 12px 4px}
+  .stat{padding:0 12px 7px;font-size:12px;color:var(--mut)} .stat b{color:var(--ink)}
+  #test{margin:0 12px 8px;padding:8px 10px;background:#0e141b;border:1px solid var(--line);border-radius:8px;font-size:12px;display:none}
+  #list{flex:1;overflow:auto;padding:0 8px 10px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}
+  .it{display:flex;gap:6px;padding:2px 4px;align-items:baseline}
+  .it .n{color:var(--mut);font-size:11px;min-width:32px;text-align:right}
+  .it .nm{font-weight:600} .it .pl{color:var(--mut);font-size:10px} .it .st{color:var(--gold)}
+  .lbl{fill:var(--mut);font:600 11px system-ui;text-transform:uppercase;letter-spacing:.5px}
+  .ntext{fill:#cdd6e0;font:9px ui-monospace,monospace;pointer-events:none}
+  .cur{position:absolute;bottom:10px;left:0;right:0;text-align:center;font:700 25px ui-monospace,monospace;letter-spacing:1px;pointer-events:none}
+  .cur small{display:block;font:400 12px system-ui;color:var(--mut);letter-spacing:0;margin-top:2px}
+</style>
+</head>
+<body>
+<header><a class="home" href="index.html">← painel</a>
+  <h1>Forja neural do Loagaeth</h1>
+  <p class="sub">A rede monta nomes e dá a cada entidade elemento · planeta · sefirá. <b>Núcleo</b> = prefixo·raiz·sufixo (62 atestados). <b>Rico</b> = esqueleto·melodia·template (100% dos 90). ★ = atestado.</p>
+</header>
+<div class="bar">
+  <label>modo <button id="mN" class="on">núcleo</button><button id="mR">rico</button></label>
+  <button id="go">▶ Forjar ∞</button>
+  <button id="collect">★ Coletar atestados</button>
+  <button id="allbtn">⚡ completo</button>
+  <button id="step">passo</button>
+  <button id="clear">limpar</button>
+  <label>veloc <input type="range" id="spd" min="50" max="900" value="300" style="width:80px"></label>
+  <label class="sxw">sufixos <button id="sx1" class="on">1</button><button id="sx2">2</button></label>
+  <label>🔎 <input type="text" id="test_in" placeholder="testar nome…"><button id="test_go">testar</button></label>
+  <span class="stat" style="margin-left:auto" id="hdr"></span>
+</div>
+<div class="main">
+  <div class="net"><svg id="svg"></svg><div class="cur" id="cur"></div></div>
+  <div class="side">
+    <h2>Engenharia reversa</h2>
+    <div id="test">cola um nome (de qualquer sistema) e vê se a estrutura do Loag o gera.</div>
+    <h2>Nomes forjados</h2>
+    <div class="stat" id="stat"></div>
+    <div id="list"></div>
+  </div>
+</div>
+
+<script>
+const R={"templates":[{"t":"CVCC","c":3,"v":1},{"t":"CVCCV","c":3,"v":2},{"t":"CVCVC","c":3,"v":2},{"t":"VCCVC","c":3,"v":2},{"t":"CCVCCV","c":4,"v":2},{"t":"CCVCVC","c":4,"v":2},{"t":"CVCCVC","c":4,"v":2},{"t":"CVCCVV","c":3,"v":3},{"t":"VCCVCC","c":4,"v":2},{"t":"VCVCCV","c":3,"v":3},{"t":"VVCVCC","c":3,"v":3},{"t":"CCVCCVC","c":5,"v":2},{"t":"CCVCVCV","c":4,"v":3},{"t":"CVCCCVC","c":5,"v":2},{"t":"CVCCVCC","c":5,"v":2},{"t":"CVCCVVC","c":4,"v":3},{"t":"CVCVCCV","c":4,"v":3},{"t":"VCCCVCV","c":4,"v":3},{"t":"VCCVCCV","c":4,"v":3},{"t":"VCCVCVC","c":4,"v":3},{"t":"VCVCCCV","c":4,"v":3},{"t":"VCVCCVC","c":4,"v":3},{"t":"CCVCCVCC","c":6,"v":2},{"t":"CCVCCVCV","c":5,"v":3},{"t":"CCVCVCCV","c":5,"v":3},{"t":"CVCCVCCV","c":5,"v":3},{"t":"CVCVCCCV","c":5,"v":3},{"t":"VCCCVCCV","c":5,"v":3},{"t":"VCCCVCVC","c":5,"v":3},{"t":"VCCVCCVC","c":5,"v":3},{"t":"VCCVCCVV","c":4,"v":4},{"t":"VCVCCCVC","c":5,"v":3},{"t":"CCVCCVCVC","c":6,"v":3},{"t":"CVCCVCCVC","c":6,"v":3},{"t":"CVCCVCVCV","c":5,"v":4},{"t":"VCCVCCVCC","c":6,"v":3},{"t":"VCCVCCVCV","c":5,"v":4},{"t":"VCVCCVCCV","c":5,"v":4},{"t":"CVCCVCCVCV","c":6,"v":4},{"t":"VCCVCCVCCV","c":6,"v":4},{"t":"VCCVCCVCVC","c":6,"v":4},{"t":"VCVCCVCCVC","c":6,"v":4},{"t":"CVCCVCCVCVC","c":7,"v":4},{"t":"VCCVCCVCCVC","c":7,"v":4}],"skelByC":{"4":["CHDX","CLXP","CLXT","DNCH","DRGR","GRDX","GTHL","HNXD","LGTH","NCHD","NCHL","NCHN","NCHP","NDLG","NNCH","NZCH","PHDL","PHNG","RNZN","XCHR","XLGR","XNCH","ZNCH"],"5":["CHDXT","CHRDN","CHRDX","CHSTR","CLXTR","DNCHL","DNCHP","LCHDN","LCHDX","LGRDX","LGTHD","NCHDX","NCHPH","NCLNS","NDNVG","NGTHL","NTNTX","NZCHL","TXLGR","XCLXT","XNCHP","XRDRH","ZDNPH"],"6":["CHDNCH","CHSTRD","CHSTRL","CHSTRN","CHSTRP","DNCHPH","NCHSTR","NTNTXL","XTLGTH","ZCHSTR"],"7":["NCHSTRD","NCHSTRL","XNCHSTR"],"3":["CHR","CLX","GST","GTH","NCH","NDB","VXR","XRD"]},"melByV":{"4":["AAAO","AAEA","AAOA","AOAA","AOAO","EAOA","IAOA","OAAA","OAAE","OAOA"],"3":["AAA","AAE","AAO","AEA","AOA","EAO","IAA","IAO","IOA","OAA","OAO"],"2":["AA","AE","AO","OA","OI","UE"],"1":["E"]},"skeletons":["CHDNCH","CHDX","CHDXT","CHR","CHRDN","CHRDX","CHSTR","CHSTRD","CHSTRL","CHSTRN","CHSTRP","CLX","CLXP","CLXT","CLXTR","DNCH","DNCHL","DNCHP","DNCHPH","DRGR","GRDX","GST","GTH","GTHL","HNXD","LCHDN","LCHDX","LGRDX","LGTH","LGTHD","NCH","NCHD","NCHDX","NCHL","NCHN","NCHP","NCHPH","NCHSTR","NCHSTRD","NCHSTRL","NCLNS","NDB","NDLG","NDNVG","NGTHL","NNCH","NTNTX","NTNTXL","NZCH","NZCHL","PHDL","PHNG","RNZN","TXLGR","VXR","XCHR","XCLXT","XLGR","XNCH","XNCHP","XNCHSTR","XRD","XRDRH","XTLGTH","ZCHSTR","ZDNPH","ZNCH"],"melodies":["AA","AAA","AAAO","AAE","AAEA","AAO","AAOA","AE","AEA","AO","AOA","AOAA","AOAO","E","EAO","EAOA","IAA","IAO","IAOA","IOA","OA","OAA","OAAA","OAAE","OAO","OAOA","OI","UE"],"attested":["achadax","achadnacho","achardan","aclax","aclaxp","aclaxto","aclaxtor","adnachepha","adnacho","adnachoa","adnocha","adnochap","adnochaph","adnochapha","agethal","alchadax","algeth","algethad","algradax","anacho","anchadax","anchano","angethal","annocha","anochastor","antantox","antantoxa","antantoxal","anzach","anzachal","aoxard","aphange","axachar","axaclaxto","axalgra","axnacho","axnochap","axnochastor","axtalgetha","chadax","chardax","chastor","chastora","chastorad","chastoral","chastoran","chastorp","chidaxto","dnochapa","donchal","dragra","gasta","geth","gradax","gradaxa","hnaxad","ichadax","ichastor","ichastora","nacho","nachoa","nachoad","nachoal","naclansa","nadab","nechastor","nechastora","nocha","nochaal","nochadaxa","nochap","nochaph","nochastor","nochastora","nochastorad","nochastoral","nodalga","olchadna","ondanvage","oxardrah","phadol","phange","ronzin","taxalgra","ucher","voxar","zichastor","zichastora","zidnopha","zinocha"],"venus":{"A":176,"O":64,"pct_AO":35,"pct_venus_weight":54}};
+const PREF=["","ad","no","al","a","zi","i","ax","an","ne","axno"];
+const ROOTS=["antantox","chastor","gradax","chadax","anzach","nocha","nacho","aclax","phange","geth"];
+const SUF=["","a","al","p","ad","ph","to","pha","an","tor","pa"];
+const TEMPL=R.templates.map(x=>x.t), SKELS=R.skeletons.map(s=>s.toLowerCase()), MELS=R.melodies.map(m=>m.toLowerCase());
+const skByC={}; for(const k in R.skelByC)skByC[k]=R.skelByC[k].map(s=>s.toLowerCase());
+const mlByV={}; for(const k in R.melByV)mlByV[k]=R.melByV[k].map(s=>s.toLowerCase());
+const SKbook=new Set((R.skeletonsBook||[]).map(s=>s.toLowerCase())), MLbook=new Set((R.melodiesBook||[]).map(m=>m.toLowerCase()));
+const LET={a:["Terra","Venus"],b:["?","Marte"],c:["Fogo","-"],d:["?","-"],e:["Terra","Mercurio"],f:["?","-"],g:["Fogo","Sol"],h:["Ar","-"],i:["Fogo","Jupiter"],l:["Agua","Lua"],m:["Ar","Saturno"],n:["Agua","Marte"],o:["Ar","Venus"],p:["Agua","Lua"],q:["?","-"],r:["Agua","Jupiter"],s:["Ar","Mercurio"],t:["?","-"],u:["Terra","Saturno"],v:["?","-"],x:["Terra","-"],z:["Fogo","Sol"]};
+const PL2SEF={Saturno:"Binah",Jupiter:"Chesed",Marte:"Geburah",Sol:"Tiphareth",Venus:"Netzach",Mercurio:"Hod",Lua:"Yesod"};
+const REAL=new Set(R.attested);
+const EC={Fogo:"var(--fogo)",Terra:"var(--terra)",Ar:"var(--ar)",Agua:"var(--agua)","?":"var(--q)"};
+const VOW=new Set(["a","e","i","o","u"]);
+function elemDom(n){const c={};for(const ch of n.toLowerCase()){const e=(LET[ch]||[])[0];if(e&&e!=="?")c[e]=(c[e]||0)+1;}let b="?",bv=-1;for(const k in c)if(c[k]>bv){bv=c[k];b=k;}return b;}
+function planDom(n){const c={};for(const ch of n.toLowerCase()){const p=(LET[ch]||[])[1];if(p&&p!=="-")c[p]=(c[p]||0)+1;}let b=null,bv=-1;for(const k in c)if(c[k]>bv){bv=c[k];b=k;}return b;}
+function sefOf(n){const p=planDom(n);return p?PL2SEF[p]:"Malkuth";}
+function skel(n){return[...n].filter(c=>!VOW.has(c)).join("")||"·";}
+function mel(n){return[...n].filter(c=>VOW.has(c)).join("")||"·";}
+function interleave(sk,ml,tm){let o="",si=0,mi=0;for(const t of tm){if(t==="C"){if(si>=sk.length)return null;o+=sk[si++];}else{if(mi>=ml.length)return null;o+=ml[mi++];}}return si===sk.length&&mi===ml.length?o:null;}
+function tmplOf(n){return[...n].map(c=>VOW.has(c)?"V":"C").join("");}
+// parse núcleo
+const Psort=PREF.filter(Boolean).sort((a,b)=>b.length-a.length),Ssort=SUF.filter(Boolean).sort((a,b)=>b.length-a.length),Rsort=[...ROOTS].sort((a,b)=>b.length-a.length);
+function parseN(name,maxs){let n=name.toLowerCase().replace(/[^a-z]/g,""),best=null;
+  for(const p of ["",...Psort]){if(!n.startsWith(p))continue;let i=p.length;
+    for(const r of Rsort){if(n.slice(i).startsWith(r)){let j=i+r.length,sufs=[];
+      while(j<n.length&&sufs.length<maxs){const h=Ssort.find(s=>n.slice(j).startsWith(s));if(!h)break;sufs.push(h);j+=h.length;}
+      const lo=n.length-j,cand={p,r,sufs,lo};if(best===null||lo<best.lo)best=cand;if(lo===0)return cand;}}}
+  return best||{p:"",r:null,sufs:[],lo:n.length};}
+
+let MODE="nucleo",MAXS=1;
+function cols(){return MODE==="nucleo"
+  ?[{k:"PREFIXO",items:PREF},{k:"RAIZ",items:ROOTS},{k:"SUFIXO",items:SUF}]
+  :[{k:"TEMPLATE",items:TEMPL},{k:"ESQUELETO",items:SKELS},{k:"MELODIA",items:MELS}];}
+function generableAttested(){return MODE==="nucleo"
+  ? [...REAL].filter(n=>parseN(n,MAXS).lo===0).sort()
+  : [...REAL].filter(n=>SKELS.includes(skel(n))&&MELS.includes(mel(n))&&TEMPL.includes(tmplOf(n))).sort();}
+let GA=generableAttested();
+
+const NS="http://www.w3.org/2000/svg";
+const svg=document.getElementById("svg");let W,H,pos={},gActive;
+function layout(){const r=svg.getBoundingClientRect();W=r.width;H=r.height;svg.setAttribute("viewBox",`0 0 ${W} ${H}`);svg.innerHTML="";pos={};
+  const C=cols(),xs=[W*0.14,W*0.40,W*0.66],xout=W*0.9;
+  const gE=document.createElementNS(NS,"g");svg.appendChild(gE);const gN=document.createElementNS(NS,"g");svg.appendChild(gN);
+  C.forEach((c,ci)=>{const n=c.items.length,top=44,bot=H-26,step=(bot-top)/Math.max(n-1,1);
+    const t=document.createElementNS(NS,"text");t.setAttribute("x",xs[ci]);t.setAttribute("y",26);t.setAttribute("text-anchor","middle");t.setAttribute("class","lbl");t.textContent=c.k;gN.appendChild(t);
+    c.items.forEach((it,i)=>{const x=xs[ci],y=top+step*i,lab=it===""?"∅":it,el=(MODE==="nucleo"&&ci===1)?elemDom(it):"?";pos[c.k+":"+i]={x,y};
+      const g=document.createElementNS(NS,"g");g.setAttribute("transform",`translate(${x},${y})`);
+      const cir=document.createElementNS(NS,"circle");cir.setAttribute("r",(MODE==="nucleo"&&ci===1)?6:3.4);cir.setAttribute("fill",(MODE==="nucleo"&&ci===1)?EC[el]:"#38475c");cir.setAttribute("stroke","#0a0e13");cir.setAttribute("stroke-width",.7);g.appendChild(cir);
+      if(n<=70){const tx=document.createElementNS(NS,"text");tx.setAttribute("x",ci===2?8:-8);tx.setAttribute("text-anchor",ci===2?"start":"end");tx.setAttribute("dy",2.5);tx.setAttribute("class","ntext");tx.textContent=lab;g.appendChild(tx);}
+      gN.appendChild(g);});});
+  if(MODE==="nucleo"){function edges(aK,bK){const A=C.find(c=>c.k===aK),B=C.find(c=>c.k===bK);
+    A.items.forEach((_,i)=>B.items.forEach((__,j)=>{const a=pos[aK+":"+i],b=pos[bK+":"+j];const l=document.createElementNS(NS,"line");
+      l.setAttribute("x1",a.x);l.setAttribute("y1",a.y);l.setAttribute("x2",b.x);l.setAttribute("y2",b.y);l.setAttribute("stroke","#1b2431");l.setAttribute("stroke-width",.4);gE.appendChild(l);}));}
+    edges("PREFIXO","RAIZ");edges("RAIZ","SUFIXO");}
+  pos.OUT={x:xout,y:H/2};const ot=document.createElementNS(NS,"text");ot.setAttribute("x",xout);ot.setAttribute("y",26);ot.setAttribute("text-anchor","middle");ot.setAttribute("class","lbl");ot.textContent="NOME";svg.appendChild(ot);
+  gActive=document.createElementNS(NS,"g");svg.appendChild(gActive);}
+function flash(idxs,name,el){gActive.innerHTML="";const C=cols();
+  const pts=idxs.map((ix,ci)=>pos[C[ci].k+":"+ix]).concat([pos.OUT]);
+  if(!pts.every(p=>p&&typeof p.x==="number")){document.getElementById("cur").innerHTML=cur(name,el);return;}
+  for(let k=0;k<pts.length-1;k++){const l=document.createElementNS(NS,"line");l.setAttribute("x1",pts[k].x);l.setAttribute("y1",pts[k].y);l.setAttribute("x2",pts[k+1].x);l.setAttribute("y2",pts[k+1].y);l.setAttribute("stroke",EC[el]);l.setAttribute("stroke-width",2);l.setAttribute("stroke-opacity",.9);gActive.appendChild(l);}
+  pts.slice(0,3).forEach(p=>{const g=document.createElementNS(NS,"circle");g.setAttribute("cx",p.x);g.setAttribute("cy",p.y);g.setAttribute("r",7);g.setAttribute("fill","none");g.setAttribute("stroke",EC[el]);g.setAttribute("stroke-width",2);gActive.appendChild(g);});
+  const dot=document.createElementNS(NS,"circle");dot.setAttribute("r",4);dot.setAttribute("fill",EC[el]);gActive.appendChild(dot);
+  const t0=performance.now(),dur=Math.min(+spd.value*0.85,400);
+  (function seg(t){const prog=Math.min((t-t0)/dur,1),tot=(pts.length-1)*prog,k=Math.min(Math.floor(tot),pts.length-2),f=tot-k;
+    if(pts[k]&&pts[k+1]){dot.setAttribute("cx",pts[k].x+(pts[k+1].x-pts[k].x)*f);dot.setAttribute("cy",pts[k].y+(pts[k+1].y-pts[k].y)*f);}if(prog<1)requestAnimationFrame(seg);})(performance.now());
+  document.getElementById("cur").innerHTML=cur(name,el);}
+function cur(name,el){return `<span style="color:${EC[el]}">${name.toUpperCase()}</span><small>esqueleto ${skel(name)} · melodia ${mel(name)} · ${el} · ${planDom(name)||'—'} · ${sefOf(name)}</small>`;}
+
+let count=0,attested=0;const seen=new Set(),seenReal=new Set();const list=document.getElementById("list");
+function emit(name,idxs){const el=elemDom(name),pl=planDom(name),sf=sefOf(name),isNew=!seen.has(name),star=REAL.has(name);
+  flash(idxs,name,el);count++;if(isNew)seen.add(name);if(star&&!seenReal.has(name)){seenReal.add(name);attested++;}
+  const it=document.createElement("div");it.className="it";
+  it.innerHTML=`<span class="n">${count}</span><span class="nm" style="color:${EC[el]}">${name}</span><span class="pl">${pl||'—'} · ${sf}</span>${star?'<span class="st">★</span>':''}`;
+  list.insertBefore(it,list.firstChild);while(list.children.length>400)list.removeChild(list.lastChild);
+  document.getElementById("stat").innerHTML=`<b>${count}</b> forjados · <b>${seen.size}</b> formas distintas · <b style="color:var(--gold)">${attested}/${GA.length}</b> ★ atestados generáveis`;}
+function pick(arr){return Math.floor(Math.random()*arr.length);}
+function forgeOne(){
+  if(MODE==="nucleo"){const pi=pick(PREF),ri=pick(ROOTS),si=pick(SUF),s2=MAXS===2?pick(SUF):0;
+    const name=PREF[pi]+ROOTS[ri]+SUF[si]+(MAXS===2?SUF[s2]:"");emit(name,[pi,ri,si]);}
+  else{const ti=pick(TEMPL),tm=TEMPL[ti],nc=(tm.match(/C/g)||[]).length,nv=(tm.match(/V/g)||[]).length;
+    const sks=skByC[nc]||[],mls=mlByV[nv]||[];if(!sks.length||!mls.length)return forgeOne();
+    const sk=sks[pick(sks)],ml=mls[pick(mls)],name=interleave(sk,ml,tm);if(!name)return;
+    emit(name,[ti,SKELS.indexOf(sk),MELS.indexOf(ml)]);}}
+
+let timer=null;const spd=document.getElementById("spd");
+function playing(){return !!timer;}
+function setLoop(on){if(on){document.getElementById("go").textContent="⏸ pausar";timer=setInterval(()=>forgeOne(),+spd.value);}else{document.getElementById("go").textContent="▶ Forjar ∞";clearInterval(timer);timer=null;}}
+document.getElementById("go").onclick=()=>{if(collecting)stopCollect();if(allTimer)stopAll();setLoop(!playing());};
+document.getElementById("step").onclick=()=>forgeOne();
+document.getElementById("clear").onclick=()=>{count=0;attested=0;seen.clear();seenReal.clear();list.innerHTML="";document.getElementById("stat").innerHTML="";document.getElementById("cur").innerHTML="";gActive&&(gActive.innerHTML="");};
+spd.oninput=()=>{if(playing()){clearInterval(timer);timer=setInterval(()=>collecting?collectTick():forgeOne(),+spd.value);}};
+function setMode(m){MODE=m;document.getElementById("mN").classList.toggle("on",m==="nucleo");document.getElementById("mR").classList.toggle("on",m==="rico");
+  document.querySelector(".sxw").style.display=m==="nucleo"?"flex":"none";if(allTimer)stopAll();GA=generableAttested();layout();updHdr();document.getElementById("clear").click();}
+document.getElementById("mN").onclick=()=>setMode("nucleo");document.getElementById("mR").onclick=()=>setMode("rico");
+function setMaxs(m){MAXS=m;document.getElementById("sx1").classList.toggle("on",m===1);document.getElementById("sx2").classList.toggle("on",m===2);GA=generableAttested();updHdr();}
+document.getElementById("sx1").onclick=()=>setMaxs(1);document.getElementById("sx2").onclick=()=>setMaxs(2);
+// coletar atestados determinístico
+let collecting=false,ci=0;
+function collectTick(){if(ci>=GA.length){stopCollect();return;}const name=GA[ci++];
+  if(MODE==="nucleo"){const pr=parseN(name,MAXS);emit(name,[Math.max(0,PREF.indexOf(pr.p)),Math.max(0,ROOTS.indexOf(pr.r)),Math.max(0,SUF.indexOf(pr.sufs[0]||""))]);}
+  else{emit(name,[Math.max(0,TEMPL.indexOf(tmplOf(name))),Math.max(0,SKELS.indexOf(skel(name))),Math.max(0,MELS.indexOf(mel(name)))]);}}
+function stopCollect(){collecting=false;clearInterval(timer);timer=null;document.getElementById("collect").classList.remove("on");}
+document.getElementById("collect").onclick=function(){if(collecting){stopCollect();return;}if(playing())setLoop(false);collecting=true;ci=0;this.classList.add("on");timer=setInterval(collectTick,Math.max(+spd.value,140));};
+// completo (enumera TODO o espaço produtivo) — demonstra o "Babel"
+let allList=null,ai=0,allTimer=null;
+function buildAll(){const L=[];
+  if(MODE==="nucleo"){for(let pi=0;pi<PREF.length;pi++)for(let ri=0;ri<ROOTS.length;ri++)for(let si=0;si<SUF.length;si++)L.push({name:PREF[pi]+ROOTS[ri]+SUF[si],idxs:[pi,ri,si]});}
+  else{for(let ti=0;ti<TEMPL.length;ti++){const tm=TEMPL[ti],nc=(tm.match(/C/g)||[]).length,nv=(tm.match(/V/g)||[]).length,sks=skByC[nc]||[],mls=mlByV[nv]||[];
+    for(const sk of sks)for(const ml of mls){const nm=interleave(sk,ml,tm);if(nm)L.push({name:nm,idxs:[ti,SKELS.indexOf(sk),MELS.indexOf(ml)]});}}}
+  return L;}
+function stopAll(){if(allTimer)clearInterval(allTimer);allTimer=null;document.getElementById("allbtn").classList.remove("on");}
+function allTick(){for(let k=0;k<Math.max(1,Math.round(12-+spd.value/80));k++){if(ai>=allList.length){stopAll();return;}const o=allList[ai++];emit(o.name,o.idxs);}}
+document.getElementById("allbtn").onclick=function(){if(allTimer){stopAll();return;}if(playing())setLoop(false);if(collecting)stopCollect();
+  allList=buildAll();ai=0;this.classList.add("on");
+  document.getElementById("hdr").innerHTML=`⚡ enumerando TODO o espaço: <b>${allList.length.toLocaleString('pt-BR')}</b> nomes bem-formados — só ~90 atestados, o resto é "Babel" (forma sem significado)`;
+  allTimer=setInterval(allTick,30);};
+// testador
+document.getElementById("test_go").onclick=doTest;
+document.getElementById("test_in").addEventListener("keydown",e=>{if(e.key==="Enter")doTest();});
+function doTest(){const n=document.getElementById("test_in").value.toLowerCase().replace(/[^a-z]/g,"");const box=document.getElementById("test");box.style.display="block";
+  if(n.length<2){box.innerHTML="nome curto demais.";return;}
+  const pr=parseN(n,3),okN=pr.lo===0, sk=skel(n), ml=mel(n);
+  const okR=SKELS.includes(sk)&&MELS.includes(ml)&&TEMPL.includes(tmplOf(n));
+  const skB=SKbook.has(sk), mlB=MLbook.has(ml), okB=skB&&mlB;
+  const el=elemDom(n),pl=planDom(n),sf=sefOf(n);
+  const dec=pr.r?`${pr.p?pr.p+" · ":""}<b>${pr.r}</b>${pr.sufs.length?" · "+pr.sufs.join(" · "):""}${pr.lo?` <span style="color:var(--fogo)">+resto "${n.slice(n.length-pr.lo)}"</span>`:""}`:"sem raiz do Loag";
+  box.innerHTML=`<b style="font-family:monospace">${n}</b> ${REAL.has(n)?'<span style="color:var(--gold)">★ é do Loag</span>':''}<br>
+    <b>núcleo</b> (10 raízes): <span style="color:${okN?'var(--ar)':'var(--fogo)'}">${okN?'✓':'✗'}</span> ${dec}<br>
+    <b>rico 90</b> (67 esq · 28 mel): <span style="color:${okR?'var(--ar)':'var(--fogo)'}">${okR?'✓ gerável':'✗'}</span><br>
+    <b>livro</b> (1948 esq · 288 mel): esqueleto <code style="color:${skB?'var(--ar)':'var(--fogo)'}">${sk}</code>${skB?'✓':'✗'} · melodia <code style="color:${mlB?'var(--ar)':'var(--fogo)'}">${ml}</code>${mlB?'✓':'✗'} → <span style="color:${okB?'var(--ar)':'var(--fogo)'}">${okB?'✓ gerável':'✗'}</span><br>
+    <span style="color:var(--mut)">⚠ o "livro" aceita ~8% de qualquer string (Babel) — acerto só vale contra null.</span><br>
+    atributos <span style="color:${EC[el]}">${el}</span> · ${pl||'—'} · ${sf}`;}
+
+function updHdr(){document.getElementById("hdr").innerHTML=MODE==="nucleo"
+  ?`núcleo · espaço <b>${MAXS===1?'1.210':'12.210'}</b>→∞ · atestados generáveis <b>${GA.length}/90</b>`
+  :`rico · ${TEMPL.length} templates × ${SKELS.length} esqueletos × ${MELS.length} melodias · atestados generáveis <b>${GA.length}/90</b>`;}
+layout();updHdr();
+window.addEventListener("resize",()=>{const w=playing(),cl=collecting;setLoop(false);if(cl)stopCollect();layout();if(w)setLoop(true);});
+</script>
+</body>
+</html>

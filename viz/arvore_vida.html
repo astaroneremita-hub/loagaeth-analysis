@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Árvore da Vida dos nomes — Loagaeth</title>
+<style>
+  :root{--bg:#0b0e13;--panel:#141a22;--ink:#e6edf3;--mut:#8b97a7;--line:#242c38;--gold:#e8c35a;
+    --fogo:#e0573b;--terra:#c9a24b;--ar:#5bb3e0;--agua:#3d6bd6;--q:#6b7686}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.45 system-ui,Segoe UI,Roboto,Arial;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+  header{padding:8px 14px 4px} h1{font-size:17px;margin:0} .sub{color:var(--mut);font-size:11px;margin:1px 0 0}
+  a.home{color:var(--ar);text-decoration:none;font-size:12px}
+  .warn{margin:6px 14px;padding:7px 11px;background:var(--panel);border:1px dashed var(--line);border-radius:8px;font-size:12px;color:var(--mut)}
+  .main{flex:1;display:flex;min-height:0}
+  .tree{flex:1;position:relative} svg{width:100%;height:100%;display:block}
+  .side{width:250px;border-left:1px solid var(--line);background:var(--panel);display:flex;flex-direction:column}
+  .side h2{font-size:13px;margin:0;padding:10px 12px 4px} .side .pl{color:var(--mut);font-size:12px;padding:0 12px 8px}
+  #names{flex:1;overflow:auto;padding:0 10px 10px;font-family:ui-monospace,monospace;font-size:13px}
+  #names div{padding:1px 0}
+  .lbl{fill:var(--ink);font:600 12px system-ui} .plt{fill:var(--mut);font:10px system-ui} .cnt{fill:var(--gold);font:700 11px ui-monospace,monospace}
+  .legend{display:flex;gap:10px;font-size:11px;color:var(--mut);padding:5px 14px;background:var(--panel);border-top:1px solid var(--line)}
+  .sw{display:inline-block;width:9px;height:9px;border-radius:50%;vertical-align:-1px;margin-right:3px}
+</style>
+</head>
+<body>
+<header><a class="home" href="index.html">← painel</a>
+  <h1>Árvore da Vida dos nomes do Loagaeth</h1>
+  <p class="sub">Cada nome na sefirá do seu <b>planeta dominante</b> (atribuição das letras, Golden Dawn). Ponto = nome, cor = elemento. Clica numa sefirá.</p>
+</header>
+<div class="warn">Honesto: <b>81 dos 90</b> nomes caem em <b>Netzach (Vênus)</b> — porque <code>A</code> e <code>O</code>, as letras mais comuns, são ambas Vênus/Ar. Não é um planeta escondido por nome; é a frequência das letras. Confirma que o campo de nomes é <b>venusiano/aéreo</b> (o Verbo reina).</div>
+<div class="main">
+  <div class="tree"><svg id="svg"></svg></div>
+  <div class="side">
+    <h2 id="stt">Clique numa sefirá</h2>
+    <div class="pl" id="spl"></div>
+    <div id="names"></div>
+  </div>
+</div>
+<div class="legend">
+  <span><span class="sw" style="background:var(--fogo)"></span>Fogo</span>
+  <span><span class="sw" style="background:var(--terra)"></span>Terra</span>
+  <span><span class="sw" style="background:var(--ar)"></span>Ar</span>
+  <span><span class="sw" style="background:var(--agua)"></span>Água</span>
+  <span>tamanho da sefirá = nº de nomes</span>
+</div>
+
+<script>
+const T={"sef_planet":{"Binah":"Saturno","Chesed":"Júpiter","Geburah":"Marte","Tiphareth":"Sol","Netzach":"Vênus","Hod":"Mercúrio","Yesod":"Lua","Malkuth":"Terra/elementos","Kether":"—","Chokmah":"zodíaco"},"sephiroth":{"Kether":[],"Chokmah":[],"Binah":[{"n":"ucher","e":"Terra"}],"Chesed":[{"n":"dragra","e":"Agua"},{"n":"ichastor","e":"Ar"},{"n":"ronzin","e":"Agua"},{"n":"zichastor","e":"Fogo"}],"Geburah":[{"n":"nadab","e":"Terra"}],"Tiphareth":[{"n":"geth","e":"Fogo"}],"Netzach":[{"n":"achadax","e":"Terra"},{"n":"achadnacho","e":"Terra"},{"n":"achardan","e":"Terra"},{"n":"aclax","e":"Terra"},{"n":"aclaxp","e":"Terra"},{"n":"aclaxto","e":"Terra"},{"n":"aclaxtor","e":"Terra"},{"n":"adnachepha","e":"Terra"},{"n":"adnacho","e":"Terra"},{"n":"adnachoa","e":"Terra"},{"n":"adnocha","e":"Terra"},{"n":"adnochap","e":"Terra"},{"n":"adnochaph","e":"Ar"},{"n":"adnochapha","e":"Terra"},{"n":"agethal","e":"Terra"},{"n":"alchadax","e":"Terra"},{"n":"algeth","e":"Terra"},{"n":"algethad","e":"Terra"},{"n":"algradax","e":"Terra"},{"n":"anacho","e":"Terra"},{"n":"anchadax","e":"Terra"},{"n":"anchano","e":"Terra"},{"n":"angethal","e":"Terra"},{"n":"annocha","e":"Terra"},{"n":"anochastor","e":"Ar"},{"n":"antantox","e":"Terra"},{"n":"antantoxa","e":"Terra"},{"n":"antantoxal","e":"Terra"},{"n":"anzach","e":"Terra"},{"n":"anzachal","e":"Terra"},{"n":"aoxard","e":"Terra"},{"n":"aphange","e":"Terra"},{"n":"axachar","e":"Terra"},{"n":"axaclaxto","e":"Terra"},{"n":"axalgra","e":"Terra"},{"n":"axnacho","e":"Terra"},{"n":"axnochap","e":"Terra"},{"n":"axnochastor","e":"Ar"},{"n":"axtalgetha","e":"Terra"},{"n":"chadax","e":"Terra"},{"n":"chardax","e":"Terra"},{"n":"chastor","e":"Ar"},{"n":"chastora","e":"Ar"},{"n":"chastorad","e":"Ar"},{"n":"chastoral","e":"Ar"},{"n":"chastoran","e":"Ar"},{"n":"chastorp","e":"Ar"},{"n":"chidaxto","e":"Fogo"},{"n":"dnochapa","e":"Agua"},{"n":"donchal","e":"Ar"},{"n":"gasta","e":"Terra"},{"n":"gradax","e":"Terra"},{"n":"gradaxa","e":"Terra"},{"n":"hnaxad","e":"Terra"},{"n":"ichadax","e":"Terra"},{"n":"ichastora","e":"Ar"},{"n":"nacho","e":"Ar"},{"n":"nachoa","e":"Terra"},{"n":"nachoad","e":"Terra"},{"n":"nachoal","e":"Agua"},{"n":"naclansa","e":"Agua"},{"n":"nechastora","e":"Terra"},{"n":"nocha","e":"Ar"},{"n":"nochaal","e":"Agua"},{"n":"nochadaxa","e":"Terra"},{"n":"nochap","e":"Agua"},{"n":"nochaph","e":"Ar"},{"n":"nochastor","e":"Ar"},{"n":"nochastora","e":"Ar"},{"n":"nochastorad","e":"Ar"},{"n":"nochastoral","e":"Ar"},{"n":"nodalga","e":"Agua"},{"n":"olchadna","e":"Ar"},{"n":"ondanvage","e":"Terra"},{"n":"oxardrah","e":"Terra"},{"n":"phadol","e":"Agua"},{"n":"taxalgra","e":"Terra"},{"n":"voxar","e":"Terra"},{"n":"zichastora","e":"Fogo"},{"n":"zidnopha","e":"Fogo"},{"n":"zinocha","e":"Fogo"}],"Hod":[{"n":"nechastor","e":"Ar"}],"Yesod":[{"n":"phange","e":"Agua"}],"Malkuth":[]},"letters":{"A":{"e":"Terra","p":"Venus"},"B":{"e":"?","p":"Marte"},"C":{"e":"Fogo","p":"-"},"D":{"e":"?","p":"-"},"E":{"e":"Terra","p":"Mercurio"},"F":{"e":"?","p":"-"},"G":{"e":"Fogo","p":"Sol"},"H":{"e":"Ar","p":"-"},"I":{"e":"Fogo","p":"Jupiter"},"L":{"e":"Agua","p":"Lua minguante"},"M":{"e":"Ar","p":"Saturno"},"N":{"e":"Agua","p":"Marte"},"O":{"e":"Ar","p":"Venus"},"P":{"e":"Agua","p":"Lua crescente"},"Q":{"e":"?","p":"-"},"R":{"e":"Agua","p":"Jupiter"},"S":{"e":"Ar","p":"Mercurio"},"T":{"e":"?","p":"-"},"U":{"e":"Terra","p":"Saturno"},"V":{"e":"?","p":"-"},"X":{"e":"Terra","p":"-"},"Z":{"e":"Fogo","p":"Sol"}},"counts":{"prefixos":10,"raizes":10,"sufixos":10,"esqueletos":1948,"melodias":288,"nomes":90}};
+const EC={Fogo:"var(--fogo)",Terra:"var(--terra)",Ar:"var(--ar)",Agua:"var(--agua)","?":"var(--q)"};
+const POS={Kether:[.5,.07],Chokmah:[.72,.2],Binah:[.28,.2],Chesed:[.72,.4],Geburah:[.28,.4],
+  Tiphareth:[.5,.49],Netzach:[.72,.66],Hod:[.28,.66],Yesod:[.5,.77],Malkuth:[.5,.92]};
+const PATHS=[["Kether","Chokmah"],["Kether","Binah"],["Kether","Tiphareth"],["Chokmah","Binah"],
+  ["Chokmah","Chesed"],["Chokmah","Tiphareth"],["Binah","Geburah"],["Binah","Tiphareth"],
+  ["Chesed","Geburah"],["Chesed","Tiphareth"],["Chesed","Netzach"],["Geburah","Tiphareth"],
+  ["Geburah","Hod"],["Tiphareth","Netzach"],["Tiphareth","Hod"],["Tiphareth","Yesod"],
+  ["Netzach","Hod"],["Netzach","Yesod"],["Netzach","Malkuth"],["Hod","Yesod"],["Hod","Malkuth"],["Yesod","Malkuth"]];
+const NS="http://www.w3.org/2000/svg";
+const svg=document.getElementById("svg");
+function el(n,a){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;}
+let W,H;
+function draw(){
+  const r=svg.getBoundingClientRect();W=r.width;H=r.height;svg.setAttribute("viewBox",`0 0 ${W} ${H}`);svg.innerHTML="";
+  const xy=s=>[POS[s][0]*W,POS[s][1]*H];
+  PATHS.forEach(([a,b])=>{const [x1,y1]=xy(a),[x2,y2]=xy(b);
+    svg.appendChild(el("line",{x1,y1,x2,y2,stroke:"#2a3340","stroke-width":1.2}));});
+  Object.keys(POS).forEach(s=>{
+    const list=T.sephiroth[s]||[]; const [cx,cy]=xy(s);
+    const R=16+Math.sqrt(list.length)*6;
+    svg.appendChild(el("circle",{cx,cy,r:R,fill:"#161d27",stroke:"var(--gold)","stroke-width":1.4,opacity:.95,style:"cursor:pointer","data-s":s}));
+    // name dots in a disk
+    list.forEach((o,i)=>{const ang=2.399*i, rad=Math.sqrt(i/Math.max(list.length,1))*(R-5);
+      svg.appendChild(el("circle",{cx:cx+Math.cos(ang)*rad,cy:cy+Math.sin(ang)*rad,r:2,fill:EC[o.e],"pointer-events":"none"}));});
+    const t=el("text",{x:cx,y:cy-R-14,"text-anchor":"middle",class:"lbl"});t.textContent=s;svg.appendChild(t);
+    const p=el("text",{x:cx,y:cy-R-3,"text-anchor":"middle",class:"plt"});p.textContent=T.sef_planet[s];svg.appendChild(p);
+    const c=el("text",{x:cx,y:cy+4,"text-anchor":"middle",class:"cnt"});c.textContent=list.length||"";svg.appendChild(c);
+  });
+  svg.querySelectorAll("[data-s]").forEach(c=>c.addEventListener("click",()=>showSef(c.getAttribute("data-s"))));
+}
+function showSef(s){
+  const list=T.sephiroth[s]||[];
+  document.getElementById("stt").textContent=s;
+  document.getElementById("spl").textContent=`${T.sef_planet[s]} · ${list.length} nomes`;
+  const box=document.getElementById("names");box.innerHTML="";
+  list.sort((a,b)=>a.n.localeCompare(b.n)).forEach(o=>{const d=document.createElement("div");
+    d.innerHTML=`<span style="color:${EC[o.e]}">●</span> ${o.n}`;box.appendChild(d);});
+  if(!list.length)box.innerHTML='<div style="color:var(--mut)">— nenhum nome aqui —</div>';
+}
+draw();showSef("Netzach");
+window.addEventListener("resize",draw);
+</script>
+</body>
+</html>

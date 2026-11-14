@@ -1763,3 +1763,85 @@ losangos (~28-29) é uma DESCONTINUIDADE COMPOSICIONAL real, confirmada independ
 dois formatos do manuscrito são composicionalmente distintos — convergência não-imposta. Refina o gradiente:
 platô->declínio->silêncio, não rampa. Descritivo, ancorado. Próximas explorações abertas: (2) deriva é temporal
 (ordem de recepção)? (3) deriva é específica do Loag vs 8 tabelas Soyga do mesmo MS?
+
+## #331 — Folha 1: as palavras nao-traduzidas sao LEXICO real (nao ruido)
+
+Pergunta: fora as 18 palavras com glosa das Chamadas (#330b), o resto da folha 1 sao
+palavras de verdade ou lixo de segmentacao?
+
+Metodo (`src/a161_folha1_wordhood.py`): 3496 tokens nao-traduzidos (2672 tipos). Tres
+testes contra null (embaralhar letras do fluxo + re-segmentar nos mesmos comprimentos;
+Markov-0 para bem-formacao e morfologia):
+  T1 recorrencia: tipos que aparecem 2+x. real=306 vs null=133+-7.5  z=+22.9.
+     32% dos tokens cobertos por tipos recorrentes.
+  T2 bem-formacao fonotatica (CV, anti-hiato <=2V <=3C): real 97% vs null-M0 69%  z=+42.0.
+  T3 vizinhanca morfologica (vizinho por edit-1): real 51% vs null 20%  z=+44.1.
+
+Top recorrentes sem traducao: na(26) oh(24) or(19) vor(19) al(18) pa(15) dah(15) ges(15)
+ax(15) vax(15) gem(14) dan(12) nah(12) van(11) nor(7)... — curtas, partícula-like.
+
+Veredito: a folha 1 e um LEXICO genuino — unidades reusadas, bem-formadas, com familias
+morfologicas, muito acima do acaso. Junta-se as 18 ja-traduzidas. PROVA wordhood, NAO
+significado (so as 18 tem glosa). Especifico da folha 1 (segmentada pelo Dee); grades 2-48
+seguem campo de nomes. CONFIRMADO NOVO.
+
+## #332 — Folha 1: lexico SIM, sintaxe de frase NAO
+
+Pergunta: as palavras reais da folha 1 (#331) formam frases legiveis (sintaxe) ou so
+estao enfileiradas?
+
+Metodo (`src/a162_folha1_syntax.py`): corpus 1a+1b, 99 linhas, ordem preservada.
+  S1 colocacao (bigramas de palavra 2+x): real=12 vs null(ordem embaralhada)=2  z=+6.7.
+  S2 entropia condicional H(prox|atual): real=2.84 bits vs null=2.86  z=-1.3 (sem queda).
+  S3 posicao na linha: quase tudo "meio"; sopro fraco ol="I" INICIO(0.37,n=10),
+     om="know" FIM(0.65,n=5).
+
+Veredito: NAO ha sintaxe de sentenca. S2 (decisivo) nulo: ordem das palavras nao prediz
+a proxima. S1 mostra colocacoes fracas (fórmulas/pares fixos, cada 2x) acima do acaso mas
+nao gramática. CAIU a especulacao de "frases/invocacao legivel". FICA (reforca #331): folha
+1 e lexico real LISTADO (litania de palavras), nao prosa. Consistente com onomasticon.
+
+## #333 — Folha 1 e Chamadas: mesmo idioma, veia fina
+
+Pergunta: o lexico-lista da folha 1 (#331) e feito da mesma lingua das Chamadas (que tem
+sintaxe + traducao)?
+
+Metodo (`src/a163_folha1_vs_calls.py`): vocab Chamadas = 682 'chave' (enoquiano) das 19
+Chamadas, com gloss. Overlap com os 2697 tipos da folha 1 vs null (strings aleatorias,
+mesmos comprimentos + freq de letra, intersectadas com o mesmo vocab).
+
+Resultado: overlap=27 tipos vs null=8.5+-2.5  z=+7.5. Cobertura 122/3614 = 3% dos tokens.
+Tirando glosas numericas (ox=26, os=12, vx=:42:, af=19) sobram palavras-lingua reais:
+ar=that, ol=I, vors=over, geh=art, par=in them, ors=with dark, ca=therefore, la=first,
+om=know, de=of, lu=nor end, od=and, gah=Spirits, goho=sayeth, oxex=vomit out, amma=Cursed,
+iad/mad=God, lap=for. Inclui VERBOS/conteudo (goho, oxex, om), nao so conectivo.
+
+Veredito: folha 1 e as Chamadas sao o MESMO idioma angelical (vocab compartilhado z=+7.5),
+mas a ponte e fina (3% dos tokens) — o grosso da folha 1 e vocab proprio (nomes/estoque).
+Quadro: folha1 = lexico real listado (#331), sem sintaxe (#332), mesma lingua das Chamadas
+numa veia estreita (#333). CONFIRMADO NOVO.
+
+## #334 — Partículas da folha 1 = peças do gerador de nomes (CONFIRMADO NOVO)
+Pergunta: o que são as "letras que sobram" (camada B, 162 tipos curtos sem glosa) e pra que servem?
+Hipóteses: H1 morfologia (afixos/fragmentos de nome) vs H2 gramática (classe-função).
+- a169: T5 viés posicional nulo (B=0.02/0.01, igual aos nomes) REFUTA H2 (palavra-função enviesa posição).
+  T4 fonotática B mais perto de C(nomes)=0.806 que de A(gloss)=0.700. T1 afixo-exato 7/162 null2.5 z=+2.9.
+  T2 borda-de-nome 29/162 null15.1 z=+4.0. T3 prefixo+stem produtivo 59/162 null40.5 z=+3.5 (n-/l-/g-/d-).
+- a170 (decisivo): 90 nomes ladrilhados pelas peças atestadas (B+afixos+raízes, 175 unidades):
+  85% das letras cobertas, 39/90 nomes 100%; null 36%/0.4; z=+5.5.
+  Ex: adnochapha=ad+nocha+pha, antantoxal=antantox+al, zichastora=zi+chastor.
+VEREDITO: B = morfologia onomástica (tijolos prefixo·raiz·sufixo dos nomes das grades 2-48),
+não classe-função. Folha 1 = página-oficina: lista as peças (B) + o léxico real fino (A, #331/#333).
+Não é frase (confirma #332). Limites: z moderados nos afixos; ~51 nomes não 100%; parte de B pode ser nome curto.
+Docs: docs/PARTICULAS_FUNCAO.md. Dados: results/169_particle_function.json, results/170_name_tiling.json.
+
+## #335 — O gerador de nomes como gramática explícita
+Gramática: NOME := PREFIXO? RAIZ SUFIXO*. Inventário: 10 prefixos, 10 raízes, 9 sufixos.
+- a171: 62/90 nomes parseiam 100%; null aleatório 0/90 em 2000 sorteios (inalcançável por acaso).
+  MDL 684 letras cruas -> 89 de inventário (7.7x).
+- Combinação LIVRE: H(sufixo|raiz)=1.714 vs shuffle 1.743, z=-0.3 (SEM restrição seletiva).
+  => gerador tabular/construído, não morfologia de língua natural (reforça tese campo-de-nomes, #332/#334).
+- Obre-gera: gerar(1 sufixo)=1100 strings possíveis vs ~90 atestados; regra necessária mas não suficiente.
+  Falta camada de seleção (qual tabela/posição) = próximo alvo.
+- Limite: 28/90 não fecham 100% (raízes/afixos fora do núcleo de 10, ou variantes).
+Código: src/gerador_nomes.py (parse+gerar). Doc: docs/GERADOR_NOMES.md. Dados: results/171_name_grammar.json.

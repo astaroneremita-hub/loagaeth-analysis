@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Atlas dos Nomes do Loagaeth</title>
+<style>
+  :root{--bg:#0b0e13;--panel:#141a22;--ink:#e6edf3;--mut:#8b97a7;--line:#262e3a;--gold:#e8c35a;--red:#e0573b;
+    --fogo:#e0573b;--terra:#c9a24b;--ar:#5bb3e0;--agua:#3d6bd6}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.45 system-ui,Segoe UI,Roboto,Arial;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+  header{padding:8px 14px 6px} h1{font-size:17px;margin:0} .sub{color:var(--mut);font-size:11px;margin:1px 0 0}
+  .bar{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;padding:7px 14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel)}
+  .grp{display:flex;gap:4px;align-items:center} .grp b{color:var(--mut);font-weight:600;font-size:11px;margin-right:2px}
+  button{background:#1b2634;border:1px solid #2c3a4e;color:var(--ink);border-radius:6px;padding:4px 9px;font-size:12px;cursor:pointer}
+  button.on{background:#2e4668;border-color:#4a6aa0}
+  button:hover{filter:brightness(1.2)}
+  input[type=text]{background:#0b1118;border:1px solid var(--line);color:var(--ink);border-radius:6px;padding:4px 8px;font:12px monospace;width:130px}
+  label.ck{font-size:12px;color:var(--mut);display:flex;gap:4px;align-items:center}
+  #wrap{flex:1;position:relative} svg{width:100%;height:100%;display:block;cursor:grab} svg:active{cursor:grabbing}
+  .count{font-size:11px;color:var(--mut);margin-left:auto}
+  .node text{font-family:ui-monospace,Menlo,Consolas,monospace;fill:#cdd6e0;pointer-events:none}
+  #detail{position:absolute;top:10px;right:10px;width:230px;background:rgba(18,24,32,.96);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:12px;display:none}
+  #detail h3{margin:0 0 6px;font-size:14px;font-family:monospace} #detail .row{display:flex;justify-content:space-between;color:var(--mut);margin:2px 0}
+  #detail .row span{color:var(--ink)} #detail .cx{color:var(--mut);font-size:11px;margin-top:6px;word-break:break-word}
+  .msg{position:absolute;top:10px;left:50%;transform:translateX(-50%);background:#1b2330;border:1px solid var(--line);padding:5px 11px;border-radius:8px;font-size:12px;opacity:0;transition:opacity .3s}
+  .legend{display:flex;flex-wrap:wrap;gap:9px;font-size:11px;color:var(--mut);padding:5px 14px;background:var(--panel);border-top:1px solid var(--line)}
+  .sw{display:inline-block;width:9px;height:9px;border-radius:50%;vertical-align:-1px;margin-right:3px}
+  .axis{fill:var(--mut);font-size:10px} .axisline{stroke:var(--line);stroke-dasharray:2 3}
+</style>
+</head>
+<body>
+<header>
+  <h1>Atlas dos Nomes do Loagaeth</h1>
+  <p class="sub">Tudo que achamos num mapa: nomes, famílias, esqueletos, elementos e posição no livro. Arraste · zoom na roda · clique num nome.</p>
+</header>
+<div class="bar">
+  <div class="grp"><b>Mapa</b>
+    <button data-mode="constelacao" class="on">Constelação</button>
+    <button data-mode="continentes">Continentes</button>
+    <button data-mode="livro">Mapa do livro</button>
+    <button data-mode="esqueleto">Esqueletos</button>
+  </div>
+  <div class="grp"><b>Cor</b>
+    <button data-col="elem" class="on">Elemento</button>
+    <button data-col="casa">Casa</button>
+  </div>
+  <label class="ck"><input type="checkbox" id="poss"> +possíveis (<span id="npos">…</span>)</label>
+  <label class="ck"><input type="checkbox" id="teia"> teia completa</label>
+  <div class="grp">
+    <input type="text" id="search" placeholder="buscar…" autocomplete="off">
+    <input type="text" id="forge" placeholder="forjar nome…" autocomplete="off">
+    <button id="bforge">Forjar</button>
+  </div>
+  <span class="count" id="count"></span>
+</div>
+<div id="wrap"><div class="msg" id="msg"></div><div id="detail"></div></div>
+<div class="legend" id="legend"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>
+const A={"letters":{"A":"Terra","B":"?","C":"Fogo","D":"?","E":"Terra","F":"?","G":"Fogo","H":"Ar","I":"Fogo","L":"Agua","M":"Ar","N":"Agua","O":"Ar","P":"Agua","Q":"?","R":"Agua","S":"Ar","T":"?","U":"Terra","V":"?","X":"Terra","Z":"Fogo"},"elems":["Fogo","Terra","Ar","Agua"],"names":[{"n":"achadax","occ":13,"peak":16,"folhas":[7,9,10,12,13,14,15,16,19],"elem":"Terra"},{"n":"achadnacho","occ":7,"peak":9,"folhas":[9,10,12,17,25],"elem":"Terra"},{"n":"achardan","occ":7,"peak":8,"folhas":[5,8,10,17,20],"elem":"Terra"},{"n":"aclax","occ":168,"peak":21,"folhas":[6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,35,36,37,38],"elem":"Terra"},{"n":"aclaxp","occ":7,"peak":18,"folhas":[9,10,13,17,18,20],"elem":"Terra"},{"n":"aclaxto","occ":49,"peak":21,"folhas":[7,8,11,15,17,18,19,20,21,22,23,24,25,28,29,30],"elem":"Terra"},{"n":"aclaxtor","occ":16,"peak":15,"folhas":[8,15,17,19,20,21,24,30],"elem":"Terra"},{"n":"adnachepha","occ":11,"peak":19,"folhas":[8,9,10,16,17,18,19,22,24,26],"elem":"Terra"},{"n":"adnacho","occ":39,"peak":14,"folhas":[5,6,7,8,9,10,11,12,13,14,15,16,17,19,22,25],"elem":"Terra"},{"n":"adnachoa","occ":8,"peak":7,"folhas":[7,8,9,10,14,16,19,22],"elem":"Terra"},{"n":"adnocha","occ":179,"peak":13,"folhas":[7,8,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,30,31,32,35,38],"elem":"Terra"},{"n":"adnochap","occ":47,"peak":21,"folhas":[8,10,11,12,13,14,15,16,17,20,21,22,25,27,28,31,32,35],"elem":"Terra"},{"n":"adnochaph","occ":21,"peak":21,"folhas":[8,11,12,13,14,15,16,17,20,21,22,25,27,31],"elem":"Ar"},{"n":"adnochapha","occ":14,"peak":13,"folhas":[8,11,13,14,16,17,20,21,22,25,27,31],"elem":"Terra"},{"n":"agethal","occ":14,"peak":13,"folhas":[1,8,10,13,14,20,21,24,28,34],"elem":"Terra"},{"n":"alchadax","occ":8,"peak":4,"folhas":[4,8,11,12,22,24,26,28],"elem":"Terra"},{"n":"algeth","occ":129,"peak":24,"folhas":[1,2,5,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,35,36,37,38,41,42],"elem":"Terra"},{"n":"algethad","occ":12,"peak":20,"folhas":[9,10,13,18,20,26,29,30,32],"elem":"Terra"},{"n":"algradax","occ":13,"peak":15,"folhas":[13,14,15,21,22,23,25,28,29],"elem":"Terra"},{"n":"anacho","occ":4,"peak":10,"folhas":[10,12,18,30],"elem":"Terra"},{"n":"anchadax","occ":4,"peak":9,"folhas":[9,11,22,24],"elem":"Terra"},{"n":"anchano","occ":14,"peak":5,"folhas":[2,5,7,8,10,13,17,20,24,30,32],"elem":"Terra"},{"n":"angethal","occ":5,"peak":9,"folhas":[9,11,15,25,36],"elem":"Terra"},{"n":"annocha","occ":3,"peak":10,"folhas":[10,28,42],"elem":"Terra"},{"n":"anochastor","occ":10,"peak":17,"folhas":[8,11,12,15,16,17,20,23,26],"elem":"Ar"},{"n":"antantox","occ":26,"peak":21,"folhas":[13,14,16,19,20,21,22,24,25,32,33,34,35,40,41],"elem":"Terra"},{"n":"antantoxa","occ":16,"peak":21,"folhas":[13,14,19,21,22,24,25,33,34,35],"elem":"Terra"},{"n":"antantoxal","occ":9,"peak":22,"folhas":[14,19,22,24,33,34,35],"elem":"Terra"},{"n":"anzach","occ":161,"peak":25,"folhas":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,34,35,36,37,38,39,40,41,42,43,47],"elem":"Terra"},{"n":"anzachal","occ":20,"peak":25,"folhas":[1,5,12,13,14,17,19,21,23,25,26,28,29,30,39,40,41,43],"elem":"Terra"},{"n":"aoxard","occ":10,"peak":4,"folhas":[3,4,5,6,11,17],"elem":"Terra"},{"n":"aphange","occ":10,"peak":7,"folhas":[6,7,8,11,14,18,22,23],"elem":"Terra"},{"n":"axachar","occ":13,"peak":14,"folhas":[7,14,15,17,19,21,24,25,30,34],"elem":"Terra"},{"n":"axaclaxto","occ":8,"peak":21,"folhas":[20,21,22,25,29,30],"elem":"Terra"},{"n":"axalgra","occ":39,"peak":20,"folhas":[10,11,13,14,15,17,18,19,20,21,22,23,26,27,28,30,34,35,36],"elem":"Terra"},{"n":"axnacho","occ":6,"peak":18,"folhas":[1,13,17,18],"elem":"Terra"},{"n":"axnochap","occ":5,"peak":9,"folhas":[9,10,13,18,35],"elem":"Terra"},{"n":"axnochastor","occ":4,"peak":16,"folhas":[16,19,24,30],"elem":"Ar"},{"n":"axtalgetha","occ":7,"peak":17,"folhas":[17,20,23,24,25,26,32],"elem":"Terra"},{"n":"chadax","occ":61,"peak":11,"folhas":[2,4,5,6,7,8,9,10,11,12,13,14,15,16,18,19,22,24,26,27,28,29,31,32,36,37],"elem":"Terra"},{"n":"chardax","occ":13,"peak":4,"folhas":[4,5,7,9,14,18,19,20,27,28,34],"elem":"Terra"},{"n":"chastor","occ":185,"peak":17,"folhas":[6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,42,43,47],"elem":"Ar"},{"n":"chastora","occ":92,"peak":25,"folhas":[6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,29,30,31,32,33,34,35,36,38,39,40],"elem":"Ar"},{"n":"chastorad","occ":18,"peak":14,"folhas":[6,9,11,12,13,14,16,17,18,19,20,21,23,25,33,34],"elem":"Ar"},{"n":"chastoral","occ":11,"peak":25,"folhas":[6,10,11,14,25,26,31,32,35,36],"elem":"Ar"},{"n":"chastoran","occ":10,"peak":16,"folhas":[13,16,20,21,23,24,29,31,32],"elem":"Ar"},{"n":"chastorp","occ":4,"peak":7,"folhas":[7,9,10,42],"elem":"Ar"},{"n":"chidaxto","occ":7,"peak":20,"folhas":[16,18,20,23,29,30],"elem":"Fogo"},{"n":"dnochapa","occ":23,"peak":15,"folhas":[11,12,13,14,15,16,17,19,20,21,23,24,25,28,29,32],"elem":"Agua"},{"n":"donchal","occ":7,"peak":3,"folhas":[3,4,11,22,42,44],"elem":"Ar"},{"n":"dragra","occ":18,"peak":21,"folhas":[11,12,13,16,17,19,21,24,25,28,29,30,34,36],"elem":"Agua"},{"n":"gasta","occ":8,"peak":1,"folhas":[1,3,4,5,10,16,26],"elem":"Terra"},{"n":"geth","occ":575,"peak":17,"folhas":[1,2,3,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48],"elem":"Fogo"},{"n":"gradax","occ":37,"peak":14,"folhas":[5,13,14,15,20,21,22,23,24,25,28,29,30],"elem":"Terra"},{"n":"gradaxa","occ":6,"peak":14,"folhas":[14,15,28,29],"elem":"Terra"},{"n":"hnaxad","occ":8,"peak":2,"folhas":[2,11,15,16,23,25,28,33],"elem":"Terra"},{"n":"ichadax","occ":5,"peak":5,"folhas":[5,7,14,29,36],"elem":"Terra"},{"n":"ichastor","occ":34,"peak":16,"folhas":[11,12,14,16,18,19,20,21,23,24,25,27,29,31,32,34,36,37,38,39,40,42,47],"elem":"Ar"},{"n":"ichastora","occ":18,"peak":25,"folhas":[11,16,19,20,21,23,25,27,31,32,36,38,39],"elem":"Ar"},{"n":"nacho","occ":153,"peak":11,"folhas":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,28,30,32,33,40],"elem":"Ar"},{"n":"nachoa","occ":40,"peak":11,"folhas":[1,5,6,7,8,9,10,11,13,14,15,16,17,18,19,20,22,23,25,33],"elem":"Terra"},{"n":"nachoad","occ":11,"peak":7,"folhas":[6,7,11,14,17,22,33],"elem":"Terra"},{"n":"nachoal","occ":16,"peak":11,"folhas":[8,9,11,13,14,15,17,19,20,22,23],"elem":"Agua"},{"n":"naclansa","occ":8,"peak":17,"folhas":[8,9,11,15,17,22,28],"elem":"Agua"},{"n":"nadab","occ":16,"peak":7,"folhas":[1,3,4,5,7,9,12,13,18,24,25],"elem":"Terra"},{"n":"nechastor","occ":20,"peak":18,"folhas":[12,14,17,18,19,20,21,22,24,25,28,35],"elem":"Ar"},{"n":"nechastora","occ":6,"peak":12,"folhas":[12,18,19,22,25,35],"elem":"Terra"},{"n":"nocha","occ":568,"peak":14,"folhas":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,40,41,42,47],"elem":"Ar"},{"n":"nochaal","occ":3,"peak":10,"folhas":[10,13,14],"elem":"Agua"},{"n":"nochadaxa","occ":5,"peak":12,"folhas":[12,13,14,19,27],"elem":"Terra"},{"n":"nochap","occ":120,"peak":14,"folhas":[2,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,31,32,34,35,36,37,38,41],"elem":"Agua"},{"n":"nochaph","occ":49,"peak":14,"folhas":[8,9,11,12,13,14,15,16,17,20,21,22,24,25,27,28,31,32,37,38,41],"elem":"Ar"},{"n":"nochastor","occ":61,"peak":16,"folhas":[6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,22,23,24,25,26,29,30,31,32,33,36,38,42],"elem":"Ar"},{"n":"nochastora","occ":36,"peak":11,"folhas":[6,7,8,9,10,11,13,14,16,17,18,19,20,22,23,24,25,26,29,30,31,32,33,36],"elem":"Ar"},{"n":"nochastorad","occ":9,"peak":6,"folhas":[6,9,11,13,16,17,20,23,33],"elem":"Ar"},{"n":"nochastoral","occ":5,"peak":10,"folhas":[10,11,26,31,36],"elem":"Ar"},{"n":"nodalga","occ":7,"peak":11,"folhas":[7,11,15,20,23,27],"elem":"Agua"},{"n":"olchadna","occ":8,"peak":6,"folhas":[6,9,10,11,20,30],"elem":"Ar"},{"n":"ondanvage","occ":6,"peak":3,"folhas":[3,4,5,6,8,10],"elem":"Terra"},{"n":"oxardrah","occ":8,"peak":3,"folhas":[3,4,5,8,11,14,16,27],"elem":"Terra"},{"n":"phadol","occ":10,"peak":14,"folhas":[2,8,9,13,14,15,19,38,47],"elem":"Agua"},{"n":"phange","occ":30,"peak":8,"folhas":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,18,22,23,33,35],"elem":"Agua"},{"n":"ronzin","occ":15,"peak":27,"folhas":[10,20,21,24,27,28,32,33,41,42],"elem":"Agua"},{"n":"taxalgra","occ":19,"peak":20,"folhas":[13,14,15,18,20,21,22,23,26,27,28],"elem":"Terra"},{"n":"ucher","occ":6,"peak":23,"folhas":[23,32,45,46,47,48],"elem":"Terra"},{"n":"voxar","occ":28,"peak":1,"folhas":[1,2,4,5,6,9,10,11,13,14,15,16,18,23,28,37],"elem":"Terra"},{"n":"zichastor","occ":14,"peak":16,"folhas":[11,16,21,24,25,27,29,31,34,36,42],"elem":"Fogo"},{"n":"zichastora","occ":7,"peak":16,"folhas":[11,16,25,27,31,36],"elem":"Fogo"},{"n":"zidnopha","occ":11,"peak":41,"folhas":[17,27,31,36,41,42,43],"elem":"Fogo"},{"n":"zinocha","occ":7,"peak":12,"folhas":[12,13,17,21,27,31],"elem":"Fogo"}],"gradient":[{"f":1,"elem":{"Fogo":0.12,"Terra":0.36,"Ar":0.3,"Agua":0.23},"occ":36},{"f":2,"elem":{"Fogo":0.13,"Terra":0.33,"Ar":0.28,"Agua":0.26},"occ":20},{"f":3,"elem":{"Fogo":0.14,"Terra":0.33,"Ar":0.27,"Agua":0.27},"occ":16},{"f":4,"elem":{"Fogo":0.14,"Terra":0.34,"Ar":0.26,"Agua":0.26},"occ":25},{"f":5,"elem":{"Fogo":0.16,"Terra":0.33,"Ar":0.25,"Agua":0.26},"occ":39},{"f":6,"elem":{"Fogo":0.15,"Terra":0.32,"Ar":0.27,"Agua":0.26},"occ":59},{"f":7,"elem":{"Fogo":0.15,"Terra":0.36,"Ar":0.23,"Agua":0.27},"occ":68},{"f":8,"elem":{"Fogo":0.16,"Terra":0.33,"Ar":0.23,"Agua":0.28},"occ":88},{"f":9,"elem":{"Fogo":0.16,"Terra":0.34,"Ar":0.23,"Agua":0.27},"occ":75},{"f":10,"elem":{"Fogo":0.16,"Terra":0.34,"Ar":0.24,"Agua":0.26},"occ":124},{"f":11,"elem":{"Fogo":0.16,"Terra":0.33,"Ar":0.24,"Agua":0.27},"occ":150},{"f":12,"elem":{"Fogo":0.15,"Terra":0.34,"Ar":0.24,"Agua":0.27},"occ":125},{"f":13,"elem":{"Fogo":0.15,"Terra":0.37,"Ar":0.2,"Agua":0.28},"occ":172},{"f":14,"elem":{"Fogo":0.13,"Terra":0.36,"Ar":0.22,"Agua":0.29},"occ":207},{"f":15,"elem":{"Fogo":0.14,"Terra":0.38,"Ar":0.21,"Agua":0.27},"occ":139},{"f":16,"elem":{"Fogo":0.16,"Terra":0.37,"Ar":0.19,"Agua":0.28},"occ":142},{"f":17,"elem":{"Fogo":0.17,"Terra":0.37,"Ar":0.2,"Agua":0.26},"occ":154},{"f":18,"elem":{"Fogo":0.17,"Terra":0.36,"Ar":0.19,"Agua":0.28},"occ":127},{"f":19,"elem":{"Fogo":0.16,"Terra":0.34,"Ar":0.21,"Agua":0.29},"occ":114},{"f":20,"elem":{"Fogo":0.17,"Terra":0.34,"Ar":0.21,"Agua":0.28},"occ":192},{"f":21,"elem":{"Fogo":0.16,"Terra":0.37,"Ar":0.19,"Agua":0.29},"occ":165},{"f":22,"elem":{"Fogo":0.16,"Terra":0.36,"Ar":0.2,"Agua":0.27},"occ":166},{"f":23,"elem":{"Fogo":0.15,"Terra":0.37,"Ar":0.19,"Agua":0.28},"occ":106},{"f":24,"elem":{"Fogo":0.17,"Terra":0.36,"Ar":0.2,"Agua":0.27},"occ":130},{"f":25,"elem":{"Fogo":0.15,"Terra":0.38,"Ar":0.22,"Agua":0.25},"occ":123},{"f":26,"elem":{"Fogo":0.12,"Terra":0.41,"Ar":0.2,"Agua":0.27},"occ":0},{"f":27,"elem":{"Fogo":0.14,"Terra":0.39,"Ar":0.21,"Agua":0.26},"occ":0},{"f":28,"elem":{"Fogo":0.14,"Terra":0.37,"Ar":0.23,"Agua":0.26},"occ":0},{"f":29,"elem":{"Fogo":0.14,"Terra":0.47,"Ar":0.19,"Agua":0.2},"occ":84},{"f":30,"elem":{"Fogo":0.14,"Terra":0.47,"Ar":0.19,"Agua":0.2},"occ":67},{"f":31,"elem":{"Fogo":0.15,"Terra":0.37,"Ar":0.23,"Agua":0.26},"occ":70},{"f":32,"elem":{"Fogo":0.14,"Terra":0.36,"Ar":0.23,"Agua":0.28},"occ":58},{"f":33,"elem":{"Fogo":0.14,"Terra":0.34,"Ar":0.23,"Agua":0.29},"occ":37},{"f":34,"elem":{"Fogo":0.15,"Terra":0.34,"Ar":0.23,"Agua":0.28},"occ":27},{"f":35,"elem":{"Fogo":0.16,"Terra":0.33,"Ar":0.23,"Agua":0.29},"occ":27},{"f":36,"elem":{"Fogo":0.15,"Terra":0.33,"Ar":0.23,"Agua":0.29},"occ":43},{"f":37,"elem":{"Fogo":0.15,"Terra":0.33,"Ar":0.23,"Agua":0.3},"occ":26},{"f":38,"elem":{"Fogo":0.16,"Terra":0.31,"Ar":0.23,"Agua":0.31},"occ":33},{"f":39,"elem":{"Fogo":0.14,"Terra":0.32,"Ar":0.22,"Agua":0.32},"occ":15},{"f":40,"elem":{"Fogo":0.15,"Terra":0.29,"Ar":0.23,"Agua":0.33},"occ":18},{"f":41,"elem":{"Fogo":0.17,"Terra":0.29,"Ar":0.22,"Agua":0.31},"occ":24},{"f":42,"elem":{"Fogo":0.19,"Terra":0.27,"Ar":0.22,"Agua":0.32},"occ":30},{"f":43,"elem":{"Fogo":0.16,"Terra":0.29,"Ar":0.2,"Agua":0.35},"occ":11},{"f":44,"elem":{"Fogo":0.18,"Terra":0.27,"Ar":0.21,"Agua":0.35},"occ":6},{"f":45,"elem":{"Fogo":0.17,"Terra":0.28,"Ar":0.2,"Agua":0.35},"occ":6},{"f":46,"elem":{"Fogo":0.18,"Terra":0.28,"Ar":0.2,"Agua":0.33},"occ":3},{"f":47,"elem":{"Fogo":0.17,"Terra":0.3,"Ar":0.21,"Agua":0.33},"occ":12},{"f":48,"elem":{"Fogo":0.18,"Terra":0.28,"Ar":0.2,"Agua":0.34},"occ":5}],"roots":["antantox","chastor","gradax","chadax","anzach","nocha","nacho","aclax","phange","geth"],"prefixes":["ad","no","al","a","zi","i","ax","an","ne","axno"],"suffixes":["a","al","p","ad","ph","to","pha","an","tor","pa"]};
+const LET=A.letters, ROOTS=A.roots, PREF=A.prefixes, SUF=A.suffixes, ELEMS=A.elems;
+const REALMETA={}; A.names.forEach(d=>REALMETA[d.n]=d);
+const ECOL={Fogo:"var(--fogo)",Terra:"var(--terra)",Ar:"var(--ar)",Agua:"var(--agua)","?":"#555"};
+const HCOL={antantox:"#7a8696",chastor:"#9b6be0",gradax:"#b5651d",chadax:"#49b67b",anzach:"#e0a13b",
+  nocha:"#5bb3e0",nacho:"#3d6bd6",aclax:"#d06ba0",phange:"#6bd0c0",geth:"#c9a24b",avulso:"#5b6672"};
+const HKEYS=[...ROOTS,"avulso"];
+const VOW=new Set(["a","e","i","o","u"]);
+function rootsOf(n){return ROOTS.filter(r=>n.includes(r));}
+function house(n){const rs=rootsOf(n);return rs.length?rs.reduce((a,b)=>b.length>a.length?b:a):"avulso";}
+function isBridge(n){return rootsOf(n).length>=2;}
+function skel(n){return [...n].filter(c=>!VOW.has(c)).join("");}
+function elemDom(n){const c={};for(const ch of n.toUpperCase()){const e=LET[ch];if(e&&ELEMS.includes(e))c[e]=(c[e]||0)+1;}
+  let best="?",bv=-1;for(const k in c)if(c[k]>bv){bv=c[k];best=k;}return best;}
+function ed1(a,b){if(a===b)return false;let la=a.length,lb=b.length;if(Math.abs(la-lb)>1)return false;
+  if(la===lb){let d=0;for(let i=0;i<la;i++)if(a[i]!==b[i])if(++d>1)return false;return d===1;}
+  if(la>lb){[a,b]=[b,a];[la,lb]=[lb,la];}let i=0,j=0,d=0;
+  while(i<la&&j<lb){if(a[i]===b[j]){i++;j++;}else{if(++d>1)return false;j++;}}return true;}
+
+const POSS=new Set();
+for(const p of ["",...PREF])for(const r of ROOTS)for(const s of ["",...SUF])POSS.add(p+r+s);
+A.names.forEach(d=>POSS.delete(d.n));
+const POSSarr=[...POSS];
+document.getElementById("npos").textContent=POSSarr.length;
+
+function meta(name,kind){
+  const m=REALMETA[name]||{};
+  return {name,kind,house:house(name),bridge:isBridge(name),elem:m.elem||elemDom(name),
+    skel:skel(name),occ:m.occ||0,peak:m.peak||0,folhas:m.folhas||[]};
+}
+
+const wrap=document.getElementById("wrap");
+let Wd=wrap.clientWidth,Ht=wrap.clientHeight;
+const svg=d3.select("#wrap").append("svg");
+const gBack=svg.append("g"), g=svg.append("g");
+const zoom=d3.zoom().scaleExtent([0.15,10]).on("zoom",e=>{g.attr("transform",e.transform);gBack.attr("transform",e.transform);});
+svg.call(zoom);
+let linkSel=g.append("g").selectAll("line");
+let nodeSel=g.append("g").selectAll("g");
+let sim, NODES=[], LINKS=[], MODE="constelacao", COLBY="elem";
+const PADL=46;
+
+const skelAnchor={};
+function anchorFor(d){
+  const R=Math.min(Wd,Ht);
+  if(MODE==="constelacao"||MODE==="continentes"){
+    const i=HKEYS.indexOf(d.house); const a=2*Math.PI*i/HKEYS.length-Math.PI/2;
+    const rr=MODE==="continentes"?R*0.36:R*0.34;
+    return [Wd/2+Math.cos(a)*rr, Ht/2+Math.sin(a)*rr];
+  }
+  if(MODE==="livro"){
+    const x=PADL+(Wd-PADL-20)*((d.peak||1)-1)/47;
+    const band=["Fogo","Ar","Terra","Agua"].indexOf(d.elem); const bi=band<0?1.5:band;
+    const y=40+(Ht-80)*(bi+0.5)/4;
+    return [x,y];
+  }
+  if(MODE==="esqueleto"){
+    let s=d.skel||"_"; if(!(s in skelAnchor)){let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))%997;
+      const a=2*Math.PI*h/997; const rr=R*0.12+R*0.3*((h%50)/50); skelAnchor[s]=[Wd/2+Math.cos(a)*rr,Ht/2+Math.sin(a)*rr];}
+    return skelAnchor[s];
+  }
+  return [Wd/2,Ht/2];
+}
+function col(d){return COLBY==="elem"?ECOL[d.elem]:HCOL[d.house];}
+
+function drawBack(){
+  gBack.selectAll("*").remove();
+  if(MODE==="livro"){
+    const bands=["Fogo","Ar","Terra","Agua"];
+    bands.forEach((e,i)=>{const y=40+(Ht-80)*i/4, h=(Ht-80)/4;
+      gBack.append("rect").attr("x",0).attr("y",y).attr("width",Wd).attr("height",h).attr("fill",ECOL[e]).attr("opacity",.06);
+      gBack.append("text").attr("x",8).attr("y",y+16).attr("class","axis").attr("fill",ECOL[e]).text(e);});
+    [1,8,16,24,28,32,40,48].forEach(f=>{const x=PADL+(Wd-PADL-20)*(f-1)/47;
+      gBack.append("line").attr("x1",x).attr("y1",30).attr("x2",x).attr("y2",Ht-40).attr("class","axisline");
+      gBack.append("text").attr("x",x).attr("y",Ht-26).attr("text-anchor","middle").attr("class","axis").text("f"+f);});
+    gBack.append("text").attr("x",Wd/2).attr("y",24).attr("text-anchor","middle").attr("class","axis").text("← posição no livro (folha do pico) ·  bandas = elemento dominante");
+  }
+}
+
+function render(restart=true){
+  Wd=wrap.clientWidth;Ht=wrap.clientHeight;svg.attr("viewBox",`0 0 ${Wd} ${Ht}`);
+  drawBack();
+  const useLink = MODE==="constelacao" || document.getElementById("teia").checked;
+  LINKS = useLink ? buildLinks(NODES) : [];
+  document.getElementById("count").textContent=`${NODES.length} nomes · ${LINKS.length} ligações · ${MODE}`;
+  const showLbl = NODES.length<=120;
+
+  linkSel=linkSel.data(LINKS,d=>(d.source.name||d.source)+"|"+(d.target.name||d.target));
+  linkSel.exit().remove();
+  linkSel=linkSel.enter().append("line").merge(linkSel)
+    .attr("stroke",d=>d.bridge?"var(--red)":"#333c48").attr("stroke-width",d=>d.bridge?1.4:0.7).attr("stroke-opacity",.5);
+
+  nodeSel=nodeSel.data(NODES,d=>d.name);
+  nodeSel.exit().remove();
+  const en=nodeSel.enter().append("g").attr("class","node").call(drag())
+    .on("click",(e,d)=>showDetail(d)).on("mouseover",(e,d)=>hoverFamily(d)).on("mouseout",clearHover);
+  en.append("circle"); en.append("title"); en.append("text").attr("text-anchor","middle").attr("dy",-6).attr("font-size",8);
+  nodeSel=en.merge(nodeSel);
+  nodeSel.select("circle")
+    .attr("r",d=>d.kind==="forge"?8:d.kind==="poss"?2.4:(3.5+Math.min(6,(d.occ||0)/35)))
+    .attr("fill",col).attr("opacity",d=>d.kind==="poss"?.42:1)
+    .attr("stroke",d=>d.kind==="forge"?"var(--gold)":d.bridge?"var(--red)":"#0b0e13")
+    .attr("stroke-width",d=>d.kind==="forge"?2.5:d.bridge?1.5:.6);
+  nodeSel.select("title").text(d=>`${d.name} · casa ${d.house} · ${d.elem}${d.bridge?" · PONTE":""}`);
+  nodeSel.select("text").text(d=>(showLbl&&d.kind!=="poss")||d.kind==="forge"?d.name:"").attr("fill",d=>d.kind==="forge"?"var(--gold)":"#cdd6e0");
+
+  if(sim)sim.stop();
+  const strong = MODE!=="constelacao";
+  sim=d3.forceSimulation(NODES)
+    .force("link",LINKS.length?d3.forceLink(LINKS).id(d=>d.name).distance(22).strength(.7):null)
+    .force("charge",d3.forceManyBody().strength(NODES.length>300?-16:(strong?-24:-70)))
+    .force("x",d3.forceX(d=>anchorFor(d)[0]).strength(strong?0.35:0.06))
+    .force("y",d3.forceY(d=>anchorFor(d)[1]).strength(strong?0.35:0.06))
+    .force("collide",d3.forceCollide(d=>d.kind==="poss"?3.4:7))
+    .on("tick",ticked);
+  if(restart)sim.alpha(.9).restart(); else sim.alpha(.5).restart();
+}
+function buildLinks(nodes){const L=[];for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){
+  if(Math.abs(nodes[i].name.length-nodes[j].name.length)>1)continue;
+  if(ed1(nodes[i].name,nodes[j].name))L.push({source:nodes[i].name,target:nodes[j].name,bridge:nodes[i].bridge||nodes[j].bridge});}return L;}
+function ticked(){linkSel.attr("x1",d=>d.source.x).attr("y1",d=>d.source.y).attr("x2",d=>d.target.x).attr("y2",d=>d.target.y);
+  nodeSel.attr("transform",d=>`translate(${d.x},${d.y})`);}
+function drag(){return d3.drag().on("start",(e,d)=>{if(!e.active)sim.alphaTarget(.3).restart();d.fx=d.x;d.fy=d.y;})
+  .on("drag",(e,d)=>{d.fx=e.x;d.fy=e.y;}).on("end",(e,d)=>{if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null;});}
+
+let hoverLines=null;
+function hoverFamily(d){
+  if(LINKS.length) return;
+  const fam=NODES.filter(n=>n.name!==d.name&&ed1(n.name,d.name));
+  hoverLines=g.insert("g",":first-child");
+  fam.forEach(f=>hoverLines.append("line").attr("x1",d.x).attr("y1",d.y).attr("x2",f.x).attr("y2",f.y)
+    .attr("stroke",isBridge(d.name)||f.bridge?"var(--red)":"var(--gold)").attr("stroke-width",1.2).attr("stroke-opacity",.8));
+}
+function clearHover(){if(hoverLines){hoverLines.remove();hoverLines=null;}}
+
+function showDetail(d){
+  const el=document.getElementById("detail");
+  const rs=rootsOf(d.name);
+  el.style.display="block";
+  el.innerHTML=`<h3>${d.name}</h3>
+   <div class="row">casa <span>${d.house}${d.bridge?" (PONTE)":""}</span></div>
+   <div class="row">elemento <span style="color:${ECOL[d.elem]}">${d.elem}</span></div>
+   <div class="row">raízes <span>${rs.join(", ")||"—"}</span></div>
+   <div class="row">esqueleto <span>${d.skel}</span></div>
+   <div class="row">recorrência <span>${d.occ||0}×</span></div>
+   <div class="row">pico <span>${d.peak?("folha "+d.peak):"—"}</span></div>
+   <div class="cx">aparece nas folhas: ${d.folhas&&d.folhas.length?d.folhas.join(", "):(d.kind==="poss"?"(nome possível, não atestado)":"—")}</div>`;
+}
+
+function flash(t){const m=document.getElementById("msg");m.textContent=t;m.style.opacity=1;setTimeout(()=>m.style.opacity=0,2400);}
+function base(){NODES=A.names.map(d=>meta(d.n,"real"));
+  if(document.getElementById("poss").checked)NODES=NODES.concat(POSSarr.map(n=>meta(n,"poss")));render();}
+
+document.querySelectorAll("[data-mode]").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("[data-mode]").forEach(x=>x.classList.remove("on"));b.classList.add("on");
+  MODE=b.dataset.mode; render();});
+document.querySelectorAll("[data-col]").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("[data-col]").forEach(x=>x.classList.remove("on"));b.classList.add("on");
+  COLBY=b.dataset.col; nodeSel.select("circle").attr("fill",col); buildLegend();});
+document.getElementById("poss").onchange=base;
+document.getElementById("teia").onchange=()=>render();
+document.getElementById("search").addEventListener("input",e=>{const q=e.target.value.toLowerCase();
+  nodeSel.select("circle").attr("stroke",d=>q&&d.name.includes(q)?"#fff":(d.kind==="forge"?"var(--gold)":d.bridge?"var(--red)":"#0b0e13"))
+    .attr("stroke-width",d=>q&&d.name.includes(q)?2.5:(d.kind==="forge"?2.5:d.bridge?1.5:.6));});
+function doForge(){let v=document.getElementById("forge").value.toLowerCase().replace(/[^a-z]/g,"");
+  if(v.length<3){flash("curto demais");return;}
+  if(NODES.find(n=>n.name===v)){flash(v+" já está no mapa");return;}
+  const node=meta(v,"forge");NODES.push(node);
+  const links=NODES.filter(n=>n.name!==v&&ed1(n.name,v));render(false);
+  flash(`${v} → casa ${node.house}${node.bridge?" (PONTE!)":""} · ${node.elem} · ${links.length} ligação(ões) ${links.length?"— encaixa":"— órfão"}`);
+  document.getElementById("forge").value="";}
+document.getElementById("bforge").onclick=doForge;
+document.getElementById("forge").addEventListener("keydown",e=>{if(e.key==="Enter")doForge();});
+
+function buildLegend(){const leg=document.getElementById("legend");leg.innerHTML="";
+  const items = COLBY==="elem" ? ELEMS.map(e=>[e,ECOL[e]]) : HKEYS.map(h=>[h,HCOL[h]]);
+  items.forEach(([k,c])=>{const s=document.createElement("span");s.innerHTML=`<span class="sw" style="background:${c}"></span>${k}`;leg.appendChild(s);});
+  const x=document.createElement("span");x.innerHTML=`<span class="sw" style="background:var(--red)"></span>ponte · <span style="color:var(--gold)">dourado=forjado</span> · tamanho=recorrência`;leg.appendChild(x);}
+
+buildLegend(); base();
+window.addEventListener("resize",()=>render(false));
+</script>
+</body>
+</html>

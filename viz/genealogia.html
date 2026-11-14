@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Genealogia viva do Loagaeth</title>
+<style>
+  :root{--bg:#0e1116;--panel:#161b22;--ink:#e6edf3;--mut:#8b97a7;--line:#2a313c;--gold:#e8c35a;--red:#e0573b}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,Segoe UI,Roboto,Arial;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+  header{padding:10px 14px 8px}
+  h1{font-size:18px;margin:0} .sub{color:var(--mut);font-size:12px;margin:2px 0 0}
+  .bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel)}
+  .bar label{font-size:12px;color:var(--mut);display:flex;gap:5px;align-items:center}
+  input[type=text]{background:#0e141b;border:1px solid var(--line);color:var(--ink);border-radius:7px;padding:5px 8px;font:13px monospace;width:150px}
+  button{background:#22304a;border:1px solid #33425e;color:var(--ink);border-radius:7px;padding:5px 11px;font-size:12px;cursor:pointer}
+  button:hover{background:#2c3e5e} button.alt{background:#2a2030;border-color:#4a3550}
+  #wrap{flex:1;position:relative} svg{width:100%;height:100%;display:block;cursor:grab}
+  svg:active{cursor:grabbing}
+  .count{font-size:12px;color:var(--mut);margin-left:auto}
+  .legend{display:flex;flex-wrap:wrap;gap:10px;font-size:11px;color:var(--mut);padding:6px 14px;background:var(--panel);border-top:1px solid var(--line)}
+  .sw{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:-1px;margin-right:3px}
+  .node text{font-family:ui-monospace,Menlo,Consolas,monospace;fill:#cdd6e0;pointer-events:none}
+  .hint{color:var(--gold)}
+  .msg{position:absolute;top:10px;left:50%;transform:translateX(-50%);background:#1b2330;border:1px solid var(--line);padding:6px 12px;border-radius:8px;font-size:12px;opacity:0;transition:opacity .3s}
+</style>
+</head>
+<body>
+<header>
+  <h1>Genealogia viva do Loagaeth</h1>
+  <p class="sub">Arraste para mover · roda do mouse para zoom · ligações = edição-1 (1 letra de diferença). Forje um nome e o algoritmo o liga sozinho.</p>
+</header>
+<div class="bar">
+  <label><input type="checkbox" id="poss"> mostrar nomes possíveis do gerador (<span id="npos">…</span>)</label>
+  <label><input type="checkbox" id="lbl"> rótulos em tudo</label>
+  <span style="width:1px;height:18px;background:var(--line)"></span>
+  <input type="text" id="forge" placeholder="forjar nome… ex: zinochastor" autocomplete="off">
+  <button id="bforge">Forjar + ligar</button>
+  <button class="alt" id="reset">Reset</button>
+  <span class="count" id="count"></span>
+</div>
+<div id="wrap"><div class="msg" id="msg"></div></div>
+<div class="legend" id="legend"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>
+const REAL="ACHADAX ACHADNACHO ACHARDAN ACLAX ACLAXP ACLAXTO ACLAXTOR ADNACHEPHA ADNACHO ADNACHOA ADNOCHA ADNOCHAP ADNOCHAPH ADNOCHAPHA AGETHAL ALCHADAX ALGETH ALGETHAD ALGRADAX ANACHO ANCHADAX ANCHANO ANGETHAL ANNOCHA ANOCHASTOR ANTANTOX ANTANTOXA ANTANTOXAL ANZACH ANZACHAL AOXARD APHANGE AXACHAR AXACLAXTO AXALGRA AXNACHO AXNOCHAP AXNOCHASTOR AXTALGETHA CHADAX CHARDAX CHASTOR CHASTORA CHASTORAD CHASTORAL CHASTORAN CHASTORP CHIDAXTO DNOCHAPA DONCHAL DRAGRA GASTA GETH GRADAX GRADAXA HNAXAD ICHADAX ICHASTOR ICHASTORA NACHO NACHOA NACHOAD NACHOAL NACLANSA NADAB NECHASTOR NECHASTORA NOCHA NOCHAAL NOCHADAXA NOCHAP NOCHAPH NOCHASTOR NOCHASTORA NOCHASTORAD NOCHASTORAL NODALGA OLCHADNA ONDANVAGE OXARDRAH PHADOL PHANGE RONZIN TAXALGRA UCHER VOXAR ZICHASTOR ZICHASTORA ZIDNOPHA ZINOCHA".toLowerCase().split(/\s+/);
+const ROOTS=["antantox","chastor","gradax","chadax","anzach","nocha","nacho","aclax","phange","geth"];
+const PREF=["ad","no","al","a","zi","i","ax","an","ne","axno"];
+const SUF=["a","al","p","ad","ph","to","pha","an","tor","pa"];
+const PAL={antantox:"#7a8696",chastor:"#9b6be0",gradax:"#b5651d",chadax:"#49b67b",anzach:"#e0a13b",
+  nocha:"#5bb3e0",nacho:"#3d6bd6",aclax:"#d06ba0",phange:"#6bd0c0",geth:"#c9a24b",avulso:"#5b6672"};
+function rootsOf(n){return ROOTS.filter(r=>n.includes(r));}
+function house(n){const rs=rootsOf(n);if(!rs.length)return"avulso";return rs.reduce((a,b)=>b.length>a.length?b:a);}
+function isBridge(n){return rootsOf(n).length>=2;}
+function ed1(a,b){if(a===b)return false;let la=a.length,lb=b.length;if(Math.abs(la-lb)>1)return false;
+  if(la===lb){let d=0;for(let i=0;i<la;i++)if(a[i]!==b[i]){if(++d>1)return false;}return d===1;}
+  if(la>lb){[a,b]=[b,a];[la,lb]=[lb,la];}let i=0,j=0,d=0;
+  while(i<la&&j<lb){if(a[i]===b[j]){i++;j++;}else{if(++d>1)return false;j++;}}return true;}
+
+// gera possiveis (pref? raiz suf{0,1})
+const POSS=new Set();
+for(const p of ["",...PREF])for(const r of ROOTS)for(const s of ["",...SUF])POSS.add(p+r+s);
+REAL.forEach(n=>POSS.delete(n));
+const POSSarr=[...POSS];
+document.getElementById("npos").textContent=POSSarr.length;
+
+// anchors por casa (circulo)
+const HKEYS=[...ROOTS,"avulso"];
+const anchors={};HKEYS.forEach((h,i)=>{const a=2*Math.PI*i/HKEYS.length-Math.PI/2;anchors[h]=[Math.cos(a),Math.sin(a)];});
+
+const wrap=document.getElementById("wrap");
+let Wd=wrap.clientWidth,Ht=wrap.clientHeight;
+const svg=d3.select("#wrap").append("svg");
+const g=svg.append("g");
+svg.call(d3.zoom().scaleExtent([0.2,9]).on("zoom",e=>g.attr("transform",e.transform)));
+let linkSel=g.append("g").attr("stroke-opacity",.55).selectAll("line");
+let nodeSel=g.append("g").selectAll("g");
+let sim;
+
+function buildLinks(nodes){
+  const by=d3.group(nodes,d=>d.name.length);
+  const links=[];const arr=nodes;
+  for(let i=0;i<arr.length;i++)for(let j=i+1;j<arr.length;j++){
+    if(Math.abs(arr[i].name.length-arr[j].name.length)>1)continue;
+    if(ed1(arr[i].name,arr[j].name))links.push({source:arr[i].name,target:arr[j].name,
+      bridge:arr[i].bridge||arr[j].bridge});
+  }
+  return links;
+}
+let NODES=[],LINKS=[];
+function mk(name,kind){return{name,house:house(name),bridge:isBridge(name),kind};}// kind: real|poss|forge
+
+function render(){
+  Wd=wrap.clientWidth;Ht=wrap.clientHeight;
+  svg.attr("viewBox",`0 0 ${Wd} ${Ht}`);
+  LINKS=buildLinks(NODES);
+  document.getElementById("count").textContent=`${NODES.length} nomes · ${LINKS.length} ligações`;
+  const showLbl=document.getElementById("lbl").checked||NODES.length<=120;
+
+  linkSel=linkSel.data(LINKS,d=>d.source.name?d.source.name+d.target.name:d.source+d.target);
+  linkSel.exit().remove();
+  linkSel=linkSel.enter().append("line").merge(linkSel)
+    .attr("stroke",d=>d.bridge?"var(--red)":"#3a424e")
+    .attr("stroke-width",d=>d.bridge?1.6:0.8);
+
+  nodeSel=nodeSel.data(NODES,d=>d.name);
+  nodeSel.exit().remove();
+  const en=nodeSel.enter().append("g").attr("class","node").call(drag());
+  en.append("circle");
+  en.append("title");
+  en.append("text").attr("text-anchor","middle").attr("dy",-7).attr("font-size",8);
+  nodeSel=en.merge(nodeSel);
+  nodeSel.select("circle")
+    .attr("r",d=>d.kind==="forge"?8:d.kind==="real"?5.5:2.6)
+    .attr("fill",d=>PAL[d.house])
+    .attr("opacity",d=>d.kind==="poss"?0.4:1)
+    .attr("stroke",d=>d.kind==="forge"?"var(--gold)":d.bridge?"var(--red)":"#0e1116")
+    .attr("stroke-width",d=>d.kind==="forge"?2.5:d.bridge?1.6:0.6);
+  nodeSel.select("title").text(d=>`${d.name} · casa ${d.house}${d.bridge?" · PONTE":""}${d.kind==="poss"?" · possível":""}`);
+  nodeSel.select("text").text(d=>(showLbl||d.kind!=="poss")?d.name:"").attr("fill",d=>d.kind==="forge"?"var(--gold)":"#cdd6e0");
+
+  if(sim)sim.stop();
+  sim=d3.forceSimulation(NODES)
+    .force("link",d3.forceLink(LINKS).id(d=>d.name).distance(24).strength(.9))
+    .force("charge",d3.forceManyBody().strength(NODES.length>300?-28:-70))
+    .force("x",d3.forceX(d=>Wd/2+anchors[d.house][0]*Math.min(Wd,Ht)*0.34).strength(.07))
+    .force("y",d3.forceY(d=>Ht/2+anchors[d.house][1]*Math.min(Wd,Ht)*0.34).strength(.07))
+    .force("collide",d3.forceCollide(d=>d.kind==="poss"?4:8))
+    .on("tick",ticked);
+  sim.alpha(.9).restart();
+}
+function ticked(){
+  linkSel.attr("x1",d=>d.source.x).attr("y1",d=>d.source.y).attr("x2",d=>d.target.x).attr("y2",d=>d.target.y);
+  nodeSel.attr("transform",d=>`translate(${d.x},${d.y})`);
+}
+function drag(){
+  return d3.drag()
+    .on("start",(e,d)=>{if(!e.active)sim.alphaTarget(.3).restart();d.fx=d.x;d.fy=d.y;})
+    .on("drag",(e,d)=>{d.fx=e.x;d.fy=e.y;})
+    .on("end",(e,d)=>{if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null;});
+}
+function flash(t){const m=document.getElementById("msg");m.textContent=t;m.style.opacity=1;setTimeout(()=>m.style.opacity=0,2200);}
+
+function base(){NODES=REAL.map(n=>mk(n,"real"));if(document.getElementById("poss").checked)NODES=NODES.concat(POSSarr.map(n=>mk(n,"poss")));render();}
+document.getElementById("poss").addEventListener("change",base);
+document.getElementById("lbl").addEventListener("change",render);
+document.getElementById("reset").addEventListener("click",()=>{document.getElementById("poss").checked=false;base();});
+function doForge(){
+  let v=document.getElementById("forge").value.toLowerCase().replace(/[^a-z]/g,"");
+  if(v.length<3){flash("nome curto demais");return;}
+  if(NODES.find(n=>n.name===v)){flash(v+" já está no grafo");return;}
+  const node=mk(v,"forge");NODES.push(node);
+  const links=NODES.filter(n=>n.name!==v&&ed1(n.name,v));
+  render();
+  const h=house(v),br=isBridge(v);
+  flash(`${v} → casa ${h}${br?" (PONTE!)":""} · ${links.length} ligação(ões) ${links.length?"— faz sentido":"— órfão, não encaixa"}`);
+  document.getElementById("forge").value="";
+}
+document.getElementById("bforge").addEventListener("click",doForge);
+document.getElementById("forge").addEventListener("keydown",e=>{if(e.key==="Enter")doForge();});
+
+// legenda
+const leg=document.getElementById("legend");
+HKEYS.forEach(h=>{const s=document.createElement("span");s.innerHTML=`<span class="sw" style="background:${PAL[h]}"></span>${h}`;leg.appendChild(s);});
+const extra=document.createElement("span");extra.innerHTML=`<span class="sw" style="background:var(--red)"></span>ponte · <span class="hint">dourado = forjado</span>`;leg.appendChild(extra);
+
+base();
+window.addEventListener("resize",()=>{svg.attr("viewBox",`0 0 ${wrap.clientWidth} ${wrap.clientHeight}`);});
+</script>
+</body>
+</html>

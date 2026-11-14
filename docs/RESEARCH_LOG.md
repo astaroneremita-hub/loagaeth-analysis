@@ -1845,3 +1845,99 @@ Gramática: NOME := PREFIXO? RAIZ SUFIXO*. Inventário: 10 prefixos, 10 raízes,
   Falta camada de seleção (qual tabela/posição) = próximo alvo.
 - Limite: 28/90 não fecham 100% (raízes/afixos fora do núcleo de 10, ou variantes).
 Código: src/gerador_nomes.py (parse+gerar). Doc: docs/GERADOR_NOMES.md. Dados: results/171_name_grammar.json.
+
+## #336 — Pontes Loag x outros sistemas: REFUTADO (Loag é ilha)
+Frente 6. Testa se nomes de Torres/Heptarquia/91 governadores/Aethyrs/Chamadas aparecem no Loag inteiro
+(96 lados, 196288 letras), substring em ordem de linha vs null pareado (seed 1583).
+- GOV_91: 0/91 (z=-0.4). AETHYR: 0. TORRE_linea: 4/8 (z=+1.3). HEPT: 8/140 (z=+1.9, marginal).
+  CALL(>=4): 81/610 (z=+0.3, no acaso).
+- Raízes do gerador (chastor/nocha/geth/...) dentro de nomes de qualquer sistema: ZERO (indep. de ordem).
+VEREDITO: sem ponte onomástica. Gerador do Loag (#335) disjunto da Grande Tábua/Heptarquia/governadores.
+O elo Loag↔Chamadas de #333 era LÉXICO (palavras curtas camada A), não nome — some em substring >=4 book-wide.
+Loag = universo de nomes autônomo/fechado. Limite: só ordem de linha (col/diagonal não testada), mas raízes=0 indep. de ordem.
+Docs: docs/PONTES.md. Dados: results/172_bridges.json.
+
+## #337 — Camada de seleção: recorrência na grade (não regra)
+Gerador (#335) dá 1210 formas possíveis (PREF? RAIZ SUF<=1); só ~90 são reais. a173 separa real vs gerado-não-real.
+- Recorrência (linhas por substring, >=5 letras): real 40.1 vs não-real 0.97, z=+14.7 => O SELETOR.
+- Secundário/subproduto: comprimento z=-8.4 (reais mais curtos), cmax z=-4.6, vmax z=-3.4, viol z=-1.6.
+- Poder: 90/90 nomes reais são row-substring do livro (Loag é row-legível; contrasta com #336).
+VEREDITO: seleção mora FORA da gramática (combinação é livre, #335) — é a geometria da tabela repetindo
+peças curtas em muitos loci. Loag = campo combinatório onde a tabela seleciona por recorrência, não língua.
+Limite: 28/90 reais não cabem em PREF?+RAIZ+SUF<=1; métrica de recorrência é grosseira (substring linha).
+Próximo: qual geometria (coluna/antidiagonal/gradiente) concentra a recorrência -> grades 2-48.
+Docs: docs/CAMADA_SELECAO.md. Dados: results/173_selection.json.
+
+## #338 — Laycock (Complete Enochian Dictionary) como léxico de validação
+PDF do usuário (145 págs, dicionário A–Z enoquiano). a174 (não guarda o texto; lê o PDF). null pareado, seed 1583.
+- folha1 len>=4: 114/2342 atestadas no dic. (null 7, z=+42.8); len>=5: 73 (z=+70.8); len>=6: 44 (null 0.1, z=+153.8).
+- partículas <=3: 111/175 (null 51, z=+11.4). Controle: 15/15 glosadas conhecidas presentes.
+- raízes do gerador 0/10 e nomes mestre 0/90 no dicionário => campo de nomes NÃO é enoquiano (confirma #336 por fonte independente).
+VEREDITO: camada de léxico real cresce de 21 -> ~114 palavras (folha1 ∩ Laycock); nomes/raízes seguem autônomos.
+Confound: pool do dic. mistura inglês das glosas; número robusto é len>=6 (44, null 0). 
+Livro NÃO tem: tabelas do Loagaeth, decodificação do Soyga (só cita: Soyga=aldaraia), nem gematria (noutra parte da obra).
+Próximo usável: glossário expandido folha1 ∩ Laycock (114) p/ reler a página.
+Docs: docs/LAYCOCK_LEXICO.md. Dados: results/174_laycock_lexicon.json.
+
+## #339 — CORREÇÃO do #338: o "114" era auto-citação (glossário honesto ≈ 24)
+Investigando p/ montar o glossário das 114, achei contaminação grave:
+- A Introdução do Laycock TRANSCREVE linhas da folha 1 (fólios I.13, 1.24, L25, 1.26, II.24) + 2ª citação (27ª Invocação).
+  Removendo só o bloco intro (3533 chars): folha1 len>=6 cai 43->24, len>=5 72->39.
+- Sobreviventes ainda contaminados: lafet/vncas/vanascor/glust/hahaha (2ª citação), notes/other (inglês),
+  tohcoth/apachana/donasdogamatastos (glosas marginais do próprio Dee = internas do Loagaeth).
+- Limpo (2 citações + stoplist inglês): léxico confiável = 21 (Chamadas) + 3 que Dee glosou (apachana, tohcoth,
+  donasdogamatastos, cada 1x na folha1) ≈ 24. gassagen não está na folha1.
+VEREDITO: Laycock NÃO expande o léxico de forma confiável; o 21->114 era artefato. O elo real folha1↔Chamadas (21) já era #333.
+As 3 glosas do Dee são hapax e são "nomes de coisas" (fogo-punição, coisas-de-pó), não gramática — encaixa campo-de-nomes.
+Bônus: Laycock (linguista) conclui por conta própria que o Loagaeth inicial é provável glossolalia/transe — bate com #332/#334/#335.
+Docs: docs/GLOSSARIO.md; correção no topo de docs/LAYCOCK_LEXICO.md.
+
+## #340 — Astrologia no Loag (zodíaco/planeta) + Soyga: REFUTADO
+Imagens do usuário = tabelas do Soyga/Aldaraia (alfabeto latino: signo/valor/elemento/planeta/humor por letra).
+a175: 48 folhas ciclam em 12 (zodíaco) ou 7 (planeta)? Autocorrelação do perfil por folha vs shuffle (seed 1583).
+- elemento Loag: lag12 z=-1.6, lag7 z=+1.2, lag1 z=+7.5. planeta Loag: lag12 z=-1.7, lag7 z=+1.4, lag1 z=+7.1.
+- valor Soyga (P14 A3 T9 E15 R12 C27 O9) aplicado ao Loag: lag12 z=-1.1, lag7 z=+0.6, lag1 z=+6.1.
+VEREDITO: sem ciclo zodiacal(12) nem planetário(7) por nenhum mapa. Só suavidade local (lag1) = gradiente conhecido, não roda.
+Soyga é sistema à parte (alfabeto latino, disjunto do Loag #336); sobrepor humores do Soyga = erro de categoria.
+Tabela de convergência seria descritiva, sem sinal. Estrelas fixas: sem dado/gancho.
+Docs: docs/ASTRO.md. Dados: results/175_astro.json.
+
+## #341 — Qual geometria concentra os nomes: LINHA (+ borda, diag↘); coluna morta
+Segue #337 (seleção por recorrência). a176: 42 faces quadradas 49x49, lê row/col/diag↘/diag↗/borda (ida+volta),
+conta recorrência dos 90 nomes por direção vs null (seed 1583).
+- ROW: 876 (~9.7 faces/nome) z=+103.1 (DOMINA, mas parcialmente circular: nomes derivados por leitura em linha).
+- BORDA: 101 z=+42.0 (real, não-circular: nomes no perímetro). DIAG↘: 128 z=+12.2 (canal menor, bate c/ 25b-28b).
+- DIAG↗: 34 z=+2.0 (marginal). COL: 1 z=-1.4 (MORTA: nomes nunca descem coluna).
+VEREDITO: Loag se lê em LINHA; nomes grudam na BORDA e num fio DIAGONAL↘; nunca coluna. Limpo: coluna=0, borda=+42.
+Limite: faces losango fora (só 42 quadradas). Prepara leitura das grades 2-48.
+Docs: docs/GEOMETRIA.md. Dados: results/176_geometry.json.
+
+## #342 — Mapa do Loagaeth inteiro (varredura folhas 1-48)
+a177: por folha (leitura em linha, #341) densidade de nomes, cobertura por peças, léxico Chamadas, gradiente elemental, raízes.
+- Densidade de nomes: real 22.5/folha vs null 0.1, z=+125.9 (campo de nomes denso).
+- Distribuição: sobe ~12(1-4) -> pico 11-25 (folha14: 47 nomes/207 occ) -> desaba 40-48 (2-14).
+- Folhas 26-27-28 = 0 nomes POR LINHA, cov 34-39%, raiz antantox = faces DIAGONAIS (confirma #341, antigo 25b-28b). "costura".
+- Gradiente limpo: Terra pico ~0.47 (f29-30), cai p/0.27(f48); Água sobe 0.23->0.35; Ar cai 0.30->0.20. Nomes densos onde Terra pica, somem onde Água sobe (regiões semente/corpo/profundo).
+- Dinastias: começo nocha/nacho, miolo geth/antantox, fim geth domina (13/16).
+- Folha 1 única: léxico Chamadas=33 vs ~5-10 no resto (página-oficina).
+Honesto: densidade de nomes tem circularidade (nomes derivados das grades); mas o FORMATO (pico/colapso/zero em 26-28) e o gradiente elemental (contagem de letras) são independentes.
+Próximo: leitura diagonal dedicada das 26-28.
+Docs: docs/MAPA_LIVRO.md. Dados: results/177_sweep.json.
+
+## #343 — Folhas 26-28 lidas na diagonal: a costura
+a178: faces 26a-28b (0 nomes por linha, #342) lidas em diagonal.
+- ROW 1 distinto, COL 0, DIAG↘ 55 distintos, DIAG↗ 18. Row/col = controle (mesmas letras, eixo errado ~0).
+- Top ↘: geth×72, nocha×41, aclax×25, algeth×18, chastor×15, anzach×12, adnocha×11, chadax×9.
+- Diagonais principais legíveis: 26a↘ NOCHASTORAL(cadeia CHASTOR); 26b↘ GETH/naclansa/zidnopha; 28a↘ ALGETH/ANTANTOX; 28b↘ GETH/RONZIN.
+VEREDITO: eixo de leitura gira 45° nas 26-28 = diagonal descendente. Mesmo campo de nomes (CHASTOR/NOCHA/GETH/ANTANTOX/RONZIN) girado, não conteúdo novo. É a costura entre metade densa (2-25) e profundo (29-48). Confirma/quantifica #341 (diag↘ z=+12) e o antigo 25b-28b.
+Docs: docs/DIAGONAL_2628.md. Dados: results/178_diag2628.json.
+
+## #344 — Dinastias dos nomes (genealogia, frente 2)
+a179: 90 nomes agrupados por raiz + grafo edição-1 + pontes. seed 1583.
+- Casas por raiz: NOCHA 19, CHASTOR 18, NACHO 9, CHADAX 6, GETH 6, ACLAX 5, GRADAX 3, ANTANTOX 3, ANZACH 2, PHANGE 2; 24 sem raiz.
+- Grafo edição-1: 55 arestas, 47 componentes; null 0.1 arestas z=+229.6 (famílias reais, acaso nunca liga).
+- Famílias: CHASTOR(10), NACHO(8), NOCHASTOR(8), CHADAX(6), ADNOCHA(6), ANTANTOX(3), NOCHA(3) + 34 isolados.
+- Pontes (2 raízes): 7, quase todas NOCHA+CHASTOR -> NOCHASTOR (nochastor/a/ad/al, anochastor, axnochastor); nochadaxa=CHADAX+NOCHA.
+- Derivação por acreção: adnocha->adnochap->adnochaph->adnochapha; chastor->chastora->chastorad/al/an; prefixos I-/ZI-/NE- = linhas paralelas.
+VEREDITO: há dinastias além de CHASTOR (NOCHA maior); evento central = casamento NOCHA×CHASTOR -> NOCHASTOR (domina diagonal 26a #343 e miolo #342). 27% dos nomes sem raiz = camada avulsa.
+Docs: docs/DINASTIAS.md. Dados: results/179_dynasties.json.

@@ -18,6 +18,103 @@ command away from being reproduced or refuted.
 
 ---
 
+## 📖 The research book (start here)
+
+The full study is written up as a book — rigorous analysis in Part I–II and an operative
+manual in Part III, every claim with its null model, every refutation with its number.
+
+| Format | Bilingual (PT → EN) | Português | English |
+|---|---|---|---|
+| **PDF** | [Liber_Loagaeth.pdf](book/dist/Liber_Loagaeth.pdf) | [PT](book/dist/Liber_Loagaeth_PT.pdf) | [EN](book/dist/Liber_Loagaeth_EN.pdf) |
+| **EPUB** | [Liber_Loagaeth.epub](book/dist/Liber_Loagaeth.epub) | [PT](book/dist/Liber_Loagaeth_PT.epub) | [EN](book/dist/Liber_Loagaeth_EN.epub) |
+
+Source manuscript: [`book/pt/`](book/pt) · [`book/en/`](book/en) · figures in [`book/figuras/`](book/figuras).
+Rebuild: `python book/gera_figuras.py && python book/gera_catalogo.py pt && python book/compila.py combined`.
+
+---
+
+## 🗺️ Document map — read every study directly
+
+**Start / method**
+- [docs/RESEARCH_LOG.md](docs/RESEARCH_LOG.md) — the full dated log, entry by entry (#1 → #408)
+- [docs/DESCOBERTAS.md](docs/DESCOBERTAS.md) — consolidated summary of the findings
+- [docs/METHODOLOGY.md](docs/METHODOLOGY.md) — the null-model discipline
+- [docs/STATE_AND_NEXT.md](docs/STATE_AND_NEXT.md) — where the study stands, what is worth doing next
+- [docs/SOURCES.md](docs/SOURCES.md) — sources & provenance
+- [docs/WHAT_THE_SOURCES_SAY.md](docs/WHAT_THE_SOURCES_SAY.md) — what the diaries say the book is
+
+**What the Loagaeth is — the language**
+- [docs/LOAG_O_QUE_E.md](docs/LOAG_O_QUE_E.md) — what we found (the book itself) and how to use it
+- [docs/ESTRUTURA_E_SENTIDO.md](docs/ESTRUTURA_E_SENTIDO.md) — structure and meaning
+- [docs/LEIS_LINGUA.md](docs/LEIS_LINGUA.md) — is it a language? the linguistic laws applied
+- [docs/GERADOR_NOMES.md](docs/GERADOR_NOMES.md) — the name generator, as code
+- [docs/LOAG_COMPLETO.md](docs/LOAG_COMPLETO.md) — the complete Loagaeth: names, words, particles
+- [docs/CAMADA_SELECAO.md](docs/CAMADA_SELECAO.md) — the selection layer: why only ~90 of 1210 possible names?
+
+**Names, families, houses, hierarchy**
+- [docs/WEAVE_AND_HIERARCHY.md](docs/WEAVE_AND_HIERARCHY.md) — the weave and the hierarchy of the names
+- [docs/DINASTIAS.md](docs/DINASTIAS.md) — the dynasties (families) of names
+- [docs/TESTE_ANJOS.md](docs/TESTE_ANJOS.md) — can the grammar generate angel names?
+
+**Structure & geometry**
+- [docs/GEOMETRIA.md](docs/GEOMETRIA.md) — which geometry concentrates the names?
+- [docs/DIAGONAL_2628.md](docs/DIAGONAL_2628.md) — leaves 26–28 read on the diagonal (the seam)
+- [docs/MAPA_LIVRO.md](docs/MAPA_LIVRO.md) — map of the whole book (leaves 1–48)
+- [docs/HIPOTESES_PROFUNDAS.md](docs/HIPOTESES_PROFUNDAS.md) — 40 deep hidden-pattern hypotheses
+
+**Element & astrology**
+- [docs/ASTRO.md](docs/ASTRO.md) — is there astrology (sign/planet) inside the Loag? is Soyga a key?
+
+**Leaf 1 & the lexicon**
+- [docs/FOLHA1_LEITURA.md](docs/FOLHA1_LEITURA.md) — leaf 1 read
+- [docs/FOLHA1_TEXTO_ANOTADO.md](docs/FOLHA1_TEXTO_ANOTADO.md) — leaf 1, whole annotated text
+- [docs/GLOSSARIO.md](docs/GLOSSARIO.md) — honest glossary: words with attested meaning
+- [docs/PARTICULAS_FUNCAO.md](docs/PARTICULAS_FUNCAO.md) — the "leftover letters" of leaf 1 and their function
+
+**Bridges to other systems & refutations**
+- [docs/PONTES.md](docs/PONTES.md) — does the Loag bridge to the other Enochian systems?
+- [docs/LAYCOCK_LEXICO.md](docs/LAYCOCK_LEXICO.md) — Laycock's dictionary, what is usable
+- [docs/EXPLORED.md](docs/EXPLORED.md) — everything we tried
+- [docs/EXPERIMENTS_72_hypotheses.md](docs/EXPERIMENTS_72_hypotheses.md) — 72 hypotheses, verified or refuted
+
+**Practice / ritual (operative plane)**
+- [docs/FINDINGS_AND_PRACTICE.md](docs/FINDINGS_AND_PRACTICE.md) — what we found, and what to do with it
+- [docs/RITUAL_NOCHA.md](docs/RITUAL_NOCHA.md) — pre-ritual structure to evoke NOCHA (table 2)
+
+**Audit, sessions, plans**
+- [docs/RELATORIO_AUDITORIA.md](docs/RELATORIO_AUDITORIA.md) — technical audit report
+- [docs/PESQUISA_LOAGAETH.md](docs/PESQUISA_LOAGAETH.md) — structural decipherment research document
+- [docs/NOVAS_DESCOBERTAS.md](docs/NOVAS_DESCOBERTAS.md) — new findings (#351–#359)
+- [docs/SESSION_FINDINGS.md](docs/SESSION_FINDINGS.md) — what we found, where we got, how
+- [docs/ROADMAP.md](docs/ROADMAP.md) — what is left to investigate
+- [docs/PLANO_33.md](docs/PLANO_33.md) · [docs/PLANO_LINGUISTA_20.md](docs/PLANO_LINGUISTA_20.md) · [docs/PLANO_SENTIDO.md](docs/PLANO_SENTIDO.md) — the working plans
+- [docs/IDEIAS.md](docs/IDEIAS.md) · [docs/IDEIAS_40.md](docs/IDEIAS_40.md) · [docs/IDEIAS_DEE.md](docs/IDEIAS_DEE.md) — idea batches (incl. "in Dee's voice")
+
+**Interactive tools** (`viz/`, serve with `python -m http.server 8860` inside `viz/`, then open in a browser)
+- [viz/index.html](viz/index.html) — the hub for all tools
+- [viz/name_grammar.html](viz/name_grammar.html) · [viz/name_forge.html](viz/name_forge.html) · [viz/forja_neural.html](viz/forja_neural.html) — the name generator / **forge**
+- [viz/catalogo.html](viz/catalogo.html) — bilingual catalog of findings · [viz/voz_loagaeth.html](viz/voz_loagaeth.html) — the voice / chant guide
+- [viz/estrutura.html](viz/estrutura.html) · [viz/dialetos.html](viz/dialetos.html) · [viz/mapa_livro.html](viz/mapa_livro.html) · [viz/loagaeth_3d.html](viz/loagaeth_3d.html) — structure, dialects, book map, 3-D atlas
+- [viz/tables.html](viz/tables.html) — read the tables (4 modes + search) · [viz/guia_pratico.html](viz/guia_pratico.html) — practical ritual guide
+- [viz/arvore_rebaseada.html](viz/arvore_rebaseada.html) — the rebaseable Tree of Life (hitkalelut explorer)
+
+---
+
+## 🔬 The deep phases — what we went furthest on
+
+The phases below are the most recent and detailed; each links to its evidence in the log and the book.
+
+- **The book as a constructed language.** Zipf slope −1.31 (r² 0.96), compresses ~1 bit/letter below shuffle, Semitic-type morphology → [RESEARCH_LOG #370a](docs/RESEARCH_LOG.md), book Ch. 1.
+- **The name generator & the forge.** root + affix grammar that is *predictive* — generated names that turn out to be in the book (a81/a82). Tools: [name_forge.html](viz/name_forge.html), [forja_neural.html](viz/forja_neural.html); write-up [GERADOR_NOMES.md](docs/GERADOR_NOMES.md).
+- **Two houses / grammatical classes.** D-/AD- → NOCHA, L-/X- → GETH; the book *declines* names by house → [RESEARCH_LOG #405](docs/RESEARCH_LOG.md).
+- **Sound & voice (the book sung).** Pronounceable (z +6.9), Latin stress (83% penult/antepenult), intoned on A, A-pulse every ~3 letters (z +31.5), final vowel/H → [#386–#398](docs/RESEARCH_LOG.md), tool [voz_loagaeth.html](viz/voz_loagaeth.html), book Ch. 4.
+- **Consonantal identity, two registers.** Identity in the consonant (3.48 bits) / vowel is register (1.25); Calls vs names are the same language, two voices → [#401–#403](docs/RESEARCH_LOG.md).
+- **The elemental arc & the sign/planet conflict.** Body = Earth (38/48 leaves agree), deep fractures Water (sign) vs Fire (planet); three measures converge on dissolution → [#396–#397](docs/RESEARCH_LOG.md), book Ch. 6.
+- **The 22 paths & the rebaseable Tree of Life.** Golden-Dawn correspondences disassembled into an interactive, rebaseable tree (interinclusion / hitkalelut) → [arvore_rebaseada.html](viz/arvore_rebaseada.html).
+- **The 49×49×49 cube — refuted (twice).** No readable depth axis, no names down z or on the space diagonals; only 42 of 49 clean faces even exist → [#200 + #408](docs/RESEARCH_LOG.md), module [`src/a236_cube_49.py`](src/a236_cube_49.py).
+
+---
+
 ## ★ The name-system (latest phase) — what we found
 
 The most recent phase (modules `a71`–`a87`, full write-up in

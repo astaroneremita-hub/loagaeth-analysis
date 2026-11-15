@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A descida — a torre do Loagaeth</title>
+<style>
+  :root{--bg:#090c11;--panel:#141a22;--ink:#e6edf3;--mut:#8b97a7;--line:#242c38;
+    --fogo:#e0573b;--terra:#c9a24b;--ar:#5bb3e0;--agua:#3d6bd6}
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(circle at 50% 20%,#121a26,#070a0e);color:var(--ink);font:13px/1.5 system-ui,Segoe UI,Roboto,Arial;min-height:100vh}
+  .wrap{max-width:900px;margin:0 auto;padding:12px 16px 40px}
+  a.home{color:var(--ar);text-decoration:none;font-size:13px}
+  h1{font-size:19px;margin:4px 0 2px} .sub{color:var(--mut);font-size:12px;margin:0 0 6px}
+  .flex{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start}
+  canvas{cursor:pointer}
+  .panel{flex:1;min-width:210px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+  .panel h2{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);margin:0 0 6px}
+  .row{display:flex;justify-content:space-between;color:var(--mut);margin:2px 0} .row span{color:var(--ink)}
+  .legend{font-size:11px;color:var(--mut);margin-top:10px} .sw{display:inline-block;width:10px;height:10px;border-radius:2px;vertical-align:-1px;margin-right:3px}
+  button{background:#1b2634;border:1px solid #2c3a4e;color:var(--ink);border-radius:7px;padding:5px 12px;font-size:12px;cursor:pointer;margin-top:8px}
+</style>
+</head>
+<body><div class="wrap">
+<a class="home" href="index.html">← painel</a>
+<h1>A descida — a torre do Loagaeth</h1>
+<p class="sub">As 48 folhas empilhadas. Largura/brilho = densidade de nomes · cor = elemento dominante (do <b>corpo</b> ao <b>profundo</b>). A faixa vermelha é a costura 26-28 (onde a leitura vira diagonal).</p>
+<div class="flex">
+  <canvas id="cv" width="420" height="640"></canvas>
+  <div class="panel">
+    <h2 id="ptt">passe o mouse numa folha</h2>
+    <div id="det"></div>
+    <button id="play">▶ descer</button>
+    <div class="legend">
+      <span class="sw" style="background:var(--terra)"></span>Terra (corpo)
+      <span class="sw" style="background:var(--agua)"></span>Água (profundo)
+      <span class="sw" style="background:var(--ar)"></span>Ar
+      <span class="sw" style="background:var(--fogo)"></span>Fogo<br>
+      <span class="sw" style="background:#e0573b"></span>costura 26-28 (diagonal)
+    </div>
+  </div>
+</div>
+</div>
+<script>
+const EC={Fogo:"#e0573b",Terra:"#c9a24b",Ar:"#5bb3e0",Agua:"#3d6bd6","?":"#667"};
+fetch("pilha_data.json").then(r=>r.json()).then(D=>{
+  const cv=document.getElementById("cv"),ctx=cv.getContext("2d"),W=cv.width,H=cv.height;
+  const n=D.length, top=24, slabH=(H-top-20)/n, cx=W/2, dx=70, dy=slabH*0.55;
+  const maxOcc=Math.max(...D.map(d=>d.occ));
+  let hi=-1, mark=-1;
+  function mix(d){ // blend terra->agua pela posição + dominante
+    const base=EC[d.elem]||"#889"; return base;}
+  function draw(){ctx.clearRect(0,0,W,H);
+    for(let i=0;i<n;i++){const d=D[i],y=top+i*slabH;
+      const w=18+ (d.occ/maxOcc)*(dx-6);  // meia-largura pela densidade
+      const col=EC[d.elem]||"#889";
+      const seam=[26,27,28].includes(d.f);
+      // topo (losango isométrico)
+      ctx.beginPath();
+      ctx.moveTo(cx,y); ctx.lineTo(cx+w,y+dy); ctx.lineTo(cx,y+2*dy); ctx.lineTo(cx-w,y+dy); ctx.closePath();
+      ctx.fillStyle=col; ctx.globalAlpha=(mark<0||mark===i)?(0.35+0.6*d.occ/maxOcc):0.12; ctx.fill();
+      ctx.globalAlpha=1; ctx.strokeStyle=seam?"#e0573b":"#0a0e13"; ctx.lineWidth=seam?2:0.6; ctx.stroke();
+      if(i===hi){ctx.strokeStyle="#fff";ctx.lineWidth=1.5;ctx.stroke();}
+      // rótulo esparso
+      if(d.f%8===1||seam){ctx.fillStyle="#8b97a7";ctx.font="9px ui-monospace";ctx.textAlign="right";ctx.fillText("f"+d.f,cx-dx-6,y+dy+3);}
+    }
+    ctx.fillStyle="#8b97a7";ctx.font="10px system-ui";ctx.textAlign="center";
+    ctx.fillText("↑ semente",cx,14); ctx.fillText("profundo ↓",cx,H-6);
+  }
+  draw();
+  cv.onmousemove=e=>{const r=cv.getBoundingClientRect();const y=e.clientY-r.top;
+    const i=Math.floor((y-top)/slabH); if(i>=0&&i<n){hi=i;const d=D[i];
+      document.getElementById("ptt").textContent="folha "+d.f+(([26,27,28].includes(d.f))?" · costura (diagonal)":"");
+      document.getElementById("det").innerHTML=`<div class="row">nomes <span>${d.nomes} (${d.occ} occ)</span></div>
+        <div class="row">elemento <span style="color:${EC[d.elem]}">${d.elem}</span></div>
+        <div class="row">raiz dominante <span>${d.raiz}</span></div>
+        <div class="row">cobertura <span>${Math.round(d.cov*100)}%</span></div>`;draw();}};
+  let t=null;document.getElementById("play").onclick=function(){
+    if(t){clearInterval(t);t=null;mark=-1;draw();this.textContent="▶ descer";return;}
+    this.textContent="⏸";mark=0;const btn=this;
+    t=setInterval(()=>{mark++;if(mark>=n){clearInterval(t);t=null;mark=-1;btn.textContent="▶ descer";}
+      const d=D[Math.min(mark,n-1)];if(d){document.getElementById("ptt").textContent="descendo… folha "+d.f;
+        document.getElementById("det").innerHTML=`<div class="row">nomes <span>${d.nomes}</span></div><div class="row">elemento <span style="color:${EC[d.elem]}">${d.elem}</span></div><div class="row">raiz <span>${d.raiz}</span></div>`;}
+      draw();},180);};
+});
+</script>
+</body>
+</html>

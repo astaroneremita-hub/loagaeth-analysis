@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sub-ângulos no Loagaeth</title>
+<style>
+:root{--bg:#090c11;--panel:#141a22;--ink:#e6edf3;--mut:#8b97a7;--line:#242c38;--ac:#d6b96a;
+  --ar:#5bb3e0;--agua:#3d6bd6;--terra:#c9a24b;--fogo:#e0573b}
+@media(prefers-color-scheme:light){:root{--bg:#f7f6f1;--panel:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.5 system-ui,Segoe UI,Roboto,Arial}
+.wrap{max-width:1180px;margin:0 auto;padding:12px 16px 50px}
+a.home{color:var(--ar);text-decoration:none;font-size:13px}
+h1{font-size:20px;margin:4px 0 2px}.sub{color:var(--mut);font-size:12.5px;margin:0 0 10px}
+.subtabs{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 10px}
+.st{display:flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--line);border-radius:9px;cursor:pointer;font-size:13px;font-weight:600}
+.st .sw{width:12px;height:12px;border-radius:3px}
+.st.on{border-width:2px}
+.ctrls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 8px}
+select,button{background:#1b2634;border:1px solid #2c3a4e;color:var(--ink);border-radius:7px;padding:5px 10px;font-size:12px;cursor:pointer}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid var(--line);border-radius:20px;font-size:12px;cursor:pointer;user-select:none}
+.chip .sw{width:10px;height:10px;border-radius:50%}.chip.off{opacity:.35}
+.flex{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start}
+.left{flex:1 1 560px;min-width:320px}
+.panel{flex:1 1 300px;min-width:260px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+canvas{width:100%;height:auto;background:#05070a;border:1px solid var(--line);border-radius:8px;cursor:crosshair}
+.count{color:var(--mut);font-size:12px;margin:2px 0 6px}
+.panel h2{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);margin:0 0 6px}
+.tr{display:flex;justify-content:space-between;gap:8px;padding:3px 6px;border-radius:6px;cursor:pointer;border-left:3px solid transparent}
+.tr:hover{background:rgba(127,127,127,.12)}.tr.hl{background:rgba(214,185,106,.14)}
+.tr .nm{font:700 12px ui-monospace,monospace}.tr .kd{color:var(--mut);font-size:11px}
+.leg{font-size:11px;color:var(--mut);margin-top:8px}
+.note{color:var(--mut);font-size:12px;margin-top:12px;border-left:3px solid var(--line);padding-left:10px}
+</style>
+</head>
+<body><div class="wrap">
+<a class="home" href="index.html">← painel</a>
+<h1>Sub-ângulos no Loagaeth</h1>
+<p class="sub">Cada Torre tem 4 sub-ângulos (Ar · Água · Terra · Fogo). Escolha <b>um</b> sub-ângulo e veja todos os nomes dele, das 4 Torres <b>juntos</b>, traçados na grade. Cor = Torre de origem.</p>
+
+<div class="subtabs" id="subtabs"></div>
+<div class="ctrls">
+  <label>Folha <select id="side"></select></label>
+  <span id="chips"></span>
+  <label>só <select id="kind"><option value="">todos os tipos</option>
+    <option value="lesser angel">anjos menores</option>
+    <option value="kerub">querúbicos</option>
+    <option value="calvary">cruz do calvário</option></select></label>
+</div>
+<div class="count" id="count"></div>
+
+<div class="flex">
+  <div class="left"><canvas id="cv" width="735" height="735"></canvas></div>
+  <div class="panel">
+    <h2 id="ptt">Nomes do sub-ângulo</h2>
+    <div id="list"></div>
+    <div class="leg">O sub-ângulo é o "quarto" da Torre. Os nomes menores (servientes) saem das 4 linhas dele; os querúbicos da linha de cima; a cruz do calvário da coluna central. Rei/Senhores/Nomes-de-Deus vêm da cruz grande (sem sub-ângulo) — não entram aqui.</div>
+  </div>
+</div>
+<p class="note" id="foot"></p>
+</div>
+<script>
+const TC={ar:"#5bb3e0",agua:"#3d6bd6",terra:"#c9a24b",fogo:"#e0573b"};
+const TPT={ar:"Ar",agua:"Água",terra:"Terra",fogo:"Fogo"};
+const SUBS=["ar","agua","terra","fogo"];
+let D=null,curSub="ar",curSide=null,towerOn={ar:1,agua:1,terra:1,fogo:1},kindF="",hlName=null;
+
+fetch("subangle_traces.json").then(r=>r.json()).then(d=>{
+  D=d;
+  // subangle tabs
+  const st=document.getElementById("subtabs");
+  for(const s of SUBS){
+    const n=d.traces.filter(t=>t.sub===s).length;
+    const el=document.createElement("div");el.className="st"+(s===curSub?" on":"");el.dataset.s=s;
+    el.style.borderColor=TC[s];
+    el.innerHTML=`<span class="sw" style="background:${TC[s]}"></span>Sub-ângulo ${TPT[s]} <span style="color:var(--mut);font-weight:400">(${n})</span>`;
+    el.onclick=()=>{curSub=s;document.querySelectorAll(".st").forEach(e=>e.classList.toggle("on",e.dataset.s===s));
+      fillSides();draw();buildList();};
+    st.appendChild(el);
+  }
+  // tower chips
+  const cs=document.getElementById("chips");
+  for(const t of SUBS){
+    const el=document.createElement("span");el.className="chip";el.dataset.t=t;
+    el.innerHTML=`<span class="sw" style="background:${TC[t]}"></span>Torre ${TPT[t]}`;
+    el.onclick=()=>{towerOn[t]=!towerOn[t];el.classList.toggle("off",!towerOn[t]);fillSides();draw();buildList();};
+    cs.appendChild(el);
+  }
+  document.getElementById("kind").onchange=e=>{kindF=e.target.value;fillSides();draw();buildList();};
+  document.getElementById("side").onchange=e=>{curSide=e.target.value;draw();buildList();};
+  document.getElementById("foot").innerHTML=
+    `Nomes de 4 letras (servientes) aparecem por acaso em quase toda grade 49×49 — esta tela mostra ONDE cada nome do sub-ângulo cai, sem afirmar que foi posto ali de propósito. Veja o Painel de integridade pro teste vs acaso.`;
+  fillSides();draw();buildList();
+});
+
+function matchSub(t){return t.sub===curSub && towerOn[t.tower] && (!kindF || t.kind.startsWith(kindF));}
+function fillSides(){
+  const sides=[...new Set(D.traces.filter(matchSub).map(t=>t.side))].sort((a,b)=>parseInt(a)-parseInt(b)||a.localeCompare(b));
+  const sel=document.getElementById("side");sel.innerHTML="";
+  for(const s of sides){const o=document.createElement("option");o.value=s;
+    o.textContent="f"+s+" ("+D.traces.filter(t=>matchSub(t)&&t.side===s).length+")";sel.appendChild(o);}
+  if(!sides.includes(curSide))curSide=sides[0]||null;
+  if(curSide)sel.value=curSide;
+}
+function active(){return D.traces.filter(t=>matchSub(t)&&t.side===curSide);}
+function draw(){
+  const cv=document.getElementById("cv"),x=cv.getContext("2d"),N=49,W=cv.width,cell=W/N;
+  x.clearRect(0,0,W,W);
+  if(!curSide){document.getElementById("count").textContent="0 traços";return;}
+  const g=D.grids[curSide];
+  x.font=(cell*0.6).toFixed(1)+"px ui-monospace,monospace";x.textAlign="center";x.textBaseline="middle";
+  for(let r=0;r<N;r++)for(let c=0;c<N;c++){x.fillStyle=g[r][c]==="?"?"#20262e":"#333d4a";
+    x.fillText(g[r][c],c*cell+cell/2,r*cell+cell/2);}
+  for(const t of active()){
+    const hot=(t.name===hlName),col=TC[t.tower];
+    x.strokeStyle=col;x.lineWidth=hot?3.2:1.6;x.globalAlpha=hot?1:0.8;x.beginPath();
+    t.path.forEach((p,i)=>{const cx=p[1]*cell+cell/2,cy=p[0]*cell+cell/2;i?x.lineTo(cx,cy):x.moveTo(cx,cy);});
+    x.stroke();x.globalAlpha=1;x.fillStyle=col;
+    for(const p of t.path)x.fillText(g[p[0]][p[1]],p[1]*cell+cell/2,p[0]*cell+cell/2);
+    const s=t.path[0];x.beginPath();x.arc(s[1]*cell+cell/2,s[0]*cell+cell/2,hot?4:2.6,0,7);x.fill();
+  }
+  document.getElementById("count").textContent=active().length+" traços — sub-ângulo "+TPT[curSub]+", folha f"+curSide;
+}
+function buildList(){
+  document.getElementById("ptt").textContent="Sub-ângulo "+TPT[curSub]+" — folha f"+(curSide||"-");
+  const box=document.getElementById("list");box.innerHTML="";
+  const tr=active().slice().sort((a,b)=>b.name.length-a.name.length||a.name.localeCompare(b.name));
+  for(const t of tr){
+    const el=document.createElement("div");el.className="tr"+(t.name===hlName?" hl":"");
+    el.style.borderLeftColor=TC[t.tower];
+    el.innerHTML=`<span class="nm">${t.name}</span><span class="kd">${t.kind} · Torre ${TPT[t.tower]}</span>`;
+    el.onmouseenter=()=>{hlName=t.name;draw();};el.onmouseleave=()=>{hlName=null;draw();};
+    box.appendChild(el);
+  }
+  if(!tr.length)box.innerHTML='<span class="kd">nenhum traço aqui (ajuste folha/filtros)</span>';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Impressão digital de bigramas — Loagaeth</title>
+<style>
+  :root{--bg:#0b0e13;--panel:#141a22;--ink:#e6edf3;--mut:#8b97a7;--line:#242c38;
+    --fogo:#e0573b;--terra:#c9a24b;--ar:#5bb3e0;--agua:#3d6bd6}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,Segoe UI,Roboto,Arial;min-height:100vh}
+  .wrap{max-width:860px;margin:0 auto;padding:16px 18px 50px}
+  a.home{color:var(--ar);text-decoration:none;font-size:13px}
+  h1{font-size:20px;margin:4px 0 2px} .sub{color:var(--mut);font-size:12.5px;margin:0 0 12px}
+  .flex{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start}
+  canvas{background:#0e141b;border:1px solid var(--line);border-radius:8px}
+  .panel{flex:1;min-width:220px}
+  .tip{font-family:ui-monospace,monospace;font-size:13px;color:var(--ink);min-height:20px;margin:4px 0 8px}
+  .legend{font-size:12px;color:var(--mut);margin-top:8px}
+  .bar{height:12px;border-radius:6px;background:linear-gradient(90deg,#3d6bd6,#1b2431,#e8c35a,#e0573b);margin:4px 0}
+  h3{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);margin:14px 0 4px}
+  .pairs{font-family:ui-monospace,monospace;font-size:13px;line-height:1.7}
+  .pairs b{color:var(--terra)} .el{font-size:11px}
+  .sw{display:inline-block;width:9px;height:9px;border-radius:2px;vertical-align:-1px;margin-right:3px}
+</style>
+</head>
+<body><div class="wrap">
+<a class="home" href="index.html">← painel</a>
+<h1>Impressão digital de bigramas</h1>
+<p class="sub">Para cada par de letras, o quanto ele aparece <b>acima (quente) ou abaixo (frio)</b> do esperado se as letras fossem independentes. É a "textura" do Loag — e nela se veem os afixos dos nomes.</p>
+<div class="flex">
+  <canvas id="cv" width="470" height="470"></canvas>
+  <div class="panel">
+    <div class="tip" id="tip">passe o mouse na matriz</div>
+    <div class="legend"><span>frio = raro &nbsp; · &nbsp; quente = frequente (lift)</span><div class="bar"></div>
+      <span>linha = 1ª letra · coluna = 2ª letra · cor dos rótulos = elemento</span></div>
+    <h3>Pares mais fortes</h3>
+    <div class="pairs" id="tops"></div>
+    <h3>Letras mais comuns</h3>
+    <div class="pairs" id="freq"></div>
+    <div class="legend" style="margin-top:10px">
+      <span class="sw" style="background:var(--fogo)"></span>Fogo
+      <span class="sw" style="background:var(--terra)"></span>Terra
+      <span class="sw" style="background:var(--ar)"></span>Ar
+      <span class="sw" style="background:var(--agua)"></span>Água</span>
+  </div>
+</div>
+</div>
+<script>
+const EC={Fogo:"#e0573b",Terra:"#c9a24b",Ar:"#5bb3e0",Agua:"#3d6bd6","?":"#6b7686"};
+fetch("bigramas_data.json").then(r=>r.json()).then(D=>{
+  const A=D.alph,n=A.length,cv=document.getElementById("cv"),ctx=cv.getContext("2d");
+  const pad=22,cell=(cv.width-pad)/n;
+  function color(v){ // v=lift; 1=neutro
+    const t=Math.max(-1,Math.min(1,Math.log2(v||0.01)/3.5));
+    if(t<0){const u=1+t;return `rgb(${Math.round(61*u+10)},${Math.round(107*u+20)},${Math.round(214*u+20)})`;}
+    const u=t;return `rgb(${Math.round(232*u+20)},${Math.round(160*u+25)},${Math.round(60*u+25)})`;}
+  function draw(hi){ctx.clearRect(0,0,cv.width,cv.height);
+    for(let i=0;i<n;i++)for(let j=0;j<n;j++){ctx.fillStyle=color(D.lift[i][j]);
+      ctx.fillRect(pad+j*cell,pad+i*cell,cell-1,cell-1);
+      if(hi&&hi[0]===i&&hi[1]===j){ctx.strokeStyle="#fff";ctx.lineWidth=1.5;ctx.strokeRect(pad+j*cell,pad+i*cell,cell-1,cell-1);}}
+    ctx.font="9px ui-monospace,monospace";ctx.textAlign="center";ctx.textBaseline="middle";
+    for(let k=0;k<n;k++){ctx.fillStyle=EC[D.elem[A[k]]]||"#888";
+      ctx.fillText(A[k].toUpperCase(),pad+k*cell+cell/2,11);
+      ctx.fillText(A[k].toUpperCase(),10,pad+k*cell+cell/2);}}
+  draw();
+  cv.onmousemove=e=>{const r=cv.getBoundingClientRect();const j=Math.floor((e.clientX-r.left-pad)/cell),i=Math.floor((e.clientY-r.top-pad)/cell);
+    if(i>=0&&i<n&&j>=0&&j<n){document.getElementById("tip").textContent=`${A[i].toUpperCase()}→${A[j].toUpperCase()} = ${D.lift[i][j]}× o esperado`;draw([i,j]);}};
+  // tops
+  const flat=[];for(let i=0;i<n;i++)for(let j=0;j<n;j++)flat.push([D.lift[i][j],A[i],A[j]]);
+  flat.sort((a,b)=>b[0]-a[0]);
+  document.getElementById("tops").innerHTML=flat.slice(0,10).map(([v,a,b])=>`${a.toUpperCase()}${b.toUpperCase()} <b>${v}×</b>`).join(" &nbsp; ");
+  document.getElementById("freq").innerHTML=Object.entries(D.freq).sort((a,b)=>b[1]-a[1]).slice(0,8)
+    .map(([l,f])=>`<span style="color:${EC[D.elem[l]]}">${l.toUpperCase()}</span> ${f}%`).join(" &nbsp; ");
+});
+</script>
+</body>
+</html>

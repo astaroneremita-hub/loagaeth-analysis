@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Estrutura oculta — a física do campo Loagaeth</title>
+<style>
+:root{--bg:#090c11;--panel:#141a22;--ink:#e6edf3;--mut:#8b97a7;--line:#242c38;--ac:#d6b96a;
+  --hi:#49b67b;--lo:#e0573b;--mid:#5bb3e0}
+@media(prefers-color-scheme:light){:root{--bg:#f7f6f1;--panel:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.55 system-ui,Segoe UI,Roboto,Arial}
+.wrap{max-width:1000px;margin:0 auto;padding:12px 16px 50px}
+a.home{color:var(--mid);text-decoration:none;font-size:13px}
+h1{font-size:21px;margin:4px 0 2px}.sub{color:var(--mut);font-size:12.5px;margin:0 0 12px}
+.cards{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 16px}
+.card{flex:1 1 200px;background:var(--panel);border:1px solid var(--line);border-left-width:4px;border-left-color:var(--hi);border-radius:9px;padding:10px 12px}
+.card.lo{border-left-color:var(--lo)}
+.card .big{font:700 20px ui-monospace;margin:2px 0}
+.card .v{font-size:12px;color:var(--mut)}
+.card .z{font:700 12px ui-monospace;color:var(--ac)}
+h3{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--ac);margin:20px 0 6px;border-top:1px solid var(--line);padding-top:12px}
+.chart{position:relative}
+canvas{width:100%;height:auto;background:#05070a;border:1px solid var(--line);border-radius:8px}
+.leg{font-size:11px;color:var(--mut);margin:6px 0}
+.flex{display:flex;gap:16px;flex-wrap:wrap}
+.flex>div{flex:1 1 300px;min-width:260px}
+.note{color:var(--mut);font-size:12.5px;margin-top:14px;border-left:3px solid var(--line);padding-left:10px}
+.sw{display:inline-block;width:12px;height:3px;border-radius:2px;vertical-align:2px;margin-right:3px}
+</style>
+</head>
+<body><div class="wrap">
+<a class="home" href="index.html">← painel</a>
+<h1>Estrutura oculta — a física do campo</h1>
+<p class="sub">Medidas de sinal e criptanálise sobre as letras (não caça-nome). Revelam COMO o campo é construído. Tudo contra null que embaralha preservando a frequência das letras.</p>
+
+<div class="cards" id="cards"></div>
+
+<h3>Autocorrelação 1D — repetição a cada N letras</h3>
+<div class="leg">P(letra = letra N depois). Linha pontilhada = base (acaso pela frequência). Vale no lag 1 (horizontal não repete), picos em 49/98 (uma/duas linhas abaixo = coluna).</div>
+<canvas id="ac1" width="960" height="240"></canvas>
+
+<div class="flex">
+  <div>
+    <h3>Gabarito posicional — χ² por coluna</h3>
+    <div class="leg">quanto a coluna foge da distribuição global. Pico na coluna 0 (borda) = template.</div>
+    <canvas id="col" width="480" height="200"></canvas>
+  </div>
+  <div>
+    <h3>χ² por linha (pra comparar)</h3>
+    <div class="leg">linhas são quase planas — a estrutura é por COLUNA, não por linha.</div>
+    <canvas id="row" width="480" height="200"></canvas>
+  </div>
+</div>
+
+<h3>Autocorrelação 2D — a grade se repete em qual deslocamento?</h3>
+<div class="leg">P(célula = célula deslocada). Verde = acima do acaso (persiste), vermelho = abaixo (evita). Centro = origem.</div>
+<canvas id="ac2" width="360" height="360" style="width:360px;max-width:100%"></canvas>
+
+<p class="note" id="note"></p>
+</div>
+<script>
+fetch("structure.json").then(r=>r.json()).then(d=>{
+  const base=d.base;
+  // cards (z from a201)
+  const cards=[
+    {t:"Horizontal não repete",big:(d.ac2_grid[d.ac2_radius][d.ac2_radius+1]*100).toFixed(1)+"%",v:"vizinho ao lado igual (base "+(base*100).toFixed(1)+"%)",z:"z = −77",lo:1},
+    {t:"Coluna 0 = gabarito",big:"χ² "+d.col_chi[0].toFixed(0),v:"borda esquerda (null ~87)",z:"z = +173",lo:0},
+    {t:"Persiste vertical",big:(d.ac2_grid[d.ac2_radius+1][d.ac2_radius]*100).toFixed(1)+"%",v:"célula de baixo igual (base "+(base*100).toFixed(1)+"%)",z:"z = +6.6",lo:0},
+    {t:"Mesma célula, folha+1",big:(d.notable_lags["2401"]*100).toFixed(1)+"%",v:"template atravessa páginas (lag 2401)",z:"z = +11",lo:0},
+  ];
+  document.getElementById("cards").innerHTML=cards.map(c=>
+    `<div class="card ${c.lo?"lo":""}"><div class="v">${c.t}</div><div class="big">${c.big}</div><div class="v">${c.v}</div><div class="z">${c.z}</div></div>`).join("");
+
+  // AC1 curve
+  (function(){const cv=document.getElementById("ac1"),x=cv.getContext("2d"),W=cv.width,H=cv.height,pad=30;
+    const ys=d.ac_curve,xs=d.lags,mx=Math.max(...ys,base),mn=0;
+    const X=i=>pad+(W-2*pad)*(i/(xs.length-1)),Y=v=>H-pad-(H-2*pad)*((v-mn)/(mx-mn));
+    x.clearRect(0,0,W,H);
+    // base line
+    x.strokeStyle="#8b97a7";x.setLineDash([4,4]);x.beginPath();x.moveTo(pad,Y(base));x.lineTo(W-pad,Y(base));x.stroke();x.setLineDash([]);
+    x.fillStyle="#8b97a7";x.font="10px system-ui";x.fillText("base "+base.toFixed(3),W-pad-70,Y(base)-4);
+    // curve
+    x.strokeStyle="#5bb3e0";x.lineWidth=1.6;x.beginPath();ys.forEach((v,i)=>{i?x.lineTo(X(i),Y(v)):x.moveTo(X(i),Y(v));});x.stroke();
+    // mark lags 1,7,49,98
+    [[0,"1"],[6,"7"],[48,"49"],[97,"98"]].forEach(([i,lab])=>{if(i<xs.length){const col=ys[i]>base?"#49b67b":"#e0573b";
+      x.fillStyle=col;x.beginPath();x.arc(X(i),Y(ys[i]),3,0,7);x.fill();
+      x.fillStyle="#cdd6e0";x.font="10px ui-monospace";x.fillText("lag "+lab,X(i)-12,Y(ys[i])+(ys[i]>base?-8:16));}});
+    x.fillStyle="#8b97a7";x.font="10px system-ui";x.fillText("lag (letras)",W/2-20,H-6);
+  })();
+
+  function bars(id,arr,hiIdx){const cv=document.getElementById(id),x=cv.getContext("2d"),W=cv.width,H=cv.height,pad=22;
+    const mx=Math.max(...arr),n=arr.length,bw=(W-2*pad)/n;
+    x.clearRect(0,0,W,H);
+    arr.forEach((v,i)=>{const h=(H-2*pad)*(v/mx);x.fillStyle=(i===hiIdx)?"#d6b96a":"#3a4552";
+      x.fillRect(pad+i*bw,H-pad-h,bw-1,h);});
+    x.strokeStyle="#242c38";x.beginPath();x.moveTo(pad,H-pad);x.lineTo(W-pad,H-pad);x.stroke();
+    x.fillStyle="#8b97a7";x.font="10px system-ui";x.fillText("índice 0 → 48",W/2-28,H-6);
+    x.fillText("máx "+mx.toFixed(0),pad,14);
+  }
+  bars("col",d.col_chi,0);
+  bars("row",d.row_chi,d.row_chi.indexOf(Math.max(...d.row_chi)));
+
+  // 2D heatmap
+  (function(){const cv=document.getElementById("ac2"),x=cv.getContext("2d"),R=d.ac2_radius,n=2*R+1,cell=cv.width/n;
+    const g=d.ac2_grid,vals=g.flat(),base=d.base;
+    x.clearRect(0,0,cv.width,cv.height);
+    for(let i=0;i<n;i++)for(let j=0;j<n;j++){const v=g[i][j],dev=(v-base)/base;
+      let col;if(i===R&&j===R)col="#1b2634";
+      else if(dev>0)col=`rgba(73,182,123,${Math.min(1,Math.abs(dev)*4)})`;
+      else col=`rgba(224,87,59,${Math.min(1,Math.abs(dev)*4)})`;
+      x.fillStyle=col;x.fillRect(j*cell+1,i*cell+1,cell-2,cell-2);
+      x.fillStyle="#cdd6e0";x.font="9px ui-monospace";x.textAlign="center";
+      x.fillText((v*100).toFixed(1),j*cell+cell/2,i*cell+cell/2+3);}
+    x.fillStyle="#8b97a7";x.font="10px system-ui";x.textAlign="left";
+    x.fillText("→ coluna (dc)",cv.width-82,cv.height-4);x.save();x.translate(10,cv.height-80);x.rotate(-Math.PI/2);x.fillText("↓ linha (dr)",0,0);x.restore();
+  })();
+
+  document.getElementById("note").innerHTML=
+    `Leitura: o campo é <b>anti-estruturado na horizontal</b> (letra quase nunca repete lado a lado — varia ao máximo ao longo da linha) e <b>estruturado na vertical/colunar</b> (persiste descendo a coluna e na mesma célula da folha seguinte), com a <b>coluna 0 como gabarito</b> de borda. Linhas são planas, colunas têm forma. É assinatura de <b>construção com lógica colunar/template</b>, não de ruído — e dá a direção de leitura (varia na linha, ancora na coluna).`;
+});
+</script>
+</body>
+</html>

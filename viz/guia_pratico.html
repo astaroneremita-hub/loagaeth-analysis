@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Guia prático do Loagaeth — pronúncia e função</title>
+<style>
+:root{--bg:#0a0c11;--panel:#151a22;--ink:#e9edf3;--mut:#8b97a7;--line:#242c38;--ac:#d6b96a;
+  --Ar:#5bb3e0;--Agua:#3d6bd6;--Fogo:#e0573b;--Terra:#c9a24b}
+@media(prefers-color-scheme:light){:root{--bg:#f7f6f1;--panel:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.6 system-ui,Segoe UI,Roboto,Arial}
+.wrap{max-width:900px;margin:0 auto;padding:14px 18px 60px}
+a.home{color:var(--Ar);text-decoration:none;font-size:13px}
+h1{font-size:23px;margin:6px 0 2px}.sub{color:var(--mut);font-size:13px;margin:0 0 14px}
+h2{font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:var(--ac);margin:24px 0 10px;border-top:1px solid var(--line);padding-top:14px}
+.lett{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+.lt{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:8px 10px;display:flex;align-items:baseline;gap:8px}
+.lt .L{font:700 20px ui-monospace,monospace;color:var(--ac);min-width:20px}
+.lt .nm{font:700 12px ui-monospace,monospace}.lt .s{font-size:11.5px;color:var(--mut)}
+.rule{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--ac);border-radius:8px;padding:8px 12px;margin:4px 0;font-size:13px}
+.rule b{color:var(--ac)}
+.reg{display:flex;gap:12px;background:var(--panel);border:1px solid var(--line);border-left-width:5px;border-radius:10px;padding:12px 14px;margin:8px 0;flex-wrap:wrap}
+.reg .hd{flex:1 1 160px}.reg .nm{font:700 16px system-ui}.reg .f{font-size:12px;color:var(--mut)}
+.reg .el{font:700 13px ui-monospace;padding:2px 9px;border-radius:12px;align-self:flex-start}
+.reg .dom{flex:1 1 240px}.reg .dom .d{font-weight:600}.reg .dom .x{font-size:12.5px;color:var(--mut)}
+.arc{display:flex;height:26px;border-radius:7px;overflow:hidden;margin:8px 0;border:1px solid var(--line)}
+.arc div{display:flex;align-items:center;justify-content:center;font:700 10px ui-monospace;color:#07090c}
+.note{color:var(--mut);font-size:12.5px;margin-top:16px;border-left:3px solid var(--line);padding-left:10px}
+</style>
+</head>
+<body><div class="wrap">
+<a class="home" href="index.html">← painel</a>
+<h1>Guia prático do Loagaeth</h1>
+<p class="sub">Como pronunciar, e o que cada parte do livro faz pelos elementos. Destilado do estudo (eixo-som #386-394 + mapa do livro #341/#360/#382). O sentido está selado; isto é a <b>operação</b>.</p>
+
+<h2>Como pronunciar</h2>
+<div class="rule" id="r1"></div>
+<div class="rule" id="r2"></div>
+<div class="rule" id="r3"></div>
+<div class="rule" id="r4"></div>
+<div style="height:8px"></div>
+<div class="lett" id="letters"></div>
+
+<h2>O que cada parte faz — o arco pelos elementos</h2>
+<div class="arc" id="arc"></div>
+<div id="regions"></div>
+
+<p class="note" id="note"></p>
+</div>
+<script>
+const EC={Ar:"#5bb3e0",Agua:"#3d6bd6",Fogo:"#e0573b",Terra:"#c9a24b"};
+fetch("pronuncia.json").then(r=>r.json()).then(d=>{
+  const R=d.chant_rules;
+  document.getElementById("r1").innerHTML=`<b>Tom:</b> entoe sobre a vogal <b>A</b> — é o tom sustentado (73% das vogais do livro).`;
+  document.getElementById("r2").innerHTML=`<b>Acento:</b> tônica na <b>penúltima</b> sílaba (regra latina).`;
+  document.getElementById("r3").innerHTML=`<b>Final:</b> cada palavra fecha em <b>vogal</b> (segure a nota) ou <b>H</b> (solte o sopro) — nunca batida seca.`;
+  document.getElementById("r4").innerHTML=`<b>Vibração:</b> para evocar, soletre pelos nomes das letras — ex. <b>NOCHA = Drux · Med · Veh · Na · Un</b>.`;
+
+  document.getElementById("letters").innerHTML=d.letters.map(l=>
+    `<div class="lt"><span class="L">${l.letra}</span><div><div class="nm">${l.nome_dee}</div><div class="s">${l.som}</div></div></div>`).join("");
+
+  // arc bar
+  const arc=d.arc, N=arc.length;
+  document.getElementById("arc").innerHTML=arc.map((e,i)=>
+    `<div style="flex:1;background:${EC[e]||'#556'}" title="folha ${i+1}: ${e}">${i%6===0?('f'+(i+1)):''}</div>`).join("");
+
+  document.getElementById("regions").innerHTML=d.regions.map(rg=>
+    `<div class="reg" style="border-left-color:${EC[rg.elemento]}">
+      <div class="hd"><div class="nm">${rg.regiao}</div><div class="f">folhas ${rg.folhas}</div>
+        <div class="el" style="background:${EC[rg.elemento]}">${rg.elemento}</div></div>
+      <div class="dom"><div class="d">${rg.dominio}</div><div class="x">${rg.faz}</div>
+        <div class="x" style="margin-top:4px;font-style:italic">${rg.desc}</div></div>
+    </div>`).join("");
+
+  document.getElementById("note").innerHTML=
+    `O arco: o livro é <b>Terra</b> (matéria, corpo, manifestação) da abertura à descida, e vira <b>Água</b> (emoção, dissolução) só no profundo (41-48). Terra→Água = manifestação→dissolução (o <i>solve</i>). `+
+    `Dualidade: o CORPO dos nomes é consoante-Terra (N,D,C,S), mas a VOZ é a vogal A-Ar — o livro se manifesta em terra e se dissolve em água, falado no ar. `+
+    `Honesto: isto diz como entoar e o tom operativo de cada região; não decifra sentido (selado).`;
+});
+</script>
+</body>
+</html>

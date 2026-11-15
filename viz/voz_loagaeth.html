@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A Voz do Loagaeth — guia de entoação</title>
+<style>
+:root{--bg:#0a0c11;--panel:#151a22;--ink:#e9edf3;--mut:#8b97a7;--line:#242c38;--ac:#d6b96a;--a:#e0573b;--v:#5bb3e0}
+@media(prefers-color-scheme:light){:root{--bg:#f7f6f1;--panel:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8}}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 50% 0%,#141a26,#080a0e);color:var(--ink);font:14px/1.6 system-ui,Segoe UI,Roboto,Arial;min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding:14px 18px 60px}
+a.home{color:var(--v);text-decoration:none;font-size:13px}
+h1{font-size:24px;margin:6px 0 2px}.sub{color:var(--mut);font-size:13px;margin:0 0 16px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+.card .k{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--mut)}
+.card .big{font:700 26px ui-monospace,monospace;color:var(--ac);margin:4px 0}
+.card .d{font-size:12.5px;color:var(--mut)}
+h2{font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:var(--ac);margin:24px 0 8px;border-top:1px solid var(--line);padding-top:14px}
+.bar{display:flex;align-items:flex-end;gap:6px;height:90px}
+.bar .b{flex:1;background:var(--v);border-radius:3px 3px 0 0;position:relative;text-align:center}
+.bar .b.a{background:var(--a)}
+.bar .b span{position:absolute;bottom:-18px;left:0;right:0;font:700 12px ui-monospace;color:var(--ink)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+.chip{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:3px 10px;font:700 13px ui-monospace,monospace}
+.chip .c{color:var(--mut);font-weight:400;font-size:11px}
+.recite{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:8px}
+.rz{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;text-align:center}
+.syl{font:700 20px ui-monospace,monospace;letter-spacing:1px}
+.syl .st{color:var(--ac);text-decoration:underline;text-underline-offset:4px}
+.syl .fin{color:var(--a)}
+.rz .m{font-size:11px;color:var(--mut);margin-top:3px}
+.note{color:var(--mut);font-size:12.5px;margin-top:18px;border-left:3px solid var(--line);padding-left:10px}
+.leg{font-size:11.5px;color:var(--mut);margin:8px 0}
+.sw{display:inline-block;width:10px;height:10px;border-radius:2px;vertical-align:-1px;margin-right:3px}
+</style>
+</head>
+<body><div class="wrap">
+<a class="home" href="index.html">← painel</a>
+<h1>A Voz do Loagaeth</h1>
+<p class="sub">Guia de entoação, destilado de 5 achados medidos (#386–#392). O sentido está selado; a <b>voz</b> é real. O livro é, por medida, um idioma de canto.</p>
+
+<div class="cards" id="rules"></div>
+
+<h2>O tom: a língua é entoada sobre A</h2>
+<div class="leg">frequência das vogais nos nomes — <span class="sw" style="background:var(--a)"></span>A, a vogal-tom &nbsp;<span class="sw" style="background:var(--v)"></span>as demais</div>
+<div class="bar" id="vowbar"></div>
+<div style="height:24px"></div>
+
+<h2>A melodia vocálica (poucas, fixas)</h2>
+<div class="chips" id="melo"></div>
+
+<h2>As consoantes — a articulação que distingue os nomes</h2>
+<div class="chips" id="cons"></div>
+
+<h2>Como recitar — exemplos silabados</h2>
+<div class="leg"><span class="syl" style="font-size:13px"><span class="st">sublinhado</span></span> = sílaba tônica (penúltima) · <span class="syl" style="font-size:13px"><span class="fin">vermelho</span></span> = vogal final sustentada (segure a nota)</div>
+<div class="recite" id="recite"></div>
+
+<p class="note" id="note"></p>
+</div>
+<script>
+fetch("voice.json").then(r=>r.json()).then(d=>{
+  const R=d.rules;
+  document.getElementById("rules").innerHTML=
+    `<div class="card"><div class="k">Tom</div><div class="big">${R.tone_vowel}</div><div class="d">entoe sobre a vogal A — o tom sustentado (73% das vogais)</div></div>`+
+    `<div class="card"><div class="k">Acento</div><div class="big">◞◟</div><div class="d">tônica na PENÚLTIMA sílaba (regra latina)</div></div>`+
+    `<div class="card"><div class="k">Final</div><div class="big">…a~</div><div class="d">termina em vogal aberta — segure a nota (sílaba aberta)</div></div>`+
+    `<div class="card"><div class="k">Encadeamento</div><div class="big">∿</div><div class="d">nomes vizinhos assonam — deixe as vogais fluírem entre eles</div></div>`;
+
+  // vowel bar
+  const vmax=Math.max(...d.vowels.map(x=>x[1]));
+  document.getElementById("vowbar").innerHTML=d.vowels.map(([v,c])=>
+    `<div class="b ${v==='A'?'a':''}" style="height:${Math.round(100*c/vmax)}%"><span>${v}</span></div>`).join("");
+
+  document.getElementById("melo").innerHTML=d.vowel_melodies.map(([m,c])=>
+    `<span class="chip">${m} <span class="c">${c}×</span></span>`).join("");
+  document.getElementById("cons").innerHTML=d.consonants.map(([c,n])=>
+    `<span class="chip">${c} <span class="c">${n}×</span></span>`).join("");
+
+  document.getElementById("recite").innerHTML=d.recite.map(r=>{
+    const syl=r.syllables.map((s,i)=>{
+      let cls=(i===r.stress_index)?"st":"";
+      // mark final vowel of the last syllable
+      return `<span class="${cls}">${s}</span>`;
+    }).join("·");
+    return `<div class="rz"><div class="syl">${syl}</div><div class="m">melodia ${r.melody}${r.open_ending?" · final aberto":""}</div></div>`;
+  }).join("");
+
+  document.getElementById("note").innerHTML=
+    `Base medida: pronunciável (#386, z=+6.9), vizinhos assonam (#387, z=+5.1), acento penúltimo latino (#388), termina em vogal (#391, z=+3.2), melodia centrada em A (#392, z=+5.2). `+
+    `Modelo: canto de mantra — vogal-tom fixa (A), consoante variável como articulação. Honesto: isto diz COMO entoar, não o que significa (o sentido está selado, provado por dentro e por fonte).`;
+});
+</script>
+</body>
+</html>

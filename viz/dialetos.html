@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dialetos — textura por folha no Loagaeth</title>
+<style>
+:root{--bg:#090c11;--panel:#141a22;--ink:#e6edf3;--mut:#8b97a7;--line:#242c38;--ac:#d6b96a;--seam:#e0573b;--bar:#5bb3e0}
+@media(prefers-color-scheme:light){:root{--bg:#f7f6f1;--panel:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.55 system-ui,Segoe UI,Roboto,Arial}
+.wrap{max-width:1000px;margin:0 auto;padding:12px 16px 50px}
+a.home{color:var(--bar);text-decoration:none;font-size:13px}
+h1{font-size:21px;margin:4px 0 2px}.sub{color:var(--mut);font-size:12.5px;margin:0 0 12px}
+canvas{width:100%;height:auto;background:#05070a;border:1px solid var(--line);border-radius:8px}
+.leg{font-size:11.5px;color:var(--mut);margin:8px 0}
+.sw{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-1px;margin-right:4px}
+.note{color:var(--mut);font-size:12.5px;margin-top:14px;border-left:3px solid var(--line);padding-left:10px}
+#tip{position:fixed;background:#000;color:#fff;font-size:11px;padding:3px 7px;border-radius:5px;pointer-events:none;opacity:0}
+</style>
+</head>
+<body><div class="wrap">
+<a class="home" href="index.html">← painel</a>
+<h1>Dialetos — textura por folha</h1>
+<p class="sub">Cada folha tem um "sotaque" (perfil de pares de letras). A barra mede o quanto a folha foge da textura média do livro. Quanto mais alta, mais anômala. Vermelho = costura 26-28.</p>
+<canvas id="cv" width="960" height="320"></canvas>
+<div class="leg"><span class="sw" style="background:var(--bar)"></span>folha comum &nbsp; <span class="sw" style="background:var(--seam)"></span>costura 26-28 (a mais distinta)</div>
+<p class="note" id="note"></p>
+</div>
+<div id="tip"></div>
+<script>
+fetch("dialects.json").then(r=>r.json()).then(d=>{
+  const cv=document.getElementById("cv"),x=cv.getContext("2d"),W=cv.width,H=cv.height,pad=34;
+  const n=d.folhas.length,vals=d.distance,mx=Math.max(...vals),bw=(W-2*pad)/n;
+  const seam=f=>{const num=parseInt(f);return num>=26&&num<=28;};
+  const tip=document.getElementById("tip");
+  const bars=[];
+  for(let i=0;i<n;i++){const h=(H-2*pad)*(vals[i]/mx);const bx=pad+i*bw,by=H-pad-h;
+    x.fillStyle=seam(d.folhas[i])?"#e0573b":"#5bb3e0";x.fillRect(bx,by,bw-1.5,h);
+    bars.push({bx,by,bw:bw-1.5,h,f:d.folhas[i],v:vals[i]});}
+  x.strokeStyle="#242c38";x.beginPath();x.moveTo(pad,H-pad);x.lineTo(W-pad,H-pad);x.stroke();
+  x.fillStyle="#8b97a7";x.font="10px system-ui";
+  for(let i=0;i<n;i+=4)x.fillText("f"+d.folhas[i],pad+i*bw-2,H-pad+12);
+  x.fillText("distância da textura média →",pad,16);
+  cv.onmousemove=e=>{const r=cv.getBoundingClientRect(),mxr=(e.clientX-r.left)*(W/r.width),myr=(e.clientY-r.top)*(H/r.height);
+    const b=bars.find(b=>mxr>=b.bx&&mxr<=b.bx+b.bw&&myr>=b.by);
+    if(b){tip.style.opacity=1;tip.style.left=(e.clientX+10)+"px";tip.style.top=(e.clientY-10)+"px";tip.textContent="folha "+b.f+" · "+b.v.toFixed(3);}
+    else tip.style.opacity=0;};
+  cv.onmouseleave=()=>tip.style.opacity=0;
+  // top 6
+  const idx=vals.map((v,i)=>[v,d.folhas[i]]).sort((a,b)=>b[0]-a[0]).slice(0,6).map(x=>x[1]);
+  document.getElementById("note").innerHTML=
+    `As folhas mais distintas são <b>${idx.join(", ")}</b> — a zona <b>26-28</b>, a costura onde a leitura vira diagonal (#343/#356). Dois métodos independentes (geometria e textura de bigrama) apontam o mesmo ponto: a costura é uma fronteira real de dialeto, a textura mais anômala do livro. As demais folhas variam suave — um gradiente, não blocos.`;
+});
+</script>
+</body>
+</html>

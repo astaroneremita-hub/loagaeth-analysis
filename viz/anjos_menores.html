@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Anjos menores no Loagaeth</title>
+<style>
+:root{--bg:#090c11;--panel:#141a22;--ink:#e6edf3;--mut:#8b97a7;--line:#242c38;--ac:#d6b96a;
+  --ar:#5bb3e0;--agua:#3d6bd6;--terra:#c9a24b;--fogo:#e0573b}
+@media(prefers-color-scheme:light){:root{--bg:#f7f6f1;--panel:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.5 system-ui,Segoe UI,Roboto,Arial}
+.wrap{max-width:1180px;margin:0 auto;padding:12px 16px 50px}
+a.home{color:var(--ar);text-decoration:none;font-size:13px}
+h1{font-size:20px;margin:4px 0 2px}.sub{color:var(--mut);font-size:12.5px;margin:0 0 10px}
+.banner{border:1px solid var(--line);border-left-width:4px;border-left-color:var(--fogo);border-radius:9px;padding:8px 12px;margin:8px 0 14px;font-size:12.5px}
+.banner b{color:var(--ac)}
+.flex{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start}
+.left{flex:1 1 420px;min-width:300px}
+.right{flex:1 1 420px;min-width:300px;position:sticky;top:10px}
+.ctrls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 8px}
+input,select{background:#1b2634;border:1px solid #2c3a4e;color:var(--ink);border-radius:7px;padding:6px 10px;font-size:12px}
+input{width:150px}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid var(--line);border-radius:20px;font-size:12px;cursor:pointer;user-select:none}
+.chip .sw{width:10px;height:10px;border-radius:50%}.chip.off{opacity:.35}
+.count{color:var(--mut);font-size:12px;margin:2px 0 6px}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:left;color:var(--mut);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid var(--line);padding:5px 6px;position:sticky;top:0;background:var(--bg)}
+td{padding:4px 6px;border-bottom:1px solid var(--line)}
+tr.row{cursor:pointer}tr.row:hover{background:rgba(127,127,127,.1)}tr.row.sel{background:rgba(214,185,106,.14)}
+.nm{font:700 12.5px ui-monospace,monospace}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;vertical-align:-1px;margin-right:5px}
+canvas{width:100%;height:auto;background:#05070a;border:1px solid var(--line);border-radius:8px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:10px}
+.panel h2{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);margin:0 0 6px}
+.kv{display:flex;justify-content:space-between;color:var(--mut)}.kv b{color:var(--ink)}
+.note{color:var(--mut);font-size:12px;margin-top:10px;border-left:3px solid var(--line);padding-left:10px}
+.tabs{display:flex;gap:6px;margin:0 0 8px}
+.tab{padding:4px 10px;border:1px solid var(--line);border-radius:7px;cursor:pointer;font-size:12px}
+.tab.on{border-color:var(--ac);color:var(--ac)}
+</style>
+</head>
+<body><div class="wrap">
+<a class="home" href="index.html">← painel</a>
+<h1>Anjos menores no Loagaeth</h1>
+<p class="sub">Os 256 anjos menores (servientes) das 4 Torres, procurados como <b>traço reto</b> nas grades 49×49. Lista todos os que aparecem, com folha e posição. Clique pra ver o traço.</p>
+<div id="banner" class="banner">carregando…</div>
+
+<div class="ctrls">
+  <input id="q" placeholder="buscar nome (ex: AMOX)">
+  <span id="chips"></span>
+  <label>ordenar <select id="sort">
+    <option value="name">nome</option><option value="side">folha</option><option value="tower">torre</option>
+  </select></label>
+</div>
+<div class="count" id="count"></div>
+
+<div class="flex">
+  <div class="left">
+    <table><thead><tr><th>nome</th><th>torre</th><th>sub</th><th>folha</th><th>pos</th></tr></thead>
+    <tbody id="rows"></tbody></table>
+  </div>
+  <div class="right">
+    <div class="panel"><h2 id="dt">selecione um anjo</h2><div id="det"></div></div>
+    <canvas id="cv" width="588" height="588"></canvas>
+  </div>
+</div>
+<p class="note" id="foot"></p>
+</div>
+<script>
+const TC={ar:"#5bb3e0",agua:"#3d6bd6",terra:"#c9a24b",fogo:"#e0573b"};
+const TPT={ar:"Ar",agua:"Água",terra:"Terra",fogo:"Fogo"};
+let D=null, L=[], towerOn={ar:1,agua:1,terra:1,fogo:1}, sel=null;
+
+fetch("tower_traces.json").then(r=>r.json()).then(d=>{
+  D=d;
+  // only lesser angels that were found as a trace
+  L=d.traces.filter(t=>/lesser|menor/i.test(t.kind)||t.kind==="lesser angel");
+  // enrich: subangle label if present in kind metadata is absent; derive from nothing -> show "-"
+  const nTot=256; // total lesser angels in the 4 towers
+  const found=new Set(L.map(t=>t.name)).size;
+  const tn=(d.tier_null&&d.tier_null["4"])||null;
+  const b=document.getElementById("banner");
+  b.innerHTML=`<b>${found}</b> anjos menores distintos aparecem como traço reto no livro. `+
+    (tn?`Mas são nomes de <b>4 letras</b>: o acaso (grade embaralhada) já produz ${tn.null_mean}±${tn.null_sd} deles — achamos ${tn.found} (z=${tn.z}). `+
+        (Math.abs(tn.z)<3?`Ou seja: <b>aparecem por acaso</b>, não por estarem escritos de propósito. Exemplos como AMOX são caça-palavras, não assinatura.`:`Acima do acaso — vale olhar.`)
+      :`Nomes de 4 letras aparecem por acaso em quase toda grade — trate como caça-palavras.`);
+  document.getElementById("foot").innerHTML=
+    `Total de anjos menores nas Torres: ${nTot}. Achados como traço reto: ${found} distintos (${L.length} ocorrências listadas, 1ª por nome). Lista honesta: mostra onde cai cada um, sem afirmar que foi posto ali de propósito.`;
+
+  const cs=document.getElementById("chips");
+  for(const t of ["ar","agua","terra","fogo"]){
+    const el=document.createElement("span");el.className="chip";
+    el.innerHTML=`<span class="sw" style="background:${TC[t]}"></span>${TPT[t]}`;
+    el.onclick=()=>{towerOn[t]=!towerOn[t];el.classList.toggle("off",!towerOn[t]);render();};
+    cs.appendChild(el);
+  }
+  document.getElementById("q").oninput=render;
+  document.getElementById("sort").onchange=render;
+  render();
+});
+
+function view(){
+  const q=document.getElementById("q").value.trim().toUpperCase();
+  let v=L.filter(t=>towerOn[t.tower]&&(!q||t.name.includes(q)));
+  const s=document.getElementById("sort").value;
+  v.sort((a,b)=> s==="name"?a.name.localeCompare(b.name)
+    : s==="side"?(parseInt(a.side)-parseInt(b.side)||a.side.localeCompare(b.side))
+    : a.tower.localeCompare(b.tower)||a.name.localeCompare(b.name));
+  return v;
+}
+function render(){
+  const v=view(),tb=document.getElementById("rows");tb.innerHTML="";
+  for(const t of v){
+    const tr=document.createElement("tr");tr.className="row"+(sel===t?" sel":"");
+    const p=t.path[0];
+    tr.innerHTML=`<td><span class="dot" style="background:${TC[t.tower]}"></span><span class="nm">${t.name}</span></td>`+
+      `<td>${TPT[t.tower]}</td><td>${t.sub||"-"}</td><td>f${t.side}</td><td>${p[0]+1},${p[1]+1}</td>`;
+    tr.onclick=()=>{sel=t;render();drawSel();};
+    tb.appendChild(tr);
+  }
+  document.getElementById("count").textContent=v.length+" ocorrências";
+}
+function drawSel(){
+  if(!sel)return;
+  document.getElementById("dt").textContent=sel.name;
+  document.getElementById("det").innerHTML=
+    `<div class="kv">torre <b style="color:${TC[sel.tower]}">${TPT[sel.tower]}</b></div>`+
+    `<div class="kv">tipo <b>${sel.kind}</b></div>`+
+    `<div class="kv">folha <b>f${sel.side}</b></div>`+
+    `<div class="kv">início <b>linha ${sel.path[0][0]+1}, col ${sel.path[0][1]+1}</b></div>`;
+  const cv=document.getElementById("cv"),x=cv.getContext("2d"),N=49,W=cv.width,cell=W/N;
+  x.clearRect(0,0,W,W);const g=D.grids[sel.side];
+  x.font=(cell*0.6).toFixed(1)+"px ui-monospace,monospace";x.textAlign="center";x.textBaseline="middle";
+  for(let r=0;r<N;r++)for(let c=0;c<N;c++){x.fillStyle=g[r][c]==="?"?"#20262e":"#333d4a";
+    x.fillText(g[r][c],c*cell+cell/2,r*cell+cell/2);}
+  const col=TC[sel.tower];x.strokeStyle=col;x.lineWidth=2.6;x.beginPath();
+  sel.path.forEach((p,i)=>{const cx=p[1]*cell+cell/2,cy=p[0]*cell+cell/2;i?x.lineTo(cx,cy):x.moveTo(cx,cy);});
+  x.stroke();x.fillStyle=col;
+  for(const p of sel.path)x.fillText(g[p[0]][p[1]],p[1]*cell+cell/2,p[0]*cell+cell/2);
+  const s=sel.path[0];x.beginPath();x.arc(s[1]*cell+cell/2,s[0]*cell+cell/2,4,0,7);x.fill();
+}
+</script>
+</body>
+</html>

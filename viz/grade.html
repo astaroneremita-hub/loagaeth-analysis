@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Raio-X da folha — Loagaeth</title>
+<style>
+  :root{--bg:#0b0e13;--panel:#141a22;--ink:#e6edf3;--mut:#8b97a7;--line:#242c38;--gold:#e8c35a;
+    --fogo:#e0573b;--terra:#c9a24b;--ar:#5bb3e0;--agua:#3d6bd6}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.45 system-ui,Segoe UI,Roboto,Arial;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+  header{padding:8px 14px 4px} h1{font-size:17px;margin:0} .sub{color:var(--mut);font-size:11px;margin:1px 0 0} a.home{color:var(--ar);text-decoration:none}
+  .bar{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;padding:7px 14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel)}
+  label{font-size:12px;color:var(--mut);display:flex;gap:5px;align-items:center}
+  button{background:#1b2634;border:1px solid #2c3a4e;color:var(--ink);border-radius:6px;padding:4px 9px;font-size:12px;cursor:pointer}
+  button.on{background:#2e4668;border-color:#4a6aa0}
+  input[type=range]{width:160px}
+  .main{flex:1;display:flex;min-height:0}
+  .cv{flex:1;overflow:auto;display:flex;align-items:flex-start;justify-content:center;padding:10px}
+  canvas{background:#0e141b;border:1px solid var(--line);border-radius:6px}
+  .side{width:240px;border-left:1px solid var(--line);background:var(--panel);display:flex;flex-direction:column}
+  .side h2{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);margin:0;padding:9px 12px 4px}
+  .stat{padding:0 12px 7px;font-size:12px;color:var(--mut)} .stat b{color:var(--ink)}
+  #names{flex:1;overflow:auto;padding:0 8px 10px;font-family:ui-monospace,monospace;font-size:12.5px}
+  #names div{padding:2px 5px;border-radius:5px;cursor:pointer} #names div:hover,#names div.sel{background:#22304a}
+  .legend{display:flex;gap:10px;font-size:11px;color:var(--mut);padding:5px 14px;background:var(--panel);border-top:1px solid var(--line)}
+  .sw{display:inline-block;width:9px;height:9px;border-radius:2px;vertical-align:-1px;margin-right:3px}
+</style>
+</head>
+<body>
+<header><a class="home" href="index.html">← painel</a>
+  <h1>Raio-X da folha</h1>
+  <p class="sub">A grade real 49×49, letras coloridas por elemento. Os nomes acesos (linha; diagonal nas 26-28). Clica um nome pra achá-lo na grade.</p>
+</header>
+<div class="bar">
+  <label>folha <input type="range" id="folha" min="1" max="48" value="8"> <b id="fnum" style="color:var(--ink)">8</b></label>
+  <label>lado <button id="la" class="on">a</button><button id="lb">b</button></label>
+  <label><input type="checkbox" id="elem" checked> cor por elemento</label>
+  <label><input type="checkbox" id="acc" checked> acender nomes</label>
+  <span class="stat" id="hdr" style="margin-left:auto"></span>
+</div>
+<div class="main">
+  <div class="cv"><canvas id="cv"></canvas></div>
+  <div class="side">
+    <h2>Nomes nesta face</h2>
+    <div class="stat" id="stat"></div>
+    <div id="names"></div>
+  </div>
+</div>
+<div class="legend">
+  <span><span class="sw" style="background:var(--fogo)"></span>Fogo</span>
+  <span><span class="sw" style="background:var(--terra)"></span>Terra</span>
+  <span><span class="sw" style="background:var(--ar)"></span>Ar</span>
+  <span><span class="sw" style="background:var(--agua)"></span>Água</span>
+  <span>caixa dourada = nome</span>
+</div>
+<script>
+const EC={Fogo:"#e0573b",Terra:"#c9a24b",Ar:"#5bb3e0",Agua:"#3d6bd6","?":"#48515f"};
+let DATA=null,FACE=null,KEY="8a",CELL=15,SEL=null,HL=[];
+const cv=document.getElementById("cv"),ctx=cv.getContext("2d");
+fetch("grades_data.json").then(r=>r.json()).then(d=>{DATA=d;load();});
+function side(){return document.getElementById("lb").classList.contains("on")?"b":"a";}
+function load(){const f=document.getElementById("folha").value;KEY=f+side();FACE=DATA.faces[KEY]||[];
+  document.getElementById("fnum").textContent=f;
+  findNames();draw();}
+function findNames(){HL=[]; const names=DATA.names; const found=new Set();
+  // linhas
+  FACE.forEach((row,r)=>{names.forEach(n=>{let i=row.indexOf(n);while(i>=0){HL.push({r,c:i,len:n.length,dir:"row",name:n});found.add(n);i=row.indexOf(n,i+1);}});});
+  // diagonal nas 26-28
+  const fn=+document.getElementById("folha").value;
+  if([26,27,28].includes(fn) && FACE.length===49){
+    for(let d=-48;d<49;d++){let cells=[];for(let r=0;r<49;r++){const c=r-d;if(c>=0&&c<49)cells.push([r,c]);}
+      const s=cells.map(([r,c])=>FACE[r][c]).join("");
+      names.forEach(n=>{let i=s.indexOf(n);while(i>=0){for(let k=0;k<n.length;k++){const[r,c]=cells[i+k];HL.push({r,c,len:1,dir:"diag",name:n});}found.add(n);i=s.indexOf(n,i+1);}});}
+  }
+  window.FOUND=[...found].sort();renderList();}
+function renderList(){const el=document.getElementById("names");el.innerHTML="";
+  document.getElementById("stat").innerHTML=`<b>${FOUND.length}</b> nomes distintos`;
+  FOUND.forEach(n=>{const d=document.createElement("div");d.textContent=n;if(n===SEL)d.className="sel";
+    d.onclick=()=>{SEL=(SEL===n?null:n);renderList();draw();};el.appendChild(d);});}
+function draw(){if(!FACE)return;const N=FACE.length,W=(FACE[0]||"").length;
+  cv.width=W*CELL+1;cv.height=N*CELL+1;ctx.clearRect(0,0,cv.width,cv.height);
+  ctx.font=(CELL-3)+"px ui-monospace,monospace";ctx.textAlign="center";ctx.textBaseline="middle";
+  const byElem=document.getElementById("elem").checked;
+  for(let r=0;r<N;r++)for(let c=0;c<W;c++){const ch=FACE[r][c];if(!ch||ch===" ")continue;
+    ctx.fillStyle=byElem?(EC[DATA.letters[ch]]||"#566"):"#9fb0c4";ctx.globalAlpha=.85;
+    ctx.fillText(ch.toUpperCase(),c*CELL+CELL/2,r*CELL+CELL/2+1);ctx.globalAlpha=1;}
+  if(document.getElementById("acc").checked){
+    HL.forEach(h=>{const on=!SEL||h.name===SEL;if(!on&&SEL)return;
+      ctx.strokeStyle=h.dir==="diag"?"#e0573b":"#e8c35a";ctx.globalAlpha=SEL&&h.name===SEL?1:.5;ctx.lineWidth=SEL&&h.name===SEL?2:1;
+      ctx.strokeRect(h.c*CELL+1,h.r*CELL+1,h.len*CELL-2,CELL-2);ctx.globalAlpha=1;});}
+  document.getElementById("hdr").innerHTML=`folha ${document.getElementById("folha").value}${side()} · ${[26,27,28].includes(+document.getElementById("folha").value)?'<b style="color:#e0573b">diagonal</b>':'linha'}`;}
+document.getElementById("folha").oninput=load;
+document.getElementById("la").onclick=()=>{document.getElementById("la").classList.add("on");document.getElementById("lb").classList.remove("on");SEL=null;load();};
+document.getElementById("lb").onclick=()=>{document.getElementById("lb").classList.add("on");document.getElementById("la").classList.remove("on");SEL=null;load();};
+document.getElementById("elem").onchange=draw;document.getElementById("acc").onchange=draw;
+</script>
+</body>
+</html>

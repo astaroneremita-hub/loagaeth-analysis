@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Explorador de fragmentos — nomes das Torres no Loagaeth</title>
+<style>
+:root{--bg:#090c11;--panel:#141a22;--ink:#e6edf3;--mut:#8b97a7;--line:#242c38;--ac:#d6b96a;
+  --H:#49c5e0;--V:#d6b96a;--Dg:#b07de0;--ok:#49b67b}
+@media(prefers-color-scheme:light){:root{--bg:#f7f6f1;--panel:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.5 system-ui,Segoe UI,Roboto,Arial}
+.wrap{max-width:1200px;margin:0 auto;padding:12px 16px 50px}
+a.home{color:var(--H);text-decoration:none;font-size:13px}
+h1{font-size:20px;margin:4px 0 2px}.sub{color:var(--mut);font-size:12.5px;margin:0 0 10px}
+.flex{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start}
+.col{flex:1 1 340px;min-width:300px}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:12px}
+.box h2{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--ac);margin:0 0 8px}
+input,select,button{background:#1b2634;border:1px solid #2c3a4e;color:var(--ink);border-radius:7px;padding:6px 10px;font-size:12.5px}
+input{width:100%}
+button{cursor:pointer}
+.row{display:flex;gap:8px;align-items:center;margin:4px 0}
+.cov{display:flex;align-items:flex-end;gap:3px;height:120px;border-bottom:1px solid var(--line);margin:8px 0 2px}
+.cv{flex:1;min-width:0;background:var(--ok);border-radius:2px 2px 0 0;position:relative;cursor:pointer;opacity:.85}
+.cv:hover{opacity:1;outline:1px solid #fff}
+.cvax{display:flex;gap:3px;font-size:10px;color:var(--mut)}.cvax span{flex:1;text-align:center}
+.big{font:700 15px ui-monospace,monospace}
+.pill{display:inline-block;font:700 12px ui-monospace;background:rgba(214,185,106,.16);color:var(--ac);padding:2px 8px;border-radius:10px}
+canvas{width:100%;height:auto;background:#05070a;border:1px solid var(--line);border-radius:8px}
+.stat{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+.stat div{flex:1 1 52px;background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:5px;text-align:center}
+.stat .n{font:700 16px ui-monospace}.stat .l{font-size:10px;color:var(--mut)}
+.lst{max-height:260px;overflow:auto}
+.it{display:flex;justify-content:space-between;gap:6px;padding:3px 6px;border-radius:5px;cursor:pointer}
+.it:hover{background:rgba(127,127,127,.12)}
+.it .p{font:700 12px ui-monospace,monospace}.it .m{color:var(--mut);font-size:11px}
+.names{max-height:200px;overflow:auto;margin-top:6px}
+.leg{font-size:11px;color:var(--mut);margin-top:6px}
+.sw{display:inline-block;width:12px;height:3px;border-radius:2px;vertical-align:2px;margin-right:3px}
+</style>
+</head>
+<body><div class="wrap">
+<a class="home" href="index.html">← painel</a>
+<h1>Explorador de fragmentos</h1>
+<p class="sub">Cada nome das 4 Torres quebrado em pedaços de 2 letras pra cima. Onde aparece, como aparece (linha/coluna/diagonal), e os pedaços que se repetem entre nomes. Instrumento de operação — busca livre.</p>
+
+<div class="flex">
+  <div class="col">
+    <div class="box">
+      <h2>Buscar pedaço livre</h2>
+      <div class="row"><input id="q" placeholder="digita: BATA, IVAH, ORO, qualquer pedaço…" autocomplete="off"></div>
+      <div class="row"><button id="go">traçar</button>
+        <label style="font-size:12px;color:var(--mut)">folha <select id="side"></select></label></div>
+      <div class="stat" id="stat"></div>
+      <div class="leg"><span class="sw" style="background:var(--H)"></span>linha
+        <span class="sw" style="background:var(--V)"></span>coluna
+        <span class="sw" style="background:var(--Dg)"></span>diagonal — inclui de trás pra frente</div>
+    </div>
+    <div class="box">
+      <h2>Por nome — perfil de pedaços</h2>
+      <div class="row"><select id="name" style="flex:1"></select></div>
+      <div id="profile"></div>
+    </div>
+    <div class="box">
+      <h2>Padrões — pedaços compartilhados entre nomes</h2>
+      <div class="leg">pedaço · em quantos nomes aparece · ocorrências no livro. Clique pra traçar.</div>
+      <div class="lst" id="shared"></div>
+    </div>
+  </div>
+  <div class="col">
+    <canvas id="cv" width="760" height="760"></canvas>
+    <div class="box" id="names" style="margin-top:12px"><h2 id="nmh">nomes com este pedaço</h2><div class="names" id="nmlist"></div></div>
+  </div>
+</div>
+</div>
+<script>
+const DIRS=[[0,1],[1,0],[0,-1],[-1,0],[1,1],[-1,-1],[1,-1],[-1,1]];
+const DCAT=[0,1,0,1,2,2,2,2],DCOL=["#49c5e0","#d6b96a","#b07de0"];
+const GEM={A:1,B:2,C:20,D:4,E:5,F:6,G:3,H:8,I:10,L:30,M:40,N:50,O:70,P:80,Q:90,R:100,S:200,T:300,U:400,X:60,Z:7,V:400,J:0,K:0,W:0,Y:0};
+function gem(w){let s=0;for(const ch of w.toUpperCase())s+=(GEM[ch]||0);return s;}
+let D=null,curSide=null,curFrag="";
+
+fetch("fragments.json").then(r=>r.json()).then(d=>{
+  D=d;
+  // name dropdown grouped
+  const sel=document.getElementById("name");
+  const order=["god name","king","senior","kerubic archangel","kerub","calvary-flame","calvary-command","lesser angel"];
+  const byg={};for(const nm in d.names){(byg[d.names[nm].group]=byg[d.names[nm].group]||[]).push(nm);}
+  for(const g of order){ if(!byg[g])continue;
+    const og=document.createElement("optgroup");og.label=d.group_pt[g]||g;
+    for(const nm of byg[g].sort())og.appendChild(new Option(nm,nm));
+    sel.appendChild(og);
+  }
+  sel.onchange=()=>showName(sel.value);
+  // sides
+  fillSides(Object.keys(d.grids));
+  document.getElementById("go").onclick=()=>{curFrag=document.getElementById("q").value.trim().toUpperCase();run();};
+  document.getElementById("q").addEventListener("keydown",e=>{if(e.key==="Enter"){curFrag=e.target.value.trim().toUpperCase();run();}});
+  document.getElementById("side").onchange=e=>{curSide=e.target.value;draw();};
+  // shared
+  const sh=document.getElementById("shared");
+  for(const s of d.shared){const el=document.createElement("div");el.className="it";
+    el.innerHTML=`<span class="p">${s.piece}</span><span class="m">${s.names} nomes · ${s.occ}×</span>`;
+    el.onclick=()=>{document.getElementById("q").value=s.piece;curFrag=s.piece;run();};sh.appendChild(el);}
+  // default
+  showName(sel.value||Object.keys(d.names)[0]);
+});
+
+function fillSides(sides){
+  sides=sides.slice().sort((a,b)=>parseInt(a)-parseInt(b)||a.localeCompare(b));
+  const sel=document.getElementById("side");sel.innerHTML="";
+  for(const s of sides)sel.appendChild(new Option("f"+s,s));
+  curSide=sides[0];
+}
+function searchGrid(g,W){const L=W.length,H=g.length,Wd=g[0].length,out=[];
+  for(let r=0;r<H;r++)for(let c=0;c<Wd;c++){if(g[r][c]!==W[0])continue;
+    for(let di=0;di<8;di++){const[dr,dc]=DIRS[di];const er=r+dr*(L-1),ec=c+dc*(L-1);
+      if(er<0||er>=H||ec<0||ec>=Wd)continue;let ok=1;
+      for(let i=0;i<L;i++)if(g[r+dr*i][c+dc*i]!==W[i]){ok=0;break;}
+      if(ok)out.push([r,c,di]);}}
+  return out;}
+function run(){
+  if(!curFrag||curFrag.length<1){return;}
+  // pick folha with most occurrences
+  let best=null,bestn=-1;const per={};
+  for(const s in D.grids){const h=searchGrid(D.grids[s],curFrag);per[s]=h.length;if(h.length>bestn){bestn=h.length;best=s;}}
+  // repopulate side dropdown with counts, select best
+  const sides=Object.keys(D.grids).sort((a,b)=>parseInt(a)-parseInt(b)||a.localeCompare(b));
+  const sel=document.getElementById("side");sel.innerHTML="";
+  for(const s of sides)sel.appendChild(new Option("f"+s+(per[s]?" ("+per[s]+")":""),s));
+  curSide=(bestn>0?best:sides[0]);sel.value=curSide;
+  draw();
+  // names containing this fragment as substring
+  const nm=[];for(const n in D.names)if(n.includes(curFrag))nm.push(n);
+  document.getElementById("nmh").textContent=`nomes com "${curFrag}" (${nm.length})`;
+  const box=document.getElementById("nmlist");box.innerHTML="";
+  for(const n of nm.sort()){const el=document.createElement("div");el.className="it";
+    el.innerHTML=`<span class="p">${n}</span><span class="m">${D.group_pt[D.names[n].group]} · ${D.names[n].tower}</span>`;
+    el.onclick=()=>showName(n);box.appendChild(el);}
+}
+function draw(){
+  const cv=document.getElementById("cv"),x=cv.getContext("2d"),N=49,W=cv.width,cell=W/N;
+  x.clearRect(0,0,W,W);if(!curSide){return;}
+  const g=D.grids[curSide];
+  x.textAlign="center";x.textBaseline="middle";x.font=(cell*0.6).toFixed(1)+"px ui-monospace,monospace";
+  for(let r=0;r<N;r++)for(let c=0;c<N;c++){x.fillStyle=g[r][c]==="?"?"#20262e":"#333d4a";
+    x.fillText(g[r][c],c*cell+cell/2,r*cell+cell/2);}
+  if(!curFrag){return;}
+  const hits=searchGrid(g,curFrag),L=curFrag.length,by=[0,0,0];
+  for(const [r,c,di] of hits){const[dr,dc]=DIRS[di],col=DCOL[DCAT[di]];by[DCAT[di]]++;
+    x.strokeStyle=col;x.lineWidth=2;x.globalAlpha=.8;x.beginPath();
+    x.moveTo(c*cell+cell/2,r*cell+cell/2);x.lineTo((c+dc*(L-1))*cell+cell/2,(r+dr*(L-1))*cell+cell/2);x.stroke();
+    x.globalAlpha=1;x.fillStyle=col;for(let i=0;i<L;i++)x.fillText(g[r+dr*i][c+dc*i],(c+dc*i)*cell+cell/2,(r+dr*i)*cell+cell/2);}
+  // overall stats across book
+  let tot=0,bs=0;for(const s in D.grids){const h=searchGrid(D.grids[s],curFrag);tot+=h.length;if(h.length)bs++;}
+  document.getElementById("stat").innerHTML=
+    `<div><div class="n">${tot}</div><div class="l">no livro</div></div>`+
+    `<div><div class="n">${bs}</div><div class="l">folhas</div></div>`+
+    `<div><div class="n">${hits.length}</div><div class="l">nesta folha</div></div>`+
+    `<div><div class="n" style="color:${DCOL[0]}">${by[0]}</div><div class="l">linha</div></div>`+
+    `<div><div class="n" style="color:${DCOL[1]}">${by[1]}</div><div class="l">coluna</div></div>`+
+    `<div><div class="n" style="color:${DCOL[2]}">${by[2]}</div><div class="l">diag</div></div>`+
+    `<div><div class="n" style="color:var(--ac)">${gem(curFrag)}</div><div class="l">gematria</div></div>`;
+}
+function showName(nm){
+  if(!nm||!D.names[nm])return;
+  document.getElementById("name").value=nm;
+  const row=D.names[nm],p=document.getElementById("profile");
+  const ks=Object.keys(row.cov).map(Number).sort((a,b)=>a-b);
+  let bars="",ax="";
+  for(const k of ks){const c=row.cov[k],pct=c.pieces?Math.round(100*c.appear/c.pieces):0;
+    bars+=`<div class="cv" data-k="${k}" style="height:${Math.max(3,pct)}%" title="k=${k}: ${c.appear}/${c.pieces} pedaços aparecem, ${c.occ}× total"></div>`;
+    ax+=`<span>${k}</span>`;}
+  p.innerHTML=`<div class="row"><span class="big">${nm}</span> <span class="m" style="color:var(--mut)">${D.group_pt[row.group]} · ${row.tower} · ${row.len} letras · gematria <b style="color:var(--ac)">${gem(nm)}</b></span></div>`+
+    `<div class="leg">% dos pedaços de tamanho k que aparecem no livro (k = 2 → ${row.len})</div>`+
+    `<div class="cov">${bars}</div><div class="cvax">${ax}</div>`+
+    `<div class="row" style="margin-top:8px">maior pedaço vivo: <span class="pill">${row.longest||"—"}</span> `+
+    (row.longest?`<span class="m">${row.longest_len} letras · ${row.longest_occ}× no livro</span>`:`<span class="m">nenhum ≥2</span>`)+`</div>`+
+    `<div class="row"><button id="tracelong">traçar o maior pedaço</button></div>`;
+  p.querySelectorAll(".cv").forEach(b=>b.onclick=()=>{ // trace the first appearing piece of length k
+    const k=+b.dataset.k;for(let i=0;i+k<=nm.length;i++){const pc=nm.slice(i,i+k);
+      if(D.grams[pc]){document.getElementById("q").value=pc;curFrag=pc;run();return;}}
+  });
+  const tl=document.getElementById("tracelong");if(tl&&row.longest)tl.onclick=()=>{document.getElementById("q").value=row.longest;curFrag=row.longest;run();};
+}
+</script>
+</body>
+</html>

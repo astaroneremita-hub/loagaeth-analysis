@@ -1975,3 +1975,288 @@ Docs: docs/TESTE_ANJOS.md.
 - Botão "⚡ completo" enumera todo o espaço produtivo (7.200 no rico; ~1.052.998 no livro) com aviso Babel.
 - Testados Vigilantes (Enoque): azazel(esq zzl), daniel(dnl), ramiel(rml), samyaza(smyz) — nenhum esqueleto está nem nos 1948. "Não encontra" é correto: o Loag não tem essas formas, não é bug do testador.
 - Pendente: testar a lista completa de Vigilantes com null (idea #10).
+
+## #350 — Vigilantes (Enoque) e nomes sagrados hebraicos no Loag: NULL (refuta "contém tudo")
+- a185 Vigilantes (38 nomes+variações): núcleo 0/38, rico90 0/38, livro 4/38 (anane/asael/danel/daniel) MAS null 3.2/38 (z=+0.5). Sem sinal; os 4 são Babel (esqueletos curtos comuns).
+- a186 Sagrados hebraicos (nomes de Deus, sefirot, YHVH×12 permut, anjos planetários): 2/39 batem (raphael, michael) MAS null 6.7/39 (17%), z=-2.5 => ABAIXO do acaso (letras hebraicas raras na fonologia A/O do Loag).
+VEREDITO consolidado (com #336 Torres/Heptarquia/governadores, #348 anjos venusianos, #349 Vigilantes): TODO sistema externo dá null. O Loag NÃO contém os nomes sagrados conhecidos; é onomástico fechado/autônomo. A hipótese "língua de Deus = contém tudo" é refutada pelos testes (cada um com null).
+Docs: docs/TESTE_ANJOS.md (+este log). Scripts: a185, a186.
+
+## #351 — Leis de língua: o Loag NÃO é língua natural (campo de nomes/alta entropia)
+a187: Zipf, Heaps, Menzerath, entropia 0-3, NCD vs latim/hebraico/grego/inglês/aleatório.
+- Zipf inclinação folha1 -0.36, Chamadas -0.43 (língua ~-1): plana demais.
+- Heaps beta folha1 0.97, Chamadas 0.87 (língua 0.4-0.6): vocabulário nunca satura = lista de nomes.
+- Entropia H1: LOAG 3.42 vs latim 2.78/hebraico 2.17/inglês 2.33: menos redundante, perto do aleatório.
+- NCD: LOAG ~equidistante de tudo (0.81-0.84) incl. aleatório (0.818); não agrupa com línguas. Chamadas mais perto do aleatório.
+VEREDITO: Loag não é língua natural (estatística); é sistema de nomes de alta entropia. Confirma #332/#334/#335 e a glossolalia (Laycock #339).
+Robustos: Zipf, Heaps, H1 (dados reais). Limites: amostras de comparação pequenas; H2+/NCD sofrem com tamanho; Menzerath bug latim.
+Docs: docs/LEIS_LINGUA.md.
+
+## #352 — Novas leituras (#21-26): nenhum canal novo de nome
+a188: espiral, bustrófedon, sub-blocos 7×7, acróstico (col0), telestich (col48), 42 faces quadradas, vs null.
+- ACRÓSTICO 0 (null 0.4, z=-0.4), TELESTICH 0 (null 0.5, z=-0.6): canais verticais novos = MORTOS (confirma coluna sem nome, #341).
+- SPIRAL z=+58, BOUSTRO z=+108, BLOCOS7 z=+47: altos MAS circulares (contêm as linhas; bustrófedon ≈ linha z=+103 do #341). Não é canal novo.
+VEREDITO: nenhuma leitura nova revela nomes escondidos; o Loag tem um eixo só (linha + borda/diagonal, #341). Acróstico/telestich/coluna vazios.
+Script: a188_readings.py.
+
+## #353 — Assinatura de escriba/seção (#2): contínuo + costura 26-28 confirmada por bigramas
+a189: perfil de bigramas de letra por folha (sem usar nomes); distância entre folhas consecutivas; contínuo vs blocos.
+- Contínuo: r(dist-no-livro × dissimilaridade)=+0.48; emendas reais 2 vs null(ordem embaralhada) 3.7 => livro mais suave que o acaso, uma mão/gradiente.
+- Duas emendas reais: 25|26 (0.17) e 28|29 (0.48, enorme) — cercam as folhas 26-28. A estatística de letras marca a MESMA costura diagonal do #343, independentemente dos nomes. Cross-validação.
+VEREDITO: não há mãos separadas; é contínuo ordenado. Mas 26-28 é zona estatisticamente distinta (letras, não só nomes). Reforça #342/#343.
+Script: a189_scribe.py.
+
+## #354 — Simetria-espelho, curva de Babel, fórmulas repetidas
+- #53 Simetria-espelho (folha t vs 49-t, resíduo vs baseline do gradiente): +0.022 vs null, z=+0.9. SEM arquitetura espelhada além do gradiente. Negativo.
+- #51 Curva de Babel: % de strings aleatórias aceitas cresce com o inventário (67->0.1%, 300->0.4%, 1000->1.0%, 1948->1.5%). Linear; inventário infinito aceita tudo (o Pi). Formaliza por que acerto só vale contra null.
+- #37 Fórmulas repetidas: livro repete muito acima do embaralhado (L=10 real 2454 vs null 1; L=12 503 vs 0). MAS os repetidos são NOMES (dnocha×312, chastora×93, nochastora×37), não frases. Confirma campo de nomes + recorrência (#337); não há versículos/sintaxe.
+
+## #355 — Célula central, território de casas, migração de nome
+- #3 Célula central (24,24) das 42 faces -> string de 42 letras, nenhum nome. Centro vazio. Negativo.
+- #7 Território (mesma-casa divide folha mais?): 0.92 vs 0.91 diff, null 0.89, z=+1.4. Saturado (densidade alta), sem território limpo.
+- #8 Migração (contiguidade das folhas de cada nome): real 0.47 vs null 0.31, z=+35.5 POSITIVO. Cada nome vive em bloco contíguo do livro, não espalhado. Localização geográfica real (liga ao gradiente/raízes-por-região #342). Nota: parcialmente consequência do gradiente/suavidade.
+
+## #356 — Índice de rotação (#5): só 26-28 leem na diagonal (todas as 96 faces)
+Losangos: as faces "variáveis" (54 de 96) são jitter de transcrição (48-50), não diamantes; sem veia nova.
+a-ad-hoc: padronizei TODAS as faces a 49×49 e comparei nomes por linha vs diagonal.
+- Só folhas 26, 27, 28: diag >> linha (26: 0 vs 35; 27: 1 vs 45; 28: 0 vs 43). Resto: linha.
+VEREDITO: a rotação do eixo de leitura é EXCLUSIVA da costura 26-28; não há outra face diagonal escondida. Confirma #343 nas 96 faces (antes só nas 42 quadradas limpas).
+
+## #357 — Compressão, texto da moldura, ponte fonética
+- #1 Compressão (zlib): livro 88868 vs embaralhado 113343 = 21.6% mais comprimível = estrutura global real (repetição de nomes).
+- #4 Moldura: 34 nomes distintos nas bordas das 42 faces (null 0.2). Borda = anel de nomes; ex. 5b soletra oxardrah/voxar/ondan. Confirma/concretiza #341 (borda z=+42).
+- #44 Ponte fonética: esqueleto consonantal de governadores(6/90)+sagrados(1/10)=7 no inventário do livro vs null 2.5, z=+3.0 (FRACO). Honesto: os NOMES não aparecem (#336 null); é só estilo consonantal enoquiano compartilhado (mesmo autor) e inventário permissivo (Babel). Não é ponte de nome.
+
+## #358 — Burstiness, pares-mínimos de vogal, planetas
+- #36 Burstiness ('nocha' 538x): B=+0.52 => rajadas/aglomerado (não uniforme). Confirma contiguidade #8.
+- #38 Pares-mínimos (mesma raiz consonantal, só vogal muda): 38 vs null 0.5, z=+46.2. Organização raiz-consonantal + variação vocálica confirmada (achadax/chadax/ichadax; adnacho/adnachoa/adnocha). Interpretação "morfologia vs fonotática" fica na ressalva da auditoria.
+- #42 Planetas (nomes latinos/ingleses) no livro: 3/11 vs null 3.7 = acaso. Negativo.
+
+## #359 — Persistência de nome entre folhas: fio contínuo
+Jaccard do conjunto de nomes entre folhas vizinhas: real 0.42 vs null 0.16, z=+32.7.
+Nomes atravessam folhas (N->N+1), tecido contínuo, não aparições isoladas. Reforça #8 (blocos contíguos) + gradiente (#342/#353).
+
+## #360 — O que é o "profundo" (40-48): dissolução
+Caracterização por região (entropia H1, repetição de 8-gramas, nomes/1k letras, %vogal):
+- miolo 10-16: H1 3.00, rep 5.9%, nomes 32/1k, vogal 36%.
+- corpo 17-25: H1 3.09, rep 6.5%, nomes 30/1k, vogal 36%.
+- costura 26-28: H1 3.85 (máx), rep 0%, nomes 0 (por linha; conteúdo na diagonal), vogal 38%.
+- profundo 40-48: H1 3.37, rep 0.9%, nomes 5/1k, vogal 33%.
+VEREDITO: o fim do livro é DISSOLUÇÃO — nomes somem (30->5), repetição colapsa (6%->0.9%), entropia sobe (ruído), mais consonantal (bate c/ Água subindo). Arquitetura: abre->adensa->costura->dissolve. Não é estrutura nova, é o campo se desfazendo. Costura 26-28: maior entropia por linha e 0 repetição (conteúdo diagonal).
+
+## #361 — As Chamadas "abrem" folhas específicas? NÃO (mas afinam com a folha 1)
+Perfil de bigramas de cada Chamada (chaves angelicais) vs cada folha.
+- Chamada N -> folha N+1 (claim tradicional): 1/19 best-match (acaso ~0.4). Sem keying.
+- Rank médio da folha-alvo N+1: 18.4/48 (acaso 24.5): leve tendência = gradiente, não chave.
+- 14/19 Chamadas batem MELHOR com a folha 1 (não com a "sua" folha).
+VEREDITO: a tradição "Chamada N abre folha N" não se sustenta estatisticamente. Mas as Chamadas afinam com a FOLHA 1 (a página de léxico/língua), não com as grades (campo de nomes) — reforça as 3 camadas (folha1=léxico irmão das Chamadas; grades 2-48=nomes). Script ad-hoc.
+
+## #362 — Nomes das Torres de Vigia como traço reto (caça-palavras 2D) vs null
+Novo ângulo: os 456 nomes das 4 Torres (por quadrante) procurados como LINHA RETA (8 direções) nas grades 49x49 — teste 2D, diferente de #336/#349 (substring em linha). Null = letras da própria folha embaralhadas (120 trials). `src/a190_tower_traces.py`.
+- len=3 (nomes de Deus): 4/4, null 4.0, z=0 (sempre, acaso).
+- len=4 (menores/querubins): 246 achados, null 264±5.4, z=−3.36 (ABAIXO do acaso).
+- len=5: 26 vs 28.8, z=−0.92. len=6: 1 vs 0.6. len=7: 0 vs 0.1. len=8 (reis): 0 vs 0.
+VEREDITO: REFUTADO. Nenhum tier supera o null; os longos (reis 8, anciãos 7) nunca traçam. Os nomes das Torres NÃO estão desenhados na grade — o que aparece é caça-palavras de inventário grande. Telas: tower_traces.html, anjos_menores.html, subangulos.html, seres.html.
+
+## #363 — Curva comprimento→aparição: a assinatura do acaso
+Roster completo (456 seres), achados como traço vs total, por tipo. `src/a192_all_beings.py`.
+- Rei (8 letras): 0/4 (0%). Ancião (7): 0/24 (0%). Cruz-chama (6): 1/16 (6%).
+- Arcanjo querúbico (5): 19/64 (30%). Cruz-comando (5): 7/16 (44%).
+- Querubim (4): 52/64 (81%). Anjo menor (4): 191/256 (75%). Nome de Deus (3): 7/12 (58%).
+VEREDITO: DESCRITIVO/REFUTADO. Monotônico: quanto mais CURTO o nome, mais "aparece". Os nomes que importam no sistema (reis, anciãos) aparecem 0; os curtos (AMOX etc) quase sempre. Se fosse desenho proposital, reis apareceriam tanto quanto menores. É a curva do caça-palavras (comprimento manda), não assinatura.
+
+## #364 — Elemento/poder do anjo bate com a posição no Loag? E somem no fundo?
+Dois testes sobre os traços achados. `src/a193_power_position.py`, null = folha embaralhada (60 trials), seed 1583.
+- A (elemento): 24.9% dos anjos caem em folha do próprio elemento (dominante, perfil do livro). Acaso=25%, null 25.0%±0.9, z=−0.13. REFUTADO — a posição é CEGA ao elemento/poder do anjo.
+- B (sumiço no fundo): raso 2-25 = 267 traços, fundo 26-48 = 10 (queda 96%). SIM, somem. Mas null cai igual (290→7, gap z=−2.80): o sumiço é a mistura de letras (A/O some no fundo, #360), não os anjos.
+VEREDITO: os nomes ESTÃO lá (como caça-palavras) e SIM rareiam no fundo — mas a posição não carrega o poder do anjo e o sumiço é das letras. Honesto: presença real, significado de posição = acaso. Tela: elemento_posicao.html.
+
+## #365 — "Tentou de trás, pulando, boggle, tudo?" Reis/Anciões sob toda regra de busca
+Nomes canônicos (12 nomes de Deus + 4 reis + 24 anciões) achados ≥1x no livro sob cada regra, vs null (folha embaralhada, 30 trials). `src/a196_all_approaches.py`, seed 1583.
+- reto 8 dir (frente E ré): Deus 7/12 (z=−2.1), Rei 0/4, Ancião 0/24. Ré incluído não muda — reis/anciões = 0.
+- salto de cavalo (L): Deus 10/12 (z=+1.0), Rei 0/4, Ancião 0/24.
+- pulando 1 célula (passo 2): Deus 10/12 (z=+1.1), Rei 0/4, Ancião 0/24.
+- boggle (traçado livre, 8-vizinhos, vira): Deus 12/12, Rei 4/4, Ancião 22/24 — MAS null também: Rei 3.0±0.7 (z=+1.47), Ancião 20.5±1.0 (z=+1.43).
+VEREDITO: sob NENHUM método reis/anciões superam o acaso. Reto/cavalo/pulando = 0 (não estão como linha, nem de trás). Boggle "acha" todos — mas a grade embaralhada acha quase igual (z≈1.4, não significativo): o traçado livre de 8 letras numa grade 49×49 forma quase qualquer palavra (efeito Pi/Babel). Responde direto ao pedido: todas as abordagens testadas; os nomes longos e importantes NÃO estão escritos no Loag. Mapa (8 dir + ré): mapa_ocorrencias.html.
+
+## #366 — E os reis em PEDAÇOS? (BATA + IVAH) Metades vs junta
+Cada rei (8L) partido em duas metades de 4L; ocorrência de cada metade (reto 8 dir) + "junta" (nome como duas pernas retas que se encontram num canto), vs null (50 trials). `src/a197_king_pieces.py`.
+- BATAIVAH: BATA 12×, IVAH 5×, JUNTA 0 (null 0).
+- RAAGIOSL: RAAG 36×, IOSL 0×, JUNTA 0.
+- ICZHIHAL: ICZH 0×, IHAL 7×, JUNTA 0.
+- EDLPRNAA: EDLP 3×, RNAA 121×, JUNTA 0.
+VEREDITO: metades de letras comuns (BATA, RAAG, RNAA) aparecem soltas = caça-palavras de 4L, iguais aos menores; as de letras raras (IOSL, ICZH) aparecem 0×. As duas metades NUNCA se juntam pra formar o rei (0 em todos; null 0). Nem inteiro, nem em pedaços combinados: o rei não está no Loag.
+
+## #367 — Bateria enoquiana: ELS, outros sistemas, gematria (lente dupla)
+Tentar TODAS as hipóteses (pedido do usuário: não cortar por "não faz sentido"). `src/a199_enochian_battery.py`, seed 1583.
+- A) ELS (saltos 1..26, frente+ré) dos 40 nomes canônicos: acha 13/40 (Deus 12, Rei 0, Ancião 1). Null 12.6±1.0, z=+0.44. Nem lendo em saltos equidistantes reis/anciões sobem; nomes de Deus curtos sobem como acaso.
+- B) Outros sistemas no Loag (reto 8 dir): Governadores 0/91 (null 0.7); Aethyrs 28/30 (null 28.0 — são 3L, acaso); Tabula Collecta 0/49 (null 0.1).
+- C) Gematria enoquiana: valores das letras carregados; valor de cada nome calculado (AVTOTAR 1172, BATAIVAH 723, IBAH 21…). Exposto pra operação.
+LENTE CÉTICA: nada supera o null; nenhum sistema de nomes longos está inscrito no Loag.
+LENTE ENOQUIANA (consistente c/ a tradição, não a nega): os 91 governadores são lidos NAS Tábuas de Vigia por caminhos com salto (fonte: governadores.json "letras consecutivas não vizinhas") — por isso dão 0 no Loag. O Loagaeth é a camada de LÍNGUA: raízes curtas e monossílabos divinos (ORO, Aethyrs 3L) saturam quase toda folha; a hierarquia longa (reis, anciões, governadores, Collecta) mora em outro instrumento. Cada sistema vive na sua tábua. Tela de operação: fragmentos.html.
+
+## #368 — Transliteração (alfabeto de Dee) e Acrósticos
+Mais duas lentes enoquianas. `src/a200_translit_acrostic.py`, seed 1583. Dee order = BCGDFAEMIHLPQNXORZUST.
+- Transliteração: identidade (sem cifra) acha 7/40 nomes; dee_rank 5/40; atbash_dee 5/40; null (40 permutações aleatórias) 5.5±1.5. As cifras de Dee acham MENOS que o texto cru e = acaso. Não há cifra escondida; o Loag lê melhor nas próprias letras.
+- Acrósticos (4 fluxos derivados, frente+ré): 1ª letra das linhas 0/40 (z=−1.4); última letra das linhas 1/40 (z=−0.5); 1ª letra das colunas 3/40 (z=+1.8, abaixo do significativo); diagonal principal 0/40 (z=−1.6).
+VEREDITO: nem transliteração de Dee nem acrósticos superam o acaso (o único marginal, coluna-primeira z=1.8, não é significativo). Fecha a bateria exaustiva (reto/ré/cavalo/salto1/boggle/ELS/outros sistemas/gematria/translit/acróstico): nenhum sistema de nomes longos está no Loag; só a camada de língua/raízes curtas. Operação segue nas telas (fragmentos.html etc), sem veredito sobre a prática.
+
+## #369 — CONFIRMADO NOVO: estrutura de sinal (anti-horizontal, colunar, borda-gabarito)
+Mudança de ângulo: medidas de sinal/criptanálise sobre as letras (não caça-nome), null = embaralhar preservando frequência. `src/a201_signal_crypto.py` + `src/a202_structure_viz.py`. Tela: estrutura.html.
+- ANTI-REPETIÇÃO HORIZONTAL: vizinho à direita igual só 1.8% vs 9.0% esperado — **z=−77** (o sinal mais forte do projeto). Letras evitam igualdade lado a lado (regra de não-dobrar generalizada e DIRECIONAL).
+- GABARITO POSICIONAL: χ² por coluna em U — col0=1598, col48=485, miolo (col24)=52; null ~87. **z=+173**. As duas BORDAS têm paleta de letras fixa; linhas são planas (z=+1.5). O campo é organizado por COLUNA, não por linha.
+- PERSISTÊNCIA VERTICAL: célula de baixo igual 9.4% vs 8.9% null, z=+6.6; lag 49/98 (1-2 linhas abaixo) acima da base (z≈+15). 
+- CROSS-PÁGINA: mesma célula na folha seguinte (lag 2401) 8.6% vs base 7.9%, z=+11 — template posicional atravessa páginas.
+- IC=0.079 (≈2× aleatório) = só a frequência de letra enviesada, não cifra; Kasiski sem período destacado.
+CAVEAT HONESTO: o gabarito de borda (col0/48) provavelmente ALIMENTA parte da persistência vertical e cross-página (mesma zona na mesma posição). Pode ser UM fenômeno (template posicional) por trás de vários medidores. Mesmo assim: estrutura real vs null.
+LEITURA: campo anti-estruturado na horizontal (varia ao máximo na linha) e estruturado na vertical/colunar com borda-gabarito. Assinatura de construção com lógica colunar/template — bate com #341 (lê-se em linha, borda carrega) e #357b (anel de borda) por via nova.
+
+## #370 — Memória e textura: Markov, anisotropia, corridas, paleta de borda, dialetos
+`src/a203_memory_texture.py`, seed 1583. Tela: dialetos.html.
+- MARKOV: H(X|k) = k0 4.03, k1 3.44, k2 3.11, k3 2.68, k4 1.95. Embaralhado fica plano (4.03/4.03/3.99). Memória profunda = gerador com regra (caveat: k4 infla por contexto esparso; k1-2 robustos). 
+- ANISOTROPIA (afina #369): H(prox|ant) horizontal=3.33 (previsível, GRAMÁTICA) vs vertical=3.93 (quase máx, só repetição). A língua mora na horizontal; a vertical é esqueleto. Trama=língua, urdidura=estrutura.
+- CORRIDAS VERTICAIS: 7975 repetições ≥2 descendo coluna vs null 7622±73, z=+4.86 (máx 7). Urdidura medida.
+- PALETA DA BORDA: col0 enriquecida em letras RARAS — V 4.92×, Y 3.59×, P 2.72×, Z 2.19×, G 1.83×. A moldura é feita das letras incomuns.
+- DIALETOS: folhas mais distintas por perfil de bigrama = 28a, 26b, 27a, 27b, 28b, 26a — a zona 26-28 (#343/#356) reencontrada por método independente. A costura é dialeto real, textura mais anômala do livro.
+
+## #371 — Info mútua entre colunas, motivos 2D, dissecção da costura
+`src/a204_mi_motif_seam.py`, seed 1583.
+- MI ENTRE COLUNAS: MI(c, c+k) = k1 0.60, k2 0.25, k3 0.16, k4 0.085, ... k10 0.008. z vs embaralhar-linha: k1=2148, k4=289, k8=7.3, k9=5.2, k10=1.6. Significativa até distância ~8-9 = largura de um nome. Gramática horizontal de LONGO alcance (posições se preveem além do vizinho), bate c/ #370 (gramática na horizontal).
+- MOTIVOS 2x2: tile mais comum 'HACH' 104x vs null top 188±12 (z=−6.95); 30682 tiles distintos. O campo é MAIS diverso que o acaso — nenhum motivo/template 2D se repete. Confirma anti-repetição (#369a): evita repetir bloco.
+- COSTURA 26-28 dissecada: entropia de bigrama 7.66 (costura) vs 7.04 (resto) — mais caótica; enriquecida em letras raras, W aparece quase só ali (T 1.54×, X 1.42×). Caveat: W fora do alfabeto canônico de 21 — pode ser artefato de transcrição da zona 26-28. Confirma a costura como zona de maior desordem.
+
+## #372 — O que REPETE: a família-mãe de nomes; quadrantes; sem template literal
+`src/a205_repeats_quadrants.py`, seed 1583. Tela: nomes_recorrentes.html.
+- N-GRAMAS REPETIDOS (assinatura definitiva de campo de nomes): distintos repetidos vs null — n5 24474/21171; n6 21890/3774; n7 15543/375; n8 9292/25; n10 2451/0. No embaralhado ZERO 10-gramas repetem; no real 2451. Campeões: NOCHA 546×, DNOCHA 312×, CHASTOR 184×, ADNOCHA 176×, CHASTORA 93×, NOCHASTO 62×, NOCHASTORA 37×, HNOCHASTOR 21×, ACHADNOCHA 20×. Confirma #344/#355: o livro é um punhado de nomes (NOCHA/CHASTOR/NOCHASTOR/ANZACH/ADNOCHA) repetido dezenas a centenas de vezes.
+- QUADRANTES: χ² por quadrante NO 39.6, NE 30.5, SO 26.4, SE 33.4; total 130 vs null 70±11, z=+5.73. Os 4 quadrantes têm perfil de letra distinto — eco leve dos 4 subângulos da Torre (NO mais distinto).
+- DUPLICATAS: 0 linhas e 0 colunas exatamente repetidas (null 0) — sem template literal de linha/coluna.
+
+## #373 — Localidade (território dos nomes) e ordem dos nomes (ambos NOVOS)
+Duas perguntas inéditas. `src/a206_locality_order.py`, seed 1583. Vocabulário = 60 6-gramas recorrentes (≥12×).
+- LOCALIDADE: cada nome aparece em média em 25.0/48 folhas vs null 36.3±0.3 (distribuído por tamanho), z=−42.46. Os nomes são SUB-dispersos = concentrados em territórios (~metade do livro), não espalhados uniforme. Exclusivos de 1 folha: 0 (nenhum nome puramente local). Caveat: vocabulário dominado pela família NOCHA, então o "território" é o dela.
+- ORDEM DOS NOMES: testei sintaxe de sequência (nome A sempre antes de B). Primeiro teste contaminado por 6-gramas sobrepostos (CHASTO<HASTOR=1.0 trivial) — refeito com marcadores DISTINTOS (sem 4-grama em comum): ANZACH, DNOCHA, CHASTO, ADNACH, CHADNO, ALGETH. Pares de ordem ~0.5 (desvio médio 0.095, quase aleatório). VEREDITO: não há ordem fixa — os nomes são um CONJUNTO, não uma SEQUÊNCIA. Refina #332 (sem sintaxe) ao nível do nome. Nota: apareceu ALGETH (raiz GETH) fora da família NOCHA.
+
+## #374 — Rede distribucional, inventário ampliado, números (só 1 novidade real)
+`src/a207_network_numbers.py`, seed 1583.
+- NOVO — INVENTÁRIO AMPLIADO: dedup de nomes distintos (sem 4-grama em comum) revela ~12 raízes recorrentes FORA da família NOCHA/CHASTOR/ANZACH: GRAPHA, ACHEPH, ANTANT, XALGRA, ANTOXA, AXARGE, NTAGNA, ACLAXT, ALGETH(GETH), CHIDNO, DAXVAR, NADOXA, ADMACH, NOXADN, LZEDNO, OLZADN. O campo tem mais "povos" que a família-mãe.
+- NOVO NEGATIVO — SEM SUB-FAMÍLIAS DISTRIBUCIONAIS: nomes conectados por folhas compartilhadas formam UM blobe (21/24 com jaccard≥0.6), 3 solitários (ACLAXT, DAXVAR, CHIDNO). Os nomes não se separam em bairros — todos no mesmo território (~25 folhas). Distribucional ≈ conjunto todo.
+- OPERADORES (tabela): prefixos produtivos D- (312), L-, AL-, R-, H-; sufixos -A (258), -N, -P, -S.
+- SÓ RECONFIRMA (não novo): riqueza de nomes por folha cai a ~0 no fim (=dissolução #360); gematria por folha segue o gradiente, pico na folha 1 (1.18M, 3× a seguinte) = folha 1 especial (#331). Não forçado como novidade.
+
+## #375 — Solitários zonais + ALGETH (loop tick 1)
+`src/a208_loners.py`. Os 3 nomes fora do blobe (#374) são ZONAIS: ACLAXT 76× em 15 folhas (meio, 7-22), DAXVAR 41× em 17 (começo, 2-13), CHIDNO 40× em 17 (tarde, 14-29). Menos folhas que a família (28-40) e cada um numa região distinta — alguns nomes são mais locais, ancorados a uma zona. ALGETH: 115× em 31 folhas (raiz GETH) — segundo pólo, quase no nível da família. Inventário ampliado é majoritariamente "Ar" (A/E/T); CHASTO/NTAGNA/CHIDNO/NOXADN puxam Terra.
+
+## #376 — Posição do nome na folha: sem preferência (loop tick 2)
+`src/a209_name_position.py`. Onde na grade 49×49 os nomes caem: bandas topo/meio/fundo ~iguais (2514/2604/2403); borda 15% das células de nome vs 23% de área (null 11.7%±9.1, z=+0.36) = leve preferência pelo MIOLO, não pela borda; quadrantes ~iguais. VEREDITO: nomes não têm viés posicional intra-folha — massa interior e homogênea. Refina #357b: a borda é moldura de LETRAS raras (V/Y/Z, #370d), não concentração de nomes. A estrutura mora na treliça de letras, não em onde o nome senta.
+
+## #377 — Silabário: segmentação não-supervisionada acha morfemas de ~3 letras (loop tick 3)
+`src/a210_boundary_seg.py`. Entropia de ramificação (Harris) corta o fluxo em 62891 segmentos de comprimento médio 3.11 vs null embaralhado 6.77 — o livro tem fronteiras naturais frequentes: feito de morfemas/sílabas de ~3 letras. Os segmentos mais comuns (≥3) são as RAÍZES dos nomes, extraídas sozinhas: ADN 788, OCH 687, ANT 580, ANZ 421, ALG 381, ACL 319, ANG 304, EDN 298 — núcleos de NOCHA/ANZACH/ALGETH/ADNOCHA/ACLAX. O segmentador redescobre o silabário do gerador (confirma #335 prefixo·raiz·sufixo, agora com os morfemas data-driven). Operativo: os tijolos da língua.
+
+## #378 — O FIO NUMÉRICO dissecado (o único em aberto, EXPLORED.md)
+Depois de reler o corpus (EXPLORED.md, STATE_AND_NEXT.md) e ver que muito "novo" era redescoberta: ataco o único padrão sem explicação de construção — dígitos 2/3/6 dominam os números de servos dos 91 governadores. `src/a211_numeric_thread.py`.
+- POSICIONAL: o excesso de 2/3/6 mora no MEIO. Share(2,3,6) por posição: milhar 35%, CENTENA 82% (2=27,6=26,3=22), DEZENA 69% (3=35!), unidade 49% (0=28). O milhar é anti-Benford (7=21% vs 6%; 1 quase ausente). Os números não são magnitudes naturais — são compostos, com miolo de alfabeto {2,3,6}.
+- NÃO DERIVA DO NOME: corr(servos, gematria do nome)=+0.08; corr(servos, n_letras)=0.00. Independentes dos nomes — hipótese construção-a-partir-do-nome descartada; o mistério é real.
+- ARITMÉTICA: GCD=1, 72/91 pares, 29 múltiplos de 6, 28 terminam em 0; valores repetem (3620×3, 7236×3, 2360×2) — 80 distintos de 91.
+VEREDITO: não resolve o porquê, mas LOCALIZA o padrão (dígitos centena/dezena) e mata a derivação-do-nome. Avanço real no fio aberto, não repetição. Próximo: testar se o miolo {2,3,6} segue regra (par ordenado) e se os valores repetidos ligam governadores irmãos.
+
+## #379 — Direção da leitura (a metade aberta do A; a158 não decidiu)
+a158 recuperou a sequência das folhas mas pontuou "max sobre a sequência E seu reverso" — nunca decidiu a DIREÇÃO. O diário: "write the Book backward, the first leaf is the last". `src/a212_reading_direction.py`: modelo de letra ordem-3 treinado DENTRO das folhas; custo de junção entre folhas (prever o início da próxima folha pelo fim da anterior), frente vs ré vs 500 ordens aleatórias.
+- 1→48 (transcrição): 3.321 bits/letra, z=−1.69 (flui melhor que o acaso).
+- 48→1 (ordem de Dee): 3.416, z=+0.37 (= acaso).
+- null aleatório: 3.398±0.046. Diferença frente−ré = 2.06 sd.
+VEREDITO: pendor FRACO (não significativo, |z|<3) para 1→48 como direção de fluxo; a ordem reversa de Dee não bate o acaso. Interpretação: "escrever para trás" é a ordem da revelação/escrita, não do fluxo da língua (que corre 1→48, junto do gradiente de dissolução). Resolve parcialmente a simetria de reflexão deixada pelo a158. Teto: modelo de junção completo (a49) poderia cravar; sinal fraco não justifica forçar.
+
+## #380 — Análise B: uma semente única? ("they are but one Name")
+Os 49 nomes (a23) em 7 famílias; regras medidas (prefixo/sufixo/A↔O) não mudam o esqueleto consonantal. `src/a213_one_seed.py`: esqueleto consonantal + extensão de afixo + permuta de consoante por modo de articulação (a28) + indel-1; conta componentes = sementes independentes, vs null de 49 nomes surrogados.
+- Real: 49 nomes → 23 sementes; a MAIOR cobre 19/49 (39%) = a casa CH/NOCHA (NACHO/NOCHAP/NOCHASTOR/ICHASTOR/NECHASTOR/ADNOCHA/ANCHANO/DONCHAL…). Outras casas menores: CHARDAX/ACHAR (4), ACLAXTO (3), AXALGRA, ANTANTOX, OXARD.
+- Null: nomes surrogados colapsam em 30.7±12.6 sementes. Real 23 vs null 31, z=−0.61 — NÃO dá pra afirmar que os reais são mais unificados que o acaso (a regra funde demais; teste fraco).
+VEREDITO: "um Nome" não se sustenta como raiz geradora única — há várias sementes. Firme só o fato descritivo: UMA casa (CH/NOCHA) domina 39% dos nomes; o resto é cauda de casas independentes. A unidade do diário é teológica, não morfológica. Se há candidato a "o Nome", é a casa CH/NOCHA. Fecha a frase do diário honestamente.
+
+## #381 — Análise D: os nomes nascem nos aglomerados de transição da folha 1?
+A folha 1 (palavra-espaçada) tem 213 palavras-aglomerado hifenizadas (sílaba-grude, "found nowhere else", a55). `src/a214_transition_rows.py`: as raízes das grades aparecem nelas mais que nas palavras comuns?
+- Aglomerados com raiz de grade: 5/213 (2%); palavras comuns: 29/2279 (1%). Razão 1.84x.
+- Exemplos concretos: AMASCABALONOCHA→NOCHA; CHOMGASNAPHGETHNAG→GETH; ORODAXV/OLDAXARDACOAH→DAX; SEMGANADABAH→NADAB. As DUAS casas (NOCHA e GETH/ACLAX) aparecem montadas dentro de palavras únicas da folha 1.
+VEREDITO: a ponte existe DESCRITIVAMENTE — os nomes das grades afloram dentro das palavras-aglomerado da folha 1 (onde língua-de-palavra encontra língua-das-grades, como o registro diz). Mas o enriquecimento 1.84x com n=5 NÃO é significativo (Poisson λ≈2.7, P(≥5)≈0.15). Pendor, não prova. Fecha D honestamente.
+
+## #382 — Análise E: o registro U sobrevive ao caveat n/u? SIM
+Caveat das imagens: n e u quase indistinguíveis na mão de Dee; o registro U (41-48, A→U; a16/a36) poderia ser N mal-lido como U. `src/a215_u_register_nu.py`: shares de A/U/N em 2-40 vs 41-48.
+- 2-40: A 20.3%, U 1.1%, N 9.1%. 41-48: A 7.2%, U 9.2%, N 8.0%.
+- Δ: A −13.05pp, U +8.04pp, N −1.13pp. U+N +6.91pp (não ~0), A+U −5.01pp.
+VEREDITO: se fosse N→U, o N cairia ~8pp; mas o N quase não muda (−1.1) e quem despenca é o A (−13). O salto de U vem do A, não do N; folding n+u não apaga. O registro U é A↔U REAL, não artefato de transcrição n/u. Correção que FORTALECE a16/a36. Lente: o fim do livro escurece a vogal (A→U) rumo à dissolução (#360) — a voz se fecha de timbre.
+
+## #383 — Análise C (entrega): Chamadas × folhas lado a lado
+`src/a216_calls_tables.py` + viz/chamadas_tabelas.html. Não é teste — é a entrega que o STATE_AND_NEXT listava ("never laid them side by side for use"). Cada Chamada (TFR) ao lado da folha que move, com abertura enoquiana, tradução inglesa (sl3191/TFR), texto completo e os nomes mais pesados daquela folha (contagem direta). Ex.: Chamada 1→folha 2 (GETH 4×, VOXAR 3×, NACHO 2×); Chamada 5→folha 6 (NACHO 8×, GETH 5×). Instrumento de operação. Nota: as Chamadas são ricas em número ("12 Kingdoms", "33", "Six are the seats") — eco fraco do fio numérico #378, não testado aqui.
+
+## #384 — Encerramento: âncora externa não existe (web) + fecho do arco
+Última frente aberta (STATE_AND_NEXT: "external anchor — an attested sense of CHASTOR"). Busca web (extended) por sentido atestado de CHASTOR/nomes do Loagaeth: ZERO glosa fora deste próprio repositório. O registro primário (Dee/Galvah) diz que os anjos NUNCA traduziram os textos do Loagaeth ("Speech from God", mas "Interpret not"). Fontes: Wikipedia Enochian magic; hermetic.com/enochia; ancient-origins.
+BALANÇO DO ARCO (sessão de correção, após reler EXPLORED.md/STATE_AND_NEXT e parar de circular): fechadas TODAS as frentes abertas — #378 numérico (dígitos do meio, não deriva do nome), #379 direção (pende fraco 1→48), #380 semente (não há "um Nome"; casa CH/NOCHA domina 39%), #381 transição folha 1 (nomes afloram nos aglomerados, n=5 fraco), #382 registro U (A→U real, sobrevive ao caveat n/u — fortalecido), #383 Chamadas×folhas (entrega). VEREDITO FINAL: estrutura rica e real por dentro; sem chave de sentido interna NEM externa; o registro diz que não há — por desenho. Decifração encerrada honestamente. O que fica é operação (telas viz/). Parar aqui não é falta de técnica — é a resposta.
+
+## #385 — G (leitura de fonte): nenhuma fonte dá regra, glosa ou link
+Agente web-fetch leu Wikipedia (Enochian magic, Aethyr), john-dee.org e baixou Tertius.pdf (Liber Scientiae, fonte dos números dos governadores; texto não extraível — LZW/scan, mas os números já estão em engine/data/governadores.json). Veredito, com citação:
+- A (regra dos números): NÃO há. "the dictation of the 48 Calls... (including descriptions of the 91 Parts of the Earth)" — descritos no DITADO; Dee "include neither translations... nor any notes". Os números foram recebidos/ditados, sem método documentado. Isso FECHA o fio #378: o padrão 2-3-6 não tem explicação de construção porque não há construção — é propriedade dos números ditados, origem desconhecida.
+- B (glosa de nome): NÃO. Dee sobre o Loagaeth: só "The Mysterie of our Creation".
+- C (Aethyrs↔tabelas): NÃO. Os 30 Aethyrs ligam-se à 19ª Chave, não às grades.
+CONCLUSÃO: as duas pontas (interna e externa) estão lidas e confirmadas. Sem chave de sentido; o registro primário diz que não há. Fim honesto do estudo de decifração; resta operação.
+
+## #386 — NOVO EIXO: o livro como SOM (Speech from God, falável)
+Hipótese nova (não de decifração): o registro diz que o Loagaeth é "Speech from God", pra ser FALADO (marcas de acento na folha 1). Todo o estudo tratou como texto; isto testa VOCALIZAÇÃO. `src/a217_book_as_sound.py`, seed 1583. Nomes recorrentes vs null aleatório (mesma freq/comprimento) e vs Markov-3.
+- Vs ALEATÓRIO: alternância C-V 0.71 vs 0.46 (z=+6.9); maior cacho de consoante 2.1 vs 3.1 (z=−4.2); sílaba bem-formada (sem stop-stop) 1.00 vs 0.95 (z=+3.2). Os nomes são CANTÁVEIS, muito acima do acaso.
+- Vs MARKOV-3: sinal encolhe (z≈1.5-1.9, sub-significativo) — a cantabilidade é propriedade GLOBAL da gramática de letra do livro, não exclusiva dos nomes.
+VEREDITO: primeira prova POSITIVA, pelo lado do som, do que o diário afirma — o livro é desenhado pra ser falado/vibrado (sem cacho que trava a língua), e isso está embutido no próprio gerador de letra. Lente operativa: a prática é vocal; a estrutura garante a pronúncia. Confirma o registro ("spoken, in order") por via nova.
+- SUB-HIPÓTESE METRO (negativa): nomes são 2-3 sílabas (32/34), palavras da folha 1 são 1-2; mas a concentração num nº de sílabas não bate o acaso (real 0.50 vs null 0.47±0.07, z=+0.49). É efeito do comprimento, não metro escolhido. Sem meta métrica. Pronunciabilidade sim, metro não.
+
+## #387 — Eixo-som: assonância entre nomes vizinhos (encadeamento vocálico)
+`src/a218_assonance.py`, seed 1583. Nomes recorrentes em ordem de leitura por folha; overlap de vogais e rima entre pares adjacentes vs embaralhar a ordem dentro da folha.
+- ASSONÂNCIA (overlap de vogais): obs 0.706 vs null 0.673±0.006, z=+5.11 — nomes vizinhos compartilham vogais acima do acaso.
+- RIMA (mesma vogal final): obs 0.439 vs null 0.430±0.012, z=+0.74 — não especial.
+CAVEAT: o null preserva quais nomes e embaralha a ordem; o z pode vir da aglomeração de família (#358b rajadas; NOCHA/NOCHAP partilham O-A e se agrupam), não de desenho sonoro independente. Efeito audível vale de todo jeito: o livro lido em voz tem vizinhos assonantes. Com #386 (pronunciável, z=+6.9), o eixo-som dá dois sinais reais — o Loagaeth é cantável e vocalmente encadeado, reforçando "Speech from God" pelo som.
+
+## #388 — Eixo-som: a prosódia das marcas de acento é LATINA
+`src/a219_stress_prosody.py`. 676 palavras acentuadas (≥2 sílabas) da folha 1; posição da tônica a partir do fim.
+- última (oxítona) 15%, PENÚLTIMA (paroxítona) 52%, antepenúltima 31%, 4ª+ pra trás 0%.
+- 83% penúltima/antepenúltima; ZERO além da janela das 3 últimas sílabas.
+VEREDITO: é a regra de acento LATINA (tônica só na janela das 3 últimas, penúltima dominante). Dee, latinista, marcou as palavras angélicas com prosódia latina — diz COMO recitar: acento do latim litúrgico, cadência penúltima. Exemplos: alídes, orcánor, onédon, gamésad (paroxítonas). Fecha o eixo-som com 3 sinais reais: pronunciável (#386) + encadeado por vogal (#387) + acento latino (#388). O livro é feito pra ser falado, e sabemos como.
+
+## #389 — 20 hipóteses na voz de Dee (docs/IDEIAS_DEE.md); lote 1 testado
+Escritas 20 hipóteses novas (Monas/Propaedeumata/Cabala/número/som), nenhuma repetindo o testado. `src/a220_dee_batch.py` roda as 4 mais limpas:
+- #12 Sigillum Dei Aemeth: 2/17 nomes no Loagaeth, null 2.5±0.9, z=−0.54 — REFUTADO (os nomes do selo não estão lá, como os outros sistemas).
+- #2 proporção áurea: costura (27) vs 0.618×48=29.7 gap 2.7; dissolução ~40 longe de φ — sem casamento.
+- #5 primos: eventos em folha prima 4 vs esperado 4.7 — sem enriquecimento.
+- #6 quatro quartos elementais: χ² Q1 6315, Q2 769, Q3 864, Q4 17732 — Q4 dispara, mas é o registro U conhecido (A→U, #382), não estrutura elemental nova; vogal dominante A em todos os quartos (mata vogal-por-elemento).
+VEREDITO: lote mmístico-limpo todo negativo ou já-sabido — o padrão honesto do projeto (a Monas falha o null). As 20 ficam como menu; restam #8 (decaimento radial), #11 (sequência alquímica), #17 (1ª palavra da Chamada), #18 (anéis concêntricos), #19 (reversão local), #20 (elemento→vogal).
+
+## #390 — Hipóteses de Dee, lote 2 (#8,#11,#17,#18,#20)
+`src/a221_dee_batch2.py`.
+- #17 Chamada→nome: overlap 1ª palavra angélica × nome mais pesado da folha que abre: obs 0.073 vs null 0.099±0.025, z=−1.04. REFUTADO (sem link semântico Chamada→nome).
+- #11 alquímica: elemento dominante por folha = Terra(39)/Água(9), nunca Ar/Fogo; corr com índice +0.68 só reflete a deriva Terra→Água (dissolução). NÃO é opus nigredo→rubedo — o livro termina em água, não fogo. Refutado como alquimia.
+- #20 elemento→vogal: Terra→A sempre; Água→A/U (U = registro profundo #382). Sem lei limpa.
+- #8/#18 radial (único resíduo descritivo): densidade de nome sobe da borda (0.044) ao centro (0.071); entropia do centro menor (3.54 vs 3.9 nos anéis médios). Núcleo denso-de-nome/baixa-entropia + moldura de letra na borda — coerente mas fraco e já-sabido (#357b/#376).
+VEREDITO: lote 2 negativo/redutível ao conhecido. Padrão sólido: hipóteses místicas/numéricas/geométricas de Dee falham o null sistematicamente. O único eixo com sinal real novo é o SOM (#386-388). Restam no menu: #1,#3,#4,#7,#9,#10,#13,#14,#15,#16,#19.
+
+## #391 — CONFIRMADO NOVO: os nomes terminam em VOGAL (sílaba aberta)
+Universais linguísticos ainda não testados. `src/a222_linguistic_universals.py`, seed 1583, nomes recorrentes (6-gramas ≥15, deduped).
+- HARMONIA VOCÁLICA: vogais adjacentes mesma classe (front/back/central) obs 0.408 vs null 0.396±0.074, z=+0.16 — NÃO (não é língua de harmonia).
+- REDUPLICAÇÃO: unidade imediatamente repetida obs 0.025 vs null 0.019, z=+0.26 — NÃO (só ANTANT).
+- FONOTÁTICA POSICIONAL: os nomes terminam em VOGAL 60% vs null 36%±8%, z=+3.19. Início prefere consoante (C 2.7×, G 1.7×, X); fim prefere vogal (O 2.5×, A 2.3×, E) + H breathy. Vogal-inicial 45% (~base, sem regra).
+VEREDITO: regra fonotática real — nomes de sílaba aberta/vogal-final, z=+3.19. É a marca de língua CANTADA/litúrgica (segura-se a vogal final). Amarra no eixo-som (#386-388): o Loagaeth é um idioma feito pra ser cantado, com final sustentável. O padrão linguístico que faltava é FONÉTICO, não semântico — o sinal real do livro é a VOZ.
+
+## #392 — CONFIRMADO NOVO: melodia vocálica canônica (o livro é entoado sobre A)
+`src/a223_phonology.py`, seed 1583.
+- MELODIA VOCÁLICA: top-5 esqueletos de vogal cobrem 78% dos nomes vs null 45%±6%, z=+5.19. Dominantes: AA (17), OA (5), AOA (4), AE (3), AO (2). As vogais quase não variam (centradas em A); as consoantes dão a distinção.
+- ONSET sonoridade: clusters iniciais que sobem em sonoridade obs 0.54 vs null 0.45, z=+0.95 — não especial.
+- ABERTURA silábica interna: obs 0.40 vs null 0.47, z=−1.12 — miolo tem coda (só o FINAL é aberto, #391), não é CV puro.
+VEREDITO: melodia vocálica real e concentrada (z=+5.19) — o Loagaeth é entoado sobre a vogal A (tom sustentado), consoante como articulação; modelo de mantra/canto (vogal fixa, consoante variável). Fecha o eixo-som com 5 sinais: pronunciável #386 + assonante #387 + acento latino #388 + vogal-final #391 + melodia-em-A #392. O livro é, medidamente, um idioma CANTADO sobre A.
+
+## #393 — Entrega: "A Voz do Loagaeth" (guia de entoação)
+`src/a224_voice_data.py` + viz/voz_loagaeth.html. Consolida os 5 achados do eixo-som em prática. Perfil fônico: vogal A domina (46/63 = 73% das vogais), consoantes-articuladoras N 21, D 15, H 15, C 12, X 11; melodias AA/OA. Guia: tom em A, acento penúltimo (latino), final vocálico sustentado, encadeamento assonante; + exemplos silabados com tônica e final marcados (DNOC·HA, CHAS·TO, AN·ZACH). Instrumento operativo — diz COMO entoar, não o que significa (sentido selado). Fecha a linha do som com um deliverável usável na prática.
+
+## #394 — Menzerath (artefato) e o H como aspirado final
+`src/a225_menzerath.py`, ~3000 palavras da folha 1.
+- MENZERATH-ALTMANN (negativo honesto): corr(nº sílabas, comprimento médio de sílaba) = −0.854 (lei aparece: K1 3.29→K3 2.59 letras/sílaba), MAS null = −0.853±0.048, z=−0.02. É artefato matemático (comprimento ~fixo ÷ sílabas), não propriedade de língua. Não conta.
+- H ASPIRADO FINAL (real): dos 1258 H, 746 (59%) são finais de palavra (aleatório daria ~25%). O H prefere fortemente o fim. Com #391 (termina em vogal), as palavras fecham em VOGAL (canta) ou H (respira/aspira) — tom ou sopro, raramente consoante dura. O H é a marca de respiração do idioma entoado; completa a regra de fechamento de canto (nunca batida seca). Reforça o eixo-som.
+
+## #395 — Arco funcional por elemento + guia prático (pronúncia e função)
+`src/a226_pronounce_function.py` + viz/guia_pratico.html. Dois produtos pedidos:
+- PRONÚNCIA: tabela das 21 letras com nome de Dee + som (A=Un "ah", N=Drux, O=Med "ô", H=Na aspirado, R=Don vibrado…) para leitura e VIBRAÇÃO (soletrar pelos nomes: NOCHA = Drux·Med·Veh·Na·Un); + regras do canto (tom A, acento penúltimo, final vogal/H).
+- FUNÇÃO POR REGIÃO (elemento dominante por folha, pilha_data): Abertura 1-12, Corpo 13-25, Costura 26-28, Descida 29-40 = TERRA (matéria/corpo/manifestação); Profundo 41-48 = ÁGUA (emoção/dissolução).
+ACHADO NOVO — ARCO: o livro é Terra do início à descida e vira Água só no profundo. Terra→Água = manifestação→dissolução (o solve alquímico). Dualidade: corpo dos nomes = consoante-Terra (N/D/C/S #393), voz = vogal A-Ar (#392) — manifesta em terra, dissolve em água, falado no ar. Operativo: cada região tem seu tom de trabalho (Terra=fixar/manifestar; Água=dissolver/sentir). Não decifra sentido (selado) — diz COMO e para QUÊ operar.

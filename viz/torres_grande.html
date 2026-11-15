@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A Grande Tábua — as 4 Torres</title>
+<style>
+:root{--bg:#090c11;--panel:#141a22;--ink:#e6edf3;--mut:#8b97a7;--line:#242c38;--ac:#d6b96a;
+  --ar:#5bb3e0;--agua:#3d6bd6;--terra:#c9a24b;--fogo:#e0573b}
+@media(prefers-color-scheme:light){:root{--bg:#f7f6f1;--panel:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.5 system-ui,Segoe UI,Roboto,Arial}
+.wrap{max-width:1180px;margin:0 auto;padding:12px 16px 50px}
+a.home{color:var(--ar);text-decoration:none;font-size:13px}
+h1{font-size:20px;margin:4px 0 2px}.sub{color:var(--mut);font-size:12.5px;margin:0 0 10px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 12px}
+.tab{display:flex;align-items:center;gap:6px;padding:7px 16px;border:1px solid var(--line);border-radius:9px;cursor:pointer;font-weight:600;font-size:13.5px}
+.tab .sw{width:12px;height:12px;border-radius:3px}.tab.on{border-width:2px}
+.flex{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start}
+.gridbox{flex:1 1 520px;min-width:300px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:2px;background:var(--line);padding:2px;border-radius:8px}
+.cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;background:#10151c;color:#9fb0c2;
+  font:600 clamp(9px,1.9vw,16px) ui-monospace,monospace;border-radius:2px;user-select:none}
+.cell.cross{background:#2a2410;color:#e9d9a0}
+.cell.lit{background:var(--lit,#d6b96a);color:#0a0a0a;font-weight:800;box-shadow:0 0 0 2px #fff inset}
+.panel{flex:1 1 300px;min-width:260px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;max-height:640px;overflow:auto}
+.panel h2{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--ac);margin:12px 0 5px}
+.panel h2:first-child{margin-top:0}
+.nm{display:flex;justify-content:space-between;gap:8px;padding:3px 7px;border-radius:6px;cursor:pointer;border-left:3px solid transparent}
+.nm:hover{background:rgba(127,127,127,.12)}.nm.sel{background:rgba(214,185,106,.16)}
+.nm .w{font:700 12.5px ui-monospace,monospace}.nm .k{color:var(--mut);font-size:11px}
+.union{font-size:12px;color:var(--mut);margin:8px 0}
+.note{color:var(--mut);font-size:12px;margin-top:12px;border-left:3px solid var(--line);padding-left:10px}
+.legend{font-size:11px;color:var(--mut);margin:6px 0}
+.hint{font:700 13px ui-monospace,monospace;margin:4px 0 8px;min-height:18px}
+</style>
+</head>
+<body><div class="wrap">
+<a class="home" href="index.html">← painel</a>
+<h1>A Grande Tábua — as 4 Torres</h1>
+<p class="sub">As letras reais de cada Torre de Vigia (13×12). A cruz dourada no meio é a Grande Cruz (de onde saem Rei, Anciãos e Nomes de Deus). Clique um nome pra acender seus quadrados.</p>
+<div class="tabs" id="tabs"></div>
+<div class="hint" id="hint">clique um nome à direita</div>
+<div class="flex">
+  <div class="gridbox"><div class="grid" id="grid"></div>
+    <div class="legend">A cruz central = Grande Cruz. Os 4 cantos = sub-ângulos (Ar · Água · Terra · Fogo). Servientes, querubim e cruz do calvário saem dos cantos.</div>
+  </div>
+  <div class="panel" id="panel"></div>
+</div>
+<p class="note" id="note"></p>
+</div>
+<script>
+const TC={ar:"#5bb3e0",agua:"#3d6bd6",terra:"#c9a24b",fogo:"#e0573b"};
+const TPT={ar:"Ar",agua:"Água",terra:"Terra",fogo:"Fogo"};
+const KPT={"god name":"Nomes de Deus (linha do espírito)","king":"Rei","senior":"Anciãos (Seniores)",
+  "calvary-flame":"Cruz do calvário — chama","calvary-command":"Cruz do calvário — comando",
+  "kerub":"Querubins","lesser angel":"Anjos menores (servientes)"};
+const KORD=["god name","king","senior","kerub","calvary-flame","calvary-command","lesser angel"];
+let D=null,cur="ar",sel=null;
+
+fetch("great_table.json").then(r=>r.json()).then(d=>{
+  D=d;
+  const tb=document.getElementById("tabs");
+  for(const el of ["ar","agua","terra","fogo"]){
+    const t=document.createElement("div");t.className="tab"+(el===cur?" on":"");t.dataset.e=el;t.style.borderColor=TC[el];
+    t.innerHTML=`<span class="sw" style="background:${TC[el]}"></span>Torre ${TPT[el]}`;
+    t.onclick=()=>{cur=el;sel=null;document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x.dataset.e===el));drawGrid();buildList();};
+    tb.appendChild(t);
+  }
+  document.getElementById("note").innerHTML=
+    `Os 4 Nomes Sagrados da Tábua da União ligam as Torres: ${Object.entries(d.union).map(([k,v])=>TPT[k]+" = "+v).join(" · ")}. `+
+    `Esta é a FONTE dos anjos — o Loagaeth é outro documento. Ver se esses nomes "aparecem" no Loag: telas Traços/Seres/Elemento×posição.`;
+  drawGrid();buildList();
+});
+
+function drawGrid(){
+  const g=D.grids[cur],grid=document.getElementById("grid");grid.innerHTML="";
+  for(let r=0;r<13;r++)for(let c=0;c<12;c++){
+    const cross=(r===6)||(c===5||c===6);
+    const el=document.createElement("div");el.className="cell"+(cross?" cross":"");
+    el.dataset.r=r;el.dataset.c=c;el.textContent=g[r][c];
+    grid.appendChild(el);
+  }
+  if(sel)lite(sel);
+}
+function lite(n){
+  document.querySelectorAll(".cell.lit").forEach(e=>e.classList.remove("lit"));
+  const col=TC[cur];
+  for(const [r,c] of n.cells){
+    const el=document.querySelector(`.cell[data-r="${r}"][data-c="${c}"]`);
+    if(el){el.classList.add("lit");el.style.setProperty("--lit",col);}
+  }
+  document.getElementById("hint").innerHTML=`<span style="color:${col}">${n.name}</span> — ${KPT[n.kind]||n.kind}${n.sub?" · sub "+TPT[n.sub]:""}`;
+}
+function buildList(){
+  const p=document.getElementById("panel");p.innerHTML="";
+  const mine=D.names.filter(n=>n.tower===cur);
+  for(const k of KORD){
+    const items=mine.filter(n=>n.kind===k);
+    if(!items.length)continue;
+    const h=document.createElement("h2");h.textContent=KPT[k]+" ("+items.length+")";p.appendChild(h);
+    for(const n of items){
+      const el=document.createElement("div");el.className="nm"+(sel===n?" sel":"");
+      el.innerHTML=`<span class="w">${n.name}</span><span class="k">${n.sub?"sub "+TPT[n.sub]:""}</span>`;
+      el.onmouseenter=()=>lite(n);
+      el.onclick=()=>{sel=n;buildList();lite(n);};
+      p.appendChild(el);
+    }
+  }
+}
+</script>
+</body>
+</html>

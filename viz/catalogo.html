@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Catálogo dos achados — Loagaeth</title>
+<style>
+:root{--bg:#0b0e13;--card:#141a22;--ink:#e6edf3;--mut:#8b97a7;--line:#242c38;--ac:#d6b96a;
+  --real:#49b67b;--ref:#e0573b;--desc:#c9a24b}
+@media(prefers-color-scheme:light){:root{--bg:#f7f6f1;--card:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,Segoe UI,Roboto,Arial}
+.wrap{max-width:960px;margin:0 auto;padding:18px 16px 70px}
+a.home{color:#5bb3e0;text-decoration:none;font-size:13px}
+h1{font-size:24px;margin:4px 0 2px}.sub{color:var(--mut);font-size:13px;margin:0 0 12px}
+.ctrls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0 16px}
+input,.chip{background:var(--card);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:6px 11px;font-size:12.5px}
+input{width:200px}
+.chip{cursor:pointer;user-select:none}.chip.off{opacity:.4}
+.tot{color:var(--mut);font-size:12px}
+h2{font-size:12.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--ac);margin:22px 0 8px;border-top:1px solid var(--line);padding-top:12px}
+.f{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-left-width:4px;border-radius:9px;padding:9px 12px;margin:7px 0}
+.f.real{border-left-color:var(--real)}.f.ref{border-left-color:var(--ref)}.f.desc{border-left-color:var(--desc)}
+.f .id{font:700 11px ui-monospace,monospace;color:var(--mut);min-width:40px}
+.f .bd{flex:1}.f .ti{font-weight:600}.f .de{color:var(--mut);font-size:12.5px;margin-top:2px}
+.f .meta{font-size:11px;color:var(--mut);margin-top:3px}
+.f a{color:#5bb3e0;text-decoration:none;font-size:11.5px}
+.f .tag{font:700 10px ui-monospace;padding:1px 7px;border-radius:9px;background:rgba(127,127,127,.15);white-space:nowrap}
+.f.real .tag{color:var(--real)}.f.ref .tag{color:var(--ref)}.f.desc .tag{color:var(--desc)}
+.note{color:var(--mut);font-size:12.5px;margin-top:20px;border-left:3px solid var(--line);padding-left:10px}
+</style>
+</head>
+<body><div class="wrap">
+<a class="home" href="index.html">← painel</a>
+<h1>Catálogo dos achados</h1>
+<p class="sub">Todo achado do projeto (#331–#374), por tema, com status, método e a tela que mostra. Verde = real (bateu null). Vermelho = refutado. Dourado = descritivo. Fonte: <code>docs/RESEARCH_LOG.md</code>.</p>
+<div class="ctrls">
+  <input id="q" placeholder="buscar…">
+  <span class="chip" data-v="real">● real</span>
+  <span class="chip" data-v="ref">● refutado</span>
+  <span class="chip" data-v="desc">● descritivo</span>
+  <span class="tot" id="tot"></span>
+</div>
+<div id="list"></div>
+<p class="note">O veredito de status é a lente cética (bateu o null?). A lente operativa/enoquiana roda em paralelo — as telas de operação (fragmentos, mapa, seres, estrutura) servem a prática, sem veredito. Cada sistema de nomes vive na sua tábua; o Loag é a camada de língua.</p>
+</div>
+<script>
+const D=[
+["Natureza do livro — as 3 camadas",[
+ ["331","Folha 1 é léxico real","real","recorrência/boa-formação (z=+44)","grade.html"],
+ ["333","Folha 1 divide léxico com as Chamadas","real","perplexidade cruzada (z=+7.5)","call_map.html"],
+ ["351","Não é língua natural","real","Zipf −0.36, Heaps β≈0.97","pesquisa.html"],
+ ["342","Mapa do livro: densidade pica no miolo, cai no fim","real","z=+126","mapa_livro.html"],
+ ["360","Profundo (40-48) = dissolução","desc","nomes somem, entropia sobe","pilha.html"],
+ ["357a","Comprime 21.6% melhor que embaralhado","real","estrutura global real","dashboard.html"],
+]],
+["O gerador de nomes",[
+ ["334","Partículas = peças do gerador","real","afixos/fragmentos (z=+5.5)","forja_neural.html"],
+ ["335","Gerador PREFIXO·RAIZ·SUFIXO, combinação livre","desc","62/90 núcleo","forja_neural.html"],
+ ["337","Seleção dos nomes = recorrência na grade","real","z=+14.7","atlas_nomes.html"],
+ ["351b","Rico (esqueleto·melodia·template) regenera 100%","real","90/90","forja_neural.html"],
+ ["370a","Gerador tem MEMÓRIA profunda (Markov)","real","H 4.03→1.95; embaralhado plano","estrutura.html"],
+]],
+["Geometria, mapa e o TEAR",[
+ ["341","Lê-se em LINHA; borda e diagonal carregam; coluna morta p/ nome","real","+103/+42/−1.4","grade.html"],
+ ["343","Costura 26-28 lida na diagonal (NOCHASTORAL)","real","0→55 nomes","pilha.html"],
+ ["353","Escriba: contínuo ordenado + costura","real","r=+0.48","mapa_livro.html"],
+ ["355","Cada nome vive num bloco contíguo","real","z=+35.5","mapa_livro.html"],
+ ["356","Rotação diagonal exclusiva de 26-28","real","só 26-28","dialetos.html"],
+ ["357b","A borda é um anel de nomes legível","real","34 vs 0.2","estrutura.html"],
+ ["369a","Horizontal NÃO repete (anti-estrutura direcional)","real","z=−77 (o mais forte)","estrutura.html"],
+ ["369b","Coluna 0/borda é gabarito posicional; organização colunar","real","χ² z=+173","estrutura.html"],
+ ["369c","Persistência vertical + template atravessa páginas","real","z=+11","estrutura.html"],
+ ["370b","Gramática mora na horizontal, vertical é esqueleto","real","H 3.33 vs 3.93","estrutura.html"],
+ ["370c","Corridas verticais reais (urdidura)","real","z=+4.86, máx 7","estrutura.html"],
+ ["370d","Borda feita de letras raras (V 4.9×, Y, Z, P, G)","desc","paleta do portão","estrutura.html"],
+ ["370e","Costura 26-28 = dialeto mais anômalo","real","método independente","dialetos.html"],
+ ["371a","MI entre colunas de longo alcance (até dist. 8-9)","real","gramática horizontal larga (z k8=7.3)","estrutura.html"],
+ ["371b","Nenhum motivo/template 2D se repete — campo mais diverso que o acaso","real","tile top z=−6.95","estrutura.html"],
+ ["371c","Costura 26-28 = maior entropia + letras raras (W quase só ali)","desc","H 7.66 vs 7.04","dialetos.html"],
+ ["372a","Família-mãe repete muito (n10: 2451 vs null 0); NOCHA 546×, NOCHASTORA 37×","real","assinatura de campo de nomes","nomes_recorrentes.html"],
+ ["372b","4 quadrantes têm perfil de letra distinto (eco dos subângulos)","real","χ² z=+5.73","nomes_recorrentes.html"],
+ ["372c","Sem linha/coluna duplicada (sem template literal)","ref","0 vs null 0","dashboard.html"],
+ ["373a","Nomes têm TERRITÓRIO: ocupam ~25/48 folhas, concentrados (sub-dispersos)","real","z=−42 vs espalhado","mapa_livro.html"],
+ ["373b","Nomes são CONJUNTO, não SEQUÊNCIA: sem ordem fixa entre folhas","ref","desvio 0.095 ≈ aleatório","dashboard.html"],
+ ["374a","Inventário ampliado: ~12 raízes fora de NOCHA (GRAPHA, ACHEPH, ANTANT, XALGRA, GETH…)","desc","mais povos que a família-mãe","fragmentos.html"],
+ ["374b","Sem sub-famílias distribucionais: 21/24 nomes num só blobe de território","ref","jaccard≥0.6","mapa_livro.html"],
+ ["352","Leituras novas (espiral/acróstico/coluna): nada","ref","0 canal novo","mapa_ocorrencias.html"],
+ ["354a","Simetria-espelho: sem arquitetura espelhada","ref","z=+0.9","dashboard.html"],
+]],
+["Genealogia dos nomes",[
+ ["344","90 nomes = famílias; NOCHA×CHASTOR → NOCHASTOR","real","z=+229.6","genealogia.html"],
+ ["358","Pares-mínimos: mesma raiz, só a vogal muda","real","z=+46","dinastias.html"],
+ ["358b","Nomes vêm em rajadas (burstiness)","real","B=+0.52","mapa_livro.html"],
+]],
+["Fronteiras — o Loag contém outros sistemas? (NÃO)",[
+ ["336","Pontes com Torres/Heptarquia/governadores","ref","null","seres.html"],
+ ["340","Astrologia: ciclo zodíaco/planeta","ref","z=−1.6","correspondencias.html"],
+ ["348","Anjos venusianos geráveis","ref","confound","seres.html"],
+ ["349","Vigilantes de Enoque","ref","z=+0.5","seres.html"],
+ ["350","Nomes de Deus/sefirot/YHVH","ref","z=−2.5","seres.html"],
+ ["361","Chamada N abre folha N","ref","1/19; afina c/ folha 1","call_map.html"],
+ ["362","Nomes das Torres como traço reto 2D","ref","nenhum tier > null","tower_traces.html"],
+ ["363","Curva comprimento→aparição = acaso","desc","rei 0%, menor 75%","seres.html"],
+ ["364","Elemento/poder do anjo bate com a posição? Não","ref","z=−0.13","elemento_posicao.html"],
+ ["365","Reis/Anciões sob TODA regra (ré/cavalo/boggle)","ref","z≤1.5","mapa_ocorrencias.html"],
+ ["366","Reis em pedaços (BATA+IVAH)? Nunca se juntam","ref","junta 0","fragmentos.html"],
+ ["367","ELS/governadores/Collecta/gematria/translit/acróstico","ref","≤ acaso","fragmentos.html"],
+ ["369d","IC/Kasiski: sem cifra escondida","ref","IC=0.079 = freq","estrutura.html"],
+]],
+["Léxico (honesto)",[
+ ["338","Laycock: 114 palavras — INFLADO por auto-citação","ref","corrigido","dashboard.html"],
+ ["339","Léxico real confiável ≈ 24","desc","21 Chamadas + 3 do Dee","dashboard.html"],
+]],
+];
+const VN={real:"REAL",ref:"REFUTADO",desc:"DESCRITIVO"};
+let on={real:1,ref:1,desc:1},q="";
+const el=document.getElementById("list");
+function render(){
+  el.innerHTML="";let n=0;
+  for(const [sec,items] of D){
+    const vis=items.filter(([id,ti,v,me,sc])=>on[v]&&((id+ti+me).toLowerCase().includes(q)));
+    if(!vis.length)continue;
+    const h=document.createElement("h2");h.textContent=sec;el.appendChild(h);
+    for(const [id,ti,v,me,sc] of vis){n++;
+      const d=document.createElement("div");d.className="f "+v;
+      d.innerHTML=`<span class="id">#${id}</span><div class="bd"><div class="ti">${ti}</div>`+
+        `<div class="meta">${me}${sc?` · <a href="${sc}">ver tela ↗</a>`:""}</div></div>`+
+        `<span class="tag">${VN[v]}</span>`;
+      el.appendChild(d);}
+  }
+  document.getElementById("tot").textContent=n+" achados";
+}
+document.querySelectorAll(".chip").forEach(c=>{c.onclick=()=>{on[c.dataset.v]=!on[c.dataset.v];c.classList.toggle("off",!on[c.dataset.v]);render();};});
+document.getElementById("q").oninput=e=>{q=e.target.value.toLowerCase();render();};
+render();
+</script>
+</body>
+</html>

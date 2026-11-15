@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Elemento × posição — os anjos no Loagaeth</title>
+<style>
+:root{--bg:#090c11;--panel:#141a22;--ink:#e6edf3;--mut:#8b97a7;--line:#242c38;--ac:#d6b96a;
+  --Ar:#5bb3e0;--Agua:#3d6bd6;--Terra:#c9a24b;--Fogo:#e0573b;--ok:#49b67b;--no:#e0573b;--desc:#c9a24b}
+@media(prefers-color-scheme:light){:root{--bg:#f7f6f1;--panel:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:13.5px/1.55 system-ui,Segoe UI,Roboto,Arial}
+.wrap{max-width:980px;margin:0 auto;padding:12px 16px 50px}
+a.home{color:var(--Ar);text-decoration:none;font-size:13px}
+h1{font-size:21px;margin:4px 0 2px}.sub{color:var(--mut);font-size:12.5px;margin:0 0 12px}
+.cards{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 16px}
+.card{flex:1 1 300px;background:var(--panel);border:1px solid var(--line);border-left-width:4px;border-radius:10px;padding:12px 14px}
+.card.ok{border-left-color:var(--ok)}.card.no{border-left-color:var(--no)}.card.desc{border-left-color:var(--desc)}
+.card h2{font-size:13px;margin:0 0 6px}
+.big{font:700 24px ui-monospace,monospace;margin:2px 0}
+.card .v{font-size:12.5px;color:var(--mut)}
+.verd{display:inline-block;font:700 11px ui-monospace;padding:2px 8px;border-radius:10px;margin-top:6px;background:rgba(127,127,127,.15)}
+.verd.ok{color:var(--ok)}.verd.no{color:var(--no)}.verd.desc{color:var(--desc)}
+h3{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--ac);margin:20px 0 8px;border-top:1px solid var(--line);padding-top:12px}
+.chart{display:flex;align-items:flex-end;gap:2px;height:200px;border-bottom:1px solid var(--line);padding-bottom:0}
+.bar{flex:1;min-width:0;border-radius:2px 2px 0 0;position:relative}
+.bar:hover{outline:1px solid #fff}
+.axis{display:flex;gap:2px;font-size:9px;color:var(--mut);margin-top:3px}
+.axis span{flex:1;text-align:center}
+.leg{display:flex;gap:14px;font-size:11px;color:var(--mut);margin:10px 0}
+.sw{display:inline-block;width:10px;height:10px;border-radius:2px;vertical-align:-1px;margin-right:3px}
+.band{display:flex;gap:10px;margin:8px 0}
+.band div{flex:1;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 10px;text-align:center}
+.band .n{font:700 20px ui-monospace}
+.note{color:var(--mut);font-size:12.5px;margin-top:14px;border-left:3px solid var(--line);padding-left:10px}
+#tip{position:fixed;background:#000;color:#fff;font-size:11px;padding:3px 7px;border-radius:5px;pointer-events:none;opacity:0;transition:.1s}
+</style>
+</head>
+<body><div class="wrap">
+<a class="home" href="index.html">← painel</a>
+<h1>Elemento × posição</h1>
+<p class="sub">Os nomes das Torres <b>estão</b> no Loagaeth (como traço reto). Pergunta honesta: a <b>posição</b> deles carrega o sentido — o elemento/poder do anjo bate com onde ele cai? E eles somem mesmo no fundo do livro? Tudo contra null.</p>
+
+<div class="cards" id="cards"><div class="card">carregando…</div></div>
+
+<h3>Densidade de traços por folha (1 → 48)</h3>
+<div class="leg" id="leg"></div>
+<div class="chart" id="chart"></div>
+<div class="axis" id="axis"></div>
+<div class="band" id="band"></div>
+
+<p class="note" id="note"></p>
+</div>
+<div id="tip"></div>
+<script>
+const EC={Ar:"#5bb3e0",Agua:"#3d6bd6",Terra:"#c9a24b",Fogo:"#e0573b"};
+fetch("power_position.json").then(r=>r.json()).then(d=>{
+  const A=d.A,B=d.B;
+  const clsA=A.verdict==="REAL"?"ok":(A.verdict==="ANTI"?"no":"no");
+  const clsB=B.verdict.startsWith("REAL")?"ok":"desc";
+  document.getElementById("cards").innerHTML=
+    `<div class="card ${clsA}"><h2>A · Elemento do anjo = elemento da folha?</h2>
+      <div class="big">${(A.observed_rate*100).toFixed(1)}%</div>
+      <div class="v">dos anjos caem numa folha do seu próprio elemento.<br>
+      Acaso puro = 25%. Null (letras embaralhadas) = ${(A.null_mean*100).toFixed(1)}% ± ${(A.null_sd*100).toFixed(1)}.<br>
+      z = <b>${A.z}</b> &nbsp; (${A.matches}/${A.placed})</div>
+      <span class="verd ${clsA}">${A.verdict==="REAL"?"BATE — elemento alinha com posição":A.verdict==="ANTI"?"ANTI — evita o próprio elemento":"NÃO BATE — posição é cega ao elemento"}</span></div>
+     <div class="card ${clsB}"><h2>B · Os nomes somem no fundo?</h2>
+      <div class="big">${B.obs_shallow_2_25} → ${B.obs_deep_26_48}</div>
+      <div class="v">traços no raso (folhas 2–25) vs fundo (26–48).<br>
+      Null (mesmas letras embaralhadas): ${B.null_shallow_mean} → ${B.null_deep_mean}.<br>
+      diferença raso−fundo: observada ${B.obs_gap} vs null ${B.null_gap_mean} ± ${B.null_gap_sd} &nbsp; z = <b>${B.z_gap}</b></div>
+      <span class="verd ${clsB}">${B.verdict.startsWith("REAL")?"SOME ALÉM DAS LETRAS":"SOME — mas só porque as letras mudam"}</span></div>`;
+
+  // chart
+  const pf=d.folha_elem; const counts=d.perfolha;
+  const maxc=Math.max(1,...Object.values(counts));
+  const chart=document.getElementById("chart"),axis=document.getElementById("axis");
+  const tip=document.getElementById("tip");
+  let html="",ax="";
+  for(let f=1;f<=48;f++){
+    const c=counts[f]||0, el=pf[f]||"?", col=EC[el]||"#556";
+    const h=Math.round(100*c/maxc);
+    html+=`<div class="bar" data-f="${f}" data-c="${c}" data-e="${el}" style="height:${h}%;background:${col}"></div>`;
+    ax+=`<span>${f%6===0||f===1?f:""}</span>`;
+  }
+  chart.innerHTML=html;axis.innerHTML=ax;
+  chart.querySelectorAll(".bar").forEach(b=>{
+    b.onmousemove=e=>{tip.style.opacity=1;tip.style.left=(e.clientX+10)+"px";tip.style.top=(e.clientY-10)+"px";
+      tip.textContent=`f${b.dataset.f}: ${b.dataset.c} traços · ${b.dataset.e}`;};
+    b.onmouseleave=()=>tip.style.opacity=0;
+  });
+  document.getElementById("leg").innerHTML=
+    `<span><span class="sw" style="background:#c9a24b"></span>Terra</span>`+
+    `<span><span class="sw" style="background:#5bb3e0"></span>Ar</span>`+
+    `<span><span class="sw" style="background:#3d6bd6"></span>Água</span>`+
+    `<span><span class="sw" style="background:#e0573b"></span>Fogo</span>`+
+    `<span style="margin-left:auto">cor da barra = elemento dominante da folha · altura = nº de anjos achados ali</span>`;
+  document.getElementById("band").innerHTML=
+    `<div><div class="n">${B.obs_shallow_2_25}</div><div class="v">raso (2–25)</div></div>`+
+    `<div><div class="n">${B.obs_deep_26_48}</div><div class="v">fundo (26–48)</div></div>`+
+    `<div><div class="n">${Math.round(100*(B.obs_shallow_2_25-B.obs_deep_26_48)/Math.max(1,B.obs_shallow_2_25))}%</div><div class="v">queda raso→fundo</div></div>`;
+
+  document.getElementById("note").innerHTML=
+    `Honesto: os nomes estão lá — mas como linha reta de caça-palavras. `+
+    (A.verdict==="REAL"
+      ? `O elemento do anjo <b>bate</b> com a folha acima do acaso (z=${A.z}): a posição carrega sentido elemental.`
+      : `O elemento do anjo <b>não bate</b> com a folha (z=${A.z}, ~igual ao acaso de 25%): onde cada anjo cai é ditado pelas letras, não pelo poder dele.`)+
+    ` E sim, eles rareiam no fundo (${B.obs_shallow_2_25}→${B.obs_deep_26_48}), `+
+    (B.verdict.startsWith("REAL")
+      ? `e mais do que as letras explicam — algo real na descida.`
+      : `mas exatamente na medida em que as letras A/O somem no fundo (#360). O sumiço é da mistura de letras, não dos anjos.`);
+});
+</script>
+</body>
+</html>

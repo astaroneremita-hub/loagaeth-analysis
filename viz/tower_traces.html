@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Traços das Torres no Loagaeth</title>
+<style>
+:root{--bg:#090c11;--panel:#141a22;--ink:#e6edf3;--mut:#8b97a7;--line:#242c38;--ac:#d6b96a;
+  --ar:#5bb3e0;--agua:#3d6bd6;--terra:#c9a24b;--fogo:#e0573b}
+@media(prefers-color-scheme:light){:root{--bg:#f7f6f1;--panel:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.5 system-ui,Segoe UI,Roboto,Arial}
+.wrap{max-width:1180px;margin:0 auto;padding:12px 16px 50px}
+a.home{color:var(--ar);text-decoration:none;font-size:13px}
+h1{font-size:20px;margin:4px 0 2px}.sub{color:var(--mut);font-size:12.5px;margin:0 0 10px}
+.banner{border:1px solid var(--line);border-left-width:4px;border-radius:9px;padding:8px 12px;margin:8px 0 14px;font-size:13px}
+.banner.ref{border-left-color:var(--fogo)}.banner.real{border-left-color:var(--terra)}
+.banner b{color:var(--ac)}
+.flex{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start}
+.left{flex:1 1 560px;min-width:320px}
+.panel{flex:1 1 300px;min-width:260px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+canvas{width:100%;height:auto;background:#05070a;border:1px solid var(--line);border-radius:8px;cursor:crosshair}
+.ctrls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 8px}
+select,button{background:#1b2634;border:1px solid #2c3a4e;color:var(--ink);border-radius:7px;padding:5px 10px;font-size:12px;cursor:pointer}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid var(--line);border-radius:20px;font-size:12px;cursor:pointer;user-select:none}
+.chip .sw{width:10px;height:10px;border-radius:50%}
+.chip.off{opacity:.35}
+.panel h2{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);margin:0 0 6px}
+.tr{display:flex;justify-content:space-between;gap:8px;padding:3px 6px;border-radius:6px;cursor:pointer;border-left:3px solid transparent}
+.tr:hover{background:rgba(127,127,127,.12)}
+.tr.hl{background:rgba(214,185,106,.14)}
+.tr .nm{font:700 12px ui-monospace,monospace}
+.tr .kd{color:var(--mut);font-size:11px}
+.leg{font-size:11px;color:var(--mut);margin-top:8px}
+.note{color:var(--mut);font-size:12px;margin-top:12px;border-left:3px solid var(--line);padding-left:10px}
+.count{color:var(--mut);font-size:12px;margin:2px 0 6px}
+</style>
+</head>
+<body><div class="wrap">
+<a class="home" href="index.html">← painel</a>
+<h1>Traços das Torres no Loagaeth</h1>
+<p class="sub">Os nomes das 4 Torres de Vigia (por quadrante) procurados como <b>linha reta</b> (8 direções, estilo caça-palavras) dentro de cada grade 49×49. Cada traço achado vira uma linha sobre a folha. Cor = Torre.</p>
+<div id="banner" class="banner ref">carregando…</div>
+
+<div class="flex">
+  <div class="left">
+    <div class="ctrls">
+      <label>Folha <select id="side"></select></label>
+      <span id="chips"></span>
+      <button id="only">só nomes longos (≥6)</button>
+    </div>
+    <div class="count" id="count"></div>
+    <canvas id="cv" width="735" height="735"></canvas>
+  </div>
+  <div class="panel">
+    <h2>Traços nesta folha</h2>
+    <div id="list"></div>
+    <div class="leg">Linha reta = achado real de caça-palavras. Nomes curtos (4 letras) aparecem por acaso em quase toda folha — por isso o teste honesto só conta os <b>longos</b>.</div>
+  </div>
+</div>
+
+<p class="note" id="verdictnote"></p>
+</div>
+<script>
+const TC={ar:"#5bb3e0",agua:"#3d6bd6",terra:"#c9a24b",fogo:"#e0573b"};
+const TPT={ar:"Ar",agua:"Água",terra:"Terra",fogo:"Fogo"};
+let D=null, curSide=null, towerOn={ar:1,agua:1,terra:1,fogo:1}, longOnly=false, hlName=null;
+
+fetch("tower_traces.json").then(r=>r.json()).then(d=>{
+  D=d;
+  const z=d.z_big, ref=(d.verdict!=="REAL");
+  const b=document.getElementById("banner");
+  b.className="banner "+(ref?"ref":"real");
+  b.innerHTML=`Veredito: <b>${d.verdict}</b> — nomes longos (≥5 letras) achados como traço reto não superam o acaso (z=${z}). `+
+    (ref?`Os nomes das Torres <b>não estão desenhados</b> na grade; o que aparece é caça-palavras de inventário grande.`:`Achado acima do acaso.`);
+  document.getElementById("verdictnote").innerHTML=
+    `São ${d.traces.length} traços no total (todos os tamanhos). Troque de folha pra ver onde cada nome cai. "${d.verdict}" vale pro teste estatístico; o visual existe pra você conferir com o olho.`;
+
+  // chips
+  const cs=document.getElementById("chips");
+  for(const t of ["ar","agua","terra","fogo"]){
+    const el=document.createElement("span"); el.className="chip"; el.dataset.t=t;
+    el.innerHTML=`<span class="sw" style="background:${TC[t]}"></span>${TPT[t]}`;
+    el.onclick=()=>{towerOn[t]=!towerOn[t]; el.classList.toggle("off",!towerOn[t]); draw(); buildList();};
+    cs.appendChild(el);
+  }
+  document.getElementById("only").onclick=function(){longOnly=!longOnly;
+    this.style.borderColor=longOnly?"var(--ac)":"#2c3a4e"; draw(); buildList();};
+
+  // sides that actually have a trace, sorted by table number
+  const sides=[...new Set(d.traces.map(t=>t.side))].sort((a,b)=>parseInt(a)-parseInt(b)||a.localeCompare(b));
+  const sel=document.getElementById("side");
+  for(const s of sides){const o=document.createElement("option");o.value=s;
+    o.textContent="f"+s+" ("+d.traces.filter(t=>t.side===s).length+")";sel.appendChild(o);}
+  sel.onchange=()=>{curSide=sel.value; draw(); buildList();};
+  curSide=sides[0]; draw(); buildList();
+});
+
+function activeTraces(){
+  return D.traces.filter(t=>t.side===curSide && towerOn[t.tower] && (!longOnly || t.name.length>=6));
+}
+function draw(){
+  const cv=document.getElementById("cv"),x=cv.getContext("2d"),N=49,W=cv.width,cell=W/N;
+  x.clearRect(0,0,W,W);
+  const g=D.grids[curSide];
+  // faint letters
+  x.font=(cell*0.62).toFixed(1)+"px ui-monospace,monospace";x.textAlign="center";x.textBaseline="middle";
+  for(let r=0;r<N;r++)for(let c=0;c<N;c++){
+    const ch=g[r][c]; x.fillStyle=ch==="?"?"#20262e":"#333d4a";
+    x.fillText(ch,c*cell+cell/2,r*cell+cell/2);
+  }
+  const tr=activeTraces();
+  for(const t of tr){
+    const hot=(t.name===hlName); const col=TC[t.tower];
+    x.strokeStyle=col; x.lineWidth=hot?3.2:1.6; x.globalAlpha=hot?1:0.8;
+    x.beginPath();
+    t.path.forEach((p,i)=>{const cx=p[1]*cell+cell/2,cy=p[0]*cell+cell/2; i?x.lineTo(cx,cy):x.moveTo(cx,cy);});
+    x.stroke();
+    // highlight letters on the path
+    x.globalAlpha=1; x.fillStyle=col; x.font=(cell*0.62).toFixed(1)+"px ui-monospace,monospace";
+    for(const p of t.path) x.fillText(g[p[0]][p[1]],p[1]*cell+cell/2,p[0]*cell+cell/2);
+    // start dot
+    const s=t.path[0]; x.beginPath(); x.arc(s[1]*cell+cell/2,s[0]*cell+cell/2,hot?4:2.6,0,7); x.fill();
+  }
+  x.globalAlpha=1;
+  document.getElementById("count").textContent=tr.length+" traços nesta folha"+(longOnly?" (≥6 letras)":"");
+}
+function buildList(){
+  const box=document.getElementById("list"); box.innerHTML="";
+  const tr=activeTraces().slice().sort((a,b)=>b.name.length-a.name.length||a.name.localeCompare(b.name));
+  for(const t of tr){
+    const el=document.createElement("div"); el.className="tr"+(t.name===hlName?" hl":"");
+    el.style.borderLeftColor=TC[t.tower];
+    el.innerHTML=`<span class="nm">${t.name}</span><span class="kd">${t.kind} · ${TPT[t.tower]}</span>`;
+    el.onmouseenter=()=>{hlName=t.name;draw();highlightRow();};
+    el.onmouseleave=()=>{hlName=null;draw();highlightRow();};
+    box.appendChild(el);
+  }
+  if(!tr.length) box.innerHTML='<span class="kd">nenhum traço (ajuste filtros)</span>';
+}
+function highlightRow(){
+  document.querySelectorAll(".tr").forEach(e=>e.classList.toggle("hl",
+    e.querySelector(".nm").textContent===hlName));
+}
+</script>
+</body>
+</html>

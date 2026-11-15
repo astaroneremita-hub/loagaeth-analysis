@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chamadas × folhas — instrumento de operação</title>
+<style>
+:root{--bg:#090c11;--panel:#141a22;--ink:#e6edf3;--mut:#8b97a7;--line:#242c38;--ac:#d6b96a;--eno:#c9a24b;--nome:#5bb3e0}
+@media(prefers-color-scheme:light){:root{--bg:#f7f6f1;--panel:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:13.5px/1.55 system-ui,Segoe UI,Roboto,Arial}
+.wrap{max-width:900px;margin:0 auto;padding:12px 16px 50px}
+a.home{color:var(--nome);text-decoration:none;font-size:13px}
+h1{font-size:21px;margin:4px 0 2px}.sub{color:var(--mut);font-size:12.5px;margin:0 0 12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:12px 14px;margin:10px 0;display:flex;gap:14px;flex-wrap:wrap}
+.lft{flex:1 1 300px;min-width:240px}
+.rgt{flex:1 1 240px;min-width:200px;border-left:1px solid var(--line);padding-left:14px}
+.hd{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+.n{font:700 15px ui-monospace;color:var(--ac)}
+.tab{font-size:12px;color:var(--mut)}
+.tab b{color:var(--nome)}
+.eno{font:600 14px ui-monospace,monospace;color:var(--eno);margin:4px 0}
+.eng{font-size:12.5px;color:var(--mut);font-style:italic}
+.full{font:11.5px/1.5 ui-monospace,monospace;color:#7d8795;max-height:0;overflow:hidden;transition:.2s;white-space:pre-wrap}
+.full.on{max-height:300px;margin-top:6px}
+.more{font-size:11px;color:var(--nome);cursor:pointer;margin-top:4px}
+.rgt h3{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);margin:0 0 6px}
+.nm{display:inline-flex;align-items:center;gap:5px;background:rgba(91,179,224,.12);border:1px solid var(--line);border-radius:14px;padding:2px 9px;margin:2px 3px 2px 0;font:700 12px ui-monospace,monospace}
+.nm .c{color:var(--mut);font-weight:400}
+.note{color:var(--mut);font-size:12px;margin-top:14px;border-left:3px solid var(--line);padding-left:10px}
+</style>
+</head>
+<body><div class="wrap">
+<a class="home" href="index.html">← painel</a>
+<h1>Chamadas × folhas</h1>
+<p class="sub">Cada Chamada (Clavis Angelica) ao lado da folha que ela abre, com os nomes mais pesados daquela folha. Instrumento de operação — a folha 1 não tem Chamada; entra-se pela 2.</p>
+<div id="list"></div>
+<p class="note" id="note"></p>
+</div>
+<script>
+fetch("calls_tables.json").then(r=>r.json()).then(d=>{
+  const box=document.getElementById("list");
+  for(const c of d.calls){
+    const el=document.createElement("div");el.className="card";
+    const nomes=(c.nomes_pesados||[]).map(([n,k])=>`<span class="nm">${n}<span class="c">${k}×</span></span>`).join("")||'<span class="tab">—</span>';
+    const full=(c.enoquiano||"").trim();
+    el.innerHTML=
+      `<div class="lft">
+        <div class="hd"><span class="n">${c.nome||('Chamada '+c.numero)}</span>
+          <span class="tab">${c.tabua?('abre a <b>folha '+c.tabua+'</b>'):'(Chamada dos 30 Aires)'}</span></div>
+        <div class="eno">${c.inicio||""}</div>
+        ${c.ingles?`<div class="eng">"${c.ingles.slice(0,160)}${c.ingles.length>160?'…':''}"</div>`:""}
+        ${full?`<div class="more" data-i="${c.numero}">▸ texto enoquiano completo</div><div class="full" id="f${c.numero}">${full}</div>`:""}
+      </div>
+      <div class="rgt"><h3>nomes pesados da folha ${c.tabua||""}</h3>${nomes}</div>`;
+    box.appendChild(el);
+  }
+  box.querySelectorAll(".more").forEach(m=>m.onclick=()=>{
+    const f=document.getElementById("f"+m.dataset.i);f.classList.toggle("on");
+    m.textContent=(f.classList.contains("on")?"▾":"▸")+" texto enoquiano completo";});
+  document.getElementById("note").innerHTML=
+    `A ligação Chamada↔folha é a da tradição (TFR): recitar a Chamada N "move" a folha que ela abre. Os nomes pesados são as entidades que mais aparecem naquela folha — por onde a operação daquela Chamada pega. GETH e NACHO dominam as primeiras folhas; DAXVAR e ANZACH entram logo depois.`;
+});
+</script>
+</body>
+</html>

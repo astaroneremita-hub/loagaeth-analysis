@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nomes recorrentes — o que repete no Loagaeth</title>
+<style>
+:root{--bg:#090c11;--panel:#141a22;--ink:#e6edf3;--mut:#8b97a7;--line:#242c38;--ac:#d6b96a;--bar:#49b67b;--fam:#d6b96a}
+@media(prefers-color-scheme:light){:root{--bg:#f7f6f1;--panel:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.55 system-ui,Segoe UI,Roboto,Arial}
+.wrap{max-width:980px;margin:0 auto;padding:12px 16px 50px}
+a.home{color:#5bb3e0;text-decoration:none;font-size:13px}
+h1{font-size:21px;margin:4px 0 2px}.sub{color:var(--mut);font-size:12.5px;margin:0 0 12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 12px}
+.tab{padding:5px 12px;border:1px solid var(--line);border-radius:8px;cursor:pointer;font-size:12.5px;font-family:ui-monospace}
+.tab.on{border-color:var(--ac);color:var(--ac);border-width:2px;padding:4px 11px}
+.row{display:flex;align-items:center;gap:8px;margin:4px 0}
+.row .w{font:700 13px ui-monospace,monospace;width:120px;text-align:right}
+.row .b{height:16px;border-radius:3px;background:var(--bar)}
+.row.fam .b{background:var(--fam)}
+.row .c{font:600 12px ui-monospace;color:var(--mut)}
+.leg{font-size:11.5px;color:var(--mut);margin:8px 0}
+.sw{display:inline-block;width:11px;height:11px;border-radius:2px;vertical-align:-1px;margin-right:3px}
+.note{color:var(--mut);font-size:12.5px;margin-top:16px;border-left:3px solid var(--line);padding-left:10px}
+.big{font:700 20px ui-monospace;color:var(--bar)}
+</style>
+</head>
+<body><div class="wrap">
+<a class="home" href="index.html">← painel</a>
+<h1>Nomes recorrentes — o que repete</h1>
+<p class="sub">Os pedaços longos que mais se repetem no livro. No acaso (grade embaralhada) pedaços de 8-10 letras quase nunca repetem; aqui, os nomes-mãe repetem dezenas a centenas de vezes. Dourado = família NOCHA/CHASTOR.</p>
+<div class="tabs" id="tabs"></div>
+<div id="bars"></div>
+<div class="leg"><span class="sw" style="background:var(--fam)"></span>família-mãe (NOCHA/CHASTOR/NOCHASTOR/ADNOCHA/ANZACH) &nbsp; <span class="sw" style="background:var(--bar)"></span>outros</div>
+<p class="note" id="note"></p>
+</div>
+<script>
+const FAM=/NOCHA|CHASTOR|NOCHAST|ADNOCH|ANZACH|NZACH|DNOCH/;
+fetch("repeats.json").then(r=>r.json()).then(d=>{
+  const reps=d.repeats, lens=Object.keys(reps).sort((a,b)=>a-b);
+  let cur="8";
+  const tabs=document.getElementById("tabs");
+  for(const n of lens){const t=document.createElement("div");t.className="tab"+(n===cur?" on":"");t.textContent=n+" letras";
+    t.onclick=()=>{cur=n;document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x.textContent===n+" letras"));draw();};tabs.appendChild(t);}
+  function draw(){
+    const box=document.getElementById("bars");box.innerHTML="";
+    const rows=reps[cur]; if(!rows||!rows.length){box.innerHTML="<div class='leg'>sem dados</div>";return;}
+    const mx=rows[0][1];
+    for(const [g,c] of rows){const r=document.createElement("div");r.className="row"+(FAM.test(g)?" fam":"");
+      r.innerHTML=`<span class="w">${g}</span><span class="b" style="width:${Math.max(2,420*c/mx)}px"></span><span class="c">${c}×</span>`;
+      box.appendChild(r);}
+  }
+  const q=d.quadrants;
+  document.getElementById("note").innerHTML=
+    `No acaso, pedaços de 10 letras repetidos = <b>0</b>; no Loag real = <b>2.451</b>. O livro é um punhado de nomes repetido muito — a assinatura de um CAMPO DE NOMES, não de texto. `+
+    `A família <b>NOCHA · CHASTOR · NOCHASTOR(A) · ADNOCHA · ANZACH</b> domina. `+
+    (q?`Quadrantes: os 4 têm perfis distintos (χ² ${q.total_chi} vs ${q.null_mean}, z=${q.z}) — eco leve dos 4 subângulos da Torre.`:"");
+  draw();
+});
+</script>
+</body>
+</html>

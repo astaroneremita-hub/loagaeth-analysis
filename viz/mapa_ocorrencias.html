@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mapa de ocorrências — nomes no Loagaeth</title>
+<style>
+:root{--bg:#090c11;--panel:#141a22;--ink:#e6edf3;--mut:#8b97a7;--line:#242c38;--ac:#d6b96a;
+  --H:#49c5e0;--V:#d6b96a;--D1:#e0573b;--D2:#49b67b}
+@media(prefers-color-scheme:light){:root{--bg:#f7f6f1;--panel:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.5 system-ui,Segoe UI,Roboto,Arial}
+.wrap{max-width:1180px;margin:0 auto;padding:12px 16px 50px}
+a.home{color:var(--H);text-decoration:none;font-size:13px}
+h1{font-size:20px;margin:4px 0 2px}.sub{color:var(--mut);font-size:12.5px;margin:0 0 10px}
+.pills{display:flex;gap:7px;flex-wrap:wrap;margin:6px 0 8px}
+.pill{padding:5px 11px;border:1px solid var(--line);border-radius:8px;cursor:pointer;font-size:12.5px}
+.pill.on{border-color:var(--ac);border-width:2px;padding:4px 10px;color:var(--ac)}
+.ctrls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:4px 0 8px}
+select,button{background:#1b2634;border:1px solid #2c3a4e;color:var(--ink);border-radius:7px;padding:5px 10px;font-size:12px;cursor:pointer}
+.dirtog{display:inline-flex;gap:4px;align-items:center;font-size:12px;cursor:pointer;padding:3px 8px;border:1px solid var(--line);border-radius:7px}
+.dirtog .sw{width:14px;height:3px;border-radius:2px}.dirtog.off{opacity:.35}
+.flex{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start}
+.left{flex:1 1 580px;min-width:320px}
+.panel{flex:1 1 300px;min-width:260px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;max-height:760px;overflow:auto}
+canvas{width:100%;height:auto;background:#05070a;border:1px solid var(--line);border-radius:8px;cursor:crosshair}
+.stat{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
+.stat div{flex:1 1 60px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 8px;text-align:center}
+.stat .n{font:700 18px ui-monospace}.stat .l{font-size:10.5px;color:var(--mut)}
+.panel h2{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);margin:0 0 6px}
+.nm{display:flex;justify-content:space-between;gap:8px;padding:3px 7px;border-radius:6px;cursor:pointer;border-left:3px solid var(--line)}
+.nm:hover{background:rgba(127,127,127,.12)}.nm.sel{background:rgba(214,185,106,.16)}
+.nm .w{font:700 12.5px ui-monospace,monospace}.nm .c{color:var(--mut);font-size:11px}
+.note{color:var(--mut);font-size:12px;margin-top:12px;border-left:3px solid var(--line);padding-left:10px}
+</style>
+</head>
+<body><div class="wrap">
+<a class="home" href="index.html">← painel</a>
+<h1>Mapa de ocorrências no Loagaeth</h1>
+<p class="sub">Escolhe a <b>folha</b> e o <b>tipo</b> — aparecem <b>todas</b> as ocorrências de todos os nomes daquele tipo, com a contagem por direção (linha, coluna, diagonal). Cor = direção.</p>
+
+<div class="pills" id="pills"></div>
+<div class="ctrls">
+  <label>Folha <select id="side"></select></label>
+  <label>nome <select id="name"><option value="">todos</option></select></label>
+  <span id="dirs"></span>
+</div>
+<div class="stat" id="stat"></div>
+
+<div class="flex">
+  <div class="left"><canvas id="cv" width="784" height="784"></canvas></div>
+  <div class="panel"><h2 id="ptt">nomes nesta folha</h2><div id="list"></div></div>
+</div>
+<p class="note" id="note"></p>
+</div>
+<script>
+const CAT=["#49c5e0","#d6b96a","#b07de0"]; // linha, coluna, diagonal
+const CATPT=["linha","coluna","diagonal"];
+const FDIRS=[[0,1],[1,0],[0,-1],[-1,0],[1,1],[-1,-1],[1,-1],[-1,1]]; // 8 dirs (match python)
+const ORDER=["god name","king","senior","kerubic archangel","kerub","calvary-flame","calvary-command","lesser angel"];
+let D=null,curG="god name",curSide=null,curName="",catOn=[1,1,1],backOn=true;
+
+fetch("occurrence_map.json").then(r=>r.json()).then(d=>{
+  D=d;
+  // all groups from the full roster (kings/seniors included, even with 0 occ)
+  const groups=ORDER.filter(g=>d.roster&&d.roster[g]&&d.roster[g].length);
+  if(!groups.includes(curG))curG=groups[0];
+  const pl=document.getElementById("pills");
+  for(const g of groups){
+    const el=document.createElement("div");el.className="pill"+(g===curG?" on":"");el.dataset.g=g;
+    el.textContent=d.group_pt[g]||g;
+    el.onclick=()=>{curG=g;curName="";document.querySelectorAll(".pill").forEach(e=>e.classList.toggle("on",e.dataset.g===g));fillSides();fillNames();draw();list();};
+    pl.appendChild(el);
+  }
+  // category toggles + "ré" (de trás pra frente)
+  const dv=document.getElementById("dirs");
+  CATPT.forEach((t,i)=>{
+    const el=document.createElement("span");el.className="dirtog";el.dataset.i=i;
+    el.innerHTML=`<span class="sw" style="background:${CAT[i]}"></span>${t}`;
+    el.onclick=()=>{catOn[i]=catOn[i]?0:1;el.classList.toggle("off",!catOn[i]);draw();};
+    dv.appendChild(el);
+  });
+  const rb=document.createElement("span");rb.className="dirtog";rb.innerHTML="↩ incluir ré (de trás)";
+  rb.onclick=()=>{backOn=!backOn;rb.classList.toggle("off",!backOn);draw();};
+  dv.appendChild(rb);
+  document.getElementById("side").onchange=e=>{curSide=e.target.value;curName="";fillNames();draw();list();};
+  document.getElementById("name").onchange=e=>{curName=e.target.value;draw();list();};
+  document.getElementById("note").innerHTML=
+    `Honesto: isto conta TODAS as linhas retas (caça-palavras). Nome curto (ORO, 3 letras) enche a folha; nome longo some. Ver se isso supera o acaso: Painel de integridade (#362) — não supera.`;
+  fillSides();fillNames();draw();list();stat();
+});
+
+function names_here(){ // names of current group present on current side
+  const sm=(D.occ[curSide]||{});
+  return Object.keys(sm).filter(n=>D.meta[n].group===curG);
+}
+function fillSides(){
+  let sides=[];
+  for(const s in D.occ){ if(Object.keys(D.occ[s]).some(n=>D.meta[n].group===curG)) sides.push(s);}
+  const hasTrace=sides.length>0;
+  if(!hasTrace){ // tipo não aparece em nenhuma folha: mostra todas as grades mesmo assim
+    sides=Object.keys(D.grids);
+  }
+  sides.sort((a,b)=>parseInt(a)-parseInt(b)||a.localeCompare(b));
+  const sel=document.getElementById("side");sel.innerHTML="";
+  for(const s of sides){const cnt=hasTrace?Object.entries(D.occ[s]||{}).filter(([n])=>D.meta[n].group===curG).reduce((a,[,v])=>a+v.length,0):0;
+    const o=document.createElement("option");o.value=s;o.textContent="f"+s+(hasTrace?" ("+cnt+")":"");sel.appendChild(o);}
+  if(!sides.includes(curSide))curSide=sides[0]||null;
+  if(curSide)sel.value=curSide;
+}
+function fillNames(){
+  const sel=document.getElementById("name");sel.innerHTML='<option value="">todos</option>';
+  for(const n of names_here().sort()){const o=document.createElement("option");o.value=n;
+    o.textContent=n+" ("+D.occ[curSide][n].length+")";sel.appendChild(o);}
+  if(curName&&!names_here().includes(curName))curName="";
+  sel.value=curName;
+}
+function activeOcc(){ // [{name,r,c,dir}]
+  const out=[];const sm=D.occ[curSide]||{};
+  for(const n of names_here()){
+    if(curName&&n!==curName)continue;
+    for(const [r,c,di] of sm[n]){
+      if(!catOn[D.dir_cat[di]])continue;
+      if(!backOn&&D.dir_back[di])continue;
+      out.push({n,r,c,di});
+    }
+  }
+  return out;
+}
+function draw(){
+  const cv=document.getElementById("cv"),x=cv.getContext("2d"),N=49,W=cv.width,cell=W/N;
+  x.clearRect(0,0,W,W);
+  if(!curSide){stat();return;}
+  const g=D.grids[curSide];
+  x.textAlign="center";x.textBaseline="middle";x.font=(cell*0.58).toFixed(1)+"px ui-monospace,monospace";
+  for(let r=0;r<N;r++)for(let c=0;c<N;c++){x.fillStyle=g[r][c]==="?"?"#20262e":"#333d4a";
+    x.fillText(g[r][c],c*cell+cell/2,r*cell+cell/2);}
+  const occ=activeOcc();
+  for(const o of occ){
+    const L=D.meta[o.n].len,[dr,dc]=FDIRS[o.di],col=CAT[D.dir_cat[o.di]];
+    x.strokeStyle=col;x.lineWidth=1.4;x.globalAlpha=0.7;x.beginPath();
+    x.moveTo(o.c*cell+cell/2,o.r*cell+cell/2);
+    x.lineTo((o.c+dc*(L-1))*cell+cell/2,(o.r+dr*(L-1))*cell+cell/2);
+    x.stroke();
+  }
+  x.globalAlpha=1;
+  if(!occ.length){
+    x.fillStyle="rgba(5,7,10,.72)";x.fillRect(0,W*0.44,W,W*0.12);
+    x.fillStyle="#e0573b";x.font="700 15px system-ui";x.textAlign="center";
+    x.fillText("Nenhum "+(D.group_pt[curG]||curG)+" aparece aqui (nem reto, nem de trás).",W/2,W*0.5);
+  }
+  stat();
+}
+function stat(){
+  const occ=activeOcc();const by=[0,0,0];let back=0;
+  for(const o of occ){by[D.dir_cat[o.di]]++;if(D.dir_back[o.di])back++;}
+  document.getElementById("stat").innerHTML=
+    `<div><div class="n">${occ.length}</div><div class="l">total</div></div>`+
+    `<div><div class="n" style="color:${CAT[0]}">${by[0]}</div><div class="l">linha</div></div>`+
+    `<div><div class="n" style="color:${CAT[1]}">${by[1]}</div><div class="l">coluna</div></div>`+
+    `<div><div class="n" style="color:${CAT[2]}">${by[2]}</div><div class="l">diagonal</div></div>`+
+    `<div><div class="n" style="color:#8b97a7">${back}</div><div class="l">ré (de trás)</div></div>`;
+}
+function list(){
+  const full=(D.roster&&D.roster[curG])?D.roster[curG]:names_here();
+  document.getElementById("ptt").textContent=(D.group_pt[curG]||curG)+" — "+full.length+" nomes (f"+(curSide||"-")+")";
+  const box=document.getElementById("list");box.innerHTML="";
+  const sm=D.occ[curSide]||{};
+  const rows=full.map(n=>({n,here:(sm[n]?sm[n].length:0),tot:(D.totals?D.totals[n]:0)}))
+    .sort((a,b)=>b.here-a.here||b.tot-a.tot||a.n.localeCompare(b.n));
+  for(const row of rows){
+    const zero=row.here===0;
+    const el=document.createElement("div");el.className="nm"+(curName===row.n?" sel":"");
+    if(zero)el.style.opacity=".5";
+    el.innerHTML=`<span class="w">${row.n}</span><span class="c">${row.here}× aqui · ${row.tot}× livro · ${D.meta[row.n].len}L</span>`;
+    el.onclick=()=>{if(row.here===0)return;curName=(curName===row.n?"":row.n);document.getElementById("name").value=curName;draw();list();};
+    box.appendChild(el);
+  }
+  if(!rows.length)box.innerHTML='<span class="c">tipo sem nomes</span>';
+}
+</script>
+</body>
+</html>

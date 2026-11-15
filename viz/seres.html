@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Todos os seres das Torres — Loagaeth</title>
+<style>
+:root{--bg:#090c11;--panel:#141a22;--ink:#e6edf3;--mut:#8b97a7;--line:#242c38;--ac:#d6b96a;
+  --ar:#5bb3e0;--agua:#3d6bd6;--terra:#c9a24b;--fogo:#e0573b;--ok:#49b67b;--no:#e0573b}
+@media(prefers-color-scheme:light){:root{--bg:#f7f6f1;--panel:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.5 system-ui,Segoe UI,Roboto,Arial}
+.wrap{max-width:1180px;margin:0 auto;padding:12px 16px 50px}
+a.home{color:var(--ar);text-decoration:none;font-size:13px}
+h1{font-size:20px;margin:4px 0 2px}.sub{color:var(--mut);font-size:12.5px;margin:0 0 10px}
+.insight{border:1px solid var(--line);border-left-width:4px;border-left-color:var(--ac);border-radius:9px;padding:8px 12px;margin:8px 0 14px;font-size:12.5px}
+.insight b{color:var(--ac)}
+.pills{display:flex;gap:7px;flex-wrap:wrap;margin:6px 0 10px}
+.pill{display:flex;flex-direction:column;gap:1px;padding:6px 12px;border:1px solid var(--line);border-radius:9px;cursor:pointer;font-size:12.5px;min-width:96px}
+.pill .g{font-weight:600}.pill .s{font-size:11px;color:var(--mut)}
+.pill.on{border-color:var(--ac);border-width:2px;padding:5px 11px}
+.bar{height:3px;border-radius:2px;background:var(--line);margin-top:3px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--ok)}
+.ctrls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 8px}
+select,button{background:#1b2634;border:1px solid #2c3a4e;color:var(--ink);border-radius:7px;padding:5px 10px;font-size:12px;cursor:pointer}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid var(--line);border-radius:20px;font-size:12px;cursor:pointer;user-select:none}
+.chip .sw{width:10px;height:10px;border-radius:50%}.chip.off{opacity:.35}
+.flex{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start}
+.left{flex:1 1 540px;min-width:320px}
+.panel{flex:1 1 320px;min-width:280px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+canvas{width:100%;height:auto;background:#05070a;border:1px solid var(--line);border-radius:8px;cursor:crosshair}
+.count{color:var(--mut);font-size:12px;margin:2px 0 6px}
+.panel h2{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);margin:0 0 6px}
+.tr{display:flex;justify-content:space-between;gap:8px;padding:3px 6px;border-radius:6px;cursor:pointer;border-left:3px solid transparent}
+.tr:hover{background:rgba(127,127,127,.12)}.tr.hl{background:rgba(214,185,106,.14)}
+.tr .nm{font:700 12px ui-monospace,monospace}.tr .kd{font-size:11px}
+.tr .ok{color:var(--ok)}.tr .no{color:var(--mut)}
+.leg{font-size:11px;color:var(--mut);margin-top:8px}
+.note{color:var(--mut);font-size:12px;margin-top:12px;border-left:3px solid var(--line);padding-left:10px}
+</style>
+</head>
+<body><div class="wrap">
+<a class="home" href="index.html">← painel</a>
+<h1>Todos os seres das Torres</h1>
+<p class="sub">Reis, Anciãos (Seniores), Nomes de Deus, Arcanjos, Querubins e Anjos menores das 4 Torres. Escolha <b>o tipo</b> que quer ver. Cor do traço = Torre. Mostra também os que <b>não aparecem</b>.</p>
+<div class="insight" id="insight">carregando…</div>
+
+<div class="pills" id="pills"></div>
+<div class="ctrls">
+  <label>Folha <select id="side"></select></label>
+  <span id="chips"></span>
+  <label><input type="checkbox" id="onlyfound" checked> só os que aparecem</label>
+</div>
+<div class="count" id="count"></div>
+
+<div class="flex">
+  <div class="left"><canvas id="cv" width="735" height="735"></canvas></div>
+  <div class="panel">
+    <h2 id="ptt">Seres</h2>
+    <div id="list"></div>
+    <div class="leg">✓ = achado como traço reto (folha). ✗ = não aparece em lugar nenhum como linha reta. Note: quanto mais <b>longo</b> o nome, menos aparece — Reis (8) e Anciãos (7) quase nunca; menores (4) quase sempre. Isso é a assinatura do <b>acaso</b>, não de desenho.</div>
+  </div>
+</div>
+<p class="note" id="foot"></p>
+</div>
+<script>
+const TC={ar:"#5bb3e0",agua:"#3d6bd6",terra:"#c9a24b",fogo:"#e0573b"};
+const TPT={ar:"Ar",agua:"Água",terra:"Terra",fogo:"Fogo"};
+const ORDER=["god name","king","senior","kerubic archangel","kerub","calvary-flame","calvary-command","lesser angel"];
+let D=null,curG="lesser angel",curSide=null,towerOn={ar:1,agua:1,terra:1,fogo:1},onlyFound=true,hlName=null;
+
+fetch("all_beings.json").then(r=>r.json()).then(d=>{
+  D=d;
+  const S=d.stats;
+  // insight banner: contrast by length
+  const k=S["king"]||{found:0,total:0,pct:0}, se=S["senior"]||{found:0,total:0,pct:0},
+        la=S["lesser angel"]||{found:0,total:0,pct:0}, gd=S["god name"]||{found:0,total:0,pct:0};
+  document.getElementById("insight").innerHTML=
+    `<b>O interessante:</b> Reis (8 letras) aparecem ${k.found}/${k.total} (${k.pct}%), Anciãos (7) ${se.found}/${se.total} (${se.pct}%), `+
+    `mas Anjos menores (4) ${la.found}/${la.total} (${la.pct}%) e Nomes de Deus (3) ${gd.found}/${gd.total} (${gd.pct}%). `+
+    `Quanto <b>mais curto</b> o nome, mais ele "aparece" — assinatura de <b>caça-palavras ao acaso</b>, não de nomes escritos de propósito. Nome real (longo) não traça.`;
+  document.getElementById("foot").innerHTML=
+    `Os 4 Nomes Sagrados da Tábua da União: ${Object.values(d.union_names).join(" · ")}. Esta tela lista TODO ser das Torres e diz se aparece como traço — honesto sobre ausências.`;
+
+  // pills
+  const pl=document.getElementById("pills");
+  const groups=ORDER.filter(g=>S[g]);
+  for(const g of groups){
+    const s=S[g];const el=document.createElement("div");el.className="pill"+(g===curG?" on":"");el.dataset.g=g;
+    el.innerHTML=`<span class="g">${d.group_pt[g]||g}</span><span class="s">${s.found}/${s.total} (${s.pct}%)</span><span class="bar"><i style="width:${s.pct}%"></i></span>`;
+    el.onclick=()=>{curG=g;document.querySelectorAll(".pill").forEach(e=>e.classList.toggle("on",e.dataset.g===g));fillSides();draw();buildList();};
+    pl.appendChild(el);
+  }
+  // tower chips
+  const cs=document.getElementById("chips");
+  for(const t of ["ar","agua","terra","fogo"]){
+    const el=document.createElement("span");el.className="chip";el.dataset.t=t;
+    el.innerHTML=`<span class="sw" style="background:${TC[t]}"></span>${TPT[t]}`;
+    el.onclick=()=>{towerOn[t]=!towerOn[t];el.classList.toggle("off",!towerOn[t]);fillSides();draw();buildList();};
+    cs.appendChild(el);
+  }
+  document.getElementById("onlyfound").onchange=e=>{onlyFound=e.target.checked;buildList();};
+  // default to king (shows the dramatic 0%); if none, first group
+  if(!S[curG])curG=groups[0];
+  document.querySelectorAll(".pill").forEach(e=>e.classList.toggle("on",e.dataset.g===curG));
+  fillSides();draw();buildList();
+});
+
+function inG(b){return b.group===curG && towerOn[b.tower];}
+function foundIn(){return D.beings.filter(b=>inG(b)&&b.found);}
+function fillSides(){
+  const sides=[...new Set(foundIn().map(b=>b.side))].sort((a,b)=>parseInt(a)-parseInt(b)||a.localeCompare(b));
+  const sel=document.getElementById("side");sel.innerHTML="";
+  if(!sides.length){const o=document.createElement("option");o.textContent="(nenhum traço)";sel.appendChild(o);curSide=null;return;}
+  for(const s of sides){const o=document.createElement("option");o.value=s;
+    o.textContent="f"+s+" ("+foundIn().filter(b=>b.side===s).length+")";sel.appendChild(o);}
+  if(!sides.includes(curSide))curSide=sides[0];
+  sel.value=curSide;sel.onchange=()=>{curSide=sel.value;draw();buildList();};
+}
+function onFolha(){return foundIn().filter(b=>b.side===curSide);}
+function draw(){
+  const cv=document.getElementById("cv"),x=cv.getContext("2d"),N=49,W=cv.width,cell=W/N;
+  x.clearRect(0,0,W,W);
+  if(!curSide){x.fillStyle="#44505f";x.font="16px system-ui";x.textAlign="center";
+    x.fillText("Este tipo não aparece como traço reto em nenhuma folha.",W/2,W/2);
+    document.getElementById("count").textContent="0 traços — "+(D.group_pt[curG]||curG)+" não traça";return;}
+  const g=D.grids[curSide];
+  x.font=(cell*0.6).toFixed(1)+"px ui-monospace,monospace";x.textAlign="center";x.textBaseline="middle";
+  for(let r=0;r<N;r++)for(let c=0;c<N;c++){x.fillStyle=g[r][c]==="?"?"#20262e":"#333d4a";
+    x.fillText(g[r][c],c*cell+cell/2,r*cell+cell/2);}
+  for(const b of onFolha()){
+    const hot=(b.name===hlName),col=TC[b.tower];
+    x.strokeStyle=col;x.lineWidth=hot?3.4:1.8;x.globalAlpha=hot?1:0.85;x.beginPath();
+    b.path.forEach((p,i)=>{const cx=p[1]*cell+cell/2,cy=p[0]*cell+cell/2;i?x.lineTo(cx,cy):x.moveTo(cx,cy);});
+    x.stroke();x.globalAlpha=1;x.fillStyle=col;
+    for(const p of b.path)x.fillText(g[p[0]][p[1]],p[1]*cell+cell/2,p[0]*cell+cell/2);
+    const s=b.path[0];x.beginPath();x.arc(s[1]*cell+cell/2,s[0]*cell+cell/2,hot?4:2.8,0,7);x.fill();
+  }
+  document.getElementById("count").textContent=onFolha().length+" traços — "+(D.group_pt[curG]||curG)+", folha f"+curSide;
+}
+function buildList(){
+  document.getElementById("ptt").textContent=(D.group_pt[curG]||curG);
+  const box=document.getElementById("list");box.innerHTML="";
+  let rows=D.beings.filter(inG);
+  // dedup by name for the list
+  const byName={};for(const b of rows){if(!byName[b.name]||(b.found&&!byName[b.name].found))byName[b.name]=b;}
+  rows=Object.values(byName);
+  if(onlyFound)rows=rows.filter(b=>b.found);
+  rows.sort((a,b)=> (b.found-a.found) || b.len-a.len || a.name.localeCompare(b.name));
+  for(const b of rows){
+    const el=document.createElement("div");el.className="tr"+(b.name===hlName?" hl":"");
+    el.style.borderLeftColor=TC[b.tower];
+    const st=b.found?`<span class="ok">✓ f${b.side}</span>`:`<span class="no">✗ ausente</span>`;
+    el.innerHTML=`<span class="nm">${b.name}</span><span class="kd">${TPT[b.tower]}${b.sub?" · sub "+TPT[b.sub]:""} · ${st}</span>`;
+    if(b.found){el.onmouseenter=()=>{hlName=b.name;if(b.side!==curSide){curSide=b.side;document.getElementById("side").value=b.side;}draw();};
+      el.onmouseleave=()=>{hlName=null;draw();};
+      el.onclick=()=>{curSide=b.side;document.getElementById("side").value=b.side;draw();buildList();};}
+    box.appendChild(el);
+  }
+  const nf=Object.values(byName).filter(b=>!b.found).length, tf=Object.values(byName).filter(b=>b.found).length;
+  if(!rows.length)box.innerHTML='<span class="kd">nenhum ser aqui</span>';
+  document.getElementById("ptt").textContent=(D.group_pt[curG]||curG)+"  —  ✓"+tf+" / ✗"+nf;
+}
+</script>
+</body>
+</html>

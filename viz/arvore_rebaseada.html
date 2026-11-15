@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Árvore da Vida Rebaseável</title>
+<style>
+  :root{--bg:#12100c;--pane:#1b1813;--pane2:#221d16;--ink:#e9dcc0;--mut:#9a8f77;--gold:#d9b45a;--gold2:#b8912f;--line:#3a3327;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Georgia,serif;}
+  header{padding:18px 20px 10px;border-bottom:1px solid var(--line);}
+  h1{margin:0;font-size:22px;color:var(--gold);letter-spacing:.03em;}
+  .sub{color:var(--mut);font-size:13px;margin-top:3px;}
+  .wrap{display:flex;flex-wrap:wrap;gap:18px;padding:16px 20px 40px;}
+  .col{flex:1 1 320px;min-width:300px;}
+  .controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:10px;}
+  .grp{display:flex;flex-wrap:wrap;gap:5px;align-items:center;}
+  .glab{color:var(--mut);font-size:12px;margin-right:4px;text-transform:uppercase;letter-spacing:.08em;}
+  button{font:13px Georgia,serif;background:var(--pane2);color:var(--ink);border:1px solid var(--line);
+    border-radius:6px;padding:5px 9px;cursor:pointer;}
+  button:hover{border-color:var(--gold2);}
+  button.on{background:var(--gold2);color:#12100c;border-color:var(--gold);font-weight:bold;}
+  .crumb{font-size:13px;color:var(--mut);margin:2px 0 8px;min-height:18px;}
+  .crumb b{color:var(--gold);}
+  .realm{font-size:17px;color:var(--gold);font-weight:bold;}
+  .note{font-size:12.5px;color:var(--mut);line-height:1.5;margin:4px 0 10px;}
+  svg{width:100%;height:auto;background:#0d0b08;border:1px solid var(--line);border-radius:10px;}
+  .node{cursor:pointer;}
+  .nodelbl{font:500 14px Georgia,serif;}
+  .nodeab{font:9px Georgia,serif;}
+  .pathlbl{font:8.5px Georgia,serif;fill:var(--mut);}
+  .row{display:flex;gap:9px;padding:8px 0;border-bottom:1px solid var(--line);}
+  .sw{flex:0 0 18px;width:18px;height:18px;border-radius:50%;margin-top:2px;border:1px solid #0008;}
+  .rtit{font-size:14px;color:var(--ink);}
+  .rtit b{color:var(--gold);}
+  .rsub{font-size:12px;color:var(--mut);margin-top:1px;}
+  .cards{font-size:11.5px;color:#c9bfa6;margin-top:2px;}
+  .panel{background:var(--pane);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:12px;}
+  .ptitle{color:var(--gold);font-size:14px;margin:0 0 6px;text-transform:uppercase;letter-spacing:.06em;}
+  .pathrow{font-size:12.5px;padding:3px 0;border-bottom:1px solid var(--line);color:#c9bfa6;}
+  .pathrow b{color:var(--ink);}
+  a{color:var(--gold);}
+</style>
+</head>
+<body>
+<header>
+  <h1>Árvore da Vida Rebaseável</h1>
+  <div class="sub">Interinclusão (hitkalelut): põe qualquer sephirah no lugar de Kether e vê cor, carta e anjo re-fluírem. Clique num nó para aninhar (R de X → de Y…). Experimental.</div>
+</header>
+<div class="wrap">
+  <div class="col">
+    <div class="controls">
+      <div class="grp"><span class="glab">Reino</span><span id="roots"></span></div>
+      <div class="grp"><span class="glab">Escala</span><span id="scales"></span></div>
+    </div>
+    <div class="crumb" id="crumb"></div>
+    <svg id="tree" viewBox="0 0 340 470" role="img" aria-label="Árvore da Vida"></svg>
+    <div style="margin-top:8px"><button id="back">◀ voltar um nível</button> <button id="reset">reiniciar</button></div>
+  </div>
+  <div class="col">
+    <div class="panel">
+      <div class="realm" id="realm"></div>
+      <div class="note" id="note"></div>
+      <div id="list"></div>
+    </div>
+    <div class="panel">
+      <div class="ptitle">Os 22 caminhos (invariantes)</div>
+      <div class="note" style="margin:0 0 6px">Os nós rebaseiam; os caminhos são o esqueleto fixo que liga as posições — letra hebraica, trunfo e atribuição.</div>
+      <div id="paths"></div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  // 0=Ke 1=Chokmah 2=Binah 3=Chesed 4=Geburah 5=Tiphareth 6=Netzach 7=Hod 8=Yesod 9=Malkuth
+  var SC=["Rei (Atziluth)","Rainha (Briah)","Príncipe (Yetzirah)","Princesa (Assiah)"];
+  var S=[
+    {n:"Kether",pl:"Kether",dn:"Eheieh",ar:"Metatron",x:170,y:30,col:["#f4f2ea","#f7f7f5","#efece2","#fff8e1"]},
+    {n:"Chokmah",pl:"Chokmah (Zodíaco)",dn:"Yah",ar:"Ratziel",x:262,y:88,col:["#aecbe8","#9aa0a6","#cfd8dc","#efe6da"]},
+    {n:"Binah",pl:"Binah (Saturno)",dn:"YHVH Elohim",ar:"Tzaphkiel",x:78,y:88,col:["#b11226","#1a1a1a","#4e342e","#b7a7ad"]},
+    {n:"Chesed",pl:"Chesed (Júpiter)",dn:"El",ar:"Tzadkiel",x:262,y:182,col:["#5b2a86","#2f6fb0","#4a2574","#2e6fae"]},
+    {n:"Geburah",pl:"Geburah (Marte)",dn:"Elohim Gibor",ar:"Kamael",x:78,y:182,col:["#e8641c","#c0392b","#e53935","#7a1f1f"]},
+    {n:"Tiphareth",pl:"Tiphareth (Sol)",dn:"YHVH Eloah va-Daath",ar:"Raphael",x:170,y:236,col:["#f4c0b8","#e3b93a","#ff8c69","#ffb300"]},
+    {n:"Netzach",pl:"Netzach (Vênus)",dn:"YHVH Tzabaoth",ar:"Haniel",x:262,y:330,col:["#ffbf00","#2f8a52","#9acd32","#9a8f3a"]},
+    {n:"Hod",pl:"Hod (Mercúrio)",dn:"Elohim Tzabaoth",ar:"Michael",x:78,y:330,col:["#6a0dad","#e07b2f","#a0522d","#8a6d3b"]},
+    {n:"Yesod",pl:"Yesod (Lua)",dn:"Shaddai El Chai",ar:"Gabriel",x:170,y:388,col:["#3f51b5","#6f4fb0","#2a1a4a","#cbb46a"]},
+    {n:"Malkuth",pl:"Malkuth (Terra)",dn:"Adonai ha-Aretz",ar:"Sandalphon",x:170,y:446,col:["#f4e04d","#808000","#9b8a2a","#1a1a1a"]}
+  ];
+  var AB=["Kt","Ck","Bn","Cs","Gb","Tp","Nz","Hd","Ys","Mk"];
+  var NUM=["Ases","Doses","Treses","Quatros","Cincos","Seises","Setes","Oitos","Noves","Dezes"];
+  var SUIT=["Paus","Copas","Espadas","Ouros"];
+  var MIN=[
+    ["Raiz do Fogo","Raiz da Água","Raiz do Ar","Raiz da Terra"],
+    ["Domínio","Amor","Paz","Mudança"],
+    ["Virtude","Abundância","Tristeza","Trabalho"],
+    ["Conclusão","Prazer","Trégua","Poder"],
+    ["Conflito","Desilusão","Derrota","Preocupação"],
+    ["Vitória","Prazer","Ciência","Sucesso"],
+    ["Valor","Ilusão","Futilidade","Fracasso"],
+    ["Rapidez","Indolência","Interferência","Prudência"],
+    ["Força","Felicidade","Crueldade","Ganho"],
+    ["Opressão","Saciedade","Ruína","Riqueza"]
+  ];
+  // caminhos: [a,b,hebraico,trunfo,atribuição]
+  var P=[
+    [0,1,"Aleph","O Louco (0)","Ar"],[0,2,"Beth","O Mago (I)","Mercúrio"],[0,5,"Gimel","A Sacerdotisa (II)","Lua"],
+    [1,2,"Daleth","A Imperatriz (III)","Vênus"],[1,5,"Heh","O Imperador (IV)","Áries"],[1,3,"Vav","O Hierofante (V)","Touro"],
+    [2,5,"Zayin","Os Amantes (VI)","Gêmeos"],[2,4,"Cheth","O Carro (VII)","Câncer"],[3,4,"Teth","A Força (VIII)","Leão"],
+    [3,5,"Yod","O Eremita (IX)","Virgem"],[3,6,"Kaph","A Roda (X)","Júpiter"],[4,5,"Lamed","A Justiça (XI)","Libra"],
+    [4,7,"Mem","O Enforcado (XII)","Água"],[5,6,"Nun","A Morte (XIII)","Escorpião"],[5,8,"Samekh","A Temperança (XIV)","Sagitário"],
+    [5,7,"Ayin","O Diabo (XV)","Capricórnio"],[6,7,"Peh","A Torre (XVI)","Marte"],[6,8,"Tzaddi","A Estrela (XVII)","Aquário"],
+    [6,9,"Qoph","A Lua (XVIII)","Peixes"],[7,8,"Resh","O Sol (XIX)","Sol"],[7,9,"Shin","O Julgamento (XX)","Fogo"],
+    [8,9,"Tav","O Mundo (XXI)","Saturno"]
+  ];
+  var stack=[6], scale=1;
+  function h2r(h){return [parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];}
+  function r2h(a){return "#"+a.map(function(v){var s=Math.max(0,Math.min(255,Math.round(v))).toString(16);return s.length<2?"0"+s:s;}).join("");}
+  function blend(a,b,t){var x=h2r(a),y=h2r(b);return r2h([x[0]+(y[0]-x[0])*t,x[1]+(y[1]-x[1])*t,x[2]+(y[2]-x[2])*t]);}
+  function lum(h){var c=h2r(h);return (0.299*c[0]+0.587*c[1]+0.114*c[2])/255;}
+  function realmIdx(){return stack[0];}
+  function nodeColor(p){var base=S[realmIdx()].col[scale],host=S[p].col[scale];return p===realmIdx()&&stack.length===1?blend(base,"#ffffff",0.12):blend(base,host,0.55);}
+  function chainText(){return stack.map(function(i){return S[i].n;}).join(" de ");}
+  function svg(t,at){var e=document.createElementNS("http://www.w3.org/2000/svg",t);for(var k in at)e.setAttribute(k,at[k]);return e;}
+  function drawTree(){
+    var t=document.getElementById("tree");t.innerHTML="";
+    P.forEach(function(e){
+      var a=S[e[0]],b=S[e[1]];
+      t.appendChild(svg("line",{x1:a.x,y1:a.y,x2:b.x,y2:b.y,stroke:"#4a4030","stroke-width":1.2}));
+      var mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
+      var tx=svg("text",{x:mx,y:my+3,"text-anchor":"middle","class":"pathlbl"});tx.textContent=e[2];t.appendChild(tx);
+    });
+    S.forEach(function(s,p){
+      var col=nodeColor(p),tc=lum(col)>0.55?"#17130a":"#f3ead4",isF=(p===stack[stack.length-1]);
+      var g=svg("g",{"class":"node"});g.addEventListener("click",function(){stack.push(p);render();});
+      g.appendChild(svg("circle",{cx:s.x,cy:s.y,r:isF?26:22,fill:col,stroke:isF?"#d9b45a":"#5a4e38","stroke-width":isF?3:1.2}));
+      var n=svg("text",{x:s.x,y:s.y-1,"text-anchor":"middle","class":"nodelbl",fill:tc});n.textContent=p+1;
+      var ab=svg("text",{x:s.x,y:s.y+12,"text-anchor":"middle","class":"nodeab",fill:tc});ab.textContent=AB[p];
+      g.appendChild(n);g.appendChild(ab);t.appendChild(g);
+    });
+  }
+  function render(){
+    var ri=realmIdx(),focus=chainText();
+    document.getElementById("crumb").innerHTML="Foco: <b>"+focus+"</b>"+(stack.length>1?" — profundidade "+stack.length:"");
+    document.getElementById("realm").textContent="Reino de "+S[ri].n;
+    document.getElementById("note").innerHTML=S[ri].n+" ocupa o lugar de Kether. A carta-raiz do reino deixa de ser o Ás e passa a ser <b>os "+NUM[ri]+"</b>. Escala de cor: "+SC[scale]+". Os dez nós abaixo são a interinclusão de <b>"+focus+"</b>.";
+    var L=document.getElementById("list");L.innerHTML="";
+    S.forEach(function(s,p){
+      var col=nodeColor(p);
+      var cards=SUIT.map(function(su,i){return (p+1)+" de "+su+" — "+MIN[p][i];}).join(" · ");
+      var row=document.createElement("div");row.className="row";
+      row.innerHTML='<span class="sw" style="background:'+col+'"></span>'+
+        '<div style="flex:1;min-width:0"><div class="rtit"><b>'+focus+'</b> de '+s.n+' <span style="color:var(--mut)">· nº '+(p+1)+'</span></div>'+
+        '<div class="rsub">'+s.ar+' · '+s.dn+'</div>'+
+        '<div class="cards">'+cards+'</div></div>';
+      L.appendChild(row);
+    });
+  }
+  function drawPaths(){
+    var d=document.getElementById("paths");d.innerHTML="";
+    P.forEach(function(e){
+      var r=document.createElement("div");r.className="pathrow";
+      r.innerHTML='<b>'+e[2]+'</b> · '+e[3]+' · '+e[4]+' <span style="color:var(--mut)">('+S[e[0]].n+'–'+S[e[1]].n+')</span>';
+      d.appendChild(r);
+    });
+  }
+  function mkbtns(){
+    var rb=document.getElementById("roots");
+    [5,2,3,4,6,7,8,1,9,0].forEach(function(i){
+      var b=document.createElement("button");b.textContent=S[i].n;b.dataset.i=i;
+      b.addEventListener("click",function(){stack=[i];syncRoots();render();drawTree();});rb.appendChild(b);
+    });
+    var sb=document.getElementById("scales");
+    ["Rei","Rainha","Príncipe","Princesa"].forEach(function(nm,i){
+      var b=document.createElement("button");b.textContent=nm;b.dataset.s=i;if(i===scale)b.className="on";
+      b.addEventListener("click",function(){scale=i;syncScales();render();drawTree();});sb.appendChild(b);
+    });
+  }
+  function syncRoots(){document.querySelectorAll('#roots button').forEach(function(b){b.className=(+b.dataset.i===stack[0]&&stack.length===1)?"on":"";});}
+  function syncScales(){document.querySelectorAll('#scales button').forEach(function(b){b.className=(+b.dataset.s===scale)?"on":"";});}
+  document.getElementById("back").addEventListener("click",function(){if(stack.length>1){stack.pop();syncRoots();render();drawTree();}});
+  document.getElementById("reset").addEventListener("click",function(){stack=[stack[0]];syncRoots();render();drawTree();});
+  mkbtns();syncRoots();drawPaths();render();drawTree();
+})();
+</script>
+</body>
+</html>

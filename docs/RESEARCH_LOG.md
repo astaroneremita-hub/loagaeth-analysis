@@ -2260,3 +2260,87 @@ VEREDITO: melodia vocálica real e concentrada (z=+5.19) — o Loagaeth é entoa
 - PRONÚNCIA: tabela das 21 letras com nome de Dee + som (A=Un "ah", N=Drux, O=Med "ô", H=Na aspirado, R=Don vibrado…) para leitura e VIBRAÇÃO (soletrar pelos nomes: NOCHA = Drux·Med·Veh·Na·Un); + regras do canto (tom A, acento penúltimo, final vogal/H).
 - FUNÇÃO POR REGIÃO (elemento dominante por folha, pilha_data): Abertura 1-12, Corpo 13-25, Costura 26-28, Descida 29-40 = TERRA (matéria/corpo/manifestação); Profundo 41-48 = ÁGUA (emoção/dissolução).
 ACHADO NOVO — ARCO: o livro é Terra do início à descida e vira Água só no profundo. Terra→Água = manifestação→dissolução (o solve alquímico). Dualidade: corpo dos nomes = consoante-Terra (N/D/C/S #393), voz = vogal A-Ar (#392) — manifesta em terra, dissolve em água, falado no ar. Operativo: cada região tem seu tom de trabalho (Terra=fixar/manifestar; Água=dissolver/sentir). Não decifra sentido (selado) — diz COMO e para QUÊ operar.
+
+## #396 — CORREÇÃO (incoerência de elemento, apontada pelo usuário)
+O #395 usou só o pilha_data (elemento por SIGNO → Terra→Água) e apresentou como assentado — escondendo o Fogo que anotamos antes. O usuário pegou: "se tudo é Terra, por que eu tinha dito Ar e Fogo no fim?". Auditoria: há DOIS sistemas GD que a90 já avisa que conflitam. Computei elemento por folha nos dois (`src/a226` reescrito):
+- CORPO (folhas 1-40): Terra por SIGNO e por PLANETA — CONCORDAM (robusto; puxado por A=Terra em ambos os mapas).
+- PROFUNDO (41-48): CONFLITO — Água por signo (triplicidade) vs FOGO por planeta (N/R→Marte→Fogo). 
+RECONCILIAÇÃO: o corpo é robustamente Terra; a dissolução do fim é AMBÍGUA — por água (afogar/sentir) ou fogo (queimar/vontade), as duas vias clássicas do solve. O "Fogo no fim" vinha do mapa planetário; eu o apaguei ao usar só o signo. Guia corrigido (guia_pratico.html mostra os dois badges no Profundo + nota honesta). Lição: nunca apresentar UM sistema de atribuição como THE elemento — eles divergem por desenho (a90), e só onde concordam (corpo=Terra) é firme.
+
+## #397 — Geografia do elemento: a identidade elemental só se fratura no profundo
+`src/a227_element_geography.py`. Mapa de concordância signo×planeta por folha (da correção #396).
+- 38/48 folhas têm signo==planeta (elemento ROBUSTO). As 10 em CONFLITO são [38, 40, 41-48] — todas no fim. Tipos: Água/Fogo 7, Água/Terra 3.
+- CONVERGÊNCIA (novo): o livro tem identidade elemental firme até ~folha 37 e a PERDE no profundo — a mesma zona onde os nomes somem (#360) e a vogal escurece A→U (#382). Três medidas independentes (nome, vogal, concordância de elemento) quebram em 38-48. O fundo é dissolução em TODA dimensão medível; a elemental passa de firme a contestada (água-ou-fogo).
+- VOZ×CORPO (honesto, sistema-dependente): por signo, vogais(A)→Terra, consoantes(N/R)→Água. Minha frase do guia "corpo-Terra/voz-Ar" era solta — corrigida: a atribuição voz/corpo depende do sistema, não cravar. Tela: element_geo.json (para mapa futuro).
+
+## #398 — Bateria profunda: 40 hipóteses de padrão oculto (docs/HIPOTESES_PROFUNDAS.md)
+`src/a228_deep_battery.py`, seed 1583, null = shuffle dentro da folha. Caça padrão oculto além dos nomes (lattice modular, periodicidade por letra, diagonal, bloco 7×7, nulos).
+- letra × coluna mod 2/3/5/7: z 8.7–35 — mas é a estrutura COLUNAR já conhecida (#369b; r mod m é negativo). Treliça de coluna por lente modular, não cifra.
+- (r+c)/(r−c) mod 2: z 4.3/5.5 — é o XADREZ (a15, documentado).
+- periodicidade lag-2 negativa (O,N,H,L,D): a anti-repetição horizontal (#369a).
+- W lag 18 z=+147: ARTEFATO (W só na costura 26-28, fora do alfabeto, #371).
+- bloco 7×7 z=+10.9: reduz-se ao c mod 7 (colunar), não é padrão 2D independente.
+- NOVO real: letra A periodicidade lag 3, z=+31.5 — um A a cada ~3 letras = pulso vocálico casando com a sílaba de ~3 (#377) e o canto. A batida do idioma é uma vogal (A) a cada 3 posições.
+VEREDITO: nenhuma cifra/lattice oculto NOVO — os z>3 são redetecções de estrutura conhecida (colunar, xadrez, anti-repetição) + o pulso-A-3. Segui as 40 até o fim; a exceção escondida no caos não existe. Resultado honesto: o caos é caos. Hipóteses finas restantes (29,31,32) em lote futuro.
+
+## #399 — Ilhas de ordem (compressão) + colunas/linha (hipóteses finas 31,32,36,40)
+`src/a229_order_islands.py`.
+- #40 MAPA DE COMPRESSÃO: todas as folhas comprimem muito melhor que embaralhadas (z −33 a −165 = estrutura real). ORDEM concentra no CORPO (folhas 11-22; f21 z=−165, mais ordenada/repetitiva). CAOS pica na COSTURA 26-28 (menos compressível, z≈−1, quase aleatória = ponto de máxima desordem) + f45 (profundo). Medida NOVA (compressão) confirma a costura como limiar/anomalia (#343/#371) e o corpo como núcleo denso.
+- #36 colunas-gêmeas: (33,34) cos=0.999 — só o miolo homogêneo (#369b), não par especial.
+- #31 1ª letra da linha prediz a última: MI z=+1.56 — não.
+- #32 soma de valor por linha: autocorr z=+0.24 — sem sequência.
+VEREDITO: a "ilha de ordem escondida" além da arquitetura conhecida não existe; mas a compressão MAPEIA limpo ordem (corpo) vs caos (costura 26-28, o pico). Convergência nova por via independente.
+
+## #400 — Gramática: direção, deriva, sílaba (hipóteses finas 29,33,37,39)
+`src/a230_deep_grammar.py`.
+- #37 MI POR DIREÇÃO: horizontal 0.60, vertical 0.007, diagonal↘ 0.016, anti↙ 0.008. A gramática é ~90× mais forte na horizontal; até a diagonal (que lê nomes em 26-28) não tem gramática. INFLUÊNCIA: o livro é idioma estritamente 1-D horizontal; vertical/diagonal = andaime, não língua; a leitura diagonal da costura é truque local, não direção gramatical. Reforça #370b.
+- #29 DERIVA DE GRAMÁTICA (perplexidade cruzada order-3): cada região prediz a si melhor (corpo 2.47, costura 3.32, profundo 2.93) e as outras pior. INFLUÊNCIA: o livro NÃO é língua uniforme — tem dialetos GRAMATICAIS por região; a costura é a mais irregular (confirma caos #399). Vai além do dialeto de bigrama (#370e).
+- #33 RUNS V/C: vogais quase sempre run=1 (núcleo único), consoantes run médio 1.94. Sílaba C(C)-V. INFLUÊNCIA: confirma a batida silábica do canto (#377/#398).
+- #39 JUNÇÃO VERTICAL entre folhas: MI z=−0.28, NÃO. INFLUÊNCIA: conteúdo não flui coluna-alinhado entre páginas; o fluxo é horizontal intra-página (coerente com #37).
+
+## #401 — Chamadas e nomes das tabelas: MESMA língua, REGISTROS diferentes
+`src/a231_call_vs_name_phonetics.py`. Perfil fonético das 910 palavras das Chamadas vs 40 nomes recorrentes.
+- COMPARTILHADO (mesma língua): alternância C-V 0.69 vs 0.68; cacho de consoante 1.9 vs 2.0; razão de vogais 0.39 vs 0.37. Mesma engine silábica/fonotática.
+- DIFERENTE (registro): termina em vogal Chamadas 31% vs Nomes 60%; A entre as vogais Chamadas 38% vs Nomes 71%; Chamadas usam A/I/O equilibrado, Nomes só A (I quase ausente).
+VEREDITO: Chamadas e Loagaeth são UMA língua (fonotática idêntica) em DOIS registros — Chamadas = fala plena (vogais equilibradas, final consonantal, prosa); nomes das tabelas = registro colapsado/cantado (só A, vogal-final, sustentado). 
+INFLUÊNCIA (grande): unifica o corpus enoquiano numa língua (bate #333) E explica por que o Loagaeth lê como NOMES e não frases — é a mesma língua no registro de INVOCAÇÃO (vogal reduzida a A, final aberto, entoado). Os nomes são a língua reduzida a nome-de-poder; as Chamadas, a mesma língua falada em sentença.
+
+## #402 — A identidade é consonantal; a vogal é registro/melodia
+`src/a232_consonant_identity.py`. Entropia por classe, nomes vs Chamadas.
+- NOMES: entropia vogal 1.25 bits (só A domina, 4 vogais) vs consoante 3.48 (de 3.81 máx, 14 consoantes). Razão 0.36.
+- CHAMADAS: vogal 1.96 (A/I/O), consoante 3.91 (de 4.17). Razão 0.50.
+- LIVRO: vogal 1.80, consoante 3.81.
+VEREDITO: nos dois registros a CONSOANTE carrega quase toda a informação (entropia quase máxima = identidade); a VOGAL é baixa e, nos nomes, colapsa em A (nota de canto, sem info lexical). A língua é consonantal-com-registro-vocálico: a consoante é a palavra, a vogal é a melodia/registro (plena na fala, A no canto). Compatível com a85 (refutou raiz triliteral MORFOLÓGICA; aqui é carga informacional).
+INFLUÊNCIA: explica o registro #401 por dentro — o registro É a camada vocálica; o esqueleto consonantal é invariante. Operativo: o nome-de-poder É suas consoantes; o A-canto é a voz que o carrega. Vibrar = soar as consoantes no fôlego de A.
+
+## #403 — O sistema de consoantes é uma fonologia coerente/balanceada
+`src/a233_consonant_system.py`.
+- PONTO: coronal 53%, velar 21%, labial 15%, glotal 11% — coronal-dominante = típico de língua natural (ponto não-marcado).
+- MODO: oclusiva 35%, fricativa 29%, líquida 18%, nasal 17%; entropia 1.93/2.0 = quase balanceado, os 4 modos bem representados = inventário fonológico NATURAL.
+- CONTRASTE CONSONANTAL: só 2 pares de nome diferem por 1 consoante, ambos de mesma classe (DNOCHA/DNOPHA oclusivas; ADNACH/ADMACH nasais). Raro (vs vogal #358, abundante).
+VEREDITO: as consoantes formam um sistema fonológico balanceado/natural — mais evidência de LÍNGUA construída real, não ruído. Confirma #402/#358: consoante = identidade (invariante; mudar=outro nome), vogal = variação/registro. Os raros contrastes consonantais respeitam classe natural. INFLUÊNCIA: fecha a tese — consoante=palavra (fonologia coerente, invariante), vogal=registro/melodia (varia, A no canto). A coerência fonológica eleva a confiança de que é língua desenhada, não aleatória.
+
+## #404 — Nome × posição: SEM template posicional (nomes emergem, não são colocados)
+`src/a234_name_position_pattern.py`. Distribuição das posições de início de cada nome top.
+- NOCHA: 447 ocorrências em 414 CÉLULAS DISTINTAS (quase cada ocorrência numa posição nova); concentração top10/total 0.05. GETH 359/335 (0.06); CHASTOR 118/108; ANZACH 117/113. Bandas topo/meio/fundo ~iguais; sem viés r%7/c%7.
+- Teste template NOCHA: célula mais usada 4× vs null uniforme 3.0±0.5, z=+1.99 (não significativo). Nomes raros "concentrados" só por terem poucas ocorrências (artefato).
+VEREDITO: os nomes NÃO estão num lattice/template posicional — espalham por células quase únicas, não recorrem em coordenadas fixas. INFLUÊNCIA: fecha a hipótese "nomes em posições desenhadas". Os nomes EMERGEM do campo de letras onde ele permite; a posição é consequência das letras, não colocação. Reforça #364 e a figura do campo gerado — caça-palavras emergente, não mapa de coordenadas.
+
+## #405 — Classes gramaticais: afixo condicionado à CASA (não é combinação livre)
+`src/a235_root_affix_grammar.py`. Matriz raiz×afixo das formas recorrentes, por casa.
+- Prefixos da casa NOCHA: D- 31, AD- 19, H, O, ED, AH. Prefixos da casa GETH: A- 21, L- 13, R-, X-.
+- D-/AD- marcam NOCHA (DNOCHA/ADNOCHA, ~50 ocorr quase todas NOCHA); L-/X-/R- marcam GETH (ALGETH/ACLAX). Afixos gerais compartilhados (H em 8 raízes, A em 7, O) + dominantes específicos de casa.
+VEREDITO: o #335 ("combinação livre") era grosso — há regra de SELEÇÃO condicionada à casa = sistema de classes/declinação rudimentar (o afixo preferido depende da casa da raiz). Tendência, não absoluto (há sobreposição), mas D/AD≈NOCHA e L/X≈GETH é nítido.
+INFLUÊNCIA: as duas casas são CLASSES GRAMATICAIS com morfologia de classe (como gênero/declinação), não só famílias estatísticas. Feature de língua real; fortalece a tese "língua construída" e dá realidade gramatical às casas. Refina #335/#344/#28.
+
+## #406 — Anjos do Ars Paulina no Loag? NÃO (sistema diferente)
+Pergunta do usuário. Busca dos 25 anjos do Ars Paulina (horas + planetários) no Loag (8 dir + substring), vs null.
+- 8 dir: só ANAEL (1/25). Substring: só RAPHAEL (1×). Null surrogado: média 1.5. Os achados estão no nível do acaso — ausência real.
+- Razão estrutural: anjos solomônicos terminam em -EL (SAMAEL, ANAEL, MICHAEL); no Loag o sufixo -EL é raro (AEL 16×, IEL 5× no livro todo) — o Loag fecha em -A (#391), convenção de nome oposta.
+VEREDITO: Ars Paulina e Loag são sistemas DIFERENTES; o Loag não contém esses anjos (nem poderia pela morfologia). Mais um sistema externo ausente (como Torres/governadores/Sigillum, #336/#367/#389). O Loag opera os PRÓPRIOS nomes. INFLUÊNCIA: confirma o Loag como sistema fechado, de natureza própria (campo cantado, casas NOCHA/GETH, -A), não um container de tradições solomônicas.
+
+## #407 — Duas afirmações públicas (web) testadas: ambas falham
+Busca web (fóruns/pesquisadores) achou 2 afirmações concretas não testadas por nós. Rodadas com o estoque.
+- MÉTODO SALTO-7 (enochiantoday "cada 7ª letra → 48 chaves"): nomes no fluxo reduzido por salto-7 = 3 (melhor fase) vs null embaralhado 1 — negligível. Não destrava nada (o próprio autor suspeitava). Não é cifra.
+- "CHAMADAS VÊM DAS TABELAS" (Laycock), teste literal: palavras das Chamadas (≥4 letras) nas grades = 147/608 vs null surrogado 213 — ABAIXO do acaso. As palavras das Chamadas NÃO estão escondidas nas grades.
+VEREDITO: ambas negativas. Refina Laycock — a ligação Chamadas↔tabelas é parentesco de LÍNGUA (mesma fonotática/léxico, #333/#401), não extração literal; as Chamadas são a mesma língua composta à parte, não lidas de dentro das tabelas. INFLUÊNCIA: nenhuma "solução" pública sobrevive à medida; reforça o Loag como campo de nomes auto-contido, sem cifra-por-salto, com as Chamadas como registro-irmão separado. Nossa análise está além do que há público.

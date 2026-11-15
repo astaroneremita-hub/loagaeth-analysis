@@ -65,18 +65,24 @@ fetch("pronuncia.json").then(r=>r.json()).then(d=>{
   document.getElementById("arc").innerHTML=arc.map((e,i)=>
     `<div style="flex:1;background:${EC[e]||'#556'}" title="folha ${i+1}: ${e}">${i%6===0?('f'+(i+1)):''}</div>`).join("");
 
-  document.getElementById("regions").innerHTML=d.regions.map(rg=>
-    `<div class="reg" style="border-left-color:${EC[rg.elemento]}">
-      <div class="hd"><div class="nm">${rg.regiao}</div><div class="f">folhas ${rg.folhas}</div>
-        <div class="el" style="background:${EC[rg.elemento]}">${rg.elemento}</div></div>
-      <div class="dom"><div class="d">${rg.dominio}</div><div class="x">${rg.faz}</div>
-        <div class="x" style="margin-top:4px;font-style:italic">${rg.desc}</div></div>
-    </div>`).join("");
+  document.getElementById("regions").innerHTML=d.regions.map(rg=>{
+    const conflict=!rg.concordam;
+    const badge=conflict
+      ? `<div class="el" style="background:${EC[rg.elemento_signo]}">${rg.elemento_signo}</div><div class="el" style="background:${EC[rg.elemento_planeta]};margin-top:4px">${rg.elemento_planeta}</div>`
+      : `<div class="el" style="background:${EC[rg.elemento]}">${rg.elemento}</div>`;
+    const dom=conflict
+      ? `<div class="d">Dissolução — por <b style="color:${EC[rg.elemento_signo]}">${rg.elemento_signo}</b> (signo) ou <b style="color:${EC[rg.elemento_planeta]}">${rg.elemento_planeta}</b> (planeta)</div><div class="x">os dois sistemas GD discordam aqui: afogar/sentir (água) ou queimar/vontade (fogo) — as duas faces da dissolução</div>`
+      : `<div class="d">${rg.dominio}</div><div class="x">${rg.faz}</div>`;
+    return `<div class="reg" style="border-left-color:${EC[rg.elemento_signo]}">
+      <div class="hd"><div class="nm">${rg.regiao}</div><div class="f">folhas ${rg.folhas}</div>${badge}</div>
+      <div class="dom">${dom}<div class="x" style="margin-top:4px;font-style:italic">${rg.desc}</div></div>
+    </div>`;}).join("");
 
   document.getElementById("note").innerHTML=
-    `O arco: o livro é <b>Terra</b> (matéria, corpo, manifestação) da abertura à descida, e vira <b>Água</b> (emoção, dissolução) só no profundo (41-48). Terra→Água = manifestação→dissolução (o <i>solve</i>). `+
-    `Dualidade: o CORPO dos nomes é consoante-Terra (N,D,C,S), mas a VOZ é a vogal A-Ar — o livro se manifesta em terra e se dissolve em água, falado no ar. `+
-    `Honesto: isto diz como entoar e o tom operativo de cada região; não decifra sentido (selado).`;
+    `<b>Honesto (atribuição de elemento depende do sistema GD):</b> o CORPO do livro (folhas 1-40) é <b>Terra</b> — e isso é robusto, os dois sistemas (signo e planeta) concordam, puxado pelo A (Terra em ambos). `+
+    `A identidade elemental é FIRME até ~folha 37 (38/48 folhas: signo e planeta concordam) e só se FRATURA no profundo (38-48) — a mesma zona onde os nomes somem e a vogal escurece (A→U). `+
+    `Lá a dissolução lê-se por <b>Água</b> (signo) OU <b>Fogo</b> (planeta, N/R→Marte) — as duas vias do <i>solve</i>. `+
+    `Diz como entoar e o tom de cada região; não decifra sentido (selado). Atribuição de elemento depende do sistema GD — só o corpo=Terra é cravável.`;
 });
 </script>
 </body>

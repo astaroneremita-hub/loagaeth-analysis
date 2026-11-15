@@ -10,9 +10,13 @@
 @media(prefers-color-scheme:light){:root{--bg:#f7f6f1;--card:#fff;--ink:#1b1a17;--mut:#6c6b62;--line:#e4e2d8}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,Segoe UI,Roboto,Arial}
-.wrap{max-width:960px;margin:0 auto;padding:18px 16px 70px}
+.wrap{max-width:980px;margin:0 auto;padding:18px 16px 70px}
 a.home{color:#5bb3e0;text-decoration:none;font-size:13px}
+.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
 h1{font-size:24px;margin:4px 0 2px}.sub{color:var(--mut);font-size:13px;margin:0 0 12px}
+.lang{display:flex;gap:4px}
+.lang button{background:var(--card);border:1px solid var(--line);color:var(--mut);border-radius:7px;padding:5px 11px;font-size:12.5px;cursor:pointer;font-weight:600}
+.lang button.on{border-color:var(--ac);color:var(--ac)}
 .ctrls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0 16px}
 input,.chip{background:var(--card);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:6px 11px;font-size:12.5px}
 input{width:200px}
@@ -21,9 +25,10 @@ input{width:200px}
 h2{font-size:12.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--ac);margin:22px 0 8px;border-top:1px solid var(--line);padding-top:12px}
 .f{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-left-width:4px;border-radius:9px;padding:9px 12px;margin:7px 0}
 .f.real{border-left-color:var(--real)}.f.ref{border-left-color:var(--ref)}.f.desc{border-left-color:var(--desc)}
-.f .id{font:700 11px ui-monospace,monospace;color:var(--mut);min-width:40px}
+.f .id{font:700 11px ui-monospace,monospace;color:var(--mut);min-width:46px}
 .f .bd{flex:1}.f .ti{font-weight:600}.f .de{color:var(--mut);font-size:12.5px;margin-top:2px}
-.f .meta{font-size:11px;color:var(--mut);margin-top:3px}
+.f .inf{font-size:12px;margin-top:4px;color:var(--ac);font-style:italic;opacity:.92}
+.f .inf::before{content:"↳ ";opacity:.6}
 .f a{color:#5bb3e0;text-decoration:none;font-size:11.5px}
 .f .tag{font:700 10px ui-monospace;padding:1px 7px;border-radius:9px;background:rgba(127,127,127,.15);white-space:nowrap}
 .f.real .tag{color:var(--real)}.f.ref .tag{color:var(--ref)}.f.desc .tag{color:var(--desc)}
@@ -31,107 +36,126 @@ h2{font-size:12.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--ac)
 </style>
 </head>
 <body><div class="wrap">
-<a class="home" href="index.html">← painel</a>
-<h1>Catálogo dos achados</h1>
-<p class="sub">Todo achado do projeto (#331–#374), por tema, com status, método e a tela que mostra. Verde = real (bateu null). Vermelho = refutado. Dourado = descritivo. Fonte: <code>docs/RESEARCH_LOG.md</code>.</p>
+<div class="top"><a class="home" href="index.html">← painel / panel</a>
+  <div class="lang"><button data-l="pt" class="on">PT</button><button data-l="en">EN</button></div></div>
+<h1 id="h1">Catálogo dos achados</h1>
+<p class="sub" id="sub"></p>
 <div class="ctrls">
-  <input id="q" placeholder="buscar…">
-  <span class="chip" data-v="real">● real</span>
-  <span class="chip" data-v="ref">● refutado</span>
-  <span class="chip" data-v="desc">● descritivo</span>
+  <input id="q" placeholder="buscar / search…">
+  <span class="chip" data-v="real">● <span class="vl">real</span></span>
+  <span class="chip" data-v="ref">● <span class="vl">refutado</span></span>
+  <span class="chip" data-v="desc">● <span class="vl">descritivo</span></span>
   <span class="tot" id="tot"></span>
 </div>
 <div id="list"></div>
-<p class="note">O veredito de status é a lente cética (bateu o null?). A lente operativa/enoquiana roda em paralelo — as telas de operação (fragmentos, mapa, seres, estrutura) servem a prática, sem veredito. Cada sistema de nomes vive na sua tábua; o Loag é a camada de língua.</p>
+<p class="note" id="footnote"></p>
 </div>
 <script>
+// [id, verdict, screen, {pt:[sec,title,method], en:[sec,title,method]}]
+const SEC={
+ nat:{pt:"Natureza do livro — as 3 camadas",en:"Nature of the book — the 3 layers"},
+ gen:{pt:"O gerador de nomes",en:"The name generator"},
+ geo:{pt:"Geometria, mapa e o tear",en:"Geometry, map, and the weave"},
+ gene:{pt:"Genealogia dos nomes",en:"Genealogy of the names"},
+ som:{pt:"Som e voz — o livro cantado",en:"Sound and voice — the sung book"},
+ fro:{pt:"Fronteiras — contém outros sistemas? (NÃO)",en:"Boundaries — does it contain other systems? (NO)"},
+ num:{pt:"Número, Dee, místico (o que falhou)",en:"Number, Dee, mystical (what failed)"},
+ ele:{pt:"Elemento e função",en:"Element and function"},
+ oc:{pt:"Padrão oculto no caos (bateria profunda)",en:"Hidden pattern in the chaos (deep battery)"},
+ lex:{pt:"Léxico (honesto)",en:"Lexicon (honest)"},
+};
 const D=[
-["Natureza do livro — as 3 camadas",[
- ["331","Folha 1 é léxico real","real","recorrência/boa-formação (z=+44)","grade.html"],
- ["333","Folha 1 divide léxico com as Chamadas","real","perplexidade cruzada (z=+7.5)","call_map.html"],
- ["351","Não é língua natural","real","Zipf −0.36, Heaps β≈0.97","pesquisa.html"],
- ["342","Mapa do livro: densidade pica no miolo, cai no fim","real","z=+126","mapa_livro.html"],
- ["360","Profundo (40-48) = dissolução","desc","nomes somem, entropia sobe","pilha.html"],
- ["357a","Comprime 21.6% melhor que embaralhado","real","estrutura global real","dashboard.html"],
-]],
-["O gerador de nomes",[
- ["334","Partículas = peças do gerador","real","afixos/fragmentos (z=+5.5)","forja_neural.html"],
- ["335","Gerador PREFIXO·RAIZ·SUFIXO, combinação livre","desc","62/90 núcleo","forja_neural.html"],
- ["337","Seleção dos nomes = recorrência na grade","real","z=+14.7","atlas_nomes.html"],
- ["351b","Rico (esqueleto·melodia·template) regenera 100%","real","90/90","forja_neural.html"],
- ["370a","Gerador tem MEMÓRIA profunda (Markov)","real","H 4.03→1.95; embaralhado plano","estrutura.html"],
-]],
-["Geometria, mapa e o TEAR",[
- ["341","Lê-se em LINHA; borda e diagonal carregam; coluna morta p/ nome","real","+103/+42/−1.4","grade.html"],
- ["343","Costura 26-28 lida na diagonal (NOCHASTORAL)","real","0→55 nomes","pilha.html"],
- ["353","Escriba: contínuo ordenado + costura","real","r=+0.48","mapa_livro.html"],
- ["355","Cada nome vive num bloco contíguo","real","z=+35.5","mapa_livro.html"],
- ["356","Rotação diagonal exclusiva de 26-28","real","só 26-28","dialetos.html"],
- ["357b","A borda é um anel de nomes legível","real","34 vs 0.2","estrutura.html"],
- ["369a","Horizontal NÃO repete (anti-estrutura direcional)","real","z=−77 (o mais forte)","estrutura.html"],
- ["369b","Coluna 0/borda é gabarito posicional; organização colunar","real","χ² z=+173","estrutura.html"],
- ["369c","Persistência vertical + template atravessa páginas","real","z=+11","estrutura.html"],
- ["370b","Gramática mora na horizontal, vertical é esqueleto","real","H 3.33 vs 3.93","estrutura.html"],
- ["370c","Corridas verticais reais (urdidura)","real","z=+4.86, máx 7","estrutura.html"],
- ["370d","Borda feita de letras raras (V 4.9×, Y, Z, P, G)","desc","paleta do portão","estrutura.html"],
- ["370e","Costura 26-28 = dialeto mais anômalo","real","método independente","dialetos.html"],
- ["371a","MI entre colunas de longo alcance (até dist. 8-9)","real","gramática horizontal larga (z k8=7.3)","estrutura.html"],
- ["371b","Nenhum motivo/template 2D se repete — campo mais diverso que o acaso","real","tile top z=−6.95","estrutura.html"],
- ["371c","Costura 26-28 = maior entropia + letras raras (W quase só ali)","desc","H 7.66 vs 7.04","dialetos.html"],
- ["372a","Família-mãe repete muito (n10: 2451 vs null 0); NOCHA 546×, NOCHASTORA 37×","real","assinatura de campo de nomes","nomes_recorrentes.html"],
- ["372b","4 quadrantes têm perfil de letra distinto (eco dos subângulos)","real","χ² z=+5.73","nomes_recorrentes.html"],
- ["372c","Sem linha/coluna duplicada (sem template literal)","ref","0 vs null 0","dashboard.html"],
- ["373a","Nomes têm TERRITÓRIO: ocupam ~25/48 folhas, concentrados (sub-dispersos)","real","z=−42 vs espalhado","mapa_livro.html"],
- ["373b","Nomes são CONJUNTO, não SEQUÊNCIA: sem ordem fixa entre folhas","ref","desvio 0.095 ≈ aleatório","dashboard.html"],
- ["374a","Inventário ampliado: ~12 raízes fora de NOCHA (GRAPHA, ACHEPH, ANTANT, XALGRA, GETH…)","desc","mais povos que a família-mãe","fragmentos.html"],
- ["374b","Sem sub-famílias distribucionais: 21/24 nomes num só blobe de território","ref","jaccard≥0.6","mapa_livro.html"],
- ["352","Leituras novas (espiral/acróstico/coluna): nada","ref","0 canal novo","mapa_ocorrencias.html"],
- ["354a","Simetria-espelho: sem arquitetura espelhada","ref","z=+0.9","dashboard.html"],
-]],
-["Genealogia dos nomes",[
- ["344","90 nomes = famílias; NOCHA×CHASTOR → NOCHASTOR","real","z=+229.6","genealogia.html"],
- ["358","Pares-mínimos: mesma raiz, só a vogal muda","real","z=+46","dinastias.html"],
- ["358b","Nomes vêm em rajadas (burstiness)","real","B=+0.52","mapa_livro.html"],
-]],
-["Fronteiras — o Loag contém outros sistemas? (NÃO)",[
- ["336","Pontes com Torres/Heptarquia/governadores","ref","null","seres.html"],
- ["340","Astrologia: ciclo zodíaco/planeta","ref","z=−1.6","correspondencias.html"],
- ["348","Anjos venusianos geráveis","ref","confound","seres.html"],
- ["349","Vigilantes de Enoque","ref","z=+0.5","seres.html"],
- ["350","Nomes de Deus/sefirot/YHVH","ref","z=−2.5","seres.html"],
- ["361","Chamada N abre folha N","ref","1/19; afina c/ folha 1","call_map.html"],
- ["362","Nomes das Torres como traço reto 2D","ref","nenhum tier > null","tower_traces.html"],
- ["363","Curva comprimento→aparição = acaso","desc","rei 0%, menor 75%","seres.html"],
- ["364","Elemento/poder do anjo bate com a posição? Não","ref","z=−0.13","elemento_posicao.html"],
- ["365","Reis/Anciões sob TODA regra (ré/cavalo/boggle)","ref","z≤1.5","mapa_ocorrencias.html"],
- ["366","Reis em pedaços (BATA+IVAH)? Nunca se juntam","ref","junta 0","fragmentos.html"],
- ["367","ELS/governadores/Collecta/gematria/translit/acróstico","ref","≤ acaso","fragmentos.html"],
- ["369d","IC/Kasiski: sem cifra escondida","ref","IC=0.079 = freq","estrutura.html"],
-]],
-["Léxico (honesto)",[
- ["338","Laycock: 114 palavras — INFLADO por auto-citação","ref","corrigido","dashboard.html"],
- ["339","Léxico real confiável ≈ 24","desc","21 Chamadas + 3 do Dee","dashboard.html"],
-]],
+["331","real","grade.html",{pt:["nat","Folha 1 é léxico real","recorrência/boa-formação (z=+44)"],en:["nat","Leaf 1 is a real lexicon","recurrence/well-formedness (z=+44)"]}],
+["351","real","pesquisa.html",{pt:["nat","Não é língua natural","Zipf −0.36, Heaps β≈0.97"],en:["nat","Not a natural language","Zipf −0.36, Heaps β≈0.97"]}],
+["342","real","mapa_livro.html",{pt:["nat","Mapa do livro: densidade pica no miolo, cai no fim","z=+126"],en:["nat","Book map: density peaks mid, falls at the end","z=+126"]}],
+["360","desc","pilha.html",{pt:["nat","Profundo (40-48) = dissolução","nomes somem, entropia sobe","Três medidas convergem aqui (nome #359, vogal A→U #382, elemento #397): o fim do livro se desfaz em TODA dimensão."],en:["nat","The deep (40-48) = dissolution","names vanish, entropy rises","Three measures converge here (name #359, vowel A→U #382, element #397): the book's end dissolves on EVERY axis."]}],
+["357a","real","dashboard.html",{pt:["nat","Comprime 21.6% melhor que embaralhado","estrutura global real"],en:["nat","Compresses 21.6% better than shuffled","real global structure"]}],
+["335","desc","forja_neural.html",{pt:["gen","Gerador PREFIXO·RAIZ·SUFIXO, combinação livre","62/90 núcleo"],en:["gen","Generator PREFIX·ROOT·SUFFIX, free combination","62/90 core"]}],
+["337","real","atlas_nomes.html",{pt:["gen","Seleção dos nomes = recorrência na grade","z=+14.7"],en:["gen","Name selection = recurrence in the grid","z=+14.7"]}],
+["370a","real","estrutura.html",{pt:["gen","Gerador tem MEMÓRIA profunda (Markov)","H 4.03→1.95; embaralhado plano"],en:["gen","Generator has deep MEMORY (Markov)","H 4.03→1.95; shuffled flat"]}],
+["377","real","estrutura.html",{pt:["gen","Silabário: morfemas de ~3 letras (OCH/ANZ/ALG)","seg 3.11 vs null 6.77"],en:["gen","Syllabary: ~3-letter morphemes (OCH/ANZ/ALG)","seg 3.11 vs null 6.77"]}],
+["341","real","grade.html",{pt:["geo","Lê-se em LINHA; borda e diagonal carregam; coluna morta p/ nome","+103/+42/−1.4"],en:["geo","Read by ROW; border & diagonal carry; column dead for names","+103/+42/−1.4"]}],
+["343","real","pilha.html",{pt:["geo","Costura 26-28 lida na diagonal (NOCHASTORAL)","0→55 nomes"],en:["geo","Seam 26-28 read on the diagonal (NOCHASTORAL)","0→55 names"]}],
+["369a","real","estrutura.html",{pt:["geo","Horizontal NÃO repete (anti-estrutura direcional)","z=−77 (o mais forte)","O sinal mais forte do projeto: as letras variam ao máximo na linha. Define a direção de leitura e a 'busy-ness' do campo."],en:["geo","Horizontal does NOT repeat (directional anti-structure)","z=−77 (the strongest)","The project's strongest signal: letters vary maximally along the row. Sets the reading direction and the field's 'busy-ness'."]}],
+["369b","real","estrutura.html",{pt:["geo","Coluna 0/borda é gabarito; organização colunar","χ² z=+173"],en:["geo","Column 0/border is a template; columnar organization","χ² z=+173"]}],
+["369c","real","estrutura.html",{pt:["geo","Persistência vertical + template atravessa páginas","z=+11"],en:["geo","Vertical persistence + template crosses pages","z=+11"]}],
+["370b","real","estrutura.html",{pt:["geo","Gramática mora na horizontal, vertical é esqueleto","H 3.33 vs 3.93"],en:["geo","Grammar lives horizontally, vertical is scaffold","H 3.33 vs 3.93"]}],
+["370e","real","dialetos.html",{pt:["geo","Costura 26-28 = dialeto mais anômalo","método independente"],en:["geo","Seam 26-28 = most anomalous dialect","independent method"]}],
+["371a","real","estrutura.html",{pt:["geo","MI entre colunas de longo alcance (dist. 8-9)","gramática horizontal larga"],en:["geo","Long-range column MI (dist. 8-9)","wide horizontal grammar"]}],
+["372a","real","nomes_recorrentes.html",{pt:["geo","Família-mãe repete muito (n10: 2451 vs null 0)","NOCHA 546×, NOCHASTORA 37×","Assinatura definitiva de campo de NOMES, não de texto — o livro é um punhado de nomes repetido."],en:["geo","Master family repeats hugely (n10: 2451 vs null 0)","NOCHA 546×, NOCHASTORA 37×","Definitive signature of a NAME field, not text — the book is a handful of names repeated."]}],
+["400a","real","estrutura.html",{pt:["geo","Gramática é SÓ horizontal (MI 0.60 vs 0.01 nas outras)","dir: H/V/diag/anti","O livro é idioma estritamente 1-D horizontal; vertical/diagonal = andaime. A leitura diagonal da costura é truque local, não língua."],en:["geo","Grammar is ONLY horizontal (MI 0.60 vs 0.01 others)","dir: H/V/diag/anti","The book is a strictly 1-D horizontal language; vertical/diagonal = scaffold. The seam's diagonal reading is a local trick, not grammar."]}],
+["400b","real","dialetos.html",{pt:["geo","A gramática DERIVA por região (dialetos gramaticais)","perplexidade cruzada","Não é uma língua uniforme: cada região tem sua gramática; a costura é a mais irregular. Muda como lemos 'uma língua'."],en:["geo","Grammar DRIFTS by region (grammatical dialects)","cross-perplexity","Not one uniform language: each region has its own grammar; the seam is most irregular. Changes how we read 'one language'."]}],
+["344","real","genealogia.html",{pt:["gene","90 nomes = famílias; NOCHA×CHASTOR → NOCHASTOR","z=+229.6"],en:["gene","90 names = families; NOCHA×CHASTOR → NOCHASTOR","z=+229.6"]}],
+["358","real","dinastias.html",{pt:["gene","Pares-mínimos: mesma raiz, só a vogal muda","z=+46"],en:["gene","Minimal pairs: same root, only the vowel changes","z=+46"]}],
+["405","real","dinastias.html",{pt:["gene","Classes gramaticais: afixo depende da CASA (D/AD=NOCHA, L/X=GETH)","não é combinação livre","Refina #335: não é combinação livre — há declinação por classe. As duas casas são CLASSES gramaticais com morfologia própria, não só famílias. Feature de língua real."],en:["gene","Grammatical classes: affix depends on the HOUSE (D/AD=NOCHA, L/X=GETH)","not free combination","Refines #335: not free combination — there is class-based declension. The two houses are grammatical CLASSES with their own morphology, not just families. A real-language feature."]}],
+["380","ref","fragmentos.html",{pt:["gene","Uma semente única? NÃO — mas casa CH/NOCHA domina 39%","z=−0.61"],en:["gene","One single seed? NO — but CH/NOCHA house rules 39%","z=−0.61"]}],
+["386","real","voz_loagaeth.html",{pt:["som","Pronunciável: CV alterna, cachos curtos","z=+6.9"],en:["som","Pronounceable: CV alternates, short clusters","z=+6.9"]}],
+["387","real","voz_loagaeth.html",{pt:["som","Vizinhos assonam (vogais partilhadas)","z=+5.1"],en:["som","Neighbours assonate (shared vowels)","z=+5.1"]}],
+["388","real","guia_pratico.html",{pt:["som","Acento LATINO (penúltima, janela de 3 sílabas)","83% pen/antepen"],en:["som","LATIN stress (penult, 3-syllable window)","83% pen/antepen"]}],
+["391","real","voz_loagaeth.html",{pt:["som","Nomes terminam em VOGAL (sílaba aberta)","z=+3.2"],en:["som","Names end in a VOWEL (open syllable)","z=+3.2"]}],
+["392","real","voz_loagaeth.html",{pt:["som","Melodia vocálica canônica (entoado sobre A)","z=+5.2","Com #386-391: o livro é um idioma de CANTO, entoado sobre A. É a única frente com sinal real novo — a VOZ, não o sentido."],en:["som","Canonical vowel melody (chanted on A)","z=+5.2","With #386-391: the book is a CHANT language, sung on A. The only front with real new signal — the VOICE, not the meaning."]}],
+["394","desc","guia_pratico.html",{pt:["som","H é aspirado FINAL (sopro); fecha em tom ou fôlego","59% dos H finais"],en:["som","H is a FINAL aspirate (breath); closes on tone or breath","59% of H final"]}],
+["398b","real","estrutura.html",{pt:["som","Pulso vocálico: um A a cada ~3 letras","z=+31.5 lag 3","A batida do idioma — uma vogal (A) a cada ~3 posições, casando com a sílaba de 3 letras (#377)."],en:["som","Vowel pulse: an A every ~3 letters","z=+31.5 lag 3","The language's beat — a vowel (A) every ~3 positions, matching the 3-letter syllable (#377)."]}],
+["401","real","chamadas_tabelas.html",{pt:["som","Chamadas e nomes: MESMA língua, REGISTROS diferentes","CV igual; A 38% vs 71%","Unifica o corpus enoquiano numa língua, e explica por que o Loagaeth lê como NOMES: é o registro de INVOCAÇÃO (só A, vogal-final, cantado) da mesma língua que fala frases nas Chamadas."],en:["som","Calls and names: SAME language, DIFFERENT registers","CV same; A 38% vs 71%","Unifies the Enochian corpus into one language, and explains why the Loagaeth reads as NAMES: it is the INVOCATION register (A-only, vowel-final, sung) of the same language the Calls speak in sentences."]}],
+["402","real","voz_loagaeth.html",{pt:["som","Identidade é consonantal; vogal é registro/melodia","H consoante 3.48, vogal 1.25","A estrutura mais profunda da língua: a CONSOANTE é a palavra (quase toda a informação); a vogal é a melodia (A no canto). O nome-de-poder É suas consoantes; o A é a voz que o carrega."],en:["som","Identity is consonantal; the vowel is register/melody","H cons 3.48, vowel 1.25","The language's deepest structure: the CONSONANT is the word (nearly all the information); the vowel is the melody (A in chant). The name of power IS its consonants; A is the voice that carries it."]}],
+["403","real","voz_loagaeth.html",{pt:["som","Consoantes = fonologia coerente/balanceada (natural)","coronal 53%; 4 modos; H 1.93/2.0","Eleva a confiança de que é LÍNGUA desenhada, não ruído: o inventário de consoantes é um sistema fonológico natural. Consoante minimal-pair é raro e de classe natural — confirma consoante=identidade."],en:["som","Consonants = coherent/balanced phonology (natural)","coronal 53%; 4 manners; H 1.93/2.0","Raises confidence it is a designed LANGUAGE, not noise: the consonant inventory is a natural phonological system. Consonant minimal pairs are rare and same-class — confirms consonant=identity."]}],
+["336","ref","seres.html",{pt:["fro","Pontes com Torres/Heptarquia/governadores","null"],en:["fro","Bridges to Towers/Heptarchy/governors","null"]}],
+["349","ref","seres.html",{pt:["fro","Vigilantes de Enoque geráveis","z=+0.5"],en:["fro","Watchers of Enoch generable","z=+0.5"]}],
+["361","ref","call_map.html",{pt:["fro","Chamada N abre folha N","1/19; afina c/ folha 1"],en:["fro","Call N opens leaf N","1/19; tunes to leaf 1"]}],
+["362","ref","tower_traces.html",{pt:["fro","Nomes das Torres como traço reto 2D","nenhum tier > null"],en:["fro","Tower names as straight 2D traces","no tier > null"]}],
+["365","ref","mapa_ocorrencias.html",{pt:["fro","Reis/Anciões sob TODA regra (ré/cavalo/boggle)","z≤1.5"],en:["fro","Kings/Seniors under EVERY rule (reverse/knight/boggle)","z≤1.5"]}],
+["366","ref","fragmentos.html",{pt:["fro","Reis em pedaços (BATA+IVAH)? Nunca se juntam","junta 0"],en:["fro","Kings in pieces (BATA+IVAH)? Never join","joint 0"]}],
+["367","ref","fragmentos.html",{pt:["fro","ELS/governadores/Collecta/gematria/translit/acróstico","≤ acaso"],en:["fro","ELS/governors/Collecta/gematria/translit/acrostic","≤ chance"]}],
+["406","ref","fragmentos.html",{pt:["fro","Anjos do Ars Paulina (horas/planetários) no Loag? NÃO","1-2 vs null 1.5","O sufixo -EL (solomônico) é raro no Loag (fecha em -A). Sistemas diferentes: o Loag não é container do Ars Paulina — opera os próprios nomes."],en:["fro","Ars Paulina angels (hours/planetary) in the Loag? NO","1-2 vs null 1.5","The -EL suffix (Solomonic) is rare in the Loag (it ends in -A). Different systems: the Loag is not a container for Ars Paulina — it operates its own names."]}],
+["378","ref","dashboard.html",{pt:["num","Fio numérico 2/3/6: vive nos dígitos do meio, não deriva do nome","z=+0.08"],en:["num","Numeric thread 2/3/6: in the middle digits, not from the name","z=+0.08"]}],
+["379","desc","dashboard.html",{pt:["num","Direção de leitura pende fraco a 1→48 (não o 'backward' de Dee)","z=−1.69"],en:["num","Reading direction weakly favours 1→48 (not Dee's 'backward')","z=−1.69"]}],
+["389","ref","dashboard.html",{pt:["num","Sigillum/φ/primos/quartos elementais: nada","z≤0, −0.5"],en:["num","Sigillum/φ/primes/elemental quarters: nothing","z≤0, −0.5"]}],
+["385","ref","dashboard.html",{pt:["num","Âncora externa (CHASTOR): sem glosa em fonte nenhuma","web + Dee"],en:["num","External anchor (CHASTOR): no gloss in any source","web + Dee"]}],
+["395","real","guia_pratico.html",{pt:["ele","Arco funcional: Terra→(Água|Fogo) = manifestação→dissolução","por região"],en:["ele","Functional arc: Earth→(Water|Fire) = manifestation→dissolution","by region"]}],
+["397","real","guia_pratico.html",{pt:["ele","Identidade elemental firme; só fratura no profundo (38-48)","38/48 concordam"],en:["ele","Elemental identity firm; fractures only in the deep (38-48)","38/48 agree"]}],
+["398a","ref","estrutura.html",{pt:["oc","Lattice modular/bloco 7×7 = estrutura colunar já sabida, não cifra","z é #369b"],en:["oc","Modular lattice/7×7 block = known columnar structure, not a cipher","z is #369b"]}],
+["398c","ref","dashboard.html",{pt:["oc","40 hipóteses de padrão oculto: nenhuma cifra nova no caos","segui até o fim"],en:["oc","40 hidden-pattern hypotheses: no new cipher in the chaos","followed to the end"]}],
+["399","desc","pilha.html",{pt:["oc","Mapa de compressão: ordem no corpo (11-22), caos pica na costura 26-28","z −165 a −1","A ordem concentra no corpo, o caos na costura — confirma a costura como limiar por via nova (compressão)."],en:["oc","Compression map: order in the body (11-22), chaos peaks at the seam 26-28","z −165 to −1","Order concentrates in the body, chaos at the seam — confirms the seam as a threshold by a new route (compression)."]}],
+["404","ref","loag_quadrados.html",{pt:["oc","Nome × posição: SEM template (nomes emergem, não são colocados)","NOCHA: 447 ocorr / 414 células","Fecha a hipótese de 'nomes em coordenadas desenhadas': a posição é consequência das letras, não colocação. Não há cifra posicional de nome — é caça-palavras emergente."],en:["oc","Name × position: NO template (names emerge, aren't placed)","NOCHA: 447 occ / 414 cells","Closes the 'names at designed coordinates' hypothesis: position is a consequence of the letters, not a placement. No positional name cipher — emergent word-search."]}],
+["407","ref","fragmentos.html",{pt:["oc","Soluções públicas (web) testadas: salto-7 e Chamadas-nas-tabelas falham","3 vs 1; 147 vs null 213","Nenhuma 'solução' pública sobrevive à medida. As Chamadas são parentes de língua das tabelas (#401), não escondidas nelas. Nossa análise vai além do que há público."],en:["oc","Public 'solutions' (web) tested: skip-7 and Calls-in-tables both fail","3 vs 1; 147 vs null 213","No public 'solution' survives measurement. The Calls are a language-sibling of the tables (#401), not hidden inside them. Our analysis goes beyond what is public."]}],
+["338","ref","dashboard.html",{pt:["lex","Laycock: 114 palavras — INFLADO por auto-citação","corrigido"],en:["lex","Laycock: 114 words — INFLATED by self-citation","corrected"]}],
+["339","desc","dashboard.html",{pt:["lex","Léxico real confiável ≈ 24","21 Chamadas + 3 do Dee"],en:["lex","Reliable real lexicon ≈ 24","21 Calls + 3 from Dee"]}],
 ];
-const VN={real:"REAL",ref:"REFUTADO",desc:"DESCRITIVO"};
-let on={real:1,ref:1,desc:1},q="";
+const VN={real:{pt:"REAL",en:"REAL"},ref:{pt:"REFUTADO",en:"REFUTED"},desc:{pt:"DESCRITIVO",en:"DESCRIPTIVE"}};
+const TXT={
+ sub:{pt:"Todo achado do projeto, por tema, com status, método e a tela que mostra. Verde = real (bateu o null). Vermelho = refutado. Dourado = descritivo. Fonte: docs/RESEARCH_LOG.md.",
+      en:"Every finding, by theme, with status, method and the screen that shows it. Green = real (beat the null). Red = refuted. Gold = descriptive. Source: docs/RESEARCH_LOG.md."},
+ foot:{pt:"O status é a lente cética (bateu o null?). A camada operativa roda em paralelo — as telas (voz, guia, fragmentos, estrutura) servem a prática. Veredito geral: campo de nomes de alta entropia, idioma de CANTO (eixo-som real); sentido selado, sem chave interna nem externa.",
+       en:"Status is the skeptical lens (did it beat the null?). The operative layer runs in parallel — the screens (voice, guide, fragments, structure) serve the practice. Overall verdict: high-entropy name field, a CHANT language (real sound axis); meaning sealed, no internal or external key."},
+ vl:{pt:["real","refutado","descritivo"],en:["real","refuted","descriptive"]},
+};
+let lang="pt",on={real:1,ref:1,desc:1},q="";
 const el=document.getElementById("list");
+const SECORD=["nat","gen","geo","gene","som","fro","num","ele","oc","lex"];
 function render(){
+  document.getElementById("h1").textContent=lang==="pt"?"Catálogo dos achados":"Catalogue of findings";
+  document.getElementById("sub").textContent=TXT.sub[lang];
+  document.getElementById("footnote").textContent=TXT.foot[lang];
+  document.querySelectorAll(".vl").forEach((e,i)=>e.textContent=TXT.vl[lang][i]);
   el.innerHTML="";let n=0;
-  for(const [sec,items] of D){
-    const vis=items.filter(([id,ti,v,me,sc])=>on[v]&&((id+ti+me).toLowerCase().includes(q)));
-    if(!vis.length)continue;
-    const h=document.createElement("h2");h.textContent=sec;el.appendChild(h);
-    for(const [id,ti,v,me,sc] of vis){n++;
+  for(const key of SECORD){
+    const items=D.filter(([id,v,sc,L])=>L[lang][0]===key&&on[v]&&((id+L[lang][1]+L[lang][2]).toLowerCase().includes(q)));
+    if(!items.length)continue;
+    const h=document.createElement("h2");h.textContent=SEC[key][lang];el.appendChild(h);
+    for(const [id,v,sc,L] of items){n++;
+      const [,ti,me,inf]=L[lang];
       const d=document.createElement("div");d.className="f "+v;
       d.innerHTML=`<span class="id">#${id}</span><div class="bd"><div class="ti">${ti}</div>`+
-        `<div class="meta">${me}${sc?` · <a href="${sc}">ver tela ↗</a>`:""}</div></div>`+
-        `<span class="tag">${VN[v]}</span>`;
-      el.appendChild(d);}
+        `<div class="de">${me}${sc?` · <a href="${sc}">${lang==="pt"?"ver tela":"view"} ↗</a>`:""}</div>`+
+        (inf?`<div class="inf">${inf}</div>`:"")+`</div>`+
+        `<span class="tag">${VN[v][lang]}</span>`;el.appendChild(d);}
   }
-  document.getElementById("tot").textContent=n+" achados";
+  document.getElementById("tot").textContent=n+(lang==="pt"?" achados":" findings");
 }
-document.querySelectorAll(".chip").forEach(c=>{c.onclick=()=>{on[c.dataset.v]=!on[c.dataset.v];c.classList.toggle("off",!on[c.dataset.v]);render();};});
+document.querySelectorAll(".lang button").forEach(b=>b.onclick=()=>{
+  lang=b.dataset.l;document.querySelectorAll(".lang button").forEach(x=>x.classList.toggle("on",x===b));
+  document.documentElement.lang=lang==="pt"?"pt-BR":"en";render();});
+document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{on[c.dataset.v]=!on[c.dataset.v];c.classList.toggle("off",!on[c.dataset.v]);render();});
 document.getElementById("q").oninput=e=>{q=e.target.value.toLowerCase();render();};
 render();
 </script>

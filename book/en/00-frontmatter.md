@@ -6,17 +6,11 @@ date: "2026"
 lang: en-US
 ---
 
-\newpage
+# Liber Loagaeth — Anatomy of a Sealed Language {.unnumbered}
 
-# Liber Loagaeth — Anatomy of a Sealed Language
+### A rigorous statistical analysis of John Dee's *Liber Loagaeth* (Sloane MS 3189) — with a null model behind every claim — and an operative manual derived from the measurement {.unnumbered}
 
-### A rigorous statistical analysis of John Dee's *Liber Loagaeth* (Sloane MS 3189), with a null model behind every claim — and an operative manual derived from the measurement
-
-**Astaron Eremita**
-
-*First edition — 2026*
-
----
+**Astaron Eremita** · *First edition · 2026*
 
 > *"Every letter here bringeth furth the Names of God: but they are but one Name."*
 > — the angel Galvah to John Dee, on the Book
@@ -27,9 +21,11 @@ lang: en-US
 
 ## A note on what this is
 
-This is a **research book**. Every claim it makes about the *Liber Loagaeth* comes with the test that supports it and the **null model** it was measured against. Nothing is presented as true because it "looks like" something: a regularity counts only when it beats the chance level of a shuffled text, a Markov surrogate, or a controlled permutation. The patterns that **failed** that test — and there were many, some of them dear to tradition — are reported as prominently as the ones that passed. Honesty about what was **not** found is part of the method.
+This is a **research book**. Every claim it makes about the *Liber Loagaeth* comes with the test that supports it and the **null model** it was measured against. Nothing is presented as true because it "looks like" something: a regularity counts only when it beats the chance level of a shuffled text, a Markov surrogate, or a controlled permutation. The patterns that **failed** that test — and there were **more than a hundred**, some of them dear to tradition — are reported as prominently as the ones that passed. Honesty about what was **not** found is part of the method.
 
 The second half of the book is **operative**: it translates what the measurement revealed — the pronunciation, the voice, the structure, the elemental function — into a manual of ritual use. That part operates by **sound, correspondence and act**, in magic's own logic, and is declared as such. It does not decipher a hidden meaning, because there is no hidden meaning to decipher: that is one of the central findings of this study, not a failure of it.
+
+All numbers in brackets — such as **[#392]** or **[a232]** — refer to dated, reproducible entries of the research log (`docs/RESEARCH_LOG.md`) and to the analysis modules (`src/aNNN_*.py`). Anyone can run the code, with the same seed (1583), and obtain the same numbers.
 
 \newpage
 
@@ -58,20 +54,18 @@ The attribution must appear visibly and permanently in the material that uses th
 
 **5. Reservation.** All rights not expressly granted are reserved to the author. For permissions: contact the author.
 
----
+\newpage
 
 ## How this book is organized
 
-The book has **two parts** and an apparatus.
+The book has **three parts** and an apparatus.
 
-- **Part I — The Research.** What the Loagaeth is, measured: the nature of the book and its three layers; the name generator and its morphology; the language (consonantal, with registers); the sound and the voice (the book sung); the signal structure (the loom); the elemental arc. Each chapter brings the tests, the numbers, the graphs and the null models.
+- **Part I — The Research.** What the Loagaeth is, measured: the nature of the book and its three layers (Ch. 1); the name generator, the families, the houses and the hierarchy (Ch. 2); the consonantal language and its phonology (Ch. 3); sound and voice — the book sung (Ch. 4); the signal structure, the loom (Ch. 5); the elemental arc and the geography of the book (Ch. 6). Each chapter brings the tests, the numbers, the graphs and the null models.
 
-- **Part II — What it is NOT.** The honest graveyard: everything tested that **fell** — the ciphers, the numerology, the astrology, the bridges to other systems (Watchtowers, governors, Sigillum, Ars Paulina, Soyga), the sacred names, the "solutions" published by others. Each refutation with its null.
+- **Part II — What it is NOT (Ch. 7).** The honest graveyard: more than a hundred tested hypotheses that **fell** — the ciphers, the numerology, the astrology, the bridges to other systems (Watchtowers, governors, Sigillum, Ars Paulina, Soyga), the sacred names, the "solutions" published by others. Each refutation with its number and its null.
 
-- **Part III — The Operative.** How to use the Loagaeth in ritual, derived from the measurement: pronunciation and vibration, the Call↔leaf link, the choice of name and house, the elemental map of the work, the evocation sequence.
+- **Part III — The Operative (Ch. 8).** How to use the Loagaeth in ritual, derived from the measurement: pronunciation and vibration, the two voice registers, the choice of name and house, the elemental map of the work, the evocation sequence — honestly separating what is **measured** from what is **tradition**.
 
-- **Apparatus.** The complete numbered catalog of all findings; the methodology and null models; the analysis modules; the sources.
-
-Numbers in brackets, such as **[#392]**, refer to the entries of the chronological research log (`docs/RESEARCH_LOG.md`), where each test is dated and reproducible.
+- **Apparatus.** The numbered catalog of all findings; the methodology and the null models; the analysis modules; the glossary; the sources.
 
 \newpage

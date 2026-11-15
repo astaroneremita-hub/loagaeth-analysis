@@ -2,68 +2,120 @@
 
 # Capítulo 7 — O cemitério: tudo que caiu, e por quê
 
-Esta é a parte do livro que mais o distingue de qualquer outro escrito sobre o Loagaeth. A tradição esotérica acumula afirmações; este estudo as **testa**, e relata as que **morreram** com o mesmo destaque das que viveram. Cada refutação abaixo tem o seu modelo nulo. O princípio de Babel (Cap. 0) garante que *algo* sempre se acha num meio milhão de letras — por isso só conta o que supera o acaso, e aqui está o que **não** superou.
+Esta é a parte do livro que mais o distingue de qualquer outro escrito sobre o Loagaeth. A tradição esotérica acumula afirmações; este estudo as **testa**, e relata as que **morreram** com o mesmo destaque das que viveram. Cada refutação abaixo tem o seu número e o seu modelo nulo. O princípio de Babel (Cap. 0) garante que *algo* sempre se acha num meio milhão de letras — por isso só conta o que supera o acaso, e aqui está o que **não** superou.
 
-![Figura 6.1 — O balanço honesto: o que bateu o nulo, o que caiu, o que é só descritivo.](../figuras/fig4_integridade.png)
+![Figura 7.1 — O balanço honesto da fase recente; as fases anteriores somam ~130 refutações a mais.](../figuras/fig_integridade.png)
 
-## 6.1 As cifras e os códigos
+## 7.1 As cifras e os códigos
 
-**ELS / sequências equidistantes (os "códigos da Bíblia").** Procurou-se nomes conhecidos lendo a cada *k* letras, para todo *k*, em todas as direções. **REFUTADO:** o número de "achados" no Loagaeth real fica **dentro** da distribuição do surrogate Markov-3. Tudo que aparece, aparece igual no ruído com a mesma fonotática. Não há mensagem equidistante escondida.
+| # | Hipótese | Medida | Veredito |
+|---|---|---|---|
+| 7 | Nomes espelhados/invertidos | 102 pares vs 93 no Markov-3 | REFUTADO |
+| 8 | Raiz triliteral semítica (morfológica) | palavras/esqueleto ≈ 1,3, tipo inglês | REFUTADO |
+| 10 | Reordenação Gebofal, 4 modelos geométricos, cifras YHVH/MAD | nenhuma bate o nulo | REFUTADO |
+| 11 | Acróstico do prólogo | gibberish; a tradução mata a cifra | REFUTADO |
+| 12 | Decimação de 2 em 2 pelas linhas | estrutura colapsa (2220 → ~20 hexagramas) | REFUTADO |
+| 13 | Extração estilo-Torre do centro da grade | centro ≈ posições aleatórias (z ≤ 1,7) | REFUTADO |
+| 40 | As letras do topo soletram um nome | não, para k = 3…8 | REFUTADO |
+| 41 | Valores de letra seguem a frequência | não, 13 sistemas com correção | REFUTADO |
+| 67 | A leitura inversa (espelho) guarda nomes | CHASTOR 179 → 0; direto 3,5 vs inverso 6,1 bits | REFUTADO |
+| 88 | Acrósticos / células do centro | nenhum nome | REFUTADO |
+| 114 | A Grande Tábua é gerada por regra (tipo-Soyga)? | célula não previsível de esquerda/acima | REFUTADO |
+| 198 | Regra de vizinho (célula = f(acima, esquerda))? | 3,02 de 3,95 bits restam; vizinhos tiram só 0,94 | REFUTADO |
+| 200 | Livro como cubo 49×49×49 com eixo de profundidade | MI entre folhas 0,0016 bits (nulo) | REFUTADO |
 
-**Treliça modular / coordenadas.** Testou-se se as posições das letras (linha, coluna) módulo *n* formam um retículo com sentido. **REFUTADO:** nenhum módulo produz estrutura acima do nulo posicional.
+**O que isto diz:** não há **cifra** no Loagaeth. Nem equidistante (ELS), nem modular, nem acróstica, nem de vizinho (tipo-Soyga), nem numa terceira dimensão. A régua é sempre a mesma: o real fica **dentro** da distribuição do surrogate de Markov-3. Tudo que "aparece" aparece igual no ruído com a mesma fonotática.
 
-**Acrósticos.** Primeiras e últimas letras de cada linha, lidas para baixo, em cada tabela e **através** das tabelas; idem para colunas. **REFUTADO:** entropia e n-gramas dos acrósticos são indistinguíveis de posições aleatórias e do shuffle de linhas. O acróstico do prólogo não se estende ao livro.
+## 7.2 A numerologia e a geometria
 
-**Gematria e numerologia.** Somou-se valores de letras (vários esquemas) por nome, linha, folha; buscou-se constantes, datas, múltiplos. **REFUTADO:** nenhuma regularidade aritmética supera o acaso. O Loagaeth **não codifica números** — o gerador é morfológico, não aritmético (Cap. 2).
+| # | Hipótese | Medida | Veredito |
+|---|---|---|---|
+| 21 | Nome maior = reino maior | comprimento × frequência ρ = **−0,39** (oposto) | REFUTADO |
+| 22 | Gematria codifica poder | ρ = +0,11 | REFUTADO |
+| 57 | Estrutura de Fibonacci | nenhuma | REFUTADO |
+| 58 | Divisão gradual 7×7 / cruz central | só efeito de borda | REFUTADO |
+| 59 | Rearranjo de quadrantes Golden Dawn | o original é o melhor (35/35) | REFUTADO |
+| 64 | Contagens de letra vs 7 / 42 / 49 | ao acaso; total ≡ 0 mod 7 vem da construção 49×49 | REFUTADO |
+| 2 | Proporção áurea na costura/dissolução | gap 2,7 de φ; sem casamento | REFUTADO |
+| 5 | Eventos em folhas primas | 4 vs 4,7 esperado | REFUTADO |
 
-**Template posicional como código.** Testou-se se o gabarito vertical (o template, z=+173 do Cap. 5) carrega mensagem. **REFUTADO como mensagem:** o template é **forma** (molde que sustenta), não **sinal** — não há informação de sequência na coluna (MI vertical = 0,007 bits).
+Um achado numérico **real** merece nota, para não escondê-lo: nas **tabelas de número** da Heptarquia (não no Loagaeth), o número é "dígito-cabeça + bloco permutado de 2·3·6" (z 7,6–9,0; pares anagrama z 13,7) [#28]. É real, mas é de **outro** documento de Dee. O Loagaeth **não codifica números**.
 
-**Direções de leitura exóticas.** Vertical, diagonal, anti-diagonal, bustrofédon, de trás para frente, espelhada. **REFUTADO** em todas (exceto a diagonal **local** da costura 26–28, que é estrutura real, não cifra): a gramática é só horizontal (Cap. 3). Ler de outro jeito não revela nada que o nulo não revele.
-
-**Transliteração para outra língua.** Mapeou-se o alfabeto enoquiano para hebraico, grego, latim, buscando palavras. **REFUTADO:** nenhuma transliteração produz texto acima do acaso. Não é outra língua escrita em código — é a sua própria língua.
-
-## 6.2 As "soluções" publicadas por terceiros
-
-**O "skip-7" (enochiantoday).** A alegação de que se lê o livro pulando de 7 em 7. **REFUTADO:** a lestura skip-7 não produz mais nomes nem mais estrutura que o nulo. É pareidolia sobre uma grade grande.
-
-**Laycock — "as Chamadas são geradas a partir das tabelas" (leitura literal).** Testou-se a hipótese de que as palavras das Chamadas se extraem literalmente das grades. **REFUTADO na forma literal:** acham-se **147** correspondências, mas o nulo de mesma composição produz **213** — ou seja, o texto real acha **menos** que o acaso. A ligação Chamada↔tabela é **funcional** (Cap. 4: mesma língua, dois registros; Call N abre a folha N+1), **não** uma extração literal de substring.
-
-## 6.3 As pontes com outros sistemas enoquianos
+## 7.3 As pontes com os outros sistemas enoquianos
 
 A hipótese mais cara à tradição: que os nomes das **Tábuas de Vigia** e dos outros sistemas de Dee "moram" dentro do Loagaeth. Testou-se **exaustivamente**, cada nome como substring e com pedaços, no livro todo e por segmento, contra nulos de composição pareada. O veredito é uniforme e **negativo**:
 
-- **Nomes de Deus das Torres** (os nomes de 3, 4, 5, 6, 7 letras de cada quadrante). **REFUTADO:** não aparecem acima do acaso — nem inteiros, nem em pedaços, nem em diagonal, nem de trás para frente.
-- **Reis e Anciões (Seniors).** Testado com nomes inteiros e com fragmentos (ex. BATA, IVAH). **REFUTADO:** os fragmentos que aparecem, aparecem na frequência do nulo. Um pedaço de 2–3 letras de qualquer nome aparece num campo deste tamanho por puro acaso.
-- **Anjos menores por subângulo** (os nomes de 2 letras das células). **REFUTADO como sistema:** casos isolados (ex. "AMOX") existem, mas o **conjunto** não supera o nulo — é exatamente o que o princípio de Babel prevê.
-- **91 governadores e 30 Aethyrs.** **REFUTADO:** nenhum governador mora numa região do livro acima do acaso.
-- **Nomes do Sigillum Dei Aemeth.** **REFUTADO.**
-- **Anjos da Ars Paulina (horas e signos).** **REFUTADO:** sistema posterior e alheio; não está no Loagaeth.
-- **Heptarquia (reis e príncipes planetários).** **REFUTADO.**
-- **Shem ha-Mephorash / Goetia.** **REFUTADO:** sistemas de outra tradição; ausentes.
+| # | Sistema | Medida | Veredito |
+|---|---|---|---|
+| 90 | Shem, Goetia, planetários, governadores | todos na expectativa Markov-3; BORNOGO 1× | REFUTADO |
+| 222 | Nomes do Sigillum Dei Aemeth | 2/17 presentes, nulo 2,5±0,9, **z = −0,54** | REFUTADO |
+| 406 | Anjos do Ars Paulina (25, horas+planetários) | só ANAEL (1/25) e RAPHAEL (1×), nulo 1,5 | REFUTADO |
+| 91 | "Constelação" de nomes nas faces empilhadas | dentro de ambos os nulos | REFUTADO |
+| — | Nomes de Deus / Reis / Anciões das Torres (inteiros e em pedaços: BATA, IVAH…) | pedaços na frequência do nulo | REFUTADO |
 
-**Conclusão da seção.** O *Liber Loagaeth* **não contém** os outros sistemas de Dee nem os sistemas mágicos clássicos. Ele é **anterior e autônomo**: a sua língua é própria, o seu campo de nomes é próprio. As pontes que a tradição imagina são pareidolia de inventário grande. Isto não diminui o livro — ao contrário: faz dele a **raiz**, não um derivado.
+Há uma **razão estrutural** além da estatística: os anjos solomônicos terminam em **-EL** (SAMAEL, ANAEL, MICHAEL); no Loagaeth o sufixo -EL é **raro** (AEL 16×, IEL 5× no livro todo), porque o Loagaeth fecha em **-A** [#391, #406]. É uma convenção de nome **oposta** — o Loagaeth não poderia conter esses anjos nem que quisesse.
 
-## 6.4 As hipóteses numéricas e de datas
+**Conclusão:** o *Liber Loagaeth* **não contém** os outros sistemas de Dee nem os sistemas mágicos clássicos. Ele é **anterior e autônomo** — a raiz, não um derivado.
 
-**Dimensão numérica / datas / coordenadas.** Testou-se se comprimentos, posições e contagens codificam números, efemérides, datas astronômicas. **REFUTADO:** nada acima do nulo. O livro não é um almanaque nem uma tábua astronômica disfarçada.
+## 7.4 A ponte com as Chamadas: parentesco, não extração
 
-## 6.5 As hipóteses de cópia e de artefato
+Caso especial, porque pesquisadores publicados afirmam que **as Chamadas saem das tabelas**. Testamos as duas formas:
 
-**Cópia de outro texto.** Testou-se se o Loagaeth é um texto conhecido embaralhado ou cifrado. **REFUTADO:** o seu perfil estatístico (Zipf, entropia, morfologia) é consistente com um **gerador próprio**, não com a assinatura de nenhuma fonte conhecida.
+| # | Afirmação | Medida | Veredito |
+|---|---|---|---|
+| 107 | Palavras glosadas das Chamadas dentro do Loagaeth | todas 26 na expectativa Markov-3 | REFUTADO |
+| 119 | Chamada *n* ↔ tabela *n+1* (link textual) | **p = 0,63** | REFUTADO |
+| 123 | Referências de número de Nalvage localizam as letras? | melhor 9/61, p family-wise 0,79 | REFUTADO |
+| 128 | Cada *k*-ésima letra dá texto tipo-Chamada (Laycock) | k = 2…12 ≈ embaralhado | REFUTADO |
+| 195 | Chamadas escondidas num caminho (diagonal, reverso, coluna) | anti-diag z 3,6 sob nulo-fluxo, mas z 1,5 sob nulo-palavra | NÃO ACHADO |
+| 407 | "Chamadas vêm das tabelas" (Laycock, literal) | **147/608 vs nulo 213** — abaixo do acaso | REFUTADO |
 
-**"Figuras" e símbolos no espaço 3D.** Empilhando as faces e procurando formas geométricas nas posições dos nomes. **REFUTADO:** as constelações de posição são compatíveis com efeito de borda e deslocamento de linha; não há "desenho" oculto.
+As palavras das Chamadas **não estão escondidas** nas grades — o texto real acha **menos** que o acaso (147 contra 213). A ligação Chamada↔tabela é **parentesco de língua** (mesma fonotática e léxico, Cap. 4), **não** extração literal nem um link página-a-página. *(Guardar para a Parte III: o mapa tradicional "Chamada abre folha" é prática herdada, não um achado da medida.)*
 
-**Territórios rígidos.** A ideia de que cada nome ocupa um território fixo e exclusivo. **REVISADO para moderado:** há tendência zonal real (o mapa de calor do Cap. 6: DAXVAR no começo, ACLAX no meio, CHIDNO/ALGETH no fim), mas não é uma partição rígida — é um **gradiente**, não fronteiras.
+## 7.5 As "soluções" publicadas por terceiros
 
-## 6.6 A honestidade sobre a 49ª folha e o sentido
+| # | Afirmação (web) | Medida | Veredito |
+|---|---|---|---|
+| 407 | Método salto-7 (enochiantoday) | 3 nomes (melhor fase) vs nulo 1 — negligível | REFUTADO |
+| 176 | kondor.de como transcrição independente | difere 1 letra em 23.712 — cópia de Peterson | REFUTADO |
+
+Nenhuma "solução" pública sobrevive à medida.
+
+## 7.6 Direção, cópia, artefato
+
+| # | Hipótese | Medida | Veredito |
+|---|---|---|---|
+| 36 | "Kelley pulou letra sim, letra não" | adjacente bate, salto-1 não (JS 0,09 vs 0,35) | REFUTADO (real na forma xadrez) |
+| 42 | Pilares esquerdo/direito | só as bordas da linha; por dentro, esq. = dir. | REFUTADO (pilares) |
+| 74 | Memória de longo alcance / código oculto | excesso só em 4–12 letras | REFUTADO (longo alcance) |
+| 75 | Cópia de blocos entre tabelas | maior partilha 16 vs surrogate 18 | REFUTADO |
+| 135 | Repetições longas copiadas no lugar | mesmas colunas não mais que embaralhos (p 0,88) | REFUTADO |
+| 161 | Lado b ligado ao lado a célula a célula | todos p ≥ 0,15 | REFUTADO |
+| 100 | Espelhamento de vogal como regra | 304 vogal vs 342 consoante; surrogate igual | REFUTADO |
+| 106 | Sintaxe de ordem **ampla** entre palavras | 19 pares ordenados vs 16,2 no Markov-3 | REFUTADO |
+
+Nota sobre o #106: a sintaxe **ampla** cai, mas o par **GETH→ACLAX** tem ordem fixa real (Cap. 2, 17× vs 0) — um sinal local, não regra geral. É assim que a honestidade funciona: o par real sobrevive, a regra geral não.
+
+## 7.7 Os títulos, o léxico, os servos
+
+| # | Hipótese | Medida | Veredito |
+|---|---|---|---|
+| 52 | Os títulos das folhas resumem a folha | não (15% vs 16%) | REFUTADO |
+| 105 | Palavras da folha 1 dentro das tabelas | 2.780 vs 3.081 esperado | REFUTADO |
+| 109 | Títulos de folha no dialeto da sua folha | rank médio próprio 0,49 (acaso 0,5) | REFUTADO |
+| 110 | Gramática nomes+letras codifica melhor que hábitos de letra | 3,000 vs 2,985 bits/letra | REFUTADO |
+| 180 | Folha 1 como chave das outras, quadrado a quadrado | 336 testes, z médio −0,1 | REFUTADO |
+| 99 | O núcleo nasce antes dos seus títulos | 23/27 vs 22,7 esperado (z 0,19) | REFUTADO |
+
+## 7.8 A 49ª folha e o sentido: ausências que são achados
 
 Duas ausências que **não** são falhas, mas achados:
 
-- **A folha 49** — "que não é, não foi, não será conhecida" — existe só por relato; não há dado a medir. Registramo-la como **ausência declarada**, não a preenchemos com conjectura.
-- **O sentido pleno de cada nome** não está na página. Nenhuma cifra interna o entrega (todas refutadas acima); nenhuma fonte externa o glosa. O próprio Dee: *"Interpret not."* A tradução que falta **não foi perdida — nunca esteve escrita**. Ela pertence ao plano operativo (Parte III), não ao estatístico.
+- **A folha 49** — "que não é, não foi, não será conhecida" — existe só por relato; não há dado a medir. Registramo-la como **ausência declarada**.
+- **O sentido pleno de cada nome** não está na página. Nenhuma cifra interna o entrega (seção 7.1); nenhuma fonte externa o glosa; os nossos nomes-raiz têm zero âncora de tradução [a97]. O próprio Dee: *"Interpret not."* A tradução que falta **não foi perdida — nunca esteve escrita**. Ela pertence ao plano operativo (Parte III), não ao estatístico.
 
 ## O que sobra depois do cemitério
 
-Depois de enterrar tudo isto, o que **resta de pé** é exatamente o que a Parte I mediu: uma língua construída, consonantal, cantável, tecida num tear de linha-e-coluna, com um arco elemental. Nada de cifra, nada de outro sistema, nada de número. O Loagaeth é **menos** do que a tradição fantasiou e **mais** do que o ceticismo esperava: não um cofre de segredos, mas uma **língua de nomes feita para a voz**. A Parte III a usa.
+Depois de enterrar mais de cem hipóteses, o que **resta de pé** é exatamente o que a Parte I mediu: uma língua construída, consonantal, cantável, tecida num tear de linha-e-coluna, com casas, famílias, hierarquia e um arco elemental. Nada de cifra, nada de outro sistema, nada de número. O Loagaeth é **menos** do que a tradição fantasiou e **mais** do que o ceticismo esperava: não um cofre de segredos, mas uma **língua de nomes feita para a voz**. A Parte III a usa.
 
 \newpage

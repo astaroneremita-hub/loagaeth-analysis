@@ -1,54 +1,86 @@
 # Capítulo 4 — O som e a voz: o livro cantado
 
-Este capítulo reúne a descoberta que mais aproxima a análise da prática: o *Liber Loagaeth* não é só pronunciável — ele é **otimizado para a voz cantada**. Cada medida do "eixo-som" supera o nulo, e juntas desenham um livro feito para soar.
+Este capítulo reúne a descoberta que mais aproxima a análise da prática: o *Liber Loagaeth* não é só pronunciável — é **feito para a voz**. O próprio diário diz que é *"Speech from God"*, para ser **falado**; a folha 1 traz marcas de acento. Todo o estudo tratou o livro como texto; este eixo testou a **vocalização**. Cinco sinais reais o sustentam — e uma ressalva honesta os limita.
 
-## O eixo-som, medida a medida
+## Os cinco sinais do eixo-som
 
-Testou-se um conjunto de propriedades fonoestéticas, cada uma contra o seu nulo. Todas passaram:
+Cada propriedade foi medida contra um nulo **aleatório** (mesma frequência e comprimento). Todas passaram [a217–a223]:
 
-- **Pronunciabilidade (z = +6,9).** A proporção de sílabas abertas e bem-formadas é muito acima do acaso. O livro é feito de coisas que a boca consegue dizer. **[#386, DECISIVO]**
+| Propriedade | Real | Nulo | z | Entrada |
+|---|---:|---:|---:|---|
+| Pronunciável (alternância C-V) | 0,71 | 0,46 | **+6,9** | #386 |
+| Sílaba bem-formada (sem stop-stop) | 1,00 | 0,95 | **+3,2** | #386 |
+| Assonância (vogais entre vizinhos) | 0,706 | 0,673 | **+5,1** | #387 |
+| Vogal final (sílaba aberta) | 60% | 36% | **+3,2** | #391 |
+| Melodia vocálica (top-5 esqueletos) | 78% | 45% | **+5,2** | #392 |
+| Pulso-A a cada ~3 letras | — | — | **+31,5** | #398 |
 
-- **Assonância (z = +5,1).** Vogais iguais recorrem dentro da mesma vizinhança mais do que o acaso — o eco vocálico que dá a uma sequência o seu "tom" cantável. **[#387, REAL]**
+![Figura 4.1 — O eixo-som: toda propriedade de voz supera o acaso. [#386–398]](../figuras/fig_som.png)
 
-- **Vogal final (z = +3,2).** Os nomes tendem a **terminar em vogal** (sílaba aberta) acima do nulo — a terminação que sustenta a nota, como no canto litúrgico. **[#391, REAL]**
+### A ressalva honesta
 
-- **Melodia em A (z = +5,2).** A vogal **A** — a mais aberta, a de maior projeção vocal — é o pivô melódico: concentra-se nas posições de maior destaque. O livro "canta em Lá". **[#392, REAL]**
+Contra o nulo mais severo — o **surrogate de Markov-3** — o sinal da pronunciabilidade **encolhe** (z ≈ 1,5–1,9) [#386]. Isso **não** derruba o achado; ele o **localiza**: a cantabilidade não é exclusiva dos nomes, está embutida na **própria gramática de letra do livro inteiro**. O livro é cantável de ponta a ponta, não só nos nomes. Dizemos isto em vez de esconder — é a diferença entre um achado e uma propaganda.
 
-- **Pulso em A a cada ~3 letras (z = +31,5).** A descoberta mais decisiva de todas: o **A** reaparece num **batimento regular**, aproximadamente a cada três letras, como um metrônomo embutido. Esse pulso é a espinha rítmica do canto — e é o achado de maior escore-z de todo o estudo. **[#398, DECISIVO]**
+E duas sub-hipóteses **caíram**, honestamente:
 
-![Figura 4.1 — O eixo-som: toda propriedade de voz supera o nulo. O pulso-A (z=31,5) é a mais forte.](../figuras/fig1_som.png)
+- **Métrica escolhida:** os nomes têm 2–3 sílabas, mas a concentração num número de sílabas não bate o acaso (z = +0,49). As linhas são quase isossilábicas (~17,6 sílabas, desvio ~1,0; figura 4.2), mas isso é efeito do **comprimento fixo da linha**, não uma métrica poética escolhida [#386, 63_metre].
+- **Rima:** a mesma vogal final entre vizinhos dá z = +0,74 — não é especial [#387]. O livro é **métrico e assonante, mas não rimado**.
 
-## O que isso significa
+![Figura 4.2 — Linhas quase isossilábicas (~17,6), mas é comprimento, não métrica escolhida. [63_metre]](../figuras/fig_metro.png)
 
-Some-se: sílabas abertas, ecos de vogal, terminações em vogal, melodia centrada no A, e um pulso rítmico regular. Isso não é a descrição de um texto para **ler** — é a descrição de um texto para **entoar**. O Loagaeth tem prosódia. Tem métrica. Tem uma nota tônica.
+## A prosódia é latina
 
-A tradição sempre disse isso — as Chamadas são **recitadas em voz alta**, "vibradas". A medida confirma por fora o que a prática afirma por dentro: a unidade de uso do Loagaeth é o **som na boca**, não o sinal na página. Um livro que só se olha teria desperdiçado todo esse desenho sonoro. O Loagaeth não desperdiça — porque a voz é o ponto.
+Dee era latinista, e marcou as palavras angélicas com **prosódia latina**. Das 676 palavras acentuadas da folha 1, a tônica cai [#388]:
 
-## A vogal como escala
+- **penúltima (paroxítona): 52%**
+- antepenúltima: 31%
+- última (oxítona): 15%
+- quarta sílaba ou além: **0%**
 
-A modulação da vogal (Cap. 3) ganha aqui sentido pleno: ao longo do livro, o registro vocálico **escurece** de A para U conforme se desce ao profundo (Cap. 6). Em termos de canto, isso é uma **descida de tessitura** — do aberto e luminoso (A) ao fechado e grave (U). O livro tem uma **escala** embutida, do claro ao escuro, que o operador percorre ao descer de folha em folha.
+**83%** na janela das três últimas sílabas, **zero** fora dela — exatamente a regra de acento do latim litúrgico, com dominância da penúltima. Exemplos reais: *alídes, orcánor, onédon, gamésad*. A marca de acento **diz como recitar**: cadência penúltima, do latim de igreja.
+
+![Figura 4.3 — A prosódia é latina: 83% da tônica na janela das 3 últimas sílabas. [#388]](../figuras/fig_acento.png)
+
+## A melodia é sobre A
+
+Os esqueletos de vogal mais comuns — **AA (17), OA (5), AOA (4), AE (3), AO (2)** — cobrem 78% dos nomes. As vogais quase não variam; concentram-se em **A**. É o modelo do **mantra**: vogal fixa (a nota sustentada), consoante variável (a articulação). O Loagaeth é **entoado sobre A** [#392].
+
+E fecha-se em vogal ou em **H aspirado**: dos 1.258 H da folha 1, **59%** são finais de palavra (o acaso daria ~25%) [#394]. As palavras terminam em **tom** (vogal sustentada) ou **sopro** (H), raramente em consoante dura. É a regra de fechamento de um idioma cantado.
 
 ## Dois registros de voz
 
-Um achado tardio e importante: **as Chamadas e os nomes das tabelas são a mesma língua, em dois registros de voz diferentes.**
+Um achado que unifica o corpus enoquiano: **as Chamadas e os nomes das tabelas são a mesma língua, em dois registros de voz** [#401, #402].
 
-- As **Chamadas** (Claves) são o registro de **fala plena** — articulada, com sintaxe, dirigida. Têm entropia vocálica maior (1,96 bits): mais "melodia de fala".
-- Os **nomes das tabelas** são o registro de **invocação** — condensado, consonantal, repetitivo. Entropia vocálica menor (1,25 bits): mais "canto de nome". **[#401, #402]**
+| | **Chamadas** (fala plena) | **Nomes** (invocação) |
+|---|---|---|
+| Fonotática | idêntica (C-V 0,69 vs 0,68) | idêntica |
+| Termina em vogal | 31% | **60%** |
+| A entre as vogais | 38% | **71%** |
+| Vogais usadas | A/I/O equilibrado | só A |
 
-A folha 1 é a ponte entre os dois: partilha vocabulário com as Chamadas (z=+7,5) e é a página onde a língua aparece **articulada** antes de condensar-se em campo de nomes. **[#331, #333]**
-
-A implicação para o rito (Parte III): **fala-se a Chamada, canta-se o nome.** São duas vozes do mesmo idioma — uma que abre, outra que nomeia.
+A fonotática é **idêntica** — é uma língua só. O que muda é a camada vocálica: as Chamadas são **fala plena** (vogais equilibradas, final consonantal, prosa); os nomes são o **registro de invocação** (vogal reduzida a A, final aberto, sustentado). Isso explica por que o Loagaeth lê como **nomes** e não como frases: é a mesma língua **reduzida a nome-de-poder**. Fala-se a Chamada; canta-se o nome.
 
 ## A pronúncia, na prática
 
-A medida não entrega um áudio, mas entrega **regras de pronúncia** derivadas:
+A medida entrega **regras de pronúncia**, e os nomes-de-letra de Dee permitem a **vibração** (soletrar pelo nome de cada letra) [#395]:
 
-1. Diga cada letra; o livro é feito de sílabas abertas — resista a engolir vogais.
-2. **Apoie no A**: é a nota de projeção. Onde houver A em posição forte, é ali que a voz sobe.
-3. Termine os nomes **na vogal**, sustentando-a.
-4. Deixe o **pulso a cada ~3 letras** reger o andamento: é o batimento natural do texto.
-5. **Desça a tessitura** conforme desce no livro: claro no corpo, escuro no profundo.
+| Letra | Nome (Dee) | Som |
+|---|---|---|
+| A | Un | "á" aberto |
+| N | Drux | "n" |
+| O | Med | "ô" |
+| H | Na | aspirado/sopro |
+| R | Don | "r" vibrado |
 
-O Capítulo 8 transforma essas regras em sequência ritual. Antes, os dois capítulos seguintes fecham a Parte I: a estrutura de sinal (o tear) e o arco elemental do livro.
+Assim **NOCHA** vibra como **Drux·Med·Veh·Na·Un**. As regras do canto:
+
+1. **Sílabas abertas** — diga cada letra, não engula vogais.
+2. **Apoie no A** — é a nota de projeção; onde houver A em posição forte, a voz sobe e vibra.
+3. **Termine na vogal (ou H)** — sustente o tom, ou solte o sopro.
+4. **Acento penúltimo** — a cadência latina.
+5. **Pulso a cada ~3 letras** — o batimento do A rege o andamento.
+6. **Desça a tessitura** — claro (A) no corpo, escuro (U) no profundo.
+
+O Capítulo 8 transforma essas regras em sequência ritual. Antes, os dois capítulos seguintes fecham a Parte I: a estrutura de sinal (o tear) e o arco elemental.
 
 \newpage

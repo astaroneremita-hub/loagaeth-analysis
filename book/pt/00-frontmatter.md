@@ -6,17 +6,11 @@ date: "2026"
 lang: pt-BR
 ---
 
-\newpage
+# Liber Loagaeth — Anatomia de uma Língua Selada {.unnumbered}
 
-# Liber Loagaeth — Anatomia de uma Língua Selada
+### Análise estatística rigorosa do *Liber Loagaeth* (Sloane MS 3189) de John Dee — com um modelo nulo por trás de cada afirmação — e um manual operativo derivado da medida {.unnumbered}
 
-### Análise estatística rigorosa do *Liber Loagaeth* (Sloane MS 3189) de John Dee, com modelo nulo em cada afirmação — e um manual operativo derivado da medida
-
-**Astaron Eremita**
-
-*Primeira edição — 2026*
-
----
+**Astaron Eremita** · *Primeira edição · 2026*
 
 > *"Every letter here bringeth furth the Names of God: but they are but one Name."*
 > — o anjo Galvah a John Dee, sobre o Livro
@@ -27,9 +21,11 @@ lang: pt-BR
 
 ## Aviso de natureza
 
-Este é um **livro de pesquisa**. Cada afirmação sobre o *Liber Loagaeth* aqui é acompanhada do teste que a sustenta e do **modelo nulo** contra o qual foi medida. Nada é apresentado como verdade porque "parece": uma regularidade só conta quando supera o acaso de um texto embaralhado, de um surrogate de Markov, ou de uma permutação controlada. Os padrões que **falharam** esse crivo — e foram muitos, inclusive ideias caras à tradição — estão relatados com o mesmo destaque dos que passaram. A honestidade sobre o que **não** se encontrou é parte do método.
+Este é um **livro de pesquisa**. Cada afirmação sobre o *Liber Loagaeth* aqui é acompanhada do teste que a sustenta e do **modelo nulo** contra o qual foi medida. Nada é apresentado como verdade porque "parece": uma regularidade só conta quando supera o acaso de um texto embaralhado, de um surrogate de Markov, ou de uma permutação controlada. Os padrões que **falharam** esse crivo — e foram **mais de cem**, inclusive ideias caras à tradição — estão relatados com o mesmo destaque dos que passaram. A honestidade sobre o que **não** se encontrou é parte do método.
 
 A segunda metade do livro é **operativa**: traduz o que a medida revelou — a pronúncia, a voz, a estrutura, a função elemental — em um manual de uso ritual. Essa parte opera por **som, correspondência e ato**, na lógica própria da magia, e é declarada como tal. Ela não decifra sentido oculto, porque não há sentido oculto a decifrar: isso é um dos achados centrais deste estudo, não uma falha dele.
+
+Todos os números entre colchetes — como **[#392]** ou **[a232]** — remetem a entradas datadas e reproduzíveis do registro de pesquisa (`docs/RESEARCH_LOG.md`) e aos módulos de análise (`src/aNNN_*.py`). Qualquer pessoa pode rodar o código, com a mesma semente (1583), e obter os mesmos números.
 
 \newpage
 
@@ -58,20 +54,18 @@ A referência deve constar de modo visível e permanente no material que usa a p
 
 **5. Reserva.** Todos os direitos não concedidos expressamente ficam reservados ao autor. Para permissões: contate o autor.
 
----
+\newpage
 
 ## Como este livro está organizado
 
-O livro tem **duas partes** e um aparato.
+O livro tem **três partes** e um aparato.
 
-- **Parte I — A Pesquisa.** O que o Loagaeth é, medido: a natureza do livro e suas três camadas; o gerador de nomes e sua morfologia; a língua (consonantal, com registros); o som e a voz (o livro cantado); a estrutura de sinal (o tear); a genealogia e as casas; o mapa funcional por elemento. Cada capítulo traz os testes, os números, os gráficos e os modelos nulos.
+- **Parte I — A Pesquisa.** O que o Loagaeth é, medido: a natureza do livro e suas três camadas (Cap. 1); o gerador de nomes, as famílias, as casas e a hierarquia (Cap. 2); a língua consonantal e sua fonologia (Cap. 3); o som e a voz — o livro cantado (Cap. 4); a estrutura de sinal, o tear (Cap. 5); o arco elemental e a geografia do livro (Cap. 6). Cada capítulo traz os testes, os números, os gráficos e os modelos nulos.
 
-- **Parte II — O que NÃO é.** O cemitério honesto: tudo que foi testado e **caiu** — as cifras, a numerologia, a astrologia, as pontes com outros sistemas (Torres, governadores, Sigillum, Ars Paulina, Soyga), os nomes sagrados, as "soluções" publicadas por terceiros. Cada refutação com o seu null.
+- **Parte II — O que NÃO é (Cap. 7).** O cemitério honesto: mais de cem hipóteses testadas que **caíram** — as cifras, a numerologia, a astrologia, as pontes com outros sistemas (Torres, governadores, Sigillum, Ars Paulina, Soyga), os nomes sagrados, as "soluções" publicadas por terceiros. Cada refutação com o seu número e o seu nulo.
 
-- **Parte III — O Operativo.** Como usar o Loagaeth em ritual, derivado da medida: a pronúncia e a vibração, a ligação Chamada↔folha, a escolha do nome e da casa, o mapa elemental do trabalho, a sequência de evocação.
+- **Parte III — O Operativo (Cap. 8).** Como usar o Loagaeth em ritual, derivado da medida: a pronúncia e a vibração, os dois registros de voz, a escolha do nome e da casa, o mapa elemental do trabalho, a sequência de evocação — separando com honestidade o que é **medido** do que é **tradição**.
 
-- **Aparato.** O catálogo completo e numerado de todos os achados; a metodologia e os modelos nulos; os módulos de análise; as fontes.
-
-Os números entre colchetes, como **[#392]**, remetem às entradas do registro cronológico de pesquisa (`docs/RESEARCH_LOG.md`), onde cada teste está datado e reproduzível.
+- **Aparato.** O catálogo numerado de todos os achados; a metodologia e os modelos nulos; os módulos de análise; o glossário; as fontes.
 
 \newpage
